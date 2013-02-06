@@ -1,0 +1,52 @@
+
+# 'of'  indicates dict mode (keys are arbitrary strings)
+# 'in'  indicates list mode (keys are sequential natural numbers)
+# 'own' drops inherited keys from the results (only applies to 'of')
+# Be careful! The same syntax is used for both r-vals andfor "FOR" loops
+
+
+# assignments
+# -----------
+# without parens, loop through the list, assigning the last value
+last =  x for x in xs   # :: Obj     === xs[xs.length-1]
+
+# with parens, you have a list comprehension (no generators in coffeescript)
+list = (x for x in xs)  # :: [Obj]   === xs
+
+# with brackets, you get a list containing the list comprehension
+nest = [x for x in xs]  # :: [[Obj]] === [xs]
+
+
+# loops:
+xs = [1, 2, 3]
+[x for x in xs]  # same as nest above but discards the result
+(x for x in xs)  # a do-nothing loop. does not build  a list
+x  for x in xs   # same as (x for x in xs)  # initial space here is syntax error
+x() for x in xs  # invoke each member as function # fails for 1,2,3 obviously!
+
+
+
+# dict comprehensions: there are none!
+# discussion: https://github.com/jashkenas/coffee-script/issues/77
+an_arbitrary_pair     =  key:val for key, val of obj
+list_of_dicts         = (key:val for key, val of obj)
+nested_list_of_dicts  = [key:val for key, val of obj]
+dict_with_one_key     = {key:val for key, val of obj} # ie, result['key'] = vals
+
+# but:
+dict = (pairs) ->
+  res = {}
+  res[key] = val for [key, val] in pairs
+  res
+
+# some python equivalents
+py_items1 = [[key, val] for own key, val of obj]
+py_items2 = for own k,v of obj
+  [k,v]
+
+py_keys       = [key for own key of obj]
+py_values     = [val for own key, val of obj]
+py_assign_two = [idx, val] for [idx, val] in obj
+py_enumerate  = [[idx, val] for idx, val in obj]
+py_range_len  = [idx for idx, val in obj]
+py_list       = [val for val in obj]

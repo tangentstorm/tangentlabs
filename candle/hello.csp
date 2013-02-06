@@ -1,0 +1,5 @@
+<?csp1.0?>
+method main()
+{
+    print("Hello world from Candle!");
+}

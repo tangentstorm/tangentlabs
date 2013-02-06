@@ -1,0 +1,7 @@
+<?csp1.0?>
+method main()
+{
+    print("what is your name?");
+    let $name = readln();
+    print("hello, " + $name);
+}

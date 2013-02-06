@@ -1,0 +1,73 @@
+<?csp1.0?>
+namespace
+   c = candle:core,
+   mjw = 'http://michaljwallace.com/';
+
+grammar mjw:gram
+{
+    !! meta rules
+    root  := mjw:hello;
+    space = s+;
+  
+    !! syntax rules
+    mjw:hello = letters*; !!"hello", "world";
+}
+
+
+function mjw:parse() as element
+{
+   xparse( "hello world", gram)
+}
+
+
+template <mjw:hello>
+{
+    "hello" { . }
+}
+
+
+
+template <before> { "after" }
+!! function mjw:after($before) { <after> "after:" apply to $before; </after> }
+method mjw:before-and-after()
+{
+   let $before = before { "before" };
+   !! let $after  = mjw:after($before);
+   let $after  = mjw:after { "after:" apply to $before; };
+   output $after at "" as "xhtml";
+
+   print( "[" +  $before +  " => "  + $after + "]");
+}
+
+
+method mjw:xform-stdio($gram)
+{
+   let $ipath  = readln();
+   let $opath  = readln();
+   let $format = readln();
+   mjw:xform($ipath, $gram, $opath);
+}
+
+
+method mjw:xform($ipath as string, $gram as qname, $opath as string)
+{
+   let $text = input($ipath);
+   print("text = " + $text);
+
+   let $tree = $text; !! xparse("hello world", mjw:gram);
+   print("tree = " + $tree);
+   output($tree) at "candle-out.xml"; !! doesn't work :(
+}
+
+
+method main($input)
+{
+   mjw:before-and-after();
+   mjw:xform("hello.hello", mjw:gram, "/temp/hello.out");
+}
+
+
+!! let $hello = apply to mjw:hello { "world" };
+!! print( element mjw:xml { "["  apply to $hello   "]" } );
+!! function main($input) { apply to $input;  }
+
