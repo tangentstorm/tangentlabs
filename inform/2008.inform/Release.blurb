@@ -1,0 +1,9 @@
+! Blurb file created by NI build 5J39
+variable [RELEASE] = "1"
+storyfile "W:\code\inform\2008.inform\Build\output.z5" include
+metadata "W:\code\inform\2008.inform\Metadata.iFiction" include
+variable [YEAR] = "2008"
+variable [TITLE] = "2008"
+variable [AUTHOR] = "michal"
+variable [BLURB] = "A work of interactive fiction."
+variable [IFID] = "07609295-0AB5-49F5-AE13-646B3D509A22"

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skein rootNode="node-0x01179F40" xmlns="http://www.logicalshift.org.uk/IF/Skein">
+  <generator>Inform 7 for Windows</generator>
+  <activeNode nodeId="node-0x057D3510"/>
+  <item nodeId="node-0x01179F40">
+    <command xml:space="preserve">- start -</command>
+    <result xml:space="preserve">2008&#x000A;An Interactive Fiction by michal&#x000A;Release 1 / Serial number 080311 / Inform 7 build 5J39 (I6/v6.31 lib 6/11N) SD&#x000A;&#x000A;bedroom&#x000A;It is a nice room.&#x000A;&#x000A;You can see a weight bench, an elliptical machine, a piano (on which are an iBook and some sheet music) and a bed here.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">NO</temporary>
+    <children>
+      <child nodeId="node-0x01185AA8"/>
+      <child nodeId="node-0x04F2F5A0"/>
+      <child nodeId="node-0x04D75D28"/>
+      <child nodeId="node-0x011798B8"/>
+      <child nodeId="node-0x0495CE58"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01185AA8">
+    <command xml:space="preserve">north</command>
+    <result xml:space="preserve">Stairs&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x0117F958"/>
+    </children>
+  </item>
+  <item nodeId="node-0x0117F958">
+    <command xml:space="preserve">south</command>
+    <result xml:space="preserve">office&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01185C68"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01185C68">
+    <command xml:space="preserve">south</command>
+    <result xml:space="preserve">kitchen&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187710"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187710">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">office&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187780"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187780">
+    <command xml:space="preserve">e</command>
+    <result xml:space="preserve">You can't go that way.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x011877F0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x011877F0">
+    <command xml:space="preserve">w</command>
+    <result xml:space="preserve">hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x011878B8"/>
+    </children>
+  </item>
+  <item nodeId="node-0x011878B8">
+    <command xml:space="preserve">w</command>
+    <result xml:space="preserve">hall closet&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187928"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187928">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">hall closet&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187998"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187998">
+    <command xml:space="preserve">e</command>
+    <result xml:space="preserve">hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187498"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187498">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">bathroom&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187A08"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187A08">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x0117F8E8"/>
+    </children>
+  </item>
+  <item nodeId="node-0x0117F8E8">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">bedroom&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187F80"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187F80">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187B78"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187B78">
+    <command xml:space="preserve">e</command>
+    <result xml:space="preserve">office&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187BE8"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187BE8">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">Stairs&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187CB0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187CB0">
+    <command xml:space="preserve">d</command>
+    <result xml:space="preserve">entryway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x01187D58"/>
+    </children>
+  </item>
+  <item nodeId="node-0x01187D58">
+    <command xml:space="preserve">e</command>
+    <result xml:space="preserve">parking lot&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x00A79D48"/>
+    </children>
+  </item>
+  <item nodeId="node-0x00A79D48">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">trash&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x0117E198"/>
+    </children>
+  </item>
+  <item nodeId="node-0x0117E198">
+    <command xml:space="preserve">d</command>
+    <result xml:space="preserve">You can't go that way.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x0117E208"/>
+    </children>
+  </item>
+  <item nodeId="node-0x0117E208">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">parking lot&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x0119C680"/>
+    </children>
+  </item>
+  <item nodeId="node-0x0119C680">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">mailbox&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x05328C70"/>
+    </children>
+  </item>
+  <item nodeId="node-0x05328C70">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">You can't go that way.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+  </item>
+  <item nodeId="node-0x04F2F5A0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">bedroom&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x04C8BE98"/>
+    </children>
+  </item>
+  <item nodeId="node-0x04C8BE98">
+    <command xml:space="preserve">where am i</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x048E94B8"/>
+    </children>
+  </item>
+  <item nodeId="node-0x048E94B8">
+    <command xml:space="preserve">who am i</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x048E9550"/>
+    </children>
+  </item>
+  <item nodeId="node-0x048E9550">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x048E9608"/>
+    </children>
+  </item>
+  <item nodeId="node-0x048E9608">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+  </item>
+  <item nodeId="node-0x04D75D28">
+    <command xml:space="preserve">lift weights</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+  </item>
+  <item nodeId="node-0x011798B8">
+    <command xml:space="preserve">look piano</command>
+    <result xml:space="preserve">I only understood you as far as wanting to look.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x00A75328"/>
+    </children>
+  </item>
+  <item nodeId="node-0x00A75328">
+    <command xml:space="preserve">x piano</command>
+    <result xml:space="preserve">It is a 82-key electronic MIDI keyboard from casio.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x0495CDE8"/>
+    </children>
+  </item>
+  <item nodeId="node-0x0495CDE8">
+    <command xml:space="preserve">x weight bench</command>
+    <result xml:space="preserve">You see nothing special about the weight bench.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+  </item>
+  <item nodeId="node-0x0495CE58">
+    <command xml:space="preserve">look sheet music</command>
+    <result xml:space="preserve">I only understood you as far as wanting to look.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x057D32E0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x057D32E0">
+    <command xml:space="preserve">x sheet music</command>
+    <result xml:space="preserve">You see nothing special about the sheet music.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x057D3350"/>
+    </children>
+  </item>
+  <item nodeId="node-0x057D3350">
+    <command xml:space="preserve">x bed</command>
+    <result xml:space="preserve">You see nothing special about the bed.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x057D3430"/>
+    </children>
+  </item>
+  <item nodeId="node-0x057D3430">
+    <command xml:space="preserve">south</command>
+    <result xml:space="preserve">You can't go that way.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x057D34A0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x057D34A0">
+    <command xml:space="preserve">x room</command>
+    <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <children>
+      <child nodeId="node-0x057D3510"/>
+    </children>
+  </item>
+  <item nodeId="node-0x057D3510">
+    <command xml:space="preserve">x bedroom</command>
+    <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+  </item>
+</Skein>

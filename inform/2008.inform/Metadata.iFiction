@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ifindex version="1.0" xmlns="http://babel.ifarchive.org/protocol/iFiction/">
+    <story>
+        <identification>
+            <ifid>07609295-0AB5-49F5-AE13-646B3D509A22</ifid>
+            <format>zcode</format>
+        </identification>
+        <bibliographic>
+            <title>2008</title>
+            <author>michal</author>
+            <headline>An Interactive Fiction</headline>
+            <genre>Fiction</genre>
+            <firstpublished>2008</firstpublished>
+            <language>en</language>
+            <group>Inform</group>
+        </bibliographic>
+        <releases>
+            <attached>
+                <release>
+                    <releasedate>2008-03-11</releasedate>
+                    <version>1</version>
+                    <compiler>Inform 7</compiler>
+                    <compilerversion>5J39</compilerversion>
+                </release>
+            </attached>
+        </releases>
+        <colophon>
+            <generator>Inform 7</generator>
+            <generatorversion>5J39</generatorversion>
+            <originated>2008-03-11</originated>
+        </colophon>
+        <zcode>
+            <serial>080311</serial>
+            <release>1</release>
+            <compiler>Inform 7 build 5J39</compiler>
+        </zcode>
+    </story>
+</ifindex>
