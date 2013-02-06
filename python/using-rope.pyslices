@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+#PySlices Save Format Version 1.2 (PySlices v0.9.8 and later)
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+import sys, os, wx
+os.chdir('c:/svn/ceomatic')
+bro = None
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+import livebrowser_xrc, livebrowser
+reload(livebrowser_xrc); reload(livebrowser)
+if bro:
+    bro.Close()
+bro = livebrowser.PyBrowser(None)
+bro.Show()
+#PySlices Marker Information -- Begin Output Slice
+#<module 'livebrowser_xrc' from 'livebrowser_xrc.pyc'>
+#<module 'livebrowser' from 'livebrowser.py'>
+#True
+#True
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+from rope.base.project import Project
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+proj = Project(".")
+mod = proj.pycore.get_module("gridliner")
+#PySlices Marker Information -- Begin Output Slice
+#Traceback (most recent call last):
+#  File "<input>", line 1, in <module>
+#TypeError: 'PyCore' object is not subscriptable
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+data = mod.get_attributes()
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+ao = data['AbstractOutline']
+scopes = mod.get_scope().get_scopes()
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+c = scopes[0]
+c.get_scope().name
+#PySlices Marker Information -- Begin Output Slice
+#Traceback (most recent call last):
+#  File "<input>", line 1, in <module>
+#AttributeError: 'ClassScope' object has no attribute 'get_scope'
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+x.get_kind()
+#PySlices Marker Information -- Begin Output Slice
+#'Class'
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+bro.methods.DeleteAllItems()
+#PySlices Marker Information -- Begin Output Slice
+#True
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+dir(mod.get_scope())
+#PySlices Marker Information -- Begin Output Slice
+#['__class__', '__contains__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_create_scopes', '_get_global_scope', '_get_scopes', '_propagated_lookup', '_scope_finder', 'builtin_names', 'end', 'get_body_start', 'get_defined_names', 'get_end', 'get_inner_scope_for_line', 'get_inner_scope_for_offset', 'get_kind', 'get_logical_end', 'get_name', 'get_names', 'get_propagated_names', 'get_scopes', 'get_start', 'logical_end', 'lookup', 'names', 'parent', 'pycore', 'pyobject', 'start']
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+dir(mod)
+#PySlices Marker Information -- Begin Output Slice
+#['__class__', '__contains__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__getitem__', '__hash__', '__init__', '__iter__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_calling__create_concluded_attributes_', '_calling__get_concluded_attributes_', '_calling__get_structural_attributes_', '_create_concluded_attributes', '_create_scope', '_create_structural_attributes', '_forget_concluded_data', '_get_base_type', '_get_concluded_attributes', '_get_concluded_data', '_get_defined_objects', '_get_structural_attributes', '_init_source', '_lines', '_logical_lines', '_types', '_unknown', 'ast_node', 'attributes', 'coding', 'concluded_attributes', 'concluded_data', 'defineds', 'get_ast', 'get_attribute', 'get_attributes', 'get_doc', 'get_module', 'get_resource', 'get_scope', 'get_type', 'lines', 'logical_lines', 'parent', 'pycore', 'resource', 'scope', 'source_code', 'star_imports', 'structural_attributes', 'type', 'visitor_class']
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+mod.get_attribute('AbstractOutline').pyobject.get_scope().get_scopes()
+
+#PySlices Marker Information -- Begin Output Slice
+#[<rope.base.pyscopes.FunctionScope object at 0x05F97F70>, <rope.base.pyscopes.FunctionScope object at 0x05F97470>, <rope.base.pyscopes.FunctionScope object at 0x05EA2470>, <rope.base.pyscopes.FunctionScope object at 0x05EA2BF0>, <rope.base.pyscopes.FunctionScope object at 0x05EA21B0>, <rope.base.pyscopes.FunctionScope object at 0x05EA2BD0>, <rope.base.pyscopes.FunctionScope object at 0x05EA22D0>, <rope.base.pyscopes.FunctionScope object at 0x05EA23D0>, <rope.base.pyscopes.FunctionScope object at 0x05EA24F0>, <rope.base.pyscopes.FunctionScope object at 0x05EA24D0>, <rope.base.pyscopes.FunctionScope object at 0x05EA24B0>, <rope.base.pyscopes.FunctionScope object at 0x05EA2C30>, <rope.base.pyscopes.FunctionScope object at 0x05EA2A50>, <rope.base.pyscopes.FunctionScope object at 0x05EA2FD0>, <rope.base.pyscopes.FunctionScope object at 0x05EA2430>]
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+bro.editor.Clear()
+
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice
+bro.GetCurrentContext().get_name("AbstractOutline")
+#PySlices Marker Information -- Begin Output Slice
+#Traceback (most recent call last):
+#  File "<input>", line 1, in <module>
+#  File "C:\Python27\lib\site-packages\rope-0.9.3-py2.7.egg\rope\base\pyscopes.py", line 122, in get_name
+#    raise exceptions.NameNotFoundError('name %s not found' % name)
+#NameNotFoundError: name AbstractOutline not found
+#PySlices Marker Information -- Begin Grouping Slice
+#PySlices Marker Information -- Begin Input Slice

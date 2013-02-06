@@ -1,0 +1,88 @@
+#+TITLE: function-variables in python
+
+* QUOTE
+#+BEGIN_QUOTE Reddit user last_useful_man
+
+/My/ little trick I learned recently:
+
+      def foo():
+          print foo.x
+      foo.x = 6
+
+You can attach values to Python functions like you can, in Javacript.
+They can fill in for static variables (like in C, C++ or Java).
+
+-- [2012-05-07 Mon] [[http://www.reddit.com/r/learnprogramming/comments/tannh/i_learned_a_new_trick_in_python_would_like_to/c4kzdtk][I learned a new trick in python...]]
+#+END_QUOTE
+
+
+* ANSWER
+
+
+Huh. That's actually pretty clever. 
+
+It's more compact than any of the ways I'd do it, but... (and this is *only* an opinion)... It feels kind of unpythonic to me.
+
+I'd say that about a third of the time, I'd encapsulate the data in a class and use a static method for this:
+
+#+BEGIN_SRC python
+  
+  class Foo(object):
+      x = 6
+      @staticmethod
+      def foo(): # note the lack of "self"
+          return Foo.x
+
+#+END_SRC
+
+Another third of the time I'd either use a closure...
+
+#+BEGIN_SRC python
+  
+  # python 2.xx style:
+  def make_foo():
+      class static:
+          x = 6
+      def procedure():
+          return static.x
+      return procedure
+  foo = make_foo()
+  
+  # python 3.xx style:
+  def make_foo(start:int=0)->int:
+      x = 6
+      def procedure()->int:
+          nonlocal x # only needed if you write to x
+          return x
+      return procedure
+  foo = make_foo()
+  
+#+END_SRC
+
+... or  (especially when dealing with strings or lists) a generator:
+
+#+BEGIN_SRC python
+
+def const(x):
+    while True:
+        yield x
+foo = const(6)
+
+#+END_SRC
+
+The other third of the time (especially if I'd only ever use one instance of the method) I'd encapsulate the data in a module:
+
+#+BEGIN_SRC python
+
+# mod.py
+_x = 6 # the _ prevents import on "from foomod import *"
+def foo( ):
+   global _x # only needed if you write to _x
+   return _x
+
+# main.py
+import mod
+assert mod.foo() == 6
+
+#+END_SRC
+

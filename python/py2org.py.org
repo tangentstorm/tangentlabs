@@ -1,0 +1,100 @@
+* PROGRAM =py2org=
+** IMPORTS [ sys tokenize ]
+#+name: imports
+#+begin_src python
+  import sys
+  import tokenize
+#+end_src
+
+
+* DEF main: Str args
+#+name: def:main
+#+begin_src python
+
+  filename = args[-1]
+  oldx = 0
+  
+  toks = tokenize.generate_tokens(open(filename).readline)
+  for code, txt, start, end, full in toks:
+  
+      tok = tokenize.tok_name[code]
+      if tok == "NAME" and txt in ["def","if","while","for","class"]:
+          tok = txt.upper()
+  
+      sy, sx = start
+      ey, ex = end
+  
+      <<handle-tok>>
+
+#+end_src  
+
+* CHUNK handle-tok
+#+name: handle-tok
+#+begin_src python
+  
+  #print "| {0:>2}, {1:>2} | {2:>2}, {3:>2} |".format(sx, sy, ex, ey),
+  #print "{0:<10} | {1:<20} |".format(tok, txt)
+    
+    
+  if tok in ("NL", "NEWLINE"): 
+      sys.stdout.write("\n")
+      oldx = 0
+  else:
+      if tok == "DEF":
+          <<handle-def>>
+      elif tok == "CLASS":
+          <<handle-class>>
+      else:
+          <<print-token>>
+    
+      #sys.stdout.write(tok + "{")
+      sys.stdout.write(txt)
+      #sys.stdout.write("}")
+      
+#+end_src
+
+
+* CHUNK handle-def
+#+name: handle-def
+#+begin_src python
+
+  print "#+name:", full[:-1]
+  print "#+begin_src python"
+
+#+end_src
+
+
+* CHUNK handle-class
+#+name: handle-class
+#+begin_src python
+  
+  print "#+name:", full[:-1]
+  print "#+begin_src python"
+  
+#+end_src
+
+
+* CHUNK print-token
+#+name: print-token
+#+begin_src python
+  
+  newx = oldx
+  while newx < sx:
+      newx += 1
+      sys.stdout.write(" ")
+  oldx = ex
+  
+#+end_src
+
+* OUTPUT ~py2org.py~
+#+begin_src python :tangle "r:/.gen/py2org.py" :comments both :padline yes :noweb tangle
+  
+  <<imports>>
+  
+  def main(args):
+      <<def:main>>
+      
+  if __name__=="__main__":
+      main(sys.argv)
+      
+#+end_src
