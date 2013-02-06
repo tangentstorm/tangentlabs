@@ -1,0 +1,30 @@
+fpc-2.6.0 -gl tracebug && ./tracebug
+------------------------------------
+Free Pascal Compiler version 2.6.0-6 [2012/10/05] for x86_64
+Copyright (c) 1993-2011 by Florian Klaempfl and others
+Target OS: Linux for x86-64
+Compiling tracebug.pas
+Linking tracebug
+/usr/bin/ld: warning: link.res contains output sections; did you forget -T?
+15 lines compiled, 0.1 sec
+  $00000000004001CA line 7 of tracebug.pas
+  $000000000040021C line 11 of tracebug.pas
+
+$ fpc-2.7.1 -gl tracebug && ./tracebug
+--------------------------------------
+Free Pascal Compiler version 2.7.1 [2013/01/16] for x86_64
+Copyright (c) 1993-2012 by Florian Klaempfl and others
+Target OS: Linux for x86-64
+Compiling tracebug.pas
+Linking tracebug
+/usr/bin/ld: warning: link.res contains output sections; did you forget -T?
+15 lines compiled, 0.2 sec
+  $00000000004001EA line 7 of tracebug.pas
+
+
+# the 2.7.1 version is r23397, built with:
+
+$ make clean all DEBUG=1 CROSSOPT="-O-"
+
+# the "-O-" was suggested by marco and sven in chat, but
+# it doesn't seem to make any difference.
