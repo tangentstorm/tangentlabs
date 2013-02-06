@@ -1,0 +1,61 @@
+( 24-jan-2013 : revectoring experiment in retro           )
+( ------------------------------------------------------- )
+( original goal was to capture a newline-delimited string )
+( looking in kernel.rx, i found newlines are converted to )
+( strings via remap:whitespace, and i decided to attempt  )
+( revectoring this word to one that does nothing.         )
+(                                                         )
+( had I paid a bit more attention, i might have noticed   )
+( the variable called 'remapping'. the command:           )
+(                                                         )
+(      remapping off                                      )
+(                                                         )
+( ... solves my original problem nicely.                  )
+(                                                         )
+( however, i am still perplexed by my inability to        )
+( revector remap:whitespace. I suspect this is either a   )
+( flaw in the bootstrapping process. in particular, the   )
+( very early words appear to be defined without headers,  )
+( and then added to the dictionary later, so that the     )
+( word i'm revectoring is shadowing the function that is  )
+( actually being called.                                  )
+(                                                         )
+( I do not know how to fix this yet, and will ask crc for )
+( some help.                                              )
+(                                                         )
+( ------------------------------------------------------- )
+
+( a basic test of revectoring with :is )
+( this demonstrates how revectoring ought to work )
+: a 'A putc ;
+: b 'B putc ;
+: ab a b ;
+: test_ab
+  cr           "expect AB. got: " puts ab cr
+  &a &b :is    "expect AA. got: " puts ab cr
+  &b :devector "expect AB. got: " puts ab cr ;
+
+( now, my attempt to enable newline characters: )
+: pass ( do nothing. this is what i want remap:whitespace to do ) ;
+: +ws &remap:whitespace &pass :is ;
+: -ws &remap:whitespace :devector ;
+
+( a word to reveal how it actually behaves: )
+: 13? 13 remap:whitespace putn cr ;
+
+( and a test that shows all the cases: )
+: test_ws 
+  cr "test of remap:whitespace on char #13 [ ^M/Return ]" puts
+  cr  "default   : expect 32. got: " puts 13?
+  +ws "after +ws : expect 13. got: " puts 13?
+  -ws "after -ws : expect 32. got: " puts 13? ;
+
+( after "remapping off", character 13 is remapped to )
+( character 10 [ CR -> LF ] , which is another thing )
+( that remap:whitespace does. i like that behavior,  )
+( but the inability to revector still confuses me.   )
+
+clear
+
+test_ab
+test_ws

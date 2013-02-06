@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# looks like you need to put the = directly
+# adjacent to the variable or bash doesn't understand
+TMP="tsort-loop.tmp"
+
+echo 'a b' >  $TMP
+echo 'b c' >> $TMP
+echo 'c a' >> $TMP
+
+
+# actually, you can also just do: echo 'a b b c c a' | tsort
+tsort $TMP
+
+rm $TMP
