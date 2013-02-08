@@ -27,12 +27,12 @@ begin
       1	: include( f, 1 );
       2	: f := f + [ 2 ];
       3	: f += [ 2 ]; { becasue of $coperators on }
-      4	: f -= [ 3,4 ];
+      4	: f += [ 3, 4 ];
       5	: f -= [ 5 ];
       6	: f += [ 5 ];
       7	: f -= [ 5 ];
     otherwise done:= true
-    end; { case }
+    end;
 
     write( 'step ', step, ': ' ); dump( f );
     inc( step );
