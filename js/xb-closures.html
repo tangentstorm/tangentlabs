@@ -1,0 +1,40 @@
+<!html>
+<html>
+<head>
+  <title>cross browser closure test</title>
+</head>
+<body>
+  <pre>
+  <script type="text/javascript">
+
+    function dw( arg ) { document.write( arg ); }
+
+    var x = 0;
+    dw( "\n" );
+    dw( "initially, x is: " + x + "\n" );
+
+    function makeClosure()
+    {
+        x = 1;
+        dw( "at the top of makeClosure, x is: " + x + "\n" );
+        var res = function() {
+            x = 3;
+            dw( "inside the closure, x is: " + x + "\n" );
+        };
+        x = 2;
+        dw( "at bottom of makeClosure, x is: " + x + "\n" );
+        return res;
+    }
+
+    var closure = makeClosure();
+    closure();
+    dw( "finally, x is: " + x + "\n" );
+
+
+
+  </script>
+  </pre>
+</body>
+</html>
+
+
