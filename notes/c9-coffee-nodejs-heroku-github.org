@@ -1,0 +1,195 @@
+#+title: cloud9 + heroku with nodejs
+#+description: notes token while working on buggernaut
+
+
+* create a simple readme file
+:PROPERTIES:
+:TS: <2013-02-11 05:22PM>
+:ID: 28xh6ro0p0g0
+:END:
+
+* add, commit, and push to repository at github
+:PROPERTIES:
+:TS: <2013-02-11 05:45PM>
+:ID: mi27atp0p0g0
+:END:
+You can just type git commands in the shell at the bottom, even though they don't appear in the autocompletion area.
+
+#+begin_src 
+git add README.md
+git commit -m"added a README"
+git push -u origin master
+#+end_src
+
+
+This took several attempts. The first time, it appeared to do nothing.
+
+I ran =git remote -v= and it showed no remotes.
+
+I then tried to add a remote and it said it already existed.
+
+I ran =git remote -v= again and it showed the remote.
+
+It looks like =git push -u origin master= was what did the trick.
+
+* create a ~package.json~ file to install coffee and express (simple web framework)
+:PROPERTIES:
+:TS: <2013-02-11 05:44PM>
+:ID: lp00vqp0p0g0
+:END:
+
+http://stackoverflow.com/questions/5284340/what-is-node-js-connect-express-and-middleware
+
+#+begin_src json
+{
+  "name": "buggernaut",
+  "description" : "a generic debugger in coffeescript",
+  "version": "0.0.0",
+  "license" : "MIT/X11-style",
+  "dependencies": {
+    "coffee-script": "1.4.0",
+    "express": "3.x"
+  }
+}
+#+end_src
+
+* run =npm install= to install these dependencies.
+:PROPERTIES:
+:TS: <2013-02-11 06:12PM>
+:ID: zrs272r0p0g0
+:END:
+* push the ~package.json~ file 
+:PROPERTIES:
+:TS: <2013-02-11 06:21PM>
+:ID: 0z389hr0p0g0
+:END:
+#+begin_src shell
+git add package.json
+git commit -m"added package.json for coffee-script and express"
+#+end_src
+
+* create ~server.js~ and ~app.coffee~. test, add, commit, and push.
+:PROPERTIES:
+:TS: <2013-02-11 06:29PM>
+:ID: mo8i1ur0p0g0
+:END:
+This allows running coffeescript on the server-side too.
+
+https://github.com/fjakobs/cloud9-coffeescript-example
+
+#+begin_src javascript
+require("coffee-script");
+
+var app = require("./app");
+app.listen(process.env.PORT);
+#+end_src
+
+#+begin_src coffee
+express = require "http"
+
+module.exports = http.createServer((req, res) ->
+    res.writeHead 200, 'Content-Type': 'text/plain'
+    res.end 'Hello World\n'
+)
+#+end_src
+
+#+begin_src shell
+git add app.coffee server.js
+git commit -m"added hello world web app.coffee and server.js"
+git push
+#+end_src
+
+* update ~server.js~ and ~app.coffee~ to use express.js
+:PROPERTIES:
+:TS: <2013-02-11 06:41PM>
+:ID: ebn9ies0p0g0
+:END:
+https://github.com/EtienneLem/skeleton
+
+#+begin_src coffee
+express = require "express"
+module.exports = app = express()
+
+app.get '/', (req, res) ->
+  res.send 'Hello world!'
+#+end_src
+
+#+begin_src shell
+git commit -m"switched app from http -> express" app.coffee
+git push
+#+end_src
+
+* create the heroku deploy server on cloud9
+:PROPERTIES:
+:TS: <2013-02-11 07:23PM>
+:ID: e2cl5cu0p0g0
+:END:
+* create ~Procfile~ and add =engines= section to ~package.json~ for heroku
+:PROPERTIES:
+:TS: <2013-02-11 07:28PM>
+:ID: b9advku0p0g0
+:END:
+
+#+begin_src text
+web: node server.js
+#+end_src
+
+The =engines= thing is needed because the default version of node on heroku is too old for express. (Though the error message I got indicated that they would soon be changing this to default to the latest version.)
+
+#+begin_src shell
+{
+  "name": "buggernaut",
+  "description" : "a generic debugger in coffeescript",
+  "version": "0.0.0",
+  "license" : "MIT/X11-style",
+  "dependencies": {
+    "coffee-script": "1.4.0",
+    "express": "3.x"
+  },
+  "engines" : {
+    "node": "0.8.x",
+    "npm":  "1.1.x"
+  }
+}
+#+end_src
+
+#+begin_src shell
+git add Procfile
+git commit -m"added Procfile for heroku"
+#+end_src
+
+* set up cloud9 to allow pushing to heroku
+:PROPERTIES:
+:TS: <2013-02-11 07:27PM>
+:ID: rab8siu0p0g0
+:END:
+http://support.cloud9ide.com/entries/21468947-Deploy-your-app-to-Heroku-using-the-Cloud9-console
+
+#+begin_src cloud
+git remote add heroku git@heroku.com:buggernaut.git
+git push heroku master
+#+end_src
+
+
+
+* pushing to heroku from home
+:PROPERTIES:
+:TS: <2013-02-12 12:40AM>
+:ID: w7obj091p0g0
+:END:
+
+- install https://toolbelt.heroku.com/
+- =heroku login=
+
+
+* NOTE . setting up a deployment branch
+:PROPERTIES:
+:TS: <2013-02-12 01:27AM>
+:ID: or63f6b1p0g0
+:END:
+
+heroku git:remote -a buggernaut
+
+=git push -u heroku deploy:master=
+
+
