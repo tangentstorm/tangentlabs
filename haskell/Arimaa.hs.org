@@ -1,0 +1,604 @@
+#+TITLE: An Arimaa Library for Haskell.
+
+* MODULE Arimaa
+
+Arimaa is an abstract strategy game for two players.
+
+See http://arimaa.com/arimaa/
+
+#+BEGIN_SRC haskell
+          
+{-# LANGUAGE TypeSynonymInstances, OverlappingInstances #-}
+  
+import Data.Array
+import Data.Char
+import qualified Data.Map as Map
+import qualified Data.String.Utils as DSU
+import Control.Monad.State
+  
+#+END_SRC
+
+* The Pieces
+
+#+BEGIN_SRC haskell
+          
+data Animal = R | C | D | H | M | E 
+     deriving (Ord, Eq, Show)
+data Color = Gold | Silver deriving (Show, Eq)
+type Colored a = (Color, a)
+type Piece = Colored Animal
+  
+showPiece (Gold, a)   = show a
+showPiece (Silver, a) = map toLower $ show a
+  
+  
+gold   a = (Gold, a)
+silver a = (Silver, a)
+  
+g = gold
+s = silver
+  
+#+END_SRC
+
+* The Board
+** squares 
+
+#+BEGIN_SRC haskell
+
+files = ['a'..'h']
+ranks = [1..8]
+type Square = (Char, Int)
+
+showSquare (x, y) = x : show y
+
+#+END_SRC
+
+
+To avoid bounds-checking when we look at neighboring pieces, we can surround the board with a one-cell-thick border. Thus any square next to a piece on the board will either be empty, contain a wall, or contain a piece.
+
+As a special case, I'm putting "trap" in here, even though it evaluates to the same thing as Empty.
+
+#+BEGIN_SRC haskell
+data Content = Empty | Wall | Trap | A Piece
+instance Show Content where
+    show c = case c of
+               Empty     -> " "
+               Trap      -> "x"
+               Wall      -> "#"
+               A (Gold, piece)   -> show piece
+               A (Silver, piece) -> map toLower $ show piece
+#+END_SRC
+
+** empty board
+
+Here we build an empty board, with a border around the edge.
+
+#+BEGIN_SRC haskell
+
+type BoardShape =  Array Square Content
+data Board = Board BoardShape
+emptyBoard :: Board
+emptyBoard = Board $ array fullBounds
+           $ [ (sq, initSquare sq) | sq <- range fullBounds ]
+
+fullBounds = ((westOf 'a', 0), (eastOf 'h', 9))
+coreBounds = (('a', 1), ('h',8))
+
+#+END_SRC
+
+This may come in handy for traps later on:
+
+#+BEGIN_SRC haskell
+
+initSquare :: Square -> Content
+initSquare sq@(x, y)
+  | (x < 'a') = Wall
+  | (x > 'h') = Wall
+  | (y < 1)   = Wall
+  | (y > 8)   = Wall
+  | isTrap sq = Trap
+  | otherwise = Empty
+
+eastOf file = chr $ (ord file) + 1
+westOf file = chr $ (ord file) - 1
+
+#+END_SRC
+
+** the Board type
+
+Here's a handy function to show the board, as per the standard ASCII notation
+defined at http://arimaa.com/arimaa/learn/notation.html
+
+#+BEGIN_SRC haskell
+
+render :: Board -> String
+render (Board br) = DSU.join "\n" $ map row [9,8.. -1]
+    where row y | y == 9 || y== 0  = " +-----------------+"
+                | y == -1          = "   a b c d e f g h  \n"
+                | otherwise        = show y ++ "| " ++ cells y ++ " |"
+          cells y = DSU.join " " $ map (\x -> show $ br ! (x, y)) files
+
+instance Show (Board) where 
+   show = render
+
+#+END_SRC
+
+** traps
+
+#+BEGIN_SRC haskell
+
+traps :: [Square]
+traps = [('c',3), ('c',6), ('f',3), ('f',6)]
+
+isTrap :: Square -> Bool
+isTrap ('c', 3) = True
+isTrap ('c', 6) = True
+isTrap ('f', 3) = True
+isTrap ('f', 6) = True
+isTrap others = False
+
+#+END_SRC
+
+* navigating the board
+
+#+BEGIN_SRC haskell
+
+data Direction = North | South | East | West
+  deriving (Eq)
+North @: (x, y) = (x, y + 1)
+South @: (x, y) = (x, y - 1)
+East  @: (x, y) = (eastOf x, y)
+West  @: (x, y) = (westOf x, y)
+
+#+END_SRC
+
+test: East @ ('d',3) == ('e', 3)
+
+#+BEGIN_SRC haskell
+
+instance (Show) Direction where
+    show North = "n"
+    show South = "s"
+    show East  = "e"
+    show West  = "w"
+
+#+END_SRC
+
+#+BEGIN_SRC haskell
+
+(>>:) :: Square -> Square -> Direction
+(x1, y1) >>: (x2, y2) = diff (ord x1 - ord x2, y1-y2)
+   where diff ( 1,  0) = West
+         diff (-1,  0) = East
+         diff ( 0,  1) = North
+         diff ( 0, -1) = South
+         diff _        = error ">>: only works for 2 numbers" 
+
+cardinals :: [Direction]
+cardinals = [North, East, South, West]
+
+neighborSquares :: Square -> [(Direction, Square)]
+neighborSquares sq = [(dir, dir @: sq) | dir <- cardinals ]
+
+rev :: Direction -> Direction
+rev North = South
+rev East  = West
+rev South = North
+rev West  = East
+
+#+END_SRC
+
+* Step and step parser:
+
+Again, from the standard notation:
+
+#+BEGIN_SRC haskell
+data Step
+   = Put Piece Square
+   | Kill Piece Square
+   | Move Piece Square Direction
+   | Resign
+   | Takeback
+   deriving (Eq)
+
+instance (Show) Step where
+    show step = case step of
+        Put  p s   -> sh p s
+        Kill p s   -> sh p s ++ "x"
+        Move p s d -> sh p s ++ show d
+        Resign     -> "resign"
+        Takeback   -> "takeback"
+        where sh p s = showPiece p ++ showSquare s
+
+#+END_SRC
+
+
+Parser is pretty simple:
+
+#+BEGIN_SRC haskell
+
+parseStep :: String -> Step
+parseStep s@(p:x:y:end)
+  | s == "takeback" = Takeback
+  | s == "resign"   = Resign 
+  | end == ""       = Put  pp (x, py)
+  | end == "x"      = Kill pp (x, py)
+  | otherwise       = Move pp (x, py) pd
+  where pp = parsePiece p
+        py = parseRank y
+        pd = parseDirection $ head end
+
+
+parsePiece :: Char -> Piece
+parsePiece ch = case ch of 
+  -- gold pieces --
+  'E' -> g E
+  'M' -> g M
+  'H' -> g H
+  'D' -> g D
+  'C' -> g C
+  'R' -> g R
+  -- silver pieces --
+  'e' -> s E
+  'm' -> s M
+  'h' -> s H
+  'd' -> s D
+  'c' -> s C
+  'r' -> s R
+
+parseRank :: Char -> Int
+parseRank ch = case ch of
+  '1' -> 1
+  '2' -> 2
+  '3' -> 3
+  '4' -> 4
+  '5' -> 5
+  '6' -> 6
+  '7' -> 7
+  '8' -> 8
+
+parseDirection :: Char -> Direction
+parseDirection ch = case ch of
+  'n' -> North
+  's' -> South
+  'e' -> East
+  'w' -> West
+
+#+END_SRC
+ 
+* setting up pieces
+
+So, now I want to actually apply the moves to the board.
+
+I couldn't figure out how to convince the type system to let me make Board an instance of Functor, but that's probably okay, because as I visit the squares I actually need to know both the coordinates and the contents. So:
+
+#+BEGIN_SRC haskell
+
+apply :: (Board -> Square -> Content) -> Board -> Board
+apply f br = Board $ array fullBounds $ contents
+             where contents = [(sq, f br sq) | sq <- range fullBounds] 
+
+#+END_SRC
+
+
+Let's see how to define the popular 99of9 opening for gold. (see http://arimaa.com/arimaa/mwiki/index.php/Setup_Positions )
+
+#+BEGIN_SRC haskell
+
+steps :: String -> [Step]
+steps s = map parseStep $ DSU.split " " s
+
+open99of9 = steps "Ra1 Rb1 Rc1 Cd1 Ce1 Rf1 Rg1 Rh1 Ra2 Hb2 Dc2 Md2 Ee2 Df2 Hg2 Rh2"
+#+END_SRC
+
+So now:
+
+#+BEGIN_SRC haskell
+
+(//=) :: Board -> [(Square, Content)] -> Board
+(Board br) //= changes = Board $ br // changes
+
+step :: Step -> Board -> Board
+step st br = case st of
+    Put  p sq     -> br //= [(sq, A p)]    
+    Kill p sq     -> todo
+    Move p sq d   -> todo
+    Resign        -> todo
+    Takeback      -> todo
+  where
+    todo = br
+
+doSteps :: [Step] -> Board -> Board
+doSteps []      br = br
+doSteps (s :ss) br = doSteps ss $ step s br
+
+#+END_SRC
+
+How about the same for silver?
+
+#+BEGIN_SRC haskell
+
+mirror :: Step -> Step
+mirror (Put (Gold, p) (x, y)) = Put (Silver, p) (x, 9-y)
+mirror other = other
+
+board99of9 = doSteps (gold ++ silver) emptyBoard
+     where gold   = open99of9
+           silver = map mirror gold
+
+#+END_SRC
+
+* board queries
+
+#+BEGIN_SRC haskell
+
+type PieceAt = (Piece, Square)
+
+#+END_SRC
+
+contents br = [(sq, content br sq) | sq <- range coreBounds]
+
+#+BEGIN_SRC haskell
+
+content sq (Board br) = br ! sq
+
+#+END_SRC
+
+
+#+BEGIN_SRC haskell
+
+neighbors :: Square -> Board -> [(Direction, PieceAt)]
+neighbors square br = [(dir, (pieceAt sq br, sq))
+                         | (dir, sq)  <- neighborSquares square
+                         , isPiece $ content sq br]
+
+#+END_SRC
+
+
+Enemitos = lesser enemies (spanglish ftw!)
+
+#+BEGIN_SRC haskell
+
+enemitos :: PieceAt -> Board -> [(Direction, PieceAt)]
+enemitos ((c, a), sq) br = [n | n@(dir, ((c2, a2), _)) <- neighbors sq br 
+                              , a2 < a  && c2 == opp c]
+
+isPiece :: Content -> Bool
+isPiece (A _) = True
+isPiece _     = False
+
+toPiece :: Content -> Piece
+toPiece (A p) = p
+toPiece _     = error "not a piece!"
+
+pieceAt :: Square -> Board -> Piece
+pieceAt sq br  = toPiece $ content sq br
+
+pieceSquares br = [sq | sq <- range coreBounds,  isPiece $ content sq br]
+
+isEmpty sq br = case content sq br of
+                   Empty -> True
+                   Trap  -> True
+                   _     -> False
+
+army :: Color -> Board -> [PieceAt]
+army c br =  [(pieceAt sq br, sq) | sq <- pieceSquares br
+                                  , colorOf (pieceAt sq br) == c]
+
+colorOf :: (Color, a) -> Color
+colorOf = fst
+
+
+isColor :: Color -> (Color, a) -> Bool
+isColor c = \x -> colorOf x == c
+
+#+END_SRC
+
+* Movement rules.
+** summary 
+
+#+BEGIN_SRC haskell
+
+validSteps :: Board -> Color -> [Step] -> [Step]
+validSteps b c ss = [] -- TODO
+
+#+END_SRC
+
+validPushes ++ validPulls ++ validSteps
+
+#+BEGIN_SRC haskell
+
+emcTestBoard = doSteps (steps "Ed3 me3 Ce4") emptyBoard
+emcE = head $ army Gold emcTestBoard
+emcM = head $ army Silver emcTestBoard 
+emcC = head $ tail $ army Gold emcTestBoard
+
+#+END_SRC
+
+Which looks like this:
+
+#+BEGIN_EXAMPLE emcTestBoard
+
+ +-----------------+
+8|                 |
+7|                 |
+6|     x     x     |
+5|                 |
+4|         C       |
+3|     x E m x     |
+2|                 |
+1|                 |
+ +-----------------+
+   a b c d e f g h
+
+#+END_EXAMPLE
+
+** 1. Pieces move in cardinal directions, except that rabbits cannot move backward.
+*** forward and backward:
+
+#+BEGIN_SRC haskell
+
+fore :: Color -> Direction
+fore Gold   = North
+fore Silver = South
+
+back :: Color -> Direction
+back = fore . opp
+
+opp Gold = Silver
+opp Silver = Gold
+
+#+END_SRC
+
+*** valid empty squares
+
+#+BEGIN_SRC haskell
+
+emptyDirs :: PieceAt -> Board -> [Direction]
+emptyDirs (p, sq) br = [dir | dir <- potentialDirs p, isEmpty (dir @: sq) br]
+
+#+END_SRC
+
+test: [North, East, West] == emptyDirs (('b', 5), (g R)) emptyBoard
+test: [South, East, West] == emptyDirs (('b', 5), (s R)) emptyBoard
+test: [South, East]       == emptyDirs (('a', 5), (s R)) emptyBoard
+
+#+BEGIN_SRC haskell
+
+potentialDirs :: Piece -> [Direction]
+potentialDirs (color, pc) =
+   case pc of 
+      R  -> (foreAndSides color) 
+      _  -> (back color) : (foreAndSides color)
+   where foreAndSides color = fore color : [East, West]
+
+#+END_SRC
+
+*** valid single-step moves:
+
+#+BEGIN_SRC haskell
+
+validMoves :: PieceAt -> Board -> [[Step]]
+validMoves pcAt@(p, sq) br = [[Move p sq d] | d <- emptyDirs pcAt br ]
+
+#+END_SRC
+
+** 2. Pieces can push or pull weaker enemy pieces provided there are >= 2 steps left.
+
+#+BEGIN_SRC haskell
+
+-- >>> validPushes emcE emcTestBoard
+-- [[me3s,Ed3e],[me3e,Ed3e]]
+-- >>> validPulls emcE emcTestBoard
+-- [[Ed3s,me3w],[Ed3n,me3w],[Ed3w,me3w]]
+
+#+END_SRC
+
+To push, move the enemy piece, then move your piece where the enemy started.
+
+#+BEGIN_SRC haskell
+
+push :: PieceAt -> Direction -> Direction -> Board -> [Step]
+push (pc, sq) pcDir enDir br = [Move en enSq enDir, Move pc sq pcDir]
+   where en = pieceAt enSq br
+         enSq = pcDir @: sq
+
+#+END_SRC
+
+piece p1 can push adjacent enemy p2 if p1 > p2 and p2 has adjacent empty square
+
+#+BEGIN_SRC haskell
+
+validPushes :: PieceAt -> Board -> [[Step]]
+validPushes pcAt@((c, a), sq) br = 
+   [push pcAt pcDir enDir br
+       | (pcDir, en) <- enemitos pcAt br
+       , enDir <- emptyDirs en br ]
+
+#+END_SRC
+
+
+To pull, move your piece, then move the enemy to where your piece started.
+
+#+BEGIN_SRC haskell
+
+pull :: PieceAt -> Direction -> Direction -> Board -> [Step]
+pull (pc, sq) pcDir enDir br = [Move pc sq pcDir, Move en enSq enDelta]
+   where en = pieceAt enSq br
+         enSq = enDir @: sq
+         enDelta = rev enDir
+
+#+END_SRC
+
+piece p1 can pull adjacent enemy p2 if p1 > p2 and p1 has adjacent empty square
+
+#+BEGIN_SRC haskell
+
+validPulls :: PieceAt -> Board -> [[Step]]
+validPulls pcAt@((c, a), sq) br = 
+   [pull pcAt pcDir enDir br
+       | (enDir, en) <- enemitos pcAt br
+       , pcDir <- emptyDirs pcAt br ]
+
+#+END_SRC
+
+** 3. A piece is frozen when adjacent to a stronger enemy, unless it is also adjacent to another friendly piece.
+
+#+BEGIN_SRC haskell
+-- | is the piece frozen?
+-- >>> frozen emcE emcTestBoard
+-- False
+-- >>> frozen emcM emcTestBoard
+-- True
+-- >>>  frozen emcC emcTestBoard
+-- False
+frozen pcAt br | hasFriend pcAt br = False
+               | otherwise = hasThreat pcAt br
+
+#+END_SRC
+
+#+BEGIN_SRC haskell
+
+hasFriend :: PieceAt -> Board -> Bool
+hasFriend ((c, _), sq) br = any (\(p, s) -> isColor c p) $ map snd $ neighbors sq br
+
+hasThreat :: PieceAt -> Board -> Bool
+hasThreat ((c, a), sq) br = any biggerEnemy $ map snd $ neighbors sq br
+   where biggerEnemy ((c2,  a2), _) = (a2 > a) && (not $ c2 == c)
+
+#+END_SRC
+
+** 4. A piece is killed when placed on a trap, unless it is also adjacent to a friendly piece.
+
+#+BEGIN_SRC haskell
+
+trapped :: PieceAt -> Board -> Bool
+trapped (p, sq) br = isTrap sq && (not $ hasFriend (p, sq) br)
+
+#+END_SRC
+
+* the Play State Monad
+
+#+BEGIN_SRC haskell
+
+type Move = (Color, [Step])
+data PlayState = PlayState {
+  board     :: Board,
+  moveNum   :: Int,
+  toMove    :: Color,
+  stepsLeft :: Int,
+  history   :: [Move],
+  future    :: [Move]
+} deriving Show
+
+initState = PlayState {
+  board     = emptyBoard,
+  moveNum   = 1,
+  toMove    = Gold,
+  stepsLeft = 4,
+  history   = [],
+  future    = []
+}
+
+#+END_SRC
+
