@@ -21,7 +21,7 @@ const
   {$ENDIF}
 
   {$IFDEF LINUX}
-  PythonLib = 'python27.so';
+  PythonLib = 'libpython2.7.so';
   {$ENDIF}
 
 type
@@ -41,7 +41,7 @@ const
 function Py_InitModule(Name: PChar; var methods: PyMethodDef;
   doc: PChar = nil; self: PyObject = nil;
   apiver: longint = PYTHON_API_VERSION): PyObject;
-  cdecl; external PythonLib Name 'Py_InitModule4';
+  cdecl; external PythonLib Name 'Py_InitModule4_64';
 
 function PyArg_ParseTuple(args: PyObject; format: PChar) :integer;
   cdecl;
