@@ -13,5 +13,4 @@ class Actions {
     method blackspace($/) { say ~$<token> }
 }
 
-my $actions = Actions.new;
-my @tokens = Grammar.parse( slurp, :actions( $actions ));
+my @tokens = Grammar.parse( slurp, :actions( Actions ));
