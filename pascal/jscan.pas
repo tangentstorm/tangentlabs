@@ -156,8 +156,10 @@ end;
 
 var tok : TToken;
 begin
-  if (paramcount > 0) and fileexists( paramstr( 1 )) then
+  if (paramcount > 0) and fileexists( paramstr( 1 )) then begin
     assign( input, paramstr( 1 ));
+    reset( input );
+  end;
   nextChar( ch );
   while not eof do begin
     write( Next( tok ).text )
