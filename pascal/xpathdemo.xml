@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<html>
+  <head>
+    <title>xpath demo</title>
+  </head>
+  <body>
+    <ul>
+      <li>item one</li>
+      <li>item two</li>
+      <li>item three</li>
+    </ul>
+  </body>
+</html>
