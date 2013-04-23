@@ -10,6 +10,7 @@ type
     procedure SetText( s : string );
     property text : string read GetText write SetText;
   end;
+
   TToken = class( TInterfacedObject, IToken )
     function GetText : string;
     procedure SetText( s : string );
@@ -17,14 +18,48 @@ type
   private
     _text : string;
   end;
-  
-procedure TToken.SetText( s : string );
-begin _text := s
-end;
 
-function TToken.GetText : string;
-begin result := _text;
-end;
+  procedure TToken.SetText( s : string );
+  begin _text := s
+  end;
+
+  function TToken.GetText : string;
+  begin result := _text;
+  end;
+
+{ -- class for parse tree -------------------- }
+
+type
+  TVariants = array of variant;
+  INode = interface
+    function GetChildren : TVariants;
+    procedure AddChild( v : variant );
+    function AsString : string;
+  end;
+
+  TNode = class( TInterfacedObject, INode )
+    function GetChildren : TVariants;
+    procedure AddChild( v : variant );
+    function AsString : string;
+  private
+    children : TVariants;
+  end;
+
+  function TNode.GetChildren : TVariants;
+  begin result := self.children;
+  end;
+
+  function TNode.AsString : string;
+  begin result := '';
+  end;
+
+  procedure TNode.AddChild( v : variant );
+  var i : integer;
+  begin
+    i := length( children );
+    setlength( children, i + 1 );
+    children[ i ] := v;
+  end;
 
 { - the lexer -------------------------------------- }
 
@@ -44,12 +79,12 @@ function next( out tok : TToken ) : TToken;
     alphas = ['a'..'z'] + ['A'..'Z'];
     digits = ['0'..'9'];
     alfnum = alphas + digits;
-    
+
   procedure consume;
   begin
     buffer += ch; nextChar( ch )
   end;
-  
+
   procedure scan_word;
   begin
     while nextChar( ch ) in alfnum do buffer += ch;
@@ -69,15 +104,15 @@ function next( out tok : TToken ) : TToken;
       else fg( 'w' )
     end
   end;
-  
+
   procedure scan_operator;
   begin
     fg( $6 );
     nextChar( ch );
   end;
-  
+
   procedure scan_comment;
-  var done : boolean = false;
+    var done : boolean = false;
   begin
     fg( $5 );
     case ch of
@@ -105,13 +140,21 @@ begin
     end
   else if ch in [ '+', '-', '*', '<', '>', '=', '&', '|' ] then scan_operator
   else begin fg( 'w' ); nextChar( ch ) end;
-  
+
   result := TToken.Create;
   result.text := buffer;
   tok := result;
 end;
 
-var tok :  TToken;
+{ -- the parser -------------------------------------- }
+
+function NextNode( out node : INode ) : INode;
+begin
+  result := TNode.Create;
+  node := result
+end;
+
+var tok : TToken;
 begin
   if (paramcount > 0) and fileexists( paramstr( 1 )) then
     assign( input, paramstr( 1 ));
