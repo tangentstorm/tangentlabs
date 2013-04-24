@@ -87,27 +87,30 @@ function next : string;
     consume; fg( 'm' );
   end;
 
+  procedure scan_whitespace;
+  begin
+    repeat consume until eof or (ch > #32);
+    bg( $e9 );
+  end;
+
+  procedure scan_delimiter;
+  begin consume; fg( 'B' )
+  end;
+
 begin
   bg( 'k' );
-  if ord( ch ) <= 32 then
-    begin
-      repeat consume until eof or (ch > #32);
-      bg( $e9 );
-    end
-  else if ch in [ '{', '}', '(', ')', '[', ']', '.', ';', ',' ] then
-    begin consume; fg( 'B' ) end
-  else if ch in digits then scan_number
-  else if ch = '"' then scan_string
-  else if ch in alphas then scan_word
-  else if ch = '@' then begin consume; scan_word; fg('g') end
-  else if ch = '/' then
-    begin
-      scan_operator;
-      if ch in ['*','/'] then scan_comment
-    end
-  else if ch in [ '+', '-', '*', '<', '>', '=', '&', '|', '!', '?', ':' ] then
-    scan_operator
-  else begin bg( 'r' ); consume end;
+  case ch of
+    #0 .. #32 : scan_whitespace;
+    '{', '}', '(', ')', '[', ']', '.', ';', ',' : scan_delimiter;
+    '0'..'9' : scan_number;
+    '"' : scan_string;
+    '@' : begin consume; scan_word; fg('g') end;
+    '/' : begin scan_operator; if ch in ['*','/'] then scan_comment end;
+    '+', '-', '*', '<', '>', '=', '&', '|', '!', '?', ':' : scan_operator;
+  else
+    if ch in alphas then scan_word
+    else begin bg( 'r' ); consume end
+  end;
   result := buffer;
 end;
 
