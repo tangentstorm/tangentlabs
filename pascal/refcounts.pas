@@ -89,14 +89,14 @@ begin
   WithConst(ref);
   writeln(':     Back.');
 
-  with IRef(TObj.Create('anonymous')) do boop;
+  with IRef(TObj.Create('anonymous1')) do boop;
+  DoSomething(TObj.Create('anonymous2'));
   
   writeln(': <-- main');
 
 end.
 
 { output:
-
   : --> main
   :     Constructing instance.
   AddRef: A.count = 1
@@ -123,12 +123,19 @@ end.
   <Boop>
   : <-- WithConst
   :     Back.
-  : <-- main
-  AddRef:anonymous.count = 1
-  AddRef: anonymous.count = 2
+  AddRef: anonymous1.count = 1
+  AddRef: anonymous1.count = 2
   <Boop>
+  AddRef: anonymous2.count = 1
+  : --> DoSomething (normal parameter)
+  <Boop>
+  :     reassigning local reference to new instance:
+  AddRef: C.count = 1
+  Release: anonymous2.count = 0
+  : <-- DoSomething
+  Release: C.count = 0
   : <-- main
-  Release: anonymous.count = 1
-  Release: anonymous.count = 0
+  Release: anonymous1.count = 1
+  Release: anonymous1.count = 0
   Release: B.count = 0
 }
