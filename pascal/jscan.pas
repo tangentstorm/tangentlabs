@@ -3,103 +3,43 @@
 program jtoks;
 uses sysutils, kvm;
 
-type
-  { using an interface to enable garbage collection }
-  IToken = interface
-    function GetText : string;
-    procedure SetText( s : string );
-    property text : string read GetText write SetText;
-  end;
-
-  TToken = class( TInterfacedObject, IToken )
-    function GetText : string;
-    procedure SetText( s : string );
-    property text : string read GetText write SetText;
-  private
-    _text : string;
-  end;
-
-  procedure TToken.SetText( s : string );
-  begin _text := s
-  end;
-
-  function TToken.GetText : string;
-  begin result := _text;
-  end;
-
-{ -- class for parse tree -------------------- }
-
-type
-  TVariants = array of variant;
-  INode = interface
-    function GetChildren : TVariants;
-    procedure AddChild( v : variant );
-    function AsString : string;
-  end;
-
-  TNode = class( TInterfacedObject, INode )
-    function GetChildren : TVariants;
-    procedure AddChild( v : variant );
-    function AsString : string;
-  private
-    children : TVariants;
-  end;
-
-  function TNode.GetChildren : TVariants;
-  begin result := self.children;
-  end;
-
-  function TNode.AsString : string;
-  begin result := '';
-  end;
-
-  procedure TNode.AddChild( v : variant );
-  var i : integer;
-  begin
-    i := length( children );
-    setlength( children, i + 1 );
-    children[ i ] := v;
-  end;
-
-{ - the lexer -------------------------------------- }
-
 var
   ch : char;
 
-function nextChar( out ch : char ) : char;
-begin
-  read( ch );
-  result := ch;
-end;
-
-function next( out tok : TToken ) : TToken;
-  var
-    buffer : string;
+{ scanner }
+function next : string;
+  var buffer : string;
   const
-    alphas = ['a'..'z'] + ['A'..'Z'];
+    alphas = ['a'..'z'] + ['A'..'Z'] + ['_'];
     digits = ['0'..'9'];
     alfnum = alphas + digits;
 
   procedure consume;
   begin
-    buffer += ch; nextChar( ch )
+    buffer += ch; read( ch );
+  end;
+
+  procedure scan_number;
+  begin
+    repeat consume until not (ch in digits);
+    fg( 'R' );
   end;
 
   procedure scan_word;
   begin
     repeat consume until not (ch in alfnum);
     case buffer of
-      'class'     : fg( 'c' );
-      'extends'   : fg( 'c' );
-      'import'    : fg( 'c' );
-      'package'   : fg( 'c' );
-      'private'   : fg( 'c' );
-      'protected' : fg( 'c' );
-      'public'    : fg( 'c' );
-      'return'    : fg( 'c' );
-      'static'    : fg( 'c' );
-      'super'     : fg( 'c' );
-      'this'      : fg( 'c' );
+      { keywords }
+      'class', 'do', 'else', 'extends', 'for', 'if', 'import',
+      'new', 'package', 'private', 'protected', 'public', 'return',
+      'static', 'switch', 'while' : fg('c');
+
+      { special values }
+      'false', 'null', 'super', 'this', 'true' : fg( 'C' );
+
+      { types }
+      'void',  'boolean', 'int', 'long', 'word', 'byte',
+      'char', 'float', 'double' : fg( 'W' );
       else if buffer[1] in ['A'..'Z'] then fg( 'W' )
       else fg( 'w' )
     end
@@ -107,65 +47,60 @@ function next( out tok : TToken ) : TToken;
 
   procedure scan_operator;
   begin
-    fg( 'y' ); consume;
+    consume; fg( 'y' );
+  end;
+
+  procedure scan_string;
+  begin
+    repeat
+      consume;
+      if ch = '\' then begin consume; consume end;
+    until ch = '"';
+    consume; fg( 'g' );
   end;
 
   procedure scan_comment;
     var done : boolean = false;
   begin
-    fg( 'm' );
     case ch of
       '/' : repeat consume until eof or ( ch in [#10, #13]);
       '*' : repeat
               consume;
               if ch = '*' then begin
                 consume; done := ch = '/';
-              end;
+              end
             until eof or done;
     end;
-    consume;
+    consume; fg( 'm' );
   end;
 
 begin
   bg( 0 ); buffer := '';
   if ord( ch ) <= 32 then
     begin
-      repeat consume until ord(ch) > 32;
-      bg( $ea );
+      repeat consume until eof or (ch > #32);
+      bg( $e9 );
     end
-  else if ch in [ '{', '}', '(', ')', '[', ']', '.', ';' ] then
-    begin fg( 'B' ); consume end
+  else if ch in [ '{', '}', '(', ')', '[', ']', '.', ';', ',' ] then
+    begin consume; fg( 'B' ) end
+  else if ch in digits then scan_number
+  else if ch = '"' then scan_string
   else if ch in alphas then scan_word
   else if ch = '/' then
     begin
       scan_operator;
       if ch in ['*','/'] then scan_comment
     end
-  else if ch in [ '+', '-', '*', '<', '>', '=', '&', '|' ] then scan_operator
-  else begin fg( 'w' ); nextChar( ch ) end;
-
-  result := TToken.Create;
-  result.text := buffer;
-  tok := result;
+  else if ch in [ '+', '-', '*', '<', '>', '=', '&', '|', '!', '?', ':' ] then
+    scan_operator
+  else begin bg( 'r' ); consume end;
+  result := buffer;
 end;
 
-{ -- the parser -------------------------------------- }
-
-function NextNode( out node : INode ) : INode;
-begin
-  result := TNode.Create;
-  node := result
-end;
-
-var tok : TToken;
 begin
   if (paramcount > 0) and fileexists( paramstr( 1 )) then begin
-    assign( input, paramstr( 1 ));
-    reset( input );
+    assign( input, paramstr( 1 )); reset( input );
   end;
-  nextChar( ch );
-  while not eof do begin
-    write( Next( tok ).text )
-  end;
-  writeln;
+  read( ch );
+  while not eof do write( next );
 end.
