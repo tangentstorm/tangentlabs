@@ -22,15 +22,18 @@ function next : string;
   end;
 
   procedure scan_number;
-    var accept : set of char = digits;
+  var
+    accept : set of char = digits;
+    done   : boolean = false;
   begin
     if ch = '0' then begin
       consume;
-      if ch = 'x'
-	then accept := hexals
-        else accept := octals
+      if ch = 'x' then accept := hexals
+      else if ch in octals then accept := octals
+      else if ch in digits then bg('r') // error
+      else done := true
     end;
-    repeat consume until not (ch in accept);
+    if not done then repeat consume until not (ch in accept);
     // TODO: decimal point, scientific notation
     fg( 'R' );
   end;
