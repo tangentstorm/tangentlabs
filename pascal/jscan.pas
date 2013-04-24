@@ -8,7 +8,7 @@ var
 
 { scanner }
 function next : string;
-  var buffer : string;
+  var buffer : string = '';
   const
     alphas = ['a'..'z'] + ['A'..'Z'] + ['_'];
     digits = ['0'..'9'];
@@ -88,7 +88,7 @@ function next : string;
   end;
 
 begin
-  bg( 0 ); buffer := '';
+  bg( 'k' );
   if ord( ch ) <= 32 then
     begin
       repeat consume until eof or (ch > #32);
@@ -117,4 +117,5 @@ begin
   end;
   read( ch );
   while not eof do write( next );
+  fg( 'w' ); bg('k')
 end.
