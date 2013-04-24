@@ -12,6 +12,8 @@ function next : string;
   const
     alphas = ['a'..'z'] + ['A'..'Z'] + ['_'];
     digits = ['0'..'9'];
+    octals = ['0'..'7'];
+    hexals = digits + ['A'..'F'] + ['a'..'f'];
     alfnum = alphas + digits;
 
   procedure consume;
@@ -20,8 +22,16 @@ function next : string;
   end;
 
   procedure scan_number;
+    var accept : set of char = digits;
   begin
-    repeat consume until not (ch in digits);
+    if ch = '0' then begin
+      consume;
+      if ch = 'x'
+	then accept := hexals
+        else accept := octals
+    end;
+    repeat consume until not (ch in accept);
+    // TODO: decimal point, scientific notation
     fg( 'R' );
   end;
 
@@ -56,7 +66,7 @@ function next : string;
       consume;
       if ch = '\' then begin consume; consume end;
     until ch = '"';
-    consume; fg( 'g' );
+    consume; fg( 'G' );
   end;
 
   procedure scan_comment;
@@ -86,6 +96,7 @@ begin
   else if ch in digits then scan_number
   else if ch = '"' then scan_string
   else if ch in alphas then scan_word
+  else if ch = '@' then begin consume; scan_word; fg('g') end
   else if ch = '/' then
     begin
       scan_operator;
