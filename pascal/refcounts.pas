@@ -89,7 +89,10 @@ begin
   WithConst(ref);
   writeln(':     Back.');
 
+  with IRef(TObj.Create('anonymous')) do boop;
+  
   writeln(': <-- main');
+
 end.
 
 { output:
@@ -121,6 +124,11 @@ end.
   : <-- WithConst
   :     Back.
   : <-- main
+  AddRef:anonymous.count = 1
+  AddRef: anonymous.count = 2
+  <Boop>
+  : <-- main
+  Release: anonymous.count = 1
+  Release: anonymous.count = 0
   Release: B.count = 0
-
 }
