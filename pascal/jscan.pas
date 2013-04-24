@@ -1,5 +1,5 @@
 { java scanner (=lexer/tokenizer) }
-{$mode objfpc}
+{$mode objfpc}{$H+}
 program jtoks;
 uses sysutils, kvm;
 
@@ -87,7 +87,7 @@ function next( out tok : TToken ) : TToken;
 
   procedure scan_word;
   begin
-    while nextChar( ch ) in alfnum do buffer += ch;
+    repeat consume until not (ch in alfnum);
     case buffer of
       'class'     : fg( 'c' );
       'extends'   : fg( 'c' );
@@ -107,18 +107,15 @@ function next( out tok : TToken ) : TToken;
 
   procedure scan_operator;
   begin
-    fg( $6 );
-    nextChar( ch );
+    fg( 'y' ); consume;
   end;
 
   procedure scan_comment;
     var done : boolean = false;
   begin
-    fg( $5 );
+    fg( 'm' );
     case ch of
-      '/' : repeat
-              consume; done := ch in [#10, #13];
-            until eof or done;
+      '/' : repeat consume until eof or ( ch in [#10, #13]);
       '*' : repeat
               consume;
               if ch = '*' then begin
@@ -126,12 +123,18 @@ function next( out tok : TToken ) : TToken;
               end;
             until eof or done;
     end;
+    consume;
   end;
 
 begin
-  buffer := ch;
-  if ch in [ '{', '}', '(', ')', '[', ']', '.', ';' ] then
-    begin fg( 'B' ); nextChar( ch ) end
+  bg( 0 ); buffer := '';
+  if ord( ch ) <= 32 then
+    begin
+      repeat consume until ord(ch) > 32;
+      bg( $ea );
+    end
+  else if ch in [ '{', '}', '(', ')', '[', ']', '.', ';' ] then
+    begin fg( 'B' ); consume end
   else if ch in alphas then scan_word
   else if ch = '/' then
     begin
