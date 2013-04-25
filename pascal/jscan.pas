@@ -1,14 +1,35 @@
-{ java scanner (=lexer/tokenizer) }
+{ java scanner (=lexer/tokenizer)
+  see jcolor.pas for example usage. }
 {$mode objfpc}{$H+}
-program jtoks;
-uses sysutils, kvm;
+unit jscan;
+interface
 
-var
-  ch : char;
+type
+  JTokenID = ( jtNumber, jtOperator, jtString, jtAnno,
+               jtComment, jtWhiteSpace, jtDelimiter,
+	       jtType, jtName, jtValue, jtKeyword,
+	       jtUnknown, jtError );
+  JToken   = class
+    kind  : JTokenID;
+    value : string
+  end;
 
-{ scanner }
-function next : string;
-  var buffer : string = '';
+  JScanner = class
+    constructor Create;
+    function Next( token : JToken ) : JToken;
+  private
+    ch : char;
+  end;
+
+implementation
+
+constructor JScanner.Create;
+begin
+  read( ch );
+end;
+  
+function JScanner.Next( token  : JToken ) : JToken;
+    
   const
     alphas = ['a'..'z'] + ['A'..'Z'] + ['_'];
     digits = ['0'..'9'];
@@ -18,7 +39,7 @@ function next : string;
 
   procedure consume;
   begin
-    buffer += ch; read( ch );
+    token.value += ch; read( ch );
   end;
 
   procedure scan_number;
@@ -30,37 +51,38 @@ function next : string;
       consume;
       if ch = 'x' then accept := hexals
       else if ch in octals then accept := octals
-      else if ch in digits then bg('r') // error
+      else if ch in digits then token.kind := jtError
       else done := true
     end;
     if not done then repeat consume until not (ch in accept);
     // TODO: decimal point, scientific notation
-    fg( 'R' );
+    token.kind := jtNumber;
   end;
 
   procedure scan_word;
   begin
     repeat consume until not (ch in alfnum);
-    case buffer of
+    case token.value of
       { keywords }
       'class', 'do', 'else', 'extends', 'for', 'if', 'import',
       'new', 'package', 'private', 'protected', 'public', 'return',
-      'static', 'switch', 'while' : fg('c');
+      'static', 'switch', 'while' : token.kind := jtKeyword;
 
       { special values }
-      'false', 'null', 'super', 'this', 'true' : fg( 'C' );
+      'false', 'null', 'super', 'this', 'true' : token.kind := jtValue;
 
       { types }
       'void',  'boolean', 'int', 'long', 'word', 'byte',
-      'char', 'float', 'double' : fg( 'W' );
-      else if buffer[1] in ['A'..'Z'] then fg( 'W' )
-      else fg( 'w' )
+      'char', 'float', 'double' : token.kind := jtType;
+      else if token.value[1] in ['A'..'Z'] then token.kind := jtType
+      else token.kind := jtName;
     end
   end;
 
   procedure scan_operator;
   begin
-    consume; fg( 'y' );
+    consume;
+    token.kind := jtOperator;
   end;
 
   procedure scan_string;
@@ -69,7 +91,8 @@ function next : string;
       consume;
       if ch = '\' then begin consume; consume end;
     until ch = '"';
-    consume; fg( 'G' );
+    consume;
+    token.kind := jtString;
   end;
 
   procedure scan_comment;
@@ -84,41 +107,37 @@ function next : string;
               end
             until eof or done;
     end;
-    consume; fg( 'm' );
+    consume;
+    token.kind := jtComment;
   end;
 
   procedure scan_whitespace;
   begin
     repeat consume until eof or (ch > #32);
-    bg( $e9 );
+    token.kind := jtWhiteSpace;
   end;
 
   procedure scan_delimiter;
-  begin consume; fg( 'B' )
+  begin consume; token.kind := jtDelimiter;
   end;
 
 begin
-  bg( 'k' );
+  token.value := '';
+  token.kind := jtUnknown;
   case ch of
     #0 .. #32 : scan_whitespace;
     '{', '}', '(', ')', '[', ']', '.', ';', ',' : scan_delimiter;
     '0'..'9' : scan_number;
     '"' : scan_string;
-    '@' : begin consume; scan_word; fg('g') end;
+    '@' : begin consume; scan_word; token.kind := jtAnno end;
     '/' : begin scan_operator; if ch in ['*','/'] then scan_comment end;
     '+', '-', '*', '<', '>', '=', '&', '|', '!', '?', ':' : scan_operator;
   else
     if ch in alphas then scan_word
-    else begin bg( 'r' ); consume end
+    else begin consume; token.kind := jtError end
   end;
-  result := buffer;
+  
+  result := token;
 end;
 
-begin
-  if (paramcount > 0) and fileexists( paramstr( 1 )) then begin
-    assign( input, paramstr( 1 )); reset( input );
-  end;
-  read( ch );
-  while not eof do write( next );
-  fg( 'w' ); bg('k')
 end.
