@@ -1,0 +1,23 @@
+1 '
+WHILE INKEY$ = ""
+ OUT 888, 8
+ FOR x = 1 TO 100: NEXT x
+ OUT 888, 4
+ FOR x = 1 TO 100: NEXT x
+ OUT 888, 2
+ FOR x = 1 TO 100: NEXT x
+ OUT 888, 1
+ FOR x = 1 TO 100: NEXT x
+WEND
+WHILE INKEY$ = ""
+ OUT 888, 1
+ FOR x = 1 TO 100: NEXT x
+ OUT 888, 2
+ FOR x = 1 TO 100: NEXT x
+ OUT 888, 4
+ FOR x = 1 TO 100: NEXT x
+ OUT 888, 8
+ FOR x = 1 TO 100: NEXT x
+WEND
+GOTO 1
+
