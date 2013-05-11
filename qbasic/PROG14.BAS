@@ -1,0 +1,9 @@
+CLS
+RANDOMIZE TIMER
+Num = INT(RND * 101) + 100
+WHILE Num <> 130
+  PRINT Num;
+  Num = INT(RND * 101) + 100
+WEND
+END
+
