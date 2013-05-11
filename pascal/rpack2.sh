@@ -1,5 +1,5 @@
 function runall() { 
-    for PACK in D C N 1 2 4 8 16 ; do
+    for PACK in xx D C N 1 2 4 8 16 ; do
 	echo ----- PACK$PACK---------
 	fpc -v0 -dPACK$PACK rpack2.pas
 	./rpack2
