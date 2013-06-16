@@ -1,0 +1,1 @@
+fpc streamy.pas -Fu~/ver/lazarus/lcl -Fu~/ver/lazarus/components/lazutils/  -Fi~/ver/lazarus/lcl/include -Fu~/ver/lazarus/lcl/widgetset && ./streamy
