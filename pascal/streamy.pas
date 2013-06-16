@@ -1,7 +1,7 @@
 { just experimenting with streaming components }
 {$mode objfpc}
 program streamy;
-uses classes;
+uses classes, lresources;
   
 type
   TStreamyComponent = class (TComponent)
