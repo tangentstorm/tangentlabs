@@ -1,11 +1,12 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# http://doc.scrapy.org/topics/items.html
+# ref http://doc.scrapy.org/topics/items.html
 
 from scrapy.item import Item, Field
 
-class BlogspiderItem(Item):
-    # define the fields for your item here like:
-    # name = Field()
-    pass
+class EntryItem(Item):
+    """
+    A blog entry.
+    """
+    title = Field()
+    date  = Field()
+    text  = Field()
+    
