@@ -1,0 +1,8 @@
+: asc
+  "ASCII TABLE" TYPE
+  255 32 DO
+    I EMIT
+    I 16 MOD 0= IF CR ELSE SPACE THEN
+  LOOP CR ;
+
+asc BYE
