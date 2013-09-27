@@ -64,6 +64,7 @@ begin
   c := hamster.create( 'fluffy' );
   d := pet.create( 'some other thing ');
   m := monster.create;
+  // m.eat( a as a.ClassType );  // I wish. :/
   m.eat( a ); m.eat( b ); m.eat( c ); m.eat( d );
 end.
 { output:
