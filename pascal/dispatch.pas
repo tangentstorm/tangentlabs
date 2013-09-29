@@ -172,10 +172,76 @@ function THelpMonster.Taste( pet : TPet ) : TReaction;
   begin
     result := pet.GetEatenBy(self);
   end;
+
+
+{--------------------------------------------------------------
+  Next, we tried dressing the animals up using variant records.
+  We put the puppy dog a puppy dog suit, the cats in a cat suit,
+  and so on.
+
+  For a single activity like Taste, this doesn't buy us much
+  compared to TCaseMonster, except that it's type-safe, the
+  code looks a lot nicer, the dispatch is on an ordinal type
+  instead of a string, and the costumes can be re-used for
+  other monstrous activities, such as throwing the pet into
+  the air or wearing it as a hat.
+
+  This is the approach used internally by pascal, for variants
+  and 'array of const'.
+--------------------------------------------------------------}
+
+type
+  TPetKind = (pkDog, pkCat, pkHamster, pkOther);
+  TPetSuit = record
+    case kind : TPetKind of
+      pkDog     : ( dog : TPuppyDog );
+      pkCat     : ( cat : TKittyCat );
+      pkHamster : ( hamster : THamster );
+      pkOther   : ( other : TPet );
+    end;
+  TSuitMonster = class (TGoalMonster)
+    public
+      function Taste( pet : TPet ) : TReaction; override;
+    end;
   
+  function PetKind(pet:TPet) : TPetKind;
+    begin
+      case pet.ClassType.ClassName of
+        'TPuppyDog' : result := pkDog;
+        'TKittyCat' : result := pkCat;
+        'THamster'  : result := pkHamster;
+      else
+        result := pkOther
+      end
+    end;
+
+  function WrapPet(pet:TPet) : TPetSuit;
+    begin
+      result.kind := PetKind(pet);
+      case result.kind of
+        pkDog : result.dog := (pet as TPuppyDog);
+        pkCat : result.cat := (cat as TKittyCat);
+        pkHamster : result.hamster := (hamster as THamster);
+      else
+        result.other := pet
+      end
+    end;
+
+  function TSuitMonster.Taste( pet : TPet ) : TReaction;
+    var suited : TPetSuit;
+    begin
+      suited := WrapPet( pet );
+      case suited.kind of
+        pkDog : result := self.Taste( suited.dog );
+        pkCat : result := self.Taste( suited.cat );
+        pkHamster : result := self.Taste( suited.hamster );
+      else
+        result := inherited Taste(suited.other)
+      end
+    end;
 
 {-- test runner -----------------------------------------------}
-
+ 
 procedure Test(m:TMonster);
   begin
     writeln('-------------------------------');
@@ -199,6 +265,7 @@ begin
   Test(TGoalMonster.Create);
   Test(TCaseMonster.Create);
   Test(THelpMonster.Create);
+  Test(TSuitMonster.Create);
 end.
 { output:
   
