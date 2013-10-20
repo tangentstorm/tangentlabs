@@ -240,6 +240,33 @@ type
       end
     end;
 
+{--------------------------------------------------------------
+  Some monsters have poor vision and can't see things when
+  they're standing still. What if they can't taste things
+  unless they're in motion either?
+  
+  That's exactly what lead us to try breeding a RaiseMonster.
+  This fascinating creature instinctively throws its lunch
+  into the air before deciding whether or not to eat it.
+--------------------------------------------------------------}
+type
+  TRaiseMonster = class( TGoalMonster )
+    function Taste( pet : TPet ) : TReaction; override;
+  end;
+
+function TRaiseMonster.Taste( pet : TPet ) : TReaction;
+  begin
+    try
+      raise pet;
+    except
+      on aDog : TPuppyDog do result := self.Taste(aDog);
+      on aCat : TKittyCat do result := self.Taste(aCat);
+      on aHam : THamster  do result := self.Taste(aHam);
+    else
+      result := inherited Taste(pet)
+    end
+  end;
+
 {-- test runner -----------------------------------------------}
  
 procedure Test(m:TMonster);
@@ -266,6 +293,7 @@ begin
   Test(TCaseMonster.Create);
   Test(THelpMonster.Create);
   Test(TSuitMonster.Create);
+  Test(TRaiseMonster.Create);
 end.
 { output:
   
