@@ -68,21 +68,21 @@ function TGoalMonster.Taste( d : TPuppyDog ) : TReaction;
     writeln( d.name, ' taste good! yum!' );
     result := kYUM;
   end;
-  
+
 // it should hate to eat kitty cats
 function TGoalMonster.Taste( c : TKittyCat ) : TReaction;
   begin
     writeln( c.name, ' taste bad! yuck!' );
     result := kYUCK;
   end;
-  
+
 // it should never eat hamsters
 function TGoalMonster.Taste( h : THamster ) : TReaction;
   begin
     writeln( 'no eat ', h.name, '! ', h.name, ' my friend!' );
     result := kNOEAT;
   end;
-  
+
 // anything else should throw it into a rage:
 function TGoalMonster.Taste( p : TPet ) : TReaction;
   begin
@@ -98,13 +98,13 @@ function TGoalMonster.TasteTest : boolean;
       and (Taste(hamster) = kNOEAT)
       and (Taste(frog) = kRAAR)
   end;
-  
+
 { Unfortunately, TGoalMonster didn't work as expected.
   It was unable to distinguish the various types of
   animal, so every potential meal simply enraged the
   monster. It eventually starved to death, after nearly
   destroying the entire lab.
-  
+
  Thankfully, we were able to salvage enough of its
  genetic material to create some working prototypes. }
 
@@ -112,7 +112,7 @@ function TGoalMonster.TasteTest : boolean;
   Our first successful attempt involved adding a CASE
   statement to the creature's brain.
 --------------------------------------------------------------}
- 
+
 type
   TCaseMonster = class( TGoalMonster )
     function Taste( pet : TPet ) : TReaction; override;
@@ -135,8 +135,8 @@ function TCaseMonster.Taste( pet : TPet ) : TReaction;
       result := inherited Taste(pet)
     end
   end;
-  
-  
+
+
 {--------------------------------------------------------------
   Our next attempt involved using a swarm of helper viruses
   to make each animal's flavor more distinctive.
@@ -151,14 +151,14 @@ type
   TPuppyDogFlavor = class helper(TStrongerFlavor) for TPuppyDog
     function GetEatenBy( m : THelpMonster ) : TReaction; overload;
   end;
-  
+
 { unfortunately, the animals would only adapt the 'rage' flavor: }
 function TStrongerFlavor.GetEatenBy( m : THelpMonster ) : TReaction;
   begin
     writeln( name, ' enrages the monster.');
     result := kRAAR
   end;
-  
+
 { Attempting to customize the virus for the individual animals proved
   fruitless. We could have modified their brains using our earlier
   CASE statement technology, but this would have just made THelpMonster
@@ -203,7 +203,7 @@ type
     public
       function Taste( pet : TPet ) : TReaction; override;
     end;
-  
+
   function PetKind(pet:TPet) : TPetKind;
     begin
       case pet.ClassType.ClassName of
@@ -244,7 +244,7 @@ type
   Some monsters have poor vision and can't see things when
   they're standing still. What if they can't taste things
   unless they're in motion either?
-  
+
   That's exactly what lead us to try breeding a RaiseMonster.
   This fascinating creature instinctively throws its lunch
   into the air before deciding whether or not to eat it.
@@ -268,7 +268,7 @@ function TRaiseMonster.Taste( pet : TPet ) : TReaction;
   end;
 
 {-- test runner -----------------------------------------------}
- 
+
 procedure Test(m:TMonster);
   begin
     writeln('-------------------------------');
@@ -286,7 +286,7 @@ procedure Test(m:TMonster);
       end;
     writeln;
   end;
-  
+
 begin
   PrepareBuffet;
   Test(TGoalMonster.Create);
@@ -296,13 +296,13 @@ begin
   Test(TRaiseMonster.Create);
 end.
 { output:
-  
+
   -------------------------------
   testing TGoalMonster
   -------------------------------
   no want Sparky! raaar!
   result: FAILED!
-  
+
   -------------------------------
   testing TCaseMonster
   -------------------------------
@@ -317,4 +317,23 @@ end.
   -------------------------------
   Sparky enrages the monster.
   result: FAILED!
+
+  -------------------------------
+  testing TSuitMonster
+  -------------------------------
+  Sparky taste good! yum!
+  Quaxo taste bad! yuck!
+  no eat Goldie! Goldie my friend!
+  no want Mr Jumpy! raaar!
+  result: PASSED!
+
+  -------------------------------
+  testing TRaiseMonster
+  -------------------------------
+  Sparky taste good! yum!
+  Quaxo taste bad! yuck!
+  no eat Goldie! Goldie my friend!
+  no want Mr Jumpy! raaar!
+  result: PASSED!
+
 }
