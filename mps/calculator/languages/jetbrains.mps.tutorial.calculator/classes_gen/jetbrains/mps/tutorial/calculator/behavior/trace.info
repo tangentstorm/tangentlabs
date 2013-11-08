@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debugInfo>
+  <unitInfo fileName="BehaviorAspectDescriptor.java" startLine="9" startPosition="0" endLine="30" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.behavior.BehaviorAspectDescriptor" />
+  <unitInfo fileName="Calculator_BehaviorDescriptor.java" startLine="13" startPosition="0" endLine="34" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.behavior.Calculator_BehaviorDescriptor" />
+  <unitInfo fileName="InputFieldReference_BehaviorDescriptor.java" startLine="7" startPosition="0" endLine="16" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.behavior.InputFieldReference_BehaviorDescriptor" />
+  <unitInfo fileName="InputField_BehaviorDescriptor.java" startLine="10" startPosition="0" endLine="23" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.behavior.InputField_BehaviorDescriptor" />
+  <unitInfo fileName="OutputField_BehaviorDescriptor.java" startLine="7" startPosition="0" endLine="16" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.behavior.OutputField_BehaviorDescriptor" />
+  <root nodeRef="r:9b034325-3c1a-49fc-9970-2b29c9f78736(jetbrains.mps.tutorial.calculator.behavior)/714196159577457066">
+    <nodeInfo nodeId="714196159577461232" fileName="Calculator_Behavior.java" startLine="16" startPosition="108" endLine="17" endPosition="165" conceptFqName="jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+    <nodeInfo nodeId="714196159577465812" fileName="Calculator_Behavior.java" startLine="18" startPosition="5" endLine="19" endPosition="16" conceptFqName="jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+    <nodeInfo nodeId="714196159577457066" fileName="Calculator_Behavior.java" startLine="12" startPosition="0" endLine="14" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" propertyString="init#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+    <nodeInfo nodeId="714196159577459401" fileName="Calculator_Behavior.java" startLine="15" startPosition="101" endLine="18" endPosition="5" conceptFqName="jetbrains.mps.baseLanguage.structure.IfStatement" />
+    <nodeInfo nodeId="714196159577457066" fileName="Calculator_Behavior.java" startLine="15" startPosition="0" endLine="21" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" propertyString="virtual_getScope_3734116213129936182#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/scope/Scope;" />
+    <scopeInfo nodeId="714196159577457219" fileName="Calculator_Behavior.java" startLine="12" startPosition="43" endLine="12" endPosition="43" />
+    <scopeInfo nodeId="714196159577459402" fileName="Calculator_Behavior.java" startLine="16" startPosition="108" endLine="17" endPosition="165" />
+    <scopeInfo nodeId="714196159577457066" fileName="Calculator_Behavior.java" startLine="12" startPosition="0" endLine="14" endPosition="0">
+      <varInfo nodeId="714196159577457066" varName="thisNode" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159577457335" fileName="Calculator_Behavior.java" startLine="15" startPosition="101" endLine="19" endPosition="16" />
+    <scopeInfo nodeId="714196159577457066" fileName="Calculator_Behavior.java" startLine="15" startPosition="0" endLine="21" endPosition="0">
+      <varInfo nodeId="714196159577457338" varName="child" />
+      <varInfo nodeId="714196159577457336" varName="kind" />
+      <varInfo nodeId="714196159577457066" varName="thisNode" />
+    </scopeInfo>
+    <unitInfo nodeId="714196159577457066" fileName="Calculator_Behavior.java" startLine="11" startPosition="0" endLine="22" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.behavior.Calculator_Behavior" />
+  </root>
+</debugInfo>
+

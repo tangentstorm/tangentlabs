@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dependencies version="2" modelHash="-t5bber6yqq48ricmd9zlzully2aew6">
+  <dep model="f:java_stub#6354ebe7-c22a-4a0f-ac54-50b52ab9b065#javax.swing(JDK/javax.swing@java_stub)" />
+  <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+  <dep model="r:72dd24e7-20b6-42d8-9dad-1fb3256f7bbf(jetbrains.mps.tutorial.calculator.generator.template.main@generator)" hash="-3t5wvhnn75reph0hxawf7tv2pm3j9iu" />
+  <common hash="-2u8kleiuxf177zlwp6dpbrsol0rq3jj" />
+  <source id="714196159574328624" name="MyCalc" hash="arwtis5wri8qqw368gd1m6pfxom7p2w">
+    <dep model="f:java_stub#6354ebe7-c22a-4a0f-ac54-50b52ab9b065#javax.swing(JDK/javax.swing@java_stub)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+    <dep model="r:72dd24e7-20b6-42d8-9dad-1fb3256f7bbf(jetbrains.mps.tutorial.calculator.generator.template.main@generator)" />
+    <file name="MyCalc.java" />
+  </source>
+  <source id="714196159577395198" name="MySalary" hash="bbu0tjjmperws9lvppiig817vbhd8rj">
+    <dep model="f:java_stub#6354ebe7-c22a-4a0f-ac54-50b52ab9b065#javax.swing(JDK/javax.swing@java_stub)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+    <dep model="r:72dd24e7-20b6-42d8-9dad-1fb3256f7bbf(jetbrains.mps.tutorial.calculator.generator.template.main@generator)" />
+    <file name="MySalary.java" />
+  </source>
+</dependencies>
+

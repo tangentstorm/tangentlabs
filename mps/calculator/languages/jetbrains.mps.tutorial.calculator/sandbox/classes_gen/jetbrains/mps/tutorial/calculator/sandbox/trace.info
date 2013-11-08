@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debugInfo>
+  <root nodeRef="r:6713e12f-2d7f-460b-8038-d4a52f34cd97(jetbrains.mps.tutorial.calculator.sandbox)/714196159574328624">
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="15" startPosition="48" endLine="16" endPosition="15" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="19" startPosition="48" endLine="20" endPosition="15" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="23" startPosition="49" endLine="24" endPosition="15" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="28" startPosition="0" endLine="29" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="input_a" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="29" startPosition="0" endLine="30" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="input_b" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="30" startPosition="0" endLine="31" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="input_c" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="31" startPosition="0" endLine="32" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="output_a" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="35" startPosition="19" endLine="36" endPosition="23" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="36" startPosition="23" endLine="37" endPosition="36" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="37" startPosition="36" endLine="38" endPosition="56" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="38" startPosition="56" endLine="39" endPosition="29" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="39" startPosition="29" endLine="40" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="40" startPosition="17" endLine="41" endPosition="56" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="41" startPosition="56" endLine="42" endPosition="30" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="42" startPosition="30" endLine="43" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="43" startPosition="17" endLine="44" endPosition="56" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="44" startPosition="56" endLine="45" endPosition="29" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="45" startPosition="29" endLine="46" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="46" startPosition="17" endLine="47" endPosition="30" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="47" startPosition="30" endLine="48" endPosition="18" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="48" startPosition="18" endLine="49" endPosition="13" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="49" startPosition="13" endLine="50" endPosition="51" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="50" startPosition="51" endLine="51" endPosition="11" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="51" startPosition="11" endLine="52" endPosition="21" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="55" startPosition="24" endLine="56" endPosition="16" conceptFqName="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="56" startPosition="16" endLine="57" endPosition="16" conceptFqName="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="57" startPosition="16" endLine="58" endPosition="16" conceptFqName="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="59" startPosition="9" endLine="60" endPosition="48" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="60" startPosition="48" endLine="61" endPosition="48" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="61" startPosition="48" endLine="62" endPosition="48" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="64" startPosition="5" endLine="65" endPosition="35" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="70" startPosition="25" endLine="71" endPosition="21" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="46" startPosition="17" endLine="48" endPosition="18" conceptFqName="jetbrains.mps.baseLanguage.structure.BlockStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="15" startPosition="0" endLine="18" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="insertUpdate#(Ljavax/swing/event/DocumentEvent;)V" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="19" startPosition="0" endLine="22" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="removeUpdate#(Ljavax/swing/event/DocumentEvent;)V" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="23" startPosition="0" endLine="26" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="changedUpdate#(Ljavax/swing/event/DocumentEvent;)V" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="37" startPosition="36" endLine="40" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.BlockStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="40" startPosition="17" endLine="43" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.BlockStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="43" startPosition="17" endLine="46" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.BlockStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="70" startPosition="0" endLine="73" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="run#()V" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="68" startPosition="42" endLine="73" endPosition="7" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="58" startPosition="16" endLine="64" endPosition="5" conceptFqName="jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="68" startPosition="0" endLine="75" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" propertyString="main#([Ljava/lang/String;)V" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="55" startPosition="0" endLine="67" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="update#()V" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="14" startPosition="0" endLine="27" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="listener" />
+    <nodeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="35" startPosition="0" endLine="54" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" propertyString="MyCalc#()V" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="63" startPosition="0" endLine="63" endPosition="39">
+      <varInfo nodeId="714196159574328624" varName="e" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="63" startPosition="39" endLine="63" endPosition="39" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="15" startPosition="48" endLine="16" endPosition="15" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="19" startPosition="48" endLine="20" endPosition="15" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="23" startPosition="49" endLine="24" endPosition="15" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="70" startPosition="25" endLine="71" endPosition="21" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="46" startPosition="17" endLine="48" endPosition="18" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="15" startPosition="0" endLine="18" endPosition="0">
+      <varInfo nodeId="714196159574328624" varName="p0" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="19" startPosition="0" endLine="22" endPosition="0">
+      <varInfo nodeId="714196159574328624" varName="p0" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="23" startPosition="0" endLine="26" endPosition="0">
+      <varInfo nodeId="714196159574328624" varName="p0" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="37" startPosition="36" endLine="40" endPosition="17" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="40" startPosition="17" endLine="43" endPosition="17" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="43" startPosition="17" endLine="46" endPosition="17" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="59" startPosition="9" endLine="62" endPosition="48" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="70" startPosition="0" endLine="73" endPosition="0" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="68" startPosition="42" endLine="73" endPosition="7" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="68" startPosition="0" endLine="75" endPosition="0">
+      <varInfo nodeId="714196159574328624" varName="args" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="55" startPosition="24" endLine="65" endPosition="35">
+      <varInfo nodeId="714196159574328624" varName="i_a" />
+      <varInfo nodeId="714196159574328624" varName="i_b" />
+      <varInfo nodeId="714196159574328624" varName="i_c" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="55" startPosition="0" endLine="67" endPosition="0" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="35" startPosition="19" endLine="52" endPosition="21" />
+    <scopeInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="35" startPosition="0" endLine="54" endPosition="0" />
+    <unitInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="69" startPosition="35" endLine="73" endPosition="5" unitName="jetbrains.mps.tutorial.calculator.sandbox.MyCalc$2" />
+    <unitInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="14" startPosition="42" endLine="26" endPosition="3" unitName="jetbrains.mps.tutorial.calculator.sandbox.MyCalc$1" />
+    <unitInfo nodeId="714196159574328624" fileName="MyCalc.java" startLine="13" startPosition="0" endLine="76" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.sandbox.MyCalc" />
+  </root>
+  <root nodeRef="r:6713e12f-2d7f-460b-8038-d4a52f34cd97(jetbrains.mps.tutorial.calculator.sandbox)/714196159577395198">
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="15" startPosition="48" endLine="16" endPosition="15" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="19" startPosition="48" endLine="20" endPosition="15" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="23" startPosition="49" endLine="24" endPosition="15" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="28" startPosition="0" endLine="29" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="input_a" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="29" startPosition="0" endLine="30" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="input_b" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="30" startPosition="0" endLine="31" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="output_a" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="34" startPosition="21" endLine="35" endPosition="25" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="35" startPosition="25" endLine="36" endPosition="36" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="36" startPosition="36" endLine="37" endPosition="56" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="37" startPosition="56" endLine="38" endPosition="34" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="38" startPosition="34" endLine="39" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="39" startPosition="17" endLine="40" endPosition="56" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="40" startPosition="56" endLine="41" endPosition="33" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="41" startPosition="33" endLine="42" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="42" startPosition="17" endLine="43" endPosition="30" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="43" startPosition="30" endLine="44" endPosition="18" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="44" startPosition="18" endLine="45" endPosition="13" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="45" startPosition="13" endLine="46" endPosition="51" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="46" startPosition="51" endLine="47" endPosition="11" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="47" startPosition="11" endLine="48" endPosition="21" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="51" startPosition="24" endLine="52" endPosition="16" conceptFqName="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="52" startPosition="16" endLine="53" endPosition="16" conceptFqName="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="54" startPosition="9" endLine="55" endPosition="48" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="55" startPosition="48" endLine="56" endPosition="48" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="58" startPosition="5" endLine="59" endPosition="48" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="64" startPosition="25" endLine="65" endPosition="23" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="42" startPosition="17" endLine="44" endPosition="18" conceptFqName="jetbrains.mps.baseLanguage.structure.BlockStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="15" startPosition="0" endLine="18" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="insertUpdate#(Ljavax/swing/event/DocumentEvent;)V" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="19" startPosition="0" endLine="22" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="removeUpdate#(Ljavax/swing/event/DocumentEvent;)V" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="23" startPosition="0" endLine="26" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="changedUpdate#(Ljavax/swing/event/DocumentEvent;)V" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="36" startPosition="36" endLine="39" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.BlockStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="39" startPosition="17" endLine="42" endPosition="17" conceptFqName="jetbrains.mps.baseLanguage.structure.BlockStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="64" startPosition="0" endLine="67" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="run#()V" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="53" startPosition="16" endLine="58" endPosition="5" conceptFqName="jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="62" startPosition="42" endLine="67" endPosition="7" conceptFqName="jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="62" startPosition="0" endLine="69" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" propertyString="main#([Ljava/lang/String;)V" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="51" startPosition="0" endLine="61" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" propertyString="update#()V" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="14" startPosition="0" endLine="27" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="listener" />
+    <nodeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="34" startPosition="0" endLine="50" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" propertyString="MySalary#()V" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="57" startPosition="0" endLine="57" endPosition="39">
+      <varInfo nodeId="714196159577395198" varName="e" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="57" startPosition="39" endLine="57" endPosition="39" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="15" startPosition="48" endLine="16" endPosition="15" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="19" startPosition="48" endLine="20" endPosition="15" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="23" startPosition="49" endLine="24" endPosition="15" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="64" startPosition="25" endLine="65" endPosition="23" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="42" startPosition="17" endLine="44" endPosition="18" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="54" startPosition="9" endLine="56" endPosition="48" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="15" startPosition="0" endLine="18" endPosition="0">
+      <varInfo nodeId="714196159577395198" varName="p0" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="19" startPosition="0" endLine="22" endPosition="0">
+      <varInfo nodeId="714196159577395198" varName="p0" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="23" startPosition="0" endLine="26" endPosition="0">
+      <varInfo nodeId="714196159577395198" varName="p0" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="36" startPosition="36" endLine="39" endPosition="17" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="39" startPosition="17" endLine="42" endPosition="17" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="64" startPosition="0" endLine="67" endPosition="0" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="62" startPosition="42" endLine="67" endPosition="7" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="62" startPosition="0" endLine="69" endPosition="0">
+      <varInfo nodeId="714196159577395198" varName="args" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="51" startPosition="24" endLine="59" endPosition="48">
+      <varInfo nodeId="714196159577395198" varName="i_a" />
+      <varInfo nodeId="714196159577395198" varName="i_b" />
+    </scopeInfo>
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="51" startPosition="0" endLine="61" endPosition="0" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="34" startPosition="21" endLine="48" endPosition="21" />
+    <scopeInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="34" startPosition="0" endLine="50" endPosition="0" />
+    <unitInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="63" startPosition="35" endLine="67" endPosition="5" unitName="jetbrains.mps.tutorial.calculator.sandbox.MySalary$2" />
+    <unitInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="14" startPosition="42" endLine="26" endPosition="3" unitName="jetbrains.mps.tutorial.calculator.sandbox.MySalary$1" />
+    <unitInfo nodeId="714196159577395198" fileName="MySalary.java" startLine="13" startPosition="0" endLine="70" endPosition="0" unitName="jetbrains.mps.tutorial.calculator.sandbox.MySalary" />
+  </root>
+</debugInfo>
+

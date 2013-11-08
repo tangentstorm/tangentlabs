@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dependencies version="2" modelHash="-3kdp4hb38cds9k7pswq9po5qs2bhvzc">
+  <dep model="r:00000000-0000-4000-0000-011c89590282(jetbrains.mps.lang.core.behavior)" />
+  <dep model="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" />
+  <dep model="r:00000000-0000-4000-0000-011c895902c0(jetbrains.mps.baseLanguage.behavior)" />
+  <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+  <dep model="r:00000000-0000-4000-0000-011c895902e8(jetbrains.mps.lang.generator.structure)" />
+  <dep model="r:00000000-0000-4000-0000-011c89590303(jetbrains.mps.lang.smodel.generator.baseLanguage.template.main@generator)" />
+  <dep model="r:229ce18d-2bb0-4d5b-a7cd-cec65841e459(jetbrains.mps.lang.behavior.generator.template.main@generator)" />
+  <dep model="r:525d7fdc-24b4-44b3-ae44-c723d189b765(jetbrains.mps.tutorial.calculator.structure)" hash="6whinq36y2vy637gb4qqb04632d6gdm" />
+  <dep model="r:f04c1476-2f91-4f59-be13-c8e009abebee(jetbrains.mps.baseLanguageInternal.generator.template.main@generator)" />
+  <common hash="hs6pj0gddaaeyxc9yrp2e4c1aq5y4f" dependsOnNodes="true">
+    <dep root="714196159577457066" />
+    <dep model="r:00000000-0000-4000-0000-011c89590282(jetbrains.mps.lang.core.behavior)" />
+    <dep model="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902c0(jetbrains.mps.baseLanguage.behavior)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902e8(jetbrains.mps.lang.generator.structure)" />
+    <dep model="r:229ce18d-2bb0-4d5b-a7cd-cec65841e459(jetbrains.mps.lang.behavior.generator.template.main@generator)" />
+    <dep model="r:525d7fdc-24b4-44b3-ae44-c723d189b765(jetbrains.mps.tutorial.calculator.structure)" />
+    <dep model="r:f04c1476-2f91-4f59-be13-c8e009abebee(jetbrains.mps.baseLanguageInternal.generator.template.main@generator)" />
+    <file name="BehaviorAspectDescriptor.java" />
+    <file name="Calculator_BehaviorDescriptor.java" />
+    <file name="InputFieldReference_BehaviorDescriptor.java" />
+    <file name="InputField_BehaviorDescriptor.java" />
+    <file name="OutputField_BehaviorDescriptor.java" />
+  </common>
+  <source id="714196159577457066" name="Calculator_Behavior" hash="28f5a1c883xfdeojf725un5uwocjxb9">
+    <dep model="r:00000000-0000-4000-0000-011c89590282(jetbrains.mps.lang.core.behavior)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+    <dep model="r:00000000-0000-4000-0000-011c89590303(jetbrains.mps.lang.smodel.generator.baseLanguage.template.main@generator)" />
+    <dep model="r:229ce18d-2bb0-4d5b-a7cd-cec65841e459(jetbrains.mps.lang.behavior.generator.template.main@generator)" />
+    <dep model="r:525d7fdc-24b4-44b3-ae44-c723d189b765(jetbrains.mps.tutorial.calculator.structure)" />
+    <file name="Calculator_Behavior.java" />
+  </source>
+</dependencies>
+

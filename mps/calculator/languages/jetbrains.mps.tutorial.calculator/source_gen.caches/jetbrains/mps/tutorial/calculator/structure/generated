@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dependencies version="2" modelHash="6whinq36y2vy637gb4qqb04632d6gdm">
+  <dep model="f:java_stub#6ed54515-acc8-4d1e-a16c-9fd6cfe951ea#jetbrains.mps.smodel.runtime.impl(MPS.Core/jetbrains.mps.smodel.runtime.impl@java_stub)" />
+  <dep model="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" />
+  <dep model="r:00000000-0000-4000-0000-011c89590293(jetbrains.mps.lang.structure.generator_new.baseLanguage@generator)" />
+  <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+  <dep model="r:00000000-0000-4000-0000-011c895902e8(jetbrains.mps.lang.generator.structure)" />
+  <dep model="r:f04c1476-2f91-4f59-be13-c8e009abebee(jetbrains.mps.baseLanguageInternal.generator.template.main@generator)" />
+  <common hash="7x5h1s2rf04omg1jx9ysnmph4lh2mv4">
+    <dep root="714196159574323305" />
+    <dep root="714196159574328627" />
+    <dep root="714196159574340672" />
+    <dep root="714196159574985953" />
+    <dep model="f:java_stub#6ed54515-acc8-4d1e-a16c-9fd6cfe951ea#jetbrains.mps.smodel.runtime.impl(MPS.Core/jetbrains.mps.smodel.runtime.impl@java_stub)" />
+    <dep model="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" />
+    <dep model="r:00000000-0000-4000-0000-011c89590293(jetbrains.mps.lang.structure.generator_new.baseLanguage@generator)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+    <dep model="r:00000000-0000-4000-0000-011c895902e8(jetbrains.mps.lang.generator.structure)" />
+    <dep model="r:f04c1476-2f91-4f59-be13-c8e009abebee(jetbrains.mps.baseLanguageInternal.generator.template.main@generator)" />
+    <file name="StructureAspectDescriptor.java" />
+  </common>
+  <source id="714196159574323305" name="Calculator" hash="-c3u1fybebyp7ko21245vi2x5l1kzi5j" />
+  <source id="714196159574328627" name="InputField" hash="8wyyzbgiib3stqqak38zw5i30wi61jg" />
+  <source id="714196159574340672" name="OutputField" hash="bx3rla4n24c60fn6qebcnmunkx3u8ax" />
+  <source id="714196159574985953" name="InputFieldReference" hash="-7a4izree6qitna1fi0qg9ed9dkknq00" />
+</dependencies>
+
