@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<history>
+  <StructureModification>
+    <dependencies>
+      <model index="vydg" modelUID="r:f052d088-2c7b-4428-8b1d-dd4b1c4d192f(pl0.structure)" version="-1" />
+    </dependencies>
+    <rename id="vydg.714196159579087055" type="CONCEPT" from="Integer" to="VInteger" />
+  </StructureModification>
+  <StructureModification>
+    <dependencies>
+      <model index="vydg" modelUID="r:f052d088-2c7b-4428-8b1d-dd4b1c4d192f(pl0.structure)" version="0" />
+    </dependencies>
+    <rename id="vydg.714196159579087055" type="CONCEPT" from="VInteger" to="IntLiteral" />
+  </StructureModification>
+</history>
+
