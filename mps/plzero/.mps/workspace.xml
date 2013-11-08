@@ -12,24 +12,9 @@
     </option>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c55a1a17-2511-437c-add3-96805c8060b9" name="Default" comment="mps calculator demo from jetbrains">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/languageModels/structure.history" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/editor/EditorAspectDescriptorImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/behavior/Expr_BehaviorDescriptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/behavior/IntLiteral_BehaviorDescriptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/editor/IntLiteral_Editor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/structure/StructureAspectDescriptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/behavior/TInteger_BehaviorDescriptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/editor/TInteger_Editor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/behavior/TValue_BehaviorDescriptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/typesystem/TypesystemDescriptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/typesystem/typeof_IntLiteral_InferenceRule.java" />
+    <list default="true" id="c55a1a17-2511-437c-add3-96805c8060b9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/behavior/TBoolean_BehaviorDescriptor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.mps/workspace.xml" afterPath="$PROJECT_DIR$/.mps/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/behavior/BehaviorAspectDescriptor.java" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/behavior/BehaviorAspectDescriptor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/Language.java" afterPath="$PROJECT_DIR$/languages/pl0/source_gen/pl0/Language.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/languages/pl0/languageModels/editor.mps" afterPath="$PROJECT_DIR$/languages/pl0/languageModels/editor.mps" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/languages/pl0/languageModels/structure.mps" afterPath="$PROJECT_DIR$/languages/pl0/languageModels/structure.mps" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/languages/pl0/languageModels/typesystem.mps" afterPath="$PROJECT_DIR$/languages/pl0/languageModels/typesystem.mps" />
     </list>
     <ignored path="plzero.iws" />
     <ignored path=".mps/workspace.xml" />
@@ -576,7 +561,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="mps calculator demo from jetbrains" />
+    <option name="LAST_COMMIT_MESSAGE" value="mps/plzero : added an integer type" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -591,6 +576,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="mps calculator demo from jetbrains" />
+    <MESSAGE value="mps/plzero : added an integer type" />
   </component>
   <component name="editorHistoryManager">
     <entry file="mps://node://pl0/pl0.structure/TValue">
