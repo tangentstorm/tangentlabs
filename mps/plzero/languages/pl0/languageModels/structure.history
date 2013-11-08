@@ -42,5 +42,11 @@
     </dependencies>
     <rename id="vydg.714196159579179398" type="CHILD" from="xExpr" to="y" />
   </StructureModification>
+  <StructureModification>
+    <dependencies>
+      <model index="vydg" modelUID="r:f052d088-2c7b-4428-8b1d-dd4b1c4d192f(pl0.structure)" version="6" />
+    </dependencies>
+    <rename id="vydg.714196159579435095" type="CHILD" from="op" to="verb" />
+  </StructureModification>
 </history>
 
