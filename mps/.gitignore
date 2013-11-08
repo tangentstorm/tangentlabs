@@ -1,0 +1,4 @@
+*.class
+classes_gen
+trace.info
+
