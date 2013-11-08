@@ -14,29 +14,37 @@ public class StructureAspectDescriptor implements jetbrains.mps.smodel.runtime.S
   public ConceptDescriptor getDescriptor(String conceptFqName) {
     switch (Arrays.binarySearch(stringSwitchCases_1htk8d_a0a0b, conceptFqName)) {
       case 0:
-        return new ConceptDescriptorBuilder("pl0.structure.BeginStmt").super_("pl0.structure.Stmt").parents("pl0.structure.Stmt").create();
+        return new ConceptDescriptorBuilder("pl0.structure.AssignStmt").super_("pl0.structure.Stmt").parents("pl0.structure.Stmt").children(new String[]{"lhs", "rhs"}, new boolean[]{false, false}).create();
       case 1:
-        return new ConceptDescriptorBuilder("pl0.structure.Block").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").children(new String[]{"statement"}, new boolean[]{false}).create();
+        return new ConceptDescriptorBuilder("pl0.structure.BeginStmt").super_("pl0.structure.Stmt").parents("pl0.structure.Stmt").children(new String[]{"statements"}, new boolean[]{true}).create();
       case 2:
-        return new ConceptDescriptorBuilder("pl0.structure.Expr").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").abstract_().create();
+        return new ConceptDescriptorBuilder("pl0.structure.Block").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").children(new String[]{"statement"}, new boolean[]{false}).create();
       case 3:
-        return new ConceptDescriptorBuilder("pl0.structure.IntLiteral").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").properties("value").create();
+        return new ConceptDescriptorBuilder("pl0.structure.Expr").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").abstract_().create();
       case 4:
-        return new ConceptDescriptorBuilder("pl0.structure.Odd").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").children(new String[]{"x"}, new boolean[]{false}).alias("odd", "").create();
+        return new ConceptDescriptorBuilder("pl0.structure.IntLiteral").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").properties("value").create();
       case 5:
-        return new ConceptDescriptorBuilder("pl0.structure.Program").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").children(new String[]{"block"}, new boolean[]{false}).create();
+        return new ConceptDescriptorBuilder("pl0.structure.Odd").super_("pl0.structure.Expr").parents("pl0.structure.Expr").children(new String[]{"y"}, new boolean[]{false}).alias("odd", "").create();
       case 6:
-        return new ConceptDescriptorBuilder("pl0.structure.Stmt").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").abstract_().create();
+        return new ConceptDescriptorBuilder("pl0.structure.Program").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").children(new String[]{"vars", "block"}, new boolean[]{false, false}).create();
       case 7:
-        return new ConceptDescriptorBuilder("pl0.structure.TBoolean").super_("pl0.structure.TValue").parents("pl0.structure.TValue").abstract_().create();
+        return new ConceptDescriptorBuilder("pl0.structure.Stmt").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").abstract_().create();
       case 8:
-        return new ConceptDescriptorBuilder("pl0.structure.TInteger").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").create();
+        return new ConceptDescriptorBuilder("pl0.structure.TBoolean").super_("pl0.structure.TValue").parents("pl0.structure.TValue").abstract_().create();
       case 9:
+        return new ConceptDescriptorBuilder("pl0.structure.TInteger").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").create();
+      case 10:
         return new ConceptDescriptorBuilder("pl0.structure.TValue").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").abstract_().create();
+      case 11:
+        return new ConceptDescriptorBuilder("pl0.structure.VarDef").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").properties("iden").create();
+      case 12:
+        return new ConceptDescriptorBuilder("pl0.structure.VarDefs").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").children(new String[]{"vars"}, new boolean[]{true}).create();
+      case 13:
+        return new ConceptDescriptorBuilder("pl0.structure.VarRef").super_("pl0.structure.Expr").parents("pl0.structure.Expr").references("var").create();
       default:
         return StructureAspectInterpreted.getInstance().getDescriptor(conceptFqName);
     }
   }
 
-  private static String[] stringSwitchCases_1htk8d_a0a0b = new String[]{"pl0.structure.BeginStmt", "pl0.structure.Block", "pl0.structure.Expr", "pl0.structure.IntLiteral", "pl0.structure.Odd", "pl0.structure.Program", "pl0.structure.Stmt", "pl0.structure.TBoolean", "pl0.structure.TInteger", "pl0.structure.TValue"};
+  private static String[] stringSwitchCases_1htk8d_a0a0b = new String[]{"pl0.structure.AssignStmt", "pl0.structure.BeginStmt", "pl0.structure.Block", "pl0.structure.Expr", "pl0.structure.IntLiteral", "pl0.structure.Odd", "pl0.structure.Program", "pl0.structure.Stmt", "pl0.structure.TBoolean", "pl0.structure.TInteger", "pl0.structure.TValue", "pl0.structure.VarDef", "pl0.structure.VarDefs", "pl0.structure.VarRef"};
 }

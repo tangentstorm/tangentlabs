@@ -15,17 +15,25 @@ public class EditorAspectDescriptorImpl implements EditorAspectDescriptor {
   public Collection<ConceptEditor> getEditors(ConceptDescriptor descriptor) {
     switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a, descriptor.getConceptFqName())) {
       case 0:
-        return Collections.<ConceptEditor>singletonList(new BeginStmt_Editor());
+        return Collections.<ConceptEditor>singletonList(new AssignStmt_Editor());
       case 1:
-        return Collections.<ConceptEditor>singletonList(new Block_Editor());
+        return Collections.<ConceptEditor>singletonList(new BeginStmt_Editor());
       case 2:
-        return Collections.<ConceptEditor>singletonList(new IntLiteral_Editor());
+        return Collections.<ConceptEditor>singletonList(new Block_Editor());
       case 3:
-        return Collections.<ConceptEditor>singletonList(new Odd_Editor());
+        return Collections.<ConceptEditor>singletonList(new IntLiteral_Editor());
       case 4:
-        return Collections.<ConceptEditor>singletonList(new Program_Editor());
+        return Collections.<ConceptEditor>singletonList(new Odd_Editor());
       case 5:
+        return Collections.<ConceptEditor>singletonList(new Program_Editor());
+      case 6:
         return Collections.<ConceptEditor>singletonList(new TInteger_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new VarDef_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new VarDefs_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new VarRef_Editor());
       default:
     }
     return Collections.emptyList();
@@ -42,5 +50,5 @@ public class EditorAspectDescriptorImpl implements EditorAspectDescriptor {
   }
 
 
-  private static String[] stringSwitchCases_xbvbvu_a0a0a = new String[]{"pl0.structure.BeginStmt", "pl0.structure.Block", "pl0.structure.IntLiteral", "pl0.structure.Odd", "pl0.structure.Program", "pl0.structure.TInteger"};
+  private static String[] stringSwitchCases_xbvbvu_a0a0a = new String[]{"pl0.structure.AssignStmt", "pl0.structure.BeginStmt", "pl0.structure.Block", "pl0.structure.IntLiteral", "pl0.structure.Odd", "pl0.structure.Program", "pl0.structure.TInteger", "pl0.structure.VarDef", "pl0.structure.VarDefs", "pl0.structure.VarRef"};
 }

@@ -30,5 +30,17 @@
     </dependencies>
     <rename id="vydg.714196159579207550" type="CHILD" from="statements" to="statement" />
   </StructureModification>
+  <StructureModification>
+    <dependencies>
+      <model index="vydg" modelUID="r:f052d088-2c7b-4428-8b1d-dd4b1c4d192f(pl0.structure)" version="4" />
+    </dependencies>
+    <rename id="vydg.714196159579236082" type="CONCEPT" from="Variable" to="VarDef" />
+  </StructureModification>
+  <StructureModification>
+    <dependencies>
+      <model index="vydg" modelUID="r:f052d088-2c7b-4428-8b1d-dd4b1c4d192f(pl0.structure)" version="5" />
+    </dependencies>
+    <rename id="vydg.714196159579179398" type="CHILD" from="xExpr" to="y" />
+  </StructureModification>
 </history>
 

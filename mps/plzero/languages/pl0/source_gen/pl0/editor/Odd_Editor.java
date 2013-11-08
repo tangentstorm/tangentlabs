@@ -36,12 +36,12 @@ public class Odd_Editor extends DefaultNodeEditor {
 
   private EditorCell createRefNode_z9qgke_b0(EditorContext editorContext, SNode node) {
     CellProviderWithRole provider = new RefNodeCellProvider(node, editorContext);
-    provider.setRole("x");
-    provider.setNoTargetText("<no x>");
+    provider.setRole("y");
+    provider.setNoTargetText("<no y>");
     EditorCell editorCell;
     editorCell = provider.createEditorCell(editorContext);
     if (editorCell.getRole() == null) {
-      editorCell.setRole("x");
+      editorCell.setRole("y");
     }
     editorCell.setSubstituteInfo(provider.createDefaultSubstituteInfo());
     SNode attributeConcept = provider.getRoleAttribute();
