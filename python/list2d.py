@@ -102,19 +102,78 @@ class List2D(object):
             for x in range(self.w):
                 self[x,y] = xyfunc(x,y)
 
-    def visit(self, xyv):
+    def rows(self):
         """
-        :: ((x,y:int; v:Any) -> Any) -> gen [(x,y,v)]
-        
-        Visit each cell in the grid and execute xyvfunc.
-        
-        for x, y, v in aList2d:
-           print("the value at cell [{0},{1}] is {2}".format(x,y,v))
+        :: gen [[Any]]
 
+        Iterates through the rows.
+
+        >>> for row in List2D(2,2).rows():
+        ...    print(row)
+        [0, 0]
+        [0, 0]
+        """
+        for row in self.data:
+            yield row
+
+    def values(self):
+        """
+        :: gen [Any]
+
+        Iterates through the values without grouping.
+
+        This is also the default __iter__ so,
+        you don't need to write .vals() it explicitly:
+
+        >>> for val in List2D(2,2):
+        ...    print(val)
+        0
+        0
+        0
+        0
+        """
+        for row in self.data:
+            for val in row:
+                yield val
+
+    def __iter__(self):
+        """
+        Same as .values()
+        """
+        return self.values()
+
+
+    def keys(self):
+        """
+        :: gen [(x,y)]
+
+        Iterate through the keys of the list2d, in
+        "print" order (top to bottom, then left to right)
+
+        >>> for x, y in List2D(2, 2).keys():
+        ...     print x, y
+        0 0
+        1 0
+        0 1
+        1 1
         """
         for y in range(self.h):
             for x in range(self.w):
-                xyv(x,y, self.data[x,y])
+                yield x,y
+
+    def items(self):
+        """
+        Loops through both the keys and the values.
+        (By analogy with dict.items())
+
+        >>> for xy, v in List2D(2, 2).items():
+        ...     print xy, "->", v
+        (0, 0) -> 0
+        (1, 0) -> 0
+        (0, 1) -> 0
+        (1, 1) -> 0
+        """
+        return zip(self.keys(), self.values())
 
     def copy(self):
         """
