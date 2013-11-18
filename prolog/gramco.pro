@@ -41,8 +41,8 @@ hexit --> (digit ; any("abcdefABCDEF")). % TODO: case insensitive.
 int --> rep(digit) ; ("$", rep(hexit)).
 
 binop -->
-    ( any("+-*/")  
-    ; ( [Op], die({append(["bad op:"],Op)} )) 
+    ( any("+-*/")
+    ; ( [Op], { append(["expected binop, got: ", [Op]], Msg) }, die(Msg))
     ).
 binex --> num, ([] ; (factor, binop)).
 
