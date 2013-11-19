@@ -21,12 +21,15 @@ alt([G|Gs]) --> G ; alt(Gs).
 
 % seq/1 : match a sequence.
 % In prolog: use the , operator.
+seq([]) --> [].
 seq([P|Ps]) --> P , seq(Ps).
 
 
 % rep/1 : match n repetitions of a sequence.
-rep(P) --> P, ([] ; P).
-rep([P|Ps]) --> rep(seq([P|Ps])).
+% we need P0 here so it repeats the pattern rather than
+% repeating the exact sequence that was matched. Without
+% it, rep(digit) would match 111 but not 123.
+rep(P) --> {P0=P}, P0, ([] ; rep(P)).
 
 % die/0 : abort the matching process
 die --> { fail }.
@@ -47,11 +50,17 @@ binop -->
 binex --> num, ([] ; (factor, binop)).
 
 
-expect(rule, string).
 test :-
+    phrase(seq(["0","1"]), "01"),
+    not(phrase(seq(["0","1"]), "10")),
+
+    phrase(lit("01"), "01"),
+    not(phrase(lit("01"), "10")),
+
     phrase(int, "0"),
     phrase(int, "$0"),
     phrase(int, "$F"),
     phrase(int, "$FF"),
-    phrase(int, "123").
-
+    phrase(int, "123"),
+    phrase(int, "$123"),
+    not(phrase(int, "FF$")).
