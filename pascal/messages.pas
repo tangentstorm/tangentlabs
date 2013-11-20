@@ -115,7 +115,7 @@ begin
   writeln;
   writeln('Result: ', v);
   writeln;
-  i := send(x, opMSG, 'qeury', v);
+  i := send(x, opMSG, 'query', v);
   writeln('response code: ', i);
   writeln('response data: ', v);
   writeln;
@@ -137,7 +137,7 @@ end.
 
 Result: 5
 
---> MSG qeury
+--> MSG query
 response code: 123
 response data: response
 
