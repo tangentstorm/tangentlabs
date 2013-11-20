@@ -1,3 +1,4 @@
+{$mode delphi}
 unit PyAPI;
 
 {
@@ -9,18 +10,12 @@ unit PyAPI;
    files (.h) included with every Python distribution.
 }
 
-{$IFDEF FPC}
- {$MODE Delphi}
-{$ENDIF}
-
 interface
 
 const
   {$IFDEF MSWINDOWS}
   PythonLib = 'python27.dll';
-  {$ENDIF}
-
-  {$IFDEF LINUX}
+  {$ELSE}
   PythonLib = 'libpython2.7.so';
   {$ENDIF}
 
@@ -38,19 +33,24 @@ const
   PYTHON_API_VERSION = 1013;     // Include/modsupport.h:46
   METH_VARARGS = 1;
 
-function Py_InitModule(Name: PChar; var methods: PyMethodDef;
-  doc: PChar = nil; self: PyObject = nil;
-  apiver: longint = PYTHON_API_VERSION): PyObject;
+function Py_InitModule(
+	       Name    : PChar;
+	   var methods : PyMethodDef;
+	       doc     : PChar = nil; self: PyObject = nil;
+	       apiver  : longint = PYTHON_API_VERSION
+	       )       : PyObject;
   cdecl; external PythonLib Name 'Py_InitModule4_64';
 
-function PyArg_ParseTuple(args: PyObject; format: PChar) :integer;
-  cdecl;
-  varargs;  // simulate C variable number of arguments (...).
-external PythonLib;
+function PyArg_ParseTuple(
+	   args	  : PyObject;
+	   format : PChar
+	   )	  : integer;
+  cdecl; varargs; external PythonLib;
 
-function PyInt_FromLong(along: longint) :PyObject;
-  cdecl;
-external PythonLib;
+function PyInt_FromLong(
+	   along : longint
+	   )	 : PyObject;
+  cdecl; external PythonLib;
 
 
 implementation
