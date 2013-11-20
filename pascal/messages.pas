@@ -1,5 +1,5 @@
 // experiments with message methods
-{$mode objfpc}
+{$mode objfpc}{$h+}
 program messages;
 uses variants;
 const
@@ -7,11 +7,12 @@ const
   opLIT	= 1;
   opADD	= 2;
   opGET	= 3;
+  opMSG = 4;
 type
   TMsgID   = cardinal;
   TMessage = packed record
 	       code : TMsgId;
-	       data : integer;
+	       data : variant;
 	     end;
 type
   TDispatch = class
@@ -21,6 +22,7 @@ type
     procedure lit(var a : TMessage);   message opLIT;
     procedure add(var _ );             message opADD;
     procedure get(var res : TMessage); message opGET;
+    procedure msg(var msg : TMessage); message opMSG;
   end;
 
 constructor TDispatch.Create;
@@ -65,21 +67,39 @@ procedure TDispatch.get(var res : TMessage);
     SetLength(_stack, i-1);
   end;
 
-function Send(obj : TObject; code : TMsgID; data:Int32): Int32; overload; inline;
+procedure TDispatch.msg(var msg : TMessage);
+  begin
+    writeln('--> MSG ', msg.data);
+    msg.code := 123; // reuse code field to send another message back.
+    msg.data := 'response';
+  end;
+
+function Send(obj : TObject; code: TMsgID; i:variant; out o: variant): TMsgID;
+  overload; inline;
   var msg : TMessage;
   begin
     msg.code := code;
-    msg.data := data;
+    msg.data :=	i;
     obj.dispatch(msg);
-    result := msg.data;
+    result := msg.code;
+    o := msg.data;
   end;
-
-function Send(obj : TObject; code : TMsgID): Int32; overload; inline;
+  
+function Send(obj : TObject; code : TMsgID; data:variant): TMsgID;
+  overload; inline;
+  var tmp:variant;
   begin
-    result := Send(obj, code, 0);
+    result := send(obj, code, data, tmp);
   end;
 
-var x : TDispatch; i : integer;
+function Send(obj : TObject; code : TMsgID): variant;
+  overload; inline;
+  var tmp: variant;
+  begin
+    result := Send(obj, code, tmp);
+  end;
+
+var x : TDispatch; v, i : variant;
 begin
   writeln;
   x := TDispatch.Create;
@@ -90,10 +110,14 @@ begin
   send(x, opSHO);
   send(x, opADD);
   send(x, opSHO);
-  i := send(x, opGET);
+  send(x, opGET, null, v);
   send(x, opSHO);
   writeln;
-  writeln('Result: ', i);
+  writeln('Result: ', v);
+  writeln;
+  i := send(x, opMSG, 'qeury', v);
+  writeln('response code: ', i);
+  writeln('response data: ', v);
   writeln;
   x.Free;
 end.
@@ -112,5 +136,9 @@ end.
 []
 
 Result: 5
+
+--> MSG qeury
+response code: 123
+response data: response
 
 ------------}
