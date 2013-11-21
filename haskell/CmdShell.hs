@@ -4,12 +4,12 @@ import Control.Monad
 
 -- Here is the code I want to run:
 
-demo :: TCmd Int
+demo :: TCmd (Int)
 demo = do { lit 3; lit 2; lit 1; add; mul }
 
 main :: IO ()
 main = do
-  if [(1+2)*3] == run demo
+  if run demo == [(1+2)*3]
     then putStrLn "ok"
     else putStrLn "failed. :("
 
@@ -20,8 +20,8 @@ data TCmd a = Cmd (TStack a -> TStack a)
 -- Stacks are just lists, but we will wrap them
 -- in a special type to show that we're using
 -- them in a specific way.
-data TStack a = S [a]
-  deriving (Show)
+newtype TStack a = S [a]
+  deriving (Eq, Show)
 
 -- First, we will implement the instructions as simple functions
 -- that operate on lists. Lets call them "Ops":
@@ -61,6 +61,11 @@ mul = cmd (opMul)
 
 nop :: TCmd a
 nop = cmd (opNop)
+
+
+-- To extract the topmost value:
+pop :: TStack a -> a
+pop (S xs) = head xs
 
 -- Now, in order for the code to work, we have to make
 -- TCmd into a Monad:
