@@ -1,3 +1,14 @@
+---
+--- This was an attempt to create a monad that
+--- would allow implicit function composition.
+--- 
+--- I couldn't get it working, though.
+--- I think maybe the problem is that I was trying
+--- to make a TCmd monad instead of a TStack monad.
+---
+--- Perhaps I will revisit this when my haskell skills
+--- are stronger.
+---
 {-# OPTIONS  -XGADTs -XTypeSynonymInstances -XInstanceSigs -XRankNTypes #-}
 module Main where
 import Control.Monad
