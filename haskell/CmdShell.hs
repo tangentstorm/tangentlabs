@@ -1,15 +1,15 @@
-{-# OPTIONS  -XGADTs -XTypeSynonymInstances #-}
-module CmdShell where
+{-# OPTIONS  -XGADTs -XTypeSynonymInstances -XInstanceSigs -XRankNTypes #-}
+module Main where
 import Control.Monad
 
 -- Here is the code I want to run:
 
-demo = do { lit 1; lit 2; lit 3; add; mul }
+demo :: TCmd Int
+demo = do { lit 3; lit 2; lit 1; add; mul }
 
 main :: IO ()
 main = do
-  (x:xs) <- run demo
-  if (x == (1+2)*3)
+  if [(1+2)*3] == run demo
     then putStrLn "ok"
     else putStrLn "failed. :("
 
@@ -50,59 +50,38 @@ cmd :: Op a -> TCmd a
 cmd op = Cmd $ \(S xs)  -> S (op xs)
 
 -- and so:
+lit :: a -> TCmd a
 lit x = cmd (opLit x)
-add   = cmd opAdd
-mul   = cmd opMul
-nop   = cmd opNop
+
+add :: Num a => TCmd a
+add   = cmd (opAdd)
+
+mul :: Num a => TCmd a
+mul = cmd (opMul)
+
+nop :: TCmd a
+nop = cmd (opNop)
 
 -- Now, in order for the code to work, we have to make
 -- TCmd into a Monad:
 instance Monad TCmd where
   
-  -- return :: a -> m a
   -- This should create a TCmd that constructs a brand new
   -- stack with only the given value on it.
+  return :: a -> TCmd a
   return x = Cmd $ \_ -> S [x]
 
   -- (>>=)  :: m a -> (a -> m b) -> m b
   -- This is the trickiest part.
   -- We want to take a TCmd and a function that *creates* a TCmd
   -- and produce a new TCmd.
-  Cmd c >>= newCmd = nop -- TODO
-
+  (>>=)  :: forall a b. TCmd a -> (a -> TCmd b) -> TCmd b
+  c >>= g = nop -- Cmd $ \s -> S (result g (result c s))
 
 -- finally, `run` creates a new stack, lets the Cmd do its work,
 -- and then extracts the underlying list from the resulting TStack.
 run :: TCmd a -> [a]
-run (Cmd c) = result where (S result) = c (S [])
+run c = result c (S [])
 
-
-
-
-
-
-----------------------------------------------------------------
--- question 1:
--- !?!?!?! How can the type of 'demo' be 'TCmd [Int]' ??
--- I expect it to be 'TCmd Int'.
-----------------------------------------------------------------
-demo :: TCmd [Int]
-
-----------------------------------------------------------------
--- question 2:
--- Possibly the same question. Why do I get this error?
-----------------------------------------------------------------
--- [1 of 1] Compiling CmdShell         ( CmdShell.hs, CmdShell.o )
---
--- CmdShell.hs:11:13:
---     Couldn't match type []' with IO'
---                             Expected type: IO [Int]
---       Actual type: [[Int]]
---     In the return type of a call of run'
---     In a stmt of a 'do' block: (x : xs) <- run demo
---     In the expression:
---       do { (x : xs) <- run demo;
---            if (x == (1 + 2) * 3) then
---                putStrLn "ok"
---            else
---                putStrLn "failed. :(" }
+result :: TCmd a -> TStack a -> [a]
+result (Cmd c) s = r where (S r) = c s
