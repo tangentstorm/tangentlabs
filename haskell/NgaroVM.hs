@@ -2,7 +2,7 @@
 -- ngaro vm in haskell
 -- http://www.retroforth.org/docs/The_Ngaro_Virtual_Machine.html
 --
-module NgaroVM
+module NgaroVM where
 import Control.Monad.State
 import qualified Data.Vector as V
 
@@ -20,7 +20,7 @@ data Op
    deriving (Show)
 
 data VM = VM { 
-   ip   :: Int            -- instruction pointer
+   ip   :: Int,            -- instruction pointer
    ram  :: V.Vector Int,
    io   :: V.Vector Int    -- port array
 } deriving (Show)
