@@ -449,23 +449,6 @@ NB. Change the underscore to the specific constant we want:
 └─┴─────────┘
 
 
-NB. t
-   ((=&(<1; 1 ;0)) L: 1) {:: tree
-┌─┬───────────────────┐
-│0│┌───┬─────────────┐│
-│ ││0 0│┌─────┬─────┐││
-│ ││   ││0 0 0│0 0 0│││
-│ ││   │└─────┴─────┘││
-│ │└───┴─────────────┘│
-└─┴───────────────────┘
-
-
-
-
-
-
-
-
 NB. Here's how we can match the path instead of the value:
 
    (( 1 1 0 )&( 4 : '(<x) = <,/>y') L: 1 ) {:: tree
@@ -514,7 +497,7 @@ NB. the non-matching path.
 
 
 
-NB. 9TODO) Alternate solution: recursion with $: ('Self Reference')
+NB. (TODO) Alternate solution: recursion with $: ('Self Reference')
 NB. ---------------------------------------------------------------
 NB. According to the docs,  $: denotes the longest verb that contains it.
 NB.
