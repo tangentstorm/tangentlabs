@@ -1,4 +1,6 @@
-// do constructors get called implicitly?
+// Q: do constructors get called implicitly?
+// A: yes.
+
 #include <iostream>
 using namespace std;
 
