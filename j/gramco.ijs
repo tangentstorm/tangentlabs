@@ -1,0 +1,60 @@
+NB. grammmar combinators for j
+NB. --------------------------
+
+NB. Pattern Matchers :: (bit num) <- ptn v str
+NB. ------------------------------------------------
+NB. bit indicates a match. num indicates the length.
+
+
+NB. match results:
+null =: (1 0)     NB. null: return 1 without consuming input
+fail =: (0 0)     NB. fail: return 0 and consume nothing.
+take =: 1 , ]     NB. take n : return true and consume n symbols
+
+when =: 2 : 0     NB. m when v
+:
+  if. x v y do. m else. (fail) end.
+)
+
+NB. primitive matchers
+NB. --------------------------------------------------
+
+NB. nul: match but don't consume
+nul_match =: null"_
+
+NB. sym: match a specific character or symbol
+sym_match =: (take 1) when (4 : 'x = {. y')
+
+NB. lit: match a literal string
+lit_match =: 4 : '(take (#x)) when x -: i.# x { y'
+
+NB. any : match any of the items in x
+any_match =: (take 1) when ({.@:] e. [)
+
+NB. { regular expression support }
+NB. opt ::  gram  -> bit    (like regexp '?')
+NB. rep ::  gram  -> bit    (like '*')
+NB. alt :: [gram] -> bit    (like "|")
+NB. seq ::  gram  -> bit
+
+NB. { recursion support, for context-free grammars }
+NB. sub :: iden -> boolean;
+
+
+NB. first characters match:
+NB. we want to apply {. (head) to both x and y, then test with  = (equal) or -: (match)
+NB. (f x) g (f y)  <--> x f &: g y 
+mch0 =: -:&:{.
+
+NB. match repeating characters at the start of a string. 
+(0: i.~ {. = ]) 'aaabbcddeeea'
+
+test =: 3 : 0
+  assert (1 0) =       nul_match 'cat'
+  assert (1 1) = 'c'   sym_match 'cat'
+  assert (0 0) = 'a'   sym_match 'cat'
+  assert (1 1) = 'abc' any_match 'cat'
+  'ok!'
+)
+
+
