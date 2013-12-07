@@ -18,15 +18,19 @@ NB. 3 4 5
 NB. 6 7 8
 NB. 0 1 2
 
-] (; +/"1) Y
-
-NB. ┌─────┬───────┐
-NB. │3 4 5│12 21 3│
-NB. │6 7 8│       │
-NB. │0 1 2│       │
-NB. └─────┴───────┘
+NB. Our base verb will be the 'row sum'. The goal is therefore to
+NB. fetch the row with the largest sum. In this case: 6 7 8
  
-U =. +/"1
+U =. +/"1    NB. row sum : insert '+' between ('/') items in rank 1 ('"1')
+
+] Y ;<,. U Y
+
+NB. ┌─────┬──┐
+NB. │3 4 5│12│
+NB. │6 7 8│21│
+NB. │0 1 2│ 3│
+NB. └─────┴──┘
+    
 
 NB. first we find the index of the max value:
 
