@@ -13,7 +13,7 @@ take =: 1 , ]     NB. take n : return true and consume n symbols
 
 when =: 2 : 0     NB. m when v
 :
-  if. x v y do. m else. (fail) end.
+  if. x v y do. ". m else. fail end.
 )
 
 NB. primitive matchers
@@ -23,13 +23,15 @@ NB. nul: match but don't consume
 nul_match =: null"_
 
 NB. sym: match a specific character or symbol
-sym_match =: (take 1) when (4 : 'x = {. y')
+sym_match =: 'take 1' when (4 : 'x = {. y')
 
 NB. lit: match a literal string
-lit_match =: 4 : '(take (#x)) when x -: i.# x { y'
+lit_match =: 'take #x' when (4 : 'x -: (i. # x) { y')
+NB.  if. x -: (i. # x) { y do. (take (# x)) else. fail end.
+NB.)
 
 NB. any : match any of the items in x
-any_match =: (take 1) when ({.@:] e. [)
+any_match =: 'take 1' when ({.@:] e. [)
 
 NB. { regular expression support }
 NB. opt ::  gram  -> bit    (like regexp '?')
@@ -54,6 +56,8 @@ test =: 3 : 0
   assert (1 1) = 'c'   sym_match 'cat'
   assert (0 0) = 'a'   sym_match 'cat'
   assert (1 1) = 'abc' any_match 'cat'
+  assert (1 3) = 'cat' lit_match 'catacomb'
+  assert (0 0) = 'bat' lit_match 'catacomb'
   'ok!'
 )
 
