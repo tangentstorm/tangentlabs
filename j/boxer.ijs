@@ -1,5 +1,3 @@
-
-
 NB. Object class
 NB. ----------------------------------------------------------
 coclass <'Object'
@@ -23,57 +21,82 @@ coinsert 'Object'
 
 create =: verb define
   data =: y
-  echo 'new stack created'
-)
-
-destroy =: verb define
-  codestroy ''
 )
 
 push =: verb define
-  data =: y , data
+  data =: y ; data
+)
+
+append =: verb define
+  data =: data , y
+)
+
+extend =: verb define
+  data =: data , <y
 )
 
 pop =: verb define
-  result =. {. data
+  res =. {. data
   data =: }. data
-  result
+  >res
 )
 
-tobox =: verb define
-  < data
+tos =: verb define   NB. top of stack
+  > {. data
 )
+
+result =: verb define
+  data
+)
+
+
+NB. cocurrent <'test'
+NB. stack =. '' conew 'Stack'
+NB. assert result__stack = ''
+
 
 
 NB. This builds trees of boxed objects.
 NB. ---------------------------------------------------------
 coclass <'Boxer'
+coinsert 'Object'
 
 create =: verb define
   state =: 0
   depth =: 0
   main  =: '' conew 'Stack'  NB. this is the main stack
   path  =: '' conew 'Stack'
-  here  =: '' conew 'Stack'
+  here  =: main
 )
 
 pushstate =: verb define
   depth =: depth + 1
   push__path state
+  push__path here
+  here  =: '' conew 'Stack'
   state =: y
 )
 
 popstate =: verb define
+  tmp   =. result__here''
+  there =. here
+  here  =: pop__path''
+  if. # tmp do. extend__here tmp end.
   state =: pop__path ''
-  depth =: depth - 1 
+  depth =: depth - 1
+  destroy__there''
 )
 
 append =: verb define
-  0
+  append__here y
+)
+
+extend =: verb define
+  extend__here y
 )
 
 result =: verb define
-  tobox__main 0
+  result__main''
 )
 
 
@@ -91,9 +114,6 @@ NB. ---------------------------------------------------------
 bx     =: 0 conew 'Boxer'
 digits =: '0123456789'
 
-true  =: 1
-false =: 0
-
 sx=: verb define
   buf =. ''         NB. buffer (current work area)
 
@@ -102,53 +122,66 @@ sx=: verb define
   i =. 0
   while. i < # y do.
     ch   =. i { y
-    skip =. false
-    emit =. false
+    drop =. 0
+    emit =. 0
+    hold =. 0
 
-    echo 'ch: ', ch, '  state: ', ": state__bx
+    echo '  state: ', (":state__bx), ' ch: ''', (":ch), '''  depth: ', (":depth__bx)
 
     select. state__bx
-    
-    NB. state _ : error handler
-    case. _ do.
-      a: return.
 
     NB. state 0 : default state (at start / between phrases)
     case. 0 do.
       if. ws ch  do.
-        skip =. true NB. just skip whitespace        
-      elseif. ch = '(' do. 
+        drop =. true NB. just skip whitespace
+      elseif. ch = '(' do.
+        drop =. true
         pushstate__bx 0
       elseif. ch = ')' do.
-        if. depth__bx <: 0 do. 
+        if. depth__bx <: 0 do.
           echo 'unexpected ('
           throw.
-        else. 
+        else.
           popstate__bx ''
+          drop =. 1
         end.
       elseif. ch e. digits do.
         pushstate__bx 1
       end.
 
-    NB. state 1 : consume all digits in a number
+    NB. state 1 : parsing a number
     case. 1 do.
       if. -. ch e. digits do.
         popstate__bx ''
-        emit =. true
+        hold =. 1
+        emit =. 1
       end.
-      
+
     end. NB. of select.
-    
+
     NB. end of loop cleanups
-    i =. i + 1
-    if. -. skip do.
+    if. -. hold do. i =. i + 1 end.
+    if. -. drop +. hold do.
       buf =. buf, ch     NB. consume the character.
     end.
-    if. emit do.
+    if. emit *. # buf do.
+      append__bx <buf
       buf =. ''
-    end.  
+    end.
   end.
-  result__bx''
+
+  if. # buf do.
+    append__bx buf
+  end.
+
+  while. depth__bx > 0 do.
+    popstate__bx ''
+    echo 'pop'
+  end.
+
+  result =. result__bx''
+  codestroy__bx''
+  result
 )
 
 
@@ -156,4 +189,11 @@ assert (a:) = sx ''
 NB. expecting an error here:
 sx ')...'
 state =: 0
-sx '1  2 (3 4 5) 6'
+sx '1 ( 2(3 4 5  ) 6) 7'
+NB. ┌─┬─────────────┬─┐
+NB. │1│┌─┬───────┬─┐│7│
+NB. │ ││2│┌─┬─┬─┐│6││ │
+NB. │ ││ ││3│4│5││ ││ │
+NB. │ ││ │└─┴─┴─┘│ ││ │
+NB. │ │└─┴───────┴─┘│ │
+NB. └─┴─────────────┴─┘
