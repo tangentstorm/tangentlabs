@@ -68,24 +68,24 @@ balance :: Tree a -> Tree a
 balance other = other
 
 
-insert :: (Ord a) => Tree a -> a -> Tree a
+ins :: (Ord a) => Tree a -> a -> Tree a
 ------
-insert (E) y = L y   {- empty nodes just become new leaves -}
+ins (E) y = L y   {- empty nodes just become new leaves -}
 
-insert (L x)  y      {- leaves become branches -}
+ins (L x)  y      {- leaves become branches -}
      | y  < x = T (L y) x E
      | y == x = L x                     {- ignore duplicate entries -}
      | y  > x = T E y (L x)
 
-insert (T p q r) y
-     | y  < q  = balance $ T (insert p y) q r
+ins (T p q r) y
+     | y  < q  = balance $ T (ins p y) q r
      | y == q  = T p q r                {- again, ignore duplicates -}
-     | y  > q  = balance $ T p q (insert r y)
+     | y  > q  = balance $ T p q (ins r y)
 
 
 fromList :: (Ord a) => [a] -> Tree a
 --------
-fromList xs = foldl insert E xs
+fromList xs = foldl ins E xs
 
 
 -----------------------------------------------------------------
@@ -102,25 +102,37 @@ h1 = T h0 E h0
 h2 = T h1 E h1
 
 test_height = TestCase ( do
-     assertEqual "height h0" 0 $ height E
-     assertEqual "height h1" 1 $ height h1
-     assertEqual "height h2" 2 $ height h2
-   )
+    assertEqual "height h0" 0 $ height E
+    assertEqual "height h1" 1 $ height h1
+    assertEqual "height h2" 2 $ height h2
+  )
 test_bal = TestCase ( do
-     assertEqual "bal (E)"     B $ bal E
-     assertEqual "bal (L _)"   B $ bal $ L 1
-     assertEqual "bal (E _ E)" B $ bal $ T E     2 (E)
-     assertEqual "bal (E _ L)" B $ bal $ T E     2 (L 3)
-     assertEqual "bal (L _ L)" B $ bal $ T (L 1) 2 (E)
-     assertEqual "bal (L _ L)" B $ bal $ T (L 1) 2 (L 3)
+    assertEqual "bal (E)"     B $ bal E
+    assertEqual "bal (L _)"   B $ bal $ L 1
+    assertEqual "bal (E _ E)" B $ bal $ T E     2 (E)
+    assertEqual "bal (E _ L)" B $ bal $ T E     2 (L 3)
+    assertEqual "bal (L _ L)" B $ bal $ T (L 1) 2 (E)
+    assertEqual "bal (L _ L)" B $ bal $ T (L 1) 2 (L 3)
 
-     assertEqual "bal (h1 _ h0)" B  $ bal $ T h1 E h0
-     assertEqual "bal (h2 _ h0)" Lh $ bal $ T h2 E h0
-     assertEqual "bal (h0 _ h2)" Rh $ bal $ T h0 E h2
-   )
+    assertEqual "bal (h1 _ h0)" B  $ bal $ T h1 E h0
+    assertEqual "bal (h2 _ h0)" Lh $ bal $ T h2 E h0
+    assertEqual "bal (h0 _ h2)" Rh $ bal $ T h0 E h2
+  )
+test_fromList = TestCase (
+    sequence_ $ map (\(str,ls) -> assertEqual (show ls) str (show $ fromList ls)) [
+          ("8",                           [8]),
+          ("(6 8 _)",                     [8,6]),
+          ("(6 7 8)",                     [8,6,7]),
+          ("((5 6 _) 7 8)",               [8,6,7,5]),
+          ("((3 5 6) 7 8)",               [8,6,7,5,3]),
+          ("((0 3 _) 5 (6 7 8))",         [8,6,7,5,3,0]),
+          ("((0 3 _) 5 (6 7 (_ 8 9)))",   [8,6,7,5,3,0,9]),
+          ("((0 3 _) 5 (6 7 (8 9 10)))",  [8,6,7,5,3,0,9,10]) --just so it does a right rotation
+       ] )
 tests = TestList [
-    TestLabel "height"  test_height,
-    TestLabel "balance" test_bal
+    TestLabel "height"     test_height,
+    TestLabel "bal"        test_bal,
+    TestLabel "fromList"   test_fromList
   ]
 
 
