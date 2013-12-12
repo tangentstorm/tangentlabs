@@ -34,7 +34,7 @@ rotl other = other
 rotr :: Tree a -> Tree a
 ----
 rotr (T (T p q r) s t) = (T p q (T r s t))
-rotr other               = other
+rotr other             = other
 
 -----------------------------------------------------------------
 -- queries
@@ -97,8 +97,14 @@ fromList xs = foldl insert E xs
 -- test suite
 -----------------------------------------------------------------
 
+h0 = E
+h1 = T h0 E h0
+h2 = T h1 E h1
+
 test_height = TestCase ( do
-     assertEqual "height (E)"  0 $ height E
+     assertEqual "height h0" 0 $ height E
+     assertEqual "height h1" 1 $ height h1
+     assertEqual "height h2" 2 $ height h2
    )
 test_bal = TestCase ( do
      assertEqual "bal (E)"     B $ bal E
@@ -108,9 +114,9 @@ test_bal = TestCase ( do
      assertEqual "bal (L _ L)" B $ bal $ T (L 1) 2 (E)
      assertEqual "bal (L _ L)" B $ bal $ T (L 1) 2 (L 3)
 
-     assertEqual "bal (h1 _ h0)" B  $ bal $ T (T E 1 E) 2 E
-     assertEqual "bal (h2 _ h0)" Lh $ bal $ T (T E 1 (T E 2 E)) 2 E
-     assertEqual "bal (h0 _ h2)" Rh $ bal $ T E 0 (T E 1 (T E 2 E))
+     assertEqual "bal (h1 _ h0)" B  $ bal $ T h1 E h0
+     assertEqual "bal (h2 _ h0)" Lh $ bal $ T h2 E h0
+     assertEqual "bal (h0 _ h2)" Rh $ bal $ T h0 E h2
    )
 tests = TestList [
     TestLabel "height"  test_height,
