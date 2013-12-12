@@ -34,7 +34,7 @@ rotl other = other
 rotr :: Tree a -> Tree a
 ----
 rotr (T (T p q r) s t) = (T p q (T r s t))
-rotr other             = other
+rotr other = other
 
 -----------------------------------------------------------------
 -- queries
@@ -63,9 +63,31 @@ bal (T p _ q)
 -- tree building
 -----------------------------------------------------------------
 
-balance :: Tree a -> Tree a
--------
-balance other = other
+rebal :: Tree a -> Tree a
+------
+
+-- these first few are special cases for dealing with
+-- empty nodes on either side of a branch point.
+-- they're not strictly necessary to enforce the
+-- balancing behavior, but they make for nicer trees:
+
+-- ((x y _) z _) -> (x y z)
+rebal (T (T x y E) z E) = rebal $ T x y (L z)
+
+-- (_ x (_ y z)) -> (x y z)
+rebal (T E x (T E y z)) = rebal $ T (L x) y z
+
+-- ((_ x y) z _) -> (x y z)
+rebal (T (T E x (L y)) z E) = rebal $ T (L x) y (L z)
+
+-- ((v w _) x (_ y z)) -> ((v w x) y z)
+rebal (T (T w x E) s (T E t u)) = rebal $ T (rebal $ T w x (L s)) t u
+
+-- and now the general purpose rebalancing routine:
+rebal tree = case bal tree of
+            Lh -> rebal $ rotr tree
+            Rh -> rebal $ rotl tree
+            B  -> tree
 
 
 ins :: (Ord a) => Tree a -> a -> Tree a
@@ -75,12 +97,12 @@ ins (E) y = L y   {- empty nodes just become new leaves -}
 ins (L x)  y      {- leaves become branches -}
      | y  < x = T (L y) x E
      | y == x = L x                     {- ignore duplicate entries -}
-     | y  > x = T E y (L x)
+     | y  > x = T E x (L y)
 
 ins (T p q r) y
-     | y  < q  = balance $ T (ins p y) q r
+     | y  < q  = rebal $ T (ins p y) q r
      | y == q  = T p q r                {- again, ignore duplicates -}
-     | y  > q  = balance $ T p q (ins r y)
+     | y  > q  = rebal $ T p q (ins r y)
 
 
 fromList :: (Ord a) => [a] -> Tree a
@@ -127,7 +149,7 @@ test_fromList = TestCase (
           ("((3 5 6) 7 8)",               [8,6,7,5,3]),
           ("((0 3 _) 5 (6 7 8))",         [8,6,7,5,3,0]),
           ("((0 3 _) 5 (6 7 (_ 8 9)))",   [8,6,7,5,3,0,9]),
-          ("((0 3 _) 5 (6 7 (8 9 10)))",  [8,6,7,5,3,0,9,10]) --just so it does a right rotation
+          ("((0 3 _) 5 (6 7 (8 9 10)))",  [8,6,7,5,3,0,9,10]) --just so it does a left rotation
        ] )
 tests = TestList [
     TestLabel "height"     test_height,
