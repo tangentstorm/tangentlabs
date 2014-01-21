@@ -9,25 +9,19 @@
 function up($z, $f)
 { for($i=0; $i<$z; $i++) $f($i); }
 
-function ar() // abbreviation for array()
-{ $res=array(); $n = func_num_args();
-  for($i=0; $i<$n; $i++)
-  { $res[]=func_get_arg($i); }
-  return $res; }
-
 function sz($a) // size of an array
 { return count($a); }
 
 function re($n, $v) // repeat n copies of v
-{ $res = array();
-  up($n, function($i) use (&$res, $v)
-  { $res[]=$v; });
-  return $res; }
+{ $r=[];
+  up($n, function($i) use (&$r, $v)
+         { $r[]=$v; });
+  return $r; }
 
-function v($m, $f) // v(a2d, f(x,y,eol,val))
+function v($m, $f) // visit: v(a2d, f(x,y,eol,val))
 { for ($y=0; $y<sz($m); $y++)
   { for ($x=0; $x<sz($m[$y]); $x++)
-    { $f($x,$y,$x+1==sz($m[$y]), $m[$y][$x]); }}}
+      $f($x,$y,$x+1==sz($m[$y]), $m[$y][$x]); }}
 
 //-- tetris stuff ------------------------------
 
@@ -43,7 +37,7 @@ function p($m) // p cmd: print the matrix
 $done = false;
 while (! $done)
 { $line = fgets(STDIN);
-  for ($i=0; $i<sz(line); $i++)
+  for ($i=0; $i<sz($line); $i++)
   { switch ($ch=$line[$i])
     { case 'q' : $done = true; break;
       case 'p' : p($matrix); break; } } }
