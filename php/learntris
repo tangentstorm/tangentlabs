@@ -9,30 +9,28 @@ function up($z, $f)
 {  for($i=0; $i<$z; $i++) $f($i); }
 function ar()
 {  $res=array(); $n = func_num_args();
-   for($i=0;$i<$n;$i++)
+   for($i=0; $i<$n; $i++)
    {  $res[]=func_get_arg($i); }
    return $res; }
 function sz($m)
 {  return count($m); }
 function re($n, $v) // repeat n copies of v
 {  $res = array();
-   $f = function($i) use ($res, $v)
-   {  array_push($res, 'x'); };
-   up($n, $f);
+   up($n, function($i) use (&$res, $v)
+   { $res[]=$v; });
    return $res; }
 $matrix = re(22, re(10,0));
-var_dump(re(10,5));
 function v($m, $f) { // v(a2d, f(x,y,eol,val))
   for ($y=0; $y<sz($m); $y++)
   for ($x=0; $x<sz($m[$y]); $x++) {
       $f($x,$y,$x+1==sz($m[$y]), $m[$y][$x]);
   }
 }
-$sym = ".x";
+$SYM = ".x"; // symbols for cells and blocks
 function p($m) { // print matrix
   v($m, function($x, $y, $eol, $val) {
-    global $sym;
-    echo $sym[$val] . ($eol ? "\n" : ' ');
+    global $SYM;
+    echo $SYM[$val] . ($eol ? "\n" : ' ');
   });
 }
 
