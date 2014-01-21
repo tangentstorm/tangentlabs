@@ -1,9 +1,14 @@
 #!/usr/local/bin/php -f
 <?php
 //===============================================
-// learntris implementation in j-style php5 //===============================================
+// learntris implementation in (j-style) php5
+//===============================================
+// copyright (c) 2014 michal j wallace
+// available for use under the MIT license.
+// http://opensource.org/licenses/MIT
+//===============================================
 
-//-- j/array stuff ------------------------------
+//-- j-style array tools -----------------------
 
 // up, ar[ray], s[i]z[e] and re[shape] routines
 function up($z, $f)
@@ -15,7 +20,7 @@ function sz($a) // size of an array
 function re($n, $v) // repeat n copies of v
 { $r=[];
   up($n, function($i) use (&$r, $v)
-         { $r[]=$v; });
+  { $r[]=$v; });
   return $r; }
 
 function v($m, $f) // visit: v(a2d, f(x,y,eol,val))
@@ -23,15 +28,35 @@ function v($m, $f) // visit: v(a2d, f(x,y,eol,val))
   { for ($x=0; $x<sz($m[$y]); $x++)
       $f($x,$y,$x+1==sz($m[$y]), $m[$y][$x]); }}
 
+//-- parsing tools -----------------------------
+
+function ch() // current char
+{ global $ch; return $ch; }
+
+function nch() // next char
+{ global $ch; $ch=fgetc(STDIN); return $ch; }
+
+function xch($x) // expect character
+{ if (nch() != $x)
+  { die("expected '$x', got '". ch(). "'}."); } }
+
 //-- tetris stuff ------------------------------
 
-$SYM = ".x"; // block/cell symbols
-$matrix = re(22, re(10,0)); // a 10*22 well
+$MTX = re(22, re(10,0)); // a 10*22 well
+$SYM = ".mbcgyor"; // block/cell symbols
 
-function p($m) // p cmd: print the matrix
+function sym2i($sym)
+{ global $SYM; return strpos($SYM, $sym); }
+
+function p($m) // cmd p: print the matrix
 { v($m, function($x, $y, $eol, $val)
   { global $SYM;
     echo $SYM[$val] . ($eol ? "\n" : ' '); }); }
+
+function g(&$m) // gmd g: load the given matrix
+{ v($m, function($x,$y,$e,$v) use (&$m)
+  { $m[$y][$x]=sym2i(nch());
+    $e ? xch("\n") : xch(" "); });}
 
 // -- main code --------------------------------
 $done = false;
@@ -39,5 +64,6 @@ while (! $done)
 { $line = fgets(STDIN);
   for ($i=0; $i<sz($line); $i++)
   { switch ($ch=$line[$i])
-    { case 'q' : $done = true; break;
-      case 'p' : p($matrix); break; } } }
+    { case 'p' : p($MTX); break;
+      case 'g' : g($MTX); break;
+      case 'q' : $done = true; break;  } } }
