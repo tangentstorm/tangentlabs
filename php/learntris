@@ -1,47 +1,49 @@
 #!/usr/local/bin/php -f
 <?php
-// --------------------------------
-// learntris implementation in php5
-// --------------------------------
+//===============================================
+// learntris implementation in j-style php5 //===============================================
+
+//-- j/array stuff ------------------------------
 
 // up, ar[ray], s[i]z[e] and re[shape] routines
 function up($z, $f)
-{  for($i=0; $i<$z; $i++) $f($i); }
-function ar()
-{  $res=array(); $n = func_num_args();
-   for($i=0; $i<$n; $i++)
-   {  $res[]=func_get_arg($i); }
-   return $res; }
-function sz($m)
-{  return count($m); }
-function re($n, $v) // repeat n copies of v
-{  $res = array();
-   up($n, function($i) use (&$res, $v)
-   { $res[]=$v; });
-   return $res; }
-$matrix = re(22, re(10,0));
-function v($m, $f) { // v(a2d, f(x,y,eol,val))
-  for ($y=0; $y<sz($m); $y++)
-  for ($x=0; $x<sz($m[$y]); $x++) {
-      $f($x,$y,$x+1==sz($m[$y]), $m[$y][$x]);
-  }
-}
-$SYM = ".x"; // symbols for cells and blocks
-function p($m) { // print matrix
-  v($m, function($x, $y, $eol, $val) {
-    global $SYM;
-    echo $SYM[$val] . ($eol ? "\n" : ' ');
-  });
-}
+{ for($i=0; $i<$z; $i++) $f($i); }
 
-// -- main code ----------------
+function ar() // abbreviation for array()
+{ $res=array(); $n = func_num_args();
+  for($i=0; $i<$n; $i++)
+  { $res[]=func_get_arg($i); }
+  return $res; }
+
+function sz($a) // size of an array
+{ return count($a); }
+
+function re($n, $v) // repeat n copies of v
+{ $res = array();
+  up($n, function($i) use (&$res, $v)
+  { $res[]=$v; });
+  return $res; }
+
+function v($m, $f) // v(a2d, f(x,y,eol,val))
+{ for ($y=0; $y<sz($m); $y++)
+  { for ($x=0; $x<sz($m[$y]); $x++)
+    { $f($x,$y,$x+1==sz($m[$y]), $m[$y][$x]); }}}
+
+//-- tetris stuff ------------------------------
+
+$SYM = ".x"; // block/cell symbols
+$matrix = re(22, re(10,0)); // a 10*22 well
+
+function p($m) // p cmd: print the matrix
+{ v($m, function($x, $y, $eol, $val)
+  { global $SYM;
+    echo $SYM[$val] . ($eol ? "\n" : ' '); }); }
+
+// -- main code --------------------------------
 $done = false;
-while (! $done) {
-  $line = fgets(STDIN);
-  for ($i=0; $i<sz($line); $i++) {
-    switch ($ch=$line[$i]) {
-    case 'q' : $done = true; break;
-    case 'p' : p($matrix); break;
-    }
-  }
-}
+while (! $done)
+{ $line = fgets(STDIN);
+  for ($i=0; $i<sz(line); $i++)
+  { switch ($ch=$line[$i])
+    { case 'q' : $done = true; break;
+      case 'p' : p($matrix); break; } } }
