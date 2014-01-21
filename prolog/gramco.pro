@@ -6,7 +6,6 @@
 
 % -- simple matchers -------------------------------------------
 % any/1 : treat string as a set and match any character.
-any("") --> error.
 any(Str) --> [Ch], { member(Ch, Str) } .
 
 % lit/1 : match a string literal.
@@ -26,10 +25,7 @@ seq([P|Ps]) --> P , seq(Ps).
 
 
 % rep/1 : match n repetitions of a sequence.
-% we need P0 here so it repeats the pattern rather than
-% repeating the exact sequence that was matched. Without
-% it, rep(digit) would match 111 but not 123.
-rep(P) --> {P0=P}, P0, ([] ; rep(P)).
+rep(P) --> P, ([] ; rep(P)).
 
 % die/0 : abort the matching process
 die --> { fail }.
@@ -38,7 +34,7 @@ die --> { fail }.
 die(Msg) --> { writef(Msg), fail }.
 
 
-digit  --> any("0123456789").
+digit --> any("0123456789").
 hexit --> (digit ; any("abcdefABCDEF")). % TODO: case insensitive.
 
 int --> rep(digit) ; ("$", rep(hexit)).
@@ -48,7 +44,6 @@ binop -->
     ; ( [Op], { append(["expected binop, got: ", [Op]], Msg) }, die(Msg))
     ).
 binex --> num, ([] ; (factor, binop)).
-
 
 test :-
     phrase(seq(["0","1"]), "01"),
