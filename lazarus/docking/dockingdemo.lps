@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="6">
+      <Unit0>
+        <Filename Value="dockingdemo.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dockingdemo"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="11" Y="12"/>
+        <UsageCount Value="342"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="udockingdemo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="udockingdemo"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="51"/>
+        <CursorPos X="1" Y="51"/>
+        <UsageCount Value="342"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="dragcard.pas"/>
+        <UnitName Value="DragCard"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="6"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="171"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="C:\lazarus\lcl\controls.pp"/>
+        <UnitName Value="Controls"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="4103"/>
+        <CursorPos X="1" Y="4127"/>
+        <UsageCount Value="171"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <UnitName Value="rttiutils"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="125"/>
+        <CursorPos X="1" Y="135"/>
+        <UsageCount Value="171"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="C:\lazarus\fpc\2.6.2\source\rtl\objpas\typinfo.pp"/>
+        <UnitName Value="typinfo"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="29"/>
+        <CursorPos X="8" Y="41"/>
+        <UsageCount Value="171"/>
+        <Loaded Value="True"/>
+      </Unit5>
+    </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <JumpHistory Count="13" HistoryIndex="12">
+      <Position1>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="7" Column="61" TopLine="1"/>
+      </Position1>
+      <Position2>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="52" Column="14" TopLine="39"/>
+      </Position2>
+      <Position3>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="176" Column="1" TopLine="173"/>
+      </Position3>
+      <Position4>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="54" Column="15" TopLine="41"/>
+      </Position4>
+      <Position5>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="156" Column="13" TopLine="143"/>
+      </Position5>
+      <Position6>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="177" Column="10" TopLine="164"/>
+      </Position6>
+      <Position7>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="212" Column="10" TopLine="199"/>
+      </Position7>
+      <Position8>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="52" Column="14" TopLine="39"/>
+      </Position8>
+      <Position9>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="177" Column="10" TopLine="164"/>
+      </Position9>
+      <Position10>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="217" Column="11" TopLine="204"/>
+      </Position10>
+      <Position11>
+        <Filename Value="F:\packages\fcl-base\src\rttiutils.pp"/>
+        <Caret Line="156" Column="6" TopLine="145"/>
+      </Position11>
+      <Position12>
+        <Filename Value="C:\lazarus\fpc\2.6.2\source\rtl\objpas\typinfo.pp"/>
+        <Caret Line="80" Column="7" TopLine="67"/>
+      </Position12>
+      <Position13>
+        <Filename Value="dockingdemo.lpr"/>
+        <Caret Line="12" Column="11" TopLine="1"/>
+      </Position13>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
