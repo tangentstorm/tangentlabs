@@ -1,3 +1,6 @@
+> module Main where
+> import Test.HUnit
+> import Data.List
 
 A parser attempts to transform a stream of input symbols (which
 we will call 'characters', regardless of their type) into an
@@ -61,7 +64,36 @@ our parser to produce.
 >   | Fork    [Jx s] s          -- train with an odd number of verbs
 
 
+== Simple examples. ==
 
+J is relatively easy to tokenize.
+
+> sDOT    = Sym ':'
+> sCOLON  = Sym ':'
+> sSPACE  = Sym ' '
+> sQUOTE  = Sym '\''
+> sALPHA  = Any $ ['a'..'z']++['A'..'Z']
+> sDIGIT  = Any $ ['0'..'9']
+> sUNDER  = Sym '_'
+> sNEWLN  = Sym '\n'
+
+> jNB   = Lit "NB."
+> jstr  = Seq [ sQUOTE, Orp [ Not [ sQUOTE, sNEWLN ] ],  sQUOTE ]
+> jprim = Alt
+
+
+> data Gram c
+>    = Nul
+>    | Sym c
+>    | Any [c]       -- Lit s <--> Alt $ map Sym s
+>    | Lit [c]       -- Lit s <--> Seq $ map Sym s
+>    | Not [Gram c]
+>    | Alt [Gram c]
+>    | Seq [Gram c]
+>    | Rep [Gram c]
+>    | Opt [Gram c]  -- Opt g <--> Alt [ Nil, g ]
+>    | Orp [Gram c]  -- Orp g <--> Opt Rep g
+>      deriving (Show, Eq)
 
 == scraps ==
 
