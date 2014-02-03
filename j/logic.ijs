@@ -16,6 +16,9 @@ is =: iff =: [: : =
 N  =: not =: -. : [:    NB. monadic -. is 'logical not'
 c  =: chk =: [: -. 0 e.]    NB. c y = not(y contains 0)
 
+NB. if.a do.b else.c end. <--> ite a,b,c (bools only)
+ite =: 0 1 0 1 0 0 1 1 {~ #.
+
 NB. truth variables ( p q r s t )
 NB. ------------------------------------------------------
 NB. These are the transposed bits of the numbers [0..31]
