@@ -9,7 +9,7 @@ NB. ------------------------------------------------------
 
 A  =: and =: [: : *.    NB. dyadic +: is logical and
 V  =: or  =: [: : +.    NB. dyadic +. is logical or
-X  =: xor =: [: : +.    NB. dyadic ~: is logical xor
+X  =: xor =: [: : ~:    NB. dyadic ~: is logical xor
       imp =: [: : >:    NB. dyadic >: is implication
       iby =: [: : <:    NB. dyadic <: is 'implied by'
 is =: iff =: [: : =
