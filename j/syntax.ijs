@@ -2,6 +2,8 @@
 --------------------------------------------------
 Adverbs and conjunctions to simulate traditional
 flow control keywords in J.
+
+(current "best" versions are at the bottom)
 --------------------------------------------------
 Copyright © 2014 Michal J Wallace
 License : http://opensource.org/licenses/MIT
@@ -132,3 +134,25 @@ a      4 5 6 7 = (nn1, nv1, vn1, vv1)''
 
 a '<<<<<O>>>>>' = ('O' if (=0:) else ('<' if (<0:) else '>'))"0 i:5
 
+
+NB. --- current 'best' versions -----------------
+0#[0 : 0]#( cocurrent 'syntax' )################0
+
+python-style conditionals, simplified
+==================================================
+
+  usage:     m if v else n
+
+This version was demonstrated by Raul Miller on
+the j programmers mailing list.
+
+It seems that using "_ accounts for both verb
+and noun cases.
+)
+
+if  =: 2 : ' u"_`(v"_) '
+else=: 2 : ' v"_`(0{m)@.((1{m)`:6) '
+
+
+if_z_ =: if_syntax_
+else_z_ =: else_syntax_
