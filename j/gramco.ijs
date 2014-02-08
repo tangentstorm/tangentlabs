@@ -27,17 +27,25 @@ sym_match =: 'take 1' when (4 : 'x = {. y')
 
 NB. lit: match a literal string
 lit_match =: 'take #x' when (4 : 'x -: (i. # x) { y')
-NB.  if. x -: (i. # x) { y do. (take (# x)) else. fail end.
-NB.)
 
 NB. any : match any of the items in x
 any_match =: 'take 1' when ({.@:] e. [)
 
+NB. abstract syntax tree for grammars
+NB. ------------------------------------------------------
+jsyms=:(3 : '(":s) =: s: s=.'' '',y') NB. these will reference their own names as symbols
+tags =: jsyms 'seq opt rep alt def sub' 
+
+
+NB. grammar interpreter
+NB. ------------------------------------------------------
+rep =: (s:' rep')"_  ; ]
+
 NB. { regular expression support }
+NB. seq ::  [gram] -> bit
 NB. opt ::  gram  -> bit    (like regexp '?')
 NB. rep ::  gram  -> bit    (like '*')
 NB. alt :: [gram] -> bit    (like "|")
-NB. seq ::  gram  -> bit
 
 NB. { recursion support, for context-free grammars }
 NB. sub :: iden -> boolean;
