@@ -1,10 +1,11 @@
 class DoubleNull {
-    double x = null;
+    Double x = null;
+    double y = null;
 }
 
-// DoubleNull.java:2: incompatible types
+// DoubleNull.java:3: incompatible types
 //     found   : <nulltype>
-// 	required: double
-// 	    double x = null;
-//                ^
+//      required: double
+//          double y = null;
+//                 ^
 // 1 error
