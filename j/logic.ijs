@@ -14,8 +14,8 @@ is =: iff =: [: : =
 N  =: not =: -. : [:    NB. monadic -. is 'logical not'
 c  =: chk =: [: -. 0 e.]    NB. c y = not(y contains 0)
 
-imp =: [: : <:    NB. dyadic >: is implication (1 1 0 1 = 0 0 1 1 <: 0 1 0 1)
-iby =: [: : >:    NB. dyadic <: is 'implied by'
+imp =: [: : <:    NB. dyadic <: is implication (1 1 0 1 = 0 0 1 1 <: 0 1 0 1)
+iby =: [: : >:    NB. dyadic >: is 'implied by'
 
 NB. if.a do.b else.c end. <--> ite a,b,c (bools only)
 ite =: 0 1 0 1 0 0 1 1 {~ #.
