@@ -100,11 +100,10 @@ a   (V/-.p,q,r,s) = (-.A/p,q,r,s)
 
 
 
-NB. solve...given : reduces logical variables
+NB. solver
 NB. ----------------------------------------
-NB. 'given' actually doesm
-NB. (expr,expr) given (fact,fact,fact)
-NB. example:  p given p -: <1
+NB.   usage: (vars) given (facts)
+NB. example:  1 = q given p, p imp q
 
 if    =: 2 : ' u"_`(v"_) '
 else  =: 2 : ' v"_`(0{m)@.((1{m)`:6) '
