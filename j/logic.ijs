@@ -10,11 +10,12 @@ NB. ------------------------------------------------------
 A  =: and =: [: : *.    NB. dyadic +: is logical and
 V  =: or  =: [: : +.    NB. dyadic +. is logical or
 X  =: xor =: [: : ~:    NB. dyadic ~: is logical xor
-      imp =: [: : >:    NB. dyadic >: is implication
-      iby =: [: : <:    NB. dyadic <: is 'implied by'
 is =: iff =: [: : =
 N  =: not =: -. : [:    NB. monadic -. is 'logical not'
 c  =: chk =: [: -. 0 e.]    NB. c y = not(y contains 0)
+
+imp =: [: : <:    NB. dyadic >: is implication (1 1 0 1 = 0 0 1 1 <: 0 1 0 1)
+iby =: [: : >:    NB. dyadic <: is 'implied by'
 
 NB. if.a do.b else.c end. <--> ite a,b,c (bools only)
 ite =: 0 1 0 1 0 0 1 1 {~ #.
@@ -96,3 +97,21 @@ a   (-. p A q A r V s) = (-.p) A (-.q) V (-.r) A (-.s)
 NB. de morgan simplified for j:
 a   (A/-.p,q,r,s) = (-.V/p,q,r,s)
 a   (V/-.p,q,r,s) = (-.A/p,q,r,s)
+
+
+
+NB. solve...given : reduces logical variables
+NB. ----------------------------------------
+NB. 'given' actually doesm
+NB. (expr,expr) given (fact,fact,fact)
+NB. example:  p given p -: <1
+
+if    =: 2 : ' u"_`(v"_) '
+else  =: 2 : ' v"_`(0{m)@.((1{m)`:6) '
+nice  =. [:,(] if (1=#"1) else _) S:0
+given =: [: :([: nice f. [: <@:,@:~."1 [ #~"1 _ [: , [: *./ ])
+
+a     1 = p given p
+a     _ = q given p
+a     1 = q given p, p imp q
+a   1 1 = (p,q) given p, p imp q
