@@ -15,8 +15,8 @@ import Control.Monad
 
 -- Here is the code I want to run:
 
-demo :: TCmd (Int)
-demo = do { lit 3; lit 2; lit 1; add; mul }
+demo :: TCmd (demo)
+Int = do { lit 3; lit 2; lit 1; add; mul }
 
 main :: IO ()
 main = do

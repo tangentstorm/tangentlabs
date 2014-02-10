@@ -87,73 +87,36 @@ NB. ---------------------------------------------------------
 digits =: '0123456789'
 
 sx =: verb define
-  bx  =. a: conew 'Boxer'
-  buf =. ''         NB. buffer (current work area)
-
   if. (0 = # y) do. a: return. end.
+  i =. 0 [  (bx =. a: conew 'Boxer') [ buf =. ''  NB. buffer (current work area)
 
-  i =. 0
   while. i < # y do.
-    ch   =. i { y
-    drop =. 0
-    emit =. 0
-    hold =. 0
-
-    echo '  state: ', (":state__bx), ' ch: ''', (":ch), '''  depth: ', (":depth__bx)
-
+    ch   =. i { y [ 'drop emit hold' =. 0 0 0
+    echo'  state: ',(":state__bx),' ch: ''',(":ch),'''  depth: ',(":depth__bx)
     select. state__bx
-
-    NB. state 0 : default state (at start / between phrases)
-    case. 0 do.
-      if. ws ch  do.
-        drop =. 1 NB. just skip whitespace
-      elseif. ch = '(' do.
-        drop =. 1
-        pushstate__bx 0
+    case. 0 do.  NB. default state (at start / between phrases)
+      if. ws ch  do. drop =. 1 NB. just skip whitespace
+      elseif. ch = '(' do. drop =. 1 [ pushstate__bx 0
       elseif. ch = ')' do.
-        if. depth__bx <: 0 do.
-          echo 'unexpected ('
-          throw.
-        else.
-          popstate__bx ''
-          drop =. 1
-        end.
-      elseif. ch e. digits do.
-        pushstate__bx 1
-      end.
-
-    NB. state 1 : parsing a number
+        if. depth__bx <: 0 do. echo 'unexpected (' throw.
+        else. popstate__bx'' [ drop =. 1 end.
+      elseif. ch e. digits do. pushstate__bx 1 end.
     case. 1 do.
-      if. -. ch e. digits do.
-        popstate__bx ''
-        hold =. 1
-        emit =. 1
-      end.
-
+      if. -. ch e. digits do. popstate__bx '' [ 'hold emit' =. 1 1 end.
     end. NB. of select.
 
     NB. end of loop cleanups
     if. -. hold do. i =. i + 1 end.
-    if. -. drop +. hold do.
-      buf =. buf, ch     NB. consume the character.
-    end.
+    if. -. drop +. hold do. buf =. buf, ch end.  NB. consume the character.
     if. emit *. # buf do.
       append__bx <buf
       buf =. ''
     end.
   end.
 
-  if. # buf do.
-    append__bx buf
-  end.
-
-  while. depth__bx > 0 do.
-    popstate__bx ''
-  end.
-
-  result =. result__bx''
-  codestroy__bx''
-  result
+  if. # buf do. append__bx buf end.
+  while. depth__bx > 0 do. popstate__bx '' end.
+  (result__bx'') [ codestroy__bx''
 )
 
 assert a: = sx ''
