@@ -38,6 +38,7 @@ NB. TODO: s1 s2 s3 s4 =: (12 8 4 0) SHL (61440 3840 240 15) AND 4$I
 
 
 test =: 3 : 0
+ a =. assert
  a (256=reg Z)[ 1 steps 1 0, 0 1, 0 0            NB. LIT 256 NOP
  a (512=reg Z)[ 2 steps 1 0, 6 0, 2 0, 0 2       NB. LIT 6 FWM 512
  'all tests passed'
