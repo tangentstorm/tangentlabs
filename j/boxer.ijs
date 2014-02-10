@@ -1,71 +1,53 @@
 NB. Object class
 NB. ----------------------------------------------------------
-coclass <'Object'
+coclass 'Object'
 
-create =: verb define
-)
-
-class =: verb define
-)
-
+create  =: verb def ''
+class   =: verb def ''
 destroy =: verb define
-  echo '** DESTROYED!! **'
+  NB. echo '** DESTROYED!! **'
   codestroy ''
 )
 
-
-NB. stacks
+NB. stacks of like objects
 NB. ----------------------------------------------------------
-coclass <'Stack'
+coclass  'Stack'
 coinsert 'Object'
 
-create =: verb define
-  data =: y
+create =: monad def ('data =: y')
+pop    =: monad define
+ res  =. {. data
+ data =: }. data
+ res
 )
-
-push =: verb define
-  data =: y ; data
-)
-
-append =: verb define
-  data =: data , y
-)
-
-extend =: verb define
-  data =: data , <y
-)
-
-pop =: verb define
-  res =. {. data
-  data =: }. data
-  >res
-)
-
-tos =: verb define   NB. top of stack
-  > {. data
-)
-
-result =: verb define
-  data
-)
+push   =: monad def ('data =: y , data')
+append =: monad def ('data =: data , y')
+extend =: append
+tos    =: monad def ('> {. data')    NB. top of stack
+result =: monad def ('data')
 
 
-NB. cocurrent <'test'
-NB. stack =. '' conew 'Stack'
-NB. assert result__stack = ''
+NB. stacks of boxed objects (mixed types)
+NB. ----------------------------------------------------------
+coclass  'BoxStack'
+coinsert 'Stack'
 
-
+NB. overrides:
+extend =: [: extend_Stack_ f. <
+push   =: [:   push_Stack_ f. <
+tos    =: [: > tos_Stack_  f.
+pop    =: [: > pop_Stack_  f.
 
 NB. This builds trees of boxed objects.
 NB. ---------------------------------------------------------
-coclass <'Boxer'
+coclass  'Boxer'
 coinsert 'Object'
 
 create =: verb define
   state =: 0
   depth =: 0
-  main  =: '' conew 'Stack'  NB. this is the main stack
-  path  =: '' conew 'Stack'
+  main  =: '' conew 'BoxStack'
+  path  =: '' conew 'BoxStack'
   here  =: main
 )
 
@@ -73,7 +55,7 @@ pushstate =: verb define
   depth =: depth + 1
   push__path state
   push__path here
-  here  =: '' conew 'Stack'
+  here  =: '' conew 'BoxStack'
   state =: y
 )
 
@@ -87,22 +69,13 @@ popstate =: verb define
   destroy__there''
 )
 
-append =: verb define
-  append__here y
-)
-
-extend =: verb define
-  extend__here y
-)
-
-result =: verb define
-  result__main''
-)
-
+append =: monad def 'append__here y'
+extend =: monad def 'extend__here y'
+result =: monad def 'result__main _'
 
 NB. generic parser stuff
 NB. ----------------------------------------------------------
-cocurrent <'script'
+cocurrent 'base'
 
 NB. ws y -> is character y whitespace?
 ws=: 32 >: (a.i.])
@@ -111,10 +84,10 @@ ws=: 32 >: (a.i.])
 NB. sx text -> tree : a simple s-expression parser
 NB. ---------------------------------------------------------
 
-bx     =: 0 conew 'Boxer'
 digits =: '0123456789'
 
-sx=: verb define
+sx =: verb define
+  bx  =. a: conew 'Boxer'
   buf =. ''         NB. buffer (current work area)
 
   if. (0 = # y) do. a: return. end.
@@ -133,9 +106,9 @@ sx=: verb define
     NB. state 0 : default state (at start / between phrases)
     case. 0 do.
       if. ws ch  do.
-        drop =. true NB. just skip whitespace
+        drop =. 1 NB. just skip whitespace
       elseif. ch = '(' do.
-        drop =. true
+        drop =. 1
         pushstate__bx 0
       elseif. ch = ')' do.
         if. depth__bx <: 0 do.
@@ -176,7 +149,6 @@ sx=: verb define
 
   while. depth__bx > 0 do.
     popstate__bx ''
-    echo 'pop'
   end.
 
   result =. result__bx''
@@ -184,12 +156,12 @@ sx=: verb define
   result
 )
 
-
-assert (a:) = sx ''
-NB. expecting an error here:
+assert a: = sx ''
+echo '-- expecting an error here:'
 sx ')...'
+echo '-- ok, now let''s parse an s-expression:'
 state =: 0
-sx '1 ( 2(3 4 5  ) 6) 7'
+echo sx '1 ( 2(3 4 5  ) 6) 7'
 NB. ┌─┬─────────────┬─┐
 NB. │1│┌─┬───────┬─┐│7│
 NB. │ ││2│┌─┬─┬─┐│6││ │
