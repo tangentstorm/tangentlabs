@@ -35,7 +35,7 @@ tt =: 1 : 'u"0/~ 0 1'  NB. shows a pretty truth table
 NB. -------------------------------------------------
 NB. some examples
 NB. -------------------------------------------------
-a =. assert
+a =. assert"0
 
 NB. identity
 a   p = p V 0
@@ -83,8 +83,8 @@ a   (p >: q) <: (p >: p A q)  NB. deduce (p imp p A q) from (p imp q)
 
 
 NB. Factoring:
-a   ((p V q) A r V -.p) = (p A r V (q A -.p))
-a   ((p A q) V r A -.p) = (p V r A (q V -.p))
+a   ((p V q) A r V -.p) = ((p A r) V (q A -.p))
+a   ((p A q) V r A -.p) = ((p V r) A (q V -.p))
 
 NB. Consensus:
 a   ((p A q) V (q A r) V (r A -.p)) = (p A q) V (r A -.p)
@@ -92,7 +92,7 @@ a   ((p V q) A (q V r) A (r V -.p)) = (p V q) A (r V -.p)
 
 NB. de Morgan''s:
 a   (-. p V q V r V s) = (-.p) A (-.q) A (-.r) A (-.s)
-a   (-. p A q A r V s) = (-.p) A (-.q) V (-.r) A (-.s)
+a   (-. p A q A r A s) = (-.p) V (-.q) V (-.r) V (-.s)
 
 NB. de morgan simplified for j:
 a   (A/-.p,q,r,s) = (-.V/p,q,r,s)
