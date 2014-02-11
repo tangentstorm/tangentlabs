@@ -26,7 +26,7 @@ NB. These are the transposed bits of the numbers [0..31]
 NB. this lets us test all combinations of 5 different
 NB. input bits simultaneously.
 
-'p q r s t' =: 0|:0|:,:#:i.32
+'p q r s t' =: 0 1|:#:i.1 32
 
 pp =: 'FT' {~ ]        NB. pretty print ('FT' for 0 1)
 jj =: pp inv           NB. inverse of pp
