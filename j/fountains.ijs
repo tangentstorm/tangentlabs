@@ -27,7 +27,9 @@ create =: monad define
 )
 
 NB. destructor
-destroy =: ''codestroy&[]
+destroy =: monad define
+  codestroy ''
+)
 
 NB. basic navigation and metadata
 NB. ------------------------------------------------------------
@@ -67,6 +69,7 @@ put =: 2 : 'n (<m) } y'
 
 NB. -- adding data : insert, append ----------------------------
 
+NB. link_XX :: () <- nid <- nid
 link_up =: (dyad def 'nav_up =: y x } nav_up')"0 0
 link_dn =: (dyad def 'nav_dn =: y x } nav_dn')"0 0
 link_pv =: (dyad def 'nav_pv =: y x } nav_pv')"0 0
@@ -145,6 +148,8 @@ NB. ------------------------------------------------------------
 
 NB. tests for adding rings
 NB. ------------------------------------------------------------
+ftn =. ('' conew 'Fountain') [ (destroy__ftn'')
+
 'h c' =. insert_ring__ftn hub       NB. rings consist of two nodes
 a  4 = len__ftn                     NB. both should be added to ftn.
 a  h = up from__ftn h               NB. node h is its own parent.
