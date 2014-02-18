@@ -22,16 +22,24 @@ NB. list connecting all the leaves of the tree.
 
 NB. constructor
 create =: monad define
-  NB. Basic prototype for an empty fountain:
-  NB.          u d p n
-  proto_hub =. 1 1 0 0  NB. The hub is a ring above and below the rim.
-  proto_rim =. 0 0 1 1  NB. The rim is a ring above and below the hub.
-  nav =: (proto_hub ,: proto_rim)
+  nav =: 1 1 0 0 ,: 0 0 1 1
   0 return.
 )
 
-destroy =: verb define
-  codestroy ''
+NB. destructor
+destroy =: ''codestroy&[]
+
+
+NB. from :: nids <- directions <- nids
+NB. (nid means 'node id'. e.g, 0 for the hub)
+from =: dyad : 'x { y { nav'
+
+NB. walk :: nids(s) <- start:nid(s) <- path=(dir,dir,dir...)
+NB. monadic case walks starts from the hub
+walk =: verb define "0 1
+  0 $: y
+:
+  for_step. ;y do. x =. step from x end.
 )
 
 NB. -- formatting as s-expressions --
@@ -40,10 +48,9 @@ ufsx =: '()'"_
 
 
 
-cocurrent 'FountainTest'
 NB. examples / test cases
 NB. ----------------------------------------------------------
-a =. assert"0
+a =. *./ & assert"0
 
 
 NB. We can create a fountain simply by invoking the constructor:
@@ -51,12 +58,22 @@ ftn =. '' conew 'Fountain'
 
 NB. Here is how a new fountain should look:
 NB. u d p n
-a   1 1 0 0 -: 0 { nav__ftn  NB. node 0 is the proto-hub
-a   0 0 1 1 -: 1 { nav__ftn  NB. node 1 is the proto-rim
+a   1 1 0 0 -: 0 { nav__ftn  NB. Node 0 is the hub, a ring up/dn from the rim.
+a   0 0 1 1 -: 1 { nav__ftn  NB. Node 1 is the rim, a ring up/dn from the hub.
 a   2 = # nav__ftn           NB. there are no other nodes
 
-NB. The path nx,pv,up,dn should always form a cycle
-a start = (start=.i.#len__ftn) walk__ftn
+a  rim = (up,dn) from__ftn hub
+a  hub = (up,dn) from__ftn rim
+a  hub = (pv,nx) from__ftn hub
+a  rim = (pv,nx) from__ftn rim
+
+a  rim = rim walk__ftn pv
+
+
+
+NB. Certain paths should always form a cycle:
+cyclic =. 4 : 'start = (start =. i. # nav__x) walk__x y'
+a  ftn cyclic nx,pv,up,dn
 
 
 NB. We can render fountains as unformatted (non-pretty printed)
