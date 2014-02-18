@@ -108,10 +108,7 @@ sx =: verb define
     NB. end of loop cleanups
     if. -. hold do. i =. i + 1 end.
     if. -. drop +. hold do. buf =. buf, ch end.  NB. consume the character.
-    if. emit *. # buf do.
-      append__bx <buf
-      buf =. ''
-    end.
+    if. emit *. # buf do. (append__bx <buf) [ buf =. '' end.
   end.
 
   if. # buf do. append__bx buf end.
