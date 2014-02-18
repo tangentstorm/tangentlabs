@@ -22,7 +22,7 @@ NB. list connecting all the leaves of the tree.
 
 NB. constructor
 create =: monad define
-  nav =: 1 1 0 0 ,: 0 0 1 1
+  nav =: 1 1 0 0 ,: 0 0 1 1  NB. initialize the hub and rim
   0 return.
 )
 
@@ -62,16 +62,16 @@ a   1 1 0 0 -: 0 { nav__ftn  NB. Node 0 is the hub, a ring up/dn from the rim.
 a   0 0 1 1 -: 1 { nav__ftn  NB. Node 1 is the rim, a ring up/dn from the hub.
 a   2 = # nav__ftn           NB. there are no other nodes
 
-a  rim = (up,dn) from__ftn hub
-a  hub = (up,dn) from__ftn rim
+a  rim = (up,dn) from__ftn hub  NB. ie, rim is both up and dn from hub
+a  hub = (up,dn) from__ftn rim  NB. (these are only true for empty fountains)
 a  hub = (pv,nx) from__ftn hub
 a  rim = (pv,nx) from__ftn rim
 
-a  rim = rim walk__ftn pv
+a  rim = rim walk__ftn pv,pv,pv,pv
 
 
 
-NB. Certain paths should always form a cycle:
+NB. Certain paths form a cycle for all nodes:
 cyclic =. 4 : 'start = (start =. i. # nav__x) walk__x y'
 a  ftn cyclic nx,pv,up,dn
 
