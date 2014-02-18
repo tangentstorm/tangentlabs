@@ -20,7 +20,7 @@ NB. Node 1 is called the 'rim', and it models a doubly linked
 NB. list connecting all the leaves of the tree.
 'hub rim' =: i.2
 
-NB. Basic prototype for an empty jump tree:
+NB. Basic prototype for an empty fountain:
 NB.          u d p n
 proto_hub =. 1 1 0 0  NB. The hub is a ring above and below the rim.
 proto_rim =. 0 0 1 1  NB. The rim is a ring above and below the hub.
