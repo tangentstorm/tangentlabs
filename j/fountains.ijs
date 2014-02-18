@@ -7,8 +7,8 @@ NB. in any direction. In particular, (almost) all links are
 NB. bi-directional, and there is a link connecting the top of
 NB. the structure to the bottom.
 
-NB. In this implementation, fountains are structured as tables
-NB. with four columns, representing the four directions in which
+NB. In this implementation, fountains are structured as four
+NB. parallel arrays, representing the four directions in which
 NB. we can traverse the structure. The names of the directions
 NB. are "up, down, previous, and next".
 'up dn pv nx' =: i.4
@@ -42,13 +42,12 @@ len =: monad define "_
   # nav_up  NB. any of the links would work
 )
 
-
 NB. from :: nid <- dir <- nid
 NB. (nid means 'node id'. e.g, 0 for the hub)
 from =: dyad define"0 0
 select. x
-case. up do. y { nav_up case. dn do. y { nav_dn
-case. pv do. y { nav_pv case. nx do. y { nav_nx
+case. up do. y { nav_up      case. dn do. y { nav_dn
+case. pv do. y { nav_pv      case. nx do. y { nav_nx
 end.
 )
 
