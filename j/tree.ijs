@@ -1,3 +1,23 @@
+(0212.2014)
+18:45:55 ischtche ) trepl =: 1 : '[ ^: (u -: ]) L: (_,L.u)'
+18:45:55 jconn ischtche: |ok
+18:46:38 ischtche ) (<'d';'d') (5 trepl) <L:0;/'abc'
+18:46:38 jconn ischtche: +---+---+---+
+18:46:39 jconn ischtche: |+-+|+-+|+-+|
+18:46:39 jconn ischtche: ||a|||b|||c||
+18:46:39 jconn ischtche: |+-+|+-+|+-+|
+18:46:39 jconn ischtche: +---+---+---+
+18:46:57 ischtche ) (<'d';'d') ((<'b') trepl) <L:0;/'abc'
+18:46:58 jconn ischtche: +---+-------+---+
+18:46:58 jconn ischtche: |+-+|+-----+|+-+|
+18:46:58 jconn ischtche: ||a|||+-+-+|||c||
+18:46:58 jconn ischtche: |+-+|||d|d|||+-+|
+18:46:58 jconn ischtche: |   ||+-+-+||   |
+18:46:58 jconn ischtche: ...
+
+
+
+
 NB. given the following tree, how to replace 3 with 33 ?
 NB.
 NB.    1;2;<3;4
