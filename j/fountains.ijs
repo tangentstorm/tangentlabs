@@ -1,11 +1,11 @@
-coclass 'Fountain'
 NB. Fountains for J.
-NB. ------------------------------------------------------------
+NB. ============================================================
 NB. Fountains are a type of cyclic graph. They resembles trees
 NB. but contain no null pointers, and can be navigated easily
 NB. in any direction. In particular, (almost) all links are
 NB. bi-directional, and there is a link connecting the top of
 NB. the structure to the bottom.
+coclass 'Fountain'
 
 NB. In this implementation, fountains are structured as four
 NB. parallel arrays, representing the four directions in which
@@ -46,7 +46,7 @@ len =: monad define "_
 
 NB. from :: nid <- dir <- nid
 NB. (nid means 'node id'. e.g, 0 for the hub)
-from =: dyad define"0 0
+from =: dyad define "0 0
 select. x
 case. up do. y { nav_up      case. dn do. y { nav_dn
 case. pv do. y { nav_pv      case. nx do. y { nav_nx
@@ -60,73 +60,91 @@ walk =: verb define "0 1
 :
   for_step. ;y do. x =. step from x end.
 )
-
-NB. tools for updating
-
-get =: 1 : '(<m) { y'
-put =: 2 : 'n (<m) } y'
 
 
-NB. -- adding data : insert, append ----------------------------
-
+NB. adding data : nodes and edges
+NB. ------------------------------------------------------------
 NB. link_XX :: () <- nid <- nid
-link_up =: (dyad def 'nav_up =: y x } nav_up')"0 0
-link_dn =: (dyad def 'nav_dn =: y x } nav_dn')"0 0
-link_pv =: (dyad def 'nav_pv =: y x } nav_pv')"0 0
-link_nx =: (dyad def 'nav_nx =: y x } nav_nx')"0 0
+link_up =: (dyad def 'nav_up =: y x } nav_up') "0 0
+link_dn =: (dyad def 'nav_dn =: y x } nav_dn') "0 0
+link_pv =: (dyad def 'nav_pv =: y x } nav_pv') "0 0
+link_nx =: (dyad def 'nav_nx =: y x } nav_nx') "0 0
+
+NB. new_node :: nid <- _
+new_node =: monad define "_
+  nid =: len''
+  nav_up =: nav_up, nid
+  nav_dn =: nav_dn, nid
+  nav_pv =: nav_pv, nid
+  nav_nx =: nav_nx, nid
+  nid return.
+)
+
+singletons_only =: monad define "0
+  if. y ~: nx from y do. echo 'can only insert singletons for now' throw. end.
+)
+
+NB. first, preserve the old links, then create the new ones.
 
 NB. ins_nx :: new <- old:nid <- new:nid
 ins_nx =: dyad define "0 0
-  if. y ~: nx from y
-  do. echo 'can only ins singletons for now' throw. end.
-
-  NB. first, preserve the old links:
+  singletons_only y
   y link_nx  (nx from x)  [  (nx from x) link_pv y
+  y link_pv  x            [           x  link_nx y
+)
 
-  NB. then create the new ones:
-  y link_pv  x  [   x link_nx  y
+NB. ins_pv :: new <- old:nid <- new:nid
+ins_pv =: dyad define "0 0
+  singletons_only y
+  y link_pv  (pv from x)  [  (pv from x) link_nx y
+  y link_nx  x            [           x  link_pv y
 )
 
-NB. -- adding structure : rings --------------------------------
+NB. adding structure : rings
+NB. ------------------------------------------------------------
 NB. Rings are just circular linked lists. Each data node in the
 NB. fountain is connected to its siblings in a ring. Each ring
 NB. consists of two nodes: a hook (which holds its place in the
 NB. parent ring) and a clasp (which holds the ends of the child
 NB. ring together).
 
-NB. insert_ring :: (hook,clasp:nid) <- parent:nid
-insert_ring =: monad define "0
+NB. new_ring :: (hook,clasp:nid) <- _
+new_ring =: monad define "_
   'h c' =: 0 1 + len''
   nav_up =: nav_up, h, h
   nav_dn =: nav_dn, c, c
   nav_pv =: nav_pv, h, c
   nav_nx =: nav_nx, h, c
-  h ins_nx y
   h, c return.
 )
 
 NB. is_clasp :: bit <- nid
 NB. a clasp is its own child but not its own parent.
-is_clasp =: (( [ = dn from ] ) :[:)"0
+is_clasp =: (( [ = dn from ] ) :[:) "0
 
 NB. is_hook :: bit <- nid
 NB. a hook is its own parent but not its own child.
 is_hook  =: (( [ = up from ] ) :[:) "0
 
-NB. -- formatting as s-expressions --
+NB. formatting as s-expressions
+NB. ------------------------------------------------------------
 NB. ufsx : unformatted (i.e, non-pretty printed) s-expressions:
 ufsx =: '()'"_
 
 
 
 NB. test cases and examples
-NB. ----------------------------------------------------------
-cocurrent 'FountainTest'
-coinsert 'Fountain'
-a =. *./ & assert"0
+NB. ============================================================
+
+(cocurrent 'FountainTest') [ coinsert 'Fountain'
+a =. *./ & assert "0
 
 NB. We can create a fountain simply by invoking the constructor:
-ftn =. '' conew 'Fountain'
+ftn =: '' conew 'Fountain'
+reset =. monad define "_
+  ftn =: ('' conew 'Fountain') [ (destroy__ftn'')
+)
+
 
 NB. Here is how a new fountain should look:
 NB. u d p n
@@ -140,24 +158,36 @@ a  hub = (pv,nx) from__ftn hub
 a  rim = (pv,nx) from__ftn rim
 
 a  rim = rim walk__ftn pv,pv,pv,pv
-
-
 
 NB. tests for adding data
 NB. ------------------------------------------------------------
+reset''
+
+a 2 = new_node__ftn''
+a 3 = new_node__ftn''
+a 4 = new_node__ftn''
+
+hub ins_nx__ftn 2               NB. insert node 2 nx from hub
+a  2 0 = nx from__ftn 0 2       NB. check cycle in 'nx' direction
+a  2 0 = pv from__ftn 0 2       NB. check cycle in 'pv' direction
+
+hub ins_pv__ftn 3               NB. insert node 3 pv from hub
+a  2 3 0 = nx from__ftn 0 2 3
+a  3 0 2 = pv from__ftn 0 2 3
 
 NB. tests for adding rings
 NB. ------------------------------------------------------------
-ftn =. ('' conew 'Fountain') [ (destroy__ftn'')
+reset''
 
-'h c' =. insert_ring__ftn hub       NB. rings consist of two nodes
+'h c' =. new_ring__ftn''            NB. rings consist of two nodes
 a  4 = len__ftn                     NB. both should be added to ftn.
 a  h = up from__ftn h               NB. node h is its own parent.
 a  is_hook__ftn h                   NB. .. which marks it as a hook.
 a  c = dn from__ftn c               NB. node c is its own child.
 a  is_clasp__ftn c                  NB. .. which marks it as a clasp.
 
-a  hub = (pv,nx) from__ftn h        NB. h should be a sibling of the hub
+hub ins_nx__ftn h
+a  hub = (pv,nx) from__ftn h        NB. h should now be sibling of the hub
 a  h = (pv,nx) from__ftn hub        NB. .. and vice versa.
 a  c = (pv,nx) from__ftn c          NB. but the clasp has no siblings yet.
 
@@ -176,6 +206,13 @@ NB. others =. nodes -. structural
 NB. a  others = others walk__ftn nx,pv,up,dn
 
 
+
+
+NB. tests for s-expression output
+NB. ------------------------------------------------------------
+
 NB. We can render fountains as unformatted (non-pretty printed)
 NB. s-expressions  using 'ufsx'
 a   '()' -: ufsx__ftn''
+
+NB. We can use this to test our changes:  (TODO)
