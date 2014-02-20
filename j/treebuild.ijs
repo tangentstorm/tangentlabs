@@ -5,7 +5,7 @@ NB. You can retrieve it in any of three formats:
 
 NB. - [[http://tangentstorm.github.io/apljk/treebuild.ijs.html][a readable html version]]
 NB. - [[https://github.com/sabren/b4/blob/master/web/apljk/treebuild.ijs.org][the literate ~.org~ file]]
-NB. - [[https://github.com/tangentstorm/b4/blob/master/j/treebuild.ijs][the generated j source code]]
+NB. - [[https://github.com/tangentstorm/tangentlabs/blob/master/j/treebuild.ijs][the generated j source code]]
 NB. [[file:treebuild.ijs.org::*%3Dtreebuild.ijs%3D][=treebuild\.ijs=:1]]
 upfrom =: 3 : 'if. y=_1 do. _1 else. y{tree end.'"0
 dnfrom =: 3 : 'if. 0=#y do. $0 else. I. +./"2 tree ="1 0 ;y end.'"1
