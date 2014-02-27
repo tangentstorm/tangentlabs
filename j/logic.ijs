@@ -105,10 +105,12 @@ NB. example:  1 = q given p, p imp q
 
 if    =: 2 : ' u"_`(v"_) '
 else  =: 2 : ' v"_`(0{m)@.((1{m)`:6) '
-nice  =. [:,(] if (1=#"1) else _) S:0
-given =: [: :([: nice f. [: <@:,@:~."1 [ #~"1 _ [: , [: *./ ])
 
-a     1 = p given p
-a     _ = q given p
-a     1 = q given p, p imp q
-a   1 1 = (p,q) given p, p imp q
+nice  =. [:,(] if (1=#"1) else _) S:0
+given =: [: :([: nice f. [: <@:,@:~."1 [ #~"1 _ [: *./ ])
+
+
+a   (, 1) -: p given p
+a   (, _) -: q given p
+a   (, 1) -: q given p, p imp q
+a    1 1  -: (p,q) given p, p imp q
