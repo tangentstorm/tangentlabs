@@ -1,7 +1,5 @@
 NB. a logic library for j
 
-a2 =: 0 0 $ 13!:8^:((0 e. ])`(12"_))
-
 NB. basic vocabulary for doing logic:
 NB. ------------------------------------------------------
 
@@ -14,7 +12,7 @@ is =: iff =: [: : =
 N  =: not =: -. : [:    NB. monadic -. is 'logical not'
 c  =: chk =: [: -. 0 e.]    NB. c y = not(y contains 0)
 
-imp =: [: : <:    NB. dyadic <: is implication (1 1 0 1 = 0 0 1 1 <: 0 1 0 1)
+imp =: [: : <:    NB. dyadic <: is implication  (so is !)
 iby =: [: : >:    NB. dyadic >: is 'implied by'
 
 NB. if.a do.b else.c end. <--> ite a,b,c (bools only)
@@ -26,7 +24,7 @@ NB. These are the transposed bits of the numbers [0..31]
 NB. this lets us test all combinations of 5 different
 NB. input bits simultaneously.
 
-'p q r s t' =: 0|:0|:,:#:i.32
+'p q r s t' =: |: #: ,. i. 2 ^ 5
 
 pp =: 'FT' {~ ]        NB. pretty print ('FT' for 0 1)
 jj =: pp inv           NB. inverse of pp
