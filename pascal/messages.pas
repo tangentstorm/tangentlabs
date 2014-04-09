@@ -1,82 +1,120 @@
 // experiments with message methods
-{$mode objfpc}{$h+}
+{$mode objfpc} // from https://github.com/tangentstorm/xpl
 program messages;
-uses variants;
+uses xpc, variants, stacks;
 const
-  opSHO	= 0;
-  opLIT	= 1;
-  opADD	= 2;
-  opGET	= 3;
-  opMSG = 4;
+  opSHO	= 0; // show the stack
+  opLIT = 1; // add literal value (from the TIntMsg) to the stack
+  opADD = 2; // add top two items
+  opPOP = 3; // return top item
+  opAAA = 4; // just an arbitrary message
+
+  // for these two, i wanted to see how to list the string messages
+  // to see if it might be usable for dynamic dispatch.
+  {$h-}
+  msgABC = 'ABC';  msgXYZ = 'XYZ';
+  {$h+}
+
+// the messages can be in any format but for int messages,
+// the first dword has to be the numeric code, and for strings,
+// the first n bytes are a shortstring (the first byte is the length)
+// i'm arbitrarily capping string messages to 16 chars.
 type
-  TMsgID   = cardinal;
-  TMessage = packed record
-	       code : TMsgId;
-	       data : variant;
-	     end;
+  TIntMsgId = dword;
+  TStrMsgId = string[16];
+  TIntStack = specialize GStack<Int32>;
+  TIntMsg   = packed record
+		code : TIntMsgId;
+		data : variant;
+	      end;
+  TStrMsg   = packed record
+		code : TStrMsgId;
+		data : variant;
+	      end;
+
 type
   TDispatch = class
-    _stack : array of Int32;
+    stack : TIntStack;
     constructor Create;
-    procedure sho(var _ );             message opSHO;
-    procedure lit(var a : TMessage);   message opLIT;
-    procedure add(var _ );             message opADD;
-    procedure get(var res : TMessage); message opGET;
-    procedure msg(var msg : TMessage); message opMSG;
+    destructor Destroy; override;
+    procedure sho(var _ );            message opSHO; // message msgSHO; nope[0]
+    procedure lit(var a : TIntMsg);   message opLIT;
+    procedure add(var _ );            message opADD;
+    procedure pop(var res : TIntMsg); message opPOP;
+    procedure aaa(var msg : TIntMsg); message opAAA;
+    procedure abc(var msg : TStrMsg); message msgABC;
+    procedure xyz(var msg : TStrMsg); message msgXYZ;
+    procedure DefaultHandlerStr( var message ); override;
   end;
+// [0] only 1 message can be used per method, even if different types
+
+
+{ TDispatch }
 
 constructor TDispatch.Create;
-  begin
-    SetLength(_stack, 0);
+  begin self.stack := TIntStack.Create(16);
+  end;
+
+destructor TDispatch.Destroy;
+  begin self.stack.free
   end;
 
 procedure TDispatch.sho(var _);
   var i : cardinal;
   begin
     write('[');
-    if length(_stack) >= 1 then write(_stack[0]);
-    if length(_stack) >  1 then
-      for i := 1 to length(_stack) - 1 do write(', ', _stack[i]);
+    if stack.count > 0 then begin
+      write(stack[0]);
+      if stack.count > 1 then
+	for i := 1 to stack.count - 1 do write(', ', stack[i]);
+    end;
     writeln(']');
   end;
-  
-procedure TDispatch.lit(var a : TMessage);
-  var i : cardinal;
-  begin
-    writeln('--> LIT ', a.data);
-    i := Length(_stack);
-    SetLength(_stack, i+1);
-    _stack[i] := a.data;
+
+{ TDispatch int messages }
+
+procedure TDispatch.lit(var a : TIntMsg);
+  begin stack.push(a.data); writeln('--> LIT ', a.data);
   end;
 
 procedure TDispatch.add(var _ );
-  var i: cardinal;
-  begin
-    writeln('--> ADD ');
-    i := Length(_stack);
-    _stack[i-2] += _stack[i-1];
-    SetLength(_stack, i-1);
-  end;
-  
-procedure TDispatch.get(var res : TMessage);
-  var i : cardinal;
-  begin
-    writeln('--> GET');
-    i := Length(_stack);
-    res.data := _stack[i-1];
-    SetLength(_stack, i-1);
+  begin stack.push(stack.pop + stack.pop); writeln('--> ADD ');
   end;
 
-procedure TDispatch.msg(var msg : TMessage);
+procedure TDispatch.POP(var res : TIntMsg);
+  begin res.data := stack.pop; writeln('--> POP');
+  end;
+
+procedure TDispatch.aaa(var msg : TIntMsg);
   begin
-    writeln('--> MSG ', msg.data);
+    writeln('--> AAA', msg.data);
     msg.code := 123; // reuse code field to send another message back.
     msg.data := 'response';
   end;
 
-function Send(obj : TObject; code: TMsgID; i:variant; out o: variant): TMsgID;
+
+{ TDispatch string messages }
+
+procedure TDispatch.abc( var msg : TStrMsg );
+  begin writeln( '--> ABC' ); msg.data := 'abc ok';
+  end;
+
+procedure TDispatch.xyz( var msg : TStrMsg );
+  begin writeln( '--> XYZ' ); msg.data := 'xyz ok';
+  end;
+
+procedure TDispatch.DefaultHandlerStr( var message );
+  begin
+    writeln('--> unknown str message:' );
+  end;
+
+
+// different ways to send messages
+
+// for when you need a response. (send null for param i if no arg)
+function Send(obj : TObject; code: TIntMsgId; i:variant; out o: variant): TIntMsgId;
   overload; inline;
-  var msg : TMessage;
+  var msg : TIntMsg;
   begin
     msg.code := code;
     msg.data :=	i;
@@ -84,61 +122,90 @@ function Send(obj : TObject; code: TMsgID; i:variant; out o: variant): TMsgID;
     result := msg.code;
     o := msg.data;
   end;
-  
-function Send(obj : TObject; code : TMsgID; data:variant): TMsgID;
+
+// for when you have a parameter but don't need a response
+function Send(obj : TObject; code : TIntMsgId; data:variant): TIntMsgId;
   overload; inline;
-  var tmp:variant;
+  var tmp : variant;
   begin
+    tmp := 0;
     result := send(obj, code, data, tmp);
   end;
 
-function Send(obj : TObject; code : TMsgID): variant;
+// for when you're just sending a message
+function Send(obj : TObject; code : TIntMsgId): variant;
   overload; inline;
-  var tmp: variant;
+  begin result := Send(obj, code, 0);
+  end;
+
+// for the string messages:
+
+function SendStr(obj : TObject; s : string) : variant;
+  var msg : TStrMsg;
   begin
-    result := Send(obj, code, tmp);
+    msg.code := s; msg.data := null;
+    obj.dispatchStr(msg);
+    result := msg.data;
+  end;
+
+const takesVal : set of byte = [ opLIT ];
+const givesVal : set of byte = [ opPOP ];
+
+// a little command interpreter
+procedure script(x : TDispatch; code : array of variant; var result : variant);
+  var c : dword; i : integer = 0;
+  begin
+    while i <= high(code) do begin
+      c := code[i];
+      if c in takesVal      then send(x, c, code[incv(i)])
+      else if c in givesVal then send(x, c, null, result)
+      else                       send(x, c);
+      send(x, opSHO); inc(i);
+    end
   end;
 
 var x : TDispatch; v, i : variant;
 begin
   writeln;
   x := TDispatch.Create;
-  send(x, opSHO);
-  send(x, opLIT, 2);
-  send(x, opSHO);
-  send(x, opLIT, 3);
-  send(x, opSHO);
-  send(x, opADD);
-  send(x, opSHO);
-  send(x, opGET, null, v);
-  send(x, opSHO);
+
+  // 2 3 + -> 5
+  script(x, [opLIT, 2, opLIT, 3, opADD, opPOP], v);
+  assert(v = 5); writeln; writeln('Result: ', v);
   writeln;
-  writeln('Result: ', v);
+
+  i := send(x, opAAA, 'query', v); // invoke TDispatch.msg
+  writeln('response code: ', i);  assert( i = 123 );
+  writeln('response data: ', v);  assert( v = 'response' );
   writeln;
-  i := send(x, opMSG, 'query', v);
-  writeln('response code: ', i);
-  writeln('response data: ', v);
-  writeln;
+
+  v := sendStr(x, msgABC); writeln('response:', v); assert( v = 'abc ok' );
+  v := sendStr(x, msgXYZ); writeln('response:', v); assert( v = 'xyz ok' );
+
   x.Free;
 end.
-
+
 { output
 ------------
 
-[]
 --> LIT 2
 [2]
 --> LIT 3
-[2, 3]
+[3, 2]
 --> ADD
 [5]
---> GET
+--> POP
 []
 
-Result: 5
+Result:5
 
---> MSG query
+--> AAAquery
 response code: 123
 response data: response
+
+--> ABC
+response:abc ok
+--> XYZ
+response:xyz ok
 
 ------------}
