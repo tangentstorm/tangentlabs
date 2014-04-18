@@ -1,0 +1,6 @@
+
+
+This demonstrates a DOS-style text terminal, based on
+example OpenGL rendering code provided by Twinklebear:
+
+https://gist.github.com/Twinklebear/11025713
