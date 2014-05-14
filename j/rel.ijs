@@ -1,5 +1,5 @@
-doubles =: (,. +:) i.5 NB. dyadic relation x=2*y, restricted to i.5
-squares =: (,. *:) i.5 NB. dyadic relation x=y*y, restricted to i.5
+doubles =: (,. +:) i.5 NB. dyadic relation y=2*x, restricted to i.5
+squares =: (,. *:) i.5 NB. dyadic relation y=x^2, restricted to i.5
 
 NB. operators for binary relations
 cv =: converse =: |."1 : [:
@@ -8,7 +8,6 @@ W =: width =: {. @: (#"1) : [:
 H =: height =: # : [:
 
 X =: product =: [: : ,/@(,"1/)
-J =: join =: 1 : ' (#~ =/"1 (0, W y) + m) { ])    x X y'
 
 NB. a (ak,bk) J b ->  select * from a X b where (ak{a)=(bk{b)
 NB. (as a convenience, drop the second copy of the joined field.)
