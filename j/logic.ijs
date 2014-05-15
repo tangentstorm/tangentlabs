@@ -24,11 +24,12 @@ NB. These are the transposed bits of the numbers [0..31]
 NB. this lets us test all combinations of 5 different
 NB. input bits simultaneously.
 
-'p q r s t' =: |: #: ,. i. 2 ^ 5
+bitvars =: adverb : '|: #: ,. i. 2^m'
+'p q r s t' =: 5 bitvars
 
 pp =: 'FT' {~ ]        NB. pretty print ('FT' for 0 1)
 jj =: pp inv           NB. inverse of pp
-tt =: 1 : 'u"0/~ 0 1'  NB. shows a pretty truth table
+tt =: adverb :'u"0/~ 0 1'  NB. shows a pretty truth table
 
 NB. -------------------------------------------------
 NB. some examples
@@ -95,6 +96,42 @@ a   (-. p A q A r A s) = (-.p) V (-.q) V (-.r) V (-.s)
 NB. de morgan simplified for j:
 a   (A/-.p,q,r,s) = (-.V/p,q,r,s)
 a   (V/-.p,q,r,s) = (-.A/p,q,r,s)
+
+
+
+NB. words that check properties of logical operators.
+NB. ---------------------------------------------------
+
+isReflexive =: adverb : 0
+  (0 u 0) *. (1 u 1)
+)
+
+isAssociative =: adverb : 0
+  'P Q R' =. 3 bitvars
+  ((P u Q) u R) -: (P u (Q u R))
+)
+
+isCommutative =: adverb : 0
+  'P Q' =. 2 bitvars
+  P (u -: u~) Q
+)
+
+distsOver =: conjunction : 0
+  'P Q R' =.3 bitvars
+  (P u (Q v R)) -: ((P u Q) v (P u R))
+)
+
+
+a     = isReflexive
+a    <: isReflexive
+
+a     >: isReflexive
+a  -. >: isCommutative
+a     >: isReflexive
+a  -. >: isCommutative
+
+a     +. distsOver *.
+a     *. distsOver +.
 
 
 
