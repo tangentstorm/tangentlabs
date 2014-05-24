@@ -1,0 +1,46 @@
+% predicate logic in nial
+% --------------------------------------------------
+
+ok := null;
+
+check is op msg pred { if pred then ok else write msg break endif }
+
+words is op Str {
+   % from towords.ndf in nial distro;
+   Strings := EACH phrase ( `  match Str cut Str ) }
+
+
+% logic symbols
+% --------------------------------------------------
+
+forall exist top bot := syms := words '∀ ∃ ⊤ ⊥'
+
+show is op x {
+  if isboolean x then
+    if x then result := top else result := bot endif
+  elseif isphrase x then
+    result := string x
+  else
+    result := link each string (link each show x)
+  endif;
+  link (each string result) }
+
+
+% test suite
+% --------------------------------------------------
+
+chk is op want tree {
+  got := show tree;
+  if want = got then ok
+  else write link[ 'mismatch:', display [want, got]] endif }
+
+chk '⊤' top;
+chk '⊥' bot;
+chk '⊥⊥' oo;
+chk '⊤⊥' lo;
+chk '∀' forall;
+chk '∃' exist;
+chk 'x' "x;
+chk 'Px' ("P "x);
+chk '∀xPx' [forall "x ["P "x]];
+
