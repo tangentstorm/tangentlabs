@@ -1,0 +1,62 @@
+# extracted from cgi-lib.ndf from the nial 6.3 distribution.
+# By: Chris Walmsley & Mike Jenkins Created: Sep, 1996
+
+Keyvalarray := [Null,Null];
+
+# Generic routine to add values to our association list
+# The "Val" can be any Nial array.
+#
+# This routines will append the value to the list of values
+# if the "Key" is already in the list of keys.  Thus
+# The values associated with a key is really a list
+# of values.  
+
+addkeyval is op Key Val {
+  Key := toupper string Key;
+  Test Pos := Key seek first Keyvalarray;
+  if Test then
+    if Val notin Keyvalarray@@[1,Pos] then
+      Keyvalarray@@[1,Pos] := Keyvalarray@@[1,Pos] append Val;
+    endif
+  else
+    Keyvalarray@0 := Keyvalarray@0 append Key;
+    Keyvalarray@1 := Keyvalarray@1 append [Val];
+  endif }
+
+# routines to get the values associated with a key
+#  getvals        Gets the list of values associated with the key
+#  getfirstval    Gets the first value only
+#  existval       Is the Key in the list at all?
+
+getfirstval is op Key {
+  Key := toupper string Key;
+  Test Pos  := Key seek Keyvalarray@0;
+  if Test then
+    first Keyvalarray@@[1,Pos]
+  else
+    Null
+  endif }
+
+getvals is op Key {
+  Key := toupper string Key;
+  Test Pos  := Key seek Keyvalarray@0;
+  if Test then
+    Res := Keyvalarray@@[1,Pos];
+    Res
+  else
+    Null
+  endif }
+
+hasval is op Key {
+  Key := toupper string Key;
+  Key in keyvalarray@0 }
+
+
+#routine to se the values for a key all at once.
+
+setvals is op Key Vals {
+  Key := toupper string Key;
+  Test Pos  := Key seek Keyvalarray@0;
+  if Test then
+    Keyvalarray@@[1,Pos] := Vals;
+  endif }
