@@ -39,12 +39,18 @@ glyph is op k { glyphs@( find k consts )};
 % unification
 % --------------------------------------------------
 
+id is pass;
+intree is op x tree {x in (link leaf id tree)};
+
 unify is op x y {
   if x = y then []
+  elseif (atomic x) and not (x intree y) then [ x, y ]
   else "no endif }
 
 chkev !( unify "a "a = [] );
-chkev !( unify "a "z = "no );
+chkev !( unify "a ["x "a] = "no );
+chkev !( unify "a 5 = ["a, 5] );
+
 
 
 % logic symbols
