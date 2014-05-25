@@ -4,10 +4,18 @@
 ok := null;
 
 reload is { loaddefs "fol };
-dump is op x { write display x };
+
 head is first;
+
+dump is op x { write display x };
 check is op msg pred { if pred then ok else write msg break endif };
-chkev is op q { if eval q then ok else write 'failed: 'q; break endif };
+
+unquote is op q {
+  link descan scan link descan deparse q };
+
+chkev is op q {
+  if eval q then ok
+  else write 'failed: ' (unquote q); break endif };
 
 words is op Str {
    % from towords.ndf in nial distro;
