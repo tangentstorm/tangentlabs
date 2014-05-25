@@ -29,13 +29,22 @@
    (cons (make-optre
 	  '("gets" "endwhile" "endrepeat" "then" "repeat" "op" "local"
 	    "if" "else" "do" "case" "begin" "end" "endif" "then" "case"
-	    "from" ))
+	    "from" "is"))
 	 font-lock-keyword-face)
+
+   ; operators
+   (cons (make-optre
+	  '("." "(" "!" "#" ")" "," "+" "*" "-" "<<" ";" ":"  ":="
+	    "/" "<" ">>" "<=" ">" "=" ">=" "@" "["
+	    "]" "{" "}" "|" "~=" ))
+	 font-lock-builtin-face)
+
+   ; symbols
+   (cons "\"[^[:space:]]"
+	 font-lock-constant-face)
 
    ; predefined words
    (cons (make-optre '(
-         "IS" "." "(" "!" "#" ")" "," "+" "*" "-" "<<" ";" ":="
-         ":" "/" "<" ">>" "<=" ">" "=" ">=" "@"
 	 "and" "abs" "allbools" "accumulate" "across" "allints"
 	 "allchars" "allin" "allreals" "allnumeric" "append"
 	 "arcsin" "arccos" "appendfile" "apply" "arctan" "atomic"
@@ -56,7 +65,7 @@
 	 "fromraw" "front" "gage" "getfile" "getdef" "getcommandline"
 	 "getenv" "getname" "hitch" "grid" "grade" "getsyms" "gradeup"
 	 "gt" "gte" "host" "in" "inverse" "innerproduct" "inner" "inv"
-	 "ip" "[" "ln" "link" "isboolean" "isinteger" "ischar" "isfault"
+	 "ip" "ln" "link" "isboolean" "isinteger" "ischar" "isfault"
          "isreal" "isphrase" "isstring" "iterate" "istruthvalue" "leaf"
          "last" "laminate" "like" "libpath" "library" "list" "load"
          "loaddefs" "nonlocal" "max" "match" "log" "lt" "lower" "lte"
@@ -88,7 +97,7 @@
 	 "valence" "up" "updateall" "update" "vacate" "value"
 	 "version" "vars" "watchlist" "watch" "void" "with"
 	 "write" "writechars" "writearray" "writefile"
-	 "writefield" "writescreen" "writerecord" "]" "{" "}" "|" "~="
+	 "writefield" "writescreen" "writerecord"
 	 )) font-lock-function-name-face)
 
    ) "highlighting for nial mode")
@@ -111,36 +120,32 @@
 	      (setq cur-indent (+ (current-indentation) nial-indent))))))))
 
 
-
-
 ; syntax table
+(defun nial-update-syntax-table (group chars)
+  (mapcar (lambda (c) (modify-syntax-entry c group nial-mode-syntax-table))
+	  chars))
+
 (defvar nial-mode-syntax-table
   (let ((nial-mode-syntax-table (make-syntax-table)))
 
-    ; underscores okay
+    ; underscores okay in names
     (modify-syntax-entry ?_ "w" nial-mode-syntax-table)
 
-  ;; Add operator symbols misassigned in the std table
-    (modify-syntax-entry ?\$ "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\% "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\& "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\* "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\+ "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\- "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\/ "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\< "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\= "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\> "."  nial-mode-syntax-table)
-    (modify-syntax-entry ?\| "."  nial-mode-syntax-table)
-  
+    ;; Add operator symbols misassigned in the std table
+    (nial-update-syntax-table "w"
+	'(?\& ?: ?* ?+ ?- ?/ ?< ?= ?> ?|))
+
     ; comments
     (modify-syntax-entry ?% "<" nial-mode-syntax-table)
+    (modify-syntax-entry ?# "<" nial-mode-syntax-table)
     (modify-syntax-entry ?\n ">" nial-mode-syntax-table)
 
-    ; strings and symbols
+    ; ' starts a string
     (modify-syntax-entry ?' "\"" nial-mode-syntax-table)
+
+    ; " represents a symbol
     (modify-syntax-entry ?\" "'" nial-mode-syntax-table)
-    
+
     nial-mode-syntax-table)
   "syntax table for nial-mode")
 
