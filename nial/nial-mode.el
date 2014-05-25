@@ -27,14 +27,18 @@
 
    ; keywords
    (cons (make-optre
-	  '("gets" "endwhile" "endrepeat" "then" "repeat" "op" "local"
-	    "if" "else" "do" "case" "begin" "end" "endif" "then" "case"
-	    "from" "is"))
+	  '("is" "gets" ":=" "op" "tr"  ";"
+	    "if" "then" "elseif" "else" "endif"
+	    "case" ":" "from" "endcase"
+	    "begin" "end"
+	    "for" "endfor"
+	    "while" "do" "endwhile"
+	    "repeat" "until" "endrepeat"))
 	 font-lock-keyword-face)
 
    ; operators
    (cons (make-optre
-	  '("." "(" "!" "#" ")" "," "+" "*" "-" "<<" ";" ":"  ":="
+	  '("." "(" "!" "#" ")" "," "+" "*" "-" "<<"
 	    "/" "<" ">>" "<=" ">" "=" ">=" "@" "["
 	    "]" "{" "}" "|" "~=" ))
 	 font-lock-builtin-face)
@@ -45,6 +49,7 @@
 
    ; predefined words
    (cons (make-optre '(
+	 "operation" "expression"
 	 "and" "abs" "allbools" "accumulate" "across" "allints"
 	 "allchars" "allin" "allreals" "allnumeric" "append"
 	 "arcsin" "arccos" "appendfile" "apply" "arctan" "atomic"
@@ -56,8 +61,8 @@
 	 "diverse" "deepplace" "cutall" "cut" "display" "deparse"
 	 "deepupdate" "descan" "depth" "diagram" "div" "divide"
 	 "drop" "down" "eachboth" "eachall" "each" "dropright"
-	 "eachleft" "eachright" "edit" "endfor" "end" "elseif"
-	 "empty" "endcase" "endif" "for" "expression" "exit"
+	 "eachleft" "eachright" "edit"
+	 "empty" "expression" "exit"
 	 "except" "erase" "equal" "eval" "eraserecord" "execute"
 	 "exp" "external" "exprs" "findall" "find" "false" "fault"
 	 "falsehood" "filestatus" "filelength" "filepath" "filetally"
@@ -90,7 +95,7 @@
 	 "socket_peek" "socket_read" "socket_send" "socket_write"
 	 "solve" "sort" "split" "sortup" "string" "status" "take"
 	 "symbols" "sum" "system" "tan" "tally" "takeright" "tanh"
-	 "tell" "team" "while" "until" "tr" "times" "third" "time"
+	 "tell" "team" "tr" "times" "third" "time"
 	 "timeit" "toupper" "tolower" "timestamp" "tonumber"
 	 "toraw" "toplevel" "transformer" "type" "transpose"
 	 "true" "trs" "twig" "truth" "unequal" "variable"
