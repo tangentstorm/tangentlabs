@@ -13,13 +13,17 @@ words is op Str {
 % logic symbols
 % --------------------------------------------------
 
-forall exist top bot := syms := words '∀ ∃ ⊤ ⊥'
-
 show is op x {
   if isboolean x then
-    if x then result := top else result := bot endif
+    if x then result := '⊤' else result := '⊥' endif
   elseif isphrase x then
-    result := string x
+    result := case x from
+      "forall : '∀' end
+      "exists : '∃' end
+      "top    : '⊤' end
+      "bot    : '⊥' end
+      else string x
+    endcase
   else
     result := link each string (link each show x)
   endif;
@@ -34,13 +38,9 @@ chk is op want tree {
   if want = got then ok
   else write link[ 'mismatch:', display [want, got]] endif }
 
-chk '⊤' top;
-chk '⊥' bot;
-chk '⊥⊥' oo;
-chk '⊤⊥' lo;
-chk '∀' forall;
-chk '∃' exist;
-chk 'x' "x;
-chk 'Px' ("P "x);
-chk '∀xPx' [forall "x ["P "x]];
+chk '⊤' "top; chk '⊥' "bot;
+chk '⊥⊥' oo; chk '⊤⊥' lo; % booloan literals;
+chk '∀' "forall; chk '∃' "exists;
+chk 'x' "x; chk 'Px' ("P "x);
+chk '∀xPx' ["forall "x ["P "x]];
 
