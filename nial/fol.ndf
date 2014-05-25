@@ -3,16 +3,29 @@
 
 ok := null;
 
-reload is { loaddefs "fol }
-
-check is op msg pred { if pred then ok else write msg break endif }
-
-chkev is op q { if eval q then ok else write 'failed: 'q; break endif }
+reload is { loaddefs "fol };
+dump is op x { write display x };
+head is first;
+check is op msg pred { if pred then ok else write msg break endif };
+chkev is op q { if eval q then ok else write 'failed: 'q; break endif };
 
 words is op Str {
    % from towords.ndf in nial distro;
    Strings := EACH phrase ( `  match Str cut Str ) }
 
+
+% logical language
+% --------------------------------------------------
+
+consts glyphs := cols mix [
+  "forall '∀',
+  "exists '∃',
+  "top    '⊤',
+  "bot    '⊥'
+];
+
+isconst is op k { k in consts };
+glyph is op k { glyphs@( find k consts )};
 
 
 % unification
@@ -20,25 +33,23 @@ words is op Str {
 
 unify is op x y {
   if x = y then []
-  else null endif }
+  else "no endif }
 
 chkev !( unify "a "a = [] );
-chkev !( unify "a "z = null );
+chkev !( unify "a "z = "no );
+
 
 % logic symbols
 % --------------------------------------------------
 
 show is op x {
   if isboolean x then
-    if x then result := '⊤' else result := '⊥' endif
+    result := if x then glyph "top else glyph "bot endif
   elseif isphrase x then
-    result := case x from
-      "forall : '∀' end
-      "exists : '∃' end
-      "top    : '⊤' end
-      "bot    : '⊥' end
+    result := if isconst x
+      then glyph x
       else string x
-    endcase
+    endif
   else
     result := link each string (link each show x)
   endif;
