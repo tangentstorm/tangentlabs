@@ -22,19 +22,31 @@
 (defun make-optre (words)
   (concat "\\<" (regexp-opt words t) "\\>"))
 
+(defface nial-punctuation-face
+  '((default (:foreground "magenta" )))
+  "Face for punctuation.")
+(defvar nial-punctuation-face 'nial-punctuation-face
+  "Face for punctuation.")
+
+
+
 (defconst nial-font-lock-keywords
   (list
 
    ; keywords
    (cons (make-optre
-	  '("is" "gets" ":=" "op" "tr"  ";"
+	  '("is" "gets" "op" "tr"  ";"
 	    "if" "then" "elseif" "else" "endif"
-	    "case" ":" "from" "endcase"
+	    "case"  "from" "endcase"
 	    "begin" "end"
 	    "for" "endfor"
 	    "while" "do" "endwhile"
 	    "repeat" "until" "endrepeat"))
 	 font-lock-keyword-face)
+
+   ; punctuation
+   (cons (make-optre '(":="))
+	 'nial-punctuation-face)
 
    ; operators
    (cons (make-optre
@@ -121,8 +133,7 @@
       (progn
 	(save-excursion
 	  (forward-line -1)
-	  (if (looking-at ".*:$")
-	      (setq cur-indent (+ (current-indentation) nial-indent))))))))
+	  (setq cur-indent (+ (current-indentation) nial-indent)))))))
 
 
 ; syntax table
