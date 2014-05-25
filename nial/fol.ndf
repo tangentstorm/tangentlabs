@@ -3,13 +3,28 @@
 
 ok := null;
 
+reload is { loaddefs "fol }
+
 check is op msg pred { if pred then ok else write msg break endif }
+
+chkev is op q { if eval q then ok else write 'failed: 'q; break endif }
 
 words is op Str {
    % from towords.ndf in nial distro;
    Strings := EACH phrase ( `  match Str cut Str ) }
 
 
+
+% unification
+% --------------------------------------------------
+
+unify is op x y {
+  if x = y then []
+  else null endif }
+
+chkev !( unify "a "a = [] );
+chkev !( unify "a "z = null );
+
 % logic symbols
 % --------------------------------------------------
 
@@ -29,7 +44,7 @@ show is op x {
   endif;
   link (each string result) }
 
-
+
 % test suite
 % --------------------------------------------------
 
