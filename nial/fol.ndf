@@ -8,14 +8,21 @@ reload is { loaddefs "fol };
 head is first;
 
 dump is op x { write display x };
-check is op msg pred { if pred then ok else write msg break endif };
+check is op msg pred { if pred then ok else fault msg endif };
 
 unquote is op q {
   link descan scan link descan deparse q };
 
 chkev is op q {
   if eval q then ok
-  else write 'failed: ' (unquote q); break endif };
+  else write 'failed: ' (unquote q) endif };
+
+cheq is op q0 q1 {
+  v0 v1 := each eval q0 q1;
+  if v0 = v1 then ok
+  else write (
+     link 'failed: ' (unquote q0) ' : ' (display v0) ' != ' (display v1))
+  endif };
 
 words is op Str {
    % from towords.ndf in nial distro;
@@ -41,16 +48,30 @@ glyph is op k { glyphs@( find k consts )};
 
 id is pass;
 intree is op x tree {x in (link leaf id tree)};
+isvar is op x {
+  if and[isphrase, not isconst] x
+  then =[id, tolower] string x else o endif };
 
 unify is op x y {
   if x = y then []
-  elseif (atomic x) and not (x intree y) then [ x, y ]
-  else "no endif }
+  elseif and[isvar x, not or[isvar y, x intree y]] then [ x, y ]
+  elseif and[isvar y, not or[isvar x, y intree x]] then [ y, x ]
+  elseif or[atomic x, atomic y, not match each tally x y] then "no
+  else
+    begin
+      if not (shape x) = (shape y) then break endif;
+      sub := link eachboth unify x y;
+      if "no intree sub then "no
+      else filter ([] ~=) sub endif
+    end
+  endif }
 
 chkev !( unify "a "a = [] );
 chkev !( unify "a ["x "a] = "no );
 chkev !( unify "a 5 = ["a, 5] );
-
+cheq !( unify [ 1 "vs "a] [ 1 "vs 2]) !( "a 2 );
+cheq !( unify [ 1 "vs  2] ["x "vs 2]) !( "x 1 );
+cheq !( unify [ 1 "vs "a] ["x "vs 2]) !( "x 1 "a 2 );
 
 
 % logic symbols
