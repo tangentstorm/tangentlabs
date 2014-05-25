@@ -40,7 +40,7 @@
 	 font-lock-builtin-face)
 
    ; symbols
-   (cons "\"[^[:space:]]"
+   (cons "\"[[:word:]]+"
 	 font-lock-constant-face)
 
    ; predefined words
