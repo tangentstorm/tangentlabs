@@ -1,11 +1,14 @@
 % predicate logic in nial
-% --------------------------------------------------
 
+
+% helpers;
+% --------------------------------------------------;
 ok := null;
 
 reload is { loaddefs "fol };
 
 head is first;
+tail is rest;
 
 dump is op x { write display x };
 check is op msg pred { if pred then ok else fault msg endif };
@@ -13,15 +16,22 @@ check is op msg pred { if pred then ok else fault msg endif };
 unquote is op q {
   link descan scan link descan deparse q };
 
-chkev is op q {
+assert is op q {
   if eval q then ok
   else write 'failed: ' (unquote q) endif };
 
+esc := char 27;
+bold := link esc '[0;1m';
+plain := link esc '[0m';
+
+emit is op a { writescreen a };
+
 cheq is op q0 q1 {
+  emit (link bold 'testing: ' (unquote q0) plain);
   v0 v1 := each eval q0 q1;
   if v0 = v1 then ok
   else write (
-     link 'failed: ' (unquote q0) ' : ' (display v0) ' != ' (display v1))
+    link 'failed: ' (unquote q0) ' : ' (display v0) ' != ' (display v1))
   endif };
 
 words is op Str {
@@ -30,7 +40,7 @@ words is op Str {
 
 
 % logical language
-% --------------------------------------------------
+% --------------------------------------------------;
 
 consts glyphs := cols mix [
   "forall '∀',
@@ -43,14 +53,43 @@ isconst is op k { k in consts };
 glyph is op k { glyphs@( find k consts )};
 
 
+% substitution
+% --------------------------------------------------;
+
+any is tr p (or each p);
+
+subs is op dict expr {
+  if any empty dict expr then expr
+  else ok;
+    k v := cols ((floor(tally dict /2) 2) reshape dict);
+    res := null;
+    for item with expr do
+      if k = solitary item
+        then res := res link v@0
+      elseif item in k
+        then res := res link (v@( find item k ))
+        else res := res link item
+      endif
+    endfor
+  endif }
+
+cheq !( subs ("a 1) "a )      !( [1] );
+cheq !( subs ("a 1) ("a "a))  !( 1 1 );
+cheq !( subs ("a 1) ["a])     !( [1] );
+cheq !( subs ("a 1) [] )      !( [] );
+
+(cheq !( subs ("a 1 "b 2) ("a "b "a))
+      !( 1 2 1 ))
+
 % unification
-% --------------------------------------------------
+% --------------------------------------------------;
 
 id is pass;
 intree is op x tree {x in (link leaf id tree)};
 isvar is op x {
   if and[isphrase, not isconst] x
   then =[id, tolower] string x else o endif };
+
 
 unify is op x y {
   if x = y then []
@@ -59,23 +98,42 @@ unify is op x y {
   elseif or[atomic x, atomic y, not match each tally x y] then "no
   else
     begin
-      if not (shape x) = (shape y) then break endif;
-      sub := link eachboth unify x y;
-      if "no intree sub then "no
-      else filter ([] ~=) sub endif
+      if (shape x) ~= (shape y) then "no
+      else
+        hu := unify (each head x y);
+        if hu = "no then "no
+        else
+          tu := (unify (each ((hu subs) tail) x y));
+          if tu = "no then "no
+          else hu link tu endif
+        endif
+      endif
     end
   endif }
 
-chkev !( unify "a "a = [] );
-chkev !( unify "a ["x "a] = "no );
-chkev !( unify "a 5 = ["a, 5] );
+
+% unification tests;
+
+% 0 variables;
+cheq !( unify 0 0 )     !( [] );
+cheq !( unify 0 1 )     !( "no );
+
+% single variable;
+
+cheq !( unify "a "a )     !( [] );
+cheq !( unify "a ["x "a]) !( "no );
+cheq !( unify "a 5 )      !( ["a, 5] );
+
 cheq !( unify [ 1 "vs "a] [ 1 "vs 2]) !( "a 2 );
 cheq !( unify [ 1 "vs  2] ["x "vs 2]) !( "x 1 );
 cheq !( unify [ 1 "vs "a] ["x "vs 2]) !( "x 1 "a 2 );
+cheq !( unify [ 1 "vs "a] ["x "vs 2]) !( "x 1 "a 2 );
 
+cheq !( unify ["a "a] [1 2]) !( "no );
+cheq !( unify ["a "a] [1 1]) !( "a 1 );
 
 % logic symbols
-% --------------------------------------------------
+% --------------------------------------------------;
 
 show is op x {
   if isboolean x then
@@ -90,9 +148,7 @@ show is op x {
   endif;
   link (each string result) }
 
-
-% test suite
-% --------------------------------------------------
+% tests for 'show';
 
 chk is op want tree {
   got := show tree;
