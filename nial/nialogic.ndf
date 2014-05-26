@@ -5,7 +5,7 @@
 % --------------------------------------------------;
 ok := null;
 
-reload is { loaddefs "fol };
+reload is { loaddefs "nialogic };
 
 head is first;
 tail is rest;
