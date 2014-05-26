@@ -60,26 +60,43 @@ any is tr p (or each p);
 
 subs is op dict expr {
   if any empty dict expr then expr
-  else ok;
+  else
     k v := cols ((floor(tally dict /2) 2) reshape dict);
-    res := null;
-    for item with expr do
-      if k = solitary item
-        then res := res link v@0
-      elseif item in k
-        then res := res link (v@( find item k ))
-        else res := res link item
-      endif
-    endfor
+    if expr in k then v@( find expr k )
+    else each (op item {
+      if k = solitary item then
+        v@0
+      elseif item in k then
+        v@( find item k )
+      elseif atomic item then
+        item
+      else
+        subs dict item
+      endif }) expr
+    endif
   endif }
 
-cheq !( subs ("a 1) "a )      !( [1] );
-cheq !( subs ("a 1) ("a "a))  !( 1 1 );
-cheq !( subs ("a 1) ["a])     !( [1] );
-cheq !( subs ("a 1) [] )      !( [] );
 
-(cheq !( subs ("a 1 "b 2) ("a "b "a))
+
+% substitution tests;
+
+cheq !( subs ("a 1) "a )      !( 1 );
+cheq !( subs ("b 1) ("b "b))  !( 1 1 );
+cheq !( subs ("c 1) ["c])     !( [1] );
+cheq !( subs ("d 1) [] )      !( [] );
+
+%breakin "subs;
+cheq !( subs ("e [1]) "e )      !( [1] );
+%breakin "subs;
+
+cheq !( subs ("f [1]) ["f "f])  !( [[1][1]] );
+cheq !( subs ("g 1) [1 ["g]]) !( [1 [1]] );
+
+(cheq !( subs ("h 1 "i 2) ("h "i "h))
       !( 1 2 1 ))
+(cheq !( subs ("j 1 "k 2) (["k]["j ["k] 3]))
+      !( [2] [1 [2] 3] ))
+
 
 % unification
 % --------------------------------------------------;
@@ -121,8 +138,11 @@ cheq !( unify 0 1 )     !( "no );
 % single variable;
 
 cheq !( unify "a "a )     !( [] );
+
 cheq !( unify "a ["x "a]) !( "no );
 cheq !( unify "a 5 )      !( ["a, 5] );
+cheq !( unify "a [] )     !( "a [] );
+cheq !( unify "a [1] )    !( "a [1] );
 
 cheq !( unify [ 1 "vs "a] [ 1 "vs 2]) !( "a 2 );
 cheq !( unify [ 1 "vs  2] ["x "vs 2]) !( "x 1 );
@@ -131,6 +151,10 @@ cheq !( unify [ 1 "vs "a] ["x "vs 2]) !( "x 1 "a 2 );
 
 cheq !( unify ["a "a] [1 2]) !( "no );
 cheq !( unify ["a "a] [1 1]) !( "a 1 );
+
+cheq !( unify ["a ["a]] [1 [1]]) !( "a 1 );
+cheq !( unify ["a "a] [[1] [1]]) !( "a [1] );
+
 
 % logic symbols
 % --------------------------------------------------;
