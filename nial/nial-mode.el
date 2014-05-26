@@ -39,7 +39,7 @@
 	    "if" "then" "elseif" "else" "endif"
 	    "case"  "from" "endcase"
 	    "begin" "end"
-	    "for" "endfor"
+	    "for"  "with" "endfor"
 	    "while" "do" "endwhile"
 	    "repeat" "until" "endrepeat"))
 	 font-lock-keyword-face)
@@ -112,7 +112,7 @@
 	 "toraw" "toplevel" "transformer" "type" "transpose"
 	 "true" "trs" "twig" "truth" "unequal" "variable"
 	 "valence" "up" "updateall" "update" "vacate" "value"
-	 "version" "vars" "watchlist" "watch" "void" "with"
+	 "version" "vars" "watchlist" "watch" "void"
 	 "write" "writechars" "writearray" "writefile"
 	 "writefield" "writescreen" "writerecord"
 	 )) font-lock-function-name-face)
@@ -149,7 +149,7 @@
 
     ;; Add operator symbols misassigned in the std table
     (nial-update-syntax-table "w"
-	'(?\& ?: ?* ?+ ?- ?/ ?< ?= ?> ?|))
+	'(?& ?: ?* ?+ ?- ?/ ?< ?= ?> ?| ?~))
 
     ; comments
     (modify-syntax-entry ?% "<" nial-mode-syntax-table)
