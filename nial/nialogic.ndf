@@ -107,16 +107,23 @@ cheq is op q0 q1 {
 % logical language
 % --------------------------------------------------;
 
-consts glyphs := cols mix [
-  "forall '∀',
-  "exists '∃',
-  "top    '⊤',
-  "bot    '⊥'
-];
+consts glyphs asciis := cols mix [
+  "forall  '∀' '@',
+  "exists  '∃' '#',
+  "top     '⊤' '1',
+  "bot     '⊥' '0',
+  "implies '⇒' '}',
+  "iff     '⇔' '=',
+  "and     '∧' '*',
+  "vel     '∨' '+',
+  "not     '¬' '~',
+  "xor     '⊕' '%',
+  "reduce  '/' '/'
+ ];
 
 isconst is op k { k in consts };
 glyph is op k { glyphs@( find k consts )};
-
+ascii is op k { asciis@( find k consts )};
 
 % substitution
 % --------------------------------------------------;
@@ -167,13 +174,19 @@ cheq !( subs ("g 1) [1 ["g]]) !( [1 [1]] );
 id is pass;
 intree is op x tree {x in (link leaf id tree)};
 isvar is op x {
-  if and[isphrase, not isconst] x
+  if and[isphrase, not isconst, ("$ ~=)] x
   then =[id, tolower] string x else o endif };
+
+passive is link team [reverse,pass][2 take,2 drop];
+
+con is tr f (f link team[reverse,pass][2 take,2 drop]);
 
 lengths is each tally;
 
 unify is op x y {
   if x = y then []
+  elseif x = "_ then [ "_, y ]
+  elseif x = "$ and isvar y then [ "$, y ]
   elseif and[isvar x, not or[isvar y, x intree y]] then [ x, y ]
   elseif and[isvar y, not or[isvar x, y intree x]] then [ y, x ]
   elseif or[atomic x, atomic y, diverse lengths x y] then "no
@@ -231,6 +244,9 @@ show is op x {
   endif;
   link (each string result) }
 
+
+
+
 % tests for 'show';
 
 chk is op want tree {
@@ -244,3 +260,31 @@ chk '∀' "forall; chk '∃' "exists;
 chk 'x' "x; chk 'Px' ("P "x);
 chk '∀xPx' ["forall "x ["P "x]];
 
+
+% rule-based printer
+% --------------------------------------------------;
+
+templates := mix [
+  ("forall "$ "_)  ((glyph "forall) "$ '(' "_ ')'),
+  ("exists "$ "_)  ((glyph "exists) "$ '(' "_ ')'),
+  ("$ "implies "_) ("$ (glyph "implies) "_)
+];
+
+fmt is op node {
+  i found := 0 o; result := null;
+  while i < tally rows templates and not found do
+    ptn tpl := templates#((i 0) (i 1));
+    if "no = (u := unify ptn node) then ok
+    else found := o;
+      result := each (op x {
+        if isconst x then glyph x
+        elseif atomic x then x
+        else link fmt x endif }) (subs u tpl)
+    endif;
+    i := i + 1;
+  endwhile;
+  if empty result then node else result endif };
+
+
+(cheq !('∀x(x⇒⊤)')
+      !(link fmt ("forall "x ("x "implies "top))))
