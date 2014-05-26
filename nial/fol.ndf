@@ -1,7 +1,7 @@
 % predicate logic in nial
 
 
-% helpers;
+% helpers/ language tweaks
 % --------------------------------------------------;
 ok := null;
 
@@ -13,18 +13,60 @@ tail is rest;
 dump is op x { write display x };
 check is op msg pred { if pred then ok else fault msg endif };
 
+words is op Str {
+  % split string on space character;
+  % (from towords.ndf in nial distro);
+  Strings := EACH phrase ( `  match Str cut Str ) }
+
 unquote is op q {
+  % convert !( quoted expressions ) back to text;
   link descan scan link descan deparse q };
 
-assert is op q {
-  if eval q then ok
-  else write 'failed: ' (unquote q) endif };
+
+% colored text
+% --------------------------------------------------;
+setwidth 1024; % fix overzealous line wrapping;
 
 esc := char 27;
 bold := link esc '[0;1m';
 plain := link esc '[0m';
 
-emit is op a { writescreen a };
+emit is op a { writescreen (link each string) a };
+clrscr is { link esc '[H' esc '[J' };
+
+xc is op color {
+  % 256 xterm colors + mnemonics for first 16 ascii colors;
+  if isinteger color then string color
+  elseif isphrase color then xc (string color)
+  elseif head color in 'krgybmcwKRGYBMCW'
+    then string (head color find 'krgybmcwKRGYBMCW')
+    else fault ['invalid color:', display color]
+  endif };
+
+fg is op color { link esc '[38;5;' (xc color)  'm' };
+bg is op color { link esc '[48;5;' (xc color)  'm' };
+hexits := '0123456789ABCDEF';
+
+hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
+
+colortest is {
+  (each emit
+     link rows
+     each link rows (16 16 reshape)
+     each (' ' link)
+     each (link[fg,hexbyte]) (tell 256))
+  null; % don't return a value; }
+
+% a little logo: ;
+emit (nialogic := (fg "B) "nia (fg "C) `l (fg "c) "ogic (fg "w))
+
+% test framework
+% --------------------------------------------------;
+
+assert is op q {
+  if eval q then ok
+  else write 'failed: ' (unquote q) endif };
+
 
 cheq is op q0 q1 {
   emit (link bold 'testing: ' (unquote q0) plain);
@@ -33,10 +75,6 @@ cheq is op q0 q1 {
   else write (
     link 'failed: ' (unquote q0) ' : ' (display v0) ' != ' (display v1))
   endif };
-
-words is op Str {
-   % from towords.ndf in nial distro;
-   Strings := EACH phrase ( `  match Str cut Str ) }
 
 
 % logical language
