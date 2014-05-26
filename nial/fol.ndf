@@ -145,25 +145,21 @@ isvar is op x {
   if and[isphrase, not isconst] x
   then =[id, tolower] string x else o endif };
 
+lengths is each tally;
 
 unify is op x y {
   if x = y then []
   elseif and[isvar x, not or[isvar y, x intree y]] then [ x, y ]
   elseif and[isvar y, not or[isvar x, y intree x]] then [ y, x ]
-  elseif or[atomic x, atomic y, not match each tally x y] then "no
-  else
-    begin
-      if (shape x) ~= (shape y) then "no
-      else
-        hu := unify (each head x y);
-        if hu = "no then "no
-        else
-          tu := (unify (each ((hu subs) tail) x y));
-          if tu = "no then "no
-          else hu link tu endif
-        endif
-      endif
-    end
+  elseif or[atomic x, atomic y, diverse lengths x y] then "no
+  elseif (shape x) ~= (shape y) then "no
+  else hu := unify (each head x y);
+    if hu = "no then "no
+    else
+      tu := (unify (each ((hu subs) tail) x y));
+      if tu = "no then "no
+      else hu link tu endif
+    endif
   endif }
 
 
