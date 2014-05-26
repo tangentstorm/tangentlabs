@@ -22,6 +22,12 @@ unquote is op q {
   % convert !( quoted expressions ) back to text;
   link descan scan link descan deparse q };
 
+
+% does any item in an array match the predicate?
+% ex:  !(any atomic a b c d etc) -> are any of them atomic?;
+
+any is tr p (or each p);
+
 
 % colored text
 % --------------------------------------------------;
@@ -33,6 +39,7 @@ plain := link esc '[0m';
 
 emit is op a { writescreen (link each string) a };
 clrscr is { link esc '[H' esc '[J' };
+newline is { char 10 };
 
 xc is op color {
   % 256 xterm colors + mnemonics for first 16 ascii colors;
@@ -63,18 +70,38 @@ emit (nialogic := (fg "B) "nia (fg "C) `l (fg "c) "ogic (fg "w))
 % test framework
 % --------------------------------------------------;
 
-assert is op q {
-  if eval q then ok
-  else write 'failed: ' (unquote q) endif };
-
+try is op quotes {
+  oldtrigger := settrigger o;
+  result := null;
+  for q with quotes do
+    if isfault result then ok
+    else qres := eval q;
+      if isfault qres
+        then result := qres
+        else result := result link [qres]
+      endif
+    endif
+  endfor;
+  settrigger oldtrigger;
+  result }
 
 cheq is op q0 q1 {
-  emit (link bold 'testing: ' (unquote q0) plain);
-  v0 v1 := each eval q0 q1;
-  if v0 = v1 then ok
-  else write (
-    link 'failed: ' (unquote q0) ' : ' (display v0) ' != ' (display v1))
-  endif };
+  res := try q0 q1; msg := null;
+  if isfault res then
+    msg := (fg "y) 'error: ' (fg "R) (string res)
+  elseif match res then
+    ok
+  else
+    v0 v1 := res;
+    msg := ((newline) (fg "r) ' expected: ' (fg "M) (display v0)
+            (newline) (fg "r) '  but saw: ' (fg "R) (display v1))
+  endif;
+  res := (fg "K) 'testing:' plain (unquote q0);
+  if empty msg
+    then res := res link ((fg "g) 'ok' plain)
+    else res := res link ((fg "r) (link msg) plain)
+  endif;
+  emit res };
 
 
 % logical language
@@ -93,8 +120,6 @@ glyph is op k { glyphs@( find k consts )};
 
 % substitution
 % --------------------------------------------------;
-
-any is tr p (or each p);
 
 subs is op dict expr {
   if any empty dict expr then expr
