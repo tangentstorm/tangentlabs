@@ -121,6 +121,26 @@ consts glyphs asciis := cols mix [
   "reduce  '/' '/'
  ];
 
+
+# TODO: merge record layout rules into above table
+layout := [
+  "top,
+  "bot,
+  "rel "$r "$t*,
+  "and "$p "$q+,
+  "vel "$p "$q+,
+  "imp "$p "$q+,
+  "iff "$p "$q+,
+  "not "$p,
+  "forall "$v+ "$p,
+  "exists "$v+ "$p,
+  "schema "$r+,
+  "eq    "$x "$y+,
+  "mem   "$x "$y+,
+  "sub   "$x "$y,
+  "sbe   "$x "$y
+ ];
+
 isconst is op k { k in consts };
 glyph is op k { glyphs@( find k consts )};
 ascii is op k { asciis@( find k consts )};
@@ -304,4 +324,88 @@ bitvars is OP N {
   rows (1 match transpose BYROWS 0 laminate list tell ( N reshape 2 )) }
 
 
-cheq !( bitvars 3 ) !( [oooollll,oollooll,olololol]);
+cheq !( bitvars 3 ) !([oooollll,oollooll,olololol]);
+
+
+
+
+% axioms of Zermelo-Fraenkel set theory
+% --------------------------------------------------;
+
+zf := [
+  ("zf.extension
+     'Sets with the same members are equal.'
+     '∀A ∀B ∀X [(X ∈ A ⇔ X ∈ B) ⇒ (A = B)].'
+     ["forall ["A "B "X]
+        ["imp ["iff ["mem "X "A] ["mem "X "B]]
+              ["eql "A "B]]]
+  ),
+  ("zf.foundation
+     'Every non-empty set contains an element distinct from itself.'
+     '∀S[(∃x.x∈S) ⇒ ∃y∈S[∀z∈S[ ¬(z∈y)]]].'
+     ["forall ["S]
+       ["imp ["exists ["X ["mem "X "S]]
+             ["exists ["Y ["mem "Y "S] ["forall ["Z ["mem "Z "S]]
+               ["not ["mem "Z "Y]]]]]]]]
+  ),
+  ("zf.pairing
+     'For any pair of sets sets, there is a set containing exactly that pair.'
+     '∀A ∀B ∃C ∀y[y∈C ⇔ (y=A ∨ y=B)].'
+     ["forall ["A "B] ["exists ["C]  ["forall ["Y]
+       ["iff ["mem "Y "C]
+             ["vel ["eq "Y "A] ["eq "Y "B ]]]]]]
+  ),
+  ("zf.infinity
+     '(There exists an infinite set.)'
+     '∃S[ \empty∈S ∧ (∀x ∈ S)[ X∪{X} ∈ S ]].'
+     ["exists ["S]
+        ["and ["mem "nil "S]
+              ["forall [["X ["mem "X "S]]]
+                       ["mem ["union "X ["set "X]]
+                             "S]]]]
+  ),
+  ("zf.union
+     'For all sets X and Y, there exists a set containing the union of X and Y.'
+     '∀X ∃Y ∀u[u∈Y ⇔ ∃z. (z∈X ∧ u∈z)].'
+     ["forall ["X] ["exists ["Y] ["forall "u]
+       ["iff ["mem "u "Y]
+             ["exists ["Z] ["and ["mem "Z "X] ["mem "U "Z]]]]]]
+  ) ];
+
+
+
+% zf, continued;
+
+zf := zf link [
+  ("zf.powerset
+     'The powerset of set X contains every subset of X.'
+     '∀X ∃Y ∀u [ u∈Y ⇔ u⊆X ].'
+     ["forall ["X] ["exists ["Y] ["forall ["u]
+       ["iff ["mem "u "Y] ["sbe "u "y]]]]]
+  ),
+  ("zf.existence
+     'There exists an empty set.'
+     '∃S ∀X[¬(X∈S)].'
+     ["exists ["S] ["forall ["X]
+       ["not ["mem "X "S]]]]
+  ),
+  ("zf.separation
+     'Predicate functions can partition a set.'
+     '∀P∈(a → Bit)[∀z∃x∀y(y∈x ⇒ (y∈z ∧ P(y)))].'
+     ["schema ["P ["mem "P ["fun "$a "bit]]]
+       ["forall ["Z "Y] ["exists ["X]
+          ["imp ["mem "Y "X]
+                ["and ["mem "Y "Z] ["P "y]]]]]]
+  ),
+  ("zf.replacement
+     'Functions map sets onto sets.'
+     ''
+     ["schema ["F]
+       ["imp ["forall ["X "Y "Z]
+               ["imp ["and ["F "X "Y "p] ["F "X "Z "p]]
+                 ["eql "Y "Z]]]
+             ["forall ["X "Y "y]
+               ["iff ["mem "y "Y]
+                     ["exists ["x ["mem "x "X]]
+                        ["F "x "y "p]]]]]]
+  ) ];
