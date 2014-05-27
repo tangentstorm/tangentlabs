@@ -124,6 +124,13 @@ consts glyphs asciis := cols mix [
 isconst is op k { k in consts };
 glyph is op k { glyphs@( find k consts )};
 ascii is op k { asciis@( find k consts )};
+
+specials:= "" "` "~ "! "@  "$ "^ "& "* ". "| "+ "* ". ": "= "/ "? "- "_ "% "';
+
+
+
+
+
 
 % substitution
 % --------------------------------------------------;
@@ -283,8 +290,18 @@ fmt is op node {
     endif;
     i := i + 1;
   endwhile;
-  if empty result then node else result endif };
-
+  if empty result then node else link result endif };
 
 (cheq !('∀x(x⇒⊤)')
-      !(link fmt ("forall "x ("x "implies "top))))
+      !(fmt ("forall "x ("x "implies "top))))
+
+
+
+% bitvars (truth tables)
+% --------------------------------------------------;
+
+bitvars is OP N {
+  rows (1 match transpose BYROWS 0 laminate list tell ( N reshape 2 )) }
+
+
+cheq !( bitvars 3 ) !( [oooollll,oollooll,olololol]);
