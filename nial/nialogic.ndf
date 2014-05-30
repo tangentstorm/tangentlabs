@@ -33,6 +33,8 @@ all is tr p (and EACH p);
 implode is op glue parts {
   link[head, link(glue eachright link tail)] parts }
 
+% short circuit boolean evaluation;
+andthen is tr f g op x ( if f x then g x else o endif );
 
 hexits := '0123456789ABCDEF';
 
@@ -106,7 +108,7 @@ cheq is op q0 q1 {
   res := try q0 q1; msg := null;
   if isfault res then
     msg := (fg "y) 'error: ' (fg "R) (string res)
-  elseif match res then
+  elseif andthen[= each tally, match] res then
     ok
   else
     v0 v1 := res;
@@ -171,7 +173,7 @@ section 'unification';
 id is pass;
 intree is op x tree {x in (link leaf id tree)};
 isvar is op x {
-  if and[isphrase, not isconst, ("$ ~=)] x
+  if and[isphrase, ("$ ~=)] x
   then =[id, tolower] string x else o endif };
 
 passive is link team [reverse,pass][2 take,2 drop];
