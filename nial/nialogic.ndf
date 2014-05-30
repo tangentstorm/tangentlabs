@@ -9,6 +9,8 @@ reload is { loaddefs "nialogic };
 
 head is first;
 tail is rest;
+zip IS EACHBOTH link;
+ints is tell;
 
 dump is op x { write display x };
 check is op msg pred { if pred then ok else fault msg endif };
@@ -22,12 +24,19 @@ unquote is op q {
   % convert !( quoted expressions ) back to text;
   link descan scan link descan deparse q };
 
-
 % does any item in an array match the predicate?
 % ex:  !(any atomic a b c d etc) -> are any of them atomic?;
+any is tr p (or EACH p);
+all is tr p (and EACH p);
 
-any is tr p (or each p);
+% glue a string together;
+implode is op glue parts {
+  link[head, link(glue eachright link tail)] parts }
 
+
+hexits := '0123456789ABCDEF';
+
+hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
 
 % colored text
 % --------------------------------------------------;
@@ -52,9 +61,7 @@ xc is op color {
 
 fg is op color { link esc '[38;5;' (xc color)  'm' };
 bg is op color { link esc '[48;5;' (xc color)  'm' };
-hexits := '0123456789ABCDEF';
 
-hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
 
 colortest is {
   (each emit
