@@ -244,12 +244,19 @@ col is op n xs (floor(tally xs div n) link n reshape xs);
 
 colget is op ab k { a b := ab; b@( find k a )};
 
-
-
-% ("A. seek) (1 pick) cols mix last master
+% relate treats the table as an operation, and applies it to arguments;
+relate is op rel vals {
+  link sublist[or(vals eachleft eachright in each (0 pick)),
+               each rest] (last rel) };
 
 haskey is op rel key { key in   head rel };
 keypos is op rel key { key find head rel };
+
+showrel is op rel {
+   if tally head rel <= 1
+     then post[head, post last] rel
+     else post[head, mix last] rel
+   endif };
 
 % relational algebra;
 
@@ -286,42 +293,46 @@ cheq  !( bc select "c )  !( "c [ "c1, "c2 ] );
 cheq  !( bc select "b )  !( "b [ "b3, "b2, "b1 ] );
 
 cd := [ "c "d, [ "c1 "d1, "c2 "d2, "c3 "d1 ]];
-cheq !( cd where "d "d1 ) !( "c "d [ "c1 "d1, "c3 "d1 ]);
+cheq !( cd where "d "d1 ) !( [ "c "d ] [ "c1 "d1, "c3 "d1 ]);
+cheq !( cd where "d "d1 "c "c1 ) !( [ "c "d ] [ "c1 "d1 ]);
+
+
 
 
 section 'logical language';
 % --------------------------------------------------;
 
+ph is phrase;
+
 master := [
-  "consts    "alias   "glyph  "synid,
-"---------------------------------------------------,
-[ "top       "l       '⊤'     "const,
-  "bot       "o       '⊥'     "const,
-  "forall    "A.      '∀'     "quant,
-  "exists    "E.      '∃'     "quant,
-  "implies   "->      '⇒'     "infix,
-  "iff       "><      '⇔'     "infix,
-  "and       "*.      '∧'     "infix,
-  "vel       "+.      '∨'     "infix,
-  "not       "-.      '¬'     "monad,
-  "xor       "~:      '⊕'     "infix,
-  "reduce    "/.      '/'     "trans,
-  "gamma     "G.      'Γ'     "const,
-  "delta     "D.      'Δ'     "const,
-  "sub       "sub     '⊂'     "infix,
-  "sbe       "sbe     '⊆'     "infix,
-  "LPAREN    "<LP     '('     "token,
-  "RPAREN    "<RP     ')'     "token
+  "const    "alias   "glyph  "synid,
+[ "top       "l      (ph'⊤')  "const,
+  "bot       "o      (ph'⊥')  "const,
+  "forall    "A.     (ph'∀')  "quant,
+  "exists    "E.     (ph'∃')  "quant,
+  "implies   "->     (ph'⇒')  "infix,
+  "iff       "><     (ph'⇔')  "infix,
+  "and       "*.     (ph'∧')  "infix,
+  "vel       "+.     (ph'∨')  "infix,
+  "not       "-.     (ph'¬')  "monad,
+  "xor       "~:     (ph'⊕')  "infix,
+  "reduce    "/.     (ph'/')  "trans,
+  "gamma     "G.     (ph'Γ')  "const,
+  "delta     "D.     (ph'Δ')  "const,
+  "sub       "sub    (ph'⊂')  "infix,
+  "sbe       "sbe    (ph'⊆')  "infix,
+  "LPAREN    (ph'(') (ph'(')  "token,
+  "RPAREN    (ph')') (ph')')  "token
 ]];
 
+% TODO: normalize syntax table;
 syntax := [
-  "synid   "fields     "rule
-"---------------------------------------------------,
-[ "const   []          ["^],
-  "quant   ["v+ "p+]   ["^ "v+ '(' "p+ ')'],
-  "infix   ["p "q]     ["p "^ "q],
-  "trans   ["o "p+]    ["o "^ "p],
-  "monad   ["p]        ["^ "p]
+  "synid   "fields     "rule,
+[ "const   [[]]        ("^),
+  "quant   ("v+ "p+)   ("^ "v+ (ph'(') "p+ (ph')')),
+  "infix   ("p "q)     ("p "^ "q),
+  "trans   ("o "p+)    ("o "^ "p),
+  "monad   ("p)        ("^ "p)
 ]];
 
 
@@ -330,6 +341,9 @@ glyphs := each phrase glyphs;
 
 isconst is op k { k in consts };
 glyph is op k { glyphs@( find k consts )};
+
+cheq !( (master select "alias "glyph) relate "A. "E. ) !( words '∀ ∃' );
+
 
 % rendering for logic language;
 % --------------------------------------------------;
