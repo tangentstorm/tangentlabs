@@ -89,31 +89,22 @@ section is op x { emit "|b '── ' "|w x "|b ' ' (hline (50 -) tally x) "|w }
 % test framework
 % --------------------------------------------------;
 
-try is op quotes {
+try is op quote {
   oldtrigger := settrigger o;
-  result := null;
-  for q with quotes do
-    if isfault result then ok
-    else qres := eval q;
-      if isfault qres
-        then result := qres
-        else result := result link [qres]
-      endif
-    endif
-  endfor;
+  result := eval quote;
   settrigger oldtrigger;
   result }
 
 cheq is op q0 q1 {
-  res := try q0 q1; msg := null;
+  res := each try q0 q1; msg := null;
   if isfault res then
     msg := (fg "y) 'error: ' (fg "R) (string res)
   elseif imp[= each tally, match] res then
     ok
   else
     v0 v1 := res;
-    msg := ((newline) (fg "r) ' expected: ' (fg "M) (display v0)
-            (newline) (fg "r) '  but saw: ' (fg "R) (display v1))
+    msg := ((newline) (fg "r) ' expected: ' (fg "M) (display v1)
+            (newline) (fg "r) '  but saw: ' (fg "R) (display v0))
   endif;
   res := (fg "K) 'testing:' plain (unquote q0);
   if empty msg
