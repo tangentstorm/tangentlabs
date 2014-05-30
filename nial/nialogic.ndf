@@ -159,34 +159,9 @@ master := [
 abbrs consts glyphs asciis nodetpl := cols mix master;
 glyphs := each phrase glyphs;
 
-# TODO: merge record layout rules into above table
-layout := [
-  "top,
-  "bot,
-  "rel "$r "$t*,
-  "and "$p "$q+,
-  "vel "$p "$q+,
-  "imp "$p "$q+,
-  "iff "$p "$q+,
-  "not "$p,
-  "forall "$v+ "$p,
-  "exists "$v+ "$p,
-  "schema "$r+,
-  "eq    "$x "$y+,
-  "mem   "$x "$y+,
-  "sub   "$x "$y,
-  "sbe   "$x "$y
- ];
-
 isconst is op k { k in consts };
 glyph is op k { glyphs@( find k consts )};
 ascii is op k { asciis@( find k consts )};
-
-specials:= "" "` "~ "! "@  "$ "^ "& "* ". "| "+ "* ". ": "= "/ "? "- "_ "% "';
-
-
-
-
 
 
 section 'substitution';
