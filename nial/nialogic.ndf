@@ -119,6 +119,19 @@ cheq is op q0 q1 {
   emit res };
 
 
+% binary tabular relations;
+
+doma IS BYROWS first;  % first column is the domain;
+codo IS BYROWS last;   % second column is the codomain;
+iv IS BYROWS reverse;  % inverse;
+
+col is op n xs (floor(tally xs div n) link n reshape xs);
+% law : ∀x:rel2[ 2 col link zip [doma, codo] x = x ] ;
+% (where rel2 is a 2-column relational  ;
+
+relget is op ab k { a b := ab; b@( find k a )}
+
+
 % logical language
 % --------------------------------------------------;
 
