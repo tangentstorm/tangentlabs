@@ -247,32 +247,43 @@ section 'logical language';
 % --------------------------------------------------;
 
 master := [
-  "l   "top     '⊤' '1' ["^],
-  "o   "bot     '⊥' '0' ["^],
-  "A.  "forall  '∀' '@' ["^ "v+ "p+],
-  "E.  "exists  '∃' '#' ["^ "v+ "p+],
-  "->  "implies '⇒' '}' ["^ "p "q+],
-  "><  "iff     '⇔' '=' ["^ "p "q+],
-  "*.  "and     '∧' '*' ["^ "p "q+],
-  "+.  "vel     '∨' '+' ["^ "p "q+],
-  "-.  "not     '¬' '~' ["^ "p],
-  "~:  "xor     '⊕' '%' ["^ "p "q+],
-  "/.  "reduce  '/' '/' ["^ "c "p+],
-  "G.  "gamma   'Γ' '{' ["^],
-  "D.  "delta   'Δ' '}' ["^],
-  "sub.  "sub   '⊂' 'S' ["^ "p "q],
-  "sbe.  "sbe   '⊆' 'E' ["^ "p "q]
-];
+  "consts    "alias   "glyph  "synid,
+"---------------------------------------------------,
+[ "top       "l       '⊤'     "const,
+  "bot       "o       '⊥'     "const,
+  "forall    "A.      '∀'     "quant,
+  "exists    "E.      '∃'     "quant,
+  "implies   "->      '⇒'     "infix,
+  "iff       "><      '⇔'     "infix,
+  "and       "*.      '∧'     "infix,
+  "vel       "+.      '∨'     "infix,
+  "not       "-.      '¬'     "monad,
+  "xor       "~:      '⊕'     "infix,
+  "reduce    "/.      '/'     "trans,
+  "gamma     "G.      'Γ'     "const,
+  "delta     "D.      'Δ'     "const,
+  "sub       "sub     '⊂'     "infix,
+  "sbe       "sbe     '⊆'     "infix,
+  "LPAREN    "<LP     '('     "token,
+  "RPAREN    "<RP     ')'     "token
+]];
 
-abbrs consts glyphs asciis nodetpl := cols mix master;
+syntax := [
+  "synid   "fields     "rule
+"---------------------------------------------------,
+[ "const   []          ["^],
+  "quant   ["v+ "p+]   ["^ "v+ '(' "p+ ')'],
+  "infix   ["p "q]     ["p "^ "q],
+  "trans   ["o "p+]    ["o "^ "p],
+  "monad   ["p]        ["^ "p]
+]];
+
+
+consts alias glyphs synrule := (cols mix) last master;
 glyphs := each phrase glyphs;
 
 isconst is op k { k in consts };
 glyph is op k { glyphs@( find k consts )};
-ascii is op k { asciis@( find k consts )};
-
-
-
 
 % rendering for logic language;
 % --------------------------------------------------;
