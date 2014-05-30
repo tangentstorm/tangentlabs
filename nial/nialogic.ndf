@@ -244,6 +244,12 @@ relate is op rel vals {
   link sublist[or(vals eachleft eachright in each (0 pick)),
                each rest] (last rel) };
 
+% total makes any dyad total (by falling back to 'id' if the dyad fails);
+total is tr f op x {
+  fx := try !( f x );
+  if or[isfault,empty] fx then x else fx endif };
+
+
 haskey is op rel key { key in   head rel };
 keypos is op rel key { key find head rel };
 
