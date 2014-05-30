@@ -166,7 +166,7 @@ section 'unification';
 
 id is pass;
 intree is op x tree {x in (link leaf id tree)};
-isvar is and[isphrase, `$ = head string ];
+isvar is imp[isphrase, `$ = head string ];
 
 passive is link team [reverse,pass][2 take,2 drop];
 
@@ -259,6 +259,7 @@ showrel is op rel {
      else post[head, mix last] rel
    endif };
 
+
 % relational algebra;
 
 rename is op rel oldnew { old new := oldnew; [old new subs head, body] rel };
@@ -329,11 +330,11 @@ master := [
 % TODO: normalize syntax table;
 syntax := [
   "synid   "fields     "rule,
-[ "const   [[]]        ("^),
-  "quant   ("v+ "p+)   ("^ "v+ (ph'(') "p+ (ph')')),
-  "infix   ("p "q)     ("p "^ "q),
-  "trans   ("o "p+)    ("o "^ "p),
-  "monad   ("p)        ("^ "p)
+[ "const   ([])         ("^),
+  "quant   ("$v+ "$p+)  ("^ "$v+ (ph'[') "$p+ (ph']')),
+  "infix   ("$p "$q)    ("$p "^ "$q),
+  "trans   ("$c "$p+)   ("$c "^ "$p+),
+  "monad   ("$p)        ("^ "$p)
 ]];
 
 GlyphView IS { Master select "const "glyph };
@@ -346,50 +347,33 @@ cheq !( glyph "A. "x "E. "y ) !( words '∀ x ∃ y' );
 % rendering for logic language;
 % --------------------------------------------------;
 
-show is op x {
-  if isboolean x then
-    result := if x then glyph "top else glyph "bot endif
-  elseif isphrase x then
-    result := if isconst x
-      then glyph x
-      else string x
-    endif
+gentoks is op node {
+  node := unboxed node;
+  sym := head node;
+  rule := (Syntax relate)({ Master select "const "synid } relate) sym;
+  if empty rule then
+    % it wasn't in the table so it must be a variable or predicate;
+    if empty rest node then string sym
+    else sym '(' link (each gentoks) (rest node) ')' endif
   else
-    result := link each string (link each show x)
-  endif;
-  link (each string result) }
+    ptn tpl := rule;
+    if "no = (u := unify ptn (rest node)) then
+      fault link ['?unify: failed to unify pattern: ',
+                   (display ptn), ' against rest: ',
+                   (display rest node) ]
+    else g := glyph sym;  u := ["^, glyph sym] link u;
+      each gentoks (subs u tpl)
+    endif
+  endif };
 
-
-templates := mix [
-  ("top)           ((glyph "top)),
-  ("bot)           ((glyph "bot)),
-  ("forall "$ "_)  ((glyph "forall) "$ '(' "_ ')'),
-  ("exists "$ "_)  ((glyph "exists) "$ '(' "_ ')'),
-  ("$ "implies "_) ("$ (glyph "implies) "_)
-];
-
-fmt is op node {
-  i found := 0 o; result := null;
-  while i < tally rows templates and not found do
-    ptn tpl := templates#((i 0) (i 1));
-    if "no = (u := unify ptn node) then ok
-    else found := o;
-      result := each (op x {
-        if isconst x then glyph x
-        elseif atomic x then x
-        else link fmt x endif }) (subs u tpl)
-    endif;
-    i := i + 1;
-  endwhile;
-  if empty result then node else link each string result endif };
-
+fmt is op node { link each string content gentoks node };
 
 % tests for language display
 % --------------------------------------------------;
 
 %cheq !( each fmt "top "bot "forall "exists "x ) !( '⊤' '⊥' '∀' '∃' 'x' );
 cheq !( fmt ("P "x))                             !( 'P(x)' );
-cheq !( fmt  "forall ["x] ["P "x]  )            !( '∀x[P(x)]' );
+cheq !( fmt  "forall ["x] ["P "x]  )             !( '∀x[P(x)]' );
 cheq !( fmt ["forall "x ["implies "x "top]])     !( '∀x(x⇒⊤)'  );
 
 
