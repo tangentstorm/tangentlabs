@@ -135,20 +135,26 @@ relget is op ab k { a b := ab; b@( find k a )}
 % logical language
 % --------------------------------------------------;
 
-consts glyphs asciis := cols mix [
-  "forall  '∀' '@',
-  "exists  '∃' '#',
-  "top     '⊤' '1',
-  "bot     '⊥' '0',
-  "implies '⇒' '}',
-  "iff     '⇔' '=',
-  "and     '∧' '*',
-  "vel     '∨' '+',
-  "not     '¬' '~',
-  "xor     '⊕' '%',
-  "reduce  '/' '/'
- ];
+master := [
+  "l   "top     '⊤' '1' ["^],
+  "o   "bot     '⊥' '0' ["^],
+  "A.  "forall  '∀' '@' ["^ "v+ "p+],
+  "E.  "exists  '∃' '#' ["^ "v+ "p+],
+  "->  "implies '⇒' '}' ["^ "p "q+],
+  "><  "iff     '⇔' '=' ["^ "p "q+],
+  "*.  "and     '∧' '*' ["^ "p "q+],
+  "+.  "vel     '∨' '+' ["^ "p "q+],
+  "-.  "not     '¬' '~' ["^ "p],
+  "~:  "xor     '⊕' '%' ["^ "p "q+],
+  "/.  "reduce  '/' '/' ["^ "c "p+],
+  "G.  "gamma   'Γ' '{' ["^],
+  "D.  "delta   'Δ' '}' ["^],
+  "sub.  "sub   '⊂' 'S' ["^ "p "q],
+  "sbe.  "sbe   '⊆' 'E' ["^ "p "q]
+];
 
+abbrs consts glyphs asciis nodetpl := cols mix master;
+glyphs := each phrase glyphs;
 
 # TODO: merge record layout rules into above table
 layout := [
@@ -306,7 +312,7 @@ show is op x {
 
 chk is op want tree {
   got := show tree;
-  if want = got then ok
+  if got = string want then ok
   else write link[ 'mismatch:', display [want, got]] endif }
 
 chk '⊤' "top; chk '⊥' "bot;
@@ -320,6 +326,8 @@ chk '∀xPx' ["forall "x ["P "x]];
 % --------------------------------------------------;
 
 templates := mix [
+  ("top)           ((glyph "top)),
+  ("bot)           ((glyph "bot)),
   ("forall "$ "_)  ((glyph "forall) "$ '(' "_ ')'),
   ("exists "$ "_)  ((glyph "exists) "$ '(' "_ ')'),
   ("$ "implies "_) ("$ (glyph "implies) "_)
@@ -338,10 +346,9 @@ fmt is op node {
     endif;
     i := i + 1;
   endwhile;
-  if empty result then node else link result endif };
+  if empty result then node else link each string result endif };
 
-(cheq !('∀x(x⇒⊤)')
-      !(fmt ("forall "x ("x "implies "top))))
+cheq !( '∀x(x⇒⊤)' ) !( fmt ("forall "x ("x "implies "top)));
 
 
 
