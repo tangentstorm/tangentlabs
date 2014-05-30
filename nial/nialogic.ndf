@@ -7,6 +7,7 @@ ok := null;
 
 reload is { loaddefs "nialogic };
 
+id is pass;
 head is first;
 tail is rest;
 zip IS EACHBOTH link;
@@ -39,6 +40,8 @@ imp is tr f g op x ( if f x then g x else o endif );
 hexits := '0123456789ABCDEF';
 
 hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
+
+unboxed is fork[and[1=tally, not simple],unboxed head,id];
 
 % colored text
 % --------------------------------------------------;
@@ -163,9 +166,7 @@ section 'unification';
 
 id is pass;
 intree is op x tree {x in (link leaf id tree)};
-isvar is op x {
-  if and[isphrase, ("$ ~=)] x
-  then =[id, tolower] string x else o endif };
+isvar is and[isphrase, `$ = head string ];
 
 passive is link team [reverse,pass][2 take,2 drop];
 
@@ -175,8 +176,6 @@ lengths is each tally;
 
 unify is op x y {
   if x = y then []
-  elseif x = "_ then [ "_, y ]
-  elseif x = "$ and isvar y then [ "$, y ]
   elseif and[isvar x, not or[isvar y, x intree y]] then [ x, y ]
   elseif and[isvar y, not or[isvar x, y intree x]] then [ y, x ]
   elseif or[atomic x, atomic y, diverse lengths x y] then "no
@@ -194,29 +193,34 @@ unify is op x y {
 % unification tests;
 %---------------------------------------------------;
 
+cheq !( isvar "a )      !( o );
+cheq !( isvar "$a )     !( l );
+
 % 0 variables;
 cheq !( unify 0 0 )     !( [] );
 cheq !( unify 0 1 )     !( "no );
 
 % single variable;
 
-cheq !( unify "a "a )     !( [] );
+cheq !( unify "$a "$a )     !( [] );
 
-cheq !( unify "a ["x "a]) !( "no );
-cheq !( unify "a 5 )      !( ["a, 5] );
-cheq !( unify "a [] )     !( "a [] );
-cheq !( unify "a [1] )    !( "a [1] );
+cheq !( unify "$a ["x "$a]) !( "no );
+cheq !( unify "$a 5 )      !( ["$a, 5] );
+cheq !( unify "$a [] )     !( "$a [] );
+cheq !( unify "$a [1] )    !( "$a [1] );
 
-cheq !( unify [ 1 "vs "a] [ 1 "vs 2]) !( "a 2 );
-cheq !( unify [ 1 "vs  2] ["x "vs 2]) !( "x 1 );
-cheq !( unify [ 1 "vs "a] ["x "vs 2]) !( "x 1 "a 2 );
-cheq !( unify [ 1 "vs "a] ["x "vs 2]) !( "x 1 "a 2 );
+cheq !( unify "$a "a )    !( "$a "a );
 
-cheq !( unify ["a "a] [1 2]) !( "no );
-cheq !( unify ["a "a] [1 1]) !( "a 1 );
+cheq !( unify [ 1 "vs "$a] [  1 "vs 2]) !( "$a 2 );
+cheq !( unify [ 1 "vs   2] ["$x "vs 2]) !( "$x 1 );
+cheq !( unify [ 1 "vs "$a] ["$x "vs 2]) !( "$x 1 "$a 2 );
+cheq !( unify [ 1 "vs "$a] ["$x "vs 2]) !( "$x 1 "$a 2 );
 
-cheq !( unify ["a ["a]] [1 [1]]) !( "a 1 );
-cheq !( unify ["a "a] [[1] [1]]) !( "a [1] );
+cheq !( unify ["$a "$a] [1 2]) !( "no );
+cheq !( unify ["$a "$a] [1 1]) !( "a 1 );
+
+cheq !( unify ["$a ["$a]] [1 [1]]) !( "$a 1 );
+cheq !( unify ["$a "$a] [[1] [1]]) !( "$a [1] );
 
 
 
