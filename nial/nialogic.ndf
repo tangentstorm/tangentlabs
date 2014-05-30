@@ -80,6 +80,8 @@ nialogic := "|B "nia "|C `l "|c "ogic "|w;
 
 clear is { emit link Clrscr Nialogic ( char 10 ) }; clear;
 
+hline is op x {link each string (x reshape) phrase '─'};
+section is op x { emit "|b '── ' "|w x "|b ' ' (hline (50 -) tally x) "|w }
 
 
 % test framework
@@ -119,7 +121,8 @@ cheq is op q0 q1 {
   emit res };
 
 
-% binary tabular relations;
+section 'tabular binary relations';
+% --------------------------------------------------;
 
 doma IS BYROWS first;  % first column is the domain;
 codo IS BYROWS last;   % second column is the codomain;
@@ -186,7 +189,7 @@ specials:= "" "` "~ "! "@  "$ "^ "& "* ". "| "+ "* ". ": "= "/ "? "- "_ "% "';
 
 
 
-% substitution
+section 'substitution';
 % --------------------------------------------------;
 
 subs is op dict expr {
@@ -210,6 +213,7 @@ subs is op dict expr {
 
 
 % substitution tests;
+% --------------------------------------------------;
 
 cheq !( subs ("a 1) "a )      !( 1 );
 cheq !( subs ("b 1) ("b "b))  !( 1 1 );
@@ -229,7 +233,7 @@ cheq !( subs ("g 1) [1 ["g]]) !( [1 [1]] );
       !( [2] [1 [2] 3] ))
 
 
-% unification
+section 'unification';
 % --------------------------------------------------;
 
 id is pass;
@@ -263,6 +267,7 @@ unify is op x y {
 
 
 % unification tests;
+%---------------------------------------------------;
 
 % 0 variables;
 cheq !( unify 0 0 )     !( [] );
@@ -289,7 +294,7 @@ cheq !( unify ["a ["a]] [1 [1]]) !( "a 1 );
 cheq !( unify ["a "a] [[1] [1]]) !( "a [1] );
 
 
-% logic symbols
+section 'logic symbols';
 % --------------------------------------------------;
 
 show is op x {
@@ -308,7 +313,8 @@ show is op x {
 
 
 
-% tests for 'show';
+% tests for "show"
+%-----------------------;
 
 chk is op want tree {
   got := show tree;
@@ -352,7 +358,7 @@ cheq !( '∀x(x⇒⊤)' ) !( fmt ("forall "x ("x "implies "top)));
 
 
 
-% bitvars (truth tables)
+section 'bitvars (truth tables)';
 % --------------------------------------------------;
 
 bitvars is OP N {
@@ -364,7 +370,7 @@ cheq !( bitvars 3 ) !([oooollll,oollooll,olololol]);
 
 
 
-% axioms of Zermelo-Fraenkel set theory
+section 'ZF (Zermelo-Fraenkel set theory)';
 % --------------------------------------------------;
 
 zf := [
