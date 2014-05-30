@@ -469,3 +469,31 @@ zf := zf link [
                      ["exists ["x ["mem "x "X]]
                         ["F "x "y "p]]]]]]
   ) ];
+
+
+
+section 'command prompt';
+% --------------------------------------------------;
+
+stack := []
+
+bar := link ' ' (fg "K) '|' (fg "w) ' '
+
+push is op x {
+  nonlocal stack; stack := stack link x }
+
+pop is op x {
+  nonlocal stack; res stack := [last, front] stack; res }
+
+prompt is { readscreen link (fg "r) ' > ' (fg "w) };
+
+repl is {
+  done := false;
+  repeat line := prompt;
+    for cmd with each phrase (words line) do
+      if cmd = "bye then done := true
+      else push cmd endif
+    endfor
+  until done endrepeat };
+
+# repl
