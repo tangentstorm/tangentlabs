@@ -121,49 +121,6 @@ cheq is op q0 q1 {
   emit res };
 
 
-section 'tabular binary relations';
-% --------------------------------------------------;
-
-doma IS BYROWS first;  % first column is the domain;
-codo IS BYROWS last;   % second column is the codomain;
-iv IS BYROWS reverse;  % inverse;
-
-col is op n xs (floor(tally xs div n) link n reshape xs);
-% law : ∀x:rel2[ 2 col link zip [doma, codo] x = x ] ;
-% (where rel2 is a 2-column relational  ;
-
-relget is op ab k { a b := ab; b@( find k a )}
-
-
-% logical language
-% --------------------------------------------------;
-
-master := [
-  "l   "top     '⊤' '1' ["^],
-  "o   "bot     '⊥' '0' ["^],
-  "A.  "forall  '∀' '@' ["^ "v+ "p+],
-  "E.  "exists  '∃' '#' ["^ "v+ "p+],
-  "->  "implies '⇒' '}' ["^ "p "q+],
-  "><  "iff     '⇔' '=' ["^ "p "q+],
-  "*.  "and     '∧' '*' ["^ "p "q+],
-  "+.  "vel     '∨' '+' ["^ "p "q+],
-  "-.  "not     '¬' '~' ["^ "p],
-  "~:  "xor     '⊕' '%' ["^ "p "q+],
-  "/.  "reduce  '/' '/' ["^ "c "p+],
-  "G.  "gamma   'Γ' '{' ["^],
-  "D.  "delta   'Δ' '}' ["^],
-  "sub.  "sub   '⊂' 'S' ["^ "p "q],
-  "sbe.  "sbe   '⊆' 'E' ["^ "p "q]
-];
-
-abbrs consts glyphs asciis nodetpl := cols mix master;
-glyphs := each phrase glyphs;
-
-isconst is op k { k in consts };
-glyph is op k { glyphs@( find k consts )};
-ascii is op k { asciis@( find k consts )};
-
-
 section 'substitution';
 % --------------------------------------------------;
 
@@ -268,8 +225,54 @@ cheq !( unify ["a "a] [1 1]) !( "a 1 );
 cheq !( unify ["a ["a]] [1 [1]]) !( "a 1 );
 cheq !( unify ["a "a] [[1] [1]]) !( "a [1] );
 
+
 
-section 'logic symbols';
+section 'tabular binary relations';
+% --------------------------------------------------;
+
+doma IS BYROWS first;  % first column is the domain;
+codo IS BYROWS last;   % second column is the codomain;
+iv IS BYROWS reverse;  % inverse;
+
+col is op n xs (floor(tally xs div n) link n reshape xs);
+% law : ∀x:rel2[ 2 col link zip [doma, codo] x = x ] ;
+% (where rel2 is a 2-column relational  ;
+
+relget is op ab k { a b := ab; b@( find k a )}
+
+
+section 'logical language';
+% --------------------------------------------------;
+
+master := [
+  "l   "top     '⊤' '1' ["^],
+  "o   "bot     '⊥' '0' ["^],
+  "A.  "forall  '∀' '@' ["^ "v+ "p+],
+  "E.  "exists  '∃' '#' ["^ "v+ "p+],
+  "->  "implies '⇒' '}' ["^ "p "q+],
+  "><  "iff     '⇔' '=' ["^ "p "q+],
+  "*.  "and     '∧' '*' ["^ "p "q+],
+  "+.  "vel     '∨' '+' ["^ "p "q+],
+  "-.  "not     '¬' '~' ["^ "p],
+  "~:  "xor     '⊕' '%' ["^ "p "q+],
+  "/.  "reduce  '/' '/' ["^ "c "p+],
+  "G.  "gamma   'Γ' '{' ["^],
+  "D.  "delta   'Δ' '}' ["^],
+  "sub.  "sub   '⊂' 'S' ["^ "p "q],
+  "sbe.  "sbe   '⊆' 'E' ["^ "p "q]
+];
+
+abbrs consts glyphs asciis nodetpl := cols mix master;
+glyphs := each phrase glyphs;
+
+isconst is op k { k in consts };
+glyph is op k { glyphs@( find k consts )};
+ascii is op k { asciis@( find k consts )};
+
+
+
+
+% rendering for logic language;
 % --------------------------------------------------;
 
 show is op x {
@@ -285,26 +288,6 @@ show is op x {
   endif;
   link (each string result) }
 
-
-
-
-% tests for "show"
-%-----------------------;
-
-chk is op want tree {
-  got := show tree;
-  if got = string want then ok
-  else write link[ 'mismatch:', display [want, got]] endif }
-
-chk '⊤' "top; chk '⊥' "bot;
-chk '⊥⊥' oo; chk '⊤⊥' lo; % booloan literals;
-chk '∀' "forall; chk '∃' "exists;
-chk 'x' "x; chk 'Px' ("P "x);
-chk '∀xPx' ["forall "x ["P "x]];
-
-
-% rule-based printer
-% --------------------------------------------------;
 
 templates := mix [
   ("top)           ((glyph "top)),
@@ -328,6 +311,21 @@ fmt is op node {
     i := i + 1;
   endwhile;
   if empty result then node else link each string result endif };
+
+
+% tests for "show"
+%-----------------------;
+
+chk is op want tree {
+  got := show tree;
+  if got = string want then ok
+  else write link[ 'mismatch:', display [want, got]] endif }
+
+chk '⊤' "top; chk '⊥' "bot;
+chk '⊥⊥' oo; chk '⊤⊥' lo; % booloan literals;
+chk '∀' "forall; chk '∃' "exists;
+chk 'x' "x; chk 'Px' ("P "x);
+chk '∀xPx' ["forall "x ["P "x]];
 
 cheq !( '∀x(x⇒⊤)' ) !( fmt ("forall "x ("x "implies "top)));
 
@@ -381,7 +379,7 @@ zf := [
                              "S]]]]
   ),
   ("zf.union
-     'For all sets X and Y, there exists a set containing the union of X and Y.'
+     'For any sets X and Y, there''s a set containing the union of X and Y.'
      '∀X ∃Y ∀u[u∈Y ⇔ ∃z. (z∈X ∧ u∈z)].'
      ["forall ["X] ["exists ["Y] ["forall "u]
        ["iff ["mem "u "Y]
