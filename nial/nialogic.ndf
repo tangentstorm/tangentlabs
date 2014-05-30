@@ -235,12 +235,58 @@ section 'tabular binary relations';
 doma IS BYROWS first;  % first column is the domain;
 codo IS BYROWS last;   % second column is the codomain;
 iv IS BYROWS reverse;  % inverse;
+body is last;
 
 col is op n xs (floor(tally xs div n) link n reshape xs);
 % law : ∀x:rel2[ 2 col link zip [doma, codo] x = x ] ;
 % (where rel2 is a 2-column relational  ;
 
-relget is op ab k { a b := ab; b@( find k a )}
+
+colget is op ab k { a b := ab; b@( find k a )};
+
+
+
+% ("A. seek) (1 pick) cols mix last master
+
+haskey is op rel key { key in   head rel };
+keypos is op rel key { key find head rel };
+
+% relational algebra;
+
+rename is op rel oldnew { old new := oldnew; [old new subs head, body] rel };
+
+select is op rel keys {
+ ind := rel eachright keypos keys;
+ [ind choose head, cull (ind eachright choose body)] rel };
+
+where is op rel keyvals {
+  res := rel;
+  for kv with rows (2 col keyvals) do
+    key val := kv; ind := res keypos key;
+    res := [head, sublist[each((val =)(ind pick)), id] last] res
+  endfor; res };
+
+
+
+
+% relational algebra tests;
+
+ab := [ "a "b, [ "a1 "b1, "a2 "b2 ]];
+cheq  !( ab rename "a "AA ) !( ["AA "b] [ "a1 "b1, "a2 "b2 ]);
+
+cheq  !( ab select "a )     !( ["a]     [ "a1, "a2 ] );
+cheq  !( ab select "b )     !( ["b]     [ "b1, "b2 ] );
+
+% okay (for now?) to select the same column twice;
+cheq  !( ab select "b "b)   !( ["b "b] [ "b1 "b1, "b2 "b2 ]);
+
+% but rows should be unique;
+bc := [ "b "c, [ "b3 "c1, "b2 "c1, "b1 "c2 ]];
+cheq  !( bc select "c )  !( "c [ "c1, "c2 ] );
+cheq  !( bc select "b )  !( "b [ "b3, "b2, "b1 ] );
+
+cd := [ "c "d, [ "c1 "d1, "c2 "d2, "c3 "d1 ]];
+cheq !( cd where "d "d1 ) !( "c "d [ "c1 "d1, "c3 "d1 ]);
 
 
 section 'logical language';
