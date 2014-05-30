@@ -45,10 +45,8 @@ setwidth 1024; % fix overzealous line wrapping;
 esc := char 27;
 bold := link esc '[0;1m';
 plain := link esc '[0m';
-
-emit is op a { writescreen (link each string) a };
-clrscr is { link esc '[H' esc '[J' };
-newline is { char 10 };
+clrscr := link esc '[H' esc '[J';
+newline := char 10;
 
 xc is op color {
   % 256 xterm colors + mnemonics for first 16 ascii colors;
@@ -62,6 +60,12 @@ xc is op color {
 fg is op color { link esc '[38;5;' (xc color)  'm' };
 bg is op color { link esc '[48;5;' (xc color)  'm' };
 
+cstr is op x {
+  res := string x;
+  if res = '||' then '|'
+  elseif `| = head res then fg rest res
+  else res endif };
+emit is op a { writescreen (link each cstr) a };
 
 colortest is {
   (each emit
@@ -71,8 +75,12 @@ colortest is {
      each (link[fg,hexbyte]) (tell 256))
   null; % don't return a value; }
 
-% a little logo: ;
-emit (nialogic := (fg "B) "nia (fg "C) `l (fg "c) "ogic (fg "w))
+% a little logo:;
+nialogic := "|B "nia "|C `l "|c "ogic "|w;
+
+clear is { emit link Clrscr Nialogic ( char 10 ) }; clear;
+
+
 
 % test framework
 % --------------------------------------------------;
