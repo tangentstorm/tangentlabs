@@ -336,14 +336,11 @@ syntax := [
   "monad   ("p)        ("^ "p)
 ]];
 
-
-consts alias glyphs synrule := (cols mix) last master;
-glyphs := each phrase glyphs;
-
-isconst is op k { k in consts };
-glyph is op k { glyphs@( find k consts )};
+GlyphView IS { Master select "const "glyph };
+glyph IS TOTAL ( GlyphView relate );
 
 cheq !( (master select "alias "glyph) relate "A. "E. ) !( words '∀ ∃' );
+cheq !( glyph "A. "x "E. "y ) !( words '∀ x ∃ y' );
 
 
 % rendering for logic language;
@@ -387,22 +384,13 @@ fmt is op node {
   if empty result then node else link each string result endif };
 
 
-% tests for "show"
-%-----------------------;
+% tests for language display
+% --------------------------------------------------;
 
-chk is op want tree {
-  got := show tree;
-  if got = string want then ok
-  else write link[ 'mismatch:', display [want, got]] endif }
-
-chk '⊤' "top; chk '⊥' "bot;
-chk '⊥⊥' oo; chk '⊤⊥' lo; % booloan literals;
-chk '∀' "forall; chk '∃' "exists;
-chk 'x' "x; chk 'Px' ("P "x);
-chk '∀xPx' ["forall "x ["P "x]];
-
-cheq !( '∀x(x⇒⊤)' ) !( fmt ("forall "x ("x "implies "top)));
-
+%cheq !( each fmt "top "bot "forall "exists "x ) !( '⊤' '⊥' '∀' '∃' 'x' );
+cheq !( fmt ("P "x))                             !( 'P(x)' );
+cheq !( fmt  "forall ["x] ["P "x]  )            !( '∀x[P(x)]' );
+cheq !( fmt ["forall "x ["implies "x "top]])     !( '∀x(x⇒⊤)'  );
 
 
 section 'bitvars (truth tables)';
