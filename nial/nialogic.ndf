@@ -321,10 +321,7 @@ cheq !( cd where "d "d1 "c "c1 ) !( [ "c "d ] [ "c1 "d1 ]);
 section 'logical language';
 % --------------------------------------------------;
 
-ph is phrase;
-
-master := [
-  "const    "alias   "glyph  "synid,
+master := [ "const    "alias   "glyph  "synid,
 [ "top       "l      (ph'⊤')  "const,
   "bot       "o      (ph'⊥')  "const,
   "forall    "A.     (ph'∀')  "quant,
@@ -344,9 +341,7 @@ master := [
   "RPAREN    (ph')') (ph')')  "token
 ]];
 
-% TODO: normalize syntax table;
-syntax := [
-  "synid   "fields     "rule,
+syntax := [ "synid   "fields     "rule,
 [ "const   ([])         ("^),
   "quant   ("$v+ "$p+)  ("^ "$v+ (ph'[') "$p+ (ph']')),
   "infix   ("$p "$q)    ("$p "^ "$q),
