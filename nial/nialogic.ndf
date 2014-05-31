@@ -404,85 +404,70 @@ cheq !( bitvars 3 ) !([oooollll,oollooll,olololol]);
 section 'ZF (Zermelo-Fraenkel set theory)';
 % --------------------------------------------------;
 
-zf := [
-  ("zf.extension
+zf := [ "rulename "note "wff,
+[ "zf.extensionality
      'Sets with the same members are equal.'
-     '∀A ∀B ∀X [(X ∈ A ⇔ X ∈ B) ⇒ (A = B)].'
-     ["forall ["A "B "X]
-        ["imp ["iff ["mem "X "A] ["mem "X "B]]
-              ["eql "A "B]]]
-  ),
-  ("zf.foundation
+     '∀(A,B,x)[(X ∈ A ⇔ X ∈ B) ⇒ (A = B)].',
+  "zf.foundation
      'Every non-empty set contains an element distinct from itself.'
-     '∀S[(∃x.x∈S) ⇒ ∃y∈S[∀z∈S[ ¬(z∈y)]]].'
-     ["forall ["S]
-       ["imp ["exists ["X ["mem "X "S]]
+     '∀S[(∃x.x∈S) ⇒ ∃y∈S[∀z∈S[ ¬(z∈y)]]].',
+  "zf.pairing
+     'For any pair of sets, there is a set containing exactly that pair.'
+     '∀A ∀B ∃C ∀y[y∈C ⇔ (y=A ∨ y=B)].',
+  "zf.infinity
+     'There exists an infinite set.'
+     '∃S[ ∅∈S ∧ ∀x∈S[ X∪X⁺ ∈ S ]].',
+  "zf.union
+     'For any two sets, there is a set equal to their union.'
+     '∀X ∃Y ∀u[u∈Y ⇔ ∃z. (z∈X ∧ u∈z)].',
+  "zf.powerset
+     'The powerset of set X contains every subset of X.'
+     '∀X ∃Y ∀u [ u∈Y ⇔ u⊆X ].',
+  "zf.existence
+     'There exists an empty set.'
+     '∃S ∀X[¬(X∈S)].',
+  "zf.separation
+     'Predicate functions can partition a set.'
+     '∀P:(a → Bit)[∀z∃x∀y(y∈x ⇒ (y∈z ∧ P(y)))].',
+  "zf.replacement
+     'The image of a set under a function is also a set.'
+     '∃x.∀y∈a[ ∃z.A(y,z) ⇒ ∃z∈x.A(y,z) ]' ]];
+
+% abstract syntax trees for zf (for testing the parser);
+
+zf_ast := [ "rulename "ast, [
+  "zf.extensionality
+      ["forall ["A "B "X]
+          ["imp ["iff ["mem "X "A] ["mem "X "B]] ["eql "A "B]]],
+  "zf.powerset
+      ["forall ["X] ["exists ["Y] ["forall ["u]
+          ["iff ["mem "u "Y] ["sbe "u "y]]]]],
+  "zf.existence
+      ["exists ["S] ["forall ["X]
+          ["not ["mem "X "S]]]],
+  "zf.separation
+      ["schema ["P ["mem "P ["fun "$a "bit]]]
+          ["forall ["Z "Y] ["exists ["X]
+              ["imp ["mem "Y "X] ["and ["mem "Y "Z] ["P "y]]]]]],
+  "zf.replacement ["schema ["A "z]
+      "TODO],
+  "zf.foundation
+      ["forall ["S]
+          ["imp ["exists ["X ["mem "X "S]]
              ["exists ["Y ["mem "Y "S] ["forall ["Z ["mem "Z "S]]
-               ["not ["mem "Z "Y]]]]]]]]
-  ),
-  ("zf.pairing
-     'For any pair of sets sets, there is a set containing exactly that pair.'
-     '∀A ∀B ∃C ∀y[y∈C ⇔ (y=A ∨ y=B)].'
-     ["forall ["A "B] ["exists ["C]  ["forall ["Y]
-       ["iff ["mem "Y "C]
-             ["vel ["eq "Y "A] ["eq "Y "B ]]]]]]
-  ),
-  ("zf.infinity
-     '(There exists an infinite set.)'
-     '∃S[ \empty∈S ∧ (∀x ∈ S)[ X∪{X} ∈ S ]].'
-     ["exists ["S]
+               ["not ["mem "Z "Y]]]]]]]],
+  "zf.pairing
+      ["forall ["A "B] ["exists ["C]  ["forall ["Y]
+          ["iff ["mem "Y "C] ["vel ["eq "Y "A] ["eq "Y "B ]]]]]],
+  "zf.infinity
+      ["exists ["S]
         ["and ["mem "nil "S]
               ["forall [["X ["mem "X "S]]]
-                       ["mem ["union "X ["set "X]]
-                             "S]]]]
-  ),
-  ("zf.union
-     'For any sets X and Y, there''s a set containing the union of X and Y.'
-     '∀X ∃Y ∀u[u∈Y ⇔ ∃z. (z∈X ∧ u∈z)].'
+                       ["mem ["union "X ["set "X]] "S]]]],
+  "zf.union
      ["forall ["X] ["exists ["Y] ["forall "u]
        ["iff ["mem "u "Y]
-             ["exists ["Z] ["and ["mem "Z "X] ["mem "U "Z]]]]]]
-  ) ];
-
-
-
-% zf, continued;
-
-zf := zf link [
-  ("zf.powerset
-     'The powerset of set X contains every subset of X.'
-     '∀X ∃Y ∀u [ u∈Y ⇔ u⊆X ].'
-     ["forall ["X] ["exists ["Y] ["forall ["u]
-       ["iff ["mem "u "Y] ["sbe "u "y]]]]]
-  ),
-  ("zf.existence
-     'There exists an empty set.'
-     '∃S ∀X[¬(X∈S)].'
-     ["exists ["S] ["forall ["X]
-       ["not ["mem "X "S]]]]
-  ),
-  ("zf.separation
-     'Predicate functions can partition a set.'
-     '∀P∈(a → Bit)[∀z∃x∀y(y∈x ⇒ (y∈z ∧ P(y)))].'
-     ["schema ["P ["mem "P ["fun "$a "bit]]]
-       ["forall ["Z "Y] ["exists ["X]
-          ["imp ["mem "Y "X]
-                ["and ["mem "Y "Z] ["P "y]]]]]]
-  ),
-  ("zf.replacement
-     'Functions map sets onto sets.'
-     ''
-     ["schema ["F]
-       ["imp ["forall ["X "Y "Z]
-               ["imp ["and ["F "X "Y "p] ["F "X "Z "p]]
-                 ["eql "Y "Z]]]
-             ["forall ["X "Y "y]
-               ["iff ["mem "y "Y]
-                     ["exists ["x ["mem "x "X]]
-                        ["F "x "y "p]]]]]]
-  ) ];
-
-
+             ["exists ["Z] ["and ["mem "Z "X] ["mem "U "Z]]]]]] ]];
 
 section 'command prompt';
 % --------------------------------------------------;
