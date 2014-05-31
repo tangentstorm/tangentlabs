@@ -1,0 +1,35 @@
+#+title: pattern recognition engine in nial
+
+* GOAL parsing arbitrary languages.
+
+We would like to be able to construct parse trees from arbitrary text. It is possible to do this in a single pass, but for the sake of argument, we will break it into several steps:
+
+The first step, [[Lexing]], means dividing an unbroken sequence of individual characters down into discrete units called /tokens/ (or /lexemes/). Tokens generalize the notion of "words" to also include things like punctuation, numbers, special keywords, comments, or whatever the building blocks of the particular language in question happen to be.
+
+The type signature of lex looks like this:
+
+#+begin_src haskell
+  lex :: [Chr] -> [Tok]
+#+end_src
+
+That is, the =lex= routine converts a sequence of [[Characters]] into a sequence of [[Tokens]].
+
+Next comes the [[Parsing]] phase, wherein we will reshape the sequence of tokens into a tree structure (called a /parse tree/). In building our tree, we may want to filter out certain tokens, such as comments and whitespace (which don't affect the meaning of the text), or "grouping" tokens such as parentheses, whose only purpose is to indicate the structure which would now be directly represented by the tree.
+
+What we /do/ with these trees, or how they are implemented internally, is beyond the scope of this article. However, we will need to specify the interface for set of [[Tree Building Primitives]].
+
+With those in place, we will be able to show:
+
+#+begin_src haskell
+  parse :: [Tok] -> Tree Tok
+#+end_src
+
+* TODO Characters
+
+* TODO Lexing
+
+* TODO Tokens
+
+* TODO Tree Building Primitives
+
+* TODO Parsing
