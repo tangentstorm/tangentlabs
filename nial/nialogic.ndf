@@ -3,19 +3,22 @@
 
 % helpers/ language tweaks
 % --------------------------------------------------;
-ok := null;
 
 reload is { loaddefs "nialogic };
 
+ok := null;
+
+% renames and abbreviations;
 id is pass;
+ph is phrase;
 head is first;
+init is front;
 tail is rest;
+
 zip IS EACHBOTH link;
 ints is tell;
 
-dump is op x { write display x };
-check is op msg pred { if pred then ok else fault msg endif };
-
+% string tools;
 words is op Str {
   % split string on space character;
   % (from towords.ndf in nial distro);
@@ -25,23 +28,36 @@ unquote is op q {
   % convert !( quoted expressions ) back to text;
   link descan scan link descan deparse q };
 
-% does any item in an array match the predicate?
-% ex:  !(any atomic a b c d etc) -> are any of them atomic?;
-any is tr p (or EACH p);
-all is tr p (and EACH p);
-
 % glue a string together;
 implode is op glue parts {
   link[head, link(glue eachright link tail)] parts }
 
-% 'imp' as short circuit boolean 'and';
-imp is tr f g op x ( if f x then g x else o endif );
+
+% more helpers...;
 
+
+% does any item in given array match predicate p?
+% ex:  !(any atomic a b c d etc) -> are any of them atomic?;
+any is tr p ( or EACH p);
+
+% do all items in given array match predicate p?
+% ex:  !( all isboolean ) <-> !( allbools );
+all is tr p ( and EACH p);
+
+% implication, like short circuiting 'and';
+imp is tr f g op x (
+  if f x then g x else o endif );
+
+% hex digits;
 hexits := '0123456789ABCDEF';
 
 hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
 
+% remove nesting until a simple or non-solitary array;
+% mostly to allow using [...] with fewer commas ;
 unboxed is fork[and[1=tally, not simple],unboxed head,id];
+
+
 
 % colored text
 % --------------------------------------------------;
@@ -86,7 +102,8 @@ nialogic := "|B "nia "|C `l "|c "ogic "|w;
 clear is { emit link Clrscr Nialogic ( char 10 ) }; clear;
 
 hline is op x {link each string (x reshape) phrase '─'};
-section is op x { emit "|b '── ' "|w x "|b ' ' (hline (50 -) tally x) "|w }
+section is op x {
+  emit "|b '── ' "|w x "|b ' ' (hline (50 -) tally x) "|w }
 
 
 % test framework
