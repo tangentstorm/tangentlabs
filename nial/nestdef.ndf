@@ -1,0 +1,26 @@
+% just testing how nested definitions work;
+% (with an eye toward maybe using them for OOP...;
+
+main is op msg arg {
+  % test of nested defiitions;
+  suc is op x { x + 1 };
+  dub is op x { 2 * x }; 
+  % could do 'apply msg arg' here;
+  % but i want to limit it to these two;
+  case msg from
+    "+1 : suc arg end
+    "*2 : dub arg end
+    else  ??msg
+  endcase };
+
+
+write 'calling suc: '; write (main "+1 (1 2 3));
+write 'callign dub: '; write (main "*2 (1 2 3));
+
+# Ouput:
+#-------------
+  calling suc:
+  2 3 4
+  callign dub:
+  2 4 6
+
