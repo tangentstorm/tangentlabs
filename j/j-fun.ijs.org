@@ -1,0 +1,151 @@
+#+title: fun with j
+
+* a big ascii circle
+:PROPERTIES:
+:TS:       <2014-06-01 05:19AM>
+:ID:       0dn147e12ig0
+:END:
+#+begin_src J
+  NB. this makes a big ascii circle;
+  [ ;"1('[]';'..') {~ 1.005 < | j./~ 0.05 * (-:y) - i. y=:50
+#+end_src
+
+
+* oblique order
+:PROPERTIES:
+:TS:       <2014-06-01 05:19AM>
+:ID:       zyx887e12ig0
+:END:
+#+begin_src J
+  NB. this makes an array whose numbers count upward along the diagonals ;
+  [ y $ (i.*/y) C.~ |.&.> C. ; </. i. y =: 4 8
+#+end_src
+
+
+* tetraminos
+:PROPERTIES:
+:TS:       <2014-03-05 10:13AM>
+:ID:       xikja9f0veg0
+:END:
+#+begin_src J
+  Z =: 1 * 4 4 $ 0 0 0 0, 1 1 0 0,  0 1 1 0,  0 0 0 0
+  J =: 2 * 4 4 $ 0 0 1 0, 0 0 1 0,  0 1 1 0,  0 0 0 0
+  T =: 4 * 4 4 $ 0 0 0 0,  0 1 1 1,  0 0 1 0,  0 0 0 0
+  I =: 4 * 4 4 $ 0 0 1 0
+  O =: 4 * 4 4 $ 0 0 0 0, 0 1 1 0,  0 1 1 0,  0 0 0 0
+  S =: +: |. Z
+  L =: -: |."1 J
+  shapes=:(O,.S,.L,.T,.J,.Z,.I)
+
+  NB. shade and widen:
+  sw =: [: ((u: 32 9617 9618 9619 9608) {~ ]) (2: # ])"1
+  sw shapes
+#+end_src
+#+begin_example text
+                  ░░                ▒▒              ██
+  ████    ▒▒▒▒    ░░      ██████    ▒▒  ░░░░        ██
+  ████  ▒▒▒▒      ░░░░      ██    ▒▒▒▒    ░░░░      ██
+                                                    ██
+#+end_example
+
+
+* 'get item' with default
+:PROPERTIES:
+:TS:       <2014-02-09 11:26PM>
+:ID:       ojnf7je12ig0
+:END:
+
+#+begin_src J
+  get =:(2 : 'm ({ :: (n"_))"0 _ y')
+  1 8 3 get 99 i. 5
+#+end_src
+#+RESULTS:
+: 1 99 3
+
+
+* TODO object arrays
+:PROPERTIES:
+:TS:       <2014-02-09 11:10PM>
+:ID:       mb55in003ig0
+:END:
+
+#+begin_src J
+NB. experiment to create arrays of
+NB. multiple stateful objects in j
+
+cocurrent'world'
+map =: 16 16 $ 0
+
+cocurrent'agent'
+coinsert'world'
+
+create=: monad define
+  pos =: 0 0
+  vel =: 0 0
+)
+
+place =: monad define
+  pos =: +. y
+)
+
+nudge =: monad define
+  vel =: vel + +. y
+)
+
+step =: monad define
+  vel =: (* 0.1 <: |) 0.9 * vel
+  pos =: pos + vel
+)
+
+cocurrent'base'
+coinsert'world'
+
+draw world
+
+Esc =: 27 { a.
+
+fg =: Esc,'[0;32mok'
+
+
+cls=: esc & '2J'
+red=: esc & '31m'
+
+#+end_src
+
+*  knight / knave problem
+:PROPERTIES:
+:TS:       <2014-02-12 03:51PM>
+:ID:       2zzj0q003ig0
+:END:
+
+#+begin_src J :results output
+
+  bitvars =: adverb : '|: #: ,. i. 2^m'
+  'p q r s t' =: 5 bitvars
+  given =: ,@([: _:^:(2=#)@ ~."1  [ #"1~ *./@])
+  and =: *.
+
+  an =. -. ak =. s  NB. 'an' means 'a is a knave'. ak=he is a knight.
+  bn =. -. bk =. t  NB. same thing for b
+
+  echo 'solution:'
+  (ak,p,bk) given (ak<:p),(an<:-.p),(p = an +. bn)
+
+  echo 'full truth table:'
+  NB. show all solutions if a claims he's a knight:
+  echo [ ~. |: (,(p = ak and bk) and (ak <: p)) #"1 (ak,p,bk)
+
+#+end_src
+
+#+RESULTS:
+: solution:
+: 
+: 1 1 0
+: 
+: full truth table:
+: 
+: 0 0 0
+: 0 0 1
+: 1 1 1
+
+
