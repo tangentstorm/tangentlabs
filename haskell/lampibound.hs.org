@@ -1,0 +1,123 @@
+#+title: a lambda-pi calculus using the Bound module
+
+* about
+:PROPERTIES:
+:TS:       <2014-06-02 02:44PM>
+:ID:       9vmjwv514ig0
+:END:
+The following in an analysis of a tiny model of the untyped lambda calculus taken from the documentation for [[http://hackage.haskell.org/package/bound-1.0.2/docs/Bound.html][Bound]], a haskell package for dealing with bound and unbound scopes.
+
+We will boil it down to its simplest form (not even using Bound) and then work up to the published version.
+
+The comments and text interpretations (or mis-interpretations) are mine.
+
+* a simple expression data type
+:PROPERTIES:
+:TS:       <2014-06-02 01:53PM>
+:ID:       xxwewi314ig0
+:END:
+
+First up, to model lambda terms, you'd want to create a data type, representing the structure of the AST:
+
+#+name: Exp0
+#+begin_src haskell :tangle unlam.hs :noweb yes
+
+  infixl 9 :@  -- just sets the precedence
+  data Exp0 = V Char                  -- variable instance
+            | Exp0 :@ Exp0            -- application
+            | Lam Char Exp0           -- lambda term
+     deriving (Eq,Ord,Read,Show)
+
+#+end_src
+
+The =Eq=, =Ord=, =Read= and =Show= derivations just provide default implementations for comparison and serializing / deserializing instances to strings.
+
+With this type, we can take a lambda term like this:
+
+: (λx.λy.x)  -- "const"
+
+... and represent it in haskell like this:
+
+#+begin_src haskell :tangle unlam.hs :noweb yes
+  main = print (Lam 'x' $ Lam 'y' $ V 'y' :@ V 'x')
+#+end_src
+
+
+
+
+
+
+#+begin_src haskell :tangle lambdacalc.hs
+  {-#LANGUAGE DeriveFunctor, DeriveFoldable, DeriveTraversable #-}
+  import Data.Foldable
+  import Data.Traversable
+
+
+  infixl 9 :@
+  data Exp a = V Str                   -- variable instance
+             | (Exp a) :@ (Exp a)      -- application
+             | Lam (Exp a)             -- lambda term
+    deriving (Eq,Ord,Read,Show,Functor,Foldable,Traversable)
+
+  
+
+
+#+end_src
+
+* de bruijn
+:PROPERTIES:
+:TS:       <2014-06-02 01:39PM>
+:ID:       h05l9w214ig0
+:END:
+
+Applying lambda terms requires variable substitution, and if you have the same variable names used in different nested scopes, tracking which variables are bound to which values can get kind of messy.
+
+One approach to handling this internally is to replace the variable names with [[http://en.wikipedia.org/wiki/De_Bruijn_index][De Bruijn indices]], which are numbers that indicate how deep each reference is compared to the lambda that introduced it. Then, since the names are no longer used directly, they can be removed.
+
+For example:
+
+: (λx.λy.x)z -- const z in lambda calculus notation
+: (λλ1)z     -- same thing in de bruijn notation
+
+A hypothetical De Bruijn interpreter would read this from left to right, and at each point along the way, it would track how deeply nested it was within the parentheses.
+
+Every time the interpreter encountered a lambda, it would allocate space within the corresponding stack frame for a new anonymous variable.
+
+When the interpreter encountered a number, it would simply reference the appropriate place in the stack.
+
+#+name: Exp
+#+begin_src haskell
+  infixl 9 :@  -- just sets the precedence
+  data Exp = V Char                 -- variable instance
+           | Exp :@ Exp             -- application
+           | Lam Char Exp           -- lambda term
+     deriving (Eq,Ord,Read,Show)
+#+end_src
+
+#+begin_src haskell :session hs :noweb yes :tangle lampibound.hs
+  {-#LANGUAGE DeriveFunctor, DeriveFoldable, DeriveTraversable #-}
+  import Bound
+  import Prelude.Extras
+  import Control.Applicative
+  import Control.Monad (ap)
+  import Data.Foldable
+  import Data.Traversable
+      
+  <<Exp>>
+  <<Exp.lifters>>
+#+end_src
+
+http://hackage.haskell.org/package/prelude-extras-0.3/docs/Prelude-Extras.html#t:Eq1
+
+#+name: Exp.lifters
+#+begin_src haskell
+  instance Eq1 Exp
+  instance Ord1 Exp
+  instance Show1 Exp
+  instance Read1 Exp
+#+end_src
+
+
+      --(Eq, Ord, Show, Read, Functor, Foldable, Traversable)
+
+  instance Applicative Exp where pure = V; (<*>) = ap
