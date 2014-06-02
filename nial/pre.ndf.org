@@ -1,35 +1,140 @@
 #+title: pattern recognition engine in nial
 
-* GOAL parsing arbitrary languages.
+* Goal: a General-Purpose Parsing Engine.
 
-We would like to be able to construct parse trees from arbitrary text. It is possible to do this in a single pass, but for the sake of argument, we will break it into several steps:
+We would like to construct parsers for arbitrary languages.
+
+For example, given suitable language definitions, we might like our system to parse any of the following phrases:
+
+#+begin_src nial
+  phrases := [ "language "example, [
+  "pascal (phrase 'REPEAT op(a, b); INC(c) UNTIL done;'),
+  "logic  (phrase '∀(A, B, x)[ (x ∈ A ≡ x ∈ B) ⇒ A=B ].'),
+  "ebnf   (phrase 'expression = ["+"|"-"] term { ("+"|"-") term }.'),
+  "regexp (phrase '[[:alpha:]][[:alnum:]]+') ]];
+#+end_src
+
+* Implementation Plan
+
+We will break the parsing system down into two phases:
 
 The first step, [[Lexing]], means dividing an unbroken sequence of individual characters down into discrete units called /tokens/ (or /lexemes/). Tokens generalize the notion of "words" to also include things like punctuation, numbers, special keywords, comments, or whatever the building blocks of the particular language in question happen to be.
 
-The type signature of lex looks like this:
+The type signature looks like this:
 
 #+begin_src haskell
-  lex :: [Chr] -> [Tok]
+  lex :: Gram a -> [Chr] -> [Tok a]
 #+end_src
 
-That is, the =lex= routine converts a sequence of [[Characters]] into a sequence of [[Tokens]].
+That is, given a [[Grammar]] for some language =a=, and sequence of [[Characters]], the =lex= routine will yield a sequence of [[Tokens]] for language =a=.
 
-Next comes the [[Parsing]] phase, wherein we will reshape the sequence of tokens into a tree structure (called a /parse tree/). In building our tree, we may want to filter out certain tokens, such as comments and whitespace (which don't affect the meaning of the text), or "grouping" tokens such as parentheses, whose only purpose is to indicate the structure which would now be directly represented by the tree.
+Next comes the [[Parsing]] phase, wherein we will reshape the sequence of tokens into a tree structure, called a /parse tree/. In building our tree, we may want to filter out certain tokens, such as comments and whitespace (which don't affect the meaning of the text), or "grouping" tokens such as parentheses, whose only purpose is to indicate the structure which would now be directly represented by the tree.
 
 What we /do/ with these trees, or how they are implemented internally, is beyond the scope of this article. However, we will need to specify the interface for set of [[Tree Building Primitives]].
 
 With those in place, we will be able to show:
 
 #+begin_src haskell
-  parse :: [Tok] -> Tree Tok
+  parse :: [Tok a] -> Tree a
 #+end_src
 
-* TODO Characters
+* Grammar
+
+If we want to parse multiple languages, we will need a means by which we can describe the grammars of those languages.
+
+One such language for describing grammars is [[http://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form][EBNF]]. Here's a formal definition of EBNF, in itself.[fn:ebnf] (See the linked reference for a well written introduction to parsing and compilers in general if you are unfamiliar.)
+
+#+begin_src ebnf
+syntax     = {production}.
+production = identifier "=" expression "." .
+expression = term {"|" term}.
+term       = factor {factor}.
+factor     = identifier | string | "(" expression ")
+           | "[" expression "]" | "{" expression "}".
+identifier = letter {letter | digit}.
+string     = """ {character} """.
+letter     = "A" | ... | "Z".
+digit      = "0" | ... | "9".
+#+end_src
+
+Briefly:  which can refer to each other recursively.
+
+- syntax is broken down into named /production rules/
+- production rules can refer to each other, recursively.
+- the vertical bar character represents alternatives.
+- curly braces represent (0 .. /n/) repetitions of the enclosed pattern.
+- square brackets mean the enclosed pattern is optional.
+- parentheses are a general grouping construct.
+- double quotes indicate character literals.
+- a sequence of three dots between literals indicates a character range.
+
+In nial, I've chosen to represent the grammar as a tabular relation, mapping symbols to an abstract syntax tree:
+
+#+begin_src nial :tangle "ebnf.ndf"
+
+  ph is phrase;
+
+  ebnf_rules := [ "rule "def, [
+    "syntax  ("* ("@ "rule)),
+    "rule    ("> ("@ "iden)  ("" "=) ("@ "expr) ("" ".)),
+    "expr    ("> ("@ "term) ("* ("" "|) "@ "term)),
+    "iden    ("> ("@ "alpha) ("* ("sub "alnum))),
+    "alpha   ("! "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ),
+    "digit   ("! "0123456789),
+    "alnum   ("| ("@ "digit) ("@ "alpha)),
+    "term    ("* ("@ "factor)),
+    "rep     ("> ("" (ph'{')) ("@ "expr) ("" (ph'{'))),
+    "opt     ("> ("" (ph'[')) ("@ "expr) ("" (ph']'))),
+    "grp     ("> ("" (ph'(')) ("@ "expr) ("" (ph')'))),
+    "factor  ("| ("@ "iden) ("@ "char) ("@ "rep) ("@ "opt) ("@ "grp)
+                 ("@ "lit)  ("@ "ext)),
+    "char    ("> ("" "") ". ("" "")),
+    "lit     ("> ("" "`) ("@ "iden)),
+    "ext     ("> ("" "\) ("@ "iden)) ]];
+
+#+end_src
+
+Here, the parens in each rule form a nested array structure, where the first element in each array explains what to do with the rest of the elements in that array.
+
+Although the rule names are somewhat different, the grammar described is equivalent to the EBNF, with a few exceptions:
+
+  - The =...= syntax is removed, which by itself means we would have to match the alphabet by explicitly listing all 26 letters (twice, if we wanted both upper and lower case). But instead:
+  - The backslash ( =\= ) is added so that we can match specific predefined ranges, such as numbers or letters.
+  - The backquote ( =`= ) is added to identify a literal, so that we can type a word like word =`REPEAT= in our grammar, instead of "R"|"E"|"P"|"E"|"A"|"T".
+
+The next table lists the various symbols used above, along with their meanings and the name of the routine we will write in nial to interpret them.
+
+#+begin_src nial
+
+  gramco := [ "sym "args "nial "meaning, [
+    ">  ["ps]  "seq  'Match each pattern in sequence',
+    "*  ["p]   "rep  'Match 0..n repetitions of pattern p.',
+    "!  ["sym] "any  'Match any character found in the symbol',
+    ""  ["sym] "lit  'Match the symbol as a literal string.',
+    "@  ["sym] "sub  'Match the production identified by symbol.' ]];
+
+#+end_src
+
+To recap, this last table (=gramco=) specifies five routines that we will need to write in order to interpret the description of EBNF in the (=ebnf_rules=) table.
+
+This should allow us to parse EBNF grammar descriptions from a text file.
+
+Later on, we will write some routines to map the parsed grammar descriptions to the same primitives, and then we should be able to parse those languages as well.
+
+In other words, these five routines will form the core of a general purpose parse engine.
 
 * TODO Lexing
+
+* TODO Characters
 
 * TODO Tokens
 
 * TODO Tree Building Primitives
 
 * TODO Parsing
+
+* Footnotes
+
+[fn:ebnf] Niklaus Wirth, [[http://www.inf.ethz.ch/personal/wirth/CompilerConstruction/index.html][Compiler Construction]]. Pg.11
+
+
