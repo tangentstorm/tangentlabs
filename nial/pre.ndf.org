@@ -1,6 +1,6 @@
 #+title: pattern recognition engine in nial
 
-* Goal: a General-Purpose Parsing Engine.
+* Goal: a General-Purpose Parsing Engine
 
 We would like to construct parsers for arbitrary languages.
 
@@ -57,7 +57,7 @@ letter     = "A" | ... | "Z".
 digit      = "0" | ... | "9".
 #+end_src
 
-Briefly:  which can refer to each other recursively.
+Briefly:
 
 - syntax is broken down into named /production rules/
 - production rules can refer to each other, recursively.
@@ -96,7 +96,7 @@ In nial, I've chosen to represent the grammar as a tabular relation, mapping sym
 
 Here, the parens in each rule form a nested array structure, where the first element in each array explains what to do with the rest of the elements in that array.
 
-Although the rule names are somewhat different, the grammar described is equivalent to the EBNF, with a few exceptions:
+Although the rule names are somewhat different, the grammar described is similar to the EBNF, with a few exceptions:
 
   - The =...= syntax is removed, which by itself means we would have to match the alphabet by explicitly listing all 26 letters (twice, if we wanted both upper and lower case). But instead:
   - The backslash ( =\= ) is added so that we can match specific predefined ranges, such as numbers or letters.
@@ -109,21 +109,45 @@ The next table lists the various symbols used above, along with their meanings a
   gramco := [ "sym "args "nial "meaning, [
     ">  ["ps]  "seq  'Match each pattern in sequence',
     "*  ["p]   "rep  'Match 0..n repetitions of pattern p.',
+    "|  ["ps]  "alt  'Match any pattern in the series.',
     "!  ["sym] "any  'Match any character found in the symbol',
     ""  ["sym] "lit  'Match the symbol as a literal string.',
     "@  ["sym] "sub  'Match the production identified by symbol.' ]];
 
 #+end_src
 
-To recap, this last table (=gramco=) specifies five routines that we will need to write in order to interpret the description of EBNF in the (=ebnf_rules=) table.
+To recap, this last table (=gramco=) specifies six routines that we will need to write in order to interpret the description of EBNF in the (=ebnf_rules=) table.
 
 This should allow us to parse EBNF grammar descriptions from a text file.
 
 Later on, we will write some routines to map the parsed grammar descriptions to the same primitives, and then we should be able to parse those languages as well.
 
-In other words, these five routines will form the core of a general purpose parse engine.
+In other words, these six routines will form the core of a general purpose parse engine.
 
-* TODO Lexing
+* Lexing
+
+If we temporarily removed the "sub" instruction from our to-do list, we would be unable to reference sub rules, and would therefore have to pack the entire grammar of any language we wanted to match into just one rule.
+
+Since there would be no way for that rule to reference itself recursively, It would not be possible to match arbitrarily deeply nested constructs.
+
+For example, if we wanted to match nested brackets, we would have to write one set of rules fo matching =([])*=, another for matching  =([([])*])*=, a third for matching =([([([])*])*])*t=, and so on. We could always manually construct a pattern for /n≥0/ levels, but it would be unable to match inputs nested /n+1/ deep.
+
+The languages we can match with just one non-recursive production rule are called regular languages, and such a rule is called a regular expression.
+
+Regular languages can be parsed efficiently using a deterministic finite automaton (a simple state machine). Constructing a DFA from a production rule is not terribly hard.
+
+* The type
+
+#+begin_src nial
+  rule2sm
+
+  seq is op ps  { }
+  rep is op p   { }
+  alt is op ps  { }
+  any is op sym { }
+  lit is op sym { }
+
+#+end_src
 
 * TODO Characters
 
@@ -136,5 +160,4 @@ In other words, these five routines will form the core of a general purpose pars
 * Footnotes
 
 [fn:ebnf] Niklaus Wirth, [[http://www.inf.ethz.ch/personal/wirth/CompilerConstruction/index.html][Compiler Construction]]. Pg.11
-
 
