@@ -16,3 +16,15 @@ base is op k n {
     k := first k dvm n link rest k;
   endwhile endif; k }
 
+bits is op k {
+  % bit vector for a positive integer;
+  (k base 2) eachall = 1 }
+
+nbits is op n k {
+  % (bits k) padded/chopped to n bits;
+  res := bits k;
+  if tally res > n then
+     res := (tally res - n) drop res
+  elseif tally res < n then
+     res := (n - tally res) reshape o link res
+  else res endif }
