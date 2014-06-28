@@ -1,0 +1,18 @@
+# various math routines
+
+idv is op x y {
+  % integer division;
+  floor((x - (x mod y)) div y) };
+
+dvm is op x y {
+  % divmod;
+  x [idv,mod] y };
+
+base is op k n {
+  % base n representation of k;
+  if n < 1 then k := ?badbase
+  elseif n = 1 then k := k reshape 1
+  else while first k > (n - 1) do
+    k := first k dvm n link rest k;
+  endwhile endif; k }
+
