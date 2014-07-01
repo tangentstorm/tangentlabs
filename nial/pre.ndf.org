@@ -136,18 +136,56 @@ The languages we can match with just one non-recursive production rule are calle
 
 Regular languages can be parsed efficiently using a deterministic finite automaton (a simple state machine). Constructing a DFA from a production rule is not terribly hard.
 
-* The type
+* Token Generator
+
+(This is an interface for generating tokens from a sequence of characters.)
+
+The token stream data structure should provide the following for each token:
+
+  - start position
+  - end position
+  - a 'channel' (as in antlr)
+  - a tag indicating the type of token
+  - the actual matched string (as a symbol)
 
 #+begin_src nial
-  rule2sm
-
-  seq is op ps  { }
-  rep is op p   { }
-  alt is op ps  { }
-  any is op sym { }
-  lit is op sym { }
 
 #+end_src
+
+
+* TODO non-deterministic interpreter
+
+(these were ported from [[https://github.com/sabren/b4/blob/master/pre/pre.pas][pre.pas]])
+
+#+begin_src nial
+
+  lang := [
+    "rule  "type        "code,
+  [ "nul   ["bit]       ["1],
+    "try   ["xpr ".]
+       ["begin "mark
+         ["if ["test "xpr] "then ["keep]
+          "else ["back]]],
+    "sym   [["ch "chr] "bit]],
+       ["try ],
+
+  ]];
+
+  try is op {}
+
+
+  if "code then 
+
+    sym is op ps  s { mark }
+    seq is op ps  s { }
+    rep is op p   s { }
+    alt is op ps  s { }
+    any is op sym s { }
+    lit is op sym s { }
+
+#+end_src
+
+* TODO deterministic state machine
 
 * TODO Characters
 

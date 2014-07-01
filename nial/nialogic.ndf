@@ -321,11 +321,13 @@ cheq !( cd where "d "d1 "c "c1 ) !( [ "c "d ] [ "c1 "d1 ]);
 section 'logical language';
 % --------------------------------------------------;
 
-master := [ "const    "alias   "glyph  "synid,
+master := [
+  "const    "alias   "glyph  "synid,
 [ "top       "l      (ph'⊤')  "const,
   "bot       "o      (ph'⊥')  "const,
   "forall    "A.     (ph'∀')  "quant,
   "exists    "E.     (ph'∃')  "quant,
+  "entails   "|-     (ph'⊢')  "infix,
   "implies   "->     (ph'⇒')  "infix,
   "iff       "><     (ph'⇔')  "infix,
   "and       "*.     (ph'∧')  "infix,
@@ -337,8 +339,14 @@ master := [ "const    "alias   "glyph  "synid,
   "delta     "D.     (ph'Δ')  "const,
   "sub       "sub    (ph'⊂')  "infix,
   "sbe       "sbe    (ph'⊆')  "infix,
+  "lambda    "lam    (ph'λ')  "quant,
+  "rarrow    "rarr   (ph'→')  "infix,
   "LPAREN    (ph'(') (ph'(')  "token,
-  "RPAREN    (ph')') (ph')')  "token
+  "RPAREN    (ph')') (ph')')  "token,
+  "LBRACK    (ph'[') (ph']')  "token,
+  "RBRACK    (ph'[') (ph']')  "token,
+  "LBRACE    (ph'{') (ph'{')  "token,
+  "RBRACE    (ph'}') (ph'}')  "token
 ]];
 
 syntax := [ "synid   "fields     "rule,
