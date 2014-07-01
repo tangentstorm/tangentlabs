@@ -28,3 +28,30 @@ nbits is op n k {
   elseif tally res < n then
      res := (n - tally res) reshape o link res
   else res endif }
+
+
+% adapted from nialib/cgi-lib.ndf;
+h2n is op sym {
+  % convert hex string/symbol to integer;
+  map := '0123456789ABCDEF';
+  str := toupper reverse string sym;
+  pos := num := 0;
+  for c with str do
+    num := num + (((find c map)) *
+            (if pos = 0 then 1 else (pos * 16) endif));
+    pos := pos + 1
+  endfor; num }
+
+pervasive is tr f op x {
+  % unary pervasive operation;
+  if atomic x then f x else each f x endif };
+
+hexbits is pervasive (op sym {
+  % convert hex string/symbol to bit vector;
+  patterns := [
+    oooo, oool, oolo, ooll, oloo, olol, ollo, olll,
+    looo, lool, lolo, loll, lloo, llol, lllo, llll ];
+  res := [];
+  for ch with string sym do
+    res := res link (patterns @ (ch find '0123456789abcdef'))
+  endfor; res })
