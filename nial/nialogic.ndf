@@ -119,7 +119,7 @@ cheq is op q0 q1 {
   res := each try q0 q1; msg := null;
   if isfault res then
     msg := (fg "y) 'error: ' (fg "R) (string res)
-  elseif imp[= each tally, match] res then
+  elseif imp[= each tally, =] res then
     ok
   else
     v0 v1 := res;
