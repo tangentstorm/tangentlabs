@@ -2,6 +2,11 @@
 % --------------------------------------------------;
 loaddefs "ansi
 
+assert is op assertion {
+ if not eval assertion then
+    fault unquote assertion
+ endif };
+
 try is op quote {
   oldtrigger := settrigger o;
   result := eval quote;

@@ -22,13 +22,7 @@ bits is op k {
 
 nbits is op n k {
   % (bits k) padded/chopped to n bits;
-  res := bits k;
-  if tally res > n then
-     res := (tally res - n) drop res
-  elseif tally res < n then
-     res := (n - tally res) reshape o link res
-  else res endif }
-
+  lfit (bits k) n o }
 
 % adapted from nialib/cgi-lib.ndf;
 h2n is op sym {
@@ -48,6 +42,7 @@ pervasive is tr f op x {
 
 hexbits is pervasive (op sym {
   % convert hex string/symbol to bit vector;
+  assert !( or[isphrase,isstring] sym );
   patterns := [
     oooo, oool, oolo, ooll, oloo, olol, ollo, olll,
     looo, lool, lolo, loll, lloo, llol, lllo, llll ];

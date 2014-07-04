@@ -51,3 +51,27 @@ hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
 % remove nesting until a simple or non-solitary array;
 % mostly to allow using [...] with fewer commas ;
 unboxed is fork[and[1=tally, not simple],unboxed head,id];
+
+% -- basic boolean operations ----------------------;
+
+nor is and (each not);
+atop is tr f g op x y { f (x g y) };
+always is eachboth (op x y { l });
+never is eachboth (op x y { o });
+
+xor is op x y {
+  % bitwise xor;
+  (x and not y) or (y and not x) }
+
+
+% array reshaping (generalized string tools)
+% -------------------------------------------;
+
+lfit is op ary newlen pad {
+  % force an array to fit length, padding on the left if needed;
+  if (len := tally ary) > newlen then
+    (len - newlen) drop ary
+  elseif len < newlen then
+    newlen - len reshape pad link ary
+  else ary endif }
+
