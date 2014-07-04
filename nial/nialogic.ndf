@@ -1,137 +1,8 @@
-% predicate logic in nial
-
-
-% helpers/ language tweaks
-% --------------------------------------------------;
-
-reload is { loaddefs "nialogic };
-
-ok := null;
-
-% renames and abbreviations;
-id is pass;
-ph is phrase;
-head is first;
-init is front;
-tail is rest;
-
-zip IS EACHBOTH link;
-ints is tell;
-
-% string tools;
-words is op Str {
-  % split string on space character;
-  % (from towords.ndf in nial distro);
-  Strings := EACH phrase ( `  match Str cut Str ) }
-
-unquote is op q {
-  % convert !( quoted expressions ) back to text;
-  link descan scan link descan deparse q };
-
-% glue a string together;
-implode is op glue parts {
-  link[head, link(glue eachright link tail)] parts }
-
-
-% more helpers...;
-
-
-% does any item in given array match predicate p?
-% ex:  !(any atomic a b c d etc) -> are any of them atomic?;
-any is tr p ( or EACH p);
-
-% do all items in given array match predicate p?
-% ex:  !( all isboolean ) <-> !( allbools );
-all is tr p ( and EACH p);
-
-% implication, like short circuiting 'and';
-imp is tr f g op x (
-  if f x then g x else o endif );
-
-% hex digits;
-hexits := '0123456789ABCDEF';
-
-hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
-
-% remove nesting until a simple or non-solitary array;
-% mostly to allow using [...] with fewer commas ;
-unboxed is fork[and[1=tally, not simple],unboxed head,id];
-
-
-
-% colored text
-% --------------------------------------------------;
-setwidth 1024; % fix overzealous line wrapping;
-
-esc := char 27;
-bold := link esc '[0;1m';
-plain := link esc '[0m';
-clrscr := link esc '[H' esc '[J';
-newline := char 10;
-
-xc is op color {
-  % 256 xterm colors + mnemonics for first 16 ascii colors;
-  if isinteger color then string color
-  elseif isphrase color then xc (string color)
-  elseif head color in 'krgybmcwKRGYBMCW'
-    then string (head color find 'krgybmcwKRGYBMCW')
-    else fault ['invalid color:', display color]
-  endif };
-
-fg is op color { link esc '[38;5;' (xc color)  'm' };
-bg is op color { link esc '[48;5;' (xc color)  'm' };
-
-cstr is op x {
-  res := string x;
-  if res = '||' then '|'
-  elseif `| = head res then fg rest res
-  else res endif };
-emit is op a { writescreen (link each cstr) a };
-
-colortest is {
-  (each emit
-     link rows
-     each link rows (16 16 reshape)
-     each (' ' link)
-     each (link[fg,hexbyte]) (tell 256))
-  null; % don't return a value; }
+% predicate logic in nial;
+each loaddefs "basics "ansi "testing;
 
 % a little logo:;
 nialogic := "|B "nia "|C `l "|c "ogic "|w;
-
-clear is { emit link Clrscr Nialogic ( char 10 ) }; clear;
-
-hline is op x {link each string (x reshape) phrase '─'};
-section is op x {
-  emit "|b '── ' "|w x "|b ' ' (hline (50 -) tally x) "|w }
-
-
-% test framework
-% --------------------------------------------------;
-
-try is op quote {
-  oldtrigger := settrigger o;
-  result := eval quote;
-  settrigger oldtrigger;
-  result }
-
-cheq is op q0 q1 {
-  res := each try q0 q1; msg := null;
-  if isfault res then
-    msg := (fg "y) 'error: ' (fg "R) (string res)
-  elseif imp[= each tally, =] res then
-    ok
-  else
-    v0 v1 := res;
-    msg := ((newline) (fg "r) ' expected: ' (fg "M) (display v1)
-            (newline) (fg "r) '  but saw: ' (fg "R) (display v0))
-  endif;
-  res := (fg "K) 'testing:' plain (unquote q0);
-  if empty msg
-    then res := res link ((fg "g) 'ok' plain)
-    else res := res link ((fg "r) (link msg) plain)
-  endif;
-  emit res };
 
 
 section 'substitution';
@@ -154,7 +25,6 @@ subs is op dict expr {
       endif }) expr
     endif
   endif }
-
 
 
 % substitution tests;
@@ -181,7 +51,6 @@ cheq !( subs ("g 1) [1 ["g]]) !( [1 [1]] );
 section 'unification';
 % --------------------------------------------------;
 
-id is pass;
 intree is op x tree {x in (link leaf id tree)};
 isvar is imp[isphrase, `$ = head string ];
 

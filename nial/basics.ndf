@@ -1,0 +1,53 @@
+% basic helpers/language tweaks for nial
+% --------------------------------------------------;
+reload is { loaddefs "nialogic };
+
+ok := null;
+
+% renames and abbreviations;
+id is pass;
+ph is phrase;
+head is first;
+init is front;
+tail is rest;
+
+zip IS EACHBOTH link;
+ints is tell;
+
+% string tools;
+words is op Str {
+  % split string on space character;
+  % (from towords.ndf in nial distro);
+  Strings := EACH phrase ( `  match Str cut Str ) }
+
+unquote is op q {
+  % convert !( quoted expressions ) back to text;
+  link descan scan link descan deparse q };
+
+% glue a string together;
+implode is op glue parts {
+  link[head, link(glue eachright link tail)] parts }
+
+
+% more helpers...;
+
+% does any item in given array match predicate p?
+% ex:  !(any atomic a b c d etc) -> are any of them atomic?;
+any is tr p ( or EACH p);
+
+% do all items in given array match predicate p?
+% ex:  !( all isboolean ) <-> !( allbools );
+all is tr p ( and EACH p);
+
+% implication, like short circuiting 'and';
+imp is tr f g op x (
+  if f x then g x else o endif );
+
+% hex digits;
+hexits := '0123456789ABCDEF';
+
+hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
+
+% remove nesting until a simple or non-solitary array;
+% mostly to allow using [...] with fewer commas ;
+unboxed is fork[and[1=tally, not simple],unboxed head,id];

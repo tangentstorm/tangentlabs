@@ -1,0 +1,42 @@
+% ansi codes for colored text;
+% --------------------------------------------------;
+setwidth 1024; % fix overzealous line wrapping;
+
+esc := char 27;
+bold := link esc '[0;1m';
+plain := link esc '[0m';
+clrscr := link esc '[H' esc '[J';
+newline := char 10;
+
+xc is op color {
+  % 256 xterm colors + mnemonics for first 16 ascii colors;
+  if isinteger color then string color
+  elseif isphrase color then xc (string color)
+  elseif head color in 'krgybmcwKRGYBMCW'
+    then string (head color find 'krgybmcwKRGYBMCW')
+    else fault ['invalid color:', display color]
+  endif };
+
+fg is op color { link esc '[38;5;' (xc color)  'm' };
+bg is op color { link esc '[48;5;' (xc color)  'm' };
+
+cstr is op x {
+  res := string x;
+  if res = '||' then '|'
+  elseif `| = head res then fg rest res
+  else res endif };
+emit is op a { writescreen (link each cstr) a };
+
+colortest is {
+  (each emit
+     link rows
+     each link rows (16 16 reshape)
+     each (' ' link)
+     each (link[fg,hexbyte]) (tell 256))
+  null; % don't return a value; }
+
+clear is { emit link Clrscr Nialogic ( char 10 ) }; clear;
+
+hline is op x {link each string (x reshape) phrase '─'};
+section is op x {
+  emit "|b '── ' "|w x "|b ' ' (hline (50 -) tally x) "|w }
