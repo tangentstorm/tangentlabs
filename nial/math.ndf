@@ -18,7 +18,7 @@ base is op n k {
 
 bits is op k {
   % bit vector for a positive integer;
-  (base k 2) eachall = 1 }
+  (base 2 k) eachall = 1 }
 
 % hex digits;
 hexits := '0123456789abcdef';
