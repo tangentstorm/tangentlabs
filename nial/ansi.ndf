@@ -35,8 +35,7 @@ colortest is {
      each (link[fg,hexbyte]) (tell 256))
   null; % don't return a value; }
 
-clear is { emit link Clrscr Nialogic ( char 10 ) }; clear;
-
+clear is { emit clrscr };
 hline is op x {link each string (x reshape) phrase '─'};
 section is op x {
   emit "|b '── ' "|w x "|b ' ' (hline (50 -) tally x) "|w }

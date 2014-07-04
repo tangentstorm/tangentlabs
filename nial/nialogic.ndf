@@ -1,8 +1,13 @@
 % predicate logic in nial;
 each loaddefs "basics "ansi "testing;
 
+reload is { loaddefs "nialogic };
+
 % a little logo:;
 nialogic := "|B "nia "|C `l "|c "ogic "|w;
+
+clear is { emit link Clrscr Nialogic ( char 10 ) };
+clear;
 
 
 section 'substitution';

@@ -1,6 +1,6 @@
 % basic helpers/language tweaks for nial
 % --------------------------------------------------;
-reload is { loaddefs "nialogic };
+loaddefs "math;
 
 ok := null;
 
@@ -10,8 +10,9 @@ ph is phrase;
 head is first;
 init is front;
 tail is rest;
-
-zip IS EACHBOTH link;
+ord is charrep;
+chr is char;
+zip is eachboth link;
 ints is tell;
 
 % string tools;
@@ -69,24 +70,25 @@ xor is op x y {
 
 rpad is op ary newlen pad {
   % pad array on right to reach new length, if necessary;
-  if (len := tally ary)  < newlen then then
+  if (len := tally ary)  < newlen then
     ary link (newlen - len reshape pad)
   else ary endif }
 
 lpad is op ary newlen pad {
   % pad array on left to reach new length, if necessary;
-  if (len := tally ary)  < newlen then then
+  if (len := tally ary)  < newlen then
     newlen - len reshape pad link ary
-  else ary endif }
+  else ary endif };
+
+rechunk is op ar sz {
+  % chop array into chunks of given size;
+  if ( tally ar ismulof sz ) then
+    result := rows ([tally ar idv sz, sz] reshape ar)
+  else fault 'array length must be multiple of chunk size' endif }
 
 lfit is op ary newlen pad {
   % pad or truncate array to fit length;
   if (len := tally ary) > newlen then
     (len - newlen) drop ary
-  else lpad ary newlen pad ary }
-
-rechunk is op ar size {
-  % break array into chunks of given size;
-  assert !( tally ar mod size = 0 );
-  result := rows ([size, tally ar idv size] reshape ar) }
+  else lpad ary newlen pad endif }
 
