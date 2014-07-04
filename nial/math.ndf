@@ -20,10 +20,6 @@ bits is op k {
   % bit vector for a positive integer;
   (k base 2) eachall = 1 }
 
-nbits is op n k {
-  % (bits k) padded/chopped to n bits;
-  lfit (bits k) n o }
-
 % adapted from nialib/cgi-lib.ndf;
 h2n is op sym {
   % convert hex string/symbol to integer;
@@ -42,11 +38,15 @@ pervasive is tr f op x {
 
 hexbits is pervasive (op sym {
   % convert hex string/symbol to bit vector;
-  assert !( or[isphrase,isstring] sym );
-  patterns := [
-    oooo, oool, oolo, ooll, oloo, olol, ollo, olll,
-    looo, lool, lolo, loll, lloo, llol, lllo, llll ];
-  res := [];
-  for ch with string sym do
-    res := res link (patterns @ (ch find '0123456789abcdef'))
-  endfor; res })
+  if (or[isphrase,isstring] sym) then
+    patterns := [
+      oooo, oool, oolo, ooll, oloo, olol, ollo, olll,
+      looo, lool, lolo, loll, lloo, llol, lllo, llll ];
+    res := [];
+    for ch with string sym do
+      res := res link (patterns @ (ch find '0123456789abcdef'))
+    endfor; res
+  else fault 'expecting a string or symbol' endif })
+
+ismulof is op x y { y mod x = 0 };
+
