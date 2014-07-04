@@ -44,10 +44,6 @@ all is tr p ( and EACH p);
 imp is tr f g op x (
   if f x then g x else o endif );
 
-% hex digits;
-hexits := '0123456789ABCDEF';
-
-hexbyte is (op n { hexits#((floor (n div 16)) (n mod 16) )});
 
 % remove nesting until a simple or non-solitary array;
 % mostly to allow using [...] with fewer commas ;
