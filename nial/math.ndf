@@ -27,7 +27,7 @@ h2n is op sym {
   str := toupper reverse string sym;
   pos := num := 0;
   for c with str do
-    num := num + (((find c map)) *
+    num := num + ((find c map) *
             (if pos = 0 then 1 else (pos * 16) endif));
     pos := pos + 1
   endfor; num }
@@ -48,5 +48,7 @@ hexbits is pervasive (op sym {
     endfor; res
   else fault 'expecting a string or symbol' endif })
 
-ismulof is op x y { y mod x = 0 };
+ismulof is op x y {
+   % is x a multple of y? ;
+   x mod y = 0 };
 
