@@ -1,0 +1,5 @@
+*.exe
+*.bak
+*.ppu
+lib
+*.dll
