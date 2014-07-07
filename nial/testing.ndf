@@ -15,17 +15,17 @@ try is op quote {
 
 cheq is op q0 q1 {
   % check for equality: both quotes should produce the same result;
-  res := each try q0 q1; msg := null;
-  if isfault res then
+  emit (fg "K) 'testing:' plain (unquote q0);
+  vals := each try q0 q1; msg := null; res :='';
+  if isfault vals then
     msg := (fg "y) 'error: ' (fg "R) (string res)
-  elseif imp[= each tally, =] res then
+  elseif imp[= each tally, =] vals then
     ok
   else
-    v0 v1 := res;
+    v0 v1 := vals;
     msg := ((newline) (fg "r) ' expected: ' (fg "M) (display v1)
             (newline) (fg "r) '  but saw: ' (fg "R) (display v0))
   endif;
-  res := (fg "K) 'testing:' plain (unquote q0);
   if empty msg
     then res := res link ((fg "g) 'ok' plain)
     else res := res link ((fg "r) (link msg) plain)
