@@ -3,6 +3,13 @@ NB. a logic library for j
 NB. basic vocabulary for doing logic:
 NB. ------------------------------------------------------
 
+
+NB. one line logic library:
+('p q' =: |:#:i.2^2)[('`not and or xor nor nand imp nim reverse' =: -.`*.`+.`~:`+:`*:`<:`>`|.)
+assert (p nand q) = reverse not (p nor q)
+assert (p and q) = reverse not (p or q)
+
+
 'F T' =: 0 1
 
 A  =: and =: [: : *.    NB. dyadic +: is logical and
@@ -134,7 +141,6 @@ a     +. distsOver *.
 a     *. distsOver +.
 
 
-
 NB. solver
 NB. ----------------------------------------
 NB.   usage: (vars) given (facts)
@@ -146,3 +152,10 @@ a   (, 1) -: p given p
 a   (, _) -: q given p
 a   (, 1) -: q given p, p imp q
 a    1 1  -: (p,q) given p, p imp q
+
+
+
+NB. shannon expansion
+NB. this should always produce an dentical function so
+NB. I am not entirely sure what the value is here.
+shannex =: adverb : '((u 1) and y) or ((u 0) and not y)'
