@@ -1,4 +1,5 @@
-
+NB. game theory tools for j
+NB. -----------------------
 
 NB. returns 1 for each dominated row, else 0
 dom =: [: +./"1 ] (*./ @: <:"1)  1]\.]
@@ -12,7 +13,7 @@ rmdom =: -.@dom # ]
 NB. simplify by doing remdom for both players
 simp1 =: [: rmdom&:opp rmdom
 
-NB. simply repeatedly until no change 
+NB. simplify repeatedly until no change
 simp =: simp1 ^:_
 
 
