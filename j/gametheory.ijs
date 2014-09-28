@@ -7,10 +7,10 @@ dom =: [: +./"1 ] (*./ @: <:"1)  1]\.]
 NB. return the opponent's view of the grid
 opp =: -@|:
 
-NB. remove dominant strategy
+NB. remove dominated options
 rmdom =: -.@dom # ]
 
-NB. simplify by doing remdom for both players
+NB. simplify by doing rmdom for both players
 simp1 =: [: rmdom&:opp rmdom
 
 NB. simplify repeatedly until no change
