@@ -5,7 +5,7 @@ NB. ------------------------------------------------------
 
 
 NB. one line logic library:
-('p q' =: |:#:i.2^2)[('`not and or xor nor nand imp nim reverse' =: -.`*.`+.`~:`+:`*:`<:`>`|.)
+('p q' =: |:#:,.i.2^2)[('`not and or xor nor nand imp nim reverse' =: -.`*.`+.`~:`+:`*:`<:`>`|.)
 assert (p nand q) = reverse not (p nor q)
 assert (p and q) = reverse not (p or q)
 
