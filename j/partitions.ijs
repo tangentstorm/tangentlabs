@@ -9,4 +9,4 @@ norm =: ,@:I.&.|:@=
 assert 0 1 2 1 2 1 -: norm 'banana'
 
 NB. all partions for y  items
-parts =: [: ~. ([: >./ norm)"1 @ dib
+parts =: [: ~. norm"1 @ dib
