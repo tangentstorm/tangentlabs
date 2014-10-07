@@ -20,9 +20,9 @@ function callback(user: pointer; cols: cint; values, name: ppchar): cint; cdecl;
   end;
 
 procedure myXFunc(ctx: psqlite3_context; N: cint; V: ppsqlite3_value); cdecl;
-  var i : byte; val : pChar;
+  var i : byte; val : PChar;
   begin
-    writeln('! xFunc triggered');
+    writeln('! myXFunc triggered');
     writeln('  arg count: ', N);
     if n > 0 then begin
       writeln('  arg values: ');
@@ -42,26 +42,51 @@ var
   msg,sql: PChar;
   
 begin
-  writeLn('--opening new in-memory database');
+  writeLn('- opening new in-memory database');
   sqlite3_open(dbName, @dbh);
 
   // execute a query to make sure everything's set up ok.
+  writeLn('- plain query.');
   sql := 'select 2+2 as iv union values(''four'')';
   err := sqlite3_exec(dbh, sql, @callback, nil, @msg);
   assert(err = 0);
 
   // add the function
-  sqlite3_create_function(dbh, 'sayhello', 1, SQLITE_UTF8,
+  sqlite3_create_function(dbh, 'sayhello',
+       			  -1 {=any number of args}, SQLITE_UTF8,
 			  {userData} nil,
 			  {xFunc}  @myXFunc,
 			  {xStep}  nil,
 			  {xFinal} nil);
 
   // and now invoke it
-  sql := 'select sayhello(123)';
+  writeLn('- xfunc query.');
+  sql := 'select sayhello(''abc'',123)';
   err := sqlite3_exec(dbh, sql, @callback, nil, @msg);
   assert(err = 0);
   
   sqlite3_close(dbh);
-  writeLn('--all done.');
+  writeLn('- all done.');
 end.
+
+{ output
+---------------------------------------------------------------
+  - opening new in-memory database
+  - plain query.
+  ! callback triggered
+  key: iv
+  val: 4
+  ! callback triggered
+  key: iv
+  val: four
+  - xfunc query.
+  ! myXFunc triggered
+  arg count: 2
+  arg values:
+  0:abc
+  1:123
+  ! callback triggered
+  key: sayhello('abc',123)
+  val: hello there!
+  - all done.
+--------------------------------------------------------------- }
