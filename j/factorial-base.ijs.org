@@ -1,0 +1,231 @@
+* NOTE : type this in j to prevent it from using scientific notation
+#+begin_src J :session a
+(9!:11) 10 NB. show 10 digits before switching to scientific notation
+#+end_src
+#+RESULTS:
+
+
+* how many ways are there to chose 7 playing cards from a 52-card deck?
+
+52 choose n  is  52*(52-1)*(52-2)..*(52-(n-1)) / (1*2*3..*n).
+
+Here are a few ways to express (52 choose 7) in J:
+
+#+begin_src J :session a
+  NB. the long way
+  52*(52-1)*(52-2)*(52-3)*(52-4)*(52-5)*(52-6) % (1*2*3*4*5*6*7)
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+
+#+begin_src J :session a
+  NB. factor out the '*' symbols
+  (*/ 52,(52-1),(52-2),(52-3),(52-4),(52-5),(52-6)) % (*/ 1 2 3 4 5 6 7)
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+#+begin_src J :session a
+  NB. factor out the '52 -'
+  (*/ 52 - 0 1 2 3 4 5 6) % (*/ 1 2 3 4 5 6 7)
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+#+begin_src J :session a
+  NB. factor out the sequences
+  (*/ 52 - i.7) % (*/ 1 + i.7)
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+#+begin_src J :session a
+  NB. factor out the */
+  */ (52 - i.7) % (1 + i.7)
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+#+begin_src J :session a
+  NB. use a fork to factor out the i.7.
+  */ 52 (- % 1 + ]) i. 7
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+#+begin_src J :session a
+  NB. factor out the arguments
+  */ x (- % 1+]) i. y [ 'x y' =. 52 7
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+#+begin_src J :session a
+  NB. compile expression into a tacit verb
+  (13 : '*/ x (- % 1+]) i. y')
+#+end_src
+
+#+RESULTS:
+: [: */ [ (- % 1 + ]) [: i. ]
+
+#+begin_src J :session a
+  choose =: [: */ [ (- % 1 + ]) [: i. ]
+  52 choose 7
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+But the simplest of all is to just use the primitive:
+
+#+begin_src J :session a
+  7!52
+#+end_src
+
+#+RESULTS:
+: 133784560
+
+
+* how can we map the combinations to integers?
+
+1 bit per card would require a 52 bit number. This is a useful representation, but not so good as a lookup key.
+
+
+* how can we map the combinations to /consecutive/ integers?
+
+** the first card
+
+There are 52 choices for our first card. 
+
+We can think of each number 0..51 as a "digits" in a base-52 number system, and they can be represented quite simply using a single base-52 "digit".
+
+** the second card
+
+Since we have removed one card from the deck, there are 51 choices for the second card, but the choices available depend on the first card.
+
+How many combinations of 2 cards are there?
+
+#+begin_src J :session a
+ 2!52
+#+end_src
+
+#+RESULTS:
+: 1326
+
+How many possible values would we have if we used base-51 for the second digit?
+
+#+begin_src J :session a
+ 52 * 51
+#+end_src
+
+#+RESULTS:
+: 2652
+
+This is twice the number of values that we need. It's a perfectly fine coding scheme, but it leaves gaps.
+
+Is there an alternative?
+
+#+begin_src J :session a
+ 52 * (51r2)  NB. 51r2 is the fraction 51/2, or 25.5
+#+end_src
+
+#+RESULTS:
+: 1326
+
+J is perfectly happy to work with fractional bases.
+
+#+begin_src J :session a
+  51r2 52 #. 0, 0    NB. lowest 2-digit number in this base
+#+end_src
+
+#+RESULTS:
+: 0
+
+#+begin_src J :session a
+  51r2 52 #. (51r2-1),51  NB. highest 2-digit number in this base
+#+end_src
+
+#+RESULTS:
+: 1325
+
+We can convert any pair of cards back and forth to our fractional base:
+
+#+begin_src J :session a
+  51r2 52 #: 1234
+  51r2 52 #:  678
+#+end_src
+
+#+RESULTS:
+: 23 38
+: 
+: 13 2
+
+#+begin_src J :session a
+  51r2 52 #. 23 38
+  51r2 52 #. 13 2
+#+end_src
+
+#+RESULTS:
+: 1234
+: 
+: 678
+
+** more digits
+
+The following verb calculates the bases for each digit for (x choose y) combinations.
+
+#+begin_src J :session a
+  chbas =: 13 : '|. x ((- % |.@>:@])) x: i. y'
+  52 chbas 7
+  7!52
+#+end_src
+
+#+RESULTS:
+: 46r7 47r6 48r5 49r4 50r3 51r2 52
+: 
+: 133784560
+
+
+We can subtract 1 from each digit to get the highest well-formed number in our base:
+
+#+begin_src J :session a
+  NB. these should produce the same result:
+  (52 chbas 7) - 1
+#+end_src
+
+#+RESULTS:
+: 39r7 41r6 43r5 45r4 47r3 49r2 51
+
+Converting these "digits" back to a decimal number (with #.) and then adding 1 should give us the total number of combinations.
+
+#+begin_src J :session a
+  NB. these should produce the same result:
+  1 + (52 chbas 7) #. (52 chbas 7) - 1
+  7!52 
+#+end_src
+
+#+RESULTS:
+: 133784560
+: 
+: 133784560
+
+Here's a base 10 analogy to make it clearer:
+
+#+begin_src J :session a
+      10 10 10 10 #: 1000 - 1
+  1 + 10 10 10 10 #. 0 9 9 9
+#+end_src
+
+#+RESULTS:
+: 0 9 9 9
+: 
+: 1000
+
