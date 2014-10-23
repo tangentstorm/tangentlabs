@@ -25,13 +25,14 @@ module IntListAsNum where
 -- In this module, we'll do just that, for no particular reason
 -- other than to prove that we can. :)
 
-instance Num [Integer] where
+instance (Num a, Eq a) => Num [a] where
 
     -- We'll convert integers into a list of bits.
     fromInteger n
         | n <  0 = negate $ fromInteger (n * (-1))
-        | n == 0 = []
-        | n >  0 = (fromInteger rest) ++ [bit]
+        | n == 0 = [0]
+        | n == 1 = [1]
+        | n >  0 = (fromInteger rest) ++ (fromInteger bit)
                    where bit  = n `mod` 2
                          rest = (n-bit) `div` 2
     abs = id
@@ -46,16 +47,19 @@ instance Num [Integer] where
 -- Since someone could manually add non-boolean integers to the
 -- list, we'll just treat anything other than a 0 as a 1.
 
+myOr :: (Num a, Eq a) => a -> a -> a
 myOr 0 0 = 0
 myOr 0 _ = 1
 myOr _ 0 = 1
 myOr _ _ = 1
 
+myAnd :: (Num a, Eq a) => a -> a -> a
 myAnd 0 0 = 0
 myAnd 0 _ = 0
 myAnd _ 0 = 0
 myAnd _ _ = 1
 
+myXor :: (Num a, Eq a) => a -> a -> a
 myXor 0 0 = 0
 myXor 0 _ = 1
 myXor _ 0 = 1
@@ -78,5 +82,6 @@ braid op xs ys
 
 -- the final result:
 --
--- *IntListAsNum> take 4 10 :: [Integer]
+-- *IntListAsNum> take 4 10
 -- [1,0,1,0]
+
