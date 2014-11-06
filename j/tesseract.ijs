@@ -42,7 +42,7 @@ deg =: 1 : 'm * 1r180p1'
 NB. matrix to rotate by y radians in x0 dimensions using the x1,x2 plane
 romat =: dyad define
   assert. (d > x1,x2) *. (x1 ~: x2) [ 'd x1 x2' =. x
-  'ns s c' =. _1 1 2 o. y
+  'ns s c' =. _1 1 2 o y
   ns (<x2,x1) } s (<x1,x2) } c ((x2,x2); x1, x1) } (=i.d)
 )
 
@@ -51,9 +51,19 @@ NB. TODO: add some sliders to control the matrix (see "deoptim" demo)
 
 NB. verb to calculate adjacency matrix for the hypercube vertices
 NB. (vertices here are adjacent when they differ by 1 bit)
-adj=: [: I. 1 = [: +/"1 [: = "1/~ ]
+adj=: [: I. 1 = [: +/"1 ~:"1/~
 
-NB. same thing for opposite corner of a face.
-NB. (vertices here are opposite when they differ by 2 bits)
-opp=: [: I. 2 = [: +/"1 [: = "1/~ ]
+NB. verb to find the unique edges.
+NB. returns a k*2 array with two ints per row, representing node indices
+edges =: (0 0 -.~ [: ,/ (i.@#) ([ ,"0 < # ])"0 1 adj)
 
+NB. dot product
+dot =: (+/ .*)
+
+NB. rot3d = roll, pitch, yaw
+rot3d =: [: dot/ (3 1 2, 3 0 2 ,: 3 0 1) (romat"1 0) 3 {. ]
+
+lines =: [: ,/"2 [: -: ]
+
+NB. draw a cube:
+gdlines gddraw lines ortho2d (rot3d 30 25 50 deg) dot~  e{v 3
