@@ -1,0 +1,32 @@
+loaddefs "ansi;
+nil := nil;
+
+ph is phrase;
+
+meta := ["rule "def,[
+  "syntax  ("* "rule),
+  "rule    ("> "iden "'=' "expr "'.'),
+  "expr    ("> "term ("* "'|' "term)),
+  "iden    ("> "alpha ("* "sub "alnum)),
+  "alpha   ("! "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ),
+  "digit   ("! "0123456789),
+  "alnum   ("| "digit "alpha),
+  "term    ("* "factor ),
+  "rep     ("> (ph'{') "expr (ph'}')),
+  "opt     ("> (ph'[') "expr (ph']')),
+  "grp     ("> (ph'(') "expr (ph')')),
+  "factor  ("| "iden "char "rep "opt "grp "lit "ext),
+  "char    ("> "'"' ". "'"'),
+  "lit     ("> "'`' "iden),
+  "ext     ("> "'!' "iden)]];
+
+
+% res′ is parsed text;
+gram is op g s {
+  begin
+    for row with second g do begin
+      rule def := row;
+      emit "|B rule "|g (link each cstr chunks) "|w
+    end endfor;
+    start := head second g
+  end }
