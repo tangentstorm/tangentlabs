@@ -358,11 +358,11 @@ stack := []
 
 bar := link ' ' (fg "K) '|' (fg "w) ' '
 
-push is op x {
-  nonlocal stack; stack := stack link x }
+push is op x { nonlocal stack; stack := stack link x };
 
-pop is op x {
-  nonlocal stack; res stack := [last, front] stack; res }
+pop is { nonlocal stack; res stack := [last, front] stack; res };
+
+reset is { nonlocal stack; stack := [] };
 
 prompt is { readscreen link (fg "r) ' > ' (fg "w) };
 
