@@ -1,21 +1,24 @@
 #include <math.h>
 #include <stdio.h>
 
+#define maxv 64
+#define mask 63
+
 int main() {
-  int c=0;
-  for (int i0=0;i0<(1<<6);i0++)
-  for (int i1=0;i1<(1<<6);i1++)
-  for (int i2=0;i2<(1<<6);i2++)
-  for (int i3=0;i3<(1<<6);i3++)
-  for (int i4=0;i4<(1<<6);i4++)
-  for (int i5=0;i5<(1<<6);i5++) if (!((i0+i1+i2+i3+i4+i5)%(1<<6))) c++;
-  printf("there are %i cases where 6 6-bit numbers summed (mod 1<<6) to 0", c);
+  long c=0,t=0;
+  for (long i0=0;        i0<maxv; i0++)
+  for (long i1=0, s1=i0; i1<maxv; i1++,s1++)
+  for (long i2=0, s2=s1; i2<maxv; i2++,s2++)
+  for (long i3=0, s3=s2; i3<maxv; i3++,s3++)
+  for (long i4=0, s4=s3; i4<maxv; i4++,s4++)
+  for (long i5=0, s5=s4; i5<maxv; i5++,s5++) { t++; if (!(s5 & mask)) c++; }
+  printf("in %li/%li cases, 6 6-bit numbers summed (& 63) to 0", c, t);
 }
 
 /* output
 ---------
-there are 1073741824 cases where 6 6-bit numbers summed (mod 1<<6) to 0
-real    7m26.177s
-user    7m25.259s
-sys     0m0.001s
+in 1073741824/68719476736 cases, 6 6-bit numbers summed (& 63) to 0
+real    4m34.963s
+user    4m33.293s
+sys     0m0.000s
 */
