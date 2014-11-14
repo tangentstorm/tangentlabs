@@ -14,7 +14,8 @@ section 'substitution';
 % --------------------------------------------------;
 
 subs is op dict expr {
-  if any empty dict expr then expr
+  if dict = "no then "no
+  elseif any empty dict expr then expr
   else
     k v := cols ((floor(tally dict /2) 2) reshape dict);
     if expr in k then v@( find expr k )
@@ -108,7 +109,7 @@ cheq !( unify [ 1 "vs "$a] ["$x "vs 2]) !( "$x 1 "$a 2 );
 cheq !( unify [ 1 "vs "$a] ["$x "vs 2]) !( "$x 1 "$a 2 );
 
 cheq !( unify ["$a "$a] [1 2]) !( "no );
-cheq !( unify ["$a "$a] [1 1]) !( "a 1 );
+cheq !( unify ["$a "$a] [1 1]) !( "$a 1 );
 
 cheq !( unify ["$a ["$a]] [1 [1]]) !( "$a 1 );
 cheq !( unify ["$a "$a] [[1] [1]]) !( "$a [1] );
@@ -172,13 +173,13 @@ where is op rel keyvals {
 % relational algebra tests;
 
 ab := [ "a "b, [ "a1 "b1, "a2 "b2 ]];
-cheq  !( ab rename "a "AA ) !( ["AA "b] [ "a1 "b1, "a2 "b2 ]);
+cheq  !( ab rename "a "AA ) !( ("AA "b) [ "a1 "b1, "a2 "b2 ]);
 
-cheq  !( ab select "a )     !( ["a]     [ "a1, "a2 ] );
-cheq  !( ab select "b )     !( ["b]     [ "b1, "b2 ] );
+cheq  !( ab select "a )     !( ("a) [ "a1, "a2 ] );
+cheq  !( ab select "b )     !( ("b) [ "b1, "b2 ] );
 
 % okay (for now?) to select the same column twice;
-cheq  !( ab select "b "b)   !( ["b "b] [ "b1 "b1, "b2 "b2 ]);
+cheq  !( ab select "b "b)   !( ("b "b) [ "b1 "b1, "b2 "b2 ]);
 
 % but rows should be unique;
 bc := [ "b "c, [ "b3 "c1, "b2 "c1, "b1 "c2 ]];
@@ -186,8 +187,8 @@ cheq  !( bc select "c )  !( "c [ "c1, "c2 ] );
 cheq  !( bc select "b )  !( "b [ "b3, "b2, "b1 ] );
 
 cd := [ "c "d, [ "c1 "d1, "c2 "d2, "c3 "d1 ]];
-cheq !( cd where "d "d1 ) !( [ "c "d ] [ "c1 "d1, "c3 "d1 ]);
-cheq !( cd where "d "d1 "c "c1 ) !( [ "c "d ] [ "c1 "d1 ]);
+cheq !( cd where "d "d1 ) !( ( "c "d ) [ "c1 "d1, "c3 "d1 ]);
+cheq !( cd where "d "d1 "c "c1 ) !( ( "c "d ) [ "c1 "d1 ]);
 
 
 
@@ -231,9 +232,10 @@ syntax := [ "synid   "fields     "rule,
   "monad   ("$p)        ("^ "$p)
 ]];
 
-GlyphView IS { Master select "const "glyph };
-glyph IS TOTAL ( GlyphView relate );
+c2gV IS { Master select "const "glyph };
+glyph IS TOTAL ( c2gV relate );
 
+cheq !( (master select "alias "glyph) relate "*. "-> "-. ) !( words '⇒ ∧ ¬' );
 cheq !( (master select "alias "glyph) relate "A. "E. ) !( words '∀ ∃' );
 cheq !( glyph "A. "x "E. "y ) !( words '∀ x ∃ y' );
 
@@ -268,7 +270,7 @@ fmt is op node { link each string content gentoks node };
 %cheq !( each fmt "top "bot "forall "exists "x ) !( '⊤' '⊥' '∀' '∃' 'x' );
 cheq !( fmt ("P "x))                             !( 'P(x)' );
 cheq !( fmt  "forall ["x] ["P "x]  )             !( '∀x[P(x)]' );
-cheq !( fmt ["forall "x ["implies "x "top]])     !( '∀x(x⇒⊤)'  );
+cheq !( fmt ["forall "x ["implies "x "top]])     !( '∀x[x⇒⊤]'  );
 
 
 section 'bitvars (truth tables)';
