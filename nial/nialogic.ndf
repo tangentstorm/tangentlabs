@@ -378,3 +378,62 @@ repl is {
   until done endrepeat };
 
 # repl
+
+
+
+section 'proofs';
+% --------------------------------------------------;
+
+ap is op rule expr {
+  % apply rule to expression;
+  e0 oper e1 := rule;
+  (e0 unify expr) subs e1 }
+
+apat is op rule path x {
+  % apply at: apply rule at a particular location in x;
+  ((rule ap) (path reach x)) path deepplace x}
+
+% ~ and ^ are used in describing low-level proofs
+% low-level proofs are just sequences of rewrite-rule
+% applications at different points in the expression.
+% the steps are given as a sequence of [rule,path] pairs;
+~ is reverse;
+^ := [[]]; % empty path. (replace entire expr);
+
+aprules is op p steps {
+  % apply rules for low-level proof;
+  res := p;
+  for rp with steps do
+    rule path := rp; if path = ^ then path := [] endif;
+    res := apat rule path res
+  endfor }
+
+section 'proof tests';
+% --------------------------------------------------;
+
+% exponent rule;
+r0 := rExpMul := (("$x "^ "$y) "^ "$z) "= ("$x "^ ("$y "* "$z));
+
+% commutative rule for *;
+r1 := rMulCom := ("$x "* "$y) "= ("$y "* "$x);
+
+p := (("x "^ "y) "^ "z);
+q := (("x "^ "z) "^ "y);
+
+r := p;
+r := r0 ap p;
+r := apat r1 [2] r;
+r := reverse r0 ap r;
+
+cheq !( r ) !( q );
+cheq !( (~r0) ap apat r1 [2] (r0 ap p) ) !( q );
+
+% we can get q from p by following this series of rule applications;
+cheq !( p aprules [r0 ^, r1 [2], [~r0, ^]] ) !( q )
+
+# TODO: high level proofs like this:
+t := { show p "= q (
+      (("x "^ "y) "^ "z)   "| "r0
+   "=  ("x "^ ("y "* "z))  "| "r1
+   "=  ("x "^ ("z "* "y))  "| "_r
+   "= (("x "^ "z) "^ "y) ) };
