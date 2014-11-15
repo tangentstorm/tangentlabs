@@ -429,11 +429,11 @@ cheq !( r ) !( q );
 cheq !( (~r0) ap apat r1 [2] (r0 ap p) ) !( q );
 
 % we can get q from p by following this series of rule applications;
-cheq !( p aprules [r0 ^, r1 [2], [~r0, ^]] ) !( q )
+cheq !( p aprules [r0, ^] [r1, 2] [~r0, ^] ) !( q );
 
 # TODO: high level proofs like this:
 t := { show p "= q (
-      (("x "^ "y) "^ "z)   "| "r0
-   "=  ("x "^ ("y "* "z))  "| "r1
-   "=  ("x "^ ("z "* "y))  "| "_r
-   "= (("x "^ "z) "^ "y) ) };
+      (("x "^ "y) "^ "z)   [ "r0, ^ ]
+   "=  ("x "^ ("y "* "z))  [ "r1, 2 ]
+   "=  ("x "^ ("z "* "y))  [ "~0, ^ ]
+   "= (("x "^ "z) "^ "y) ) }
