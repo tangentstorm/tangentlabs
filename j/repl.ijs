@@ -10,13 +10,11 @@ main =: verb define
   echo 'main loop. type ''bye'' to exit.'
   echo '--------------------------------'
   while. (s:'`bye') ~: s:<input=:readln'' do.
-    echo ":input
+    echo ".input
   end.
   echo '--------------------------------'
   echo 'loop complete. returning to j.'
   NB. or put (  exit'' ) here to exit j.
 )
-
-
 
 donext 'main _'
