@@ -1,21 +1,42 @@
+NB. dos (vga) font viewer.
+NB. vga fonts were 256*16
+
 load 'viewmat'
 ord  =: 256 #: a. i. ]
-bits =: _8&{.#:]
+bits =: _8 {.#:
 fnt  =: fread 'r:\old\pascal.cvs\inc\sabren.fnt'
 
-NB. this shows the letter 'k' as a graphic
-viewmat (ord 'k') { >256 16 $(_8&{.#:) each ord  fnt
 
-NB. every 16 makes a char
-chars =: _16<\ord fnt
-bits =: (_8&{. #:)"0 
-maps =: bits > chars    NB. 256 16 18
+NB. each character is 16 bytes
+assert 256 16 8 -: $ maps =: >bits"0 L:0] _16<\ord fnt
 
-16 16& $ <"2 maps NB. 16 x 16 boxed
-
-NB. i don't know how to get this into bitmap format 
-NB. even though it's basically the same as the tetris thing i made.
-NB. this shows 'abc' as ascii:
-;/>'.x'{~ >(ord 'abc') { maps
+chmp=: maps {~ ord
+zoom=: 2 # 2 #"0 1 ]  NB. 1 pixel becomes 4
 
 
+opq =: 16bff000000 NB. opaque mask
+red =:   16bff0000 NB. red
+fgc =:   16bffcc44 NB. gold
+
+NB. cls : clear screen
+NB. ------------------
+cls =: glpaint@glfill [ [: glrgb 0 0,0:
+
+
+NB. color (x y) cxy text
+NB. --------------------
+cxy =: adverb define 
+  [:
+:
+  bmp =. ,./^:2 chmp _16[\ y
+  glpaint@glpixels m, (|.@$,,) opq+x *x:bmp
+)
+ 
+
+demo =: 3 : 0
+  cls''
+  red 16 32 cxy a.
+  fgc 16 16  cxy 'hello world'
+)
+
+demo''
