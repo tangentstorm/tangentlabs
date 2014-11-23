@@ -1,31 +1,17 @@
-NB. Object class
-NB. ----------------------------------------------------------
-coclass 'Object'
-
-create  =: verb def ''
-class   =: verb def ''
-destroy =: verb define
-  NB. echo '** DESTROYED!! **'
-  codestroy ''
-)
-
+NB. boxer: class and s-expression parser to create nested objects
+
 NB. stacks of like objects
 NB. ----------------------------------------------------------
 coclass  'Stack'
-coinsert 'Object'
 
 create =: monad def ('data =: y')
-pop    =: monad define
- res  =. {. data
- data =: }. data
- res
-)
+pop    =: monad def ('>[/''res data'' =: split data')
 push   =: monad def ('data =: y , data')
 append =: monad def ('data =: data , y')
 extend =: append
-tos    =: monad def ('> {. data')    NB. top of stack
+top    =: monad def ('> {. data')    NB. top of stack
 result =: monad def ('data')
-
+destroy=: codestroy
 
 NB. stacks of boxed objects (mixed types)
 NB. ----------------------------------------------------------
@@ -35,15 +21,15 @@ coinsert 'Stack'
 NB. overrides:
 extend =: [: extend_Stack_ f. <
 push   =: [:   push_Stack_ f. <
-tos    =: [: > tos_Stack_  f.
+tos    =: [: > top_Stack_  f.
 pop    =: [: > pop_Stack_  f.
 
-NB. This builds trees of boxed objects.
+
+NB. Boxers build trees of boxed objects.
 NB. ---------------------------------------------------------
 coclass  'Boxer'
-coinsert 'Object'
 
-create =: verb define
+create =: monad define
   state =: 0
   depth =: 0
   main  =: '' conew 'BoxStack'
@@ -51,7 +37,7 @@ create =: verb define
   here  =: main
 )
 
-pushstate =: verb define
+pushstate =: monad define
   depth =: depth + 1
   push__path state
   push__path here
@@ -59,7 +45,7 @@ pushstate =: verb define
   state =: y
 )
 
-popstate =: verb define
+popstate =: monad define
   tmp   =. result__here''
   there =. here
   here  =: pop__path''
@@ -72,60 +58,124 @@ popstate =: verb define
 append =: monad def 'append__here y'
 extend =: monad def 'extend__here y'
 result =: monad def 'result__main _'
-
-NB. generic parser stuff
-NB. ----------------------------------------------------------
-cocurrent 'base'
-
-NB. ws y -> is character y whitespace?
-ws=: 32 >: (a.i.])
-
-
-NB. sx text -> tree : a simple s-expression parser
-NB. ---------------------------------------------------------
-
-digits =: '0123456789'
-
-sx =: verb define
-  if. (0 = # y) do. a: return. end.
-  i =. 0 [  (bx =. a: conew 'Boxer') [ buf =. ''  NB. buffer (current work area)
-
-  while. i < # y do.
-    ch   =. i { y [ 'drop emit hold' =. 0 0 0
-    echo'  state: ',(":state__bx),' ch: ''',(":ch),'''  depth: ',(":depth__bx)
-    select. state__bx
-    case. 0 do.  NB. default state (at start / between phrases)
-      if. ws ch  do. drop =. 1 NB. just skip whitespace
-      elseif. ch = '(' do. drop =. 1 [ pushstate__bx 0
-      elseif. ch = ')' do.
-        if. depth__bx <: 0 do. echo 'unexpected (' throw.
-        else. popstate__bx'' [ drop =. 1 end.
-      elseif. ch e. digits do. pushstate__bx 1 end.
-    case. 1 do.
-      if. -. ch e. digits do. popstate__bx '' [ 'hold emit' =. 1 1 end.
-    end. NB. of select.
-
-    NB. end of loop cleanups
-    if. -. hold do. i =. i + 1 end.
-    if. -. drop +. hold do. buf =. buf, ch end.  NB. consume the character.
-    if. emit *. # buf do. (append__bx <buf) [ buf =. '' end.
-  end.
-
-  if. # buf do. append__bx buf end.
-  while. depth__bx > 0 do. popstate__bx '' end.
-  (result__bx'') [ codestroy__bx''
+destroy=: verb define
+  coerase here,path
+  codestroy''
 )
 
-assert a: = sx ''
-echo '-- expecting an error here:'
-sx ')...'
-echo '-- ok, now let''s parse an s-expression:'
-state =: 0
-echo sx '1 ( 2(3 4 5  ) 6) 7'
-NB. ┌─┬─────────────┬─┐
-NB. │1│┌─┬───────┬─┐│7│
-NB. │ ││2│┌─┬─┬─┐│6││ │
-NB. │ ││ ││3│4│5││ ││ │
-NB. │ ││ │└─┴─┴─┘│ ││ │
-NB. │ │└─┴───────┴─┘│ │
-NB. └─┴─────────────┴─┘
+
+NB. helpers for s-expression parser
+NB. ----------------------------------------------------------
+cocurrent'sx'
+
+ord     =: a. i. ]
+chr     =: a. {~ ]
+between =: ( ([ >: {.@]) *. ([ <: {:@]) )
+span    =: ([ + [: i. >:@-~)/
+chspan  =: span&.ord L:0
+groups  =: chspan cut ' ''  (  )  09  AZ  `  az'
+
+NB. escape special characters in rx sets
+altesc  =: ((];'\',])"0 '^[\]-')&stringreplace
+
+NB. m subst n y : replace leaves matching m with n in tree y
+subst =: 2 :'(]`(n"_))@.(-:m"_) L:0'
+
+NB. verb to classify x according to groups y:
+class =: (1 i.~e.S:0)"0 _
+
+
+NB. sx text -> tree : a simple s-expression parser
+NB. ---------------------------------------------------------
+spaces =: a.{~ i.33
+syntax =:'()[]{}''`,@'
+others =: a.-.spaces,syntax,'"'
+digits =: chspan'09'
+'LP RP LB RB LC RC Q QQ UQ AT'=: s:;/syntax  NB. names for boxed tokens
+
+nxch =: verb define
+  NB. (private) return next character from s and increment cp
+  cp=:cp+1 if. cp<ep do. ch=:cp{s else. ch=:0{a. end.
+)
+
+nxtok=: verb define
+  NB. (private) next s-expr token from s, starting at index cp
+  NB. spec:  cp′ = cp + #tok′ ...
+  tok=.''
+  NB. skip whitespace
+  while. (ch e. spaces) *. (cp < ep) do. nxch'' end.
+  if. cp < ep do.
+    NB. single char tokens become boxed symbols
+    if. ch e. syntax do. nxch tok=.s:<ch
+    NB. strings (double quoted, with \" allowed) remain literals
+    elseif. ch = '"' do.
+      while. ((nxch'') ~: '"') *. (cp < ep) do.
+        if. ch='\' do. tok=.tok,nxch'' else. tok=.tok,ch end.
+      end.
+      nxch'' NB. drop trailing '"'
+    NB. anything else is a number or a symbol
+    elseif. do.
+      while. (ch e. others) *. (cp<ep) do. nxch tok=.tok,ch end.
+      if. *./tok e. digits do. tok=.".tok else. tok=.s:<tok end.
+    end.
+  else. ok end.
+  <tok return. NB. the boxed token.
+)
+
+tokens=: verb define
+  NB. treat string y as s-expr and return boxed tokens
+  ep =: # s=:y
+  if. ep=0 do. y
+  else. NB. spec: cp′=#s
+    ch =: (cp=:0) { s=:y [ r=:''
+    while. cp < ep do. r=:r,nxtok'' end.
+  end.
+)
+
+NB. s-expression parser
+
+parse =: verb define
+  if. # toks =. tokens y do.
+    bx =. a: conew 'Boxer'
+    try.
+      for_tok. toks do.
+        select. >tok
+        case. LP do. pushstate__bx 0
+        case. RP do. popstate__bx''
+        case.    do. append__bx tok
+        end.
+      end.
+      (r=.result__bx'') [ destroy__bx''
+    catch.
+      destroy__bx''
+      'malformed s-expression' throw.
+    end.
+  else. r=.>a: end.
+  r return.
+)
+
+sx_z_ =: parse_sx_
+
+NB. mini test suite
+a =: [: assert ]
+
+a        a: = sx ''
+a      (<1) = sx '1'
+a     (1;2) = sx '1 2'
+
+NB.  fix memory leak here!
+verb :0 ''
+  goterr=.0 try. sx ')...' catch. goterr=.1 end.
+  a goterr
+)
+
+NB. ok, now let''s parse a valid s-expression:
+a (":sx '1 ( 2(3 4 5  ) 6) 7')={.(0 :0)
+┌─┬─────────────┬─┐
+│1│┌─┬───────┬─┐│7│
+│ ││2│┌─┬─┬─┐│6││ │
+│ ││ ││3│4│5││ ││ │
+│ ││ │└─┴─┴─┘│ ││ │
+│ │└─┴───────┴─┘│ │
+└─┴─────────────┴─┘
+)
