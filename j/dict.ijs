@@ -34,9 +34,22 @@ put =: 2 : 0
 )
 
 
+
 NB. test case / example usage:
 
-assert ({:0 :0) -: ((sym 'a b c') dict ('apple';'banana';'cherry')) get sym 'b a'
+NB.assert (}:0 :0) -:": ((sym 'a b c') dict ('apple';'banana';'cherry')) get sym 'b a'
+
+NB. unicode box chars. (j magically translates these to unicode for display)
+uboxch=: [: (9!:7) (a.{~16 17 18 19 20 21 22 23 24 25 26)"_
+NB. the same translation as a dictionary, so we can compare to unicode strings.
+a2uboxd=:(16 26 17 18 25 22 23 24 dict 9484 9472 9516 9488 9474 9492 9524 9496)
+NB. function to apply the map to ascii string y, but leave other chars unchanged:
+a2ubox=: (a2uboxd get ::] ])&.(3 u:])"0
+
+lines =: [: (<;._2) 7 u: ]
+shouldbe =: [: assert (>@lines@[) -: a2ubox@]
+
+(0 : 0) shouldbe ": ((sym 'a b c') dict ('apple';'banana';'cherry')) get sym 'b a'
 ┌──────┬─────┐
 │banana│apple│
 └──────┴─────┘
