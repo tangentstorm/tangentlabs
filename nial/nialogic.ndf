@@ -71,7 +71,6 @@ unify is op x y {
   elseif and[isvar x, not or[isvar y, x intree y]] then [ x, y ]
   elseif and[isvar y, not or[isvar x, y intree x]] then [ y, x ]
   elseif or[atomic x, atomic y, diverse lengths x y] then "no
-  elseif (shape x) ~= (shape y) then "no
   else hu := unify (each head x y);
     if hu = "no then "no
     else
