@@ -8,7 +8,7 @@ NB. constructors:
 emptyd =: a:,a:
 
 NB. x:K map y:V → D(K,V)
-dict =: ,&< [ ('key/val lengths must match' assert =&#)
+dict =: ,&<&, [ ('key/val lengths must match' assert =&#)
 
 NB. keys y:D → K
 keys=: >@[/
