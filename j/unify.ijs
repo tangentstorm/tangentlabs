@@ -28,7 +28,7 @@ dtype =: 3!:0 NB. datatype of y
 isSym =: 65536=dtype
 isBox =: 32=dtype
 
-inRange =: ([ > {.@]) *. ([ < {:@])
+inRange =: (> {.) *. (< {:)
 isVar   =: 0:`(inRange&('$ %'S))@.isSym
 inTree  =: +./@(e.S:0)
 
@@ -40,10 +40,10 @@ unify =: (4 : 0) NB. x uw y : 0|dict → dict if x unifies with y, else 0
   elseif. (isVar x) > ((isVar y) +. (x inTree y)) do. x dict y
   elseif. (isVar y) > ((isVar x) +. (y inTree x)) do. y dict x
   elseif. +./(atomic x),(atomic y),(x ~:&# y) do. nope
-  elseif. (1=#x)*.(x *.&isBox y) do. ,x unify & > y
+  elseif. (1=#x) *. (x *.&isBox y) do. , x unify & > y
   elseif. do.
-    if. (hu =. ({.x) unify {.y) -: nope do. nope     NB. unify heads
-    else. tu =. (hu subs }. x) unify (hu subs }. y)  NB. unify tails
+    if. (hu =. x unify & {. y) -: nope do. nope   NB. unify heads
+    else. tu =. x unify & (hu subs }.) y          NB. unify tails
       if. tu -: nope do. nope
       else. tu , L:_1 hu end.
     end.
