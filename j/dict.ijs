@@ -37,8 +37,6 @@ put =: 2 : 0
 
 NB. test case / example usage:
 
-NB.assert (}:0 :0) -:": ((sym 'a b c') dict ('apple';'banana';'cherry')) get sym 'b a'
-
 NB. unicode box chars. (j magically translates these to unicode for display)
 uboxch=: [: (9!:7) (a.{~16 17 18 19 20 21 22 23 24 25 26)"_
 NB. the same translation as a dictionary, so we can compare to unicode strings.
@@ -54,6 +52,9 @@ shouldbe =: [: assert (>@lines@[) -: a2ubox@]
 │banana│apple│
 └──────┴─────┘
 )
+
+NB. for a version of this that doesn't require dicts, see 'cheq.ijs''
+
 
 NB. rev y:D → D  (reverse keys and values)
 rev =: (}.,{.) : [:
