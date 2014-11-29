@@ -1,4 +1,6 @@
 NB. boxer: class and s-expression parser to create nested objects
+
+load 'cheq.ijs' NB. for unit tests at the end
 
 NB. stacks of like objects
 NB. ----------------------------------------------------------
@@ -49,7 +51,7 @@ popstate =: monad define
   tmp   =. result__here''
   there =. here
   here  =: pop__path''
-  if. # tmp do. extend__here tmp end.
+  if. # tmp do. extend__here tmp else. extend__here a: end.
   state =: pop__path ''
   depth =: depth - 1
   destroy__there''
@@ -154,7 +156,10 @@ parse =: verb define
   r return.
 )
 
-sx_z_ =: parse_sx_
+NB. dtw = delete trailing whitespace (like dtb, but with newlines, etc)
+dtw =: #~ ([: +./\. 32 < 3&u:)
+sx_z_ =: parse_sx_@dtw_sx_
+
 
 NB. mini test suite
 a =: [: assert ]
@@ -170,7 +175,7 @@ verb :0 ''
 )
 
 NB. ok, now let''s parse a valid s-expression:
-a (":sx '1 ( 2(3 4 5  ) 6) 7')={.(0 :0)
+cheq sx '1 ( 2(3 4 5  ) 6) 7'
 ┌─┬─────────────┬─┐
 │1│┌─┬───────┬─┐│7│
 │ ││2│┌─┬─┬─┐│6││ │
@@ -178,4 +183,16 @@ a (":sx '1 ( 2(3 4 5  ) 6) 7')={.(0 :0)
 │ ││ │└─┴─┴─┘│ ││ │
 │ │└─┴───────┴─┘│ │
 └─┴─────────────┴─┘
+)
+
+cheq sx' () (()) (() (())) '
+┌──┬────┬─────────┐
+│┌┐│┌──┐│┌──┬────┐│
+│││││┌┐│││┌┐│┌──┐││
+│└┘│││││││││││┌┐│││
+│  ││└┘│││└┘│││││││
+│  │└──┘││  ││└┘│││
+│  │    ││  │└──┘││
+│  │    │└──┴────┘│
+└──┴────┴─────────┘
 )
