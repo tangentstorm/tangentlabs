@@ -1,4 +1,5 @@
 NB. cheq y : checks that the result of y is equal to the following noun
+cocurrent'cheq'
 
 NB. unicode box chars. (j magically translates these to unicode for display)
 uboxch=: [: (9!:7) (a.{~16 17 18 19 20 21 22 23 24 25 26)"_
@@ -24,9 +25,10 @@ cheq =: 3 : 0
     echo 'expect=:'
     echo expect
     'actual -: expect' assert actual -: expect
+    0$0
   end.
 )
-
+cheq_z_=:cheq_cheq_
 
 NB. examples:
 
