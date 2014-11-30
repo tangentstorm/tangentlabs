@@ -104,6 +104,8 @@ NB. de morgan simplified for j:
 a   (A/-.p,q,r,s) = (-.V/p,q,r,s)
 a   (V/-.p,q,r,s) = (-.A/p,q,r,s)
 
+a (-.@A = V&-.)~ p,q,r,s
+a (-.@V = A&-.)~ p,q,r,s
 
 
 NB. words that check properties of logical operators.
