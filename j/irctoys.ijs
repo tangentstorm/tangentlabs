@@ -24,7 +24,7 @@ Note c,.1j1#!.(c=.'|')"1] 4 4 $ hext
 lol =: (# $ 1 , 0:) # ]
 blit =: ([:(hext{~#.@,L:0)@(lol"1)@lol 2 2 <;.3 ])
 
-NB. N×10 bitmaps 0=circles m=mandelbrot set j='YAYJ' 
+NB. N×10 bitmaps 0=circles m=mandelbrot set j='YAYJ'
 pic0 =: +./ 0.2 0.7 (0.05>|@:-)"0 _ m=:(%>./@,)|j./~ i:4.5
 Note blit pic0
 
@@ -47,8 +47,7 @@ Note   blit picm
 )
 
 
-
-bmp=:([: #. 'l' = [: (}:"1) 8 9 $ ])
+bmp=:'l'&=;._2@,&';'
 I=:bmp'oolllloo;oooloooo;oooloooo;oooloooo;oooloooo;oooloooo;oooloooo;oolllooo'
 Y=:bmp'oloooloo;oloooloo;oololooo;oolllooo;oooloooo;oooloooo;oooloooo;oooloooo'
 A=:bmp'oooloooo;oololooo;oloooloo;oloooloo;ollllloo;oloooloo;oloooloo;oloooloo'
