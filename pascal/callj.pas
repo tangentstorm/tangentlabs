@@ -44,7 +44,7 @@ function DoRd(j:JJ; s:JS):JS; stdcall;
     readln(r); result:=JS(r);
   end;
 
-var jlib: TLibHandle; j:JJ; s:RawByteString='';
+var jlib: TLibHandle; j:JJ; s:RawByteString='0!:0<''callj.ijs''';
     jcb:TJCBs=(@DoWr, Nil, @DoRd, Nil, Pointer(3));
 begin
   jlib := LoadLibrary('./libj.so');
