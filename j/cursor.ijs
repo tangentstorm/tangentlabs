@@ -100,7 +100,6 @@ run =: verb define
 
 
 cocurrent'base'
-coinsert'ansi'
 
 Cursor_z_ =: conew&'Cursor'
 Editor_z_ =: conew&'Editor'
