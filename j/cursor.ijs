@@ -1,66 +1,77 @@
 NB. a basic cursor class, with support for text terminal display
 
 
+coclass'List'
+
+create =: monad define
+  update y
+)
+update =: monad define
+  value=:y NB. replace all values
+)
+get =: monad define
+  y { value
+)
+ins =: dyad define
+  update x ({., y, }.) value
+)
+del =: verb define
+  1 del y
+:
+  update (y {. value), y + x }.value
+)
+len =: verb define
+  # value
+)
+swap =: verb define
+  (2|.\y) swap y  NB. swap 0 1 2 3 →  1 0 3 2 swap 0 1 2 3
+:
+  update (y{value) x } value
+)
+List_z_ =: conew&'List'
+
+
 coclass'Cursor'
 
 create =: monad define
+  data =: List''
   here =: 0
   setdata y
 )
-
 setdata =: monad define
-  data =: y [ lo =: 0 [ hi =: #y
+  update__data y [ lo =: 0 [ hi =: #y
   nudge 0
 )
-
 ins =: monad define
-  setdata here ({., y, }.) data
+  here ins__data y
   nudge #y
 )
-
 del =: verb define
-  setdata here ({. , }.@}.) data
+  del__data here
 )
-
 swap =: verb define
-  if. -. here e. 0, #data do.
-    setdata ;0 2 1 3 /:~ here (split&.(_1|.])@{. , split@}.) data
-  end.
+  if. -. here e. 0, len__data do. here swap__data here-1 end.
 )
-
 dup =: verb define
   if. here > 0 do. setdata (>: ((<: here) = i. # data)) # data end.
 )
+nudge =: monad define
+  here=: hi <. lo >. here + {.y
+)
+
+coclass 'Editor'
+coinsert 'Cursor kbd'
 
 NB. "tab stops" for each item, since they may have different lengths
 stops =: {:@$@":\
 
 show =: verb define
-  wr data
-  'c w' =. (here&{ , {:) 0,<: stops data
-  ' ^'{~ c = i. 1 >. w
-)
-
-nudge =: monad define
-  here=: hi <. lo >. here + {.y
-)
-
-
-cocurrent'ansi'
-NB.load'ansi.ijs'
-fg =: [: cw '|',]
-reset=: [: cw '|!k|w'"_
-
-coclass 'AnsiCursor'
-coinsert 'ansi'
-coinsert 'Cursor'
-
-show =: verb define
-  wr data [ cw'|$|g'                      NB. draw the data
-  'c w' =. (here&{ , {:) 0,<: stops data
+  boxes =. value__data
+  wr boxes [ cw'|$|g'                     NB. draw the boxed items
+  'c w' =. (here&{ , {:) 0,<: stops boxes
   cw '|K', (u:' ',u:8593) {~ c = i. 1+ w  NB. draw arrow
   cw '|B'
-  try. wr ". ; }. ,(<,' '),. data catch. (cw'|r ')[wr(13!:12)'' end.
+  try. wr ". ; }. ,(<,' '),. boxes catch. (cw'|r ')[wr(13!:12)'' end.
   cw '|w'
 )
 
@@ -76,8 +87,8 @@ run =: verb define
   while. -. done do.
     show''
     select. ch =. a.{~".rk''
-      case. '<';'b';ctrl'B' do. nudge _1
-      case. '>';'f';ctrl'F' do. nudge  1
+      case. L_ARROW;'<';'b';ctrl'B' do. nudge _1
+      case. R_ARROW;'>';'f';ctrl'F' do. nudge  1
       case. 'i' do. ins prompt'|winsert:'
       case. 'x' do. del''
       case. 'd' do. dup''
@@ -87,16 +98,14 @@ run =: verb define
   end.
 )
 
-
 
 cocurrent'base'
 coinsert'ansi'
 
-Cursor =: conew&'Cursor'
-AnsiCursor =: conew&'AnsiCursor'
+Cursor_z_ =: conew&'Cursor'
+Editor_z_ =: conew&'Editor'
 
-cur =: AnsiCursor ;:'i. 3 3'
+ed  =: Editor ;:'i. 3 3'
 
-imx =: [: (9!:29) 1: [ 9!:27
-imx 'run__cur _'
+immex 'run__ed _'
 
