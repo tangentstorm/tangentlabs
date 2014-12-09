@@ -18,7 +18,7 @@ ins =: dyad define
 del =: verb define
   1 del y
 :
-  update (y {. value), y + x }.value
+  update (y {. value), (y + x) }. value
 )
 len =: verb define
   # value
@@ -39,7 +39,7 @@ create =: monad define
   setdata y
 )
 setdata =: monad define
-  update__data y [ lo =: 0 [ hi =: #y
+  update__data y
   nudge 0
 )
 ins =: monad define
@@ -56,6 +56,7 @@ dup =: verb define
   if. here > 0 do. setdata (>: ((<: here) = i. # data)) # data end.
 )
 nudge =: monad define
+  lo =: 0 [ hi =: len__data''
   here=: hi <. lo >. here + {.y
 )
 
