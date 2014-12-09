@@ -8,7 +8,7 @@ NB. -- writing to screen -------------------------
 wr=:0$(1!:2)&2   NB. &2 selects 'screen', so callj intercepts
 cwtrg=: chr _64 + ord'F' NB. trigger character for terminal stuff.
 cwstr=: ('|',cwtrg) charsub ,"1
-cw =: wr@cwstr
+cw =: 0 0 $ wr@cwstr
 cls=:cwstr'|$'
 fg =: [: cw '|',]
 bg =: [: cw '|!',]
