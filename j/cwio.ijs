@@ -3,8 +3,6 @@ NB.
 NB. NOTE: this stuff currently only works when using
 NB. ../pascal/callj.pas as the J frontend.
 
-cc'cwio'
-
 NB. -- writing to screen -------------------------
 wr=:0$(1!:2)&2   NB. &2 selects 'screen', so callj intercepts
 cwtrg=: chr _64 + ord'F' NB. trigger character for terminal stuff.

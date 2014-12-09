@@ -10,6 +10,6 @@ NB. UNAME=:'Linux'[IFRASPI=:0
 0!:0 <BINPATH,'/profile.ijs'
 
 NB. -- startup --
-require'../j/startup.ijs'
-require'../j/cwio.ijs'
+require'~/l/j/startup.ijs'
+require'~/l/j/cwio.ijs'
 chdir'../j'
