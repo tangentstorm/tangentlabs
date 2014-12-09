@@ -22,3 +22,8 @@ chdir =:1!:44
   NB. (so i have a place to put work-in progress/debug code to run at startup)
   if. fexist '~/l/j/scratch.ijs' do. load '~/l/j/scratch.ijs' end.
 )
+
+(3 : 0) ^:( UNAME-:'FreeBSD' )
+  load 'freebsd.ijs'
+)
+
