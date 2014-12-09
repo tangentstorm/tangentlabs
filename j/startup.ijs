@@ -4,7 +4,7 @@ cocurrent'z'
 
 cc =: cocurrent :: coname f.
 module =: cocurrent
-import =: coinsert@require
+import =: coinsert [ require
 
 immex =: [:(9!:29)1: [9!:27 NB. schedule y:str for immediate execution
 
