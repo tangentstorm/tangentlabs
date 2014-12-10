@@ -4,7 +4,6 @@ NB.
 NB. you can use these to test whot arbitrary combinators do.
 cocurrent'symbolic'
 
-
 isbox =: 32 = 3!:0
 isint =:  4 = 3!:0
 isbit =:  1 = 3!:0
@@ -12,30 +11,28 @@ isbit =:  1 = 3!:0
 typ =: (4!:0)
 ob =: ^:_1
 
-
-
-
 NB. name newv -> create symbolic verb that uses parens
-newv =: 1 : 0  
-  '(', (": m), ' ', (": y), ')' 
+newv =: 1 : 0
+  '(', (": m), ' ', (": y), ')'
 :
   '(', (": x) ,' ', (": m) ,' ', (": y), ')'
 )
+VSYM=:newv
 
-NB. name boxv -> create symbolic verb that renders as boxes 
+NB. name boxv -> create symbolic verb that renders as boxes
 boxv =: 1 : ('(": m) ; (": y)';':';'(": x) ; (": m) ; (": y)')
 
 NB. obverses (custom inverses)
-updn =: ([: |. 'abcdefghijklmnopqrstuvwxyz'&i. { 7 u: 'ɐqɔpǝɟƃɥᴉɾʞ?ɯuodbɹsʇnʌʍxʎz'"_)
+updn =: ([: |. 'abcdefghijklmnopqrstuvwxyz'&i. { 7 u: 'ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz'"_)
 ov =: 1 : ' (m newv) :. ((updn m) newv)'
 
 NB. create symbolic noun:
-nsym  =: 13 : 0
+nsym  =: 3 : 0
    ". y , '=: ''' , y , ''''
 )
 
 NB. creaty symbolic verb:
-vsym =: 13 : 0
+vsym =: 3 : 0
   ". , y , '=: ''' , y , ''' ov'
 )
 
@@ -66,7 +63,7 @@ toirc =: 3 : 0
    ys =. ys -. a:
   if. (# ys) = 1 do.
     echo ') ' , x , '=:', (,>ys)
-  else. 
+  else.
     echo   ').. ', x , ' =: ',  >{. ys
     for_ln. }.}:ys do.
       echo ').. ', >ln
@@ -77,7 +74,7 @@ toirc =: 3 : 0
 
 NB. generate the irc version
 'updn' toirc '([: |. ''abcdefghijklmnopqrstuvwxyz''&i. { 7 u: ''ɐqɔpǝɟƃɥᴉɾʞ?ɯuodbɹsʇnʌʍxʎz''"_)'
-(toirc src) fwd 'ob typ parv boxv newv ov nsym vsym wds fwd syms toirc'
+(toirc src) fwd 'ob typ boxv newv ov nsym vsym wds fwd syms toirc'
 toirc args
 
 NB. the idea here is that invoking the function creates a string:
@@ -137,4 +134,3 @@ NB. ---------------------------------------------------
 assert   x (f`g`h @. 0) y   =  (x f y)
 assert   x (f`g`h @. 1) y   =  (x g y)
 assert   x (f`g`h @. 2) y   =  (x h y)
-
