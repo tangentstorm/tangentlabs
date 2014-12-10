@@ -5,6 +5,6 @@ enum'rChild rType'
 mvar'SUB REL OBJ LOG'
 '`sub rel obj log'=:('SUB'G)`('REL'G)`('OBJ'G)`('LOG'G)
 
-incoming =: sub = ]
-outgoing =: obj = ]
+incoming =: [: I. sub = ]
+outgoing =: [: I. obj = ]
 children =: (#~ rChild=]{rel) @ outgoing
