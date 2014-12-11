@@ -5,8 +5,16 @@ stringdb mdir,'/nodes.jf'
 
 enum'rType rChild'
 
-mvar'SUB REL OBJ ETS'  NB. the table of edges
-'`sub rel obj ets'=:('SUB'G)`('REL'G)`('OBJ'G)`('ETS'G)
+3 : 0''
+  NB. only declare these mapped variables if they're undefined.
+  NB. if the file is already mapped, it'll cause an assertion
+  NB. failure. This conditional is just to allow reloading this
+  NB. file during development.
+  if. _1 = (4!:0)<'SUB' do.
+    mvar'SUB REL OBJ ETS'  NB. the table of edges
+    '`sub rel obj ets'=:('SUB'G)`('REL'G)`('OBJ'G)`('ETS'G)
+  end.
+)
 
 incoming =: [: I. obj = ]
 outgoing =: [: I. sub = ]
@@ -26,4 +34,10 @@ retract =: verb define
   NB. retract'' → removes the most recently created edge.
   SUB =: }:SUB [ REL =: }:REL [ OBJ =: }:OBJ [ ETS =: }:ETS
   EMPTY
+)
+
+edges =: verb define
+  NB. returns a boxed table of strings, representing the edges.
+  if. -.#y do. y=.i.#SUB end.
+  >@k2s "0 L:0(y{SUB);(y{REL);(y{OBJ)
 )
