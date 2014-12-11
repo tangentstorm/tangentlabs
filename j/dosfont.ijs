@@ -1,10 +1,10 @@
 NB. dos (vga) font viewer.
 NB. vga fonts were 256*16
 
-load 'viewmat'
+load 'graph'
 ord  =: 256 #: a. i. ]
 bits =: _8 {.#:
-fnt  =: fread 'r:\old\pascal.cvs\inc\sabren.fnt'
+fnt  =: fread 'ibmvga437.fnt'
 
 
 NB. each character is 16 bytes
@@ -25,18 +25,21 @@ cls =: glpaint@glfill [ [: glrgb 0 0,0:
 
 NB. color (x y) cxy text
 NB. --------------------
-cxy =: adverb define 
-  [:
+cxy =: adverb define
+ [:
 :
-  bmp =. ,./^:2 chmp _16[\ y
-  glpaint@glpixels m, (|.@$,,) opq+x *x:bmp
+ bmp =. ,./^:2 chmp _16[\ y
+ glpaint@glpixels m, (|.@$,,) opq+x *x:bmp
 )
  
 
 demo =: 3 : 0
-  cls''
-  red 16 32 cxy a.
-  fgc 16 16  cxy 'hello world'
+ wd'pc dosfont closeok; pmove 700 0 640 480;'
+ wd'cc g isidraw;'
+ wd'pas 0 0; pshow;'
+ cls''
+ red 16 32 cxy a.
+ fgc 16 16  cxy 'hello world'
 )
 
 demo''
