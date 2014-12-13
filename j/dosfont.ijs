@@ -1,11 +1,13 @@
 NB. dos (vga) font viewer.
 NB. vga fonts were 256*16
 
-load 'graph'
+load 'graph' [ coinsert 'jgl2'
 ord  =: 256 #: a. i. ]
 bits =: _8 {.#:
-fnt  =: fread 'ibmvga437.fnt'
 
+NB. TODO: not sure how to avoid hard-coding this path
+fnt  =: fread 'l:/j/ibmvga437.fnt'
+assert -.fnt-:_1 NB. you need to change the path to the font. :/
 
 NB. each character is 16 bytes
 assert 256 16 8 -: $ maps =: >bits"0 L:0] _16<\ord fnt
@@ -20,7 +22,7 @@ fgc =:   16bffcc44 NB. gold
 
 NB. cls : clear screen
 NB. ------------------
-cls =: glpaint@glfill [ [: glrgb 0 0,0:
+cls =: glpaint@glfill [ [: glrgb 0 0, 0:
 
 
 NB. color (x y) cxy text
