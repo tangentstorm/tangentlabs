@@ -21,8 +21,7 @@ padding=:4 4
 GOLD=:16bff 16bd7 0
 
 textbox=: 3 : 0
- NB. can't change font yet because of glqextent bug :/
- NB. glfont'"consolas" 11'
+ (glfont,glfontextent)'"consolas" 11'
  'xy fg bg text' =: y
  gltextcolor glrgb BLACK
  glpen 0 [ glrgb BLACK [ glbrush glrgb bg
@@ -33,11 +32,11 @@ textbox=: 3 : 0
 )
 
 win_g_paint=: 3 : 0
- txy =. 0 0
+ txy=.(left=.5 0)+(top=.0 5) 
  for_j. i.10 do. for_i. i.10 do.
   bg=.>((i,j)-:cxy){WHITE;GOLD
   txy =. txy + 1 0 * wh=.textbox txy;BLACK;bg;":i,j
- end. txy =.0 1* xy+0 1* wh end.
+ end. txy =. left + 0 1 * txy + wh end.
  glpaint''
 )
 
