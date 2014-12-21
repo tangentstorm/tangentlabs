@@ -1,0 +1,4 @@
+[submodule "j/syndir"]
+	path = j/syndir
+	url = git@github.com:tangentstorm/syndir.git
+	branch = master

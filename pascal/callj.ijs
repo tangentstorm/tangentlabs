@@ -7,6 +7,8 @@ ARGV=:,<'j'
 0!:0 <BINPATH,'/profile.ijs'
 
 NB. -- startup --
-require'~/l/j/startup.ijs'
+
+UserFolders_j_ =: UserFolders_j_, 'Syn';jpath'~/s'
+require'~Syn/startup.ijs'
 require'~/l/j/cwio.ijs'
 chdir'../j'
