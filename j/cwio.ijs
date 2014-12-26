@@ -19,7 +19,7 @@ NB. -- reading from keyboard ---------------------
 rl=: [: (1!:1) 1:  NB. readline
 rk=: 3 : 0
   wr 11{a. NB. ^K
-  ,":rl''  NB.  TODO: fix this security hole.
+  a.{~ nval rl''
 )
 
 NB. -- keyboard contants -------------------------
