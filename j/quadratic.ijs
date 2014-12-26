@@ -6,7 +6,7 @@ NB. ============================================
 NB. Set 'rnd =: ?.' to use a fixed seed so that the
 NB. generated values are consistent between runs.
 NB. Set 'rnd=: ?' to use a random seed.
-rnd =: ?.  NB. 
+rnd =: ?.  NB.
 
 NB. specification
 NB. ============================================
@@ -23,13 +23,13 @@ b1 =: 3 : '2 = (#a1) - (#a0)'
 NB. requirements for end state
 NB. --------------------------------------------
 
-NB. e0. output variables n and m are both elements of a1 
+NB. e0. output variables n and m are both elements of a1
 e0 =: 3 : '*/ (n,m) e. a1'
 
 NB. e2. n and m are what remain after removing one matching
 NB.     element from a1 for each element of a0
 NB.     We'll demonstrate this by sorting the two lists and
-NB.     then 
+NB.     then
 e1 =: 3 : 0
   s0  =. /:~ a0      NB. sorted version of s0
   s1  =. /:~ a1      NB. sorted version of s1
@@ -39,12 +39,12 @@ e1 =: 3 : 0
     if. h = {. s0 do.
       s0 =. }. s0    NB. heads match, so behead s0
     else.
-      rv =: rv,h     NB. s1 is extra, so add to result 
+      rv =: rv,h     NB. s1 is extra, so add to result
     end.
     s1 =. }. s1      NB. behead s1 either way
   end.
   nm =. /:~ n, m     NB. sort (n, m)
-  nm -: /:~ rv       NB. sort rv and check for match 
+  nm -: /:~ rv       NB. sort rv and check for match
 )
 
 NB. The above routine produces the correct solution,
@@ -72,7 +72,7 @@ NB. let ij hold two random indices into a1
 ] ij =: 2 rnd # a1
 
 NB. Let t be a1 with the items at indices ij removed
-] t =: a1 #~ -. (i. # a1) e. ij 
+] t =: a1 #~ -. (i. # a1) e. ij
 
 NB. finally, let a0 be some random permutation of t
 ] a0 =: t A.~ rnd 2^30
@@ -131,7 +131,7 @@ NB. us at this point, but let's work through it by hand before we look at that.
 
 NB. The Quadriatic formula
 NB. --------------------------------------------
-NB. In a more traditional syntax (maxima), 
+NB. In a more traditional syntax (maxima),
 NB. a quadratic equation looks like this:
 NB.
 NB.      a*x^2 + b*x + c = 0
@@ -154,7 +154,7 @@ NB. names for the coefficients:
 NB. Again, the x: is just telling j to use extended precision
 NB. values, so that floating point issues don't mess up division.
 
-A     0 = n p.~ c, b, a                     NB. p10. ← p8 by p9  
+A     0 = n p.~ c, b, a                     NB. p10. ← p8 by p9
 
 NB. The line above is the 'proper' j syntax for 'a*x^2 + b*x + c = 0'
 NB. and is quite handy for expressing specific polynomial equations,
@@ -177,7 +177,7 @@ A                        0 = c + (b*n) + a*n^2                NB. q0. ← p18. (
 A                        0 = (c % a) + (b * n % a) + (n^2)    NB. q1. ← q0 by (% & a) (given that a ~: 0)
 A                        0 = (c%a) + (b*n%a) + (*:n)          NB. q2. ← q1 by *: (square)
 A                (- c % a) = (b * n % a) + (*:n)              NB. q3. ← q2 by subtracting (c % a)
-A    ((*: -: b%a) - c % a) = (*: -: b%a) + (b * n%a) + (*:n)  NB. q4. ← q3 ('completing the square')               
+A    ((*: -: b%a) - c % a) = (*: -: b%a) + (b * n%a) + (*:n)  NB. q4. ← q3 ('completing the square')
 A    ((*: -: b%a) - c % a) = (*: n + b % +: a)                NB. q6. ← q5 factor the square
 A (lhs=.(*: n + b % +: a)) = (*: -:b % a) - (c % a)           NB. q7. ← q6 swap sides to reduce parens
 A                    (lhs) = (*: b % +:a) - (c % a)           NB. q8. ← q7 (-:x % y) <--> (x % +:y)
