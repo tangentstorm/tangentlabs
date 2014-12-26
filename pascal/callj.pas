@@ -6,10 +6,10 @@ program callj;
 uses xpc,dynlibs;
 
 type
-  JS = PAnsiChar;
-  JI = Int32;
-  JA = pointer;
-  JJ = pointer;
+  JS     = PAnsiChar;
+  JI     = Int32;
+  JA     = ^TJA;
+  JJ     = pointer;
   TJCBs  = array [0..4] of pointer; // callbacks
   TJInit = function : JS; stdcall;
   TJSM   = procedure(j:JJ; var cb:TJCBs); stdcall;
@@ -18,17 +18,22 @@ type
   TJGetL = function(j:JJ):JS; stdcall;
   TJGetA = function(j:JJ; n:JI; name:JS):JA; stdcall;
   TJSetA = function(j:JJ; n:JI; name:JS; x:JI; data:JS):JI; stdcall;
+  TJA    = record
+             k,flag,m,t,c,n,r,s : JI;
+             v: array [0..0] of JI; // really it's dynamically sized
+           end;
 
 var
-  JInit	: TJInit;
-  JDo	: TJDo;
-  JSM	: TJSM;
-  JFree	: TJFree;
+  JInit : TJInit;
+  JDo   : TJDo;
+  JSM   : TJSM;
+  JFree : TJFree;
   JGetL : TJGetL;
   JGetA : TJGetA;
   JSetA : TJSetA;
   jwaiting:boolean=false; // is j awaiting input?
-
+
+// write text to screen
 procedure DoWr(j : JJ;len:JI;s:JS); stdcall;
   var i:byte;
   begin
@@ -36,6 +41,7 @@ procedure DoWr(j : JJ;len:JI;s:JS); stdcall;
     write(s); flush(output);
   end;
 
+// read input from keyboard
 function DoRd(j:JJ; s:JS):JS; stdcall;
   var r:RawByteString;
   begin
@@ -43,9 +49,25 @@ function DoRd(j:JJ; s:JS):JS; stdcall;
     else begin writeln(^E); flush(output); end;
     readln(r); result:=JS(r);
   end;
+
+// window driver
+function DoWd(j : JJ; x:JI; a:JA; var res:JA) : JI;
+  var wdres:TStr;jres:AnsiString;
+  begin
+    { writeln('Wd: x=', x, '  k: ',a^.k, ' flag: ',a^.flag, ' m: ',a^.m,
+      t: ',a^.t, ' c: ',a^.c, ' n: ',a^.n, ' r: ',a^.r ); }
+    case x of
+      0 : wdres:='i.5';
+      1 : wdres:='i.10';
+    otherwise
+      wdres:='i.25';
+    end;
+    wdres:='wdres_z_=:'+wdres; jres:=u2a(wdres);
+    JDo(j, @jres[1]); res := a; result:= 0;
+  end;
 
 var jlib: TLibHandle; j:JJ; s:RawByteString='0!:0<''callj.ijs''';
-    jcb:TJCBs=(@DoWr, Nil, @DoRd, Nil, Pointer(3));
+    jcb:TJCBs=(@DoWr, @DoWd, @DoRd, Nil, Pointer(3));
 begin
   jlib := LoadLibrary('./libj.so');
   if jlib = NilHandle then writeln('failed to load jlib')
