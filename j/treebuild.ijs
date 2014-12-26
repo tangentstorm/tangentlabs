@@ -1,12 +1,4 @@
-NB. =treebuild.ijs=
 
-NB. This code is maintained as a literate program with org-babel for emacs.
-NB. You can retrieve it in any of three formats:
-
-NB. - [[http://tangentstorm.github.io/apljk/treebuild.ijs.html][a readable html version]]
-NB. - [[https://github.com/sabren/b4/blob/master/web/apljk/treebuild.ijs.org][the literate ~.org~ file]]
-NB. - [[https://github.com/tangentstorm/tangentlabs/blob/master/j/treebuild.ijs][the generated j source code]]
-NB. [[file:treebuild.ijs.org::*%3Dtreebuild.ijs%3D][=treebuild\.ijs=:1]]
 tree =: $0   NB. stores the links to parents.
 data =: $0   NB. stores the actual data items.
 path =: $0   NB. the stack of parent nodes.
@@ -19,7 +11,6 @@ emit =: monad define "0
 )
 
 node =: monad define "_
-  emit y
   path =: path, here
   here =: <: # tree
   tree
@@ -34,6 +25,7 @@ done =: monad define "_
 drop =: monad define "_
   data =: }: data
   tree =: }: tree
+  tree
 )
 
 goto =: monad define "_
@@ -41,7 +33,7 @@ goto =: monad define "_
   here =: y
   tree
 )
-upfrom =: 3 : 'if. y=_1 do. _1 else. y{tree end.'"0
+upfrom =: 3 : 'if. y=_1 do. _1 else. y{tree end.'
 dnfrom =: 3 : 'if. 0=#y do. $0 else. I. +./"2 tree ="1 0 ;y end.'"1
 above =: (_1 -.~ }.)&(upfrom f.^:a:)"0
 below =: 13 : '; }. dnfrom each ^:a: < y'
@@ -69,4 +61,4 @@ tree0 =: verb define
 )
 
 rsx =: (node`done`emit)@.('()' & i.)"0  NB. 'read s-expression'
-NB. =treebuild\.ijs=:1 ends here
+
