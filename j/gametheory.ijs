@@ -35,7 +35,8 @@ rpS =: 3 3 $ 0 _1 1,  1 0 _2,  _1 2 0
 
 NB. solving the game:
 solve =: ((1,#@]$0:) %. 1,x:)
-solve =: [: (%.~ 1 = #\) 1x , ]
+NB. the 1=#\ forms a matrix of 1 followed by #y 0's
+solve =: [: (%.~ 1=#\) 1x , ]
 
 assert 1r3 1r3 1r3 -: solve rps
 assert 1r2 1r4 1r4 -: solve rpS
