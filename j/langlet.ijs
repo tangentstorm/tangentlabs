@@ -1,5 +1,5 @@
 load'irctoys.ijs'
-load'cheq.ijs'
+load'~Syn/cheq.ijs'
 
 NB. numbers from langlets apl94 binary algebra workshop
 NB. http://archive.vector.org.uk/art10004690
@@ -32,7 +32,7 @@ X..X.XXX.X.....X
 X.XXXX.XX.X..XX.
 ..XXXX.XX..XXX..
 )
-
+
 id =: 1 0 ,: 0 1
 di =: 0 1 ,: 1 0
 gh=:Gh =: 1 0 ,: 1 1
@@ -72,15 +72,40 @@ cheq 3 3 <@$"1 #: I.(m2fn isinc 3 3)"1 ] #:i.2^9
 │0 0 0│0 0 1│0 1 0│0 1 1│1 0 0│1 0 1│1 1 0│1 1 1│
 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
 )
-
+
 NB. does one function act like another? (wound up not using this...)
 like =: 2 :('(u y) -: (v y)';':';'(x u y) -: (x v y)')
 assert (2*]) like +:  i.10
 
 NB. x u isfn v y → does (v y)&u map 0{x to 1{x?
-isfn =: 2 :('[:';':';'*./ (-: (v y)&u)S:0/ x')
+isfn =: conjunction define
+ [:
+:
+ *./ ([ -: (v y) u ]) S:0/ x
+)
+
 plus =: 1 : '_2 {. [: #: 4| m + #.'
+NB. map u over n to produce a table
+utbl =: 1 :'(< ;~ u L:0);/y'
 findm =: 1 :'3 3 <@$"1 #:I.((<;~u L:0);/#:i.4) (m2fn isfn (3 3$]))"1 #:i.2^9'
+
+sz =: 5      NB. size of the square matrix
+sh =: sz,sz
+sq =: sz^2
+bx =: #:@:I. NB. binary index
+fm =: 1 :'{. sh <@$"1 bx f. (u utbl #:i.2^sz-1) (m2fn isfn (sh$]))"1 #:i.2^sq'
+
+
+Maj =: (a *. b) ~: (a *. c) ~: b *. c  NB. boolean majority
+Cho =: (a *. b) ~: a < c               NB. boolean choice
+
+NB. fractal growth operation. monad substitutes y for 1 in y
+NB. (dyadic version substitutes x for 1 in y)
+gro =: [: ,./^:2 [ *./ ]
+
+NB. (his roby is rotated 90 degrees, so the numbers are different)
+roby =: (16$2)#:0 864 64 320 736 544 4640 6128 5392 7452 1300 1300 2032 544 544 3640
+newlife=: 'B=:(~:/\ 1|. B) ~: ~:/\ 1|."1 B=:0,0,"1 B'
 
 
 
