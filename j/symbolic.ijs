@@ -1,9 +1,9 @@
 NB. symbolic functions, expanded from an idea here:
 NB. http://www.jsoftware.com/docs/help701/dictionary/samp19.htm
 NB.
-NB. you can use these to test whot arbitrary combinators do.
+NB. you can use these to test what arbitrary combinators do.
+coinsert'symbolic'
 cocurrent'symbolic'
-
 isbox =: 32 = 3!:0
 isint =:  4 = 3!:0
 isbit =:  1 = 3!:0
@@ -43,39 +43,14 @@ fwd =: 1 : 0
 )
 
 NB. declare some symbols for us to play with:
-syms =: 3 : 0
+cc'z'
+symbolic_z_=:(3 : 0)
   nsym fwd 'z m n'
   vsym fwd 'a b c d e f g h'
 )
-syms''
-
+symbolic''
 NB. we have to declare these manually because they're in use:
-". args =:'(x=:''x'');(y=:''y'');(u=:''u''ov);(v=:''v''ov)'
-
-
-NB. verbs for pasting into irc bot
-src =: 13 : '5!:5 < y -. (0{a.)'
-lns =: 13 : '<;._1 LF,y'
-toirc =: 3 : 0
-  echo ') ', y
-:
-   ys =. lns y
-   ys =. ys -. a:
-  if. (# ys) = 1 do.
-    echo ') ' , x , '=:', (,>ys)
-  else.
-    echo   ').. ', x , ' =: ',  >{. ys
-    for_ln. }.}:ys do.
-      echo ').. ', >ln
-    end.
-    echo   ') )'
-  end.
-)
-
-NB. generate the irc version
-'updn' toirc '([: |. ''abcdefghijklmnopqrstuvwxyz''&i. { 7 u: ''ɐqɔpǝɟƃɥᴉɾʞ?ɯuodbɹsʇnʌʍxʎz''"_)'
-(toirc src) fwd 'ob typ boxv newv ov nsym vsym wds fwd syms toirc'
-toirc args
+". '(x_z_=:''x'');(y_z_=:''y'');(u_z_=:''u''ov);(v_z_=:''v''ov)'
 
 NB. the idea here is that invoking the function creates a string:
 assert         (f 0)        =   '(f 0)'
