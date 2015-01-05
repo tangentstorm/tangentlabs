@@ -10,6 +10,7 @@ Note  botplot 2 o. -: i:32
 )
 
 NB. 4x4 hex tiles
+hext=:u:32,9600+23 22 4 29 16 30 31 24 26 12 25 0 28 27 8
 Note c,.1j1#!.(c=.'|')"1] 4 4 $ hext
 
 | |▗|▖|▄|
@@ -59,7 +60,7 @@ shapes=:(O,.S,.L,.T,.J,.Z,.I)
 
 NB. shade and widen:
 shade =: [: ((u: 32 9617 9618 9619 9608) {~ ]) (2: # ])"1
-Note sw shapes
+Note shade shapes
                   ░░                ▒▒              ██
   ████    ▒▒▒▒    ░░      ██████    ▒▒  ░░░░        ██
   ████  ▒▒▒▒      ░░░░      ██    ▒▒▒▒    ░░░░      ██
