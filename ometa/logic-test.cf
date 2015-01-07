@@ -1,0 +1,21 @@
+# run this in coffeescript
+assert = require 'assert'
+logic  = require './logic.js'
+loj = (s)-> logic.lang.matchAll s,'top'
+toJ = (s)-> logic.toJ.matchAll (loj s),'top'
+fol = (s)-> logic.toFOL.matchAll (loj s),'top'
+chk = (u, src,val) -> assert.deepEqual(res=(u src), [val])
+
+# lexing and parser
+chk loj, '⊥', ["Bit", 0]; chk loj, '⊤', ["Bit", 1]
+chk loj, 'o', ["Bit", 0]; chk loj, 'l', ["Bit", 1]
+chk loj, 'o +. l', ["Dya", ["Bit", 0], "Vel", ["Bit", 1]]
+chk loj, '-. o', ["Moa", "Not", ["Bit", 0]]
+
+# deparsing to J
+chk toJ, 'o',       '0'
+chk toJ, 'o +. l',  '0 +. 1'
+
+# deparsing to first order logic
+chk fol, 'o', '⊥'
+chk fol, 'o +. l', '⊥ ∨ ⊤'

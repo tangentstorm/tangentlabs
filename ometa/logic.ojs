@@ -1,0 +1,35 @@
+// logic language for ometa
+
+ometa lang {
+  top  = xpr* end
+, xpr  = bit:x dy:op bit:y -> [`Dya, x, op, y]
+       | mo:op bit:x -> [`Moa, op, x]
+       | atom:a -> a
+, atom = bit:b -> b
+, bit  = ("o"  | "⊥") -> [`Bit, 0]
+       | ("l"  | "⊤") -> [`Bit, 1]
+, dy   = ("=") -> Eq | ("<") -> Lt | (">") -> Gt
+       | ("*." | "∧") -> `And
+       | ("+." | "∨") -> `Vel
+       | ('~:' | "≠") -> `Xor
+       | ('<:' | "→") -> `Imp
+       | ('>:' | "←") -> `Rfn
+, mo   = "0:" -> `K0 | "1:" -> `K1
+       | ("-." | "¬") -> `Not
+}
+
+ometa toJ { // convert to j syntax
+  top = (toJ:n->n)*
+, toJ = [`Bit 0] -> '0'
+      | [`Bit 1] -> '1'
+      | [`Dya toJ:x op:u toJ:y] -> (x + ' ' + u + ' ' + y)
+, op  = `Vel -> '+.'
+}
+
+ometa toFOL { // convert to first order logic syntax
+  top = (toJ:n->n)*
+, toJ = [`Bit 0] -> '⊥'
+      | [`Bit 1] -> '⊤'
+      | [`Dya toJ:x op:u toJ:y] -> (x + ' ' + u + ' ' + y)
+, op  = `Vel -> '∨'
+}
