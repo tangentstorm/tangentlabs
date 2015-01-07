@@ -1,0 +1,13 @@
+// mini-j interpreter
+// just enough j to handle simple boolean expressions
+
+int  = function (s) { return parseInt(s,10); }
+ints = function (s) { return s.split(' ').map(int); }
+
+ometa minij {
+  j     = bits,
+  bits  = [bit (' '+ bit)+]:bs -> ints(bs)
+        | bit,
+  bit   = '0' -> 0
+        | '1' -> 1
+}

@@ -1,0 +1,8 @@
+# run this in coffeescript
+assert =require 'assert'
+mj = require('./minij.js').minij
+cj = (j,v) -> assert.deepEqual(mj.match(j,'j'), v)
+
+cj '0', 0
+cj '1', 1
+cj '1 0 1', [1,0,1]
