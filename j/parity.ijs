@@ -1,3 +1,4 @@
+NB. parity logic. (see also langlet.ijs)
 load'logic.ijs'
 
 NB. thue-morse sequence (nothing to do with parity. just generates a nice bit string)
@@ -32,15 +33,30 @@ chekb=:(1 :'for_v. #:i.y do. assert u v end.')
 (] -: Cog^:2) chekb 256
 (] -: Hel^:2) chekb 256
 
+
 NB. symbolic versions (for 3 variables only, so far)
-o =: 0 *. l =: 1 +. a [ 'a b c' =: |. 3 bitvars
+o =: 0 *. l =: 1 +. a [ 'na nb nc' =: -. 'a b c' =: |. 3 bitvars
+
+NB. symt is a literal description of the truth table, with
+NB. one entry per 'true' value.
+t_abc=:'(a<b<c<1)';'(a>b+.c)';'(a<b>c)';'(a*.b>c)';'(a<b<c)'
+t_abc=:t_abc,'(a*.b<c)';'(a<b*.c)';'(*./a,b,c)'
+symt =: ('+./', [: }. [: ; ',' ,L:0 t_abc #~ ]) "1
+
+NB. symh is the helical transform, in algebraic normal form (xor-of-ands)
 h_abc=:'l';'a';'b';'(a*.b)';'c';'(a*.c)';'(b*.c)';'(*./a,b,c)'
-c_abc=:'(+./a,b,c)';'(b+.c)';'(a+.c)';'c';'(a+.b)';'b';'a';'o'
 symh =: ('~:/', [: }. [: ; ',' ,L:0 h_abc #~ Hel)"1
+
+NB. symc is the cognitive transform: nxor-of-ors (nxor is '=')
+NB. you can convert it to xor-of-ors just by toggling inclusion of
+NB. 'l' in the list. (in fact the cognitive transform does this,
+NB. but the (}:,-.@{:) flips the final bit for brevity.
+c_abc=:'(+./a,b,c)';'(b+.c)';'(a+.c)';'c';'(a+.b)';'b';'a';'o'
 symc =: ('=/' , [: }. [: ; ',' ,L:0 c_abc #~ [: (}:,-.@{:) Cog)"1
 
-p=.{.(a*.b)~:(a*.c)*(a*.b)
-assert (-:".@symh) p
-assert (-:".@symc) p
-assert (symh p) -: '~:/(a*.b),(*./a,b,c)'
-assert (symc p) -: '=/(+./a,b,c),(b+.c),(a+.c),c,o'
+testp=:{.(a*.b)~:(a*.c)*(a*.b)
+assert (-:".@symh) testp
+assert (-:".@symc) testp
+assert (symh testp) -: '~:/(a*.b),(*./a,b,c)'
+assert (symc testp) -: '=/(+./a,b,c),(b+.c),(a+.c),c,o'
+assert (symt testp) -: '+./(a*.b>c)'
