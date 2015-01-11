@@ -1,3 +1,5 @@
+load'logic.ijs'
+
 NB. thue-morse sequence (nothing to do with parity. just generates a nice bit string)
 thuem =: 13 : '(y $ (,-.)^:(2^.y) 0 1)'
 
@@ -37,7 +39,7 @@ c_abc=:'(+./a,b,c)';'(b+.c)';'(a+.c)';'c';'(a+.b)';'b';'a';'o'
 symh =: ('~:/', [: }. [: ; ',' ,L:0 h_abc #~ Hel)"1
 symc =: ('=/' , [: }. [: ; ',' ,L:0 c_abc #~ [: (}:,-.@{:) Cog)"1
 
-p=.(a*.b)~:(a*.c)*(a*.b)
+p=.{.(a*.b)~:(a*.c)*(a*.b)
 assert (-:".@symh) p
 assert (-:".@symc) p
 assert (symh p) -: '~:/(a*.b),(*./a,b,c)'
