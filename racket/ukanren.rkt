@@ -3,11 +3,13 @@
 ; ukanren , transcribed from
 ; "µKanren: A minimal Functional Core for Relational Programming"
 ; by Jason Hemann and Daniel P. Friedman
-; 
+;
 
 ;-- internal routines -----------------------
 
 (require rnrs/lists-6)
+(provide (all-defined-out))
+
 (define (var c) (vector c))
 (define (var? x) (vector? x))
 (define (var=? x1 x2) (= (vector-ref x1 0) (vector-ref x2 0)))
