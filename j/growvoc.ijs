@@ -11,9 +11,9 @@ q=:_6 s: ] NB. return symbol for given id.
 
 NB. follow links in a tree to find depth of each node.
 f=:3 :'(y{~])^:(~:0:)^:a:"0 y' NB. follow nodes, making a chain.
-d=:[: +/@:*"1 f NB. depth of node (length of path)
+d=:[: +/@:*"1 f NB. depth of node (length of chain)
 
-NB. now chose either the prefix or suffix based on the longer chain.
+NB. now choose either the prefix or suffix based on the longer chain.
 n=:(ds<:dp)}s,:p[m=:ds>.dp NB. n=next link and m=max depth (of s or p)
 
 NB. collect the chain, dropping the last item (0=empty string)
