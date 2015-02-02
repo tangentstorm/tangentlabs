@@ -6,6 +6,6 @@
 
 bit x = if x then 1 else 0
 zsum = foldl1 (zipWith(+))
-turn n k ts = map (mod (2^k))$ zsum [[s*bit(x>=d-1)|x<-[0..n-1]]|(d,s)<-ts]
+turn n k ts = map (`mod`(2^k))$ zsum [[s*bit(x>=d-1)|x<-[0..n-1]]|(d,s)<-ts]
 result = turn 4 6 [(3,2),(2,1)]
 main = print result
