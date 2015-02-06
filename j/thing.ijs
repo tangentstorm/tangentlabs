@@ -9,8 +9,8 @@ drop2 =: verb define
 )
 
 status =: verb define
-  'lob mid hib lo m hi s i'=.y
-  ss =. 2 ^ s [ t=.i<:m
+  'lob mid hib lo m hi s i t'=.y
+  ss =. 2 ^ s
   msg=.('lo m hi=',":lo;m;hi);('(',(":i),'<:m):',(":t));'ss=2^',(":s)
   echo msg ,('m=',":m); 'bounds:',":lob;mid;hib
 )
@@ -22,16 +22,20 @@ factor =: verb define
   i =. y [ lo =. 1 [ m =. _. [ hi=. 2 [ s =.  <: nbits y
   while. s>:0 do.
     gap0 =. (*/hi,s)-(*/lo,s)
-    t =. i <: 'lob mid hib'=.(2^s) * ('l m h'=. ((*/lo) bp (*/hi)))
-    status lob;mid;hib;lo;m;hi;s;i
-    assert m <: lob
-    assert hib >: m
+    t =. i <: mid ['lob mid hib'=.(2^s) * ('l m h'=. ((*/lo) bp (*/hi)))
+    status lob;mid;hib;lo;m;hi;s;i;t
+    assert lob <: mid
+    assert mid <: hib
     hi=.hi,2 [ lo=.lo,2 [ s=.<:s
     NB. if. m = 0.5+<.m do. hi=.hi,2 [ lo=.lo,2 [ s=.<:s end.
-    if. t do. hi=. m meld hi [ echo (":i),' <: ',(":mid),', so mid->hi'
+    if. t do. hi=. drop2 m meld hi [ echo (":i),' <: ',(":mid),', so mid->hi'
     else. lo=. m meld lo     [ echo (":i),' > ',(":mid),', so lo<-mid' end.
     gap1 =. (*/hi,s)-(*/lo,s)
-    if. gap1 >: gap0 do. echo 'error: gap should have shrunk.' throw. end.
+    if. gap1 >: gap0 do.
+      echo '*** ERROR: gap should have shrunk.'
+      echo 'gap0:', (":gap0), ' gap1:', (":gap1)
+      status lob;mid;hib;lo;m;hi;s;i;t
+      throw. end.
   end.
   if. t do. r=.lo else. r=.hi end.
   f,r-.1 2 return.
@@ -42,7 +46,7 @@ meld =: dyad define
       if.(<.x) = x     do. x=.<.x
   elseif.(<.x) = x-0.5 do. x=.2*x [ y=.drop2 y
   elseif. do. echo'invalid x' throw. end.
-  echo '->', ": res =. \:~ 1-.~x,y
+  echo '->', ": res =. x, }. \:~ 1-.~y
   res return.
 )
 
