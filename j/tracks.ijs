@@ -139,8 +139,8 @@ cheq cyclen every paths chars LOOP
 4 4
 )
 
-NB. Here is another example input that shows
-NB. another example. the ' ' cells are loops of length 1
+NB. Here is another example input that shows some more
+NB. complex cycles. Note that each ' ' cell is a loop of length 1.
 WIDE =: noun define
 3 4
 >>>>>v   ><  v<<
@@ -162,7 +162,7 @@ cheq ismax 1 5 3 4 5 2 _5
 NB. 'x m mask y' replaces items of x with m where y=1
 mask =: adverb define
 :
-x (m"0`[@.]"0) y
+  x (m"0`[@.]"0) y
 )
 
 NB. 'maxcyc' puts all af this together to show the longest path.
