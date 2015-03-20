@@ -175,7 +175,7 @@ cheq < maxcyc chars WIDE
 └────────────────┘
 )
 
-
+NB. Finally, the example input:
 EXAMPLE =: (0 : 0)
 45 20
 ^^v>>v^>>v<<<v>v<>>>>>>>>^vvv^^vvvv<v^^><^^v>
@@ -199,8 +199,6 @@ v><>^><vv^v^^>><>^<^v<^><v>^v^<^<>>^<^vv<v>^v
 ^^^^<^<>^^vvv>v^<<>><^<<v>^<<v>>><>>><<^^>vv>
 <^<^<>vvv^v><<<vvv<>>>>^<<<^vvv>^<<<^vv>v^><^
 )
-
-NB. Finally, the example input:
 cheq < maxcyc chars EXAMPLE
 ┌─────────────────────────────────────────────┐
 │                    >>>>>^                   │
