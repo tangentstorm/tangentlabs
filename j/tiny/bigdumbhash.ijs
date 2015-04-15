@@ -29,5 +29,5 @@ NB. assert 0.36 -: ((#-#@~.) % #) bigdumbhash"0 i.100000
 
 NB. I abandoned my attempt after discovering the crc foreign,
 NB. which is both much faster and quite unlikely to collide:
-0$ (crc =: 128!:3) ` base256 =: (a. {~ 256 (#.^:_1) ])
-assert 0 -: (#-#@~.) (2^20) | crc@base256"0 i.100000
+(crc =: 128!:3) (binrep=: 0&(3!:1))
+assert 0 -: (#-#@~.) (2^20) | crc binrep i.1000000
