@@ -24,8 +24,8 @@ assert 0.047 -: ((#-#@~.) % #) bigdumbhash"0 i.2000
 
 NB. but as increase the number of inputs, it kept going up.
 NB. (tests commented out because they are also rather slow)
-assert 0.19 -: ((#-#@~.) % #) bigdumbhash"0 i. 10000
-assert 0.36 -: ((#-#@~.) % #) bigdumbhash"0 i.100000
+NB. assert 0.19 -: ((#-#@~.) % #) bigdumbhash"0 i. 10000
+NB. assert 0.36 -: ((#-#@~.) % #) bigdumbhash"0 i.100000
 
 NB. I abandoned my attempt after discovering the crc foreign,
 NB. which is both much faster and quite unlikely to collide:
