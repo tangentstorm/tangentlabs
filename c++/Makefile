@@ -13,7 +13,7 @@ CUDDLS=$(CUDD)/obj/libobj.a  \
 bdd-run: shabdd
 	./shabdd
 
-bdd: shacudd.cc
+shabdd: shacudd.cc
 	$(CPP) -c shacudd.cc -o shabdd.o -I $(CUDD)/include/
 	$(CPP) -o shabdd shabdd.o $(CUDDLS)
 
