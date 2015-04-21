@@ -1,4 +1,6 @@
-CUDD=~/ver/cudd/cudd-2.5.1
+CPP=clang++
+CPP=g++ -g
+CUDD=~/ver/cudd
 CUDDLS=$(CUDD)/obj/libobj.a  \
        $(CUDD)/cudd/libcudd.a \
        $(CUDD)/mtr/libmtr.a \
@@ -10,8 +12,7 @@ shacudd-run: shacudd
 	./shacudd
 
 shacudd: shacudd.o
-	clang++ -g -o shacudd shacudd.o $(CUDDLS)
+	$(CPP) -o shacudd shacudd.o $(CUDDLS)
 
 shacudd.o: shacudd.cc
-	clang++ -g -c shacudd.cc -I $(CUDD)/include/
-
+	$(CPP) -c shacudd.cc -I $(CUDD)/include/
