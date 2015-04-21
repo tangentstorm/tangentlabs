@@ -23,20 +23,30 @@ Cudd gCudd(0,0); // global/singleton manager for the cudd system
 #define len(x) x.size()
 #define ret return
 
+string ts() {
+  char s[100]; time_t t = time(NULL);
+  strftime(s, sizeof(s), "%D %H:%M:%S", localtime(&t));
+  ret string(s); }
+
 
+
 Bits add(Bits x, Bits y) {
+  /// Implement addition in bdd terms.
   Bits r; Bit c = bit0; // result vector and carry bit
   assert(len(x)==len(y));
   _I(len(y)) {
     Bit a = x[i]; Bit b=y[i];
-    cout << "calculating bit " << i << "..." << endl;
+    cout << ts() << " calculating bit " << i << "..." << endl;
     r.insert(r.begin(), a.ite(b.ite(c,!c), b.ite(!c,c)));
     if (i) c = a.ite(b.ite(bit0,c), b.ite(c,bit1)); }
   ret r; }
 
-Bits xors(Bits x, Bits y){ Bits r(len(x)); I(len(x)) r[i] = x[i]^y[i]; ret r; }
+Bits xors(Bits x, Bits y){
+  /// zipwith xor
+  Bits r(len(x)); I(len(x)) r[i] = x[i]^y[i]; ret r; }
 
 Bits sig(Bits y, int ax, int bx, int cx) {
+  // sha-256 building block: xor of two right rotations and a right shift
   int n = len(y); Bits a(n); Bits b(n); Bits c(n);
   I(n) a[i] = y[(i+ax)%n], b[i] = y[(i+bx)%n], c[i] = y[(i<cx)?bit0:y[i-cx]];
   ret xors(a, xors(b,c)); }
@@ -45,10 +55,11 @@ Bits sig0(Bits y) { ret sig(y,  7, 18,  3); }
 Bits sig1(Bits y) { ret sig(y, 17, 19, 10); }
 
 int main(int argc, char *argv[]) {
+  // attempt to calculate the message schedule
   vector<Bits> w(16);
   I(16) { w[i].resize(32); J(32) w[i][j] = bitVar(); }
   J(48) { int i=j+16;
-    cout << "-- calculating w[" << i << "] -------------------------" << endl;
+    cout << ts() << " -- calculating w[" << i << "] -------------------" << endl;
     Bits wa=w[i-2]; Bits wb=w[i-7]; Bits wc=w[i-15]; Bits wd=w[i-16];
     Bits r = wd;
     Bits s0 = sig0(wc);
