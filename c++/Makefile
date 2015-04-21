@@ -8,11 +8,22 @@ CUDDLS=$(CUDD)/obj/libobj.a  \
        $(CUDD)/st/libst.a \
        $(CUDD)/epd/libepd.a
 
-shacudd-run: shacudd
-	./shacudd
 
-shacudd: shacudd.o
-	$(CPP) -o shacudd shacudd.o $(CUDDLS)
 
-shacudd.o: shacudd.cc
-	$(CPP) -c shacudd.cc -I $(CUDD)/include/
+bdd-run: shabdd
+	./shabdd
+
+bdd: shacudd.cc
+	$(CPP) -c shacudd.cc -o shabdd.o -I $(CUDD)/include/
+	$(CPP) -o shabdd shabdd.o $(CUDDLS)
+
+
+zdd-run: shazdd
+	./shazdd
+
+shazdd: shacudd.cc
+	$(CPP) -DUSEZDDS -c shacudd.cc -o shazdd.o -I $(CUDD)/include/
+	$(CPP) -o shazdd shazdd.o $(CUDDLS)
+
+clean:
+	rm -f shazdd shabdd *.o
