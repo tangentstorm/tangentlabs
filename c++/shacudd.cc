@@ -48,7 +48,7 @@ Bits xors(Bits x, Bits y){
 Bits sig(Bits y, int ax, int bx, int cx) {
   // sha-256 building block: xor of two right rotations and a right shift
   int n = len(y); Bits a(n); Bits b(n); Bits c(n);
-  I(n) a[i] = y[(i+ax)%n], b[i] = y[(i+bx)%n], c[i] = y[(i<cx)?bit0:y[i-cx]];
+  I(n) a[i] = y[(n+i-ax)%n], b[i] = y[(n+i-bx)%n], c[i] = y[(i<cx)?bit0:y[i-cx]];
   ret xors(a, xors(b,c)); }
 
 Bits sig0(Bits y) { ret sig(y,  7, 18,  3); }
