@@ -1,3 +1,6 @@
+NB. debug on
+NB. (13!:0) 1
+
 NB. load main profile.ijs that j uses
 18!:4<'z'  NB. set current locale
 BoxForm =: 0
