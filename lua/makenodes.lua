@@ -59,8 +59,8 @@ function constructors(kinds, with_body)
    ind()
    for i,kind in pairs(kinds) do
       wln(signature(kind))
-      -- for now, just return null (the empty variant)
-      if with_body then wln('  begin result := null end;\n') end
+      -- for now, just return nil (the empty pointer)
+      if with_body then wln('  begin result := nil end;\n') end
    end
    ded()
 end
@@ -68,14 +68,22 @@ end
 function generate(kinds)
    wln('{$mode delphi}')
    wln('unit uAST; // abstract syntax tree for simple interpreter')
-   wln('interface uses classes, sysutils, variants;')
+   wln('interface')
    wln()
+   wln('type')
+   wln('  Node     = ^NodeData;')
+   wln('  NodeKind = ( kWRITE, kINT, kIF, kASSIGN, kBLOCK );')
+   wln('  NodeData = record')
+   wln('    case kind : NodeKind of')
+   wln('      kINT    : ( vInt  : integer );')
+   wln('      kWRITE  : ( vExpr : Node );')
+   wln('end;')
 
    -- this chunk just declares a bunch of types and sets them all
-   -- to be the same as the type 'variant' (just for now, so it compiles)
+   -- to be the same as the type Node (just for now, so it compiles)
    ind(); wln('type '); ind()
    for i,kind in pairs(kinds) do
-      wln('T', kind[1], ' = variant;')
+      wln('T', kind[1], ' = Node;')
    end; ded(); ded()
    wln()
 
