@@ -52,49 +52,44 @@ def clear_matrix
 end
 
 
+# the tetraminos
+
 tetI = grid <<END
 . . . .
 c c c c
 . . . .
 . . . .
 END
-
 tetO = grid <<END
 y y
 y y
 END
-
 tetZ = grid <<END
 r r .
 . r r
 . . .
 END
-
 tetS = grid <<END
 . g g
 g g .
 . . .
 END
-
 tetJ = grid <<END
 b . .
 b b b
 . . .
 END
-
 tetL = grid <<END
 . . o
 o o o
 . . .
 END
-
 tetI = grid <<END
 . . . .
 c c c c
 . . . .
 . . . .
 END
-
 tetT = grid <<END
 . m .
 m m m
