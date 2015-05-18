@@ -7,7 +7,19 @@
 # --------------------------------------------------------------
 require 'matrix'
 
-@m = Matrix.build(22, 10) {'.'}
+# monkeypatch std matrix class to allow updating
+class Matrix
+  def []=(i, j, x)
+    @rows[i][j] = x
+  end
+end
+
+
+# width and height of the testris matrix
+@mh = 22; @mw = 10
+
+# initialize to empty space
+@m = Matrix.build(@mh, @mw) {'.'}
 
 def print_matrix
   @m.row_vectors.each do |row|
@@ -16,12 +28,22 @@ def print_matrix
   end
 end
 
+def given_matrix
+  @mh.times do |y|
+    STDIN.readline.split.each_with_index do |ch, x|
+      @m[y,x] = ch
+    end
+  end
+end
 
+
+# main loop
 loop do
   STDIN.readline.each_char do |c|
     case c
     when 'q' then exit
     when 'p' then print_matrix
+    when 'g' then given_matrix
     end
   end
 end
