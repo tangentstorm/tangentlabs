@@ -7,26 +7,37 @@
 # --------------------------------------------------------------
 require 'matrix'
 
-# monkeypatch std matrix class to allow updating
-class Matrix
+# in ruby, a 'Matrix' is a specific class for 2d arrays.
+# in tetris, the 'matrix' is the container that holds all the blocks.
+# after this next line, i will use 'matrix' only in the tetris sense,
+# and refer to 2d arrays as 'grids'.
+
+class Grid < Matrix
+
   def []=(i, j, x)
     @rows[i][j] = x
   end
+
+  def emit
+    row_vectors.each do |row|
+      row.each {|ch| print "#{ch} "}
+      puts
+    end
+  end
+
 end
+
+def grid here
+  Grid.rows [ *here.split("\n").collect {|line| line.split } ]
+end
+
 
 
 # width and height of the testris matrix
 @mh = 22; @mw = 10
 
 # initialize to empty space
-@m = Matrix.build(@mh, @mw) {'.'}
-
-def print_matrix
-  @m.row_vectors.each do |row|
-    row.each {|ch| print "#{ch} "}
-    puts
-  end
-end
+@m = Grid.build(@mh, @mw) {'.'}
 
 def given_matrix
   @mh.times do |y|
@@ -39,6 +50,17 @@ end
 def clear_matrix
   @mh.times do |y| @mw.times do |x| @m[y,x]='.' end end
 end
+
+
+tetI = grid <<END
+. . . .
+c c c c
+. . . .
+. . . .
+END
+
+@t = tetI
+
 
 
 @lines = 0 # number of lines that have been cleared
@@ -68,9 +90,10 @@ loop do
   case next_char
   when 'c' then clear_matrix
   when 'g' then given_matrix
-  when 'p' then print_matrix
+  when 'p' then @m.emit
   when 'q' then exit
   when 's' then step
+  when 't' then @t.emit
   when '?' then
     case next_char
     when 's' then puts @score
