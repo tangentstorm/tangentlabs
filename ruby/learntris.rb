@@ -59,6 +59,48 @@ c c c c
 . . . .
 END
 
+tetO = grid <<END
+y y
+y y
+END
+
+tetZ = grid <<END
+r r .
+. r r
+. . .
+END
+
+tetS = grid <<END
+. g g
+g g .
+. . .
+END
+
+tetJ = grid <<END
+b . .
+b b b
+. . .
+END
+
+tetL = grid <<END
+. . o
+o o o
+. . .
+END
+
+tetI = grid <<END
+. . . .
+c c c c
+. . . .
+. . . .
+END
+
+tetT = grid <<END
+. m .
+m m m
+. . .
+END
+
 @t = tetI
 
 
@@ -94,6 +136,13 @@ loop do
   when 'q' then exit
   when 's' then step
   when 't' then @t.emit
+  when 'I' then @t = tetI
+  when 'O' then @t = tetO
+  when 'Z' then @t = tetZ
+  when 'S' then @t = tetS
+  when 'J' then @t = tetJ
+  when 'L' then @t = tetL
+  when 'T' then @t = tetT
   when '?' then
     case next_char
     when 's' then puts @score
