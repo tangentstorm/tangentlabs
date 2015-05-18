@@ -9,7 +9,7 @@
 loop do
   STDIN.readline.each_char do |c|
     case c
-    when 'q' then exit!
+    when 'q' then exit
     when 'p' then 22.times { 10.times { print '. ' }; puts'' }
     end
   end
