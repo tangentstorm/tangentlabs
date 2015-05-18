@@ -41,10 +41,19 @@ def clear_matrix
 end
 
 
-def print_score
-  puts 0
-end
+@lines = 0 # number of lines that have been cleared
+@score = 0 # score for those lines
 
+def step
+  @mh.times do |y|
+    space_count = @m.row(y).select {|ch| ch == '.'}.length
+    if space_count == 0 then
+      @mw.times {|x| @m[y,x]='.'}
+      @lines += 1
+      @score += 100
+    end
+  end
+end
 
 
 # buffer input so we can read one char at a time, on demand
@@ -61,9 +70,11 @@ loop do
   when 'g' then given_matrix
   when 'p' then print_matrix
   when 'q' then exit
+  when 's' then step
   when '?' then
     case next_char
-    when 's' then print_score
+    when 's' then puts @score
+    when 'n' then puts @lines
     end
   end
 end
