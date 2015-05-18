@@ -36,14 +36,34 @@ def given_matrix
   end
 end
 
+def clear_matrix
+  @mh.times do |y| @mw.times do |x| @m[y,x]='.' end end
+end
+
 
+def print_score
+  puts 0
+end
+
+
+
+# buffer input so we can read one char at a time, on demand
+@buf = ''; @pos = 1
+def next_char
+  while @pos >= @buf.length do @buf = STDIN.readline; @pos = 0 end
+  r = @buf[@pos]; @pos += 1; r
+end
+
 # main loop
 loop do
-  STDIN.readline.each_char do |c|
-    case c
-    when 'q' then exit
-    when 'p' then print_matrix
-    when 'g' then given_matrix
+  case next_char
+  when 'c' then clear_matrix
+  when 'g' then given_matrix
+  when 'p' then print_matrix
+  when 'q' then exit
+  when '?' then
+    case next_char
+    when 's' then print_score
     end
   end
 end
