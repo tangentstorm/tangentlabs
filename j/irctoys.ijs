@@ -1,5 +1,19 @@
 NB. toys for using J on irc
 
+NB. whence : finds the script a name was defined in
+whence =: verb define
+  select. 4!:0 < y
+    case. _2 do. 'invalid name'
+    case. _1 do. 'name not defined'
+    case. 0;1;2;3 do.
+      index =. 4!:4 < y
+      select. * >: index
+        case. 0 do. 'name defined locally'
+        case. 1 do. > index { 4!:3''
+      end.
+  end.
+)
+
 NB. botplot : plots a function using unicode
 botplot=: [: u: 32 ([:I.9600=]) } 9600 + ([: <. 10* (]-<./) % (>./ - <./))
 
