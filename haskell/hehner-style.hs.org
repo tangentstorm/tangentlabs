@@ -57,8 +57,8 @@ Since our program doesn't have to do anything, both of these tools will be prett
   binop c x op y = (truth c x) `op` (truth c y)
 
 
-  s  = V $ Ident "s"          -- special variable name for state
-  s' = V $ Prime $ Ident "s"  -- special variable name for state'
+  σ  = V $ Ident "s"          -- special variable name for state
+  σ' = V $ Prime $ Ident "s"  -- special variable name for state'
 
   verify :: ctx -> Lo -> Work
   verify c x =
@@ -75,7 +75,7 @@ Since our program doesn't have to do anything, both of these tools will be prett
 
   -- desugaring step
   desugar :: Hi -> Work
-  desugar Ok      = return $ s :=: s'
+  desugar Ok      = return $ σ :=: σ'
   desugar (Lo lo) = return lo
 
   -- interpreter
