@@ -28,20 +28,20 @@ Since our program doesn't have to do anything, both of these tools will be prett
 #+begin_src haskell :tangle yes
 
   type Str = String
-  type Err = Str
+  type Err = String
 
   data Var = Ident Str   -- unprimed identifier
            | Prime Var   -- variables can be primed multiple times
        deriving (Eq, Ord, Show)
-  
+
   -- low level language (basic boolean stuff)
   data Lo = T | F | V Var
           | Not Lo
-          | Lo :&: Lo    -- and
-          | Lo :|: Lo    -- or
+          | Lo :∧: Lo    -- and
+          | Lo :∨: Lo    -- or
           | Lo :=: Lo    -- xnor (equality check)
        deriving (Eq, Ord, Show)
-  
+
   type Work  = Either Err Lo
   type Truth = Either Err Bool
 
@@ -56,7 +56,7 @@ Since our program doesn't have to do anything, both of these tools will be prett
 
   s  = V $ Ident "s"          -- special variable name for state
   s' = V $ Prime $ Ident "s"  -- special variable name for state'
-  
+
   verify :: ctx -> Lo -> Work
   verify c x =
        do passed <- truth c x
@@ -65,12 +65,12 @@ Since our program doesn't have to do anything, both of these tools will be prett
   
   -- high level language (syntactic sugar)
   data Hi = Ok | Lo Lo
-  
-  -- stub for th parser
+
+  -- stub for the parser
   parse :: Str -> Either Err Hi
-  parse ('o':'k':ss) = Right Ok
-  parse s = Left $ "unable to parse. expected \"ok\". got: \"" ++ s ++ "'\""
-  
+  parse ('o':'k':ss) = return Ok
+  parse s = fail $ "unable to parse. expected \"ok\". got: \"" ++ s ++ "'\""
+
   -- desugaring step
   desugar :: Hi -> Work
   desugar Ok      = return $ s :=: s'
@@ -90,4 +90,3 @@ Since our program doesn't have to do anything, both of these tools will be prett
          Left err -> putStrLn $ "ERROR: " ++ err
 
 #+end_src
-
