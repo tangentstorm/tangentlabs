@@ -1,0 +1,23 @@
+* Generic meta-language
+
+In order to talk about languages in general:
+so that we can talk about languages /in general/:
+We will start with a generic model of symbolic expressions, 
+
+#+begin_src haskell
+  data Exp s o
+       = Sym s            -- symbols in the meta-language
+       | Obj o            -- objects in the "world"
+       | Grp [Exp s o]    -- generic grouping/nesting construct
+     deriving (Eq, Ord)
+#+end_src
+
+
+#+begin_src haskell
+  data Expr = T | F
+            | Expr :*. Expr
+            | Expr :+. Expr
+            | Not Expr
+            | Spec SpecExpr
+            | Code CodeExpr
+#+end_src
