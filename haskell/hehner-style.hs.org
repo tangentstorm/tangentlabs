@@ -1,0 +1,94 @@
+#+title: hehner style
+
+* Programs as Boolean Expressions
+
+A key insight in Eric Hehner's /Practical Theory of Programming/ is that both programs and specifications can be treated as boolean expressions.
+
+Although he spends the first part of the book building up a unified theory of basic objects such as numbers, characters, lists, and sets, the actual language he creates consists only of statements /about/ those objects.
+
+He does this by adopting a syntactic sugar for.
+
+* The empty program
+
+In Hehner's notation, the equal sign (=\equal=) represents a test for equality (rather than assignment), =s= represents the state of the entire system before the program starts, and =s\prime= represents the state when the program ends.
+
+Therefore, the following line specifies a program that has no effect.
+
+#+begin_src text
+s = s\prime
+#+end_src
+
+This specification is also the smallest possible program, and it is used so often that Hehner gives it a special syntax: the keyword =ok=.
+
+* Language tools.
+
+Now that we have our first program, it would be nice if we had an interpreter to run it, and /interpterer/ a /proof checker/ to make sure that it's implemented correctly.
+
+Since our program doesn't have to do anything, both of these tools will be pretty simple. That's fine, though: it gives us a chance to figure out how the whole system fits together.
+
+
+#+begin_src haskell
+  type Str = String
+  type Err = Str
+
+  data Var = Ident Str   -- unprimed identifier
+           | Prime Var   -- variables can be primed multiple times
+       deriving (Eq, Ord, Show)
+  
+  -- low level language (basic boolean stuff)
+  data Lo = T | F | V Var
+          | Not Lo
+          | Lo :&: Lo    -- and
+          | Lo :|: Lo    -- or
+          | Lo :=: Lo    -- xnor (equality check)
+       deriving (Eq, Ord, Show)
+  
+  type Work  = Either Err Lo
+  type Truth = Either Err Bool
+
+  truth :: ctx -> Lo -> Truth
+  truth c T = return True
+  truth c F = return False
+  truth c (x :=: y) = do xt <- truth c x
+                         yt <- truth c y
+                         return $ xt == yt
+  truth c (V x) = return False
+
+
+  s  = V $ Ident "s"          -- special variable name for state
+  s' = V $ Prime $ Ident "s"  -- special variable name for state'
+  
+  verify :: ctx -> Lo -> Work
+  verify c x =
+       do passed <- truth c x
+          if passed then Right x
+          else Left $ "Unable to verify: (" ++ show x ++ ")"
+  
+  -- high level language (syntactic sugar)
+  data Hi = Ok | Lo Lo
+  
+  -- stub for th parser
+  parse :: Str -> Either Err Hi
+  parse ('o':'k':ss) = Right Ok
+  parse s = Left $ "unable to parse. expected \"ok\". got: \"" ++ s ++ "'\""
+  
+  -- desugaring step
+  desugar :: Hi -> Work
+  desugar Ok      = return $ s :=: s'
+  desugar (Lo lo) = return lo
+
+  -- interpreter
+  execute :: Lo -> IO ()
+  execute _ = return ()
+
+  -- main routine
+  main :: IO ()
+  main = do
+    let src = "ok"
+    let ctx = () -- no context yet
+    case parse src >>= desugar >>= verify ctx  of
+         Right ex -> execute ex
+         Left err -> putStrLn $ "ERROR: " ++ err
+
+#+end_src
+
