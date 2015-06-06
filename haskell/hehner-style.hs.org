@@ -8,12 +8,12 @@ Although he spends the first part of the book building up a unified theory of ba
 
 * The empty program
 
-In Hehner's notation, the equal sign (=\equal=) represents a test for equality (rather than assignment), =s= represents the state of the entire system before the program starts, and =s\prime= represents the state when the program ends.
+In Hehner's notation, the equal sign (=\equal=) represents a test for equality (rather than assignment), =σ= represents the state of the entire system before the program starts, and =σ′= represents the state when the program ends.
 
 Therefore, the following line specifies a program that has no effect.
 
 #+begin_src text
-s = s\prime
+σ = σ′
 #+end_src
 
 This specification is also the smallest possible program, and it is used so often that Hehner gives it a special syntax: the keyword =ok=.
@@ -57,20 +57,19 @@ Since our program doesn't have to do anything, both of these tools will be prett
   binop c x op y = (truth c x) `op` (truth c y)
 
 
-  σ  = V $ Ident "s"          -- special variable name for state
-  σ' = V $ Prime $ Ident "s"  -- special variable name for state'
+  σ  = V $ Ident "σ"          -- special variable name for state before run
+  σ' = V $ Prime $ Ident "σ"  -- special variable name for state after run
 
   verify :: ctx -> Lo -> Work
-  verify c x =
-          if truth c x then return x
-          else fail $ "Unable to verify: (" ++ show x ++ ")"
+  verify c x = if truth c x then return x
+               else fail $ "Unable to verify: (" ++ show x ++ ")"
 
   -- high level language (syntactic sugar)
   data Hi = Ok | Lo Lo
 
   -- stub for the parser
   parse :: Str -> Either Err Hi
-  parse ('o':'k':ss) = return Ok
+  parse ('o':'k':_) = return Ok
   parse s = fail $ "unable to parse. expected \"ok\". got: \"" ++ s ++ "'\""
 
   -- desugaring step
