@@ -6,8 +6,6 @@ A key insight in Eric Hehner's /Practical Theory of Programming/ is that both pr
 
 Although he spends the first part of the book building up a unified theory of basic objects such as numbers, characters, lists, and sets, the actual language he creates consists only of statements /about/ those objects.
 
-He does this by adopting a syntactic sugar for.
-
 * The empty program
 
 In Hehner's notation, the equal sign (=\equal=) represents a test for equality (rather than assignment), =s= represents the state of the entire system before the program starts, and =s\prime= represents the state when the program ends.
