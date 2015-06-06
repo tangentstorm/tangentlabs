@@ -25,7 +25,8 @@ Now that we have our first program, it would be nice if we had an interpreter to
 Since our program doesn't have to do anything, both of these tools will be pretty simple. That's fine, though: it gives us a chance to figure out how the whole system fits together.
 
 
-#+begin_src haskell
+#+begin_src haskell :tangle yes
+
   type Str = String
   type Err = Str
 
