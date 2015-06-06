@@ -43,15 +43,18 @@ Since our program doesn't have to do anything, both of these tools will be prett
        deriving (Eq, Ord, Show)
 
   type Work  = Either Err Lo
-  type Truth = Either Err Bool
 
-  truth :: ctx -> Lo -> Truth
-  truth c T = return True
-  truth c F = return False
-  truth c (x :=: y) = do xt <- truth c x
-                         yt <- truth c y
-                         return $ xt == yt
-  truth c (V x) = return False
+  truth :: ctx -> Lo -> Bool
+  truth c T = True
+  truth c F = False
+  truth c (x :=: y) = binop c x (==) y
+  truth c (x :∧: y) = binop c x (&&) y
+  truth c (x :∨: y) = binop c x (||) y
+  truth c (V x) = False
+  truth c _ = error "unknown"
+
+  binop :: ctx -> Lo -> (Bool -> Bool -> Bool) -> Lo -> Bool
+  binop c x op y = (truth c x) `op` (truth c y)
 
 
   s  = V $ Ident "s"          -- special variable name for state
@@ -59,10 +62,9 @@ Since our program doesn't have to do anything, both of these tools will be prett
 
   verify :: ctx -> Lo -> Work
   verify c x =
-       do passed <- truth c x
-          if passed then Right x
-          else Left $ "Unable to verify: (" ++ show x ++ ")"
-  
+          if truth c x then return x
+          else fail $ "Unable to verify: (" ++ show x ++ ")"
+
   -- high level language (syntactic sugar)
   data Hi = Ok | Lo Lo
 
