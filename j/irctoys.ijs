@@ -42,7 +42,7 @@ tile =: [: (lol"1)@lol 2 2 <;.3 ]
 NB. blit
 blit =: (hext{~#.@,L:0)@:tile "2
 
-NB. pb : pretty-pritns a boolean matrix in color (uses blit)
+NB. pb : pretty-prints a boolean matrix in color (uses blit)
 pb =: [: ((u:3),'2|',(u:3),'10',((u:3),'2|'),~])"1 blit@(,~^:(1 = {.@$))
 
 
@@ -105,6 +105,21 @@ Note   blit picm
                    ▀▀█
 
 )
+
+mandel =: verb define
+  'scale x y w h' =.  6 , 0 _4 , -: 16 16
+  2>|((c+*:))^:8 ] c =: scale %~ (x+}.i:w) j./~ (y+}.i:h)
+)
+Note _ NB. output from `blit mandel''`
+   ▐
+   ▐
+  ▐██
+  ▄█▙▖
+ ▐████
+▗█████▙
+ ▝█▛█▛
+)
+
 
 bmp=:'l'&=;._2@,&';'
 I=:bmp'oolllloo;oooloooo;oooloooo;oooloooo;oooloooo;oooloooo;oooloooo;oolllooo'
