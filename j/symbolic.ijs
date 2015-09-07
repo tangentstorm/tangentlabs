@@ -43,8 +43,7 @@ fwd =: 1 : 0
 )
 
 NB. declare some symbols for us to play with:
-cc'z'
-symbolic_z_=:(3 : 0)
+symbolic=:(3 : 0)
   nsym fwd 'z m n'
   vsym fwd 'a b c d e f g h'
 )

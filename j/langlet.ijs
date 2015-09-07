@@ -1,6 +1,6 @@
 load'irctoys.ijs'
 load'~Syn/cheq.ijs'
-
+cc'langlet'
 NB. numbers from langlets apl94 binary algebra workshop
 NB. http://archive.vector.org.uk/art10004690
 NB. https://docs.google.com/file/d/0B3gbSUvJhxQuRmRpam9ZWnN1UUU/edit
@@ -140,3 +140,4 @@ cheq   3 plus findm
 │0 0 0│0 0 1│0 1 0│0 1 1│1 0 0│1 0 1│1 1 0│1 1 1│
 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
 )
+cc'base'
