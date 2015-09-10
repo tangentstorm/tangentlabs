@@ -5,7 +5,7 @@ var net = require('net'),
 var server = net.createServer(function(client) {
     var rl = readline.createInterface(client, client)
     rl.question("what up, homie?", function(whatup) {
-        console.log(whatup);
+        console.log(whatup)
         client.end("good talk. seeya.\r\n")
     })
 })
