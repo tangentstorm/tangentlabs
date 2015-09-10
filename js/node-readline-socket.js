@@ -10,6 +10,4 @@ var server = net.createServer((client)=> {
     })
 })
 
-server.listen(1313, ()=> {
-    console.log('listening...')
-})
+server.listen(1313, ()=> console.log('listening...'))
