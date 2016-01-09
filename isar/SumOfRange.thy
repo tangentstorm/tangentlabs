@@ -27,13 +27,13 @@ theorem sr2 [simp]: "n > 0 \<Longrightarrow> 2 * (sr n) = n * (n + 1)"
 by (induction n; auto)
 
 
-theorem "n > 0 \<Longrightarrow> sum (range n) = (n * (n+1)) div 2"
- proof -
-  let ?x =  "sum (range n)"
-  have  "n>0 \<Longrightarrow>     ?x =     sr n"          by (simp only: srsimp)
-  hence "n>0 \<Longrightarrow> 2 * ?x = 2 * sr n"          by auto
-  hence "n>0 \<Longrightarrow> 2 * ?x = n * (n + 1)"       by (simp only: sr2)
-  hence "n>0 \<Longrightarrow>     ?x = n * (n + 1) div 2" by auto
+theorem
+  assumes "n > 0"
+  shows "sum (range n) = (n * (n+1)) div 2" (is "?x = _")
+proof -
+  have  "     ?x =     sr n"       using assms by (simp only: srsimp)
+  hence " 2 * ?x = 2 * sr n"       by auto
+  hence " 2 * ?x = n * (n + 1)"    using assms by (simp only: sr2)
   thus ?thesis by auto
 qed
 
