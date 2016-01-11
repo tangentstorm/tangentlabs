@@ -80,6 +80,37 @@ by (induction zs arbitrary: x y rule: listmin.induct; auto)
 lemma assumes "sorted (x#xs)" shows "listmin (x#xs) = x" using assms
 by (induction xs arbitrary: x rule: listmin.induct; auto)
 
+(* same for max item *)
+
+lemma gt_vs_le:
+  fixes x y
+  assumes "x > y"
+  shows "\<not>(x \<le> y)"
+  sorry (* I have no idea yet why this isn't proved automatically :/ *)
+
+lemma maxxy [simp]:
+  fixes x y assumes "x > y"
+  shows "(max x y) = x"
+  using assms
+proof -
+  have  "(max x y)= (if x \<le> y then y else x)" by (rule max_def)
+  hence "(max x y)= (if False then y else x)" using assms by (simp only: gt_vs_le)
+  then show ?thesis by auto
+qed
+
+fun listmax :: "'a::ord list \<Rightarrow> 'a" where
+   "listmax [] = undefined"
+ | "listmax [x] = x"
+ | "listmax (x#xs) = max x (listmax xs)"
+
+lemma [simp]: "listmax [x,y] = max x y" by auto
+
+lemma sorted_concat:
+  assumes "sorted (y0#ys)"
+      and "sorted xs"
+      and "listmax(x) < y0"
+    shows "sorted (xs @ ys)"
+    sorry (* TODO *)
 
 
 (* and now, the (functional-style) quicksort: *)
@@ -90,9 +121,23 @@ fun qsort :: "'a::ord list \<Rightarrow> 'a list" where
 
 value "qsort [ 5, 9, 2, 3, 4 ] :: int list"
 
+
+
 lemma "sorted (qsort [])" by auto
 lemma "sorted (qsort [x])" by auto
-theorem "sorted (qsort (x#xs))"
+
+theorem "sorted (qsort (x#ys))"
+sorry
+
+(* proof (induct ys rule: qsort.induct)
+  show "sorted (qsort [x])" by auto
+next
+  let ?lt = "[y \<leftarrow> ys. y < x]"
+  let ?ge = "[y \<leftarrow> ys. y \<ge> x]"
+  have  q0: "qsort (x#ys) = (qsort ?lt) @ (x # qsort ?ge)" by auto
   sorry
+qed *)
+
+
 
 end
