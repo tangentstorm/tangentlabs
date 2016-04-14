@@ -18,13 +18,15 @@ UGC C      CGC R      AGC S      GGC G
 UGA _      CGA R      AGA R      GGA G
 UGG W      CGG R      AGG R      GGG G"
 
+cols: {[x;y](((#y)%x),x) # y}   / reshape y as x columns
+
 / parse above into a 2-column table:
 tbl: _ssr[tbl;"\n";" "]         / newlines → spaces
 tbl: {x@&a|1_1!1,a:~x=" "} tbl  / condense spaces 
 tbl: {1_'(&x=" ") _ x} tbl      / split on whitespace
 tbl: `$'tbl                     / strings to symbols
-tbl: +{ (((#x)%2),2)# x } tbl   / reshape as 2 columns
+tbl: +cols[2;tbl]               / reshape as 2 columns
+r2p[tbl@0]:tbl@1;               / rna sequence → protein dictionary
+pro: {-1_,/$r2p[`$'cols[3;x]]}  / rna string → protien string converter.
 
-/ rna sequence → protein dictionary
-rna[tbl@0]:tbl@1                
-
+`0:pro[,/0:"data.txt"],"\n"     / convert and print the given rna string.
