@@ -1,5 +1,9 @@
 NB. toys for using J on irc
 
+NB. use ascii box drawing so that people can see:
+ascii =: 3 : '(9!:7 ''+++++++++|-'') ] y'
+
+
 NB. whence : finds the script a name was defined in
 whence =: verb define
   select. 4!:0 < y
