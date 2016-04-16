@@ -47,7 +47,7 @@ symbolic=:(3 : 0)
   nsym fwd 'z m n'
   vsym fwd 'a b c d e f g h'
 )
-symbolic''
+
 NB. we have to declare these manually because they're in use:
 ". '(x_z_=:''x'');(y_z_=:''y'');(u_z_=:''u''ov);(v_z_=:''v''ov)'
 

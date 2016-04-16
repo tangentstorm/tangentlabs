@@ -1,0 +1,22 @@
+#+title: ludic numbers in j
+
+Generate and show here the first 25 ludic numbers.
+How many ludic numbers are there less than or equal to 1000?
+Show the 2000..2005'th ludic numbers.
+A triplet is any three numbers x, x + 2, x + 6 where all three numbers are also ludic numbers. Show all triplets of ludic numbers < 250 (Stretch goal)
+
+
+#+begin_src j
+    
+  NB. generate the first 2005 ludic numbers:
+  ludic =: 1, {."1 (#~ 0 ~: {. | i.@#)^:(<2004) 2+i.25000
+  
+  echo 'First 25 ludic numbers: ', ": 25 {. ludic
+  echo 'There are ',(": +/ ludic <: 1000),' ludic numbers less than 1000.'
+  echo 'Ludic numbers 2000..2005: ', ": (2000 + i.5) { ludic
+  
+  triples =: 0 2 6 ([: |: [ +/ ] #~ [: *./ +/ e."1 1 ]) ludic
+  echo 'Ludic triplets less than 250:'
+  echo (#~ 1 1 1 -:"1 <&250) triples
+  
+#+end_src

@@ -1,0 +1,9 @@
+( relative jumps in retro )
+
+( ---- untested ------------- )
+
+: pc pop dup push ;
+  "( - a ) leaves the address from which it was invoked on the stack " :doc
+
+: jumprel pc + goto ;
+  "( a - ) perform a relative jump" :doc

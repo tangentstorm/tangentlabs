@@ -202,7 +202,7 @@ master := [
   "forall    "A.     (ph'∀')  "quant,
   "exists    "E.     (ph'∃')  "quant,
   "entails   "|-     (ph'⊢')  "infix,
-  "implies   "->     (ph'⇒')  "infix,
+  "imp       "->     (ph'→')  "infix,
   "iff       "><     (ph'⇔')  "infix,
   "and       "*.     (ph'∧')  "infix,
   "vel       "+.     (ph'∨')  "infix,
@@ -214,7 +214,7 @@ master := [
   "sub       "sub    (ph'⊂')  "infix,
   "sbe       "sbe    (ph'⊆')  "infix,
   "lambda    "lam    (ph'λ')  "quant,
-  "rarrow    "rarr   (ph'→')  "infix,
+  "IMP       "=>     (ph'⇒')  "infix,
   "LPAREN    (ph'(') (ph'(')  "token,
   "RPAREN    (ph')') (ph')')  "token,
   "LBRACK    (ph'[') (ph']')  "token,
@@ -234,7 +234,7 @@ syntax := [ "synid   "fields     "rule,
 c2gV IS { Master select "const "glyph };
 glyph IS TOTAL ( c2gV relate );
 
-cheq !( (master select "alias "glyph) relate "*. "-> "-. ) !( words '⇒ ∧ ¬' );
+cheq !( (master select "alias "glyph) relate "*. "-> "-. ) !( words '→ ∧ ¬' );
 cheq !( (master select "alias "glyph) relate "A. "E. ) !( words '∀ ∃' );
 cheq !( glyph "A. "x "E. "y ) !( words '∀ x ∃ y' );
 
@@ -269,7 +269,7 @@ fmt is op node { link each string content gentoks node };
 %cheq !( each fmt "top "bot "forall "exists "x ) !( '⊤' '⊥' '∀' '∃' 'x' );
 cheq !( fmt ("P "x))                             !( 'P(x)' );
 cheq !( fmt  "forall ["x] ["P "x]  )             !( '∀x[P(x)]' );
-cheq !( fmt ["forall "x ["implies "x "top]])     !( '∀x[x⇒⊤]'  );
+cheq !( fmt ["forall "x ["imp "x "top]])         !( '∀x[x→⊤]'  );
 
 
 section 'bitvars (truth tables)';
@@ -436,3 +436,43 @@ t := { show p "= q (
    "=  ("x "^ ("y "* "z))  [ "r1, 2 ]
    "=  ("x "^ ("z "* "y))  [ "~0, ^ ]
    "= (("x "^ "z) "^ "y) ) }
+
+
+section 'simple inference engine';
+% --------------------------------------------------;
+MP := ("Rule 'MP' ("$P "$Q) [("imp "$P "$Q)] [("$Q)]);
+
+# language L from /A Primer for Logic and Proof/
+# by Holly P. Hirst and Jeffry L. Hirst
+# http://www.mathsci.appstate.edu/~jlh/primer/hirst.pdf;
+
+HirstL := [ MP,
+    ("Rule 'A1' ("$A "$B) []
+         ["imp "$A ["imp "$B "$A]]),
+    ("Rule 'A2' ("$A "$B "$C) []
+         ["imp ["imp "$A ["imp "$B "$C]]]
+         ["imp ["imp "$A "$B] ["imp "$A "$C]]),
+    ("Rule 'A3' ("$A "$B) []
+         ["imp ["imp  ("not "$B) ("not "$A)]
+               ["imp [("not "$B) "$A] "$B]]) ];
+
+goals := ("Rule 'L1' ["$A] [] (l1 :=["imp "A "A]));
+
+antecedents is op r { head r @ 3 };
+consequents is op r { head r @ 4 };
+
+leads is op stmt ctx {
+  res := [];
+  for rule with ctx do
+    write display rule;
+    cons := consequents rule; sub := stmt unify cons;
+    if sub = "no then ok
+    else res := res link ["Try stmt ctx rule sub] endif;
+  endfor; res }
+
+for lead with leads l1 hirstl do
+   _try stmt ctx rule sub := lead;
+   emit "|r;
+   write display (antecedents rule);
+   emit "|w;
+endfor;
