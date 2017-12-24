@@ -5,10 +5,14 @@ use std::clone;
 
 struct PartitionGenerator<T: clone::Clone> {
   k: usize,  xs: Vec<T>,
-  i: usize,  state: u8,  // internal flow control stuff
-  held: Option<T>,       // held and subs are for recursion support
+  i: usize,  state: PGState,  // internal flow control stuff.
+  held: Option<T>,            // held and subs are for recursion
   subs: Option<Box<PartitionGenerator<T>>>
 }
+
+#[derive(Debug)]
+enum PGState { Init, OuterLoop, InnerLoop, Done }
+use PGState::*;
 
 impl<T: clone::Clone> Iterator for PartitionGenerator<T> {
   // this is basically the ugly state machine rust would generate if it had async/yield
@@ -19,21 +23,21 @@ impl<T: clone::Clone> Iterator for PartitionGenerator<T> {
   fn next(&mut self) -> Option<Self::Item> {
     let n = self.xs.len();
     loop { match self.state {
-      0 => {
-        if self.k==0 { self.state = 255; return Some((vec![], self.xs.clone())) }
-        if self.k==n { self.state = 255; return Some((self.xs.clone(), vec![])) }
+      Init => {
+        if self.k==0 { self.state = Done; return Some((vec![], self.xs.clone())) }
+        if self.k==n { self.state = Done; return Some((self.xs.clone(), vec![])) }
         // k < nx so nx can't be 0
-        self.state = 1 }
-      1 => { // top of outer loop -- for i in 0..(nx-k)
+        self.state = OuterLoop }
+      OuterLoop => { // for i in 0..(nx-k)
         if self.i <= n-self.k {
           // add item[i] to the left subset
           self.held = Some(self.xs[self.i].clone());
           // and recursively generate sub-partitions of size k-1 from the remaining items:
           let mut tail = self.xs.clone(); tail.remove(self.i);
           self.subs = Some(Box::new(partitions_i(self.k-1, tail, self.i)));
-          self.i += 1; self.state = 2
-        } else { self.state = 255 }}
-      2 => { // inner loop: for (aa,bb) in the sub-partitions
+          self.i += 1; self.state = InnerLoop
+        } else { self.state = Done }}
+      InnerLoop => { // for (aa,bb) in sub-partitions
         match self.subs {
           None => panic!("error! self.subs should never be None in state 2!!"),
           Some(ref mut pg) => {
@@ -41,10 +45,9 @@ impl<T: clone::Clone> Iterator for PartitionGenerator<T> {
               Some((mut aa,bb)) => {
                 aa.insert(0, self.held.clone().unwrap());
                 return Some((aa, bb)) }
-              None => { self.state = 1 }}}  // end of inner loop  
+              None => { self.state = OuterLoop }}}  // end of inner loop  
         }}
-      255 => return None,  // "done" state
-      _ => panic!("PartitionGenerator entered unknown state: {}", self.state)
+      Done => return None
     }}
   }
 }
@@ -54,7 +57,7 @@ fn partitions_i<T:clone::Clone>(k:usize, xs:Vec<T>, i:usize) -> PartitionGenerat
   // so when we do the sub-partitions, we pass in the current index. this ensures
   // that the sub-partitions don't include items we've already held in previous
   // iterations of the outer loop.
-  PartitionGenerator{k:k, xs:xs, i:i, state:0, held:None, subs:None}
+  PartitionGenerator{k:k, xs:xs, i:i, state:Init, held:None, subs:None}
 }
 
 fn partitions<T:clone::Clone>(k:usize, xs:Vec<T>) -> PartitionGenerator<T> {
