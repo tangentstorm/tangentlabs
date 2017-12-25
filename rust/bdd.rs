@@ -51,8 +51,9 @@ fn test_basics(){
 fn test_vars(){
   let mut base = Base::new();
   let mut ab = base.vars(&["a","b"]);
+  let base = base;
   if let (Some(b), Some(a), None) = (ab.pop(), ab.pop(), ab.pop()) {
-    assert_eq!(3, base.count.clone());
+    assert_eq!(3, base.count);
     assert_eq!(*a, base[1]);   assert_eq!(*b, base[2]);
     assert_eq!(O.nid, a.lo, "a.lo->O"); assert_eq!(I.nid, a.hi, "a.hi->I");
     assert_eq!(O.nid, b.lo, "b.lo->O"); assert_eq!(I.nid, b.hi, "b.hi->I");
