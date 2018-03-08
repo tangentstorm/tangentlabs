@@ -17,13 +17,13 @@
       fn fmt(&self, f:&mut fmt::Formatter) -> fmt::Result {
 
         // !! is there any way to get rid of these & in the
-        match self {
+        match *self {
 
-          &Nil => write!(f, "()"),                              // should only happen if we directly display nil.
+          Nil => write!(f, "()"),                              // should only happen if we directly display nil.
 
-          &Item(x) => write!(f, "{}", x),                       // single item. easy.
+          Item(x) => write!(f, "{}", x),                       // single item. easy.
 
-          &Cons(ref x, ref y) => {                              // walk through and display the entire list:
+          Cons(ref x, ref y) => {                              // walk through and display the entire list:
 
             // always show '(x'
             write!(f, "({}", x).unwrap();                       // !! how to detect and propagate the errors correctly?
@@ -36,12 +36,12 @@
             }
 
             // final value at end of list is either ')' (normal list) or '. y)' for "dotted pair"
-            match tail.as_ref() {
-              &Nil => write!(f, ")"),
-              &Item(n) => write!(f, ". {})", n),
+            match *(tail.as_ref()) {
+              Nil => write!(f, ")"),
+              Item(n) => write!(f, ". {})", n),
 
                                                                 // !! not sure how i'm supposed to handle errors here:
-              xxx => { eprintln!("got to end of list and found something weird: {:?}", xxx); Err(fmt::Error) }
+              ref xxx => { eprintln!("got to end of list and found something weird: {:?}", xxx); Err(fmt::Error) }
             }
           }
         }
