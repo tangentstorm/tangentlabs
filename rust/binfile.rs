@@ -2,6 +2,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 
+#[derive(Debug, PartialEq)]
 struct Data { a: u8, b: u8, c: u16, d: u32 }
 
 // https://stackoverflow.com/questions/28127165/how-to-convert-struct-to-u8
@@ -26,7 +27,7 @@ impl Data {
 
 fn do_main()->std::io::Result<()> {
   let mut m = vec![];
-  for i in 0..255 { m.push(Data::new(i)) }
+  for i in 0..256 { m.push(Data::new(i as u8)) }
 
   // let bytes = unsafe { to_slice(&m) };
 
@@ -44,10 +45,10 @@ fn do_main()->std::io::Result<()> {
   let mut u = Vec::new();
   let r: &[Data] = { // read
     let mut f = File::open(path)?;
-    // TODO: read_exact
     f.read_to_end(&mut u).expect("couldn't read file");
-    let s = u.as_slice();
-    unsafe { u8s_to_slice(s)} };
+    unsafe { u8s_to_slice(&u.as_slice())} };
+
+  for i in 0..511 { assert_eq!(&r[i], &m[i%256]) }
 
   Ok(()) }
 
