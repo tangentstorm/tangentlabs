@@ -2,7 +2,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 struct Data { a: u8, b: u8, c: u16, d: u32 }
 
 // https://stackoverflow.com/questions/28127165/how-to-convert-struct-to-u8
@@ -42,11 +42,12 @@ fn do_main()->std::io::Result<()> {
     // then write a second copy, storing entire vector at once:
     f.write_all( unsafe{ slice_to_u8s(m.as_slice()) })?; }
 
-  let mut u = Vec::new();
-  let r: &[Data] = { // read
+  let r = { // read
     let mut f = File::open(path)?;
+    let mut u = Vec::new();
     f.read_to_end(&mut u).expect("couldn't read file");
-    unsafe { u8s_to_slice(&u.as_slice())} };
+    let s:&[Data] = unsafe { u8s_to_slice(&u.as_slice())};
+    s.to_vec() };
 
   for i in 0..511 { assert_eq!(&r[i], &m[i%256]) }
 
