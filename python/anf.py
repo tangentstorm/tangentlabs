@@ -10,19 +10,20 @@ def anf(terms):
 class ANF(object):
 
     @staticmethod
-    def empty():
-        return ANF.from_term('0')
+    def false():
+        return ANF(var='', inc=0, lo=None, hi=None)
 
     @staticmethod
     def hitch(var, anf):
-        return ANF(var=var, inc=False, lo=None, hi=anf)
+        return ANF(var=var, inc=0, lo=None, hi=anf)
 
     @staticmethod
     def from_term(term):
-        if term in '01': result=ANF(var=term, inc=term=='1', lo=None, hi=None)
+        if term == '':    result=ANF(var='', inc=0, lo=None, hi=None)
+        elif term == '1': result=ANF(var='', inc=1, lo=None, hi=None)
         else:
             xs = reversed(sorted(term))
-            result = ANF(var=next(xs), inc=True, lo=None, hi=None)
+            result = ANF(var=next(xs), inc=1, lo=None, hi=None)
             for x in xs: result = ANF.hitch(x, result)
         return result
 
@@ -30,23 +31,27 @@ class ANF(object):
     def from_terms(terms):
         terms = terms.split() if type(terms)==str else terms[:]
         if terms: return reduce(XOR, [ANF.from_term(t) for t in terms])
-        else: return ANF.empty()
+        else: return ANF.false()
 
     def __init__(self, var, inc, lo, hi):
-        self.var = '' if var in '01' else var
+        self.var = var
         self.inc = inc
         self.lo = lo
         self.hi = hi
 
     def __str__(self):
-        v = self.var or '%i' % self.inc
+        if self.is_false(): return '( )'
+        v = self.var or '1'
         if self.var == '' and (self.lo == self.hi == None): return '(%s)' % v
         return ' '.join(['(%s%s' % ('*' if self.inc else '', v),
                          str(self.lo) if self.lo else '-',
                          str(self.hi) if self.hi else '-']) + ')'
+    def __repr__(self):
+        return str(self)
 
     def gen_terms(self):
         """generates a series of terms"""
+        if self.is_false(): return
         if self.inc: yield self.var or '1'
         if self.hi:
             for x in self.hi.gen_terms(): yield self.var + x
@@ -59,30 +64,46 @@ class ANF(object):
     def is_leaf(self):
         return self.lo is None and self.hi is None
 
+    def is_false(self):
+        return self.var is '' and not self.inc
+
+    def is_true(self):
+        return self.var is '' and self.is_leaf()
+
 
 def XOR(x0,y0):
     if x0 is None: return y0
     if y0 is None: return x0
     x,y = (x0,y0) if x0.var <= y0.var else (y0,x0)
-    if x.var == '' and not x.inc: return y0
+    if x.is_false(): return y0
     if x.var == y.var:
         r = ANF(x.var, inc=(x.inc ^ y.inc), lo=XOR(x.lo, y.lo), hi=XOR(x.hi,y.hi))
-        if (not r.inc) and (r.lo == r.hi == None): return ANF.empty()
+        if (not r.inc) and (r.lo == r.hi == None): return ANF.false()
         else: return r
     else: return ANF(x.var, inc=x.inc, lo=XOR(x.lo, y), hi=x.hi)
 
 def AND(x0,y0):
     x,y = (x0,y0) if x0.var <= y0.var else (y0,x0)
+    if x.is_false(): return x
+    if x.is_true(): return y
     if x.is_leaf():
         if y.is_leaf():
-            assert y.inc, "leaves should always be incuded in the set."
+            assert y.inc, "leaves should always be incuded in the set. (got: %s)" % y
             if x.var==y.var: return x
-            else: return ANF(var=x.var, inc=False, lo=None, hi=y)
-        else: # y is not a leaf
-            return XOR(ANF(var=y.var, inc=y.inc, lo=None, hi=y.hi),
-                       ANF(var=y.var, inc=False, lo=None, hi=y.lo))
-    else: # neither is a leaf:
-        raise NotImplementedError
+            else: return ANF(var=x.var, inc=0, lo=None, hi=y)
+        else: # x is a leaf, y is not
+            if x.var==y.var: return ANF(var=x.var, inc=y.inc, lo=None, hi=XOR(y.lo, y.hi))
+            else: return ANF(var=x.var, inc=0, lo=None, hi=y) # otherwise, just prepend x (which is no longer in the set)
+    else: # x is not a leaf, so we have to append y to the end of x
+        raise NotImplementedError('TODO: x *. y when -. x.is_leaf')
+        # this means x by itself is no longer in the set, so:
+        return ANF(var=x.var, inc=0, lo=None, hi=None)
+        return anf('z')
+        res = x
+        # the long, terrible way:
+        for yt in y.terms():
+            res = XOR(res, AND(anf(xt), anf(yt)))
+        return res
 
 
 
@@ -94,8 +115,7 @@ class ANFTest(unittest.TestCase):
 
     def test_from_term(self):
         chk = lambda t,s : self.assertEqual(str(ANF.from_term(t)), s)
-        chk('',    "(0)")
-        chk('0',   "(0)")
+        chk('',    "( )")
         chk('1',   "(1)")
         chk('a',   "(*a - -)")
         chk('ab',  "(a - (*b - -))")
@@ -104,11 +124,10 @@ class ANFTest(unittest.TestCase):
 
     def test_from_terms(self):
         chk = lambda t,s : self.assertEqual(str(ANF.from_terms(t)), s)
-        chk('',        "(0)")     # this is the empty set.
-        chk('0',       "(0)")     # same
-        chk('1',       "(1)")     # term should be same as above
+        chk('',        "( )")     # this is false
+        chk('1',       "(1)")     # this is true
         chk('a',      "(*a - -)") # xor/a     = a
-        chk('a a',     "(0)")     # xor/a,a   = empty
+        chk('a a',     "( )")     # xor/a,a   = false
         chk('a a a',  "(*a - -)") # xor/a,a,a = a
         chk('1 a', "(*1 (*a - -) -)")
         chk('a b', "(*a (*b - -) -)")
@@ -122,6 +141,42 @@ class ANFTest(unittest.TestCase):
         chk('a ab','a ab')
         chk('1 a', '1 a')
         chk('1 a b ab', '1 a ab b')
+
+
+    def test_xor(self):
+        def chk(x,y,z):
+            a,b = anf(x), anf(y); r = XOR(a,b); t = r.terms()
+            self.assertEqual(t, z, 'expect: %s; got: %s; anf: %r XOR %r ==> %r' % (z,t,a,b,r))
+        chk('a', 'a', '')
+        chk('a', '1', '1 a')
+
+    def chk_and(self, x,y,z):
+        a,b = anf(x), anf(y); r = AND(a,b); t = r.terms()
+        self.assertEqual(t, z, 'expect: %s; got: %s; anf: %r AND %r ==> %r' % (z,t,a,b,r))
+
+    def test_and_simple_x(self):
+        """check 'and' when x is a leaf"""
+        chk = self.chk_and
+        chk('', '', '')
+        chk('', '1', '')
+        chk('', 'a', '')
+        chk('1', '', '')
+        chk('1', '1', '1')
+        chk('1', 'a', 'a')
+        chk('a', 'a', 'a')
+        chk('a', 'ab', 'ab')
+        chk('a', 'bc', 'abc')
+        chk('1', '1 a', '1 a')
+        chk('1', 'a b', 'a b')
+        chk('a', 'a b', 'a ab')
+
+    def test_and_nonleaf_x(self):
+        """check 'and' when x is not a leaf"""
+        chk = self.chk_and
+        chk('1 a', 'a', '')
+        #chk('a', 'a b', 'a ab')
+        #import pdb; pdb.set_trace()
+        #chk('a b', 'b', 'ab b')
 
 if __name__=="__main__":
     unittest.main()
