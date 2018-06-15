@@ -1,5 +1,7 @@
 """
-a zdd-like data structure for working with algebraic normal form.
+a zdd-like data structure for working with the algebraic normal form (xor of ands) of boolean functions.
+ANF has various nice properties (xor(f,g) is trivial, not(f) is just xor(f,1), ...)
+Unfortunately, the AND operation is very expensive, as it amounts to the multiplication of polynomials.
 """
 import unittest
 from functools import reduce
@@ -82,6 +84,16 @@ def XOR(x0,y0):
         else: return r
     else: return ANF(x.var, inc=x.inc, lo=XOR(x.lo, y), hi=x.hi)
 
+
+def NAIVE_AND(x,y):
+    """full cartesian product. (slow)"""
+    res = ANF.false()
+    for xt0 in x.gen_terms():
+        for yt0 in y.gen_terms():
+            (xt,yt) = (xt0, yt0) if xt0<=yt0 else (yt0,xt0)
+            res = XOR(res, anf(yt if xt == '1' else xt+yt))
+    return res
+
 def AND(x0,y0):
     x,y = (x0,y0) if x0.var <= y0.var else (y0,x0)
     if x.is_false(): return x
@@ -95,13 +107,7 @@ def AND(x0,y0):
             if x.var==y.var: return ANF(var=x.var, inc=y.inc, lo=None, hi=XOR(y.lo, y.hi))
             else: return ANF(var=x.var, inc=0, lo=None, hi=y) # otherwise, just prepend x (which is no longer in the set)
     else: # x is not a leaf, so we have to append y to the end of x
-        # the long, terrible way, just while i build up my test cases
-        res = ANF.false()
-        for xt0 in x.gen_terms():
-            for yt0 in y.gen_terms():
-                (xt,yt) = (xt0, yt0) if xt0<=yt0 else (yt0,xt0)
-                res = XOR(res, anf(yt if xt == '1' else xt+yt))
-        return res
+        return NAIVE_AND(x,y)
 
 
 
