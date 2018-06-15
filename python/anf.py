@@ -22,7 +22,7 @@ class ANF(object):
         if term == '':    result=ANF(var='', inc=0, lo=None, hi=None)
         elif term == '1': result=ANF(var='', inc=1, lo=None, hi=None)
         else:
-            xs = reversed(sorted(term))
+            xs = reversed(sorted(set(term)))
             result = ANF(var=next(xs), inc=1, lo=None, hi=None)
             for x in xs: result = ANF.hitch(x, result)
         return result
@@ -95,14 +95,12 @@ def AND(x0,y0):
             if x.var==y.var: return ANF(var=x.var, inc=y.inc, lo=None, hi=XOR(y.lo, y.hi))
             else: return ANF(var=x.var, inc=0, lo=None, hi=y) # otherwise, just prepend x (which is no longer in the set)
     else: # x is not a leaf, so we have to append y to the end of x
-        raise NotImplementedError('TODO: x *. y when -. x.is_leaf')
-        # this means x by itself is no longer in the set, so:
-        return ANF(var=x.var, inc=0, lo=None, hi=None)
-        return anf('z')
-        res = x
-        # the long, terrible way:
-        for yt in y.terms():
-            res = XOR(res, AND(anf(xt), anf(yt)))
+        # the long, terrible way, just while i build up my test cases
+        res = ANF.false()
+        for xt0 in x.gen_terms():
+            for yt0 in y.gen_terms():
+                (xt,yt) = (xt0, yt0) if xt0<=yt0 else (yt0,xt0)
+                res = XOR(res, anf(yt if xt == '1' else xt+yt))
         return res
 
 
@@ -118,6 +116,7 @@ class ANFTest(unittest.TestCase):
         chk('',    "( )")
         chk('1',   "(1)")
         chk('a',   "(*a - -)")
+        chk('aa',  "(*a - -)")
         chk('ab',  "(a - (*b - -))")
         chk('ac',  "(a - (*c - -))")
         chk('abc', "(a - (b - (*c - -)))")
@@ -141,7 +140,6 @@ class ANFTest(unittest.TestCase):
         chk('a ab','a ab')
         chk('1 a', '1 a')
         chk('1 a b ab', '1 a ab b')
-
 
     def test_xor(self):
         def chk(x,y,z):
@@ -174,9 +172,13 @@ class ANFTest(unittest.TestCase):
         """check 'and' when x is not a leaf"""
         chk = self.chk_and
         chk('1 a', 'a', '')
-        #chk('a', 'a b', 'a ab')
-        #import pdb; pdb.set_trace()
-        #chk('a b', 'b', 'ab b')
+        chk('a b', 'b', 'ab b')
+        chk('a b', 'ab', '')
+        chk('a b', 'bc', 'abc bc')
+        chk('a b', 'b c', 'ab ac b bc')
+        chk('a c', 'b d', 'ab ad bc cd')
+        chk('a ab c', 'b d', 'abd ad bc cd')
+        chk('a ab c', '1 b d', 'a ab abd ad bc c cd') # ~:/a,ab,ad,ab,ab,abd,c,bc,cd
 
 if __name__=="__main__":
     unittest.main()
