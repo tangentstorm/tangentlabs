@@ -94,6 +94,7 @@ def NAIVE_AND(x,y):
             res = XOR(res, anf(yt if xt == '1' else xt+yt))
     return res
 
+
 def AND(x0,y0):
     x,y = (x0,y0) if x0.var <= y0.var else (y0,x0)
     if x.is_false(): return x
@@ -107,7 +108,10 @@ def AND(x0,y0):
             if x.var==y.var: return ANF(var=x.var, inc=y.inc, lo=None, hi=XOR(y.lo, y.hi))
             else: return ANF(var=x.var, inc=0, lo=None, hi=y) # otherwise, just prepend x (which is no longer in the set)
     else: # x is not a leaf, so we have to append y to the end of x
-        return NAIVE_AND(x,y)
+        return NAIVE_AND(x0,y0)
+        print("x:", x)
+        print("y:", y)
+        raise NotImplementedError("complex case")
 
 
 
@@ -153,7 +157,7 @@ class ANFTest(unittest.TestCase):
             self.assertEqual(t, z, 'expect: %s; got: %s; anf: %r XOR %r ==> %r' % (z,t,a,b,r))
         chk('a', 'a', '')
         chk('a', '1', '1 a')
-
+
     def chk_and(self, x,y,z):
         a,b = anf(x), anf(y); r = AND(a,b); t = r.terms()
         self.assertEqual(t, z, 'expect: %s; got: %s; anf: %r AND %r ==> %r' % (z,t,a,b,r))
@@ -185,6 +189,13 @@ class ANFTest(unittest.TestCase):
         chk('a c', 'b d', 'ab ad bc cd')
         chk('a ab c', 'b d', 'abd ad bc cd')
         chk('a ab c', '1 b d', 'a ab abd ad bc c cd') # ~:/a,ab,ad,ab,ab,abd,c,bc,cd
+
+    def test_and_complicated(self):
+        chk = self.chk_and
+        chk('ab cd', 'ad bc', 'abc abd acd bcd')
+        chk('ae bc d', 'ab c de', 'abc abd abe ace ade bc bcde cd de')
+        chk('a cd gk i jn', 'b ef hl im j',
+            'ab aef ahl aim aj bcd bgk bi bjn cdef cdhl cdim cdj efgk efi efjn ghkl gikm gjk hil hjln ij ijmn im jn')
 
 if __name__=="__main__":
     unittest.main()
