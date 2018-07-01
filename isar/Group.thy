@@ -1,4 +1,4 @@
-(* Simple Group Theory 
+(* Simple Group Theory
    based on exercises and definitions in chapter 2.5 of
    "A Bridge to Advanced Mathematics" by Dennis Sentilles *)
 theory Group
@@ -6,7 +6,7 @@ theory Group
 begin
 
 (* "Main" uses "\<circ>" for function composition, so hide it. *)
-no_notation comp (infixl "\<circ>" 55) 
+no_notation comp (infixl "\<circ>" 55)
 
 (* "locale" lets us define what a group is. *)
 locale group =
@@ -19,15 +19,15 @@ locale group =
       and A4: "a \<circ> a\<acute> = \<ee>"
 
   begin (* the following theorems are defined inside the locale *)
-  
-  theorem (in group) T1: "a \<circ> c = b \<circ> c \<longrightarrow> a = b"
+
+  theorem T1: "a \<circ> c = b \<circ> c \<longrightarrow> a = b"
     proof
       assume "a \<circ> c = b \<circ> c"
       hence  "(a \<circ> c) \<circ> c\<acute> = (b \<circ> c) \<circ> c\<acute>" by (simp only: A1)
       hence  "a \<circ> (c \<circ> c\<acute>) = b \<circ> (c \<circ> c\<acute>)" by (simp only: A2)
       thus   "a = b"                       by (simp only: A4 A3)
     qed
-  
+
   theorem T2: "c\<acute> \<circ> c = \<ee>"
     proof -
       define b where "b = c\<acute>"
@@ -71,13 +71,10 @@ locale group =
     qed
 
   theorem P3: "\<exists>x. a \<circ> x = b"
-    proof -
-      fix x assume axb: "a \<circ> x = b"
-      hence "a\<acute> \<circ> (a \<circ> x) = a\<acute> \<circ> b" by auto
-      hence "(a\<acute> \<circ> a) \<circ> x = a\<acute> \<circ> b" by (simp only: A2)
-      hence "x = a\<acute> \<circ> b" by (simp only: T2 P1)
-      oops (* now what? I have an x, how do I convince Isabelle it exists? *)
-
+    proof
+      have "(a \<circ> a\<acute>) \<circ> b = b" by (simp only: A4 P1)
+      thus "a \<circ> (a\<acute> \<circ> b) = b" by (simp only: A2)
+    qed
 
   text \<open>This next one shows that \<ee> is unique in the group:
         That is, any element b that behaves like \<ee> must be \<ee>.\<close>
