@@ -5,78 +5,87 @@ theory TopSpace
   imports Main
 begin
 
-text \<open>A topological space (X,T) is a pair where X is a set whose elements 
+text \<open>A topological space (X,T) is a pair where X is a set whose elements
 are called the "points" of the topological space, and T is a fixed collection of
 subsets of X called neighborhoods, with the following properties:\<close>
 
-class topspace =
+locale topspace =
     fixes X :: "'a set"
     fixes T :: "('a set) set"
-    assumes A1: "x\<in>X \<Longrightarrow> \<exists>N\<in>T. x\<in>N"
-    assumes A2: "(U\<in>T) \<and> (V\<in>T) \<and> (x \<in> (U\<inter>V)) \<Longrightarrow> \<exists>N. x\<in>N \<and> N\<subseteq>(U\<inter>V)"
-  begin
+    assumes A1 [simp]: "x\<in>X \<equiv> \<exists>N\<in>T. x\<in>N"
+    assumes A2 [simp]: "U\<in>T \<and> V\<in>T \<and> x\<in>(U\<inter>V) \<Longrightarrow> \<exists>N\<in>T. x\<in>N \<and> N\<subseteq>(U\<inter>V)"
+begin
 
-    text \<open>If A\<subset>X in topological space (X,T), then x\<in>X is called a \<^bold>\<open>limit point\<close>
-      of A if the intersection of every neighborhood of x with A is non-empty.\<close>
+  text \<open>A set N\<in>T which contains p\<in>X is called a neighborhood of p.\<close>
 
-    definition limpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool"
-      where "limpt A p \<equiv> (A\<subset>X) \<and> (p\<in>X) \<and> ((A \<inter> \<Inter>T) \<noteq> {})"
+  definition nhs :: "'a \<Rightarrow> ('a set) set"
+    where "nhs p \<equiv> {N\<in>T. p\<in>N}"
 
-    text \<open>If A\<subset>X in topological space (X,T), then x\<in>X is called an \<^bold>\<open>interior point\<close> 
-      of A if at least one neighborhood of a is contained entirely within A.\<close>
+  text \<open>If A\<subset>X in topological space (X,T), then p\<in>X is called a \<^bold>\<open>limit point\<close>
+    of A if the intersection of every neighborhood of p with A is non-empty.\<close>
 
-    definition intpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool"
-      where "intpt A p \<equiv> (A\<subset>X) \<and> (p\<in>A) \<and> (\<exists>N\<in>T. N\<subset>A)"
+  definition limpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool" (* def 4.2.1 *)
+    where [simp]: "limpt A p \<equiv> A\<in>T \<and> p\<in>X \<and> (A \<inter> (\<Inter> {N\<in>T. p\<in>N}) \<noteq> {})"
 
-    definition boundpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool"
-      where "boundpt A p \<equiv> (limpt A p) \<and> (limpt (X-A) p)"
+  text \<open>If A\<subset>X in topological space (X,T), then x\<in>X is called an \<^bold>\<open>interior point\<close>
+    of A if at least one neighborhood of a is contained entirely within A.\<close>
 
-    definition "open" :: "'a set \<Rightarrow> bool"
-      where "open A \<equiv> (\<forall>p\<in>A. (intpt A p))"
-      (* where "open A \<longleftrightarrow> A = {a\<in>A. intpt A a}" *)
+  definition intpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool" (* def 4.2.2 *)
+    where [simp]: "intpt A p \<equiv> A\<in>T \<and> p\<in>A \<and> (\<exists>N\<in>T. N\<subset>A)"
 
-    definition closed :: "'a set \<Rightarrow> bool"
-      where "closed A \<equiv> open (X-A)"
+  definition boundpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool" (* def 4.2.3 *)
+    where "boundpt A p \<equiv> (limpt A p) \<and> (limpt (X-A) p)"
 
-  theorem assumes "closed A" and "limpt A p"  shows "p \<in> A"
-  proof (rule ccontr)
-    assume "p\<notin>A"
-    have "open (X-A)"
-      using `closed A` closed_def by simp
-    obtain N where "N\<in>T" and "p\<in>N" and "N\<subset>(X-A)"
-      using Inf_lower(* "x \<in> A \<Longrightarrow> \<Sqinter>A \<le> x" *)
-        and `open (X-A)` open_def intpt_def 
-        and `limpt A p` limpt_def by auto
-    hence "N\<inter>A = {}" by auto
-    moreover have "N\<inter>A \<noteq> {}"
-      using DiffD2  (*  "c \<in> A - B \<Longrightarrow> c \<in> B \<Longrightarrow> P" *)
-        and \<open>N\<in>T\<close> `limpt A p` limpt_def by auto
-    ultimately show "False" by simp
-  qed
+  definition "open" :: "'a set \<Rightarrow> bool" (* def 4.2.4a *)
+    where "open A \<equiv> (\<forall>p\<in>A. (intpt A p))"
 
+  definition closed :: "'a set \<Rightarrow> bool" (* def 4.2.4b *)
+    where [simp]: "closed A \<equiv> A\<in>T \<and> open (X-A)"
 
+  corollary c426: "True" (* cor 4.2.6 *) oops
+  corollary c427: "True" (* cor 4.2.7 *) oops
 
+  text \<open>THEOREM 4.2.5: A set \<open>A\<in>X\<close> in a topological space "\<open>(X,T)\<close> is closed
+        iff every limit point of \<open>A\<close> belongs to \<open>A\<close>. Hence, if \<open>\<exists>\<close> a limit point
+        of \<open>A\<close> not in \<open>A\<close>, then \<open>A\<close> is not closed. Conversely, if \<open>A\<close> is not
+        closed, then  \<open>\<exists>\<close> a limit point of \<open>A\<close> not in \<open>A\<close>.\<close>
 
+  theorem t425a: assumes "closed A" and "limpt A p" shows "p \<in> A"
+    proof (rule ccontr)
+      assume "p\<notin>A"
+      with `limpt A p` have "p\<in>(X-A)" by simp
+      moreover from `closed A` have "open (X-A)" by simp
+      ultimately have "intpt (X-A) p" using open_def by blast
+      \<comment> \<open>that is, there's a neighborhood, \<open>N\<in>T\<close> of p such that \<open>N\<subseteq>(X-A)\<close> \<close>
+      with A2 `p\<in>(X-A)` obtain N where "p\<in>N" and "N\<in>T" and "N\<subseteq>(X-A)"
+        by (meson intpt_def order_refl)
+      then have "N\<inter>A={}" by auto   \<comment> \<open>which contradicts the definition of a limit point.\<close>
+      moreover have "N\<inter>A\<noteq>{}" using `limpt A p` `p\<in>N` `N\<in>T` limpt_def by auto
+      ultimately show "False" by simp
+    qed
+end
 
+section \<open>notes to self\<close>
 
+  text \<open> i had originally translated the theorem like so: \<close>
 
-   (* misc notes to self... *)
-
-    (* i had originally translated the theorem like so: *)
     lemma (in topspace) "closed A \<Longrightarrow> {p\<in>X. limpt A p} \<subseteq>  A"
-      proof   oops
-  
-    (* simpler to just write this: *)
+      proof
+      oops
+
+  text \<open> but it's simpler to just write this: \<close>
+
     lemma (in topspace) "closed A \<and> limpt A p \<longrightarrow> p \<in> A"
       proof -
-        show ?thesis using Inf_lower Int_Diff closed_def intpt_def limpt_def open_def by auto
-      qed
-  
-    (* but even simpler to write this. (compare subgoals in the output panel) *) 
+      oops
+
+  text \<open>but even simpler to write this.
+       (compare subgoals in the output panel with the cursor placed directly after the word "proof")\<close>
     lemma (in topspace) assumes "closed A" and "limpt A p"  shows "p \<in> A"
-      proof     oops
-  
-    (* but sentilles used a proof by contradiction, 
-       so in the end the goal to prove was just "False". *)
+      proof
+      oops
+
+  text \<open> but in the end, Sentilles used a proof by contradiction,
+         so the actual proof goal was just "False".\<close>
 
 end
