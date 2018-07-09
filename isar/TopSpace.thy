@@ -92,19 +92,16 @@ begin
         \<comment> \<open>"But this means \<open>X-A\<close> is open by [\<open>open_def\<close>]."\<close>
         \<comment> \<open>"This is what we wished to prove."\<close>
     proof -
-      have "open(X-A)" proof -
-        have "\<forall>x\<in>(X-A). intpt (X-A) x" proof
-          fix x assume "x\<in>(X-A)" hence "x\<notin>A" by auto
-          have  "\<not>(limpt A x)" using a1 \<open>x\<notin>A\<close> by auto
-          \<comment> \<open>(Here is where I used the above lemma.)\<close>
-          with `x \<in> X-A` obtain N where "N\<in>nhs x" and "N\<inter>A={}" using a0 non_limpt_nh by blast
-          hence "N\<subseteq>X-A" by auto
-          with `N\<in>nhs x` show "intpt (X-A) x" by auto
-        qed
-        thus "open (X-A)" using open_def by simp
+      have "\<forall>x\<in>(X-A). intpt (X-A) x" proof
+        fix x assume "x\<in>(X-A)" hence "x\<notin>A" by auto
+        have  "\<not>(limpt A x)" using a1 \<open>x\<notin>A\<close> by auto
+        with `x \<in> X-A` obtain N where "N\<in>nhs x" and "N\<inter>A={}" using a0 non_limpt_nh by blast
+        hence "N\<subseteq>X-A" by auto
+        with `N\<in>nhs x` show "intpt (X-A) x" by auto
       qed
-     thus "closed A" by simp
-   qed
+      hence "open (X-A)" using open_def by simp
+      thus "closed A" by simp
+    qed
 
     text \<open>\<^bold>\<open>COROLLARY 4.2.6\<close>
       A subset \<open>A\<close> of a topological space \<open>(X,T)\<close> is closed if \<open>A\<close> contains its boundary.\<close>
