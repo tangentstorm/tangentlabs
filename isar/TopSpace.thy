@@ -82,15 +82,15 @@ begin
   text \<open>Now we can prove the second part of theorem 4.2.5: if \<open>A\<close> contains all its limit
         points, then A is closed.\<close>
   theorem t425b: assumes a0: "A\<subseteq>X" and a1: "\<forall>p. limpt A p \<longrightarrow> p\<in>A" shows "closed A"
-  \<comment> \<open>Quoting Sentilles here (replacing his syntax with isar's and using my variable names:\<close>
-  \<comment> \<open>"To show \<open>A\<close> is closed, we must argue that \<open>X-A\<close> is open."\<close>
-     \<comment> \<open>"That is, that any point of \<open>X-A\<close> is an interior point of \<open>X-A\<close>."\<close>
-        \<comment> \<open>"Suppose \<open>x\<in>X-A\<close>. Then \<open>x\<notin>A\<close>."\<close>
-        \<comment> \<open>"Since \<open>A\<close> contains all its limit points, then \<open>x\<close> is not a limit point of \<open>A\<close>."\<close>
-        \<comment> \<open>"By [\<open>limpt_def\<close>] this means there is a neighborhood \<open>N\<in>T\<close> of \<open>x\<close>
+    \<comment> \<open>Quoting Sentilles here (replacing his syntax with isar's and using my variable names:\<close>
+    \<comment> \<open>"To show \<open>A\<close> is closed, we must argue that \<open>X-A\<close> is open."\<close>
+    \<comment> \<open>"That is, that any point of \<open>X-A\<close> is an interior point of \<open>X-A\<close>."\<close>
+       \<comment> \<open>"Suppose \<open>x\<in>X-A\<close>. Then \<open>x\<notin>A\<close>."\<close>
+       \<comment> \<open>"Since \<open>A\<close> contains all its limit points, then \<open>x\<close> is not a limit point of \<open>A\<close>."\<close>
+       \<comment> \<open>"By [\<open>limpt_def\<close>] this means there is a neighborhood \<open>N\<in>T\<close> of \<open>x\<close>
             whose intersection with \<open>A\<close> is empty. In other words, \<open>N\<subseteq>(X-A)\<close>."\<close>
-        \<comment> \<open>"But this means \<open>X-A\<close> is open by [\<open>open_def\<close>]."\<close>
-        \<comment> \<open>"This is what we wished to prove."\<close>
+       \<comment> \<open>"But this means \<open>X-A\<close> is open by [\<open>open_def\<close>]."\<close>
+       \<comment> \<open>"This is what we wished to prove."\<close>
     proof -
       have "\<forall>x\<in>(X-A). intpt (X-A) x" proof
         fix x assume "x\<in>(X-A)" hence "x\<notin>A" by auto
