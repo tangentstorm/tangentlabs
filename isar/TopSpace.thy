@@ -82,27 +82,27 @@ begin
   text \<open>Now we can prove the second part of theorem 4.2.5: if \<open>A\<close> contains all its limit
         points, then A is closed.\<close>
   theorem t425b: assumes a0: "A\<subseteq>X" and a1: "\<forall>p. limpt A p \<longrightarrow> p\<in>A" shows "closed A"
+  \<comment> \<open>Quoting Sentilles here (replacing his syntax with isar's and using my variable names:\<close>
+  \<comment> \<open>"To show \<open>A\<close> is closed, we must argue that \<open>X-A\<close> is open."\<close>
+     \<comment> \<open>"That is, that any point of \<open>X-A\<close> is an interior point of \<open>X-A\<close>."\<close>
+        \<comment> \<open>"Suppose \<open>x\<in>X-A\<close>. Then \<open>x\<notin>A\<close>."\<close>
+        \<comment> \<open>"Since \<open>A\<close> contains all its limit points, then \<open>x\<close> is not a limit point of \<open>A\<close>."\<close>
+        \<comment> \<open>"By [\<open>limpt_def\<close>] this means there is a neighborhood \<open>N\<in>T\<close> of \<open>x\<close>
+            whose intersection with \<open>A\<close> is empty. In other words, \<open>N\<subseteq>(X-A)\<close>."\<close>
+        \<comment> \<open>"But this means \<open>X-A\<close> is open by [\<open>open_def\<close>]."\<close>
+        \<comment> \<open>"This is what we wished to prove."\<close>
     proof -
-      \<comment> \<open>Quoting Sentilles here (replacing his syntax with isar's and using my variable names:\<close>
-      \<comment> \<open>"To show \<open>A\<close> is closed, we must argue that \<open>X-A\<close> is open."\<close>
       have "open(X-A)" proof -
-        \<comment> \<open>"That is, that any point of \<open>X-A\<close> is an interior point of \<open>X-A\<close>."\<close>
         have "\<forall>x\<in>(X-A). intpt (X-A) x" proof
-          \<comment> \<open>"Suppose \<open>x\<in>X-A\<close>. Then \<open>x\<notin>A\<close>."\<close>
           fix x assume "x\<in>(X-A)" hence "x\<notin>A" by auto
-          \<comment> \<open>"Since \<open>A\<close> contains all its limit points, then \<open>x\<close> is not a limit point of \<open>A\<close>."\<close>
           have  "\<not>(limpt A x)" using a1 \<open>x\<notin>A\<close> by auto
-          \<comment> \<open>"By [\<open>limpt_def\<close>] this means there is a neighborhood \<open>N\<in>T\<close> of \<open>x\<close>
-              whose intersection with \<open>A\<close> is empty." (Here is where I used the above lemma.)\<close>
+          \<comment> \<open>(Here is where I used the above lemma.)\<close>
           with `x \<in> X-A` obtain N where "N\<in>nhs x" and "N\<inter>A={}" using a0 non_limpt_nh by blast
-          \<comment> \<open>"In other words, \<open>N\<subseteq>(X-A)\<close>."\<close>
           hence "N\<subseteq>X-A" by auto
           with `N\<in>nhs x` show "intpt (X-A) x" by auto
         qed
-        \<comment> \<open>"But this means \<open>X-A\<close> is open by [\<open>open_def\<close>]."\<close>
         thus "open (X-A)" using open_def by simp
       qed
-     \<comment> \<open>"This is what we wished to prove."\<close>
      thus "closed A" by simp
    qed
 
