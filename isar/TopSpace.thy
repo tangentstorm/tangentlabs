@@ -27,13 +27,13 @@ begin
     to \<open>A\<close> without actually being in it.\<close>
 
   definition limpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool" (* def 4.2.1 *)
-    where [simp]: "limpt A p \<equiv> A\<in>T \<and> p\<in>X \<and> (A\<inter>(\<Inter>nhs p) \<noteq> {})"
+    where [simp]: "limpt A p \<equiv> A\<subseteq>X \<and> p\<in>X \<and> (\<forall>N\<in>nhs p. (A\<inter>N) \<noteq> {})"
 
-  text \<open>If A\<subset>X in topological space (X,T), then x\<in>X is called an \<^bold>\<open>interior point\<close>
-    of A if at least one neighborhood of a is contained entirely within A.\<close>
+  text \<open>If \<open>A\<subset>X\<close> in topological space \<open>(X,T)\<close>, then \<open>x\<in>X\<close> is called an \<^bold>\<open>interior point\<close>
+    of \<open>A\<close> if at least one neighborhood of \<open>x\<close> is contained entirely within \<open>A\<close>.\<close>
 
   definition intpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool" (* def 4.2.2 *)
-    where [simp]: "intpt A p \<equiv> A\<in>T \<and> p\<in>A \<and> (\<exists>N\<in>T. N\<subset>A)"
+    where [simp]: "intpt A p \<equiv> A\<subseteq>X \<and> p\<in>A \<and> (\<exists>N\<in>nhs p. N\<subseteq>A)"
 
   definition boundpt :: "'a set \<Rightarrow> 'a \<Rightarrow> bool" (* def 4.2.3 *)
     where "boundpt A p \<equiv> (limpt A p) \<and> (limpt (X-A) p)"
@@ -42,7 +42,7 @@ begin
     where "open A \<equiv> (\<forall>p\<in>A. intpt A p)"
 
   definition closed :: "'a set \<Rightarrow> bool" (* def 4.2.4b *)
-    where [simp, intro]: "closed A \<longleftrightarrow> A\<in>T \<and> open (X-A)"
+    where [simp, intro]: "closed A \<longleftrightarrow> open (X-A)"
 
   text \<open>THEOREM 4.2.5: A set \<open>A\<in>X\<close> in a topological space "\<open>(X,T)\<close> is closed
         iff every limit point of \<open>A\<close> belongs to \<open>A\<close>. Hence, if \<open>\<exists>\<close> a limit point
@@ -56,64 +56,55 @@ begin
       moreover from `closed A` have "open (X-A)" by simp
       ultimately have "intpt (X-A) p" using open_def by blast
       \<comment> \<open>that is, there's a neighborhood, \<open>N\<in>T\<close> of p such that \<open>N\<subseteq>(X-A)\<close> \<close>
-      with A2 `p\<in>(X-A)` obtain N where "p\<in>N" and "N\<in>T" and "N\<subseteq>(X-A)"
-        by (meson intpt_def order_refl)
+      with A2 `p\<in>(X-A)` obtain N where "p\<in>N" and "N\<in>T" and "N\<subseteq>(X-A)" by auto
       then have "N\<inter>A={}" by auto   \<comment> \<open>which contradicts the definition of a limit point.\<close>
       moreover have "N\<inter>A\<noteq>{}" using `limpt A p` `p\<in>N` `N\<in>T` limpt_def by auto
       ultimately show "False" by simp
     qed
 
-  lemma nhT: assumes "p\<in>X" shows "(\<Inter> nhs p) \<in> T"
-    proof -
-      define NS where "NS = nhs p"
-      from `p\<in>X` A1 obtain N0 where "p\<in>N0" and "N0\<in>T" by auto
-      hence "N0 \<in> nhs p" by simp
-      then show ?thesis proof (cases "NS = {N0}")
-        case True then show ?thesis using NS_def by auto
-      next
-        case False
-        then obtain N1 where "N1\<in>NS" and "N1\<in>T" and "N0\<noteq>N1" using NS_def \<open>N0 \<in> nhs p\<close> by auto
-        hence "p\<in>N0\<inter>N1" by (simp add: NS_def \<open>p \<in> N0\<close>)
-        then obtain N01 where "N01\<in>T" and "N01\<subseteq>(N0\<inter>N1)" using `N0\<in>T` `N1\<in>T` A2 by meson
-        oops
-        text \<open>I suspect the above is probably true, but to prove it, i would need an
-induction rule on sets, where I keep removing intersecting items from NS until it's empty.
-This is probably possible in Isar, but I don't yet know how to express it.\<close>
-
-  lemma
-    assumes "A\<in>T" "x\<in>X" and "\<not>(limpt A x)"
-    obtains N where "N\<in>T" and "N\<inter>A={}"
+    text \<open>To prove the converse in Isar, I needed to make use of the following lemma,
+  which says that if some \<open>x\<in>X\<close> is not a limit point of \<open>A\<subseteq>X\<close> then there must be some
+  neighborhood \<open>N\<close> of \<open>x\<close> that does not intersect \<open>A\<close> at all.\<close>
+  lemma non_limpt_nh:
+    assumes "A\<subseteq>X" "x\<in>X" and "\<not>(limpt A x)"
+    obtains N where "N\<in>nhs x" and "N\<inter>A={}"
   proof -
     \<comment> "Start with the (negated) definition of \<open>limpt A x\<close>"
-    from limpt_def have "\<not>(limpt A x) \<equiv> \<not>(A\<in>T \<and> x\<in>X \<and> (A\<inter>(\<Inter> {N\<in>T. x\<in>N}) \<noteq> {}))" by simp
+    from limpt_def have "\<not>(limpt A x) \<equiv> \<not>(A\<subseteq>X \<and> x\<in>X \<and> (\<forall>N\<in>nhs x. (A\<inter>N) \<noteq> {}))" by simp
     \<comment> "Distributing \<not> over \<and> gives us three possibilities \<dots>"
-    also have "\<dots> \<equiv> (A\<notin>T) \<or> (x\<notin>X) \<or> (A\<inter>(\<Inter> nhs x) = {})" by simp
+    also have "\<dots> \<equiv> \<not>(A\<subseteq>X) \<or> (x\<notin>X) \<or> (\<exists>N\<in>nhs x. A\<inter>N={})" by simp
     \<comment> "\<dots> But our assumptions rule out the first two."
-    finally have "\<dots> \<equiv> A\<inter>(\<Inter> nhs x) = {}" using assms by auto
-    hence "A\<inter>(\<Inter> nhs x) = {}" using assms by auto
-    then obtain N where "N\<in>T" and "N\<inter>A={}" sorry
-    oops    (* have "\<exists>N. N\<in>T \<and> N\<inter>A={}" proof *)
+    finally have "\<dots> \<equiv> \<exists>N\<in>nhs x. A\<inter>N = {}" using assms by auto
+    with `\<not>(limpt A x)` obtain N where "N\<in>nhs x" and "N\<inter>A={}" by auto
+    then show ?thesis using that by auto
+  qed
 
-
-    text\<open>this lemma suffers from the same problem. however:
- if i replaced \<open>A\<inter>(\<Inter> nhs p\<close> with \<open>\<forall> N \<in> nhs p. A\<inter>N\<noteq>{} \<close>, then I wouldn't
-have to deal with the minimal intersection at all: I would only need to obtain
-one example of N. (And in this second attempt, that would be automatic by
-negating the \<open>\<forall>\<close>... So I will try this tomorrow.\<close>
-
-
-  theorem t425b: assumes a1:"\<And>p. limpt A p \<longrightarrow> p \<in> A" shows "closed A"
-  proof -
-     \<comment> \<open>open(x-A) means any point in X-A is an interior point of X-A.\<close>
-     fix x assume "x\<in>(X-A)" hence "x\<notin>A" by auto
-     with a1 have  "\<not>(limpt A x)" by blast
-     then obtain N where "N\<in>T" and "N\<inter>A={}" sorry
-     next show "closed A" using assms sorry
+  text \<open>Now we can prove the second part of theorem 4.2.5: if \<open>A\<close> contains all its limit
+        points, then A is closed.\<close>
+  theorem t425b: assumes a0: "A\<subseteq>X" and a1: "\<forall>p. limpt A p \<longrightarrow> p\<in>A" shows "closed A"
+    proof -
+      \<comment> \<open>Quoting Sentilles here (replacing his syntax with isar's and using my variable names:\<close>
+      \<comment> \<open>"To show \<open>A\<close> is closed, we must argue that \<open>X-A\<close> is open."\<close>
+      have "open(X-A)" proof -
+        \<comment> \<open>"That is, that any point of \<open>X-A\<close> is an interior point of \<open>X-A\<close>."\<close>
+        have "\<forall>x\<in>(X-A). intpt (X-A) x" proof
+          \<comment> \<open>"Suppose \<open>x\<in>X-A\<close>. Then \<open>x\<notin>A\<close>."\<close>
+          fix x assume "x\<in>(X-A)" hence "x\<notin>A" by auto
+          \<comment> \<open>"Since \<open>A\<close> contains all its limit points, then \<open>x\<close> is not a limit point of \<open>A\<close>."\<close>
+          have  "\<not>(limpt A x)" using a1 \<open>x\<notin>A\<close> by auto
+          \<comment> \<open>"By [\<open>limpt_def\<close>] this means there is a neighborhood \<open>N\<in>T\<close> of \<open>x\<close>
+              whose intersection with \<open>A\<close> is empty." (Here is where I used the above lemma.)\<close>
+          with `x \<in> X-A` obtain N where "N\<in>nhs x" and "N\<inter>A={}" using a0 non_limpt_nh by blast
+          \<comment> \<open>"In other words, \<open>N\<subseteq>(X-A)\<close>."\<close>
+          hence "N\<subseteq>X-A" by auto
+          with `N\<in>nhs x` show "intpt (X-A) x" by auto
+        qed
+        \<comment> \<open>"But this means \<open>X-A\<close> is open by [\<open>open_def\<close>]."\<close>
+        thus "open (X-A)" using open_def by simp
+      qed
+     \<comment> \<open>"This is what we wished to prove."\<close>
+     thus "closed A" by simp
    qed
-       \<comment> \<open>
-By def 4.2.1, this means there is a neighborhood N\<in>T of x whose intersection with A is empty.
-In other words, N\<subset>X-A.
-But this means X-A is open by def 4.24.\<close>
 
     text \<open>\<^bold>\<open>COROLLARY 4.2.6\<close>
       A subset \<open>A\<close> of a topological space \<open>(X,T)\<close> is closed if \<open>A\<close> contains its boundary.\<close>
@@ -147,5 +138,28 @@ section \<open>notes to self\<close>
 
   text \<open> but in the end, Sentilles used a proof by contradiction,
          so the actual proof goal was just "False".\<close>
+
+
+section \<open>conjectures\<close>
+
+  lemma (in topspace) nhT_conjecture: assumes "p\<in>X" shows "(\<Inter> nhs p) \<in> T"
+    proof -
+      define NS where "NS = nhs p"
+      from `p\<in>X` A1 obtain N0 where "p\<in>N0" and "N0\<in>T" by auto
+      hence "N0 \<in> nhs p" by simp
+      then show ?thesis proof (cases "NS = {N0}")
+        case True then show ?thesis using NS_def by auto
+      next
+        case False
+        then obtain N1 where "N1\<in>NS" and "N1\<in>T" and "N0\<noteq>N1" using NS_def \<open>N0 \<in> nhs p\<close> by auto
+        hence "p\<in>N0\<inter>N1" by (simp add: NS_def \<open>p \<in> N0\<close>)
+        then obtain N01 where "N01\<in>T" and "N01\<subseteq>(N0\<inter>N1)" using `N0\<in>T` `N1\<in>T` A2 by meson
+     oops
+     text \<open>I suspect the above might be true, but I'm not sure. I was trying to prove this
+as when the definition of limpt included the phrase \<open>A\<inter>(\<Inter>nhs p)\<noteq>{}\<close>. This form seems to require
+something like an induction rule on sets, where I keep removing intersecting items from
+NS until it's empty. This is probably possible in Isar, but I don't yet know how to express it.
+Since then, I've re-formulated \<open>limpt\<close> using \<open>(\<forall>N\<in>nhs p. (A\<inter>N) \<noteq> {})\<close> which turned out to
+be much easier to work with. I am leaving this as a conjecture for me to work on in the future.\<close>
 
 end
