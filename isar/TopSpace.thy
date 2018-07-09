@@ -104,14 +104,20 @@ begin
     qed
 
     text \<open>\<^bold>\<open>COROLLARY 4.2.6\<close>
-      A subset \<open>A\<close> of a topological space \<open>(X,T)\<close> is closed if \<open>A\<close> contains its boundary.\<close>
-    corollary c426: "True" (* cor 4.2.6 *) oops
+      A subset \<open>A\<subseteq>X\<close> of a topological space \<open>(X,T)\<close> is closed if \<open>A\<close> contains its boundary.\<close>
+    corollary c426: assumes "A\<subseteq>X" "\<forall>p. boundpt A p \<longrightarrow> p\<in>A" shows "closed A" (* cor 4.2.6 *)
+      sorry
 
     text \<open>\<^bold>\<open>COROLLARY 4.2.7\<close>
      In any topological space \<open>(X,T)\<close>, both \<open>X\<close> and \<open>{}\<close> are closed sets,
      and both are empty sets.\<close>
 
-    corollary c427: "True" (* cor 4.2.7 *) oops
+    \<comment> "The first two statements can be proved directly from the definition of 'open':"
+    corollary open_empty: "open {}"      using open_def by auto
+    corollary open_univ: "open X"        using open_def by fastforce
+    \<comment> "Once we have those two, the others two are obvious:"
+    corollary closed_univ: "closed X"    using open_empty by simp
+    corollary closed_empty: "closed {}"  using open_univ by simp
 
 end (* locale topspace *)
 
