@@ -103,10 +103,92 @@ begin
       thus "closed A" by simp
     qed
 
-    text \<open>\<^bold>\<open>COROLLARY 4.2.6\<close>
+
+  text \<open>\<^bold>\<open>COROLLARY 4.2.6\<close>
       A subset \<open>A\<subseteq>X\<close> of a topological space \<open>(X,T)\<close> is closed if \<open>A\<close> contains its boundary.\<close>
-    corollary c426: assumes "A\<subseteq>X" "\<forall>p. boundpt A p \<longrightarrow> p\<in>A" shows "closed A" (* cor 4.2.6 *)
-      sorry
+
+  text \<open>
+    The last theorem shows that if \<open>A\<subseteq>X\<close> contains all its limit points, then it's closed.
+    Can we show that if \<open>A\<close> contains all its boundary points, it must contain all 
+    its limit points?
+
+    First, many of the limit points are interior points, right? From intpt_def,
+    it seems like all interior points are limit points... right?
+\<close>
+
+  lemma intpt_implies_limpt:
+    assumes "A\<subseteq>X" "intpt A p" shows "limpt A p"
+    using assms ball_empty intpt_def by auto
+
+  text \<open>
+    It seems so. (We won't actually need that lemma, so I'll just trust the proof.
+    Isabelle generated when i typed the word 'try' after the `shows` clause.)
+
+    Anyway, back to the question of whether \<open>A\<close> containing its boundary implies
+    that it contains all its limit points.
+
+    Assume \<open>A\<subseteq>X\<close> contains its boundary points, and let \<open>p\<close> be a limit point of \<open>A\<close>
+       If \<open>p\<close> is an interior point, then \<open>p\<in>A\<close>.
+       else if it's a boundary point, then \<open>p\<in>A\<close> by assumption.
+       else ... well, what would that even mean?
+
+    The final case would be a limit point that is neither an interior point
+    nor a boundary point. It's hard for me to imagine such a thing, so maybe no
+    such thing exists.
+
+    If it doesn't exist, then we've covered all our bases, and the corollary
+    can be proven just by formalizing the argument above.
+
+    So... let's try to show that if \<open>limpt A p \<Longrightarrow> (intpt A p) \<or> (boundpt A p)\<close>.
+    We know all boundary points are limit points by definition, and all interior
+    points are limit points from the lemma above, so really we only need to show
+    that a limit point that isn't one of those two things must be the other.
+
+    Here's the proof I came up with:
+\<close>
+
+  lemma lim_ext_imp_bnd: assumes "A\<subseteq>X" "limpt A p" "~intpt A p" shows "boundpt A p"
+  proof -
+    from `limpt A p` have "p\<in>X" by simp
+    moreover have "\<forall>N\<in>nhs p. (X-A)\<inter>N\<noteq>{}"
+      proof 
+        fix N assume "N\<in>nhs p"
+        from `\<not>intpt A p` `A\<subseteq>X` have "p\<notin>A \<or> \<not>(\<exists>N\<in>nhs p. N\<subseteq>A)" by auto
+        then consider "p\<in>(X-A)" | "(\<forall>N\<in>nhs p. \<not>N\<subseteq>A)" by auto
+        thus"(X-A)\<inter>N\<noteq>{}" proof (cases)
+          case 1 then show ?thesis using \<open>N \<in> nhs p\<close> by fastforce
+        next
+          case 2 then have "\<not>N\<subseteq>A" using \<open>N \<in> nhs p\<close> by blast
+          thus ?thesis using \<open>N \<in> nhs p\<close> by fastforce
+        qed
+     qed
+     moreover from `A\<subseteq>X` have "(X-A) \<subseteq>X" by auto
+     ultimately have "limpt (X-A) p" by simp
+     thus "boundpt A p" using `limpt A p` boundpt_def by blast
+   qed
+
+   text \<open>Now we show that the two cases are mutually exclusive:\<close>
+
+  text \<open>Now we can show what we really wanted to show:\<close>
+
+  corollary c426:  (* cor 4.2.6 *)
+    assumes ax: "A\<subseteq>X" 
+        and ap: "\<forall>p. boundpt A p \<longrightarrow> p\<in>A"
+    shows "closed A"
+    proof -
+      have "\<forall>p. limpt A p \<longrightarrow> p\<in>A" proof
+        fix a assume "limpt A p"
+        consider "boundpt A p" 
+
+    Assume \<open>A\<subseteq>X\<close> contains its boundary points, and let \<open>p\<close> be a limit point of \<open>A\<close>
+       If \<open>p\<close> is an interior point, then \<open>p\<in>A\<close>.
+       else if it's a boundary point, then \<open>p\<in>A\<close> by assumption.
+       else ... well, what would that even mean?
+
+  from ap
+      have "open (X-A)" using open_def by simp
+      thus "closed A" by simp
+    qed
 
     text \<open>\<^bold>\<open>COROLLARY 4.2.7\<close>
      In any topological space \<open>(X,T)\<close>, both \<open>X\<close> and \<open>{}\<close> are closed sets,
