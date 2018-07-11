@@ -109,14 +109,14 @@ begin
 
   text \<open>
     The last theorem shows that if \<open>A\<subseteq>X\<close> contains all its limit points, then it's closed.
-    Can we show that if \<open>A\<close> contains all its boundary points, it must contain all 
+    Can we show that if \<open>A\<close> contains all its boundary points, it must contain all
     its limit points?
 
     First, many of the limit points are interior points, right? From intpt_def,
     it seems like all interior points are limit points... right?
 \<close>
 
-  lemma intpt_implies_limpt:
+  lemma int_lim:
     assumes "A\<subseteq>X" "intpt A p" shows "limpt A p"
     using assms ball_empty intpt_def by auto
 
@@ -147,11 +147,11 @@ begin
     Here's the proof I came up with:
 \<close>
 
-  lemma lim_ext_imp_bnd: assumes "A\<subseteq>X" "limpt A p" "~intpt A p" shows "boundpt A p"
+  lemma bnd_ext_lim: assumes "A\<subseteq>X" "limpt A p" "~intpt A p" shows "boundpt A p"
   proof -
     from `limpt A p` have "p\<in>X" by simp
     moreover have "\<forall>N\<in>nhs p. (X-A)\<inter>N\<noteq>{}"
-      proof 
+      proof
         fix N assume "N\<in>nhs p"
         from `\<not>intpt A p` `A\<subseteq>X` have "p\<notin>A \<or> \<not>(\<exists>N\<in>nhs p. N\<subseteq>A)" by auto
         then consider "p\<in>(X-A)" | "(\<forall>N\<in>nhs p. \<not>N\<subseteq>A)" by auto
@@ -167,18 +167,21 @@ begin
      thus "boundpt A p" using `limpt A p` boundpt_def by blast
    qed
 
-   text \<open>Now we show that the two cases are mutually exclusive:\<close>
+  text \<open>I'll let Isabelle prove to itself that the two cases are mutually exclusive:\<close>
+  lemma lim_bnd_xor_int: "limpt A p \<Longrightarrow> (boundpt A p) \<noteq> (intpt A p)"
+    by (smt Diff_Diff_Int Diff_disjoint Int_Diff bnd_ext_lim boundpt_def
+        inf.absorb_iff2 limpt_def topspace.intpt_def topspace_axioms)
 
   text \<open>Now we can show what we really wanted to show:\<close>
 
   corollary c426:  (* cor 4.2.6 *)
-    assumes ax: "A\<subseteq>X" 
+    assumes ax: "A\<subseteq>X"
         and ap: "\<forall>p. boundpt A p \<longrightarrow> p\<in>A"
     shows "closed A"
     proof -
       have "\<forall>p. limpt A p \<longrightarrow> p\<in>A" proof
         fix a assume "limpt A p"
-        consider "boundpt A p" 
+        consider "boundpt A p"
 
     Assume \<open>A\<subseteq>X\<close> contains its boundary points, and let \<open>p\<close> be a limit point of \<open>A\<close>
        If \<open>p\<close> is an interior point, then \<open>p\<in>A\<close>.
