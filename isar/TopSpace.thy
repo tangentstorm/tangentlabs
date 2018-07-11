@@ -168,9 +168,8 @@ begin
    qed
 
   text \<open>I'll let Isabelle prove to itself that the two cases are mutually exclusive:\<close>
-  lemma lim_bnd_xor_int: "limpt A p \<Longrightarrow> (boundpt A p) \<noteq> (intpt A p)"
-    by (smt Diff_Diff_Int Diff_disjoint Int_Diff bnd_ext_lim boundpt_def
-        inf.absorb_iff2 limpt_def topspace.intpt_def topspace_axioms)
+  lemma lim_bnd_xor_int: assumes "limpt A p" shows "(boundpt A p) \<noteq> (intpt A p)"
+    using assms bnd_ext_lim boundpt_def by auto
 
   text \<open>Now we can show what we really wanted to show:\<close>
 
@@ -179,21 +178,17 @@ begin
         and ap: "\<forall>p. boundpt A p \<longrightarrow> p\<in>A"
     shows "closed A"
     proof -
-      have "\<forall>p. limpt A p \<longrightarrow> p\<in>A" proof
-        fix a assume "limpt A p"
-        consider "boundpt A p"
-
-    Assume \<open>A\<subseteq>X\<close> contains its boundary points, and let \<open>p\<close> be a limit point of \<open>A\<close>
-       If \<open>p\<close> is an interior point, then \<open>p\<in>A\<close>.
-       else if it's a boundary point, then \<open>p\<in>A\<close> by assumption.
-       else ... well, what would that even mean?
-
-  from ap
-      have "open (X-A)" using open_def by simp
-      thus "closed A" by simp
+      have "\<And>p. limpt A p \<longrightarrow> p\<in>A" proof
+        fix p assume "limpt A p"
+        consider (0) "boundpt A p"
+               | (1) "intpt A p"
+          using \<open>limpt A p\<close> lim_bnd_xor_int by auto
+        then show "p\<in>A" using ap intpt_def by auto
+      qed
+      thus "closed A" using ax t425b by simp
     qed
 
-    text \<open>\<^bold>\<open>COROLLARY 4.2.7\<close>
+  text \<open>\<^bold>\<open>COROLLARY 4.2.7\<close>
      In any topological space \<open>(X,T)\<close>, both \<open>X\<close> and \<open>{}\<close> are closed sets,
      and both are empty sets.\<close>
 
