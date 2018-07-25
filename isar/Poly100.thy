@@ -2,7 +2,7 @@
 
    #13 Polyhedron Formula (F + V - E = 2)     (TODO)
    #50 The Number of Platonic Solids
-       (core logic is proven, except for a missing duplicate argument)
+       (core argument is proven. assumptions are not)
 
 *)
 theory Poly100
@@ -21,7 +21,7 @@ definition faces where
   "faces p = {v. v face_of p \<and> aff_dim v = 2}"
 
 locale convex_polyhedron =
-  fixes p assumes "solid p" and "aff_dim p = 3"
+  fixes p assumes "polytope p" "aff_dim p = 3"
 begin
 
 definition F where "F = card(faces p)"
@@ -58,67 +58,51 @@ theorem (in convex_polyhedron) PLATONIC_SOLIDS:
 proof -
   \<comment> \<open>Following Euler, as explained here:
       https://www.mathsisfun.com/geometry/platonic-solids-why-five.html\<close>
-  have iq0: "1/s + 1/m > 1/2"
-  proof -
-    have f:"F = 2*E/s" using `s \<ge> 3` eq0 `E>0`
-      by (metis mult_eq_0_iff neq0_conv nonzero_mult_div_cancel_left of_nat_eq_0_iff of_nat_mult zero_neq_numeral)
-    have v:"V = 2*E/m" using `m \<ge> 3` eq1 `E>0`
-      by (metis mult_eq_0_iff neq0_conv nonzero_mult_div_cancel_left of_nat_eq_0_iff of_nat_mult zero_neq_numeral)
-    have  "F + V - E = 2" using polyhedron_formula .
-    hence "(2*E/s) + (2*E/m) - E = 2" using f v by simp
-    hence "E/s + E/m - E/2 = 1" by simp
-    hence "E * (1/s + 1/m - 1/2) = 1" by argo
-    hence "(1/s + 1/m - 1/2) = 1/E" using `E>0`
-      by (simp add: linordered_field_class.sign_simps(24) nonzero_eq_divide_eq)
-    moreover from `E>0` have "1/E>0" by simp
-    ultimately show ?thesis using `E>0` by argo
-  qed
-  hence "s \<le> 5" and "m \<le> 5"
-  proof -
-    show "s\<le>5" proof (rule ccontr)
-      assume "\<not>s\<le>5"
-      hence "s > 5" by simp
-      hence "1/s < 1/5" by simp
-      hence "1/5 + 1/m > 1/2" using iq0 by linarith
-      hence "1/m > 3/10" by simp
-      hence "m < 10/3" using less_imp_inverse_less by fastforce
-      hence "m \<le> 3" by simp
-      moreover have "m\<noteq>3" proof
-        assume "m=3"
-        with iq0 have "1/s + 1/3 > 1/2" by auto
-        hence "1/s > 1/2 - 1/3" by simp
-        hence "1/s > 1/6" by simp
-        hence "s < 6" using div_by_1 floor_of_nat linorder_not_le by fastforce
-        with `s > 5` show False by simp
-      qed
-      ultimately have "m<3" by simp
-      hence "False" using `m\<ge>3` by auto
-      thus "\<not>s\<le>5 \<Longrightarrow> False" by simp
-    qed
-  next
-    show "m\<le>5" \<comment> \<open>!HELP!: same argument as above, swapping m and s\<close>  sorry
-  qed
-  hence "s\<le>5 \<and> m\<le>5" using assms by auto
-  hence "s \<in> {3,4,5}" and "m \<in> {3,4,5}" using assms by auto
+
+  \<comment>\<open>First, redefine F and V in terms of sides and meets:\<close>
+  have f: "F = 2*E/s" using eq0 `s\<ge>3`
+    by (metis nonzero_mult_div_cancel_left not_numeral_le_zero of_nat_eq_0_iff of_nat_mult)
+  have v:"V = 2*E/m" using eq1 `m \<ge> 3`
+    by (metis nonzero_mult_div_cancel_left not_numeral_le_zero of_nat_eq_0_iff of_nat_mult)
+
+  \<comment>\<open>Next, rewrite Euler's formula as inequality \<open>iq0\<close> in those terms:\<close>
+  have "F + V - E = 2" using polyhedron_formula .
+  hence "(2*E/s) + (2*E/m) - E = 2" using f v by simp
+  hence "E/s + E/m - E/2 = 1" by simp
+  hence "E * (1/s + 1/m - 1/2) = 1" by argo
+  hence "1/s + 1/m - 1/2 = 1/E" using `E>0`
+    by (simp add: linordered_field_class.sign_simps(24) nonzero_eq_divide_eq)
+  hence iq0: "1/s + 1/m > 1/2" using `E>0` by (smt of_nat_0_less_iff zero_less_divide_1_iff)
+
+  \<comment>\<open>Lower bounds for \<open>{s,m}\<close> provide upper bounds for \<open>{1/s, 1/m}\<close>\<close>
+  have "1/s \<le> 1/3" "1/m \<le> 1/3" using `s\<ge>3` `m\<ge>3` by auto
+
+  \<comment>\<open>Plugging these into \<open>iq0\<close>, we calculate upper bounds for \<open>{s,m}\<close>\<close>
+  with iq0 have "1/s > 1/6" "1/m > 1/6" by linarith+
+  hence "s < 6" "m < 6" using not_less try0 by force+
+
+  \<comment>\<open>This gives us 9 possible combinations for the pair \<open>(s,m)\<close>.\<close>
+  hence "s \<in> {3,4,5}" "m \<in> {3,4,5}" using `s\<ge>3` `m\<ge>3` by auto
   hence "(s,m) \<in> {3,4,5} \<times> {3,4,5}" by auto
-  moreover have "(s,m) \<notin> {(4,4), (5,4), (4,5), (5,5)}" proof -
-    have sm: "1/s + 1/m > 1/2" using iq0 by blast
-    \<comment> \<open>!HELP! all of these are essentially the same. How can I simplify this?\<close>
-    have 44: "(s,m) \<noteq> (4,4)" proof
-      assume a44: "(s,m) = (4,4)" hence "1/s+1/m\<ge>1/2" using sm by simp
-      thus False using a44 iq0 by auto qed
-    have 54: "(s,m) \<noteq> (5,4)" proof
-      assume a54: "(s,m) = (5,4)" hence "1/s+1/m\<ge>1/2" using sm by simp
-      thus False using a54 iq0 by auto qed
-    have 45: "(s,m) \<noteq> (4,5)" proof
-      assume a45: "(s,m) = (4,5)" hence "1/s+1/m\<ge>1/2" using sm by simp
-      thus False using a45 iq0 by auto qed
-    have 55: "(s,m) \<noteq> (5,5)" proof
-      assume a55: "(s,m) = (5,5)" hence "1/s+1/m\<ge>1/2" using sm by simp
-      thus False using a55 iq0 by auto qed
-    from 44 54 45 55 show ?thesis by auto
-  qed
+
+  \<comment>\<open>However, four of these fail to satisfy our inequality.\<close>
+  moreover have "1/s + 1/m > 1/2" using iq0 .
+  hence "(s,m) \<notin> {(4,4), (5,4), (4,5), (5,5)}" by auto
   ultimately show "(s,m) \<in> {(3,3), (3,4), (3,5), (4,3), (5,3)}" by auto
 qed
+
+text \<open>So far, this proof shows that if these relationships between {s,m,F,V} hold,
+  then a platonic solid must have one of these five combinations for (s,m).
+  We have not yet shown the converse -- that the five remaining pairs actually do
+  represent valid polyhedra.
+
+  We also haven't shown that eq0 and eq1 actually describe convex polyhedra. These
+  should be theorems, not assumptions.
+
+  Probably even, \<open>s\<ge>3\<close>, \<open>m\<ge>3\<close>, and \<open>E>0\<close> can be derived from more basic facts. I will
+  have to study Polytope.thy a bit more.
+
+  The biggest, gap, though, is of course Euler's formula itself, so that's what I'll try
+  to focus on next.\<close>
 
 end
