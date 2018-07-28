@@ -30,14 +30,9 @@ definition E where "E = card(edges p)"
 
 theorem polyhedron_formula:
   shows "F + V - E = 2"
-  (* Reference: HOL light proof (really list of tactics) in
-     https://github.com/jrh13/hol-light/blob/master/100/platonic.ml *)
-proof -
-  show ?thesis sorry
-qed
+  sorry
 
 end
-
 
 (* ------------------------------------------------------------------------ *)
 section \<open>The Platonic Solids\<close>
@@ -60,33 +55,33 @@ proof -
       https://www.mathsisfun.com/geometry/platonic-solids-why-five.html\<close>
 
   \<comment>\<open>First, redefine F and V in terms of sides and meets:\<close>
-  have f: "F = 2*E/s" using eq0 `s\<ge>3`
+  from eq0 `s\<ge>3` have f: "F = 2*E/s"
     by (metis nonzero_mult_div_cancel_left not_numeral_le_zero of_nat_eq_0_iff of_nat_mult)
-  have v:"V = 2*E/m" using eq1 `m \<ge> 3`
+  from eq1 `m\<ge>3` have v: "V = 2*E/m"
     by (metis nonzero_mult_div_cancel_left not_numeral_le_zero of_nat_eq_0_iff of_nat_mult)
 
   \<comment>\<open>Next, rewrite Euler's formula as inequality \<open>iq0\<close> in those terms:\<close>
-  have "F + V - E = 2" using polyhedron_formula .
-  hence "(2*E/s) + (2*E/m) - E = 2" using f v by simp
+  from polyhedron_formula have "F + V - E = 2" .
+  with f v have "(2*E/s) + (2*E/m) - E = 2" by simp
   hence "E/s + E/m - E/2 = 1" by simp
   hence "E * (1/s + 1/m - 1/2) = 1" by argo
-  hence "1/s + 1/m - 1/2 = 1/E" using `E>0`
+  with `E>0` have "1/s + 1/m - 1/2 = 1/E"
     by (simp add: linordered_field_class.sign_simps(24) nonzero_eq_divide_eq)
-  hence iq0: "1/s + 1/m > 1/2" using `E>0` by (smt of_nat_0_less_iff zero_less_divide_1_iff)
+  with `E>0` have iq0: "1/s + 1/m > 1/2" by (smt of_nat_0_less_iff zero_less_divide_1_iff)
 
   \<comment>\<open>Lower bounds for \<open>{s,m}\<close> provide upper bounds for \<open>{1/s, 1/m}\<close>\<close>
-  have "1/s \<le> 1/3" "1/m \<le> 1/3" using `s\<ge>3` `m\<ge>3` by auto
+  with `s\<ge>3` `m\<ge>3` have "1/s \<le> 1/3" "1/m \<le> 1/3" by auto
 
   \<comment>\<open>Plugging these into \<open>iq0\<close>, we calculate upper bounds for \<open>{s,m}\<close>\<close>
   with iq0 have "1/s > 1/6" "1/m > 1/6" by linarith+
-  hence "s < 6" "m < 6" using not_less try0 by force+
+  hence "s < 6" "m < 6" using not_less by force+
 
   \<comment>\<open>This gives us 9 possible combinations for the pair \<open>(s,m)\<close>.\<close>
-  hence "s \<in> {3,4,5}" "m \<in> {3,4,5}" using `s\<ge>3` `m\<ge>3` by auto
+  with `s\<ge>3` `m\<ge>3` have "s \<in> {3,4,5}" "m \<in> {3,4,5}" by auto
   hence "(s,m) \<in> {3,4,5} \<times> {3,4,5}" by auto
 
   \<comment>\<open>However, four of these fail to satisfy our inequality.\<close>
-  moreover have "1/s + 1/m > 1/2" using iq0 .
+  moreover from iq0 have "1/s + 1/m > 1/2" .
   hence "(s,m) \<notin> {(4,4), (5,4), (4,5), (5,5)}" by auto
   ultimately show "(s,m) \<in> {(3,3), (3,4), (3,5), (4,3), (5,3)}" by auto
 qed
@@ -100,9 +95,7 @@ text \<open>So far, this proof shows that if these relationships between {s,m,F,
   should be theorems, not assumptions.
 
   Probably even, \<open>s\<ge>3\<close>, \<open>m\<ge>3\<close>, and \<open>E>0\<close> can be derived from more basic facts. I will
-  have to study Polytope.thy a bit more.
+  have to study Polytope.thy a bit more.\<close>
 
-  The biggest, gap, though, is of course Euler's formula itself, so that's what I'll try
-  to focus on next.\<close>
 
 end
