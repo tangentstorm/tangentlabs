@@ -1,9 +1,8 @@
-(* Isar Proofs (eventually) for two of the theorems from http://www.cs.ru.nl/~freek/100/
+(* Isar Proofs (eventually) for three theorems from http://www.cs.ru.nl/~freek/100/
 
-   #13 Polyhedron Formula (F + V - E = 2)     (TODO)
+   #13 Polyhedron Formula (F + V - E = 2)
    #50 The Number of Platonic Solids
-       (core argument is proven. assumptions are not)
-
+   #92 Pick's theorem
 *)
 theory Poly100
   imports Main "HOL-Analysis.Polytope"
@@ -112,13 +111,22 @@ text \<open>Another consequence of Euler's formula is Pick's theorem, which desc
 
   Then, assuming the area of each such triangle is 1/2, we can just divide the
   number of faces F by 2. (except one face is the plane itself, so we say A=(F-1)/2.
+\<close>
 
-  TODO: prove the area of a primitive triangle is 1/2. \<close>
+theorem pick0: "B = 3 \<and> I = 0 \<longrightarrow> A = 1/2"
+  \<comment> \<open>TODO: prove the area of a primitive triangle is 1/2. \<close>
+  oops
+
+
 
 theorem funkenbusch:
   fixes I::int and B::int \<comment> \<open>number of interior and boundary points\<close>
   shows "E = 3*I + 2*B - 3"
-    \<comment> \<open>informal proof (still thinking about how to formalize this.)
+    \<comment> \<open>informal proof due to Funkenbusch:
+       "From Euler's Formula to Pick's Formula Using an Edge Theorem"
+       http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.475.919&rep=rep1&type=pdf
+
+   (still thinking about how to formalize this.)
 
   The theorem counts the number of edges in the triangularization, inductively.
 
@@ -148,7 +156,7 @@ theorem pick's_theorem:
     and euler: "V - E + F = 2" \<comment> \<open>Euler's theorem\<close>
     and verts: "V = I + B"  \<comment> \<open>Each point has become a vertex in the triangularization graph\<close>
     and edges: "E = 3*I + 2*B - 3" \<comment> \<open>Funkenbusch's edge theorem, above\<close>
-    and area: "A = (F-1)/2" \<comment> \<open>TODO: proof coming soon...\<close>
+    and area: "A = (F-1)/2" \<comment> \<open>coming soon...\<close>
   shows "A = I + B/2 - 1"
 proof -
   from euler have "V - E + F = 2" .
