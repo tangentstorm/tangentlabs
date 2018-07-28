@@ -98,4 +98,67 @@ text \<open>So far, this proof shows that if these relationships between {s,m,F,
   have to study Polytope.thy a bit more.\<close>
 
 
+(* ------------------------------------------------------------------------ *)
+section \<open>Pick's Theorem\<close>
+(* ------------------------------------------------------------------------ *)
+
+text \<open>Another consequence of Euler's formula is Pick's theorem, which describes
+  the area of a polygon whose vertices all lie on the integer lattice points of the
+  plane. (In other words for each vertex, the coordinates x,y on the plane are both
+  integers.)
+
+  We can prove it by triangulating the polygon such that each triangle has 0
+  interior lattice points, and the boundary of each triangle is a lattice point.
+
+  Then, assuming the area of each such triangle is 1/2, we can just divide the
+  number of faces F by 2. (except one face is the plane itself, so we say A=(F-1)/2.
+
+  TODO: prove the area of a primitive triangle is 1/2. \<close>
+
+theorem funkenbusch:
+  fixes I::int and B::int \<comment> \<open>number of interior and boundary points\<close>
+  shows "E = 3*I + 2*B - 3"
+    \<comment> \<open>informal proof (still thinking about how to formalize this.)
+
+  The theorem counts the number of edges in the triangularization, inductively.
+
+  0. (Base case): B=3, I=0 \<longrightarrow> E=3  (a single triangle)
+       E' = 3*I' + 2*B' - 3
+       E' = 3*0  + 2*3  - 3
+
+  1. I'=I+1 \<longrightarrow> E'=E+3     : new interior point subdivides a triangle into 3 parts, adding 3 edges
+    true because the formula contains the term  E = 3*I + ...
+
+  2. B'=B+(1-x) \<longrightarrow> E'=E+(2+x) : new boundary point adds 2 edges to boundary. but this also
+                                 moves \<open>X\<ge>0\<close> old boundary points into the interior, and have to draw
+                                 an edge from the new point to each of them, too.
+    E' = 3*I' + 2*B' - 3
+    E' = 3*(I+x) + 2*(B+1-x) -3
+    E' = 3I +3x + 2B + 2 - 2x - 3
+    E' = 3I + 2B + x - 1
+    E + (2+x) = 3I + 2B + x - 1
+    E = 3I + 2B - 3 \<close>
+  oops
+
+
+theorem pick's_theorem:
+  fixes I::int and B::int \<comment> \<open>number of interior and boundary points\<close>
+    and V::int and E::int and F::int \<comment> \<open>edges, vertices, and faces (triangles + the plane)\<close>
+  assumes "B\<ge>3" \<comment> \<open>So we have a polygon\<close>
+    and euler: "V - E + F = 2" \<comment> \<open>Euler's theorem\<close>
+    and verts: "V = I + B"  \<comment> \<open>Each point has become a vertex in the triangularization graph\<close>
+    and edges: "E = 3*I + 2*B - 3" \<comment> \<open>Funkenbusch's edge theorem, above\<close>
+    and area: "A = (F-1)/2" \<comment> \<open>TODO: proof coming soon...\<close>
+  shows "A = I + B/2 - 1"
+proof -
+  from euler have "V - E + F = 2" .
+  with verts have "(I + B) - E + F = 2" by simp
+  with edges have "(I + B) - (3*I + 2*B - 3) + F = 2" by simp
+  hence "(I + B) - (3*I + 2*B - 3) + F = 2" by simp
+  hence "F = 2 * I + B - 1" by simp
+  hence "F-1 = 2*I + B - 2" by simp
+  hence "(F-1)/2 = I + B/2 -1" by simp
+  with area show "A = I + B/2 - 1" by auto
+qed
+
 end
