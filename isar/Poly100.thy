@@ -12,12 +12,15 @@ begin
 section \<open>Syntax helpers\<close>
 (* ------------------------------------------------------------------------ *)
 
-definition facets ("(_ facets _)" [85,85] 80) where
-  "n facets p = {f. f face_of p \<and> aff_dim f = n}"
+definition d_faces ("(_ d'_faces _)" [85,85] 80) where
+  "n d_faces p = {f. f face_of p \<and> aff_dim f = n}"
 
-definition verts where "verts p = 0 facets p"
-definition edges where "edges p = 1 facets p"
-definition faces where "faces p = 2 facets p"
+definition d_face_count ("(_ d'_face'_count _)" [85,85] 80) where
+  "n d_face_count p = card(n d_faces p)"
+
+definition verts where "verts p = 0 d_faces p"
+definition edges where "edges p = 1 d_faces p"
+definition faces where "faces p = 2 d_faces p"
 
 
 (* ------------------------------------------------------------------------ *)
@@ -25,345 +28,77 @@ section \<open>The Euler characteristic.\<close>
 (* ------------------------------------------------------------------------ *)
 
 definition euler_char where
-  "euler_char p = (\<Sum>d=0..aff_dim p. (-1) ^ card(d facets p))"
+  "euler_char p = (\<Sum>n=0..aff_dim p. (-1)^(nat n) * n d_face_count p)"
 
-text \<open>The following proof follows the HOL-Light implementation by John Harrison at
-      https://github.com/jrh13/hol-light/blob/master/100/polyhedron.ml\<close>
 
-subsection \<open>Interpret which "side" of a hyperplane a point is on.\<close>
+subsection \<open>Euler characteristic for empty set.\<close>
 
-default_sort "real_inner"
-
-type_synonym 'v hyperplane = "'v \<times> real"
-type_synonym 'v arrangement = "('v hyperplane) set"
-
-fun hyperplane_side :: "'v hyperplane \<Rightarrow> 'v  \<Rightarrow> real" where
-  "hyperplane_side (a, b) x = sgn (a \<bullet> x - b)"
-
-subsection \<open>Equivalence relation imposed by hyperplane arrangement.\<close>
-
-definition hyperplane_equiv  :: "'v arrangement \<Rightarrow> 'v \<Rightarrow> 'v \<Rightarrow> bool" where
-  "hyperplane_equiv A x y \<equiv> \<forall>h\<in>A. hyperplane_side h x = hyperplane_side h y"
-
-lemma hyperplane_equiv_refl:
-  "hyperplane_equiv A x x"
-  by (smt hyperplane_equiv_def)
-
-lemma hyperplane_equiv_sym:
-  "hyperplane_equiv A x y \<equiv> hyperplane_equiv A y x"
-  by (smt hyperplane_equiv_def)
-
-lemma hyperplane_equiv_trans:
-  "hyperplane_equiv A x y \<and> hyperplane_equiv A y z \<Longrightarrow> hyperplane_equiv A x z"
-  by (smt hyperplane_equiv_def)
-
-lemma hyperplane_equiv_union:
-  "hyperplane_equiv (A\<union>B) x y \<equiv>
-   hyperplane_equiv A x y \<and> hyperplane_equiv B x y"
-  by (smt Un_iff hyperplane_equiv_def)
-
-subsection \<open>Cells of a hyperplane arrangement\<close>
-
-\<comment> \<open>Harrison seems to define hyperplane_cell as a partially applied function,
-   and then immediately proves a lemma that shows it's a set. Maybe this is some
-   kind of magic thing in HOL/Light? I'll use the set definition directly and
-   hope for the best.\<close>
-
-definition hyperplane_cell :: "'v arrangement \<Rightarrow> ('v set) \<Rightarrow> bool" where
-  "hyperplane_cell A c \<equiv> \<exists>x. c = {y. hyperplane_equiv A x y}"
-
-\<^cancel>\<open>lemma hyperplane_cell:   \<comment> \<open>Do I need this?\<close>
-  "hyperplane_cell A c \<equiv> (\<exists>x. c = {y. hyperplane_equiv A x y})"
-  by (fact hyperplane_cell_def)\<close>
-
-lemma not_hyperplane_cell_empty: "\<not> hyperplane_cell A {}"
-  using hyperplane_cell_def hyperplane_equiv_refl by fastforce
-
-lemma nonempty_hyperplane_cell: "hyperplane_cell A c \<Longrightarrow> \<not>(c = {})"
-  using hyperplane_cell_def hyperplane_equiv_refl by fastforce
-
-\<comment> \<open>This is saying the union of all hyperplane cells in the arrangement is the entire
-   real^N space. I am somewhat impressed that sledgehammer managed to prove this, once I
-   broke it down into sub-cases.\<close>
-lemma unions_hyperplane_cells: "\<Union> {c. hyperplane_cell A c} = UNIV"
-proof
-  show "\<Union> {c. hyperplane_cell A c} \<subseteq> UNIV" by simp
-next
-  show "UNIV \<subseteq> \<Union> {c. hyperplane_cell A c}"
-    by (metis (mono_tags, hide_lams) UnionI hyperplane_cell_def hyperplane_equiv_refl mem_Collect_eq subsetI)
+lemma empty_face_count:
+  "(-1) d_face_count p = 1"
+proof -
+  let ?F = "(-1) d_faces p"
+  have "?F = {f. f face_of p \<and> aff_dim f = -1}" by (simp add: d_faces_def)
+  hence "?F = {f. f face_of p \<and> f = {}}" by (simp add: aff_dim_empty)
+  hence f: "?F = {{}}" by auto
+  have "(-1) d_face_count p = card(?F)" by (simp add: d_face_count_def)
+  with f show "(-1) d_face_count p = 1" by simp
 qed
 
-lemma disjoint_hyperplane_cells:
-  assumes "hyperplane_cell A c1" and "hyperplane_cell A c2" and "\<not>(c1=c2)"
-  shows "disjoint {c1, c2}"
-  sorry
+lemma ec_empty_0:
+  "euler_char {} = 0"
+proof -
+  have "euler_char {} = (\<Sum>n= 0..-1. (-1)^(nat n) * n d_face_count {})"
+    by (simp add: euler_char_def)
+  thus "euler_char {} = 0" by auto
+qed
 
-lemma disjoint_hyperplane_cells_eq:
-  "hyperplane_cell A c1 \<and> hyperplane_cell A c2 \<Longrightarrow> (disjoint {c1,c2} \<equiv> \<not>(c1=c2))"
-  sorry
+subsection \<open>Simplex helpers.\<close>
 
-lemma hyperplane_cell_empty: "hyperplane_cell {} c \<equiv> c = UNIV"
-  by (simp add: hyperplane_cell_def hyperplane_equiv_def)
-
-lemma hyperplane_cell_sing_cases:
-  assumes "hyperplane_cell {(a,b)} c"
-  shows "c = {x. a \<bullet> x = b} \<or>
-         c = {x. a \<bullet> x < b} \<or>
-         c = {x. a \<bullet> x > b}"
-  sorry
-
-\<^cancel>\<open>
-let HYPERPLANE_CELL_SING = prove
- (`!a b c.
-        hyperplane_cell {(a,b)} c <=>
-        if a = vec 0 then c = (:real^N)
-        else c = {x | a dot x = b} \/
-             c = {x | a dot x < b} \/
-             c = {x | a dot x > b}`,
-
-let HYPERPLANE_CELL_UNION = prove
- (`!A B c:real^N->bool.
-        hyperplane_cell (A UNION B) c <=>
-        ~(c = {}) /\
-        ?c1 c2. hyperplane_cell A c1 /\
-                hyperplane_cell B c2 /\
-                c = c1 INTER c2`,
-
-let FINITE_HYPERPLANE_CELLS = prove
- (`!A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c}`,
-
-let FINITE_RESTRICT_HYPERPLANE_CELLS = prove
- (`!P A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c /\ P c}`,
-
-let FINITE_SET_OF_HYPERPLANE_CELLS = prove
- (`!A C. FINITE A /\ (!c:real^N->bool. c IN C ==> hyperplane_cell A c)
-         ==> FINITE C`,
-
-let PAIRWISE_DISJOINT_HYPERPLANE_CELLS = prove
- (`!A C. (!c. c IN C ==> hyperplane_cell A c)
-         ==> pairwise DISJOINT C`,
-
-let HYPERPLANE_CELL_INTER_OPEN_AFFINE = prove
- (`!A c:real^N->bool.
-        FINITE A /\ hyperplane_cell A c
-        ==> ?s t. open s /\ affine t /\ c = s INTER t`,
-
-let HYPERPLANE_CELL_RELATIVELY_OPEN = prove
- (`!A c:real^N->bool.
-        FINITE A /\ hyperplane_cell A c
-        ==> open_in (subtopology euclidean (affine hull c)) c`,
-
-let HYPERPLANE_CELL_RELATIVE_INTERIOR = prove
- (`!A c:real^N->bool.
-        FINITE A /\ hyperplane_cell A c
-        ==> relative_interior c = c`,
-
-let HYPERPLANE_CELL_CONVEX = prove
- (`!A c:real^N->bool. hyperplane_cell A c ==> convex c`,
-
-let HYPERPLANE_CELL_INTERS = prove
- (`!A C. (!c:real^N->bool. c IN C ==> hyperplane_cell A c) /\
-         ~(C = {}) /\ ~(INTERS C = {})
-         ==> hyperplane_cell A (INTERS C)`,
-
-let HYPERPLANE_CELL_INTER = prove
- (`!A s t:real^N->bool.
-        hyperplane_cell A s /\ hyperplane_cell A t /\ ~(s INTER t = {})
-        ==> hyperplane_cell A (s INTER t)`,
-\<close>
+lemma simplex_self_face:
+  assumes "n simplex S" shows "S face_of S"
+  using assms convex_simplex face_of_refl by auto
 
 
-subsection \<open>A cell complex is considered to be a union of such cells\<close>
+lemma n_simplex_only_n_face:
+  assumes "n simplex S" shows "n d_faces S = {S}"
+proof
+  let ?F = "n d_faces S"
+  have "?F \<subseteq> {f. f face_of S \<and> aff_dim f = n}" using d_faces_def by auto
+  hence "?F \<subseteq> {f. f face_of S}" by auto
+  thus "?F \<subseteq> {S}" by (smt aff_dim_simplex assms convex_simplex
+      d_faces_def face_of_aff_dim_lt insertCI mem_Collect_eq simplex_def subsetI)
+next
+  show "{S} \<subseteq> n d_faces S"
+    using assms(1) simplex_self_face aff_dim_simplex d_faces_def by blast
+qed
 
-\<^cancel>\<open>
-let hyperplane_cellcomplex = new_definition
- `hyperplane_cellcomplex A s <=>
-        ?t. (!c. c IN t ==> hyperplane_cell A c) /\
-            s = UNIONS t`;;
+subsection \<open>Euler characteristic for a single point, aka a 0 simplex.\<close>
 
+lemma euler_simplex_0:
+  assumes "0 simplex S"
+  shows "euler_char S = 1"
+proof -
+  have dim: "aff_dim S = 0" by (simp add: aff_dim_simplex assms)
+  have cnt: "0 d_face_count S = 1" using n_simplex_only_n_face
+    by (simp add: n_simplex_only_n_face assms d_face_count_def)
 
-let HYPERPLANE_CELLCOMPLEX_EMPTY = prove
- (`!A:real^N#real->bool. hyperplane_cellcomplex A {}`,
+  \<comment> \<open>Now plug these results into the definition, and calculate.\<close>
+  have "euler_char S = (\<Sum>n=0..aff_dim S. (-1)^(nat n) * n d_face_count S)"
+    by (fact euler_char_def)
+  also have "... = ((-1)^0 * (0 d_face_count S))"  using dim by simp
+  also have "... = (0 d_face_count S)" by simp
+  finally show "euler_char S = 1" using cnt by simp
+qed
 
-let HYPERPLANE_CELL_CELLCOMPLEX = prove
- (`!A c:real^N->bool. hyperplane_cell A c ==> hyperplane_cellcomplex A c`,
+subsection \<open>Euler characteristic for an n-Simplex.\<close>
 
-let HYPERPLANE_CELLCOMPLEX_UNIONS = prove
- (`!A C. (!s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)
-         ==> hyperplane_cellcomplex A (UNIONS C)`
-
-let HYPERPLANE_CELLCOMPLEX_UNION = prove
- (`!A s t.
-        hyperplane_cellcomplex A s /\ hyperplane_cellcomplex A t
-        ==> hyperplane_cellcomplex A (s UNION t)`
-
-let HYPERPLANE_CELLCOMPLEX_UNIV = prove
- (`!A. hyperplane_cellcomplex A (:real^N)`
-
-let HYPERPLANE_CELLCOMPLEX_INTERS = prove
- (`!A C. (!s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)
-         ==> hyperplane_cellcomplex A (INTERS C)`,
-
-let HYPERPLANE_CELLCOMPLEX_INTER = prove
- (`!A s t.
-        hyperplane_cellcomplex A s /\ hyperplane_cellcomplex A t
-        ==> hyperplane_cellcomplex A (s INTER t)`
-
-let HYPERPLANE_CELLCOMPLEX_COMPL = prove
- (`!A s. hyperplane_cellcomplex A s
-         ==> hyperplane_cellcomplex A ((:real^N) DIFF s)`,
-
-let HYPERPLANE_CELLCOMPLEX_DIFF = prove
- (`!A s t.
-        hyperplane_cellcomplex A s /\ hyperplane_cellcomplex A t
-        ==> hyperplane_cellcomplex A (s DIFF t)`,
-
-let HYPERPLANE_CELLCOMPLEX_MONO = prove
- (`!A B s:real^N->bool.
-        hyperplane_cellcomplex A s /\ A SUBSET B
-        ==> hyperplane_cellcomplex B s`,
-
-let FINITE_HYPERPLANE_CELLCOMPLEXES = prove
- (`!A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c}`,
-
-let FINITE_RESTRICT_HYPERPLANE_CELLCOMPLEXES = prove
- (`!P A. FINITE A
-         ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c /\ P c}`,
-
-let FINITE_SET_OF_HYPERPLANE_CELLS = prove
- (`!A C. FINITE A /\ (!c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c)
-         ==> FINITE C`,
-
-let CELL_SUBSET_CELLCOMPLEX = prove
- (`!A s c:real^N->bool.
-        hyperplane_cell A c /\ hyperplane_cellcomplex A s
-        ==> (c SUBSET s <=> ~(DISJOINT c s))`,
-\<close>
-
-subsection \<open>Euler Characteristic\<close>
-
-\<^cancel>\<open>
-let euler_characteristic = new_definition
- `euler_characteristic A (s:real^N->bool) =
-        sum {c | hyperplane_cell A c /\ c SUBSET s}
-            (\c. (-- &1) pow (num_of_int(aff_dim c)))`;;
-
-let EULER_CHARACTERISTIC_EMPTY = prove
- (`euler_characteristic A {} = &0`,
-
-let EULER_CHARACTERISTIC_CELL_UNIONS = prove
- (`!A C. (!c:real^N->bool. c IN C ==> hyperplane_cell A c)
-         ==> euler_characteristic A (UNIONS C) =
-             sum C (\c. (-- &1) pow (num_of_int(aff_dim c)))`
-
-let EULER_CHARACTERISTIC_CELL = prove
- (`!A c. hyperplane_cell A c
-         ==> euler_characteristic A c =  (-- &1) pow (num_of_int(aff_dim c))`,
-
-let EULER_CHARACTERISTIC_CELLCOMPLEX_UNION = prove
- (`!A s t:real^N->bool.
-        FINITE A /\
-        hyperplane_cellcomplex A s /\
-        hyperplane_cellcomplex A t /\
-        DISJOINT s t
-        ==> euler_characteristic A (s UNION t) =
-            euler_characteristic A s + euler_characteristic A t`,
-
-let EULER_CHARACTERISTIC_CELLCOMPLEX_UNIONS = prove
- (`!A C. FINITE A /\
-         (!c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c) /\
-         pairwise DISJOINT C
-         ==> euler_characteristic A (UNIONS C) =
-             sum C (\c. euler_characteristic A c)`,
-
-let EULER_CHARACTERISTIC = prove
- (`!A s:real^N->bool.
-        FINITE A
-        ==> euler_characteristic A s =
-            sum (0..dimindex(:N))
-                (\d. (-- &1) pow d *
-                     &(CARD {c | hyperplane_cell A c /\ c SUBSET s /\
-                                 aff_dim c = &d}))`,
-\<close>
-
-subsection \<open>Show that the characteristic is invariant w.r.t. hyperplane arrangement.\<close>
-
-\<^cancel>\<open>
-let HYPERPLANE_CELLS_DISTINCT_LEMMA = prove
- (`!a b. {x | a dot x = b} INTER {x | a dot x < b} = {} /\
-         {x | a dot x = b} INTER {x | a dot x > b} = {} /\
-         {x | a dot x < b} INTER {x | a dot x = b} = {} /\
-         {x | a dot x < b} INTER {x | a dot x > b} = {} /\
-         {x | a dot x > b} INTER {x | a dot x = b} = {} /\
-         {x | a dot x > b} INTER {x | a dot x < b} = {}`,
-  REWRITE_TAC[EXTENSION; IN_INTER; IN_ELIM_THM; NOT_IN_EMPTY] THEN
-  REAL_ARITH_TAC);;
-
-let EULER_CHARACTERSTIC_LEMMA = prove
- (`!A h s:real^N->bool.
-        FINITE A /\ hyperplane_cellcomplex A s
-        ==> euler_characteristic (h INSERT A) s = euler_characteristic A s`,
-
-
-let EULER_CHARACTERSTIC_INVARIANT = prove
- (`!A B h s:real^N->bool.
-        FINITE A /\ FINITE B /\
-        hyperplane_cellcomplex A s /\ hyperplane_cellcomplex B s
-        ==> euler_characteristic A s = euler_characteristic B s`,
-  SUBGOAL_THEN
-   `!A s:real^N->bool.
-        FINITE A /\ hyperplane_cellcomplex A s
-        ==> !B. FINITE B
-                ==> euler_characteristic (A UNION B) s =
-                    euler_characteristic A s`
-
-let EULER_CHARACTERISTIC_INCLUSION_EXCLUSION = prove
- (`!A s:(real^N->bool)->bool.
-        FINITE A /\ FINITE s /\ (!k. k IN s ==> hyperplane_cellcomplex A k)
-        ==> euler_characteristic A (UNIONS s) =
-            sum {t | t SUBSET s /\ ~(t = {})}
-                (\t. (-- &1) pow (CARD t + 1) *
-                     euler_characteristic A (INTERS t))`,
-\<close>
-
-subsection \<open>Euler-type relation for full-dimensional proper polyhedral cones.\<close>
-
-\<^cancel>\<open>
-
-let EULER_POLYHEDRAL_CONE = prove
- (`!s. polyhedron s /\ conic s /\ ~(interior s = {}) /\ ~(s = (:real^N))
-       ==> sum (0..dimindex(:N))
-               (\d. (-- &1) pow d *
-                    &(CARD {f | f face_of s /\ aff_dim f = &d })) = &0`,
-
-\<comment> \<open> ! HOL/Light proof is gigantic...\<close>\<close>
-
-
-subsection \<open>Euler-Poincare relation for special (n-1)-dimensional polytope.\<close>
-
-\<^cancel>\<open>let EULER_POINCARE_LEMMA = prove
- (`!p:real^N->bool.
-        2 <= dimindex(:N) /\ polytope p /\ affine hull p = {x | x$1 = &1}
-        ==> sum (0..dimindex(:N)-1)
-               (\d. (-- &1) pow d *
-                    &(CARD {f | f face_of p /\ aff_dim f = &d })) = &1`,
-\<comment> \<open>another gigantic proof\<close>
-
-let EULER_POINCARE_SPECIAL = prove
- (`!p:real^N->bool.
-        2 <= dimindex(:N) /\ polytope p /\ affine hull p = {x | x$1 = &0}
-        ==> sum (0..dimindex(:N)-1)
-               (\d. (-- &1) pow d *
-                    &(CARD {f | f face_of p /\ aff_dim f = &d })) = &1`,
-\<close>
 
 subsection \<open>Now Euler-Poincare for a a general full-dimensional polytope.\<close>
 
-theorem euler_poincare_full:
-  assumes "polytope p" and "affine_dim p d"
-  shows "(\<Sum>k=0..d. (-1)^k * card(k facets p)) = 1"
+theorem euler_poincare:
+  assumes "polytope p" and "aff_dim p = d"
+  shows "euler_char p = 1"
   sorry
-
 
 (* ------------------------------------------------------------------------ *)
 section \<open>The Polyhedron Formula\<close>
