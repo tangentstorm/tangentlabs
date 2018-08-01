@@ -72,6 +72,70 @@ next
     using assms(1) simplex_self_face aff_dim_simplex d_faces_def by blast
 qed
 
+\<comment> \<open>Polytope.thy defines @{thm simplex_insert_dimplus1} which demonstrates that you can
+   add an affine-independent point to a simplex and create a higher-dimensional simplex
+   (e.g: adding a point off the plane to a triangle yields a tetrahedron.) This lemma
+   lets us work in the opposite direction, to show each n-dimensional simplex is
+   composed of (n-1) simplices.\<close>
+lemma facet_of_simplex_simplex:
+  assumes "n simplex S" "F facet_of S" "n\<ge>0"
+  shows "(n-1) simplex F"
+proof -
+  \<comment> \<open>\<open>C1\<close> is the set of affine-independent vertices required by @{const simplex}. \<close>
+  obtain C1 where C: "finite C1" "\<not>(affine_dependent C1)" "int(card C1) = n+1"
+    and S: "S = convex hull C1" using assms unfolding simplex by force
+
+  \<comment> \<open>Isolate the vertex from \<open>C1\<close> that isn't in F, and call the remaining set \<open>C\<close>.\<close>
+  then obtain A where "A\<in>C1" and "A\<notin>F"
+    by (metis affine_dependent_def affine_hull_convex_hull assms(2)
+        facet_of_convex_hull_affine_independent_alt hull_inc)
+  then obtain C where "C = C1 - {A}" by simp
+
+  \<comment> \<open>Finally, show that \<open>F\<close> and \<open>C\<close> together meet the definition of an (n-1) simplex.\<close>
+  show ?thesis unfolding simplex
+  proof (intro exI conjI)
+
+    \<comment> \<open>The first couple statements show that the remaining vertices of \<open>C\<close>
+        are the extreme points of an \<open>n-1\<close> dimensional simplex. These all follow
+        trivially from the idea that we're just removing one vertex from a set that
+        already had the required properties.\<close>
+    show "finite C" by (simp add: C(1) \<open>C = C1 - {A}\<close>)
+    show "\<not> affine_dependent C" by (simp add: C(2) \<open>C = C1 - {A}\<close> affine_independent_Diff)
+    show "int (card C) = (n-1) + 1"
+      using C \<open>A \<in> C1\<close> \<open>C = C1 - {A}\<close> affine_independent_card_dim_diffs by fastforce
+
+    show "F = convex hull C"
+      \<comment> \<open>This is the tricky one. Intuitively, it's obvious that once we removed vertex A,
+         there's one facet left, and it's the simplex defined by the remaining vertices.
+         It's not obvious (to me, anyway) exactly how to derive this fact from the definitions.
+         Thankfully, as long as we point her in the right direction, Isabelle is happy to work
+         through the details of proofs that would normally be left as an exercise for the reader.\<close>
+    proof
+      \<comment> \<open>Briefly, a \<open>facet_of\<close> and a \<open>convex hull\<close> are both sets, so to prove equality, we just
+         show that each is a subset of the other. Sledgehammer found a proof for the first
+         statement in a matter of seconds.\<close>
+      show "F \<subseteq> convex hull C"
+        by (metis C(2) Diff_subset S \<open>A \<in> C1\<close> \<open>A \<notin> F\<close> \<open>C = C1 - {A}\<close> assms(2)
+            facet_of_convex_hull_affine_independent hull_inc hull_mono insert_Diff subset_insert)
+    next
+      \<comment> \<open>The opposite direction was harder to prove. My plan had been to convince Isabelle
+          that since C is the minimal set of affine-independent vertices, then removing any one
+          would drop \<open>aff_dim C\<close> by 1. But we already know \<open>F\<subseteq>convex hull C\<close>, and (although we
+          haven't proven it here), \<open>aff_dim C = aff_dim F\<close>. So if there were any point \<open>p\<in>C \<and> p\<notin>F\<close>,
+          we would also have \<open>aff_dim C < aff_dim F\<close>, and hence a contradiction. The facts
+          referenced by these sledgehammer-generated proofs suggest it found a way to derive
+          a similar idea, but directly, without resorting to proof by contradicition.\<close>
+      have"C \<subseteq> F"
+        by (metis C(2) S \<open>A \<in> C1\<close> \<open>A \<notin> F\<close> \<open>C = C1 - {A}\<close> assms(2)
+            facet_of_convex_hull_affine_independent hull_inc insertE insert_Diff subsetI)
+      thus "convex hull C \<subseteq> F"
+        by (metis C(2) S assms(2) convex_convex_hull facet_of_convex_hull_affine_independent hull_minimal)
+    qed
+  qed
+qed
+
+
+
 subsection \<open>Euler characteristic for a single point, aka a 0 simplex.\<close>
 
 lemma euler_simplex_0:
@@ -92,78 +156,6 @@ qed
 
 subsection \<open>Euler characteristic for an n-Simplex.\<close>
 
-lemma facet_of_simplex_simplex:
-  assumes "n simplex S" "F facet_of S" "n\<ge>0"
-  shows "(n-1) simplex F"
-proof -
-  consider (0) "n=0" | (1) "n=1" | (gt1) "n>1" using assms(3) by linarith
-  then show ?thesis
-  proof (cases)
-    case 0 then show ?thesis
-      by (smt aff_dim_empty aff_dim_simplex assms(1) assms(2) facet_of_def)
-  next
-    case 1 then show ?thesis
-      by (smt aff_dim_eq_0 aff_dim_simplex assms(1) assms(2) facet_of_def simplex_sing)
-  next
-    case gt1
-      obtain C1 where C: "finite C1" "~(affine_dependent C1)" "int(card C1) = n+1" and S: "S = convex hull C1"
-        using assms unfolding simplex by force
-      then obtain A where "A\<in>C1" and "A\<notin>F"
-        by (metis affine_dependent_def affine_hull_convex_hull assms(2) facet_of_convex_hull_affine_independent_alt hull_inc)
-      then obtain C where "C = C1 - {A}" by simp
-     show ?thesis unfolding simplex
-     proof (intro exI conjI)
-       show "finite C" by (simp add: C(1) \<open>C = C1 - {A}\<close>)
-       show "\<not> affine_dependent C"
-         by (simp add: C(2) \<open>C = C1 - {A}\<close> affine_independent_Diff)
-       show "int (card C) = (n-1) + 1"
-         using C \<open>A \<in> C1\<close> \<open>C = C1 - {A}\<close> affine_independent_card_dim_diffs by fastforce
-       show "F = convex hull C"
-       proof
-         show "F \<subseteq> convex hull C"
-           by (metis C(2) Diff_subset S \<open>A \<in> C1\<close> \<open>A \<notin> F\<close> \<open>C = C1 - {A}\<close> assms(2) facet_of_convex_hull_affine_independent hull_inc hull_mono insert_Diff subset_insert)
-         have"C \<subseteq> F"
-         proof - (* generated by sledgehammer. TODO: clean up *)
-           obtain aa :: "'a set \<Rightarrow> 'a set \<Rightarrow> 'a" where
-             "\<forall>x0 x1. (\<exists>v2. v2 \<in> x1 \<and> v2 \<notin> x0) = (aa x0 x1 \<in> x1 \<and> aa x0 x1 \<notin> x0)"
-    by moura
-  then have f1: "\<forall>A Aa. (\<not> A \<subseteq> Aa \<or> (\<forall>a. a \<notin> A \<or> a \<in> Aa)) \<and> (A \<subseteq> Aa \<or> aa Aa A \<in> A \<and> aa Aa A \<notin> Aa)"
-    by blast
-  have f2: "F facet_of convex hull C1"
-    by (metis S assms(2))
-  obtain aaa :: "'a set \<Rightarrow> 'a set \<Rightarrow> 'a" where
-    "\<forall>x0 x1. (\<exists>v2. v2 \<in> x1 \<and> x0 = convex hull (x1 - {v2})) = (aaa x0 x1 \<in> x1 \<and> x0 = convex hull (x1 - {aaa x0 x1}))"
-    by moura
-  then have f3: "F \<noteq> {} \<and> aaa F C1 \<in> C1 \<and> F = convex hull (C1 - {aaa F C1})"
-    using f2 by (simp add: C(2) facet_of_convex_hull_affine_independent)
-  then have "A \<notin> convex hull (C1 - {aaa F C1})"
-    by (metis \<open>A \<notin> F\<close>)
-             then have f4: "A \<notin> C1 - {aaa F C1}"
-               using f1 by (meson hull_subset)
-             have "\<forall>a. a \<notin> C1 - {aaa F C1} \<or> a \<in> convex hull (C1 - {aaa F C1})"
-               using f1 by (meson hull_subset)
-             then show ?thesis
-    using f4 f3 \<open>A \<in> C1\<close> \<open>C = C1 - {A}\<close> by blast
-qed
-         thus "convex hull C \<subseteq> F"
-           by (metis C(2) S assms(2) convex_convex_hull facet_of_convex_hull_affine_independent hull_minimal)
-(*
-         proof
-           have "aff_dim F = aff_dim C"
-             by (smt \<open>F \<subseteq> convex hull C\<close> \<open>finite C\<close> \<open>int (card C) = n - 1 + 1\<close> aff_dim_convex_hull aff_dim_le_card aff_dim_simplex aff_dim_subset assms(1) assms(2) facet_of_def)
-           fix x assume "x \<in> C" hence "x \<in> convex hull C" by (simp add: hull_inc)
-           have "aff_dim (C-{x}) < aff_dim C" using `\<not>affine_dependent C`
-             by (smt \<open>x \<in> C\<close> aff_dim_insert affine_dependent_def insert_Diff)
-           then have "x\<notin>F \<Longrightarrow> False" proof -
-             assume "x\<notin>F" show "False" sorry
-           qed
-           thus "x\<in>F" by auto
-         qed
-*)
-       qed
-     qed
-   qed
-qed
 
 
 subsection \<open>Now Euler-Poincare for a a general full-dimensional polytope.\<close>
