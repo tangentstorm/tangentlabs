@@ -9,7 +9,7 @@ theory Poly100
 begin
 
 (* ------------------------------------------------------------------------ *)
-section \<open>Syntax helpers\<close>
+section \<open>Vocabulary (Syntax helpers)\<close>
 (* ------------------------------------------------------------------------ *)
 
 definition d_faces ("(_ d'_faces _)" [85,85] 80) where
@@ -21,6 +21,21 @@ definition d_face_count ("(_ d'_face'_count _)" [85,85] 80) where
 definition verts where "verts p = 0 d_faces p"
 definition edges where "edges p = 1 d_faces p"
 definition faces where "faces p = 2 d_faces p"
+
+
+definition corners ("_ corners'_of _" [80, 80] 85) where
+  \<comment> \<open>NOTE the distinction between "corners" and "verts":
+
+       1. a "vert" is a set containing one point
+          a "corner" is the point itself.
+
+       2. "corner" is a definition I made up specifically
+          to streamline proofs about simplices. Probably there
+          should be a "locale simplex" and the definition of
+          "corners" should only be visible inside of it.\<close>
+  "C corners_of S \<equiv> finite C \<and> (\<not>affine_dependent C) \<and>
+                 (int(card C) = aff_dim S + 1) \<and>
+                 (S=convex hull C)"
 
 
 (* ------------------------------------------------------------------------ *)
@@ -72,14 +87,15 @@ next
     using assms(1) simplex_self_face aff_dim_simplex d_faces_def by blast
 qed
 
+
+lemma facet_of_simplex_simplex:
+  assumes "n simplex S" "F facet_of S" "n\<ge>0"
+  shows "(n-1) simplex F"
 \<comment> \<open>Polytope.thy defines @{thm simplex_insert_dimplus1} which demonstrates that you can
    add an affine-independent point to a simplex and create a higher-dimensional simplex
    (e.g: adding a point off the plane to a triangle yields a tetrahedron.) This lemma
    lets us work in the opposite direction, to show each n-dimensional simplex is
    composed of (n-1) simplices.\<close>
-lemma facet_of_simplex_simplex:
-  assumes "n simplex S" "F facet_of S" "n\<ge>0"
-  shows "(n-1) simplex F"
 proof -
   \<comment> \<open>\<open>C1\<close> is the set of affine-independent vertices required by @{const simplex}. \<close>
   obtain C1 where C: "finite C1" "\<not>(affine_dependent C1)" "int(card C1) = n+1"
@@ -135,6 +151,95 @@ proof -
 qed
 
 
+lemma subset_corners:
+  assumes "n simplex S" and F: "F face_of S"
+    and SC: "SC corners_of S" and FC: "FC corners_of F"
+  shows "FC \<subseteq> SC"
+proof
+  fix x assume "x\<in>FC"
+  with F FC SC show "x\<in>SC" using corners_def
+    by (metis (full_types) extreme_point_of_face
+        extreme_point_of_convex_hull_affine_independent)
+qed
+
+
+
+lemma sub_simplex_of_corners:
+  \<comment> \<open>Any subset of the corners of a simplex is sufficient to form a new simplex.\<close>
+  assumes S: "n simplex S" and C1: "C1 corners_of S"
+      and C: "C \<subseteq> C1" and k: "int(card C) = k+1"
+      and F: "F = convex hull C"
+    shows "F face_of S" and "k simplex F"
+proof -
+  show "F face_of S" using C C1 F corners_def
+    by (metis face_of_convex_hull_affine_independent)
+next
+  show "k simplex F" unfolding simplex_def
+  proof (intro exI conjI)
+    show "\<not> affine_dependent C"
+      using C C1 affine_independent_subset corners_def by blast
+    show "int (card C) = k + 1" by (fact k)
+    show "F = convex hull C" by (fact F)
+  qed
+qed
+
+
+
+lemma simplex_corners:
+  assumes S: "n simplex S" and C: "C corners_of S"
+  shows "int(card C) = n+1"
+proof -
+  from S have "aff_dim S = n" by (simp add: aff_dim_simplex)
+  thus "int(card C) = n + 1" using corners_def C by auto
+qed
+
+
+
+lemma face_of_simplex_simplex:
+  assumes S:"n simplex S" and F: "F face_of S" and k: "aff_dim F = k"
+  shows "k simplex F"
+proof -
+  from S obtain SC where "SC corners_of S" using corners_def simplex_def
+    by (metis (no_types, hide_lams) aff_dim_affine_independent
+        aff_dim_convex_hull aff_independent_finite)
+  then obtain FC where "FC = F \<inter> SC" by simp
+\<^cancel>\<open>
+  ... hence "FC corners_of F"
+
+  in the meantime, sledgehammer found the following ugly proof
+  (as well as one-line smt proofs that took way too long)
+\<close>
+(* WARNING: DO NOT GAZE DIRECTLY INTO THE FOLLOWING PROOF.
+   SEVERE EYE DAMAGE MAY OCCUR. *)
+have f1: "\<forall>x0 x2. (int (card (x0::'a set)) = 1 + x2) = (int (card x0) + - 1 * x2 = 1)"
+  by auto
+  have "\<forall>x2. (x2::int) + 1 = 1 + x2"
+    by auto
+  then have f2: "\<forall>i A. (i simplex (A::'a set)) = (\<exists>Aa. \<not> affine_dependent Aa \<and> int (card Aa) + - 1 * i = 1 \<and> A = convex hull Aa)"
+    using f1 by (metis simplex_def)
+  obtain AA :: "'a set \<Rightarrow> int \<Rightarrow> 'a set" where
+    "\<forall>x0 x1. (\<exists>v2. \<not> affine_dependent v2 \<and> int (card v2) + - 1 * x1 = 1 \<and> x0 = convex hull v2) = (\<not> affine_dependent (AA x0 x1) \<and> int (card (AA x0 x1)) + - 1 * x1 = 1 \<and> x0 = convex hull AA x0 x1)"
+by moura
+  then have f3: "\<forall>i A. (\<not> i simplex A \<or> \<not> affine_dependent (AA A i) \<and> i + - 1 * int (card (AA A i)) = - 1 \<and> A = convex hull AA A i) \<and> (i simplex A \<or> (\<forall>Aa. affine_dependent Aa \<or> int (card Aa) + - 1 * i \<noteq> 1 \<or> A \<noteq> convex hull Aa))"
+using f2 by auto
+  obtain AAa :: "'a set \<Rightarrow> 'a set \<Rightarrow> 'a set" where
+    "\<forall>x0 x1. (\<exists>v2\<subseteq>x1. x0 = convex hull v2) = (AAa x0 x1 \<subseteq> x1 \<and> x0 = convex hull AAa x0 x1)"
+    by moura
+  then have f4: "AAa F (AA S n) \<subseteq> AA S n \<and> F = convex hull AAa F (AA S n)"
+    using f3 by (metis (no_types) F S face_of_convex_hull_affine_independent)
+  then have f5: "\<not> affine_dependent (AAa F (AA S n))"
+    using f3 S affine_independent_subset by blast
+  have f6: "k = aff_dim (convex hull AAa F (AA S n))"
+    using f4 by (metis k)
+  then have f7: "k + - 1 * int (card (AAa F (AA S n))) \<le> - 1"
+    using f5 by (simp add: aff_dim_convex_hull affine_independent_iff_card)
+  have f8: "- 1 \<le> k + - 1 * int (card (AAa F (AA S n)))"
+    using f6 f5 by (simp add: aff_dim_convex_hull affine_independent_iff_card)
+  have "\<forall>x0. (- 1 * k + int (card (x0::'a set)) = 1) = (k + - 1 * int (card x0) = - 1)"
+    by auto
+  then show ?thesis
+    using f8 f7 f5 f4 f3 by auto
+qed
 
 subsection \<open>Euler characteristic for a single point, aka a 0 simplex.\<close>
 
@@ -156,9 +261,39 @@ qed
 
 subsection \<open>Euler characteristic for an n-Simplex.\<close>
 
+\<comment> \<open>
+
+From all the simplex work above, we should eventually have a bijection between
+faces and subsets of the n corners of a simplex.
+
+There are (n choose k) ways to select k corners, so there are (n choose k)
+distinct faces with aff_dim (k-1).
+
+When we plug these numbers into the euler relation, we get a sequence that
+always sums to 0:
+
+lemma choose_alternating_sum:
+  "n > 0 \<Longrightarrow> (\<Sum>i\<le>n. (-1)^i * of_nat (n choose i)) = (0 :: 'a::comm_ring_1)"
+  using binomial_ring[of "-1 :: 'a" 1 n]
+  by (simp add: atLeast0AtMost mult_of_nat_commute zero_power)
+\<close>
 
 
 subsection \<open>Now Euler-Poincare for a a general full-dimensional polytope.\<close>
+
+\<comment> \<open>
+
+Now we know the euler characteristic for all simplices. Then, following
+Tverberg or Euler or possibly just Polytope.thy, we will show that:
+
+  a) the euler characterstic of a polytope = 0 provided it's 0 for
+     the two sections you get when you slice it with a hyperplane.
+
+  b) any polytope can be cut into simplices
+
+Putting these two things together with our proof of the characteristic
+for simplices, we can then show that it holds for any polytope.\<close>
+
 
 theorem euler_poincare:
   assumes "polytope p" and "aff_dim p = d"
@@ -170,6 +305,12 @@ section \<open>The Polyhedron Formula\<close>
 (* ------------------------------------------------------------------------ *)
 text \<open>The polyhedron formula is the Euler relation in 3 dimensions.\<close>
 
+\<comment> \<open>
+The euler characteristic is 0 for all non-empty simplices,
+but (at least for the polyhedron forumla) we will ignore the empty
+face and the face that consists of the whole simplex. That's where
+the 2 comes from)
+\<close>
 
 locale convex_polyhedron =
   fixes p assumes "polytope p" and "aff_dim p = 3"
