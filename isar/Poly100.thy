@@ -23,21 +23,6 @@ definition edges where "edges p = 1 d_faces p"
 definition faces where "faces p = 2 d_faces p"
 
 
-definition corners ("_ corners'_of _" [80, 80] 85) where
-  \<comment> \<open>NOTE the distinction between "corners" and "verts":
-
-       1. a "vert" is a set containing one point
-          a "corner" is the point itself.
-
-       2. "corner" is a definition I made up specifically
-          to streamline proofs about simplices. Probably there
-          should be a "locale simplex" and the definition of
-          "corners" should only be visible inside of it.\<close>
-  "C corners_of S \<equiv> finite C \<and> (\<not>affine_dependent C) \<and>
-                 (int(card C) = aff_dim S + 1) \<and>
-                 (S=convex hull C)"
-
-
 (* ------------------------------------------------------------------------ *)
 section \<open>The Euler characteristic.\<close>
 (* ------------------------------------------------------------------------ *)
@@ -69,23 +54,6 @@ qed
 
 subsection \<open>Simplex helpers.\<close>
 
-lemma simplex_self_face:
-  assumes "n simplex S" shows "S face_of S"
-  using assms convex_simplex face_of_refl by auto
-
-
-lemma n_simplex_only_n_face:
-  assumes "n simplex S" shows "n d_faces S = {S}"
-proof
-  let ?F = "n d_faces S"
-  have "?F \<subseteq> {f. f face_of S \<and> aff_dim f = n}" using d_faces_def by auto
-  hence "?F \<subseteq> {f. f face_of S}" by auto
-  thus "?F \<subseteq> {S}" by (smt aff_dim_simplex assms convex_simplex
-      d_faces_def face_of_aff_dim_lt insertCI mem_Collect_eq simplex_def subsetI)
-next
-  show "{S} \<subseteq> n d_faces S"
-    using assms(1) simplex_self_face aff_dim_simplex d_faces_def by blast
-qed
 
 
 lemma facet_of_simplex_simplex:
@@ -151,6 +119,52 @@ proof -
 qed
 
 
+text \<open>The proof above was a lot of work. I wanted to generalize it to arbitrary faces, which
+      made me realize that the set \<open>C\<close> in the definition of @{thm simplex} corresponds to
+      the union of all vertex faces. (A vertex in polytope-land is a set containing one point,
+      but simplices are defined in terms of the points themselves). So I found it helpful
+      to create a definition that mirrors the definition of @{thm simplex}, but lets me
+      assign a name to set of these points themselves. Since @{thm simplex} refers to this
+      set as \<open>C\<close>, I decided it probably stood for \<open>corners\<close>, and so...\<close>
+
+definition corners ("_ corners'_of _" [80, 80] 85) where
+  "C corners_of S \<equiv> finite C \<and> (\<not>affine_dependent C) \<and>
+                 (int(card C) = aff_dim S + 1) \<and>
+                 (S=convex hull C)"
+
+text \<open>Once we have a name for these points, metis is able able to untangle th
+      different terminologies used in the definition of polytopes, faces, and
+      simplices, and show what we really wanted to say with much less manual work:\<close>
+
+lemma face_of_simplex_simplex:
+  assumes S:"n simplex S" and F: "F face_of S" and k: "aff_dim F = k"
+  shows "k simplex F"
+proof -
+  from S obtain SC where SC: "SC corners_of S" using corners_def simplex_def
+    by (metis (no_types, hide_lams) aff_dim_affine_independent
+        aff_dim_convex_hull aff_independent_finite)
+  with F obtain FC where FC: "FC corners_of F"
+    by (metis (no_types, hide_lams) aff_dim_affine_independent
+        aff_dim_convex_hull aff_independent_finite
+        affine_independent_subset corners_def
+        face_of_convex_hull_affine_independent)
+  thus "k simplex F"  by (metis FC corners_def k simplex_def)
+qed
+
+
+subsubsection "More simplex theory."
+
+text "Here are few lemmas I thought I'd need while I was building up to the proof above."
+
+lemma simplex_corners:
+  assumes S: "n simplex S" and C: "C corners_of S"
+  shows "int(card C) = n+1"
+proof -
+  from S have "aff_dim S = n" by (simp add: aff_dim_simplex)
+  thus "int(card C) = n + 1" using corners_def C by auto
+qed
+
+
 lemma subset_corners:
   assumes "n simplex S" and F: "F face_of S"
     and SC: "SC corners_of S" and FC: "FC corners_of F"
@@ -161,7 +175,6 @@ proof
     by (metis (full_types) extreme_point_of_face
         extreme_point_of_convex_hull_affine_independent)
 qed
-
 
 
 lemma sub_simplex_of_corners:
@@ -185,61 +198,26 @@ qed
 
 
 
-lemma simplex_corners:
-  assumes S: "n simplex S" and C: "C corners_of S"
-  shows "int(card C) = n+1"
-proof -
-  from S have "aff_dim S = n" by (simp add: aff_dim_simplex)
-  thus "int(card C) = n + 1" using corners_def C by auto
+lemma simplex_self_face:
+  \<comment> \<open>Any simplex is a face of itself.\<close>
+  assumes "n simplex S" shows "S face_of S"
+  using assms convex_simplex face_of_refl by auto
+
+
+lemma n_simplex_only_n_face:
+  \<comment> \<open>The only n dimensional face of an n simplex S is S itself.\<close>
+  assumes "n simplex S" shows "n d_faces S = {S}"
+proof
+  let ?F = "n d_faces S"
+  have "?F \<subseteq> {f. f face_of S \<and> aff_dim f = n}" using d_faces_def by auto
+  hence "?F \<subseteq> {f. f face_of S}" by auto
+  thus "?F \<subseteq> {S}" by (smt aff_dim_simplex assms convex_simplex
+      d_faces_def face_of_aff_dim_lt insertCI mem_Collect_eq simplex_def subsetI)
+next
+  show "{S} \<subseteq> n d_faces S"
+    using assms(1) simplex_self_face aff_dim_simplex d_faces_def by blast
 qed
 
-
-
-lemma face_of_simplex_simplex:
-  assumes S:"n simplex S" and F: "F face_of S" and k: "aff_dim F = k"
-  shows "k simplex F"
-proof -
-  from S obtain SC where "SC corners_of S" using corners_def simplex_def
-    by (metis (no_types, hide_lams) aff_dim_affine_independent
-        aff_dim_convex_hull aff_independent_finite)
-  then obtain FC where "FC = F \<inter> SC" by simp
-\<^cancel>\<open>
-  ... hence "FC corners_of F"
-
-  in the meantime, sledgehammer found the following ugly proof
-  (as well as one-line smt proofs that took way too long)
-\<close>
-(* WARNING: DO NOT GAZE DIRECTLY INTO THE FOLLOWING PROOF.
-   SEVERE EYE DAMAGE MAY OCCUR. *)
-have f1: "\<forall>x0 x2. (int (card (x0::'a set)) = 1 + x2) = (int (card x0) + - 1 * x2 = 1)"
-  by auto
-  have "\<forall>x2. (x2::int) + 1 = 1 + x2"
-    by auto
-  then have f2: "\<forall>i A. (i simplex (A::'a set)) = (\<exists>Aa. \<not> affine_dependent Aa \<and> int (card Aa) + - 1 * i = 1 \<and> A = convex hull Aa)"
-    using f1 by (metis simplex_def)
-  obtain AA :: "'a set \<Rightarrow> int \<Rightarrow> 'a set" where
-    "\<forall>x0 x1. (\<exists>v2. \<not> affine_dependent v2 \<and> int (card v2) + - 1 * x1 = 1 \<and> x0 = convex hull v2) = (\<not> affine_dependent (AA x0 x1) \<and> int (card (AA x0 x1)) + - 1 * x1 = 1 \<and> x0 = convex hull AA x0 x1)"
-by moura
-  then have f3: "\<forall>i A. (\<not> i simplex A \<or> \<not> affine_dependent (AA A i) \<and> i + - 1 * int (card (AA A i)) = - 1 \<and> A = convex hull AA A i) \<and> (i simplex A \<or> (\<forall>Aa. affine_dependent Aa \<or> int (card Aa) + - 1 * i \<noteq> 1 \<or> A \<noteq> convex hull Aa))"
-using f2 by auto
-  obtain AAa :: "'a set \<Rightarrow> 'a set \<Rightarrow> 'a set" where
-    "\<forall>x0 x1. (\<exists>v2\<subseteq>x1. x0 = convex hull v2) = (AAa x0 x1 \<subseteq> x1 \<and> x0 = convex hull AAa x0 x1)"
-    by moura
-  then have f4: "AAa F (AA S n) \<subseteq> AA S n \<and> F = convex hull AAa F (AA S n)"
-    using f3 by (metis (no_types) F S face_of_convex_hull_affine_independent)
-  then have f5: "\<not> affine_dependent (AAa F (AA S n))"
-    using f3 S affine_independent_subset by blast
-  have f6: "k = aff_dim (convex hull AAa F (AA S n))"
-    using f4 by (metis k)
-  then have f7: "k + - 1 * int (card (AAa F (AA S n))) \<le> - 1"
-    using f5 by (simp add: aff_dim_convex_hull affine_independent_iff_card)
-  have f8: "- 1 \<le> k + - 1 * int (card (AAa F (AA S n)))"
-    using f6 f5 by (simp add: aff_dim_convex_hull affine_independent_iff_card)
-  have "\<forall>x0. (- 1 * k + int (card (x0::'a set)) = 1) = (k + - 1 * int (card x0) = - 1)"
-    by auto
-  then show ?thesis
-    using f8 f7 f5 f4 f3 by auto
-qed
 
 subsection \<open>Euler characteristic for a single point, aka a 0 simplex.\<close>
 
@@ -248,7 +226,8 @@ lemma euler_simplex_0:
   shows "euler_char S = 1"
 proof -
   have dim: "aff_dim S = 0" by (simp add: aff_dim_simplex assms)
-  have cnt: "0 d_face_count S = 1" using n_simplex_only_n_face
+  have cnt: "0 d_face_count S = 1"
+    using n_simplex_only_n_face
     by (simp add: n_simplex_only_n_face assms d_face_count_def)
 
   \<comment> \<open>Now plug these results into the definition, and calculate.\<close>
