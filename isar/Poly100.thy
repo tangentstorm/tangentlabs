@@ -122,11 +122,14 @@ proof -
   thus "k simplex F"  by (metis FC corners_def k simplex_def)
 qed
 
-text \<open>There are (n choose k) subsets of the corners, and each subset corresponds to a face.\<close>
+text \<open>There are \<open>(n+1) choose k\<close> subsets of the corners, and each subset corresponds to a face.\<close>
 
 lemma simplex_face_count:
-  "n simplex S \<Longrightarrow> k d_face_count S = of_nat (n choose k)"
-  sorry \<comment> \<open>TODO\<close>
+  "n simplex S \<Longrightarrow> k d_face_count S = of_nat ((n+1) choose k)"
+  sorry 
+
+\<comment> \<open>Lesson learned: do not postpone proofs with "sorry" and then work on things
+   that depend on the statement. my obvious statement was obviously *wrong* \<close>
 
 
 subsubsection "More simplex helpers."
@@ -235,13 +238,14 @@ proof -
   define N where N: "N = nat(0)"
   hence dim: "aff_dim S = N" by (simp add: aff_dim_simplex assms)
   have cnt: "0 d_face_count S = 1"
-  using n_simplex_only_n_face
     by (simp add: n_simplex_only_n_face assms d_face_count_def)
+
   \<comment> \<open>Now plug these results into the definition, and calculate.\<close>
-  have "euler_char S = (\<Sum>n\<le>N. (-1::int)^(nat n) * (n d_face_count S))"
+  have "euler_char S = (\<Sum>k\<le>N. (-1::int)^(nat k) * (k d_face_count S))"
     by (simp add: N dim euler_char_def)
-  also have "... = (0 d_face_count S)" using N by auto
-  finally show "euler_char S = 1" using cnt by simp
+  also have "... = (-1::int)^(nat 0) * (0 d_face_count S)" using N by simp
+  also have "... = (0 d_face_count S)" by simp
+  finally show "euler_char S = 1" using cnt by auto
 qed
 
 
@@ -251,18 +255,18 @@ lemma euler_nsimplex_eq0:
 proof -
   have dim: "aff_dim S = (nat n)" using assms aff_dim_simplex by auto
   from `n>0` obtain N where "N = nat(n)" by simp
-  hence cnt: "k d_face_count S = of_nat (N choose k)" for k
+  hence cnt: "k d_face_count S = of_nat (N+1 choose k)" for k
     using assms simplex_face_count by (metis aff_dim_simplex dim)
 
   have "euler_char S = (\<Sum>k\<le>N. (-1::int)^k * (k d_face_count S))"
     by (simp add: \<open>N = nat n\<close> dim euler_char_def)
-  also have "... = (\<Sum>k\<le>N. (-1::int)^k * (N choose nat k))"
+  also have "... = (\<Sum>k\<le>N. (-1::int)^k * (N+1 choose nat k))"
     by (simp add: cnt)
-  also have "... = (\<Sum>k\<le>N. (-1::int)^k * of_nat (N choose k))"
+  also have "... = (\<Sum>k\<le>N. (-1::int)^k * of_nat (N+1 choose k))"
     by simp
-  finally show "euler_char S = 0"  using choose_alternating_sum
-    by (simp add: choose_alternating_sum \<open>N = nat n\<close> assms(2))
-qed
+  finally have "euler_char S = 1"
+    sorry
+  oops
 
 \<comment> \<open>
 
