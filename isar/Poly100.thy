@@ -22,38 +22,9 @@ definition verts where "verts p = 0 d_faces p"
 definition edges where "edges p = 1 d_faces p"
 definition faces where "faces p = 2 d_faces p"
 
-
 (* ------------------------------------------------------------------------ *)
-section \<open>The Euler characteristic.\<close>
+section \<open>Simplex Theory.\<close>
 (* ------------------------------------------------------------------------ *)
-
-definition euler_char where
-  "euler_char p = (\<Sum>n=0..aff_dim p. (-1)^(nat n) * n d_face_count p)"
-
-
-subsection \<open>Euler characteristic for empty set.\<close>
-
-lemma empty_face_count:
-  "(-1) d_face_count p = 1"
-proof -
-  let ?F = "(-1) d_faces p"
-  have "?F = {f. f face_of p \<and> aff_dim f = -1}" by (simp add: d_faces_def)
-  hence "?F = {f. f face_of p \<and> f = {}}" by (simp add: aff_dim_empty)
-  hence f: "?F = {{}}" by auto
-  have "(-1) d_face_count p = card(?F)" by (simp add: d_face_count_def)
-  with f show "(-1) d_face_count p = 1" by simp
-qed
-
-lemma ec_empty_0:
-  "euler_char {} = 0"
-proof -
-  have "euler_char {} = (\<Sum>n= 0..-1. (-1)^(nat n) * n d_face_count {})"
-    by (simp add: euler_char_def)
-  thus "euler_char {} = 0" by auto
-qed
-
-subsection \<open>Simplex helpers.\<close>
-
 
 
 lemma facet_of_simplex_simplex:
@@ -151,8 +122,14 @@ proof -
   thus "k simplex F"  by (metis FC corners_def k simplex_def)
 qed
 
+text \<open>There are (n choose k) subsets of the corners, and each subset corresponds to a face.\<close>
 
-subsubsection "More simplex theory."
+lemma simplex_face_count:
+  "n simplex S \<Longrightarrow> k d_face_count S = of_nat (n choose k)"
+  sorry \<comment> \<open>TODO\<close>
+
+
+subsubsection "More simplex helpers."
 
 text "Here are few lemmas I thought I'd need while I was building up to the proof above."
 
@@ -197,7 +174,6 @@ next
 qed
 
 
-
 lemma simplex_self_face:
   \<comment> \<open>Any simplex is a face of itself.\<close>
   assumes "n simplex S" shows "S face_of S"
@@ -218,27 +194,75 @@ next
     using assms(1) simplex_self_face aff_dim_simplex d_faces_def by blast
 qed
 
+(* ------------------------------------------------------------------------ *)
+section \<open>The Euler characteristic.\<close>
+(* ------------------------------------------------------------------------ *)
 
-subsection \<open>Euler characteristic for a single point, aka a 0 simplex.\<close>
+text "The Euler characteristic is simply the alternating sum \<open>x\<^sub>0 - x\<^sub>1 + x\<^sub>2 - x\<^sub>3 \<dots>\<close>
+      of the number of n-dimensional faces:"
 
-lemma euler_simplex_0:
-  assumes "0 simplex S"
-  shows "euler_char S = 1"
+definition euler_char where
+  "euler_char p = (\<Sum>k\<le>nat(aff_dim p). (-1::int)^k * (k d_face_count p))"
+
+
+subsection \<open>The empty face\<close>
+
+text \<open>The empty set is considered to be a face of any polytope,
+      and its affine dimension is -1, but we don't actually count
+      it in the sum.\<close>
+
+lemma "S = {} \<longleftrightarrow> aff_dim S = -1"
+  by (fact Convex_Euclidean_Space.aff_dim_empty)
+
+lemma empty_face_count:
+  "(-1) d_face_count p = 1"
 proof -
-  have dim: "aff_dim S = 0" by (simp add: aff_dim_simplex assms)
-  have cnt: "0 d_face_count S = 1"
-    using n_simplex_only_n_face
-    by (simp add: n_simplex_only_n_face assms d_face_count_def)
-
-  \<comment> \<open>Now plug these results into the definition, and calculate.\<close>
-  have "euler_char S = (\<Sum>n=0..aff_dim S. (-1)^(nat n) * n d_face_count S)"
-    by (fact euler_char_def)
-  also have "... = ((-1)^0 * (0 d_face_count S))"  using dim by simp
-  also have "... = (0 d_face_count S)" by simp
-  finally show "euler_char S = 1" using cnt by simp
+  let ?F = "(-1) d_faces p"
+  have "?F = {f. f face_of p \<and> aff_dim f = -1}" by (simp add: d_faces_def)
+  hence "?F = {f. f face_of p \<and> f = {}}" by (simp add: aff_dim_empty)
+  hence f: "?F = {{}}" by auto
+  have "(-1) d_face_count p = card(?F)" by (simp add: d_face_count_def)
+  with f show "(-1) d_face_count p = 1" by simp
 qed
 
 subsection \<open>Euler characteristic for an n-Simplex.\<close>
+
+
+lemma euler_0simplex_eq1:
+  assumes "0 simplex S"
+  shows "euler_char S = 1"
+proof -
+  define N where N: "N = nat(0)"
+  hence dim: "aff_dim S = N" by (simp add: aff_dim_simplex assms)
+  have cnt: "0 d_face_count S = 1"
+  using n_simplex_only_n_face
+    by (simp add: n_simplex_only_n_face assms d_face_count_def)
+  \<comment> \<open>Now plug these results into the definition, and calculate.\<close>
+  have "euler_char S = (\<Sum>n\<le>N. (-1::int)^(nat n) * (n d_face_count S))"
+    by (simp add: N dim euler_char_def)
+  also have "... = (0 d_face_count S)" using N by auto
+  finally show "euler_char S = 1" using cnt by simp
+qed
+
+
+lemma euler_nsimplex_eq0:
+  assumes "n simplex S" "n>0"
+  shows "euler_char S = 0"
+proof -
+  have dim: "aff_dim S = (nat n)" using assms aff_dim_simplex by auto
+  from `n>0` obtain N where "N = nat(n)" by simp
+  hence cnt: "k d_face_count S = of_nat (N choose k)" for k
+    using assms simplex_face_count by (metis aff_dim_simplex dim)
+
+  have "euler_char S = (\<Sum>k\<le>N. (-1::int)^k * (k d_face_count S))"
+    by (simp add: \<open>N = nat n\<close> dim euler_char_def)
+  also have "... = (\<Sum>k\<le>N. (-1::int)^k * (N choose nat k))"
+    by (simp add: cnt)
+  also have "... = (\<Sum>k\<le>N. (-1::int)^k * of_nat (N choose k))"
+    by simp
+  finally show "euler_char S = 0"  using choose_alternating_sum
+    by (simp add: choose_alternating_sum \<open>N = nat n\<close> assms(2))
+qed
 
 \<comment> \<open>
 
