@@ -38,7 +38,7 @@ lemma facet_of_simplex_simplex:
 proof -
   \<comment> \<open>\<open>C1\<close> is the set of affine-independent vertices required by @{const simplex}. \<close>
   obtain C1 where C: "finite C1" "\<not>(affine_dependent C1)" "int(card C1) = n+1"
-    and S: "S = convex hull C1" using assms unfolding simplex by force
+    and S: "S = convex hull C1" using assms unfolding Polytope.simplex by force
 
   \<comment> \<open>Isolate the vertex from \<open>C1\<close> that isn't in F, and call the remaining set \<open>C\<close>.\<close>
   then obtain A where "A\<in>C1" and "A\<notin>F"
@@ -47,7 +47,7 @@ proof -
   then obtain C where "C = C1 - {A}" by simp
 
   \<comment> \<open>Finally, show that \<open>F\<close> and \<open>C\<close> together meet the definition of an (n-1) simplex.\<close>
-  show ?thesis unfolding simplex
+  show ?thesis unfolding Polytope.simplex
   proof (intro exI conjI)
 
     \<comment> \<open>The first couple statements show that the remaining vertices of \<open>C\<close>
@@ -98,35 +98,118 @@ text \<open>The proof above was a lot of work. I wanted to generalize it to arbi
       assign a name to set of these points themselves. Since @{thm simplex} refers to this
       set as \<open>C\<close>, I decided it probably stood for \<open>corners\<close>, and so...\<close>
 
-definition corners ("_ corners'_of _" [80, 80] 85) where
+definition corners_of ("_ corners'_of _" [80, 80] 85) where
   "C corners_of S \<equiv> finite C \<and> (\<not>affine_dependent C) \<and>
                  (int(card C) = aff_dim S + 1) \<and>
                  (S=convex hull C)"
+
+definition corners where
+  "corners S = (THE C. C corners_of S)" if "n simplex S"
+
+
+context
+  fixes n :: int
+    and S :: "'a::euclidean_space set"
+  assumes nS: "n simplex S" and "n\<ge>-1"
+begin
+
+lemma corners_exist:
+  shows "\<exists>C. C corners_of S"
+  unfolding corners_of_def
+  using Polytope.simplex aff_dim_simplex nS by blast
+
+lemma corners_equiv:
+  assumes "C0 corners_of S" and "C1 corners_of S"
+  shows "C0 = C1"
+  unfolding simplex_def corners_of_def
+  by (metis assms corners_of_def extreme_point_of_convex_hull_affine_independent subsetI subset_antisym)
+
+lemma corners_unique:
+  shows "\<exists>!C. C corners_of S"
+  using nS corners_exist corners_equiv by blast
+
+lemma shows "(C = corners S) \<equiv> C corners_of S"
+  by (smt nS corners_def corners_unique theI')
+
 
 text \<open>Once we have a name for these points, metis is able able to untangle th
       different terminologies used in the definition of polytopes, faces, and
       simplices, and show what we really wanted to say with much less manual work:\<close>
 
 lemma face_of_simplex_simplex:
-  assumes S:"n simplex S" and F: "F face_of S" and k: "aff_dim F = k"
+  assumes F: "F face_of S" and k: "aff_dim F = k"
   shows "k simplex F"
 proof -
-  from S obtain SC where SC: "SC corners_of S" using corners_def simplex_def
+  from nS obtain SC where SC: "SC corners_of S" using corners_of_def simplex_def
     by (metis (no_types, hide_lams) aff_dim_affine_independent
         aff_dim_convex_hull aff_independent_finite)
   with F obtain FC where FC: "FC corners_of F"
     by (metis (no_types, hide_lams) aff_dim_affine_independent
         aff_dim_convex_hull aff_independent_finite
-        affine_independent_subset corners_def
+        affine_independent_subset corners_of_def
         face_of_convex_hull_affine_independent)
-  thus "k simplex F"  by (metis FC corners_def k simplex_def)
+  thus "k simplex F"  by (metis FC corners_of_def k simplex_def)
 qed
 
-text \<open>There are \<open>(n+1) choose k\<close> subsets of the corners, and each subset corresponds to a face.\<close>
 
-lemma simplex_face_count:
-  "n simplex S \<Longrightarrow> k d_face_count S = of_nat ((n+1) choose k)"
-  sorry 
+
+
+
+subsection \<open>Count of faces\<close>
+
+text \<open>We will show that \<open>k d_face_count S = (n+1) choose (k+1)\<close> for all \<open>n simplex S\<close>,
+    as there are (n+1) corners, and each k-dimensional face encloses (k+1) of them.\<close>
+
+
+subsubsection "correspondence between faces and sets of corners"
+
+
+lemma sub_corners_simplex_face:
+  \<comment> \<open>Any subset of the corners of a simplex is sufficient to form a new simplex.\<close>
+  assumes C: "C \<subseteq> corners S" and k: "int(card C) = k+1"
+  obtains F where "F = convex hull C" and "F face_of S" and "k simplex F"
+proof
+  obtain C1 where C1: "C1 corners_of S" using corners_exist by auto
+  from C1 have CC1: "C \<subseteq> C1" by (metis C corners_def corners_unique nS theI)
+  let ?F = "convex hull C"
+  show 0: "?F = convex hull C" by simp
+  thus 1: "?F face_of S" using C1 CC1 corners_of_def
+    by (metis face_of_convex_hull_affine_independent)
+  show 2: "k simplex ?F" unfolding simplex_def
+  proof (intro exI conjI)
+    show "\<not> affine_dependent C"
+      using C1 CC1 affine_independent_subset corners_of_def by blast
+    show "int (card C) = k + 1" by (fact k)
+    show "?F = convex hull C" by (fact 0)
+  qed
+qed
+
+
+
+lemma
+  assumes C: "C \<subseteq> corners S"
+  shows "\<exists>!F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F"
+proof -
+  let ?k = "(int(card C)-1)"
+  have "card C = ?k+1" by auto
+  with C obtain F where "F = convex hull C \<and> F face_of S \<and> ?k simplex F"
+    using sub_corners_simplex_face by blast
+  thus "\<exists>!F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F" by blast
+qed
+
+definition corresponding_face where
+  "corresponding_face C \<equiv> (THE F. F = convex hull C \<and> F face_of S \<and> (card C-1) simplex F)"
+
+
+lemma "F = corresponding_face C \<equiv>
+       F = convex hull C \<and> F face_of S \<and> (card C-1) simplex F"
+  sorry
+
+
+
+proposition simplex_face_count:
+  shows "k d_face_count S = of_nat (nat (n+1) choose nat (k+1))"
+  oops
 
 \<comment> \<open>Lesson learned: do not postpone proofs with "sorry" and then work on things
    that depend on the statement. my obvious statement was obviously *wrong* \<close>
@@ -136,66 +219,200 @@ subsubsection "More simplex helpers."
 
 text "Here are few lemmas I thought I'd need while I was building up to the proof above."
 
-lemma simplex_corners:
+
+lemma card_simplex_corners:
   assumes S: "n simplex S" and C: "C corners_of S"
   shows "int(card C) = n+1"
 proof -
   from S have "aff_dim S = n" by (simp add: aff_dim_simplex)
-  thus "int(card C) = n + 1" using corners_def C by auto
+  thus "int(card C) = n + 1" using corners_of_def C by auto
 qed
 
 
-lemma subset_corners:
+lemma simplex_corners_of_face:
   assumes "n simplex S" and F: "F face_of S"
     and SC: "SC corners_of S" and FC: "FC corners_of F"
   shows "FC \<subseteq> SC"
 proof
   fix x assume "x\<in>FC"
-  with F FC SC show "x\<in>SC" using corners_def
+  with F FC SC show "x\<in>SC" using corners_of_def
     by (metis (full_types) extreme_point_of_face
         extreme_point_of_convex_hull_affine_independent)
 qed
 
+lemma simplex_face_of_corners:
+  assumes "n simplex S"
+      and "SC corners_of S" and "FC corners_of F"
+      and "FC \<subseteq> SC"
+  shows "F face_of S"
+  by (metis assms(2) assms(3) assms(4) corners_of_def face_of_convex_hull_affine_independent)
 
-lemma sub_simplex_of_corners:
-  \<comment> \<open>Any subset of the corners of a simplex is sufficient to form a new simplex.\<close>
-  assumes S: "n simplex S" and C1: "C1 corners_of S"
-      and C: "C \<subseteq> C1" and k: "int(card C) = k+1"
-      and F: "F = convex hull C"
-    shows "F face_of S" and "k simplex F"
-proof -
-  show "F face_of S" using C C1 F corners_def
-    by (metis face_of_convex_hull_affine_independent)
-next
-  show "k simplex F" unfolding simplex_def
-  proof (intro exI conjI)
-    show "\<not> affine_dependent C"
-      using C C1 affine_independent_subset corners_def by blast
-    show "int (card C) = k + 1" by (fact k)
-    show "F = convex hull C" by (fact F)
-  qed
-qed
+
+lemma obtain_corners:
+  assumes "n simplex S"
+  obtains C where "C corners_of S"
+  by (metis (no_types, hide_lams) aff_dim_affine_independent aff_dim_convex_hull aff_independent_finite assms corners_of_def simplex_def)
+
+\<^cancel>\<open>lemma card_aff_dim_corners:
+  assumes C: "C corners_of S"
+  shows "int(card C) = k + 1 \<equiv> aff_dim S = k"
+  using corners_of_def C by (simp add: corners_of_def)
+
+lemma corners_face_equiv0:
+  assumes "n simplex S" and "SC corners_of S" and "FC corners_of F"
+  shows "FC \<subseteq> SC \<equiv> F face_of S"
+  by (smt assms simplex_corners_of_face simplex_face_of_corners)
+\<close>
+
+
+
+lemma corners_face_equiv:
+  assumes "SC corners_of S" and "FC corners_of F"
+  shows "(FC \<subseteq> SC     \<and> int(card FC) = k+1)
+       \<equiv> (F face_of S \<and> aff_dim F = k)"
+  by (smt nS assms corners_of_def simplex_corners_of_face simplex_face_of_corners)
+
+
+
+subsection \<open>mapping a set of corners to its corresponding face\<close>
+
+
+
+
 
 
 lemma simplex_self_face:
   \<comment> \<open>Any simplex is a face of itself.\<close>
-  assumes "n simplex S" shows "S face_of S"
-  using assms convex_simplex face_of_refl by auto
+  "S face_of S" using nS convex_simplex face_of_refl by auto
 
 
 lemma n_simplex_only_n_face:
   \<comment> \<open>The only n dimensional face of an n simplex S is S itself.\<close>
-  assumes "n simplex S" shows "n d_faces S = {S}"
+  shows "n d_faces S = {S}"
 proof
   let ?F = "n d_faces S"
   have "?F \<subseteq> {f. f face_of S \<and> aff_dim f = n}" using d_faces_def by auto
   hence "?F \<subseteq> {f. f face_of S}" by auto
-  thus "?F \<subseteq> {S}" by (smt aff_dim_simplex assms convex_simplex
+  thus "?F \<subseteq> {S}" by (smt nS aff_dim_simplex convex_simplex
       d_faces_def face_of_aff_dim_lt insertCI mem_Collect_eq simplex_def subsetI)
-next
   show "{S} \<subseteq> n d_faces S"
-    using assms(1) simplex_self_face aff_dim_simplex d_faces_def by blast
+    using nS simplex_self_face aff_dim_simplex d_faces_def by blast
 qed
+
+
+
+subsection "---- proven simplex stuff but probably garbage ------"
+
+lemma ex1_face_corners:
+  assumes "F face_of S"
+  shows "\<exists>!c. c = corresponding_corners F"
+  by simp
+
+
+
+lemma unique_face:
+  assumes "F face_of S" and "c0 corners_of F" and "c1 corners_of F"
+  shows "c0 = c1"
+  using Poly100.corners_equiv assms face_of_simplex_simplex simplex_dim_ge by blast
+
+
+lemma unique_corners:
+  assumes "C \<subseteq> corners S"
+      and "F0 face_of S \<and> F0 = convex hull C"
+      and "F1 face_of S \<and> F1 = convex hull C"
+      and "F face_of S" and "c0 corners_of F" and "c1 corners_of F"
+  shows "c0 = c1"
+  using Poly100.corners_equiv assms face_of_simplex_simplex simplex_dim_ge by blast
+
+
+subsection "---- unproven simplex stuff ------"
+
+
+
+
+
+lemma eq_hull:
+
+  assumes "h0 = convex hull C"
+  and "h1 = convex hull C"
+shows "h0 = h1" sledgehammer
+  by (simp add: assms(1) assms(2))
+
+
+
+
+lemma eq_faces:
+  assumes "F0 face_of S" and "F1 face_of S"
+      and "corners F0 = corners F1"
+    shows "F0 = F1"
+  oops
+
+definition corresponding_corners where
+  "corresponding_corners F = (THE C. C corners_of F \<and> C \<subseteq> corners S)"
+  if "F face_of S"
+
+
+lemma corresponding:
+  assumes "SC corners_of S" and "F = corresponding_face C"
+  shows "C = corresponding_corners F"
+  oops
+
+lemma corresponding2:
+  assumes "SC corners_of S" and "C = corresponding_corners F"
+  shows "F = corresponding_face C"
+  oops
+
+
+lemma eq_corners:
+  assumes "SC corners_of S"
+    and "c0 \<subseteq> SC" and "f0 = corresponding_face c0"
+    and "c1 \<subseteq> SC" and "f1 = corresponding_face c1"
+  shows "c0 = c1 \<longleftrightarrow> f0 = f1"
+proof
+  show "c0 = c1 \<Longrightarrow> f0 = f1" by (simp add: assms(3) assms(5))
+  show "f0 = f1 \<Longrightarrow> c0 = c1"
+  oops
+
+lemma count:
+  shows "card {f. f face_of S} = card {fc. fc \<subseteq> corners S}"
+  oops
+
+
+
+lemma card_simplex_faces:
+  "card( k d_faces S ) = (nat(n+1) choose k+1)"
+proof -
+  obtain SC where SC: "SC corners_of S" using nS obtain_corners by auto
+  have "card SC = n + 1" using SC nS card_simplex_corners by fastforce
+  have "card(k d_faces S) = card({f. f face_of S \<and> aff_dim f = k})"
+    unfolding d_faces_def by simp
+
+
+  also have "... = card({(f,c). f face_of S \<and> aff_dim f = k \<and> c = corners f })"
+    using corners_face_equiv inj_on_def sledgehammer
+
+
+  also have "... =  {. f face_of S \<and> aff_dim f = k \<and> c corners_of f \<longrightarrow> c \<subseteq> SC))  }"
+
+      using SC assms corner_face_equiv card_aff_dim_corners by blast
+
+  also have "... =  {f. (f face_of S \<and> aff_dim f = k \<and> (\<forall>fC. fC corners_of f \<longrightarrow> fC \<subseteq> SC))  }"
+    using SC assms corner_face_equiv by blast
+  also have "... =  {f. (f face_of S \<and> aff_dim f = k
+                     \<and> (\<forall>fC. fC corners_of f \<longrightarrow> fC \<subseteq> SC \<and> (card fC) = (k+1)))  }"
+    using card_aff_dim_corners by fastforce
+  also have "... =  {f. (\<forall>fC. fC corners_of f \<longrightarrow> fC \<subseteq> SC \<and> (card fC) = (k+1))  }"
+    using card_aff_dim_corners corner_face_equiv  sledgehammer oops
+
+
+  have "card( k d_faces S ) = card({FC. FC\<subseteq>SC \<and> (card FC) = k+1 })"
+  proof -
+
+
+    oops
+
+
+end
 
 (* ------------------------------------------------------------------------ *)
 section \<open>The Euler characteristic.\<close>
@@ -255,7 +472,7 @@ lemma euler_nsimplex_eq0:
 proof -
   have dim: "aff_dim S = (nat n)" using assms aff_dim_simplex by auto
   from `n>0` obtain N where "N = nat(n)" by simp
-  hence cnt: "k d_face_count S = of_nat (N+1 choose k)" for k
+  hence cnt: "k d_face_count S = of_nat (N+1 choose k+1)" for k
     using assms simplex_face_count by (metis aff_dim_simplex dim)
 
   have "euler_char S = (\<Sum>k\<le>N. (-1::int)^k * (k d_face_count S))"
