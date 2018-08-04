@@ -186,7 +186,7 @@ qed
 
 
 
-lemma
+lemma unique_corresponding_face:
   assumes C: "C \<subseteq> corners S"
   shows "\<exists>!F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F"
 proof -
@@ -197,14 +197,18 @@ proof -
   thus "\<exists>!F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F" by blast
 qed
 
+
 definition corresponding_face where
-  "corresponding_face C \<equiv> (THE F. F = convex hull C \<and> F face_of S \<and> (card C-1) simplex F)"
+  "corresponding_face C \<equiv> (THE F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F)"
+  if "C \<subseteq> corners S"
 
 
-lemma "F = corresponding_face C \<equiv>
-       F = convex hull C \<and> F face_of S \<and> (card C-1) simplex F"
-  sorry
-
+lemma corresponding_face:
+  assumes "C \<subseteq> corners S"
+  shows "(F = corresponding_face C) \<equiv>
+         (F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F)"
+  using assms corresponding_face_def using unique_corresponding_face
+  by (smt the_equality)
 
 
 proposition simplex_face_count:
@@ -325,32 +329,45 @@ lemma unique_corners:
   using Poly100.corners_equiv assms face_of_simplex_simplex simplex_dim_ge by blast
 
 
-subsection "---- unproven simplex stuff ------"
-
-
-
-
-
 lemma eq_hull:
-
   assumes "h0 = convex hull C"
-  and "h1 = convex hull C"
-shows "h0 = h1" sledgehammer
+      and "h1 = convex hull C"
+    shows "h0 = h1"
   by (simp add: assms(1) assms(2))
 
 
+subsection "---- unproven simplex stuff ------"
 
 
-lemma eq_faces:
-  assumes "F0 face_of S" and "F1 face_of S"
-      and "corners F0 = corners F1"
-    shows "F0 = F1"
-  oops
+lemma corner_face_equiv:
+  assumes "SC corners_of S"
+    and "c0 \<subseteq> SC" and "f0 = corresponding_face c0"
+    and "c1 \<subseteq> SC" and "f1 = corresponding_face c1"
+  shows "c0 = c1 \<longleftrightarrow> f0 = f1"
+proof
+  show "c0 = c1 \<Longrightarrow> f0 = f1" by (simp add: assms(3) assms(5))
+  show "f0 = f1 \<Longrightarrow> c0 = c1"
+    using nS assms
+          corners_def corners_of_def Poly100.corners_unique
+          corresponding_face unique_corresponding_face the_equality
+    by (metis (no_types, lifting)
+          simplex_dim_ge
+          aff_dim_affine_independent  aff_dim_convex_hull
+          aff_independent_finite affine_independent_subset)
+qed
 
 definition corresponding_corners where
-  "corresponding_corners F = (THE C. C corners_of F \<and> C \<subseteq> corners S)"
+  "corresponding_corners F = (THE C. F = corresponding_face C)"
   if "F face_of S"
 
+lemma unique_corresponding_corners:
+  assumes F: "F face_of S"
+  shows "\<exists>!C. C \<subseteq> corners S \<and> F = corresponding_face C"
+    using nS assms
+          corners_def corners_of_def Poly100.corners_unique
+          corresponding_face unique_corresponding_face the_equality
+    sledgehammer
+    sorry
 
 lemma corresponding:
   assumes "SC corners_of S" and "F = corresponding_face C"
@@ -363,14 +380,10 @@ lemma corresponding2:
   oops
 
 
-lemma eq_corners:
-  assumes "SC corners_of S"
-    and "c0 \<subseteq> SC" and "f0 = corresponding_face c0"
-    and "c1 \<subseteq> SC" and "f1 = corresponding_face c1"
-  shows "c0 = c1 \<longleftrightarrow> f0 = f1"
-proof
-  show "c0 = c1 \<Longrightarrow> f0 = f1" by (simp add: assms(3) assms(5))
-  show "f0 = f1 \<Longrightarrow> c0 = c1"
+lemma eq_faces:
+  assumes "F0 face_of S" and "F1 face_of S"
+      and "corners F0 = corners F1"
+    shows "F0 = F1"
   oops
 
 lemma count:
@@ -389,7 +402,7 @@ proof -
 
 
   also have "... = card({(f,c). f face_of S \<and> aff_dim f = k \<and> c = corners f })"
-    using corners_face_equiv inj_on_def sledgehammer
+    using corners_face_equiv inj_on_def sory
 
 
   also have "... =  {. f face_of S \<and> aff_dim f = k \<and> c corners_of f \<longrightarrow> c \<subseteq> SC))  }"
