@@ -5,7 +5,7 @@
    #92 Pick's theorem
 *)
 theory Poly100
-  imports Main "HOL-Analysis.Polytope"
+  imports Main "HOL.Binomial" "HOL-Analysis.Polytope"
 begin
 
 (* ------------------------------------------------------------------------ *)
@@ -186,7 +186,7 @@ qed
 
 
 
-lemma unique_corresponding_face:
+lemma ex1_corresponding_face:
   assumes C: "C \<subseteq> corners S"
   shows "\<exists>!F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F"
 proof -
@@ -194,7 +194,7 @@ proof -
   have "card C = ?k+1" by auto
   with C obtain F where "F = convex hull C \<and> F face_of S \<and> ?k simplex F"
     using sub_corners_simplex_face by blast
-  thus "\<exists>!F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F" by blast
+  thus ?thesis by blast
 qed
 
 
@@ -207,7 +207,7 @@ lemma corresponding_face:
   assumes "C \<subseteq> corners S"
   shows "(F = corresponding_face C) \<equiv>
          (F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F)"
-  using assms corresponding_face_def using unique_corresponding_face
+  using assms corresponding_face_def ex1_corresponding_face
   by (smt the_equality)
 
 
@@ -329,12 +329,6 @@ lemma unique_corners:
   using Poly100.corners_equiv assms face_of_simplex_simplex simplex_dim_ge by blast
 
 
-lemma eq_hull:
-  assumes "h0 = convex hull C"
-      and "h1 = convex hull C"
-    shows "h0 = h1"
-  by (simp add: assms(1) assms(2))
-
 
 subsection "---- unproven simplex stuff ------"
 
@@ -349,81 +343,148 @@ proof
   show "f0 = f1 \<Longrightarrow> c0 = c1"
     using nS assms
           corners_def corners_of_def Poly100.corners_unique
-          corresponding_face unique_corresponding_face the_equality
+          corresponding_face ex1_corresponding_face the_equality
     by (metis (no_types, lifting)
           simplex_dim_ge
           aff_dim_affine_independent  aff_dim_convex_hull
           aff_independent_finite affine_independent_subset)
 qed
 
-definition corresponding_corners where
-  "corresponding_corners F = (THE C. F = corresponding_face C)"
+\<^cancel>\<open>
+
+  \<comment> \<open>TODO: make this proof explicit. it takes a really long time to run.\<close>
+
+  lemma exists_corresponding_corners:
+    assumes "F face_of S"
+    shows "\<exists>!C. C \<subseteq> corners S \<and> F = corresponding_face C"
+    using nS assms simplex_dim_ge
+         face_of_simplex_simplex simplex_corners_of_face
+         corners_def corners_of_def Poly100.corners_unique
+         corresponding_face unique_corresponding_face the_equality
+         aff_dim_affine_independent aff_dim_convex_hull
+         aff_independent_finite affine_independent_subset
+    by (metis (no_types, lifting))
+\<close>
+
+\<^cancel>\<open> recall:
+  "corresponding_face C \<equiv> (THE F. F = convex hull C \<and> F face_of S \<and> (int(card C)-1) simplex F)"
+  if "C \<subseteq> corners S" \<close>
+
+definition corresponding_corners0 where
+  "corresponding_corners0 F \<equiv> (THE C. F = corresponding_face C)"
   if "F face_of S"
 
-lemma unique_corresponding_corners:
+definition corresponding_corners1 where
+  "corresponding_corners1 F \<equiv> (THE C. C \<subseteq> corners S \<and> F = convex hull C)"
+  if "F face_of S"
+
+
+definition corresponding_corners where
+  "corresponding_corners F \<equiv> (THE C. C \<subseteq> corners S \<and> F = corresponding_face C)"
+  if "F face_of S"
+
+
+lemma unique_aff_dim_convex_hull:
+  assumes 0: "\<not>affine_dependent C0"
+      and 1: "\<not>affine_dependent C1"
+      and 2: "convex hull C0 = convex hull C1"
+      and 3: "aff_dim C0 = aff_dim C1"
+    shows "C0 = C1"
+  by (metis 0 1 2 subsetI subset_antisym
+      extreme_point_of_convex_hull_affine_independent)
+
+lemma simplex_face_equiv:
+  assumes F: "F face_of S"
+      and C0: "C0 \<subseteq> corners S"
+      and C1: "C1 \<subseteq> corners S"
+      and "convex hull C0 = convex hull C1"
+    shows "C0 = C1"
+  using nS F unique_aff_dim_convex_hull face_of_simplex_simplex
+  oops
+
+
+
+\<comment> \<open>this parallels @{thm ex1_corresponding_face}\<close>
+lemma ex1_corresponding_corners:
   assumes F: "F face_of S"
   shows "\<exists>!C. C \<subseteq> corners S \<and> F = corresponding_face C"
-    using nS assms
-          corners_def corners_of_def Poly100.corners_unique
-          corresponding_face unique_corresponding_face the_equality
-    sledgehammer
-    sorry
+proof -
+  obtain FC where FC: "FC \<subseteq> corners S \<and> F = convex hull FC"
+    using nS F face_of_simplex_simplex
+    by (metis (no_types, lifting) aff_dim_affine_independent
+          aff_dim_convex_hull aff_independent_finite assms
+          corners_def corners_of_def corners_unique
+          simplex_corners_of_face simplex_def the_equality)
+  obtain FC' where CF: "FC' \<subseteq> corners S \<and> F = corresponding_face FC'"
+    using FC corresponding_face by auto
+  thus "\<exists>!C. C \<subseteq> corners S \<and> F = corresponding_face C"
+    by (metis corner_face_equiv corners_def corners_unique nS the_equality)
+qed
 
-lemma corresponding:
-  assumes "SC corners_of S" and "F = corresponding_face C"
-  shows "C = corresponding_corners F"
+
+
+(* garbage *)
+
+\<comment> \<open>this parallels @{thm ex1_corresponding_face}\<close>
+lemma ex1_corresponding_corners1:
+  assumes F: "F face_of S"
+  shows "\<exists>!C. C \<subseteq> corners S \<and> F = convex hull C"
+proof -
+  let ?k = "aff_dim F"
+  from nS F have "?k simplex F" using face_of_simplex_simplex by auto
+  then obtain FC where FC: "FC \<subseteq> corners S \<and> F = convex hull FC"
+    by (metis nS F corners_def corners_of_def corners_unique
+        face_of_convex_hull_affine_independent the_equality)
+  hence "\<exists>C. C \<subseteq> corners S \<and> F = convex hull C" by auto
+  hence "\<exists>!C. C \<subseteq> corners S \<and> F = convex hull C"
+  proof
   oops
 
-lemma corresponding2:
-  assumes "SC corners_of S" and "C = corresponding_corners F"
-  shows "F = corresponding_face C"
-  oops
+lemma corresponding_corners:
+  assumes F: "F face_of S"
+  shows "(C = corresponding_corners F)
+       \<equiv> (C \<subseteq> corners S \<and> F = corresponding_face C)"
+  using nS F
+  by (smt corners_def
+      Poly100.corners_exist corners_unique
+      corresponding_corners_def ex1_corresponding_corners
+      corresponding_face simplex_dim_ge the_equality)
 
 
-lemma eq_faces:
-  assumes "F0 face_of S" and "F1 face_of S"
-      and "corners F0 = corners F1"
-    shows "F0 = F1"
-  oops
+lemma corner_face_inj:
+  assumes C0: "C0 \<subseteq> corners S" and F0: "F0 = corresponding_face C0"
+      and C1: "C1 \<subseteq> corners S" and F1: "F1 = corresponding_face C1"
+  shows "C0 = C1 \<longleftrightarrow> F0 = F1"
+  using nS assms corresponding_corners corresponding_face by metis
+
 
 lemma count:
-  shows "card {f. f face_of S} = card {fc. fc \<subseteq> corners S}"
-  oops
+  shows "card {fc. fc \<subseteq> corners S} = card {f. f face_of S}"
+proof -
 
+  let ?ps = "{fc. fc \<subseteq> corners S}" \<comment> \<open>power set of corners\<close>
+  let ?fs = "{f. f face_of S}" \<comment> \<open>set of all faces\<close>
+
+  have 0: "inj_on (corresponding_face) ?ps"
+    using  corner_face_inj inj_on_def by (metis (no_types) mem_Collect_eq)
+  have 1: "\<forall>f\<in>?fs. \<exists>c\<in>?ps. f = corresponding_face c"
+    using ex1_corresponding_corners by blast
+
+  have 2: "inj_on (corresponding_corners) ?fs"
+    by (smt corresponding_corners inj_on_def mem_Collect_eq)
+  have 3: "\<forall>c\<in>?ps. \<exists>f\<in>?fs. c = corresponding_corners f"
+    by (metis corresponding_corners corresponding_face mem_Collect_eq)
+
+  from 1 2 3 have  "(corresponding_face)`?ps = ?fs"
+    using corresponding_corners by auto
+
+  thus ?thesis using 0 card_image by fastforce
+qed
 
 
 lemma card_simplex_faces:
-  "card( k d_faces S ) = (nat(n+1) choose k+1)"
-proof -
-  obtain SC where SC: "SC corners_of S" using nS obtain_corners by auto
-  have "card SC = n + 1" using SC nS card_simplex_corners by fastforce
-  have "card(k d_faces S) = card({f. f face_of S \<and> aff_dim f = k})"
-    unfolding d_faces_def by simp
-
-
-  also have "... = card({(f,c). f face_of S \<and> aff_dim f = k \<and> c = corners f })"
-    using corners_face_equiv inj_on_def sory
-
-
-  also have "... =  {. f face_of S \<and> aff_dim f = k \<and> c corners_of f \<longrightarrow> c \<subseteq> SC))  }"
-
-      using SC assms corner_face_equiv card_aff_dim_corners by blast
-
-  also have "... =  {f. (f face_of S \<and> aff_dim f = k \<and> (\<forall>fC. fC corners_of f \<longrightarrow> fC \<subseteq> SC))  }"
-    using SC assms corner_face_equiv by blast
-  also have "... =  {f. (f face_of S \<and> aff_dim f = k
-                     \<and> (\<forall>fC. fC corners_of f \<longrightarrow> fC \<subseteq> SC \<and> (card fC) = (k+1)))  }"
-    using card_aff_dim_corners by fastforce
-  also have "... =  {f. (\<forall>fC. fC corners_of f \<longrightarrow> fC \<subseteq> SC \<and> (card fC) = (k+1))  }"
-    using card_aff_dim_corners corner_face_equiv  sledgehammer oops
-
-
-  have "card( k d_faces S ) = card({FC. FC\<subseteq>SC \<and> (card FC) = k+1 })"
-  proof -
-
-
-    oops
-
+  "k d_face_count S = (nat(n+1) choose k)"
+  sorry
 
 end
 
@@ -435,7 +496,7 @@ text "The Euler characteristic is simply the alternating sum \<open>x\<^sub>0 - 
       of the number of n-dimensional faces:"
 
 definition euler_char where
-  "euler_char p = (\<Sum>k\<le>nat(aff_dim p). (-1::int)^k * (k d_face_count p))"
+  "euler_char p = (\<Sum>k\<le>nat(aff_dim p)+1. (-1::int)^k * int(k) d_face_count p) - 1"
 
 
 subsection \<open>The empty face\<close>
@@ -461,21 +522,29 @@ qed
 subsection \<open>Euler characteristic for an n-Simplex.\<close>
 
 
-lemma euler_0simplex_eq1:
+\<comment> \<open> Meh. These still don't work. I keep adjusting the formula to try and
+    compensate for the fact that I can't refer to dimension -1 because of
+    int vs nat issues. I keep fiddling with it and I'm pretty sure the
+    arithmetic and the formula are now completely wrong. Will revisit when
+    I have a clearer head.\<close>
+
+lemma euler_0simplex_eq0:
   assumes "0 simplex S"
-  shows "euler_char S = 1"
+  shows "euler_char S = 0"
 proof -
-  define N where N: "N = nat(0)"
-  hence dim: "aff_dim S = N" by (simp add: aff_dim_simplex assms)
-  have cnt: "0 d_face_count S = 1"
+  have zero: "0 d_face_count S = 1"
     by (simp add: n_simplex_only_n_face assms d_face_count_def)
 
+  define N where N: "N = nat(0)"
+
   \<comment> \<open>Now plug these results into the definition, and calculate.\<close>
-  have "euler_char S = (\<Sum>k\<le>N. (-1::int)^(nat k) * (k d_face_count S))"
-    by (simp add: N dim euler_char_def)
-  also have "... = (-1::int)^(nat 0) * (0 d_face_count S)" using N by simp
-  also have "... = (0 d_face_count S)" by simp
-  finally show "euler_char S = 1" using cnt by auto
+  hence "euler_char S = (\<Sum>k\<le>N+1. (-1::int)^k * (k d_face_count S))-1"
+    by (metis (full_types) aff_dim_simplex assms euler_char_def)
+  also have "... = (-1::int)^0 * (0 d_face_count S) + 0 - 1"
+    sledgehammer
+    by (simp add: N)
+  also have "... = (0 d_face_count S) -1" by (simp add: zero)
+  finally show "euler_char S = 0" by (simp  add: zero)
 qed
 
 
@@ -484,19 +553,23 @@ lemma euler_nsimplex_eq0:
   shows "euler_char S = 0"
 proof -
   have dim: "aff_dim S = (nat n)" using assms aff_dim_simplex by auto
-  from `n>0` obtain N where "N = nat(n)" by simp
-  hence cnt: "k d_face_count S = of_nat (N+1 choose k+1)" for k
-    using assms simplex_face_count by (metis aff_dim_simplex dim)
 
-  have "euler_char S = (\<Sum>k\<le>N. (-1::int)^k * (k d_face_count S))"
-    by (simp add: \<open>N = nat n\<close> dim euler_char_def)
-  also have "... = (\<Sum>k\<le>N. (-1::int)^k * (N+1 choose nat k))"
-    by (simp add: cnt)
-  also have "... = (\<Sum>k\<le>N. (-1::int)^k * of_nat (N+1 choose k))"
+  hence cnt: "k d_face_count S = (nat(n+1) choose k)" for k
+    using assms card_simplex_faces simplex_dim_ge by blast
+
+  define N  where N: "N = nat(n)"
+  define N1 where N1: "N1 = nat(n+1)"
+
+  have "euler_char S = (\<Sum>k\<le>N+1. (-1::int)^k * (k d_face_count S))-1"
+    by (simp add: N dim euler_char_def)
+  also have "... = (\<Sum>k\<le>N+1. (-1::int)^k * (N1 choose nat k))-1"
+    sledgehammer
+    by (auto simp: N1 cnt)
+  also have "... = (\<Sum>k\<le>N+1. (-1::int)^k * of_nat (N1 choose k))-1"
     by simp
-  finally have "euler_char S = 1"
-    sorry
-  oops
+  finally show "euler_char S = 0"
+    using N Binomial.choose_alternating_sum by fastforce
+qed
 
 \<comment> \<open>
 
