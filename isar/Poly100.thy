@@ -128,7 +128,8 @@ lemma corners_unique:
   shows "\<exists>!C. C corners_of S"
   using nS corners_exist corners_equiv by blast
 
-lemma shows "(C = corners S) \<equiv> C corners_of S"
+lemma corners_are_corners_of:
+  "(C = corners S) \<equiv> C corners_of S"
   by (smt nS corners_def corners_unique theI')
 
 
@@ -224,9 +225,10 @@ subsubsection "More simplex helpers."
 text "Here are few lemmas I thought I'd need while I was building up to the proof above."
 
 
-lemma card_simplex_corners:
+lemma card_simplex_corners0:
   assumes S: "n simplex S" and C: "C corners_of S"
   shows "int(card C) = n+1"
+\<comment> \<open>Once I defined corresponding corners, metis can figure this out on its own.\<close>
 proof -
   from S have "aff_dim S = n" by (simp add: aff_dim_simplex)
   thus "int(card C) = n + 1" using corners_of_def C by auto
@@ -257,18 +259,6 @@ lemma obtain_corners:
   obtains C where "C corners_of S"
   by (metis (no_types, hide_lams) aff_dim_affine_independent aff_dim_convex_hull aff_independent_finite assms corners_of_def simplex_def)
 
-\<^cancel>\<open>lemma card_aff_dim_corners:
-  assumes C: "C corners_of S"
-  shows "int(card C) = k + 1 \<equiv> aff_dim S = k"
-  using corners_of_def C by (simp add: corners_of_def)
-
-lemma corners_face_equiv0:
-  assumes "n simplex S" and "SC corners_of S" and "FC corners_of F"
-  shows "FC \<subseteq> SC \<equiv> F face_of S"
-  by (smt assms simplex_corners_of_face simplex_face_of_corners)
-\<close>
-
-
 
 lemma corners_face_equiv:
   assumes "SC corners_of S" and "FC corners_of F"
@@ -279,10 +269,6 @@ lemma corners_face_equiv:
 
 
 subsection \<open>mapping a set of corners to its corresponding face\<close>
-
-
-
-
 
 
 lemma simplex_self_face:
@@ -482,9 +468,78 @@ proof -
 qed
 
 
-lemma card_simplex_faces:
-  "k d_face_count S = (nat(n+1) choose k)"
+lemma card_simplex_corners:
+  "card(corresponding_corners S) = n+1"
+  by (metis nS aff_dim_simplex corresponding_corners corresponding_face
+          diff_add_cancel simplex_self_face)
+
+\<comment> \<open>!! really slow to verify\<close>
+lemma corners_are_corresponding:
+  assumes "F face_of S"
+  shows "FC corners_of F \<longleftrightarrow> FC = corresponding_corners F"
+  by (metis aff_dim_affine_independent aff_dim_convex_hull aff_independent_finite
+        affine_independent_subset assms corners_def corners_of_def corners_unique
+        corresponding_corners corresponding_face nS simplex_corners_of_face the_equality)
+
+lemma corners_of_face_are_corners:
+  assumes "F face_of S"
+  shows "FC = corners F \<longleftrightarrow> FC corners_of F"
+  by (metis assms corners_are_corresponding corners_def face_of_simplex_simplex the_equality)
+
+
+lemma face_subset_equiv:
+  "F face_of S \<longleftrightarrow> (\<exists>k. k simplex F \<and> corners F \<subseteq> corners S)"
+\<comment> \<open>TODO: why doesn't this follow automatically from @{thm corners_face_equiv}
+       or @{thm corresponding_corners}?\<close>
+\<comment> \<open>TODO: maybe I can define \<open>is_simplex\<close> and not have to worry about the dimension?
+    currently, it's required for the second "show" step of the proof\<close>
+proof
+  define sc where sc: "sc = corners S"
+  define fc where fc: "fc = corners F"
+  from nS sc have sc_of: "sc corners_of S" using corners_of_face_are_corners simplex_self_face by auto
+  show "F face_of S \<Longrightarrow> (\<exists>k. k simplex F \<and> fc \<subseteq> sc)"
+  proof -
+    assume F: "F face_of S"   define k where k: "k = aff_dim F"
+    from F fc have "fc corners_of F" using corners_of_face_are_corners by auto
+    with F sc_of have "fc \<subseteq> sc" using simplex_corners_of_face using nS by blast
+    moreover from F k have "k simplex F" using face_of_simplex_simplex by auto
+    ultimately have "k simplex F \<and> fc \<subseteq> sc" by auto
+    thus ?thesis ..
+  qed
+  show "(\<exists>k. k simplex F \<and> fc \<subseteq> sc) \<Longrightarrow> F face_of S"
+  by (metis Poly100.corners_are_corners_of corners_of_def ex1_corresponding_face fc sc simplex_dim_ge)
+qed
+
+
+
+lemma face_subset_correspondence:
+  assumes "F face_of S"
+  shows "aff_dim F = k  \<longleftrightarrow>  card(corresponding_corners F) = k+1"
   sorry
+\<^cancel>\<open>
+proof
+  show "F face_of S \<and> aff_dim F = int k \<Longrightarrow>
+    local.corresponding_corners F \<subseteq> corners S \<and> card (local.corresponding_corners F) = k + 1"
+  using corners_face_equiv corners_are_corresponding card_simplex_corners
+  by (smt corners_of_def corresponding_corners ex1_corresponding_face of_nat_1 of_nat_add of_nat_eq_iff)
+\<close>
+
+lemma card_simplex_faces:
+  assumes "k \<ge> -1"
+  shows "k d_face_count S = (nat(n+1) choose nat(k+1))"
+  sledgehammer
+  sorry
+\<^cancel>\<open>
+proof -
+  have 0:"k d_face_count S = card {f. f face_of S \<and> aff_dim f = k}"
+    unfolding d_face_count_def d_faces_def ..
+  have 1:"\<And>f. f face_of S \<Longrightarrow> (aff_dim f = k \<Longrightarrow> card(corresponding_corners f) = k+1)"
+    by (smt aff_dim_simplex corresponding_corners corresponding_face)
+  from 0 1 have "k d_face_count S = card {f. f face_of S \<and> card(corresponding_corners f) = k+1}"
+    by (smt Collect_cong Collect_mem_eq Poly100.corners_are_corresponding Poly100.corners_unique Poly100.ex1_corresponding_corners Polytope.simplex \<open>- 1 \<le> n\<close> add_right_cancel aff_dim_affine_independent aff_dim_convex_hull aff_dim_simplex affine_independent_subset antisym_conv card_empty card_simplex_corners corners_are_corresponding corners_face_equiv corners_of_def corners_unique corresponding_corners corresponding_face ex1_corresponding_corners ex1_corresponding_face face_of_face face_of_imp_subset face_of_refl_eq face_of_simplex_simplex face_of_subset nS order_refl simplex_convex_hull simplex_def simplex_dim_ge simplex_self_face someI_ex subset_antisym)
+  oops
+\<close>
+
 
 end
 
@@ -492,11 +547,25 @@ end
 section \<open>The Euler characteristic.\<close>
 (* ------------------------------------------------------------------------ *)
 
-text "The Euler characteristic is simply the alternating sum \<open>x\<^sub>0 - x\<^sub>1 + x\<^sub>2 - x\<^sub>3 \<dots>\<close>
-      of the number of n-dimensional faces:"
+text "The Euler characteristic is the alternating sum \<open>-x\<^sub>-\<^sub>1 + x\<^sub>0 - x\<^sub>1 + x\<^sub>2 \<dots> \<plusminus> x\<^sub>n\<close>
+      of the number of n-dimensional faces."
 
 definition euler_char where
-  "euler_char p = (\<Sum>k\<le>nat(aff_dim p)+1. (-1::int)^k * int(k) d_face_count p) - 1"
+  "euler_char p = (\<Sum>k\<le>nat(aff_dim p). (-1::int)^k * int(k) d_face_count p)"
+
+text \<open>For example, in a triangle, we have:
+
+     n  |\<open>x\<^sub>n\<close>|
+    ----+----+------------
+     -1 | 1  | empty face
+      0 | 3  | vertices
+      1 | 3  | edges
+      2 | 1  | surface
+
+  The alternating sum (and therefore the Euler characteristic) is:  -(1) + 3 - 3 + 1 = 0\<close>
+
+text \<open>\<close>
+
 
 
 subsection \<open>The empty face\<close>
