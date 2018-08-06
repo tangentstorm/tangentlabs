@@ -381,13 +381,12 @@ lemma unique_aff_dim_convex_hull:
 
 lemma simplex_face_equiv:
   assumes F: "F face_of S"
-      and C0: "C0 \<subseteq> corners S"
-      and C1: "C1 \<subseteq> corners S"
+      and "C0 \<subseteq> corners S"
+      and "C1 \<subseteq> corners S"
       and "convex hull C0 = convex hull C1"
     shows "C0 = C1"
-  using nS F unique_aff_dim_convex_hull face_of_simplex_simplex
-  oops
-
+  using nS assms unique_aff_dim_convex_hull face_of_simplex_simplex
+  by (metis aff_dim_convex_hull affine_independent_subset corners_are_corners_of corners_of_def)
 
 
 \<comment> \<open>this parallels @{thm ex1_corresponding_face}\<close>
@@ -407,25 +406,6 @@ proof -
     by (metis corner_face_equiv corners_def corners_unique nS the_equality)
 qed
 
-
-
-(* garbage *)
-
-\<comment> \<open>this parallels @{thm ex1_corresponding_face}\<close>
-lemma ex1_corresponding_corners1:
-  assumes F: "F face_of S"
-  shows "\<exists>!C. C \<subseteq> corners S \<and> F = convex hull C"
-proof -
-  let ?k = "aff_dim F"
-  from nS F have "?k simplex F" using face_of_simplex_simplex by auto
-  then obtain FC where FC: "FC \<subseteq> corners S \<and> F = convex hull FC"
-    by (metis nS F corners_def corners_of_def corners_unique
-        face_of_convex_hull_affine_independent the_equality)
-  hence "\<exists>C. C \<subseteq> corners S \<and> F = convex hull C" by auto
-  hence "\<exists>!C. C \<subseteq> corners S \<and> F = convex hull C"
-  proof
-  oops
-
 lemma corresponding_corners:
   assumes F: "F face_of S"
   shows "(C = corresponding_corners F)
@@ -444,7 +424,7 @@ lemma corner_face_inj:
   using nS assms corresponding_corners corresponding_face by metis
 
 
-lemma count:
+lemma card_corners_and_faces:
   shows "card {fc. fc \<subseteq> corners S} = card {f. f face_of S}"
 proof -
 
@@ -511,34 +491,82 @@ proof
 qed
 
 
-
-lemma face_subset_correspondence:
+lemma card_corresponding_corners:
   assumes "F face_of S"
-  shows "aff_dim F = k  \<longleftrightarrow>  card(corresponding_corners F) = k+1"
-  sorry
-\<^cancel>\<open>
-proof
-  show "F face_of S \<and> aff_dim F = int k \<Longrightarrow>
-    local.corresponding_corners F \<subseteq> corners S \<and> card (local.corresponding_corners F) = k + 1"
-  using corners_face_equiv corners_are_corresponding card_simplex_corners
-  by (smt corners_of_def corresponding_corners ex1_corresponding_face of_nat_1 of_nat_add of_nat_eq_iff)
-\<close>
+  shows "card(corresponding_corners F) = (aff_dim F)+1"
+  using assms face_of_simplex_simplex card_simplex_corners 
+    by (metis (no_types, hide_lams)  add.commute assms corners_are_corresponding corners_of_def )
+
+lemma finite_corners: "finite (corners S)"
+  using corners_are_corners_of corners_of_def by auto
+
+lemma subset_choose:
+  assumes "finite X"
+  shows "card {Y. Y \<subseteq> X \<and> card(Y) = k} = ((card X) choose k)"
+  using assms Binomial.n_subsets by auto
+
+
+lemma card_faces_and_subsets:
+  "{(f,c). f face_of S  \<and> c = corresponding_corners f} =
+   {(f,c). c \<subseteq> corners S \<and> f = corresponding_face c }"
+  by (metis corresponding_corners corresponding_face)
+
+lemma faces_and_subsets_dim:
+  assumes "k \<ge> -1"
+  shows "(f face_of S \<and> c = corresponding_corners f \<and> aff_dim f = k)
+    \<longleftrightarrow>  (c \<subseteq> corners S \<and> f = corresponding_face c \<and> card c = nat(k+1))"
+  by (smt aff_dim_simplex assms corresponding_corners corresponding_face int_nat_eq of_nat_eq_iff)
+
+lemma card_faces_and_subsets_dim:
+  assumes "k \<ge> -1"
+  shows "{(f,c). f face_of S \<and> c = corresponding_corners f \<and> aff_dim f = k}
+       = {(f,c). c \<subseteq> corners S \<and> f = corresponding_face c \<and> card c = nat(k+1)}"
+  using assms card_faces_and_subsets faces_and_subsets_dim by auto
+
+
+lemma card_pair_THE:
+  fixes P and Q
+  assumes "\<forall>x. P(x) \<Longrightarrow> \<exists>!y. y=Q(x)"
+  shows "card {x. P(x)} = card {(x,y). P(x) \<and> y=(THE y. y=Q(x))}"
+  sledgehammer
 
 lemma card_simplex_faces:
   assumes "k \<ge> -1"
   shows "k d_face_count S = (nat(n+1) choose nat(k+1))"
-  sledgehammer
-  sorry
-\<^cancel>\<open>
 proof -
-  have 0:"k d_face_count S = card {f. f face_of S \<and> aff_dim f = k}"
-    unfolding d_face_count_def d_faces_def ..
-  have 1:"\<And>f. f face_of S \<Longrightarrow> (aff_dim f = k \<Longrightarrow> card(corresponding_corners f) = k+1)"
-    by (smt aff_dim_simplex corresponding_corners corresponding_face)
-  from 0 1 have "k d_face_count S = card {f. f face_of S \<and> card(corresponding_corners f) = k+1}"
-    by (smt Collect_cong Collect_mem_eq Poly100.corners_are_corresponding Poly100.corners_unique Poly100.ex1_corresponding_corners Polytope.simplex \<open>- 1 \<le> n\<close> add_right_cancel aff_dim_affine_independent aff_dim_convex_hull aff_dim_simplex affine_independent_subset antisym_conv card_empty card_simplex_corners corners_are_corresponding corners_face_equiv corners_of_def corners_unique corresponding_corners corresponding_face ex1_corresponding_corners ex1_corresponding_face face_of_face face_of_imp_subset face_of_refl_eq face_of_simplex_simplex face_of_subset nS order_refl simplex_convex_hull simplex_def simplex_dim_ge simplex_self_face someI_ex subset_antisym)
-  oops
-\<close>
+  define nc where nc: "nc = nat(k+1)"
+  have k1nc: "k+1 = nc" using assms nc by auto
+  have "k d_face_count S = card {c. c \<subseteq> corners S \<and> card(c) = nc}"
+  proof -
+    have "k d_face_count S = card {f. f face_of S \<and> aff_dim f = k}"
+      unfolding d_face_count_def d_faces_def ..
+    also have "... = card {(f,c). f face_of S \<and> c = corresponding_corners f \<and> aff_dim f = k}"
+      sorry
+
+    also have "... = card {f. f face_of S \<and> card(corresponding_corners f) = k+1}"
+      by (smt Collect_cong aff_dim_def card_corresponding_corners)
+    also have "... = card {f. f face_of S \<and> card(corresponding_corners f) = nc}"
+      using k1nc by simp
+
+
+    also have "... = card {f. f face_of S \<and> card(THE C. C \<subseteq> corners S \<and> f = corresponding_face C) = nc}"
+      by (metis corresponding_corners_def)
+
+    also have "... = card {(f,c). f face_of S 
+                          \<and> c = (THE C. C \<subseteq> corners S \<and> f = corresponding_face C)
+                          \<and> card(c) = nc}"
+      sledgehammer
+
+    \<comment> \<open>If I can get here, I'm good:\<close>
+    also have "... = card {c. c \<subseteq> corners S \<and> card(c) = nc}" sorry
+    finally show ?thesis .
+  qed
+  also have  "... = (card (corners S) choose nc)"
+    using nc finite_corners Binomial.n_subsets by simp
+  finally have "k d_face_count S = (nat(n+1) choose nc)"
+    by (metis card_simplex_corners0 corners_are_corners_of nS nat_int)
+  thus ?thesis using nc by simp
+qed
 
 
 end
