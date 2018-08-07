@@ -212,14 +212,6 @@ lemma corresponding_face:
   by (smt the_equality)
 
 
-proposition simplex_face_count:
-  shows "k d_face_count S = of_nat (nat (n+1) choose nat (k+1))"
-  oops
-
-\<comment> \<open>Lesson learned: do not postpone proofs with "sorry" and then work on things
-   that depend on the statement. my obvious statement was obviously *wrong* \<close>
-
-
 subsubsection "More simplex helpers."
 
 text "Here are few lemmas I thought I'd need while I was building up to the proof above."
