@@ -590,7 +590,7 @@ qed
 end
 
 (* ------------------------------------------------------------------------ *)
-section \<open>The Euler characteristic.\<close>
+section \<open>The Euler characteristic for Simplices.\<close>
 (* ------------------------------------------------------------------------ *)
 
 text "The Euler characteristic is the alternating sum \<open>-x\<^sub>-\<^sub>1 + x\<^sub>0 - x\<^sub>1 + x\<^sub>2 \<dots> \<plusminus> x\<^sub>n\<close>
@@ -686,8 +686,45 @@ proof -
 qed
 
 
+section \<open>Triangulations\<close>
 
-subsection \<open>Now Euler-Poincare for a a general full-dimensional polytope.\<close>
+text \<open>Now we'll define the concept of a cutting a polyhedron (really any ordered set)
+     into two parts:\<close>
+
+definition cut where
+  "cut H P \<equiv> ({x\<in>P. x\<le>H}, {x\<in>P. x\<ge>H})"
+
+
+text \<open>In particular, we want to cut our space (and any unlucky polyhedra that happen to be
+     in it) by means of a hyperplane. A hyperplane is just the n-dimensional equivalent
+     of a plane that cuts a 3d space into two halves. (Or a line that cuts a plane, etc.)
+
+    TODO: describe inner product, and what this set notation means. \<close>
+
+definition hyperplane :: "'a::euclidean_space set \<Rightarrow> bool" where
+  "hyperplane H \<equiv> \<exists>a b. H = {x. a \<bullet> x = b}"
+
+
+text \<open>Note that @{theory "HOL-Analysis.Polytope"} already provides several lemmas for
+talking about this idea:
+
+  @{thm cell_subdivision_lemma}
+  @{thm cell_complex_subdivision_exists}
+  @{thm simplicial_complex_def}
+  @{thm triangulation_def}
+
+We'll make use of this machinery below, but in particular, we want to set things
+up so we can reason inductively about the process, showing that at any step along
+the way, some particular property holds.
+
+(We will use this induction-by-triangulation tactic twice in this paper:
+first to prove that the euler characteristic is 0 for all polyhedra, and then
+later to derive Pick's theorem for the area of a polygon on \<open>\<int>\<^sup>2\<close>.\<close>
+
+
+
+
+section \<open>Euler Characteristic for a a general full-dimensional polytope.\<close>
 
 \<comment> \<open>
 
@@ -699,9 +736,11 @@ Tverberg or Euler or possibly just Polytope.thy, we will show that:
 
   b) any polytope can be cut into simplices
 
+\<close>
+
+text \<open>Now we want to show that at each step along the way, the
 Putting these two things together with our proof of the characteristic
 for simplices, we can then show that it holds for any polytope.\<close>
-
 
 theorem euler_poincare:
   assumes "polytope p" and "aff_dim p = d"
