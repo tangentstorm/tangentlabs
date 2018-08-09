@@ -20,7 +20,9 @@ definition d_face_count ("(_ d'_face'_count _)" [85,85] 80) where
 
 definition verts where "verts p = 0 d_faces p"
 definition edges where "edges p = 1 d_faces p"
-definition faces where "faces p = 2 d_faces p"
+definition surfs where "surfs p = 2 d_faces p"
+
+definition facets where "facets p = (aff_dim p -1) d_faces p"
 
 (* ------------------------------------------------------------------------ *)
 section \<open>Simplex Theory.\<close>
@@ -686,24 +688,12 @@ proof -
 qed
 
 
-section \<open>Triangulations\<close>
+section \<open>Simplication\<close>
 
-text \<open>Now we'll define the concept of a cutting a polyhedron (really any ordered set)
-     into two parts:\<close>
+text \<open>v. To make a system more complex so that the use of the system is easier or simpler.\<close>
 
-definition cut where
-  "cut H P \<equiv> ({x\<in>P. x\<le>H}, {x\<in>P. x\<ge>H})"
-
-
-text \<open>In particular, we want to cut our space (and any unlucky polyhedra that happen to be
-     in it) by means of a hyperplane. A hyperplane is just the n-dimensional equivalent
-     of a plane that cuts a 3d space into two halves. (Or a line that cuts a plane, etc.)
-
-    TODO: describe inner product, and what this set notation means. \<close>
-
-definition hyperplane :: "'a::euclidean_space set \<Rightarrow> bool" where
-  "hyperplane H \<equiv> \<exists>a b. H = {x. a \<bullet> x = b}"
-
+text \<open>In this case, I'm also using the word to mean the process of forming a simplical complex
+or triangulation.\<close>
 
 text \<open>Note that @{theory "HOL-Analysis.Polytope"} already provides several lemmas for
 talking about this idea:
@@ -722,7 +712,79 @@ first to prove that the euler characteristic is 0 for all polyhedra, and then
 later to derive Pick's theorem for the area of a polygon on \<open>\<int>\<^sup>2\<close>.\<close>
 
 
+text \<open>We define the concept of a cutting a polyhedron (really any ordered set) into two parts:\<close>
 
+text \<open>In particular, we want to cut our space (and any unlucky polyhedra that happen to be
+     in it) by means of a hyperplane. A hyperplane is just the n-dimensional equivalent
+     of a plane that cuts a 3d space into two halves. (Or a line that cuts a plane, etc.)
+
+    TODO: describe inner product, and what this set notation means. \<close>
+
+subsection "definitions"
+
+definition is_simplex where
+  "is_simplex p \<equiv> (\<exists>n. n simplex p)"
+
+lemma is_simplex [simp]:
+  "is_simplex p \<longrightarrow> (\<exists>n. n simplex p)"
+  using is_simplex_def by auto
+
+default_sort euclidean_space
+
+typedef (overloaded) 'a Polytope
+  = "{p::'a set. polytope p}"
+  using polytope_empty by auto
+
+typedef (overloaded) 'a Simplex
+  = "{s::'a set. polytope s \<and> is_simplex s}"
+  using is_simplex_def polytope_sing by fastforce
+
+typedef (overloaded) 'a hyperplane
+  = "{h::'a set. \<exists>a b. h = {x. a \<bullet>x = b}}"
+  by blast
+
+definition cut_of ("_ cut'_of _" [70,70] 75) where
+  "H cut_of P \<equiv> ({x\<in>P. x\<le>H}, {x\<in>P. x\<ge>H})"
+
+typedef (overloaded) 'a cut_fn
+  = "{fn::('a Polytope \<Rightarrow> 'a hyperplane). True}"
+  by blast
+
+typedef (overloaded) 'a simplication
+  \<comment> \<open>A list of the actual simplices obtained, and the cuts used to make them.
+     TODO: add a predicate so that the cuts have to all be adjacent to the simplex obtained. \<close>
+  = "{hsl::('a hyperplane list \<times> 'a Simplex) list. True}"
+  by blast
+
+\<^cancel>\<open>
+fun simplication ("_ simplication _ _" [80,82,80] 85) where
+  0 : "Q simplication [] = Q {} " |
+\<close>
+
+subsection \<open>Tverberg's Method\<close>
+
+text \<open>Adapted from \<^emph>\<open>How to cut a convex polytope into simplices\<close> by Helge Tverberg\<close>
+
+lemma tv1:
+  assumes convex:"convex K" and poly:"polytope K" and d:"aff_dim K = d"
+  fixes F assumes "F \<in> faces K"
+  shows "is_simplex K \<or> (\<exists>v. v \<in> verts K
+          \<and> (\<exists>F0. F0 \<in> faces K \<and> \<not>(v \<subseteq> F0)
+          \<and> (\<exists>F1. F1 \<in> faces K \<and> \<not>(v \<subseteq> F1) \<and> F0 \<noteq> F1)))"
+proof (cases "d<2")
+  case True
+  hence "is_simplex K" using is_simplex_def d poly polytope_lowdim_imp_simplex by fastforce
+  thus ?thesis ..
+next
+  case False hence "d \<ge> 2" by simp thus ?thesis
+  proof (cases "is_simplex F")
+    case True
+    thus ?thesis try0 sorry
+  next
+    case False
+    thus ?thesis try0 sorry
+  qed
+qed
 
 section \<open>Euler Characteristic for a a general full-dimensional polytope.\<close>
 
@@ -739,6 +801,7 @@ Tverberg or Euler or possibly just Polytope.thy, we will show that:
 \<close>
 
 text \<open>Now we want to show that at each step along the way, the
+euler characteristic remains unchange.
 Putting these two things together with our proof of the characteristic
 for simplices, we can then show that it holds for any polytope.\<close>
 
@@ -763,7 +826,7 @@ locale convex_polyhedron =
   fixes p assumes "polytope p" and "aff_dim p = 3"
 begin
 
-definition F where "F = card(faces p)"
+definition F where "F = card(surfs p)"
 definition V where "V = card(verts p)"
 definition E where "E = card(edges p)"
 
