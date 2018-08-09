@@ -756,10 +756,13 @@ typedef (overloaded) 'a simplication
   = "{hsl::('a hyperplane list \<times> 'a Simplex) list. True}"
   by blast
 
-\<^cancel>\<open>
-fun simplication ("_ simplication _ _" [80,82,80] 85) where
-  0 : "Q simplication [] = Q {} " |
-\<close>
+function simplication ("_ simplication _ _" [80,82,80] 85) where
+  0 : "Q simplication [] {} = (Q {}) "
+  sorry
+
+definition simplicates ("_ simplicates _" [80,80] 85) where
+  "X simplicates Y = False" \<comment> \<open>TODO: X is a simplication of Y\<close>
+
 
 subsection \<open>Tverberg's Method\<close>
 
@@ -768,9 +771,9 @@ text \<open>Adapted from \<^emph>\<open>How to cut a convex polytope into simpli
 lemma tv1:
   assumes convex:"convex K" and poly:"polytope K" and d:"aff_dim K = d"
   fixes F assumes "F \<in> faces K"
-  shows "is_simplex K \<or> (\<exists>v. v \<in> verts K
-          \<and> (\<exists>F0. F0 \<in> faces K \<and> \<not>(v \<subseteq> F0)
-          \<and> (\<exists>F1. F1 \<in> faces K \<and> \<not>(v \<subseteq> F1) \<and> F0 \<noteq> F1)))"
+  shows "is_simplex K \<or>
+         (\<exists>v F\<^sub>0 F\<^sub>1. v \<in> verts K \<and> F\<^sub>0 \<in> faces K \<and> F\<^sub>1 \<in> faces K
+                  \<and> F\<^sub>0 \<noteq> F\<^sub>1 \<and> \<not>(v \<subseteq> F\<^sub>0 \<or> v \<subseteq> F\<^sub>1))"
 proof (cases "d<2")
   case True
   hence "is_simplex K" using is_simplex_def d poly polytope_lowdim_imp_simplex by fastforce
@@ -785,6 +788,40 @@ next
     thus ?thesis try0 sorry
   qed
 qed
+
+
+(* Induction from a lower bound other than zero, inspired by Manuel Eberl
+https://stackoverflow.com/questions/41384146/proof-by-induction-with-three-base-cases-isabelle *)
+
+lemma nat_induct_lower_bound [case_names lte step]:
+  assumes lte:  "\<And>n. n \<le> k \<Longrightarrow> P n"  and step: "\<And>n. n \<ge> k \<Longrightarrow> P n \<Longrightarrow> P (Suc n)"
+  shows "P n"
+proof (induction n rule: less_induct)
+  case (less x)
+  have stmt: "\<lbrakk>k \<le> x - 1; x - 1 < x\<rbrakk> \<Longrightarrow> P (Suc (x - 1))" using step[OF _ less.IH[of "x-1"]] .
+  then show ?case proof (cases "n\<le>k")
+    case True then show ?thesis using stmt lte by force
+  next
+    case False then show ?thesis using stmt lte step by force
+  qed
+qed
+
+
+theorem tverberg_dissection:
+  assumes "convex K" "polytope K" "f = card (facets K)"
+  obtains T where "T simplicates K"
+    \<comment> \<open>Tverberg's main theorem will go here.\<close>
+proof (induction f rule: nat_induct_lower_bound[of "3"])
+  case (lte n)
+  hence "is_simplex K"
+    using facets_def is_simplex_def assms polytope_lowdim_imp_simplex
+    sorry
+  then show ?case sorry
+next
+  case (step n)
+  then show ?case sorry
+qed
+
 
 section \<open>Euler Characteristic for a a general full-dimensional polytope.\<close>
 
