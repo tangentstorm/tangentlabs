@@ -690,7 +690,7 @@ qed
 
 section \<open>Simplication\<close>
 
-text \<open>v. To make a system more complex so that the use of the system is easier or simpler.\<close>
+text \<open>is_simplicate. v. To make a system more complex so that the use of the system is easier or simpler.\<close>
 
 text \<open>In this case, I'm also using the word to mean the process of forming a simplical complex
 or triangulation.\<close>
@@ -722,14 +722,14 @@ text \<open>In particular, we want to cut our space (and any unlucky polyhedra t
 
 subsection "definitions"
 
+default_sort euclidean_space
+
 definition is_simplex where
   "is_simplex p \<equiv> (\<exists>n. n simplex p)"
 
 lemma is_simplex [simp]:
   "is_simplex p \<longrightarrow> (\<exists>n. n simplex p)"
   using is_simplex_def by auto
-
-default_sort euclidean_space
 
 typedef (overloaded) 'a Polytope
   = "{p::'a set. polytope p}"
@@ -738,6 +738,14 @@ typedef (overloaded) 'a Polytope
 typedef (overloaded) 'a Simplex
   = "{s::'a set. polytope s \<and> is_simplex s}"
   using is_simplex_def polytope_sing by fastforce
+
+(* https://stackoverflow.com/questions/26860637/how-type-casting-is-possible-in-isabelle *)
+consts cast_simplex_polytope :: "'a Simplex \<Rightarrow> 'a Polytope"
+consts cast_polytope_set :: "'a Polytope \<Rightarrow> 'a set"
+declare
+  [[coercion_enabled]]
+  [[coercion cast_simplex_polytope]]
+  [[coercion cast_polytope_set]]
 
 typedef (overloaded) 'a hyperplane
   = "{h::'a set. \<exists>a b. h = {x. a \<bullet>x = b}}"
@@ -750,15 +758,28 @@ typedef (overloaded) 'a cut_fn
   = "{fn::('a Polytope \<Rightarrow> 'a hyperplane). True}"
   by blast
 
-typedef (overloaded) 'a simplication
-  \<comment> \<open>A list of the actual simplices obtained, and the cuts used to make them.
-     TODO: add a predicate so that the cuts have to all be adjacent to the simplex obtained. \<close>
-  = "{hsl::('a hyperplane list \<times> 'a Simplex) list. True}"
-  by blast
+declare
+  [[typedef_overloaded]]
 
-function simplication ("_ simplication _ _" [80,82,80] 85) where
-  0 : "Q simplication [] {} = (Q {}) "
-  sorry
+datatype ('a,'c) Plex
+  = Cell "'a Polytope"
+  | Simp "'a Simplex"
+  | Join 'c "('a,'c) Plex" "('a,'c) Plex"
+
+fun plex :: "('a, 'c) Plex \<Rightarrow> 'a set" where
+  "plex (Simp x) = x" |
+  "plex (Cell x) = x" |
+  "plex (Join _ a b) = plex a \<union> plex b"
+
+fun is_simplicate :: "('a,'c) Plex \<Rightarrow> bool" where
+  "is_simplicate (Simp x) = True" |
+  "is_simplicate (Cell x) = False" |
+  "is_simplicate (Join _ a b) \<longleftrightarrow> (is_simplicate a) \<and> (is_simplicate b)
+                \<and> (\<exists>!f. f facet_of plex a \<and> f facet_of plex b)"
+
+typedef (overloaded) ('a,'c) simplication
+  = "{cp::('a,'c) Plex. is_simplicate cp}"
+  by (meson mem_Collect_eq is_simplicate.simps(1))
 
 definition simplicates ("_ simplicates _" [80,80] 85) where
   "X simplicates Y = False" \<comment> \<open>TODO: X is a simplication of Y\<close>
