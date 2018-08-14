@@ -762,18 +762,15 @@ declare
   [[typedef_overloaded]]
 
 datatype ('a,'c) Plex
-  = Cell "'a Polytope"
-  | Simp "'a Simplex"
+  = Simp "'a Simplex"
   | Join 'c "('a,'c) Plex" "('a,'c) Plex"
 
 fun plex :: "('a, 'c) Plex \<Rightarrow> 'a set" where
   "plex (Simp x) = x" |
-  "plex (Cell x) = x" |
   "plex (Join _ a b) = plex a \<union> plex b"
 
 fun is_simplicate :: "('a,'c) Plex \<Rightarrow> bool" where
   "is_simplicate (Simp x) = True" |
-  "is_simplicate (Cell x) = False" |
   "is_simplicate (Join _ a b) \<longleftrightarrow> (is_simplicate a) \<and> (is_simplicate b)
                 \<and> (\<exists>!f. f facet_of plex a \<and> f facet_of plex b)"
 
@@ -781,9 +778,31 @@ typedef (overloaded) ('a,'c) simplication
   = "{cp::('a,'c) Plex. is_simplicate cp}"
   by (meson mem_Collect_eq is_simplicate.simps(1))
 
-definition simplicates ("_ simplicates _" [80,80] 85) where
-  "X simplicates Y = False" \<comment> \<open>TODO: X is a simplication of Y\<close>
+definition simplicates :: "('a,'c) Plex \<Rightarrow> 'a Polytope \<Rightarrow> bool" ("_ simplicates _" [80,80] 85) where
+  "X simplicates Y \<longleftrightarrow> (is_simplicate X) \<and> (plex X = Y)"
 
+lemma induct_plex [case_names simp join]:
+  assumes "\<And>s. P(plex(Simp s))"
+      and "\<And>a b f. P(plex a) \<and> P(plex b) \<Longrightarrow> P(plex(Join f a b))"
+    shows "c simplicates k \<Longrightarrow> P(k)"
+  sorry
+
+
+\<comment> \<open>The following is nonsense and doesn't work. I'm just trying to figure out the general structure
+   of what I want to be able to say.\<close>
+consts neat :: "'a set \<Rightarrow> bool"
+lemma test_induct_plex:
+  assumes "d simplex s \<Longrightarrow> neat s"
+     and "c simplicates k"
+  shows "neat k"
+  (* assume "polytope k"  \<comment> \<open>how to get the corresponding Polytope?\<close> *)
+proof (induction rule:induct_plex)
+    case (simp s) then show ?case sorry
+  next
+    case (join a b f)
+    then show ?case sorry
+  qed
+qed
 
 subsection \<open>Tverberg's Method\<close>
 
