@@ -990,13 +990,13 @@ lemma hyperplane_facet_of_halfspace_le:
    "a \<noteq> 0 \<Longrightarrow> {x. a \<bullet> x = b} facet_of {x. a \<bullet> x \<le> b}"
 unfolding facet_of_def hyperplane_eq_empty
 by (auto simp: hyperplane_face_of_halfspace_ge hyperplane_face_of_halfspace_le
-           DIM_positive Suc_leI of_nat_diff aff_dim_halfspace_le)
+           Suc_leI of_nat_diff aff_dim_halfspace_le)
 
 lemma hyperplane_facet_of_halfspace_ge:
     "a \<noteq> 0 \<Longrightarrow> {x. a \<bullet> x = b} facet_of {x. a \<bullet> x \<ge> b}"
 unfolding facet_of_def hyperplane_eq_empty
 by (auto simp: hyperplane_face_of_halfspace_le hyperplane_face_of_halfspace_ge
-           DIM_positive Suc_leI of_nat_diff aff_dim_halfspace_ge)
+            Suc_leI of_nat_diff aff_dim_halfspace_ge)
 
 lemma facet_of_halfspace_le:
     "F facet_of {x. a \<bullet> x \<le> b} \<longleftrightarrow> a \<noteq> 0 \<and> F = {x. a \<bullet> x = b}"
