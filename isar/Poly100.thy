@@ -5,7 +5,7 @@
    #92 Pick's theorem
 *)
 theory Poly100
-  imports Main "HOL.Binomial" "HOL-Analysis.Polytope"
+  imports Main "HOL.Binomial" "Polytope"
 begin
 
 (* ------------------------------------------------------------------------ *)
@@ -781,14 +781,38 @@ typedef (overloaded) ('a,'c) simplication
 definition simplicates :: "('a,'c) Plex \<Rightarrow> 'a Polytope \<Rightarrow> bool" ("_ simplicates _" [80,80] 85) where
   "X simplicates Y \<longleftrightarrow> (is_simplicate X) \<and> (plex X = Y)"
 
+locale cplex =
+  fixes cut:: "'a set \<Rightarrow> 'cut"
+    and app:: "'cut \<Rightarrow> 'a set \<Rightarrow> ('a set \<times> 'a set)"
+    and glu:: "'a set \<Rightarrow> 'a set \<Rightarrow> 'a set" ("_ \<triangle> _" [60,60] 65)
+ assumes inv: "(\<exists>c. app c x = (a,b)) \<longleftrightarrow> (a \<triangle> b = x)"
+begin
+
+  lemma induct0: 
+    assumes 0: "d simplex s \<Longrightarrow> P(s)"
+        and 1: "P(a) \<and> P(b) \<Longrightarrow> P(a \<triangle> b)"
+        and k: "polytope k" "aff_dim k = d"
+      shows "P(k)"
+  sorry
+  
+  lemma induct1:
+    assumes 0: "d simplex s \<Longrightarrow> P(s)"
+        and 1: "P(a) \<Longrightarrow> P(a \<triangle> b)"
+        and k: "polytope k" "aff_dim k = d"
+    shows "P(cplex_of cut k x)"
+  sorry
+
+end
+  
+
 lemma induct_plex [case_names simp join]:
   assumes "\<And>s. P(plex(Simp s))"
       and "\<And>a b f. P(plex a) \<and> P(plex b) \<Longrightarrow> P(plex(Join f a b))"
     shows "c simplicates k \<Longrightarrow> P(k)"
-  sorry
+sorry
 
 
-\<comment> \<open>The following is nonsense and doesn't work. I'm just trying to figure out the general structure
+text \<open>The following is nonsense and doesn't work. I'm just trying to figure out the general structure
    of what I want to be able to say.\<close>
 consts neat :: "'a set \<Rightarrow> bool"
 lemma test_induct_plex:
