@@ -5,7 +5,7 @@
    #92 Pick's theorem
 *)
 theory Poly100
-  imports Main "HOL.Binomial" "Polytope"
+  imports Main "HOL.Binomial" "HOL-Analysis.Polytope"
 begin
 
 (* ------------------------------------------------------------------------ *)
@@ -289,7 +289,7 @@ subsection "---- proven simplex stuff but probably garbage ------"
 
 lemma ex1_face_corners:
   assumes "F face_of S"
-  shows "\<exists>!c. c = corresponding_corners F"
+  shows "\<exists>!c. c = corners F"
   by simp
 
 
@@ -400,16 +400,24 @@ proof -
     by (metis corner_face_equiv corners_def corners_unique nS the_equality)
 qed
 
+
+lemma face_corners_are_simplex_corners:
+  assumes F: "F face_of S"
+  shows "corners F \<subseteq> corners S" unfolding corners_def
+  by (meson nS F Poly100.corners_are_corners_of 
+            face_of_simplex_simplex simplex_corners_of_face simplex_dim_ge)
+
 lemma corresponding_corners:
   assumes F: "F face_of S"
   shows "(C = corresponding_corners F)
-       \<equiv> (C \<subseteq> corners S \<and> F = corresponding_face C)"
-  using nS F
+     \<longleftrightarrow> (C \<subseteq> corners S \<and> F = corresponding_face C)"
+proof -
+  from F show ?thesis 
   by (smt corners_def
       Poly100.corners_exist corners_unique
       corresponding_corners_def ex1_corresponding_corners
       corresponding_face simplex_dim_ge the_equality)
-
+qed
 
 lemma corner_face_inj:
   assumes C0: "C0 \<subseteq> corners S" and F0: "F0 = corresponding_face C0"
@@ -500,7 +508,6 @@ proof
   show "(\<exists>k. k simplex F \<and> fc \<subseteq> sc) \<Longrightarrow> F face_of S"
   by (metis Poly100.corners_are_corners_of corners_of_def ex1_corresponding_face fc sc simplex_dim_ge)
 qed
-
 
 lemma card_corresponding_corners:
   assumes "F face_of S"
@@ -789,12 +796,24 @@ locale cplex =
 begin
 
   lemma induct0: 
-    assumes 0: "d simplex s \<Longrightarrow> P(s)"
+    assumes k: "polytope k" "aff_dim k = d"
+        and 0: "\<And>s. d simplex s \<Longrightarrow> P(s)"
         and 1: "P(a) \<and> P(b) \<Longrightarrow> P(a \<triangle> b)"
-        and k: "polytope k" "aff_dim k = d"
       shows "P(k)"
-  sorry
-  
+  proof (cases "is_simplex k")
+    case True 
+      then have "is_simplex k" .
+      hence "d simplex k" using is_simplex[of k] k aff_dim_simplex by blast
+      with 0[of k] show ?thesis by simp
+  next
+    case False
+      fix a b assume "(a,b) = app (cut k) k"
+    \<comment> \<open>Here is where I need induction to magically kick in...
+       Somehow I have to be able to show that for any polytope, 
+       I can eventually keep cutting it and obtain nothing 
+      but simplices.\<close>
+  oops
+
   lemma induct1:
     assumes 0: "d simplex s \<Longrightarrow> P(s)"
         and 1: "P(a) \<Longrightarrow> P(a \<triangle> b)"
@@ -803,7 +822,7 @@ begin
   sorry
 
 end
-  
+
 
 lemma induct_plex [case_names simp join]:
   assumes "\<And>s. P(plex(Simp s))"
@@ -819,9 +838,9 @@ lemma test_induct_plex:
   assumes "d simplex s \<Longrightarrow> neat s"
      and "c simplicates k"
   shows "neat k"
-  (* assume "polytope k"  \<comment> \<open>how to get the corresponding Polytope?\<close> *)
-proof (induction rule:induct_plex)
-    case (simp s) then show ?case sorry
+proof (induction k rule:induct_plex)
+    case (simp s) 
+    then show ?case sorry
   next
     case (join a b f)
     then show ?case sorry
