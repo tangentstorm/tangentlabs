@@ -824,6 +824,7 @@ begin
 end
 
 
+
 lemma induct_plex [case_names simp join]:
   assumes "\<And>s. P(plex(Simp s))"
       and "\<And>a b f. P(plex a) \<and> P(plex b) \<Longrightarrow> P(plex(Join f a b))"
@@ -833,6 +834,7 @@ sorry
 
 text \<open>The following is nonsense and doesn't work. I'm just trying to figure out the general structure
    of what I want to be able to say.\<close>
+(*
 consts neat :: "'a set \<Rightarrow> bool"
 lemma test_induct_plex:
   assumes "d simplex s \<Longrightarrow> neat s"
@@ -846,31 +848,84 @@ proof (induction k rule:induct_plex)
     then show ?case sorry
   qed
 qed
+*)
 
 subsection \<open>Tverberg's Method\<close>
 
 text \<open>Adapted from \<^emph>\<open>How to cut a convex polytope into simplices\<close> by Helge Tverberg\<close>
 
-lemma tv1:
-  assumes convex:"convex K" and poly:"polytope K" and d:"aff_dim K = d"
+definition convex_polytope where 
+  "convex_polytope K \<equiv> convex K \<and> polytope K"
+lemma convex_polytope [simp]:
+   "convex_polytope K \<equiv> convex K \<and> polytope K" by (rule convex_polytope_def)
+
+lemma tv1a:
+  assumes cp: "convex_polytope K" and d:"aff_dim K = d"
   fixes F assumes "F \<in> faces K"
-  shows "is_simplex K \<or>
-         (\<exists>v F\<^sub>0 F\<^sub>1. v \<in> verts K \<and> F\<^sub>0 \<in> faces K \<and> F\<^sub>1 \<in> faces K
-                  \<and> F\<^sub>0 \<noteq> F\<^sub>1 \<and> \<not>(v \<subseteq> F\<^sub>0 \<or> v \<subseteq> F\<^sub>1))"
+  shows "is_simplex K \<or> d\<ge>2"
 proof (cases "d<2")
-  case True
-  hence "is_simplex K" using is_simplex_def d poly polytope_lowdim_imp_simplex by fastforce
+  case True hence "is_simplex K" 
+    using is_simplex_def cp d polytope_lowdim_imp_simplex by (simp; fastforce)
   thus ?thesis ..
-next
-  case False hence "d \<ge> 2" by simp thus ?thesis
-  proof (cases "is_simplex F")
-    case True
-    thus ?thesis try0 sorry
-  next
-    case False
-    thus ?thesis try0 sorry
-  qed
+next  
+  case False thus ?thesis by simp
 qed
+
+definition adjoins :: "'a set \<Rightarrow> 'a set \<Rightarrow> bool" ("_ adjoins _" [60,60] 65) where
+  "x adjoins y \<equiv> (\<exists>f. f facet_of x \<and> f facet_of y)"
+lemma ajoins:
+  "x adjoins y = (\<exists>f. f facet_of x \<and> f facet_of y)" by (simp add: adjoins_def)
+
+
+lemma tv1b:
+  assumes "convex_polytope K" and "\<not> is_simplex K"
+      and "F facet_of K"
+  obtains F\<^sub>1 F\<^sub>2 V
+    where "V \<in> verts K" 
+      and "F\<^sub>1 facet_of K" and "\<not>(V \<subseteq> F\<^sub>1)"
+      and "F\<^sub>2 facet_of K" and "\<not>(V \<subseteq> F\<^sub>2)"
+proof (cases "is_simplex F")
+  case True
+  fix F2 assume "F2 facet_of K" and "F2 adjoins F" 
+  have "(\<exists>x\<subseteq>K. \<not>(x\<subseteq>F) \<and> \<not>(x\<subseteq>F2))" proof (rule ccontr)
+    assume "\<not>(\<exists>x\<subseteq>K. \<not>(x\<subseteq>F) \<and> \<not>(x\<subseteq>F2))"
+    hence "(\<forall>x\<subseteq>K. x\<subseteq>F \<or> x\<subseteq>F2)" by simp
+    hence "is_simplex K" using \<open>F2 facet_of K\<close> assms(3) facet_of_imp_subset by fastforce
+    with `\<not> is_simplex K` show "False" by simp
+  qed
+  from this obtain F3::"'a set" where "F3\<subseteq>K  \<and> \<not>(F3\<subseteq>F) \<and> \<not>(F3\<subseteq>F2)" by auto
+  then have "\<exists>v. v\<in>F3" by blast
+  from this obtain v where "v\<in>F3" by auto
+  hence "{v} face_of  F3" sorry
+(*    -- this is what i really want to show... (but the simpler proof above doesn't
+      -- translate directly. (why not?)
+      -- somehow i just need to go from a subset existing
+      -- to the actual vertex so I can obtain (capital) V.
+  moreover have "(\<exists>V\<in> verts K. \<not>(V\<subseteq>F) \<and> \<not>(V\<subseteq>F2))" proof (rule ccontr)
+    assume "\<not>(\<exists>V\<in> verts K. \<not>(V\<subseteq>F) \<and> \<not>(V\<subseteq>F2))"
+    hence "(\<forall>V\<in>verts K. V\<subseteq>F \<or> V\<subseteq>F2)" by simp
+    hence "(\<forall>V\<in>verts K. V\<subseteq>K \<and> (V\<subseteq>F \<or> V\<subseteq>F2))"
+      by (meson assms(3) calculation(1) dual_order.trans facet_of_imp_subset)
+    hence "is_simplex K" using \<open>F2 facet_of K\<close> assms(3) facet_of_imp_subset is_simplex_def by blast
+    with `\<not> is_simplex K` show "False" by simp
+  qed
+*)
+  ultimately show ?thesis using that by auto
+next
+  case False
+  then obtain V FF1 FF2 
+        where "V \<in> verts F"
+          and "FF1 facet_of F" and "\<not>(V \<subseteq> FF1)"
+          and "FF2 facet_of F" and "\<not>(V \<subseteq> FF2)" 
+      (* show that this is possible by induction from case True *) sorry
+  hence "V \<in> verts K" using `V \<in> verts F` sorry
+  then obtain F1 F2 
+        where "F1 facet_of K" and "\<not>(V \<subseteq> F1)"
+          and "F2 facet_of K" and "\<not>(V \<subseteq> F2)"
+      (* show that this is possible by induction from case True *) sorry
+  with that show thesis using `V \<in> verts K` by simp
+oops
+
 
 
 (* Induction from a lower bound other than zero, inspired by Manuel Eberl
@@ -903,7 +958,7 @@ proof (induction f rule: nat_induct_lower_bound[of "3"])
 next
   case (step n)
   then show ?case sorry
-qed
+oops
 
 
 section \<open>Euler Characteristic for a a general full-dimensional polytope.\<close>
