@@ -22,7 +22,16 @@ definition verts where "verts p = 0 d_faces p"
 definition edges where "edges p = 1 d_faces p"
 definition surfs where "surfs p = 2 d_faces p"
 
-definition facets where "facets p = (aff_dim p -1) d_faces p"
+definition facets where "facets p = ((aff_dim p)-1) d_faces p"
+
+\<comment> \<open>\<open>facets p\<close> should be identical to \<open>{f. facet_of p}\<close> but \<open>facet_of\<close> has an
+    unnecessary restriction that {} isn't a facet. I wonder if maybe dimensions
+    can't be negative in HOL-light: the polytope theory validates all the way to
+    the end if the \<open>f\<noteq>{}\<close> restriction is removed.\<close>
+lemma "facets p - {{}} \<equiv> {f. f facet_of p}"
+  unfolding facets_def d_faces_def facet_of_def
+  by (smt Collect_cong Collect_empty_eq Diff_empty Diff_insert0 Diff_insert_absorb
+          aff_dim_empty mem_Collect_eq mk_disjoint_insert singletonI singleton_conv)
 
 (* ------------------------------------------------------------------------ *)
 section \<open>Simplex Theory.\<close>
@@ -404,7 +413,7 @@ qed
 lemma face_corners_are_simplex_corners:
   assumes F: "F face_of S"
   shows "corners F \<subseteq> corners S" unfolding corners_def
-  by (meson nS F Poly100.corners_are_corners_of 
+  by (meson nS F Poly100.corners_are_corners_of
             face_of_simplex_simplex simplex_corners_of_face simplex_dim_ge)
 
 lemma corresponding_corners:
@@ -412,7 +421,7 @@ lemma corresponding_corners:
   shows "(C = corresponding_corners F)
      \<longleftrightarrow> (C \<subseteq> corners S \<and> F = corresponding_face C)"
 proof -
-  from F show ?thesis 
+  from F show ?thesis
   by (smt corners_def
       Poly100.corners_exist corners_unique
       corresponding_corners_def ex1_corresponding_corners
@@ -795,13 +804,13 @@ locale cplex =
  assumes inv: "(\<exists>c. app c x = (a,b)) \<longleftrightarrow> (a \<triangle> b = x)"
 begin
 
-  lemma induct0: 
+  lemma induct0:
     assumes k: "polytope k" "aff_dim k = d"
         and 0: "\<And>s. d simplex s \<Longrightarrow> P(s)"
         and 1: "P(a) \<and> P(b) \<Longrightarrow> P(a \<triangle> b)"
       shows "P(k)"
   proof (cases "is_simplex k")
-    case True 
+    case True
       then have "is_simplex k" .
       hence "d simplex k" using is_simplex[of k] k aff_dim_simplex by blast
       with 0[of k] show ?thesis by simp
@@ -809,8 +818,8 @@ begin
     case False
       fix a b assume "(a,b) = app (cut k) k"
     \<comment> \<open>Here is where I need induction to magically kick in...
-       Somehow I have to be able to show that for any polytope, 
-       I can eventually keep cutting it and obtain nothing 
+       Somehow I have to be able to show that for any polytope,
+       I can eventually keep cutting it and obtain nothing
       but simplices.\<close>
   oops
 
@@ -841,7 +850,7 @@ lemma test_induct_plex:
      and "c simplicates k"
   shows "neat k"
 proof (induction k rule:induct_plex)
-    case (simp s) 
+    case (simp s)
     then show ?case sorry
   next
     case (join a b f)
@@ -854,7 +863,7 @@ subsection \<open>Tverberg's Method\<close>
 
 text \<open>Adapted from \<^emph>\<open>How to cut a convex polytope into simplices\<close> by Helge Tverberg\<close>
 
-definition convex_polytope where 
+definition convex_polytope where
   "convex_polytope K \<equiv> convex K \<and> polytope K"
 lemma convex_polytope [simp]:
    "convex_polytope K \<equiv> convex K \<and> polytope K" by (rule convex_polytope_def)
@@ -864,29 +873,122 @@ lemma tv1a:
   fixes F assumes "F \<in> faces K"
   shows "is_simplex K \<or> d\<ge>2"
 proof (cases "d<2")
-  case True hence "is_simplex K" 
+  case True hence "is_simplex K"
     using is_simplex_def cp d polytope_lowdim_imp_simplex by (simp; fastforce)
   thus ?thesis ..
-next  
+next
   case False thus ?thesis by simp
 qed
 
-definition adjoins :: "'a set \<Rightarrow> 'a set \<Rightarrow> bool" ("_ adjoins _" [60,60] 65) where
-  "x adjoins y \<equiv> (\<exists>f. f facet_of x \<and> f facet_of y)"
-lemma ajoins:
-  "x adjoins y = (\<exists>f. f facet_of x \<and> f facet_of y)" by (simp add: adjoins_def)
+
+subsection\<open>Adjacent facets\<close>
+
+definition adjacent :: "'a set \<Rightarrow> 'a set \<Rightarrow> bool" where
+  "adjacent x y \<equiv> x\<noteq>y \<and> (\<exists>f. f facet_of x \<and> f facet_of y)"
+
+lemma adjacent_facets_exist:
+  assumes T:"polytope T" "aff_dim T > 0"
+      and F:"F facet_of T" and E:"E facet_of F"
+  shows "\<exists>!F'. F'\<noteq>F \<and> (E facet_of F') \<and> (F' facet_of T)"
+  \<comment> \<open>Every edge of a polygon shares a vertex with another edge,
+      every face of a 3d polytope shares an edge with another face, etc.\<close>
+proof
+  define dimF where dimF:"dimF = aff_dim F"
+  define dimE where dimE:"dimE = aff_dim E"
+  have "dimE = dimF-1" using F dimF E dimE facet_of_def by auto
+
+  \<comment> \<open>Obtain the dimF hyperplane H containing F and the dimE hyperplane h containing E\<close>
+  from T have phT: "polyhedron T" using polytope_imp_polyhedron by auto
+  with F obtain H A B where h: "H = {x. A \<bullet> x = B} \<and> F = T \<inter> H"
+    by (metis facet_of_polyhedron)
+  from F have phF: "polyhedron F" using phT facet_of_def face_of_polyhedron_polyhedron by auto
+  with E obtain h a b where h: "h = {x. a \<bullet> x = b} \<and> E = F \<inter> h"
+    by (metis facet_of_polyhedron)
+
+  \<comment> \<open>The only reason E is a facet is that F is bounded. That boundary must have been
+     inherited from the boundaries of T, but I don't know how to show it. GRRR...
+
+     (Why am I doing this? I need to mention an adjacent face for Tverberg's lemma
+      about a non-simplex polytope having a vertex and two facets which don't contain it.)\<close>
+
+  oops
+
+(*   \<comment> \<open>T is the intersection of a set of half-hyperspaces. Let's call that set S.\<close>
+  obtain S where S:"(finite S) \<and> (T=\<Inter>S) \<and> (\<forall>h\<in>S. \<exists>a b. a\<noteq>0 \<and> h={x. a\<bullet>x \<le> b})"
+    using phT polyhedron_def by fastforce
+  obtain H' A' B' where H': "(H'\<subseteq>T) \<and> (H'={x. A' \<bullet> x = B'}) \<and> (h = H\<inter>H')"
+  have "h\<subset>H" sorry
+qed
+ *)
+
+\<comment> \<open>previous failed attempt:\<close>
+\<^cancel>\<open>
+lemma adjacent_faces_exist:
+  assumes T: "polytope T" and F: "F facet_of T"
+  shows "fF facet_of F \<equiv> \<exists>!fT. fT facet_of T \<and> fF facet_of fT"
+proof -
+  define d where d: "d = aff_dim F"
+  from T have phT: "polyhedron T" using polytope_imp_polyhedron by auto
+  with F obtain h a b where h: "h = {x. a \<bullet> x = b} \<and> F = T \<inter> h"
+    by (metis facet_of_polyhedron)
+  with F phT polyhedron_def obtain F' ff where F': "F' facet_of T" "F\<noteq>F'" and ff: "ff = F\<inter>F'" "ff \<noteq> {}"
+    sorry (*by (metis facet_of_def inf.idem)*)
+  from F' phT obtain h' a' b' where h': "h' = {x. a' \<bullet> x = b'} \<and> F' = T \<inter> h'"
+    by (metis facet_of_polyhedron)
+  from h h' ff have "ff = T\<inter>(h\<inter>h')" by auto
+  moreover have "aff_dim ff = aff_dim h - 1" sorry
+  hence "ff facet_of F" "ff facet_of F'" using F F' h h' ff phT
+    sorry (*by (metis face_of_Int_subface face_of_refl_eq facet_of_imp_face_of inf.idem polyhedron_imp_convex)+*)
+  oops
+\<close>
+
+lemma adjacent_faces_simplex:
+  "d simplex S \<equiv> \<forall>x\<in>facets S. \<forall>y\<in>facets S. (x\<noteq>y \<longleftrightarrow> adjacent x y)"
+  sorry
+
+lemma count_adjacent_faces:
+  assumes "polytope T" "F facet_of T"
+  shows "card(facets F) = card {x\<in>facets T. adjacent x F}"
+  sorry
+
+
+
+proposition polyhedron_facets:
+  assumes "polytope K" and "aff_dim K = d"
+  shows "card (facets K) \<ge> d+1"
+sorry
+
+corollary simplex_facets:
+ "d simplex K \<equiv> polytope K \<and> aff_dim K = d \<and> card (facets K) = d+1"
+ sorry
+
 
 
 lemma tv1b:
   assumes "convex_polytope K" and "\<not> is_simplex K"
-      and "F facet_of K"
   obtains F\<^sub>1 F\<^sub>2 V
-    where "V \<in> verts K" 
+    where "V \<in> verts K"
       and "F\<^sub>1 facet_of K" and "\<not>(V \<subseteq> F\<^sub>1)"
       and "F\<^sub>2 facet_of K" and "\<not>(V \<subseteq> F\<^sub>2)"
-proof (cases "is_simplex F")
-  case True
-  fix F2 assume "F2 facet_of K" and "F2 adjoins F" 
+  oops
+\<^cancel>\<open>
+proof -
+  fix F1 assume "F1 facet_of K"
+  then show ?thesis proof (cases "is_simplex F1")
+    case True
+    \<comment> \<open>facet F is a d-simplex. Therefore, it is adjacent to at least d other facets.
+       These facets have other vertices (else they would only be facets of F, not of K).
+       So there must be at least one vertex in K that isn't in F. Suppose there is exactly
+       one. Then the other facets must also be simplices and must all meet at that vertex.
+      But then K would be a simplex, and we assumed it wasn't, so there must be more than
+      one vertex.
+
+
+
+ Suppose
+       d=2 and thus the other 2 facets are triangles. Then the only vertex of K not in F is
+          \<close>
+  fix F2 assume "F2 facet_of K" and "adjacent F1 F2"
   have "(\<exists>x\<subseteq>K. \<not>(x\<subseteq>F) \<and> \<not>(x\<subseteq>F2))" proof (rule ccontr)
     assume "\<not>(\<exists>x\<subseteq>K. \<not>(x\<subseteq>F) \<and> \<not>(x\<subseteq>F2))"
     hence "(\<forall>x\<subseteq>K. x\<subseteq>F \<or> x\<subseteq>F2)" by simp
@@ -894,9 +996,12 @@ proof (cases "is_simplex F")
     with `\<not> is_simplex K` show "False" by simp
   qed
   from this obtain F3::"'a set" where "F3\<subseteq>K  \<and> \<not>(F3\<subseteq>F) \<and> \<not>(F3\<subseteq>F2)" by auto
+  hence "F3 face_of K" by auto
   then have "\<exists>v. v\<in>F3" by blast
+  hence assumes "compact S" "convex S" "S \<noteq> {}"
   from this obtain v where "v\<in>F3" by auto
-  hence "{v} face_of  F3" sorry
+  hence "aff_dim {v} = 0" using aff_dim_def by auto
+  moreover have "{v} face_of F3" using face_of_def try0 by auto
 (*    -- this is what i really want to show... (but the simpler proof above doesn't
       -- translate directly. (why not?)
       -- somehow i just need to go from a subset existing
@@ -913,19 +1018,19 @@ proof (cases "is_simplex F")
   ultimately show ?thesis using that by auto
 next
   case False
-  then obtain V FF1 FF2 
+  then obtain V FF1 FF2
         where "V \<in> verts F"
           and "FF1 facet_of F" and "\<not>(V \<subseteq> FF1)"
-          and "FF2 facet_of F" and "\<not>(V \<subseteq> FF2)" 
+          and "FF2 facet_of F" and "\<not>(V \<subseteq> FF2)"
       (* show that this is possible by induction from case True *) sorry
   hence "V \<in> verts K" using `V \<in> verts F` sorry
-  then obtain F1 F2 
+  then obtain F1 F2
         where "F1 facet_of K" and "\<not>(V \<subseteq> F1)"
           and "F2 facet_of K" and "\<not>(V \<subseteq> F2)"
       (* show that this is possible by induction from case True *) sorry
   with that show thesis using `V \<in> verts K` by simp
 oops
-
+\<close>
 
 
 (* Induction from a lower bound other than zero, inspired by Manuel Eberl
@@ -944,7 +1049,7 @@ proof (induction n rule: less_induct)
   qed
 qed
 
-
+\<^cancel>\<open>
 theorem tverberg_dissection:
   assumes "convex K" "polytope K" "f = card (facets K)"
   obtains T where "T simplicates K"
@@ -959,7 +1064,7 @@ next
   case (step n)
   then show ?case sorry
 oops
-
+\<close>
 
 section \<open>Euler Characteristic for a a general full-dimensional polytope.\<close>
 
