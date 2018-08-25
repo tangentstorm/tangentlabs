@@ -883,7 +883,7 @@ qed
 
 subsection\<open>Half-spaces\<close>
 
-text "A polyhedron (and therefore a polytope) is the intersection of a finite set of half-spaces."
+text\<open>A polyhedron (and therefore a polytope) is the intersection of a finite set of half-spaces.\<close>
 
 definition halfspaces_of :: "'a set set \<Rightarrow> 'a set \<Rightarrow> bool" ("_ halfspaces'_of _" [60,60] 65) where
   "HF halfspaces_of S \<equiv> finite HF \<and>
@@ -891,18 +891,29 @@ definition halfspaces_of :: "'a set set \<Rightarrow> 'a set \<Rightarrow> bool"
                       (\<forall>h \<in> HF. \<exists>a b. a\<noteq>0 \<and> h = {x. a \<bullet> x \<le> b})"
 
 lemma polyhedron_halfspaces:
-  assumes "polyhedron S" obtains HF where "HF halfspaces_of S"
+  assumes "polyhedron T" obtains HF where "HF halfspaces_of T"
   by (metis assms halfspaces_of_def polyhedron_Int_affine)
 
 lemma polytope_halfspaces:
-  assumes "polytope S" obtains HF where "HF halfspaces_of S"
+  assumes "polytope T" obtains HF where "HF halfspaces_of T"
   by (metis assms polyhedron_halfspaces polytope_imp_polyhedron)
 
-lemma aff_elements_in_halfspaces:
+text\<open>The important feature here is that a point is an element of the polyhedron if and only if
+     that point is in all of the polyhedron's half-spaces.\<close>
+
+theorem aff_elements_of_halfspaces:
   assumes "HF halfspaces_of S" "x\<in>(affine hull S)"
   shows "x\<in>S \<longleftrightarrow> (\<forall>h\<in>HF. x\<in>h)"
   by (metis assms halfspaces_of_def Int_iff Inter_iff)
 
+text\<open>In particular, if some point P is co-hyperplanar with of a facet of polytope S
+     (and thus an element of one of its half-spaces), but \<open>P\<notin>S\<close>, then we can deduce
+     the existence of some other half-space of S that doesn't contain P either.\<close>
+
+corollary pointless_halfspace: \<comment> \<open> ;) \<close>
+  assumes "HF halfspaces_of T" "H\<^sub>0 \<in> HF" "P\<in>(affine hull T) \<and> P\<in>H\<^sub>0 \<and> P\<notin>T"
+  obtains H\<^sub>1 where "H\<^sub>1\<in>HF \<and> P\<notin>H\<^sub>1"
+  using assms aff_elements_of_halfspaces by metis
 
 
 subsection\<open>Adjacent facets\<close>
@@ -917,16 +928,16 @@ lemma adjacent_facets_exist:
   \<comment> \<open>Every edge of a polygon shares a vertex with another edge,
       every face of a 3d polytope shares an edge with another face, etc.\<close>
 proof
-  define dimF where dimF:"dimF = aff_dim F"
-  define dimE where dimE:"dimE = aff_dim E"
-  have "dimE = dimF-1" using F dimF E dimE facet_of_def by auto
-
-  \<comment> \<open>Obtain the dimF hyperplane H containing F and the dimE hyperplane h containing E\<close>
+  \<comment> \<open>Obtain the hyperplane \<open>H\<^sub>F\<close> and half-space \<open>HH\<^sub>F\<close>, both of which contain \<open>F\<close>...\<close>
   from T have phT: "polyhedron T" using polytope_imp_polyhedron by auto
-  with F obtain H A B where H: "H = {x. A \<bullet> x = B} \<and> F = T \<inter> H"
+  with F obtain H\<^sub>F HH\<^sub>F A\<^sub>F B\<^sub>F
+    where HF: "H\<^sub>F = {x. A\<^sub>F \<bullet> x = B\<^sub>F} \<and> F=T\<inter>H\<^sub>F" and HHF: "HH\<^sub>F = {x. A\<^sub>F \<bullet> x \<le> B\<^sub>F} \<and> T\<subseteq>HH\<^sub>F"
     by (metis facet_of_polyhedron)
+
+  \<comment> \<open>... Now do the same for \<open>E\<close>:\<close>
   from F have phF: "polyhedron F" using phT facet_of_def face_of_polyhedron_polyhedron by auto
-  with E obtain h a b where h: "h = {x. a \<bullet> x = b} \<and> E = F \<inter> h"
+  with E obtain H\<^sub>E HH\<^sub>E A\<^sub>E B\<^sub>E
+    where HF: "H\<^sub>E = {x. A\<^sub>E \<bullet> x = B\<^sub>E} \<and> E = F\<inter>H\<^sub>E" and HHE: "HH\<^sub>E = {x. A\<^sub>E \<bullet> x \<le> B\<^sub>E} \<and> F\<subseteq>HH\<^sub>E"
     by (metis facet_of_polyhedron)
 
   \<comment> \<open>The only reason E is a facet is that F is bounded. That boundary must have been
@@ -937,11 +948,10 @@ proof
 
   oops
 
-(*   \<comment> \<open>T is the intersection of a set of half-hyperspaces. Let's call that set S.\<close>
-  obtain S where S:"(finite S) \<and> (T=\<Inter>S) \<and> (\<forall>h\<in>S. \<exists>a b. a\<noteq>0 \<and> h={x. a\<bullet>x \<le> b})"
-    using phT polyhedron_def by fastforce
-  obtain H' A' B' where H': "(H'\<subseteq>T) \<and> (H'={x. A' \<bullet> x = B'}) \<and> (h = H\<inter>H')"
-  have "h\<subset>H" sorry
+(*
+  define dimF where dimF:"dimF = aff_dim F"
+  define dimE where dimE:"dimE = aff_dim E"
+  have "dimE = dimF-1" using F dimF E dimE facet_of_def by auto
 qed
  *)
 
