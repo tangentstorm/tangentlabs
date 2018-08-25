@@ -881,6 +881,30 @@ next
 qed
 
 
+subsection\<open>Half-spaces\<close>
+
+text "A polyhedron (and therefore a polytope) is the intersection of a finite set of half-spaces."
+
+definition halfspaces_of :: "'a set set \<Rightarrow> 'a set \<Rightarrow> bool" ("_ halfspaces'_of _" [60,60] 65) where
+  "HF halfspaces_of S \<equiv> finite HF \<and>
+                      S = (affine hull S) \<inter> \<Inter> HF \<and>
+                      (\<forall>h \<in> HF. \<exists>a b. a\<noteq>0 \<and> h = {x. a \<bullet> x \<le> b})"
+
+lemma polyhedron_halfspaces:
+  assumes "polyhedron S" obtains HF where "HF halfspaces_of S"
+  by (metis assms halfspaces_of_def polyhedron_Int_affine)
+
+lemma polytope_halfspaces:
+  assumes "polytope S" obtains HF where "HF halfspaces_of S"
+  by (metis assms polyhedron_halfspaces polytope_imp_polyhedron)
+
+lemma aff_elements_in_halfspaces:
+  assumes "HF halfspaces_of S" "x\<in>(affine hull S)"
+  shows "x\<in>S \<longleftrightarrow> (\<forall>h\<in>HF. x\<in>h)"
+  by (metis assms halfspaces_of_def Int_iff Inter_iff)
+
+
+
 subsection\<open>Adjacent facets\<close>
 
 definition adjacent :: "'a set \<Rightarrow> 'a set \<Rightarrow> bool" where
@@ -899,7 +923,7 @@ proof
 
   \<comment> \<open>Obtain the dimF hyperplane H containing F and the dimE hyperplane h containing E\<close>
   from T have phT: "polyhedron T" using polytope_imp_polyhedron by auto
-  with F obtain H A B where h: "H = {x. A \<bullet> x = B} \<and> F = T \<inter> H"
+  with F obtain H A B where H: "H = {x. A \<bullet> x = B} \<and> F = T \<inter> H"
     by (metis facet_of_polyhedron)
   from F have phF: "polyhedron F" using phT facet_of_def face_of_polyhedron_polyhedron by auto
   with E obtain h a b where h: "h = {x. a \<bullet> x = b} \<and> E = F \<inter> h"
