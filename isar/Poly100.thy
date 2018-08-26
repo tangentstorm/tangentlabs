@@ -898,6 +898,14 @@ lemma polytope_halfspaces:
   assumes "polytope T" obtains HF where "HF halfspaces_of T"
   by (metis assms polyhedron_halfspaces polytope_imp_polyhedron)
 
+theorem extending_hyperplanes:
+  assumes "polyhedron T" "F facet_of T" "HF halfspaces_of F" "HT halfspaces_of T"
+  shows "HF \<subseteq> HT"
+  using assms face_of_def face_of_polyhedron_polyhedron face_of_polyhedron_explicit
+  unfolding halfspaces_of_def polyhedron_def facet_of_def
+  oops
+
+
 text\<open>The important feature here is that a point is an element of the polyhedron if and only if
      that point is in all of the polyhedron's half-spaces.\<close>
 
@@ -915,66 +923,37 @@ corollary pointless_halfspace: \<comment> \<open> ;) \<close>
   obtains H\<^sub>1 where "H\<^sub>1\<in>HF \<and> P\<notin>H\<^sub>1"
   using assms aff_elements_of_halfspaces by metis
 
-
 subsection\<open>Adjacent facets\<close>
 
-definition adjacent :: "'a set \<Rightarrow> 'a set \<Rightarrow> bool" where
-  "adjacent x y \<equiv> x\<noteq>y \<and> (\<exists>f. f facet_of x \<and> f facet_of y)"
+definition adjacent_by :: "'a set \<Rightarrow> 'a set \<Rightarrow> 'a set \<Rightarrow> bool"
+  ("_ _ adjacent'_by _" [60,60,60] 65) where
+  "x y adjacent_by f \<equiv> x\<noteq>y \<and> f facet_of x \<and> f facet_of y"
 
-lemma adjacent_facets_exist:
-  assumes T:"polytope T" "aff_dim T > 0"
+definition adjacent :: "'a set \<Rightarrow> 'a set \<Rightarrow> bool" where
+  "adjacent x y \<equiv> (\<exists>f. x y adjacent_by f)"
+
+lemma adjacent_facet_exists:
+  assumes T:"polytope T"
       and F:"F facet_of T" and E:"E facet_of F"
-  shows "\<exists>!F'. F'\<noteq>F \<and> (E facet_of F') \<and> (F' facet_of T)"
+  shows "\<exists>F'. F F' adjacent_by E"
   \<comment> \<open>Every edge of a polygon shares a vertex with another edge,
       every face of a 3d polytope shares an edge with another face, etc.\<close>
-proof
-  \<comment> \<open>Obtain the hyperplane \<open>H\<^sub>F\<close> and half-space \<open>HH\<^sub>F\<close>, both of which contain \<open>F\<close>...\<close>
-  from T have phT: "polyhedron T" using polytope_imp_polyhedron by auto
-  with F obtain H\<^sub>F HH\<^sub>F A\<^sub>F B\<^sub>F
-    where HF: "H\<^sub>F = {x. A\<^sub>F \<bullet> x = B\<^sub>F} \<and> F=T\<inter>H\<^sub>F" and HHF: "HH\<^sub>F = {x. A\<^sub>F \<bullet> x \<le> B\<^sub>F} \<and> T\<subseteq>HH\<^sub>F"
-    by (metis facet_of_polyhedron)
-
-  \<comment> \<open>... Now do the same for \<open>E\<close>:\<close>
-  from F have phF: "polyhedron F" using phT facet_of_def face_of_polyhedron_polyhedron by auto
-  with E obtain H\<^sub>E HH\<^sub>E A\<^sub>E B\<^sub>E
-    where HF: "H\<^sub>E = {x. A\<^sub>E \<bullet> x = B\<^sub>E} \<and> E = F\<inter>H\<^sub>E" and HHE: "HH\<^sub>E = {x. A\<^sub>E \<bullet> x \<le> B\<^sub>E} \<and> F\<subseteq>HH\<^sub>E"
-    by (metis facet_of_polyhedron)
-
-  \<comment> \<open>The only reason E is a facet is that F is bounded. That boundary must have been
-     inherited from the boundaries of T, but I don't know how to show it. GRRR...
-
-     (Why am I doing this? I need to mention an adjacent face for Tverberg's lemma
-      about a non-simplex polytope having a vertex and two facets which don't contain it.)\<close>
-
-  oops
-
-(*
-  define dimF where dimF:"dimF = aff_dim F"
-  define dimE where dimE:"dimE = aff_dim E"
-  have "dimE = dimF-1" using F dimF E dimE facet_of_def by auto
-qed
- *)
-
-\<comment> \<open>previous failed attempt:\<close>
-\<^cancel>\<open>
-lemma adjacent_faces_exist:
-  assumes T: "polytope T" and F: "F facet_of T"
-  shows "fF facet_of F \<equiv> \<exists>!fT. fT facet_of T \<and> fF facet_of fT"
 proof -
-  define d where d: "d = aff_dim F"
   from T have phT: "polyhedron T" using polytope_imp_polyhedron by auto
-  with F obtain h a b where h: "h = {x. a \<bullet> x = b} \<and> F = T \<inter> h"
-    by (metis facet_of_polyhedron)
-  with F phT polyhedron_def obtain F' ff where F': "F' facet_of T" "F\<noteq>F'" and ff: "ff = F\<inter>F'" "ff \<noteq> {}"
-    sorry (*by (metis facet_of_def inf.idem)*)
-  from F' phT obtain h' a' b' where h': "h' = {x. a' \<bullet> x = b'} \<and> F' = T \<inter> h'"
-    by (metis facet_of_polyhedron)
-  from h h' ff have "ff = T\<inter>(h\<inter>h')" by auto
-  moreover have "aff_dim ff = aff_dim h - 1" sorry
-  hence "ff facet_of F" "ff facet_of F'" using F F' h h' ff phT
-    sorry (*by (metis face_of_Int_subface face_of_refl_eq facet_of_imp_face_of inf.idem polyhedron_imp_convex)+*)
-  oops
-\<close>
+  from F E have E0:"E face_of T" using face_of_trans facet_of_imp_face_of by blast
+  moreover have E1:"E \<noteq> {} \<and> E\<noteq>T " using E F facet_of_def by auto
+  ultimately have E2:"E = \<Inter>{F'. F' facet_of T \<and> E \<subseteq> F'}"
+    using phT face_of_polyhedron by blast
+  then obtain Fs where Fs:"Fs = {F'. F' facet_of T \<and> E \<subseteq> F'} \<and> E=\<Inter>Fs" by auto
+  then obtain F' where F':"F'\<in>Fs \<and> F'\<noteq>F"
+    by (metis E Inf_greatest facet_of_imp_subset facet_of_irrefl order_refl subset_antisym)
+  hence "E facet_of F'"
+    by (smt Collect_mem_eq Collect_mono_iff E F Fs E0 E1 E2
+        equalityE face_of_face facet_of_def facet_of_imp_face_of le_Inf_iff)
+  hence "F'\<noteq>F \<and> (E facet_of F') \<and> (F' facet_of T)" using F' Fs by blast
+  then show ?thesis using adjacent_by_def using E by blast
+qed
+
 
 lemma adjacent_faces_simplex:
   "d simplex S \<equiv> \<forall>x\<in>facets S. \<forall>y\<in>facets S. (x\<noteq>y \<longleftrightarrow> adjacent x y)"
@@ -1284,5 +1263,7 @@ proof -
   hence "(F-1)/2 = I + B/2 -1" by simp
   with area show "A = I + B/2 - 1" by auto
 qed
+
+print_context
 
 end
