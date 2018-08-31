@@ -859,28 +859,6 @@ proof (induction k rule:induct_plex)
 qed
 *)
 
-subsection \<open>Tverberg's Method\<close>
-
-text \<open>Adapted from \<^emph>\<open>How to cut a convex polytope into simplices\<close> by Helge Tverberg\<close>
-
-definition convex_polytope where
-  "convex_polytope K \<equiv> convex K \<and> polytope K"
-lemma convex_polytope [simp]:
-   "convex_polytope K \<equiv> convex K \<and> polytope K" by (rule convex_polytope_def)
-
-lemma tv1a:
-  assumes cp: "convex_polytope K" and d:"aff_dim K = d"
-  fixes F assumes "F \<in> faces K"
-  shows "is_simplex K \<or> d\<ge>2"
-proof (cases "d<2")
-  case True hence "is_simplex K"
-    using is_simplex_def cp d polytope_lowdim_imp_simplex by (simp; fastforce)
-  thus ?thesis ..
-next
-  case False thus ?thesis by simp
-qed
-
-
 subsection\<open>Half-spaces\<close>
 
 text\<open>A polyhedron (and therefore a polytope) is the intersection of a finite set of half-spaces.\<close>
@@ -951,7 +929,7 @@ proof -
     by (smt Collect_mem_eq Collect_mono_iff E F Fs E0 E1 E2
         equalityE face_of_face facet_of_def facet_of_imp_face_of le_Inf_iff)
   hence "F'\<noteq>F \<and> (E facet_of F') \<and> (F' facet_of T)" using F' Fs by blast
-  then show ?thesis using adjacent_by_def using E by blast
+  with E show ?thesis using adjacent_by_def by blast
 qed
 
 
@@ -976,19 +954,69 @@ corollary simplex_facets:
  sorry
 
 
+lemma verts_exist:
+  assumes T:"polytope T" "aff_dim T > 1"
+      and F:"F facet_of T"
+    shows "\<exists>V. V\<in>verts F"
+  unfolding verts_def d_faces_def
+  sorry
+
+
+lemma verts_transitive:
+  assumes "F facet_of T" "V \<in> verts F"
+  shows "V \<in> verts T"
+  unfolding verts_def facet_of_def using assms
+  by (metis (no_types, lifting) d_faces_def face_of_face facet_of_imp_face_of mem_Collect_eq verts_def)
+
+subsection \<open>Tverberg's Method\<close>
+
+text \<open>Adapted from \<^emph>\<open>How to cut a convex polytope into simplices\<close> by Helge Tverberg\<close>
+
+lemma tv1a:
+  assumes cp: "polytope K" and d:"aff_dim K = d"
+  fixes F assumes "F \<in> faces K"
+  shows "is_simplex K \<or> d\<ge>2"
+proof (cases "d<2")
+  case True hence "is_simplex K"
+    using is_simplex_def cp d polytope_lowdim_imp_simplex by fastforce
+  thus ?thesis ..
+next
+  case False thus ?thesis by simp
+qed
+
 
 lemma tv1b:
-  assumes "convex_polytope K" and "\<not> is_simplex K"
-  obtains F\<^sub>1 F\<^sub>2 V
-    where "V \<in> verts K"
-      and "F\<^sub>1 facet_of K" and "\<not>(V \<subseteq> F\<^sub>1)"
-      and "F\<^sub>2 facet_of K" and "\<not>(V \<subseteq> F\<^sub>2)"
-  oops
-\<^cancel>\<open>
+  assumes T: "polytope T"  "\<not> is_simplex T"
+  shows "\<exists>F\<^sub>1 F\<^sub>2 V. V \<in> verts T \<and> F\<^sub>1\<noteq>F\<^sub>2 \<and>
+          F\<^sub>1 facet_of T \<and> \<not>(V \<subseteq> F\<^sub>1) \<and>
+          F\<^sub>2 facet_of T \<and> \<not>(V \<subseteq> F\<^sub>2)"
 proof -
-  fix F1 assume "F1 facet_of K"
+  from T have dim1: "aff_dim T > 1"
+    using aff_dim_negative_iff tv1a by fastforce
+  hence dim0: "aff_dim T > 0" by auto
+  with T obtain F0 where F0: "F0 facet_of T"
+    using polytope_facet_exists by blast
+  with T dim1 obtain V where  V:"V \<in> verts F0"
+    using verts_exist by blast
+
+  obtain F\<^sub>1 where "F\<^sub>1 facet_of T" and "\<not>(V \<subseteq> F\<^sub>1)" sorry
+  obtain F\<^sub>2 where "F\<^sub>2 facet_of T" and "F\<^sub>2 \<noteq> F\<^sub>1" and "\<not>(V \<subseteq> F\<^sub>2)" sorry
+
+  from F0 V have "V \<in> verts T" using verts_transitive by auto
+  moreover have "F\<^sub>1 facet_of T" and "\<not>V \<subseteq> F\<^sub>1" sorry
+  moreover have "F\<^sub>2 facet_of T" and "\<not>V \<subseteq> F\<^sub>2" sorry
+  moreover have "F\<^sub>1 \<noteq> F\<^sub>2" and "\<not>V \<subseteq> F\<^sub>2" sorry
+  ultimately show ?thesis by blast
+(*
   then show ?thesis proof (cases "is_simplex F1")
-    case True
+    case True then show ?case sorry
+  next
+    case False then show ?case sorry
+  qed
+*)
+qed
+
+\<^cancel>\<open>
     \<comment> \<open>facet F is a d-simplex. Therefore, it is adjacent to at least d other facets.
        These facets have other vertices (else they would only be facets of F, not of K).
        So there must be at least one vertex in K that isn't in F. Suppose there is exactly
