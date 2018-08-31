@@ -947,11 +947,11 @@ lemma count_adjacent_faces:
 proposition polyhedron_facets:
   assumes "polytope K" and "aff_dim K = d"
   shows "card (facets K) \<ge> d+1"
-sorry
+  sorry
 
 corollary simplex_facets:
- "d simplex K \<equiv> polytope K \<and> aff_dim K = d \<and> card (facets K) = d+1"
- sorry
+  "d simplex K \<equiv> polytope K \<and> aff_dim K = d \<and> card (facets K) = d+1"
+  sorry
 
 
 lemma verts_exist:
@@ -984,13 +984,43 @@ next
   case False thus ?thesis by simp
 qed
 
-
-lemma tv1b:
+lemma tv1:
   assumes T: "polytope T"  "\<not> is_simplex T"
   shows "\<exists>F\<^sub>1 F\<^sub>2 V. V \<in> verts T \<and> F\<^sub>1\<noteq>F\<^sub>2 \<and>
           F\<^sub>1 facet_of T \<and> \<not>(V \<subseteq> F\<^sub>1) \<and>
           F\<^sub>2 facet_of T \<and> \<not>(V \<subseteq> F\<^sub>2)"
-proof -
+proof -   (* TODO: induction on "card(facets)" *)
+
+  (* -- direct translation from tverberg to psuedocode -- *)
+
+  (* if card(facets) < 4 then k is already a simplex *)
+  (* else *) let ?dim = "aff_dim T"
+  consider
+    (1) "\<exists>v\<in>verts T. of_nat(card {f. f facet_of T \<and> v\<in>verts f}) > aff_dim T" |
+    (2) "\<forall>v\<in>verts T. of_nat(card {f. f facet_of T \<and> v\<in>verts f}) = aff_dim T"
+    sorry
+  then have ?thesis proof (cases)
+    case 1
+      \<comment> \<open>have H separating P from other vertices of K\<close>
+      \<comment> \<open>hence intersection HK of of H and K
+            and HK is a (d-1)-polytope
+            and HK is not a simplex
+            and HK has fewer facets than K\<close>
+      \<comment> \<open>hence dissection of HKD HK by cuts in H (by induction hypothesis)\<close>
+      \<comment> \<open>then for each d-2 hyperplane in HKD, extend to the d-1 hyperplane through P\<close>
+      \<comment> \<open>then obtain a dissection of K into polytopes K0..Kn\<close>
+      \<comment> \<open>for each Ki in K0..Kn:
+            Ki is a (d) polytope
+            Ki has fewer facets than K\<close>
+      \<comment> \<open>hence we can break it down recursively\<close>
+    then show ?thesis sorry
+  next
+    case 2  \<comment> \<open>At each vertex of K only d facets meet\<close>
+      \<^cancel>\<open>obtain F1 F2 P by induction\<close>
+    then show ?thesis sorry
+  qed
+
+  (* -- meanwhile, structure of what i have to show -- *)
   from T have dim1: "aff_dim T > 1"
     using aff_dim_negative_iff tv1a by fastforce
   hence dim0: "aff_dim T > 0" by auto
@@ -1007,13 +1037,6 @@ proof -
   moreover have "F\<^sub>2 facet_of T" and "\<not>V \<subseteq> F\<^sub>2" sorry
   moreover have "F\<^sub>1 \<noteq> F\<^sub>2" and "\<not>V \<subseteq> F\<^sub>2" sorry
   ultimately show ?thesis by blast
-(*
-  then show ?thesis proof (cases "is_simplex F1")
-    case True then show ?case sorry
-  next
-    case False then show ?case sorry
-  qed
-*)
 qed
 
 \<^cancel>\<open>
