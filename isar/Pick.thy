@@ -1,19 +1,33 @@
 (* straight port of Pick's Theorem from HOL light
     https://github.com/jrh13/hol-light/blob/master/100/pick.ml *)
 theory Pick
-  imports Main "HOL-Analysis.Measure" "HOL-Analysis.Polytope" "HOL-Analysis.MoreTop"
+  imports Main "HOL-Analysis.Measure_Space" "HOL-Analysis.Polytope" "HOL-Analysis.Further_Topology"
 begin
 
 (* ------------------------------------------------------------------------- *)
-(* Misc lemmas.                                                              *)
+section "Misc lemmas."
 (* ------------------------------------------------------------------------- *)
 
-(* let COLLINEAR_IMP_NEGLIGIBLE = prove
+subsubsection "collinear_imp_negligible"
+\<^cancel>\<open>
+let COLLINEAR_IMP_NEGLIGIBLE = prove
  (`!s:real^2->bool. collinear s ==> negligible s`,
   REWRITE_TAC[COLLINEAR_AFFINE_HULL] THEN
   MESON_TAC[NEGLIGIBLE_AFFINE_HULL_2; NEGLIGIBLE_SUBSET]);;
- *)
+\<close>
 
+lemma collinear_imp_negligible:
+  fixes s :: "(real^2) set"
+  shows "collinear s \<Longrightarrow> negligible s"
+  using collinear_affine_hull negligible_subset
+  sorry
+
+
+subsubsection "convex hull 3 0"
+
+section "unprocessed HOL-LIGHT code"
+
+\<^cancel>\<open>
 (* let CONVEX_HULL_3_0 = prove
  (`!a b:real^N.
         convex hull {vec 0,a,b} =
@@ -27,8 +41,11 @@ begin
   EQ_TAC THEN STRIP_TAC THEN ASM_REWRITE_TAC[] THENL
    [ASM_ARITH_TAC; EXISTS_TAC `&1 - x - y` THEN ASM_ARITH_TAC]);;
  *)
+\<close>
 
-(* let INTERIOR_CONVEX_HULL_3_0 = prove
+
+\<^cancel>\<open>
+let INTERIOR_CONVEX_HULL_3_0 = prove
  (`!a b:real^2.
         ~(collinear {vec 0,a,b})
         ==> interior(convex hull {vec 0,a,b}) =
@@ -42,9 +59,11 @@ begin
   GEN_TAC THEN REPEAT(AP_TERM_TAC THEN ABS_TAC) THEN
   EQ_TAC THEN STRIP_TAC THEN ASM_REWRITE_TAC[] THEN
   ASM_REAL_ARITH_TAC);;
- *)
+\<close>
 
-(* let MEASURE_CONVEX_HULL_2_TRIVIAL = prove
+
+\<^cancel>\<open>
+let MEASURE_CONVEX_HULL_2_TRIVIAL = prove
  (`(!a:real^2. measure(convex hull {a}) = &0) /\
    (!a b:real^2. measure(convex hull {a,b}) = &0)`,
   REPEAT STRIP_TAC THEN
@@ -52,17 +71,20 @@ begin
   MATCH_MP_TAC COLLINEAR_IMP_NEGLIGIBLE THEN
   REWRITE_TAC[GSYM SEGMENT_CONVEX_HULL; CONVEX_HULL_SING] THEN
   REWRITE_TAC[COLLINEAR_SING; COLLINEAR_SEGMENT]);;
- *)
+\<close>
 
-(* let NEGLIGIBLE_SEGMENT_2 = prove
+
+\<^cancel>\<open>
+ let NEGLIGIBLE_SEGMENT_2 = prove
  (`!a b:real^2. negligible(segment[a,b])`,
   SIMP_TAC[COLLINEAR_IMP_NEGLIGIBLE; COLLINEAR_SEGMENT]);;
- *)
+\<close>
 
 (* ------------------------------------------------------------------------- *)
-(* Decomposing an additive function on a triangle.                           *)
+section "Decomposing an additive function on a triangle."
 (* ------------------------------------------------------------------------- *)
 
+\<^cancel>\<open>
 (* let TRIANGLE_DECOMPOSITION = prove
  (`!a b c d:real^2.
         d IN convex hull {a,b,c}
@@ -83,10 +105,11 @@ begin
     SIMP_TAC[SUBSET_HULL; CONVEX_CONVEX_HULL] THEN
     REWRITE_TAC[INSERT_SUBSET; EMPTY_SUBSET] THEN
     ASM_SIMP_TAC[HULL_INC; IN_INSERT]]);;
- *)
+\<close>
 
 
-(* let TRIANGLE_ADDITIVE_DECOMPOSITION = prove
+\<^cancel>\<open>
+let TRIANGLE_ADDITIVE_DECOMPOSITION = prove
  (`!f:(real^2->bool)->real a b c d.
         (!s t. compact s /\ compact t
                ==> f(s UNION t) = f(s) + f(t) - f(s INTER t)) /\
@@ -113,35 +136,53 @@ begin
            SET_RULE `s SUBSET u /\ t SUBSET u ==> (s INTER t) SUBSET u`] THEN
   ASM_REWRITE_TAC[INSERT_INTER; IN_INSERT; NOT_IN_EMPTY; INTER_EMPTY] THEN
   DISCH_TAC THEN REWRITE_TAC[INSERT_AC] THEN REAL_ARITH_TAC);;
- *)
+\<close>
+
 
 (* ------------------------------------------------------------------------- *)
-(* Vectors all of whose coordinates are integers.                            *)
+section "Vectors all of whose coordinates are integers."
 (* ------------------------------------------------------------------------- *)
 
-(* let integral_vector = define
+\<^cancel>\<open>
+let integral_vector = define
  `integral_vector(x:real^N) <=>
         !i. 1 <= i /\ i <= dimindex(:N) ==> integer(x$i)`;;
+\<close>
 
+
+\<^cancel>\<open>
 let INTEGRAL_VECTOR_VEC = prove
  (`!n. integral_vector(vec n)`,
   REWRITE_TAC[integral_vector; VEC_COMPONENT; INTEGER_CLOSED]);;
+\<close>
 
+
+\<^cancel>\<open>
 let INTEGRAL_VECTOR_STDBASIS = prove
  (`!i. integral_vector(basis i:real^N)`,
   REWRITE_TAC[integral_vector] THEN
   REPEAT STRIP_TAC THEN ASM_SIMP_TAC[BASIS_COMPONENT] THEN
   COND_CASES_TAC THEN REWRITE_TAC[INTEGER_CLOSED]);;
+\<close>
 
+
+\<^cancel>\<open>
 let INTEGRAL_VECTOR_ADD = prove
  (`!x y:real^N.
         integral_vector x /\ integral_vector y ==> integral_vector(x + y)`,
   SIMP_TAC[integral_vector; VECTOR_ADD_COMPONENT; INTEGER_CLOSED]);;
+\<close>
 
+
+\<^cancel>\<open>
 let INTEGRAL_VECTOR_SUB = prove
  (`!x y:real^N.
         integral_vector x /\ integral_vector y ==> integral_vector(x - y)`,
   SIMP_TAC[integral_vector; VECTOR_SUB_COMPONENT; INTEGER_CLOSED]);;
+\<close>
+
+
+\<^cancel>\<open>
 
 let INTEGRAL_VECTOR_ADD_LCANCEL = prove
  (`!x y:real^N.
@@ -149,8 +190,11 @@ let INTEGRAL_VECTOR_ADD_LCANCEL = prove
   MESON_TAC[INTEGRAL_VECTOR_ADD; INTEGRAL_VECTOR_SUB;
             VECTOR_ARITH `(x + y) - x:real^N = y`]);;
  *)
+\<close>
 
-(* let FINITE_BOUNDED_INTEGER_POINTS = prove
+
+\<^cancel>\<open>
+let FINITE_BOUNDED_INTEGER_POINTS = prove
  (`!s:real^N->bool. bounded s ==> FINITE {x | x IN s /\ integral_vector x}`,
   REPEAT STRIP_TAC THEN
   FIRST_ASSUM(MP_TAC o MATCH_MP BOUNDED_SUBSET_CLOSED_INTERVAL) THEN
@@ -164,20 +208,23 @@ let INTEGRAL_VECTOR_ADD_LCANCEL = prove
   CONJ_TAC THENL
    [MATCH_MP_TAC FINITE_CART THEN REWRITE_TAC[FINITE_INTSEG];
     ASM SET_TAC[]]);;
- *)
+\<close>
 
+
+\<^cancel>\<open>
 (* let FINITE_TRIANGLE_INTEGER_POINTS = prove
  (`!a b c:real^N. FINITE {x | x IN convex hull {a,b,c} /\ integral_vector x}`,
   REPEAT GEN_TAC THEN MATCH_MP_TAC FINITE_BOUNDED_INTEGER_POINTS THEN
   SIMP_TAC[FINITE_IMP_BOUNDED_CONVEX_HULL; FINITE_INSERT; FINITE_EMPTY]);;
  *)
-
+\<close>
 
 (* ------------------------------------------------------------------------- *)
-(* Properties of a basis for the integer lattice.                            *)
+section "Properties of a basis for the integer lattice."
 (* ------------------------------------------------------------------------- *)
 
-(* let LINEAR_INTEGRAL_VECTOR = prove
+\<^cancel>\<open>
+let LINEAR_INTEGRAL_VECTOR = prove
  (`!f:real^N->real^N.
         linear f
         ==> ((!x. integral_vector x ==> integral_vector(f x)) <=>
@@ -199,9 +246,10 @@ let INTEGRAL_VECTOR_ADD_LCANCEL = prove
     X_GEN_TAC `i:num` THEN STRIP_TAC THEN
     MATCH_MP_TAC INTEGER_SUM THEN
     ASM_SIMP_TAC[INTEGER_CLOSED; IN_NUMSEG]]);;
- *)
+\<close>
 
-(* 
+
+\<^cancel>\<open>
 let INTEGRAL_BASIS_UNIMODULAR = prove
  (`!f:real^N->real^N.
         linear f /\ IMAGE f integral_vector = integral_vector
@@ -244,13 +292,14 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
   DISCH_THEN(MP_TAC o AP_TERM `abs:real->real`) THEN
   REWRITE_TAC[MATRIX_I; DET_I; REAL_ABS_NUM] THEN
   ASM_SIMP_TAC[INTEGER_DET; INTEGER_ABS_MUL_EQ_1]);;
- *)
+\<close>
 
 (* ------------------------------------------------------------------------- *)
-(* Pick's theorem for an elementary triangle.                                *)
+section "Pick's theorem for an elementary triangle."
 (* ------------------------------------------------------------------------- *)
 
-(* let PICK_ELEMENTARY_TRIANGLE_0 = prove
+\<^cancel>\<open>
+let PICK_ELEMENTARY_TRIANGLE_0 = prove
  (`!a b:real^2.
         {x | x IN convex hull {vec 0,a,b} /\ integral_vector x} = {vec 0,a,b}
         ==> measure(convex hull {vec 0,a,b}) =
@@ -350,9 +399,11 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
     ASM_SIMP_TAC[INDEPENDENT_2; GSYM REAL_FRAC_EQ_0] THEN
     MP_TAC(SPEC `u:real` FLOOR_FRAC) THEN
     MP_TAC(SPEC `v:real` FLOOR_FRAC) THEN REAL_ARITH_TAC]);;
- *)
+\<close>
 
-(* let PICK_ELEMENTARY_TRIANGLE = prove
+
+\<^cancel>\<open>
+let PICK_ELEMENTARY_TRIANGLE = prove
  (`!a b c:real^2.
         {x | x IN convex hull {a,b,c} /\ integral_vector x} = {a,b,c}
         ==> measure(convex hull {a,b,c}) =
@@ -364,14 +415,15 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
   GEOM_ORIGIN_TAC `a:real^2`THEN
   SIMP_TAC[INTEGRAL_VECTOR_ADD_LCANCEL; VECTOR_ADD_RID] THEN
   REWRITE_TAC[PICK_ELEMENTARY_TRIANGLE_0]);;
- *)
+\<close>
 
 
 (* ------------------------------------------------------------------------- *)
-(* Our form of Pick's theorem holds degenerately for a flat triangle.        *)
+section "Our form of Pick's theorem holds degenerately for a flat triangle."
 (* ------------------------------------------------------------------------- *)
 
-(* let PICK_TRIANGLE_FLAT = prove
+\<^cancel>\<open>
+let PICK_TRIANGLE_FLAT = prove
  (`!a b c:real^2.
         integral_vector a /\ integral_vector b /\ integral_vector c /\
         c IN segment[a,b]
@@ -415,13 +467,14 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
     SUBGOAL_THEN `{x:real^2 | x IN {c} /\ integral_vector x} = {c}`
     SUBST1_TAC THENL [ASM SET_TAC[]; ALL_TAC] THEN
     SIMP_TAC[CARD_CLAUSES; FINITE_EMPTY; ARITH; NOT_IN_EMPTY]]);;
- *)
+\<close>
 
 (* ------------------------------------------------------------------------- *)
-(* Pick's theorem for a triangle.                                            *)
+section "Pick's theorem for a triangle."
 (* ------------------------------------------------------------------------- *)
 
-(* let PICK_TRIANGLE_ALT = prove
+\<^cancel>\<open>
+let PICK_TRIANGLE_ALT = prove
  (`!a b c:real^2.
         integral_vector a /\ integral_vector b /\ integral_vector c
         ==> measure(convex hull {a,b,c}) =
@@ -556,9 +609,11 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
   CONV_TAC NUM_REDUCE_CONV THEN
   REWRITE_TAC[SET_RULE `{x | x IN s /\ P x} = s INTER P`] THEN
   REWRITE_TAC[INSERT_AC] THEN REAL_ARITH_TAC);;
- *)
+\<close>
 
-(* let PICK_TRIANGLE = prove
+
+\<^cancel>\<open>
+let PICK_TRIANGLE = prove
  (`!a b c:real^2.
         integral_vector a /\ integral_vector b /\ integral_vector c
         ==> measure(convex hull {a,b,c}) =
@@ -619,13 +674,15 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
              FINITE_EMPTY] THEN CONV_TAC NUM_REDUCE_CONV THEN
     REWRITE_TAC[SET_RULE `{x | x IN s /\ P x} = s INTER P`] THEN
     REWRITE_TAC[SEGMENT_CONVEX_HULL; INSERT_AC] THEN ARITH_TAC]);;
- *)
+\<close>
+
 
 (* ------------------------------------------------------------------------- *)
-(* Parity lemma for segment crossing a polygon.                              *)
+section "Parity lemma for segment crossing a polygon."
 (* ------------------------------------------------------------------------- *)
 
-(* let PARITY_LEMMA = prove
+\<^cancel>\<open>
+let PARITY_LEMMA = prove
  (`!a b c d p x:real^2.
         simple_path(p ++ linepath(a,b)) /\
         pathstart p = b /\ pathfinish p = a /\
@@ -1036,30 +1093,41 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
                        REAL_LT_01]];
         REWRITE_TAC[IN_BALL; IN_INTER; IN_ELIM_THM] THEN
         ONCE_REWRITE_TAC[DIST_SYM] THEN ASM_REWRITE_TAC[]]]]);;
- *)
+\<close>
 
 (* ------------------------------------------------------------------------- *)
-(* Polygonal path; 0 in the empty case is just for linear invariance.        *)
+section "Polygonal path"
+(* 0 in the empty case is just for linear invariance.                        *)
 (* Note that we *are* forced to assume non-emptiness for translation.        *)
 (* ------------------------------------------------------------------------- *)
 
+fun polygonal_path where
+  "polygonal_path [] = linepath 0 0" |
+  "polygonal_path [a] = linepath a a" |
+  "polygonal_path (a#b#c) = (linepath a b)" (* @ polygonal_path b # c" *)
+
+\<^cancel>\<open>
 (* let polygonal_path = define
  `polygonal_path[] = linepath(vec 0,vec 0) /\
   polygonal_path[a] = linepath(a,a) /\
   polygonal_path [a;b] = linepath(a,b) /\
   polygonal_path (CONS a (CONS b (CONS c l))) =
        linepath(a,b) ++ polygonal_path(CONS b (CONS c l))`;;
- *)
-  
-(* let POLYGONAL_PATH_CONS_CONS = prove
+\<close>
+
+
+\<^cancel>\<open>
+let POLYGONAL_PATH_CONS_CONS = prove
  (`!a b p. ~(p = [])
            ==> polygonal_path(CONS a (CONS b p)) =
                linepath(a,b) ++ polygonal_path(CONS b p)`,
   GEN_TAC THEN GEN_TAC THEN LIST_INDUCT_TAC THEN
   REWRITE_TAC[polygonal_path]);;
- *)
+\<close>
 
-(* let POLYGONAL_PATH_TRANSLATION = prove
+
+\<^cancel>\<open>
+let POLYGONAL_PATH_TRANSLATION = prove
  (`!a b p. polygonal_path (MAP (\x. a + x) (CONS b p)) =
          (\x. a + x) o (polygonal_path (CONS b p))`,
   GEN_TAC THEN ONCE_REWRITE_TAC[SWAP_FORALL_THM] THEN
@@ -1069,13 +1137,16 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
   MATCH_MP_TAC list_INDUCT THEN
   ASM_SIMP_TAC[MAP; polygonal_path; LINEPATH_TRANSLATION] THEN
   REWRITE_TAC[JOINPATHS_TRANSLATION]);;
- *)
-
-(* add_translation_invariants [POLYGONAL_PATH_TRANSLATION];;
- *)
+\<close>
 
 
-(* let POLYGONAL_PATH_LINEAR_IMAGE = prove
+\<^cancel>\<open>
+add_translation_invariants [POLYGONAL_PATH_TRANSLATION];;
+\<close>
+
+
+\<^cancel>\<open>
+let POLYGONAL_PATH_LINEAR_IMAGE = prove
  (`!f p. linear f ==> polygonal_path (MAP f p) = f o polygonal_path p`,
   REWRITE_TAC[RIGHT_FORALL_IMP_THM] THEN GEN_TAC THEN DISCH_TAC THEN
   MATCH_MP_TAC list_INDUCT THEN
@@ -1090,9 +1161,11 @@ let INTEGRAL_BASIS_UNIMODULAR = prove
   ASM_SIMP_TAC[GSYM JOINPATHS_LINEAR_IMAGE; GSYM LINEPATH_LINEAR_IMAGE]);;
 
 add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
- *)
+\<close>
 
-(* let PATHSTART_POLYGONAL_PATH = prove
+
+\<^cancel>\<open>
+let PATHSTART_POLYGONAL_PATH = prove
  (`!p. pathstart(polygonal_path p) = if p = [] then vec 0 else HD p`,
   MATCH_MP_TAC list_INDUCT THEN
   REWRITE_TAC[polygonal_path; PATHSTART_LINEPATH] THEN
@@ -1100,9 +1173,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
   REWRITE_TAC[polygonal_path; PATHSTART_LINEPATH; NOT_CONS_NIL; HD] THEN
   GEN_TAC THEN MATCH_MP_TAC list_INDUCT THEN
   REWRITE_TAC[polygonal_path; PATHSTART_LINEPATH; HD; PATHSTART_JOIN]);;
- *)
+\<close>
 
-  (* let PATHFINISH_POLYGONAL_PATH = prove
+
+\<^cancel>\<open>
+let PATHFINISH_POLYGONAL_PATH = prove
  (`!p. pathfinish(polygonal_path p) = if p = [] then vec 0 else LAST p`,
   MATCH_MP_TAC list_INDUCT THEN
   REWRITE_TAC[polygonal_path; PATHFINISH_LINEPATH] THEN
@@ -1110,9 +1185,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
   REWRITE_TAC[polygonal_path; PATHFINISH_LINEPATH; NOT_CONS_NIL; LAST] THEN
   GEN_TAC THEN MATCH_MP_TAC list_INDUCT THEN
   REWRITE_TAC[polygonal_path; PATHFINISH_LINEPATH; PATHFINISH_JOIN]);;
- *)
+\<close>
 
-(* let VERTICES_IN_PATH_IMAGE_POLYGONAL_PATH = prove
+
+\<^cancel>\<open>
+let VERTICES_IN_PATH_IMAGE_POLYGONAL_PATH = prove
  (`!p:(real^N)list. set_of_list p SUBSET path_image (polygonal_path p)`,
   MATCH_MP_TAC list_INDUCT THEN REWRITE_TAC[set_of_list; EMPTY_SUBSET] THEN
   GEN_TAC THEN MATCH_MP_TAC list_INDUCT THEN
@@ -1127,9 +1204,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
     SIMP_TAC[PATH_IMAGE_JOIN; PATHFINISH_LINEPATH; PATHSTART_POLYGONAL_PATH;
         HD; NOT_CONS_NIL; IN_UNION; ENDS_IN_SEGMENT; PATH_IMAGE_LINEPATH] THEN
     ASM SET_TAC[]]);;
- *)
+\<close>
 
-(* let ARC_POLYGONAL_PATH_IMP_DISTINCT = prove
+
+\<^cancel>\<open>
+let ARC_POLYGONAL_PATH_IMP_DISTINCT = prove
  (`!p:(real^N)list. arc(polygonal_path p) ==> PAIRWISE (\x y. ~(x = y)) p`,
   MATCH_MP_TAC list_INDUCT THEN
   REWRITE_TAC[polygonal_path; ARC_LINEPATH_EQ] THEN
@@ -1152,9 +1231,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
     (REWRITE_RULE[SUBSET] VERTICES_IN_PATH_IMAGE_POLYGONAL_PATH))) THEN
   ASM_REWRITE_TAC[IN_SET_OF_LIST; MEM; DE_MORGAN_THM; GSYM ALL_MEM] THEN
   MESON_TAC[]);;
- *)
+\<close>
 
-(* let PATH_POLYGONAL_PATH = prove
+
+\<^cancel>\<open>
+let PATH_POLYGONAL_PATH = prove
  (`!p:(real^N)list. path(polygonal_path p)`,
   MATCH_MP_TAC list_INDUCT THEN
   REWRITE_TAC[polygonal_path; PATH_LINEPATH] THEN
@@ -1164,9 +1245,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
   REWRITE_TAC[polygonal_path; PATH_LINEPATH] THEN
   SIMP_TAC[PATH_JOIN; PATHFINISH_LINEPATH; PATHSTART_POLYGONAL_PATH;
            NOT_CONS_NIL; HD; PATH_LINEPATH]);;
- *)
+\<close>
 
-(* let PATH_IMAGE_POLYGONAL_PATH_SUBSET_CONVEX_HULL = prove
+
+\<^cancel>\<open>
+let PATH_IMAGE_POLYGONAL_PATH_SUBSET_CONVEX_HULL = prove
  (`!p. ~(p = [])
        ==> path_image(polygonal_path p) SUBSET convex hull (set_of_list p)`,
   MATCH_MP_TAC list_INDUCT THEN REWRITE_TAC[] THEN GEN_TAC THEN
@@ -1184,9 +1267,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
        (REWRITE_RULE[IMP_CONJ] SUBSET_TRANS)) THEN
       MATCH_MP_TAC HULL_MONO THEN REWRITE_TAC[set_of_list] THEN
       SET_TAC[]]]);;
- *)
+\<close>
 
-(* let PATH_IMAGE_POLYGONAL_PATH_SUBSET_SEGMENTS = prove
+
+\<^cancel>\<open>
+let PATH_IMAGE_POLYGONAL_PATH_SUBSET_SEGMENTS = prove
  (`!p x:real^N.
         arc(polygonal_path p) /\ 3 <= LENGTH p /\
         x IN path_image(polygonal_path p)
@@ -1255,21 +1340,25 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
               ==> F`) o el 2 o CONJUNCTS) THEN
         MAP_EVERY EXISTS_TAC [`segment[d:real^N,e]`; `a:real^N`] THEN
         ASM_REWRITE_TAC[ENDS_IN_SEGMENT] THEN ASM_MESON_TAC[]]]]);;
- *)
+\<close>
+
 
 (* ------------------------------------------------------------------------- *)
-(* Rotating the starting point to move a preferred vertex forward.           *)
+section "Rotating the starting point to move a preferred vertex forward."
 (* ------------------------------------------------------------------------- *)
 
-(* let SET_OF_LIST_POLYGONAL_PATH_ROTATE = prove
+\<^cancel>\<open>
+let SET_OF_LIST_POLYGONAL_PATH_ROTATE = prove
  (`!p. ~(p = []) ==> set_of_list(CONS (LAST p) (BUTLAST p)) = set_of_list p`,
   REPEAT STRIP_TAC THEN
   FIRST_X_ASSUM(fun th -> GEN_REWRITE_TAC (RAND_CONV o RAND_CONV)
    [GSYM(MATCH_MP APPEND_BUTLAST_LAST th)]) THEN
   REWRITE_TAC[SET_OF_LIST_APPEND; set_of_list] THEN SET_TAC[]);;
- *)
+\<close>
 
-(* let PROPERTIES_POLYGONAL_PATH_SNOC = prove
+
+\<^cancel>\<open>
+let PROPERTIES_POLYGONAL_PATH_SNOC = prove
  (`!p d:real^N.
         2 <= LENGTH p
         ==> path_image(polygonal_path(APPEND p [d])) =
@@ -1349,9 +1438,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
       DISCH_THEN SUBST1_TAC] THEN
     ASM_REWRITE_TAC[] THEN
     REWRITE_TAC[PATHSTART_JOIN; PATHSTART_POLYGONAL_PATH; NOT_CONS_NIL; HD]]);;
- *)
+\<close>
 
-(* let PATH_IMAGE_POLYGONAL_PATH_ROTATE = prove
+
+\<^cancel>\<open>
+let PATH_IMAGE_POLYGONAL_PATH_ROTATE = prove
  (`!p:(real^N)list.
         2 <= LENGTH p /\ LAST p = HD p
         ==> path_image(polygonal_path(APPEND (TL p) [HD(TL p)])) =
@@ -1376,9 +1467,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
            PATHSTART_POLYGONAL_PATH; PATHFINISH_POLYGONAL_PATH;
            LAST; NOT_CONS_NIL; HD] THEN
   REWRITE_TAC[UNION_ACI]);;
- *)
+\<close>
 
-(* let SIMPLE_PATH_POLYGONAL_PATH_ROTATE = prove
+
+\<^cancel>\<open>
+let SIMPLE_PATH_POLYGONAL_PATH_ROTATE = prove
  (`!p:(real^N)list.
         2 <= LENGTH p /\ LAST p = HD p
         ==> (simple_path(polygonal_path(APPEND (TL p) [HD(TL p)])) =
@@ -1403,9 +1496,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
                PATHFINISH_LINEPATH; PATHSTART_POLYGONAL_PATH;
                PATHFINISH_POLYGONAL_PATH; LAST; NOT_CONS_NIL; HD] THEN
   REWRITE_TAC[INSERT_AC; INTER_ACI; CONJ_ACI]);;
- *)
+\<close>
 
-(* let ROTATE_LIST_TO_FRONT_1 = prove
+
+\<^cancel>\<open>
+let ROTATE_LIST_TO_FRONT_1 = prove
  (`!P l a:A.
       (!l. P(l) ==> 3 <= LENGTH l /\ LAST l = HD l) /\
       (!l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\
@@ -1455,9 +1550,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
     ASM_REWRITE_TAC[LENGTH] THEN CONJ_TAC THENL [ASM_ARITH_TAC; ALL_TAC] THEN
     COND_CASES_TAC THENL [ALL_TAC; ASM_ARITH_TAC] THEN
     ASM_SIMP_TAC[EL_TL; ARITH_RULE `0 < k ==> k - 1 + 1 = k`]]);;
- *)
+\<close>
 
-(* let ROTATE_LIST_TO_FRONT_0 = prove
+
+\<^cancel>\<open>
+let ROTATE_LIST_TO_FRONT_0 = prove
  (`!P l a:A.
       (!l. P(l) ==> 3 <= LENGTH l /\ LAST l = HD l) /\
       (!l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\
@@ -1475,12 +1572,14 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
   MATCH_MP_TAC list_INDUCT THEN REWRITE_TAC[LENGTH; ARITH] THEN
   GEN_TAC THEN MATCH_MP_TAC list_INDUCT THEN REWRITE_TAC[LENGTH; ARITH] THEN
   REWRITE_TAC[APPEND; HD; TL; num_CONV `1`; EL]);;
- *)
+\<close>
+
 
 (* ------------------------------------------------------------------------- *)
-(* We can pick a transformation to make all y coordinates distinct.          *)
+section "We can pick a transformation to make all y coordinates distinct."
 (* ------------------------------------------------------------------------- *)
 
+\<^cancel>\<open>
 (* let DISTINGUISHING_ROTATION_EXISTS_PAIR = prove
  (`!x y. ~(x = y)
          ==> FINITE {t | &0 <= t /\ t < &2 * pi /\
@@ -1500,9 +1599,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
   REWRITE_TAC[IN_ELIM_THM] THEN REPEAT STRIP_TAC THEN
   MATCH_MP_TAC ARG_ROTATE2D_UNIQUE_2PI THEN EXISTS_TAC `x - y:complex` THEN
   ASM_REWRITE_TAC[COMPLEX_SUB_0]);;
- *)
+\<close>
 
-(* let DISTINGUISHING_ROTATION_EXISTS = prove
+
+\<^cancel>\<open>
+let DISTINGUISHING_ROTATION_EXISTS = prove
  (`!s. FINITE s ==> ?t. pairwise (\x y. ~(x$2 = y$2)) (IMAGE (rotate2d t) s)`,
   REPEAT STRIP_TAC THEN
   SUBGOAL_THEN
@@ -1529,9 +1630,11 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
     REWRITE_TAC[pairwise; IN_ELIM_THM] THEN
     REWRITE_TAC[IMP_CONJ; RIGHT_FORALL_IMP_THM; FORALL_IN_IMAGE] THEN
     ASM_REWRITE_TAC[ROTATE2D_EQ] THEN MESON_TAC[]]);;
- *)
+\<close>
 
-(* let DISTINGUISHING_ROTATION_EXISTS_POLYGON = prove
+
+\<^cancel>\<open>
+let DISTINGUISHING_ROTATION_EXISTS_POLYGON = prove
  (`!p:(real^2)list.
         ?f q. (?g. orthogonal_transformation g /\ f = MAP g) /\
               (!x y. MEM x q /\ MEM y q /\ ~(x = y) ==> ~(x$2 = y$2)) /\
@@ -1551,13 +1654,15 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
   REWRITE_TAC[GSYM IN_SET_OF_LIST; SET_OF_LIST_MAP] THEN
   REWRITE_TAC[IMP_CONJ; RIGHT_FORALL_IMP_THM; FORALL_IN_IMAGE] THEN
   ASM_REWRITE_TAC[IN_SET_OF_LIST; ROTATE2D_EQ] THEN ASM_MESON_TAC[]);;
- *)
+\<close>
+
 
 (* ------------------------------------------------------------------------- *)
-(* Proof that we can chop a polygon's inside in two.                         *)
+section "Proof that we can chop a polygon's inside in two."
 (* ------------------------------------------------------------------------- *)
 
-(* let POLYGON_CHOP_IN_TWO = prove
+\<^cancel>\<open>
+let POLYGON_CHOP_IN_TWO = prove
  (`!p:(real^2)list.
         simple_path(polygonal_path p) /\
         pathfinish(polygonal_path p) = pathstart(polygonal_path p) /\
@@ -3111,12 +3216,23 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
                       REAL_MUL_LID]];
     UNDISCH_TAC `segment[a:real^2,c] SUBSET segment[u,v]` THEN
     ASM_REWRITE_TAC[SUBSET_SEGMENT]]);;
- *)
+\<close>
 
 (* ------------------------------------------------------------------------- *)
-(* Hence the final Pick theorem by induction on number of polygon segments.  *)
+section \<open>Hence the final Pick theorem by induction on number of polygon segments.\<close>
 (* ------------------------------------------------------------------------- *)
 
+
+theorem pick's_theorem:
+  assumes "x \<in> p \<Longrightarrow> integral_vector x"
+      and "simple_path (polygonal_path p)"
+      and "pathfinish (polygonal_path p) = pathstart (polygonal_path p)"
+    shows "measure(inside(path_image(polygonal_path p)))
+          = card {x. x\<in>inside(path_image(polygonal_path p)) \<and> integral_vector x}
+          + card {x. x\<in>path_image(polygonal_path p) \<and> integral_vector x} / 2 - 1"
+  sorry
+
+\<^cancel>\<open>
 (* let PICK = prove
  (`!p:(real^2)list.
         (!x. MEM x p ==> integral_vector x) /\
@@ -3748,6 +3864,6 @@ add_linear_invariants [POLYGONAL_PATH_LINEAR_IMAGE];;
            BOUNDED_SEGMENT; FINITE_INSERT] THEN
   ASM_REWRITE_TAC[IN_INSERT; IN_ELIM_THM; ENDS_NOT_IN_SEGMENT] THEN
   REWRITE_TAC[REAL_OF_NUM_ADD; ARITH_RULE `SUC(SUC n) = n + 2`]);;
- *)
+\<close>
 
 end
