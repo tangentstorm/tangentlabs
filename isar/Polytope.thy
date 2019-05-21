@@ -8,12 +8,14 @@ begin
 
 subsection \<open>Faces of a (usually convex) set\<close>
 
+declare[[show_consts=true,show_brackets=true]]
+
 definition face_of :: "['a::real_vector set, 'a set] \<Rightarrow> bool" (infixr "(face'_of)" 50)
   where
   "T face_of S \<longleftrightarrow>
         T \<subseteq> S \<and> convex T \<and>
         (\<forall>a \<in> S. \<forall>b \<in> S. \<forall>x \<in> T. x \<in> open_segment a b \<longrightarrow> a \<in> T \<and> b \<in> T)"
-
+       
 lemma face_ofD: "\<lbrakk>T face_of S; x \<in> open_segment a b; a \<in> S; b \<in> S; x \<in> T\<rbrakk> \<Longrightarrow> a \<in> T \<and> b \<in> T"
   unfolding face_of_def by blast
 
