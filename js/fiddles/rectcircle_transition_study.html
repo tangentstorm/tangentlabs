@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>rect/circle transition study</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      html { font-family:verdana,arial,sans-serif; background: #336699; }
+html, body { padding: 0; margin: 0; overflow:hidden; }
+svg { width: 640px; height: 480px;}
+h1 { color:#ccc; background:black; width:100%; margin:0; font-size:16pt; padding:11px; }
+h1 strong { color:white; }
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+# scene data
+data = [
+	[0, 100, 100, 0]
+ 	[0, 250, 100, 1]
+	[1, 150, 110, 0]]
+
+# drag and drop helpers
+drag = ->
+  d3.select(this).attr
+    x: d3.event.x
+    y: d3.event.y
+
+bitOrigin = ->
+  bit = d3.select(this)
+  x: bit.attr('x'), y: bit.attr('y')
+
+onDrag = d3.behavior.drag()
+  .origin bitOrigin
+  .on 'dragend', ->
+    e = d3.event.sourceEvent
+    if e.movementX or e.movementY then e.preventDefault()
+  .on "drag", drag
+
+bitColor = (d)-> if d[0] then '#333' else '#eee'
+bitShape = (d)-> if d[3] then 1 else 16
+
+resize_svg = ->
+  html = document.querySelector('html')
+  h1   = document.querySelector('h1')
+  d3.select('svg').style
+    border: 'none'
+    height: html.clientHeight - h1.clientHeight
+    width : html.clientWidth
+
+# main program
+resize_svg()
+    
+bits = d3.select('#stage').selectAll('rect').data(data)
+bits.enter().append 'rect'
+	.attr
+    filter: 'url(#shadow)'
+    width: 32, height: 32
+    fill: bitColor
+    rx: bitShape, ry: bitShape
+    x: (d)->d[1]
+    y: (d)->d[2]
+  .on 'click', (d)->
+    if not d3.event.defaultPrevented
+      d[0] = 1-d[0]
+      d3.select(this).transition().duration(100).attr fill: bitColor
+  .on 'dblclick', (d)->
+    d[3] = 1-d[3]
+    d3.select(this).transition()
+	  	.ease 'linear'
+    	.duration 300
+    	.attr rx: bitShape, ry: bitShape
+  .call onDrag
+
+
+
+
+  </script>
+
+<!-- Title: rect/circle transition study --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: D3 --><!-- Version: 13 --><!-- Latest_version: 13 --><!-- Url: //jsfiddle.net/tangentstorm/d5LkzhLL/ --><!-- Created date: 2016-02-13 01:01:14 --></head>
+<body>
+    <h1>drag, click, or double click</h1>
+<svg id="stage">
+  <defs>
+    <filter id="shadow" width="200%" height="200%">
+      <feoffset dx="2" dy="2" in="SourceAlpha"/>
+      <fegaussianblur result="blur" stddeviation="1.5"/>
+      <feblend in="SourceGraphic" in2="blur" mode="normal"/>
+    </filter>
+  </defs>
+</svg>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "d5LkzhLL"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

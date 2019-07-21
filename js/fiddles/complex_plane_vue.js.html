@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>complex plane : vue.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+      html,body { background: #369; }
+input[type=number] { width: 64px; }
+
+svg { border: solid #369 2px; background: white; }
+line[stroke=''] { stroke: #888; }
+line, circle { stroke-width: 2px;
+  vector-effect: non-scaling-stroke; }
+.axis { stroke: #fcc; stroke-width: 2px; }
+.unit { stroke: #fcc; stroke-width: 2px; fill:none }
+.point { fill: #888; }
+.minor-grid line { stroke: #eef; stroke-width: 1px; }
+.major-grid line { stroke: #bef; stroke-width: 1px; }
+.super-grid line { stroke: #9bf; stroke-width: 1px; }
+.spark { fill:gold; }
+.trace line { stroke-width:2px; opacity: 0.25; }
+.trace circle { stroke: none; }
+
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+console.clear()
+
+const TAU = 2 * Math.PI;
+
+function snap(x, dx) { return Math.round(x/dx)*dx }
+function clamp(x, lo, hi) { return Math.max(lo, Math.min(hi, x))}
+
+function csq(r,j) {
+  // complex square. (r+ji)(r+ji) = (r^2-j^2) + 2*r*ji
+  return {x: r*r-j*j, y: 2*r*j }}
+
+// debugger for mouse events
+class EventLoggerTool {
+  constructor(){ this.verbose = false }
+
+  hiLvl(x) { console.log(x) }
+  click(p, btn, e) { this.hiLvl(['click', p, e ]) }
+  dClick(p, btn, e) { this.hiLvl(['dClick', p, e ])}
+  dragStart(p0, e) { this.hiLvl(['dragStart', p, e]) }
+  drag(p0, p1, e) { if(this.verbose) this.hiLvl(['drag', p0, p1, e]) }
+  dragEnd(p0, p1, e) { this.hiLvl(['dragEnd', p0, p1, e]) }
+  wheel(p, e) { this.hiLvl(['wheel', p, e])}
+
+  loLvl(m,p,b) { console.log(`${m}((${p.x},${p.y}),${b})`) }
+  msIn(p, b) { this.loLvl('msIn', p, b) }
+  msMv(p, b) { if(this.verbose) this.lowLvl('msMv', p, b) }
+  msDn(p, b) { this.loLvl('msDn', p, b) }
+  msUp(p, b) { this.loLvl('msUp', p, b) }
+  msEx(p, b) { this.loLvl('msEx', p, b) } }
+
+/// default tool that handles all events by ignoring them
+class Tool {
+  constructor(scn) { this.scn = scn }
+  click(p, btn, e) { }
+  dClick(p, btn, e) { }
+  dragStart(p0, btn, e) { }
+  drag(p0, p1, e) { }
+  dragEnd(p0, p1, e) { }
+  wheel(p, e) { }
+  msIn(p, b) { }
+  msMv(p, b) { }
+  msDn(p, b) { }
+  msUp(p, b) { }
+  msEx(p, b) { }}
+  
+class PanZoomTool extends Tool {
+	drag(p0, p1, e) {
+    this.scn.cx += p0.x-p1.x;
+    this.scn.cy += p0.y-p1.y; }
+  wheel(p, e) {
+    let dy = e.deltaY;
+    if (dy<0) this.scn.zm += 1
+    if (dy>0) this.scn.zm -= 1 }}
+    
+class DrawPointsTool extends PanZoomTool {
+	click(p) { this.scn.points.push({x:p.x, y:p.y}) }}
+  
+class SquareTraceTool extends PanZoomTool {
+	click(p) { 
+    this.scn.tracks.push({p0: p, p1: csq(p.x, p.y), color:"#666" }) }}
+    
+
+/// generic mouse listener that handles custom state machine for
+/// clicking and dragging. This also gives us a single overridable
+/// method (getPt) for coordinate system transformations.
+let MouseListener = Vue.component('mouse-listener', {
+  props: ['tool'],
+  data() { return { down:false, dragging:false, inHand: null } },
+  methods: {
+    getPt(e) { return [e.clientX, e.clientY] },
+    dispatch(e,method) { this.tool[method](this.getPt(e), e.buttons) },
+    dclick(e) { this.tool.dClick(this.getPt(e), e.button, e); },
+    msDn(e) { this.down = 1; this.p0 = this.getPt(e); this.dispatch(e, 'msDn') },
+    msUp(e) {
+      if (this.dragging) this.tool.dragEnd(this.p0, this.getPt(e), e);
+      else if (this.down) { // ignore case where mouse down on enter
+      	this.tool.click(this.p0, e); }
+      this.dragging = this.down = 0; this.dispatch(e, 'msUp') },
+    msMv(e) {
+      this.dragging = this.down;
+      if (this.dragging) this.tool.drag(this.p0, this.getPt(e), e);
+      this.dispatch(e, 'msMv') },
+    msIn(e) { this.dispatch(e, 'msIn') },
+    msEx(e) { this.dispatch(e, 'msEx') },
+    wheel(e) { this.tool.wheel(this.getPt(e), e) } }})
+    
+Vue.component('trace', {
+	props: ['x1', 'y1', 'x2', 'y2', 'color'],
+  template: `
+  <g class="trace">
+  	<line :stroke="color" :x1="x1" :y1="y1" :x2="x2" :y2="y2"/>
+    <circle :cx="x1" :cy="y1" :fill="color" r="0.05"/>
+    <circle :cx="x2" :cy="y2" :fill="color" r="0.05"/>
+  </g>`});
+
+Vue.component('grid', {
+  mixins: [MouseListener],
+  props: ['snap', 'cx', 'cy', 'cw', 'ch'],
+  methods: {
+    getPt(e) { // @override MouseListener
+			let svg = this.$el, c = svg.getClientRects()[0], p = svg.createSVGPoint();
+      p.x = e.clientX - c.x; p.y = e.clientY - c.y;
+      p = p.matrixTransform(svg.getCTM().inverse())
+      if (this.snap) {p.x = snap(p.x, 0.25); p.y = snap(p.y, 0.25) }
+      return p },
+    xTicks(dx){ return d3.range(snap(this.x1,dx),snap(this.x2+dx,dx), dx)},
+    yTicks(dy){ return d3.range(snap(this.y1,dy),snap(this.y2+dy,dy), dy)}},
+  computed: {
+    showMinors() { return this.cw <= 10 },
+    x1() { return this.cw/-2 + this.cx }, x2(){ return this.cw/2 + this.cx },
+    y1() { return this.ch/-2 + this.cy }, y2(){ return this.ch/2 + this.cy },
+    viewBox() { return [this.x1, this.y1, this.cw, this.ch].join(' ') }},
+  template: `
+  <svg :viewBox="viewBox" @dblclick="dclick"
+    @mouseenter="msIn" @mousemove="msMv" @mousedown="msDn" @mouseup="msUp"
+    @mouseleave="msEx" @wheel="wheel">
+    <g class="minor-grid" v-if="showMinors">
+      <line v-for="y in this.yTicks(0.25)" :x1="x1" :y1="y" :x2="x2" :y2="y"/>
+      <line v-for="x in this.xTicks(0.25)" :x1="x" :y1="y1" :x2="x" :y2="y2"/>
+    </g>
+    <g class="major-grid">
+      <line v-for="y in this.yTicks(1)" :x1="x1" :y1="y" :x2="x2" :y2="y"/>
+      <line v-for="x in this.xTicks(1)" :x1="x" :y1="y1" :x2="x" :y2="y2"/>
+    </g>
+    <g class="super-grid">
+      <line v-for="y in this.yTicks(10)" :x1="x1" :y1="y" :x2="x2" :y2="y"/>
+      <line v-for="x in this.xTicks(10)" :x1="x" :y1="y1" :x2="x" :y2="y2"/>
+    </g>
+    <line class="axis" :x1="x1" y1="0" :x2="x2" y2="0"/>
+    <line class="axis" x1="0" :y1="y1" x2="0" :y2="y2"/>
+    <slot/>
+  </svg>` })
+
+vm = new Vue({
+  el:'#app',
+  data() { return {
+    cx:1, cy:0, zm: 12, snap:1,
+    points: [], tracks: [],
+    spark: { x: 1, y: 0 },  x:2, loops:4,
+    tool:'draw points', tools: { 
+      'draw points': new DrawPointsTool(this),
+      'trace squares': new SquareTraceTool(this),
+      'pan/zoom': new PanZoomTool(this),
+  	  'do nothing': new Tool(this),
+      'log events': new EventLoggerTool() } }},
+  methods: {
+    rings() {
+      let step = TAU/60;
+      d3.range(0, TAU, step).map(t=> {
+        let scale = 1.1,
+          x = scale * Math.cos(t),
+          y = scale * Math.sin(-t),
+          c = d3.interpolateRainbow(t/TAU),
+          p = {x, y};
+        this.points.push(p);
+        this.tracks.push({p0: p, p1: csq(x, y), color:c}) }) },
+    clear() { this.points=[], this.tracks=[], this.spark={x:1, y:0} },
+    spin() {
+      const DURATION = 2000 * this.loops;
+      let tm = d3.timer(function(ts) {
+      if (ts>DURATION) { vm.step(DURATION); tm.stop(); }
+      else vm.step(ts, 1); })},
+  	step(ts) {
+      const DURATION = 2000;
+      let s = clamp(ts/DURATION, 0, this.loops), t = s*TAU;
+      this.spark.x = (this.x**s) * Math.cos( t);
+      this.spark.y = (this.x**s) * Math.sin(-t);
+      this.points.push({x:this.spark.x, y:this.spark.y})} }})
+
+vm.rings()
+
+    }
+
+  //]]></script>
+
+<!-- Title: complex plane : vue.js --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: Vue --><!-- Version: 453 --><!-- Latest_version: 453 --><!-- Url: //jsfiddle.net/tangentstorm/53k7ejfw/ --><!-- Created date: 2019-07-15 13:01:51 --></head>
+<body>
+    <div id="app">
+  <form>
+    <label>snap: <input v-model="snap" type="checkbox"></label>
+    <label>tool:
+      <select v-model="tool">
+        <option v-for="t in Object.keys(tools)">{{t}}</option>
+      </select>
+    </label>
+    <label>x: <input v-model="x" type="number"></label>
+    <button type="button" @click="spin">spin</button>
+    <button type="button" @click="clear">clear</button>
+  </form>
+  <grid width="512" height="512" :cx="cx" :cy="cy" :cw="zm" :ch="zm" :snap="snap" :tool="tools[tool]">
+    <circle v-for="r in [1,2,4,8,16,32]" class="unit" cx="0" cy="0" :r="r"></circle>
+    <circle class="unit" cx="0" cy="0" r="2"></circle>
+    <circle class="unit" cx="0" cy="0" r="4"></circle>
+    <circle class="unit" cx="0" cy="0" r="8"></circle>
+    <circle class="point" v-for="p in points" :cx="p.x" :cy="p.y" r="0.025"></circle>
+    <line x1="0" y1="0" :x2="spark.x" :y2="spark.y"></line>
+    <circle class="spark" :cx="spark.x" :cy="spark.y" r="0.025"></circle>
+    <trace v-for="t in tracks" :color="t.color" :x1="t.p0.x" :y1="t.p0.y" :x2="t.p1.x" :y2="t.p1.y"></trace>
+ </grid>
+</div>
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "53k7ejfw"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>pl/0 ebnf</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      body { font-family: "consolas", monospace;}
+def { display: block; }
+alt[box="v"] { display: block; margin-left: 10px; }
+alt[box="v"]:before { content: ":"; visibility: hidden;  }
+alt[box="v"] or {content: "|"; display: block; }
+alt[box="h"] or { display: inline-block; }
+
+def:after { content: "."; color: blue; }
+or:before { content: "|"; color: blue; display: inline; }
+orp:before { content: "{"; color: blue; }
+orp { display: inline-block; vertical-align:top; }
+orp:after { content: "}"; color: blue; }
+
+opt:before { content: "[ "; color: blue; }
+opt { display: inline-block; }
+opt:after { content: " ]"; color: blue; }
+
+body { line-height: 150%; }
+def[box="v"] opt, def[box="v"] orp,def[box="v"] seq { display: block; margin-left:10px; }
+def { margin: 5px; }
+def:before { content: attr(rule) ":"; background: #ddf; padding: 2px; box-shadow: 0.5px 0.5px 2px #999;  }
+
+ref:before { content: attr(rule); background: #ffe; font-style: italic; padding: 2px; box-shadow: 0.5px 0.5px 2px #999;  }
+lit:before { content: attr(tok); background: white; padding: 2px; box-shadow: 0.5px 0.5px 5px #ccc; }
+
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+
+
+    }
+
+  //]]></script>
+
+<!-- Title: pl/0 ebnf --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: No-Library --><!-- Version: 4 --><!-- Latest_version: 4 --><!-- Url: //jsfiddle.net/tangentstorm/p8b4rpaf/ --><!-- Created date: 2016-03-02 02:02:12 --></head>
+<body>
+    <h1>PL/0 Syntax</h1>
+
+<def rule="program">
+  <ref rule="block"> <lit tok=".">
+</lit></ref></def>
+
+<def rule="block" box="v">
+   <opt><lit tok="const"> <rep sep=","> <ref rule="ident"> <lit tok="="> <ref rule="number"> </ref></lit></ref></rep> <lit tok=";"></lit></lit></opt>
+    <opt><lit tok="var"> <rep sep=","><ref rule="ident"></ref></rep> <lit tok=";"></lit></lit></opt>
+    <orp sep="\n">
+      <lit tok="procedure"> <ref rule="ident"> <lit tok=";"> <br> 
+      &#xA0; <ref rule="block"> <lit tok=";">
+    </lit></ref></lit></ref></lit></orp>
+    <seq><ref rule="statement"></ref></seq>
+</def>
+
+<def rule="statement">
+  <alt box="v">
+    <ref rule="ident"> <lit tok=":="> <ref rule="expression">
+  <or>
+    <lit tok="call"> <ref rule="ident">
+  <or>
+    <lit tok="begin">
+      <ind><orp sep=";\n"><ref rule="statement"></ref></orp></ind>
+    <lit tok="end">
+  <or>
+    <lit tok="if"> <ref rule="condition"> <lit tok="then"> <ref rule="statement">
+  <or>
+    <lit tok="while"> <ref rule="condition"> <lit tok="do"> <ref rule="statement">
+  </ref></lit></ref></lit></or></ref></lit></ref></lit></or></lit></lit></or></ref></lit></or></ref></lit></ref></alt>
+</def>
+
+<def rule="condition">
+  <alt box="v">
+    <lit tok="odd"> <ref rule="expression">
+  <or>
+    <ref rule="expression">
+    <alt box="h"> <lit tok="="> <or> <lit tok="&#x2260;"> <or> <lit tok="&lt;"> <or> <lit tok="&gt;"> <or> <lit tok="&#x2264;"> <or> <lit tok="&#x2265;"></lit></or></lit></or></lit></or></lit></or></lit></or></lit></alt>
+    <ref rule="expression">
+  </ref></ref></or></ref></lit></alt>
+</def>
+
+<def rule="expression">
+  <alt> <lit tok="+"> <or> <lit tok="-"> <or> </or></lit></or></lit></alt>
+  <ref rule="term"> <orp> <alt> <lit tok="+"> <or> <lit tok="-"> </lit></or></lit></alt> <ref rule="term"> </ref></orp>
+</ref></def>
+
+<def rule="term">
+  <ref rule="factor"> <orp> <alt> <lit tok="&#xD7;"> <or> <lit tok="&#xF7;"> </lit></or></lit></alt> <ref rule="factor"> </ref></orp>
+</ref></def>
+
+<def rule="factor">
+  <alt>
+    <ref rule="ident">
+  <or>
+    <ref rule="number">
+  <or>
+    <lit tok="("> <ref rule="expression"> <lit tok=")">
+  </lit></ref></lit></or></ref></or></ref></alt>
+</def>
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "p8b4rpaf"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

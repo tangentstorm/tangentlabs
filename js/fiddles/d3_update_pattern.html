@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>d3 update pattern</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      rect { fill: silver; stroke: black; }
+
+  </style>
+
+
+  
+<!-- Title: d3 update pattern --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: D3 --><!-- Version: 0 --><!-- Latest_version: 1 --><!-- Url: //jsfiddle.net/tangentstorm/xa1q5tre/ --><!-- Created date: 2017-10-24 22:10:22 --></head>
+<body>
+    <svg viewbox="0 0 640 480" style="width:640px; height:480px; border: solid black 1px;">
+  <g id="primes" transform="translate(50, 50)"/>
+  <g id="value" transform="translate(50,100)"/>
+  <g id="oddnums" transform="translate(50,150)"/>
+</svg>
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    
+function drawList(sel, list){
+  const cellW = cellH = 32, gap = 8;
+  let cells = d3.select(sel).selectAll('g').data(list).enter().append('g')
+    .attr('transform', (d,i)=>['translate(',i*(cellW+gap),',0)'].join(''));
+  cells.append('rect').attr({'width': cellW, 'height': cellH})
+  cells.append('text').attr({x:10, y:20}).text(d=>d);
+}
+
+drawList('#primes', [2,3,5,7,11]);
+drawList('#oddnums',[1,3,5,7,9]);
+
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "xa1q5tre"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

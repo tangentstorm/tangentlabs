@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>tile drag</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      *{ background: #678; font-family: verdana,arial,sans-serif; }
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+snapdrag = (d)->
+  d.x = d3.event.x - d3.event.x % 10
+  d.y = d3.event.y - d3.event.y % 10
+  d3.select(this).attr 
+    transform: 'translate(' + d.x + ',' + d.y + ')'
+
+cellsize = 50
+drag = d3.behavior.drag().origin(Object).on("drag", snapdrag)
+
+data = "abc xyz 123".split(" ").map (d, i)->
+    x: (i % 4 ) * cellsize,
+    y: ((i - i % 4)/ 4) * cellsize,
+    text: d
+
+cards = d3.select('svg').selectAll('g').data(data)
+  .enter().append('g').attr
+      transform: (d)-> 'translate(' + d.x + ',' + d.y + ')'
+  .call drag
+
+cards.append('rect').attr
+  width  : cellsize
+  height : cellsize
+  fill   : 'white'
+  stroke : '#333'
+cards.append('text')
+  .attr({ x : 10 , y : 20 })
+  .text((d) -> d.text)
+    
+
+
+
+  </script>
+
+<!-- Title: tile drag --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: D3 --><!-- Version: 6 --><!-- Latest_version: 6 --><!-- Url: //jsfiddle.net/tangentstorm/fjZnb/ --><!-- Created date: 2016-02-10 16:04:47 --></head>
+<body>
+    <h1>draggable tiles in d3</h1>
+<svg>
+    
+</svg>
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "fjZnb"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

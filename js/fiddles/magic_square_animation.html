@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>magic square animation</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      html { background: #336699; }
+svg { width: 1024px; height: 640px; }
+svg .grid rect { fill: #999; stroke: black }
+svg .tile rect { fill: #eee; stroke: black }
+svg .tile text { font-family: consolas  }
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+if 0
+  d3.select('svg').style
+    position: 'absolute'
+    left: '500px'
+    top: '500px'
+  console.log "what?"
+
+n = 7
+ms = 250 # time in ms for slide transitions
+delay = 10
+sy = 0; sx = 0    # starting x,y
+gx = 10; gy = 10; cw = 32; ch = 32; gw = n
+
+
+# draw the empty square
+grid = d3.select("svg .grid").selectAll('rect')
+grid.data(d3.range(n*n)).enter().append('rect').attr
+  width: cw, height: ch
+  x: (d,i)->gx + cw * (i % gw)
+  y: (d,i)->gy + ch * Math.floor(i/gw)
+  
+  
+# draw the numbered tiles in their initial position
+tx = gx; ty = gy + (n+2) * ch
+tiles = d3.select("svg .tile").selectAll('g').data(d3.range n*n).enter()
+  .append('g')
+tiles.append('rect').attr
+  width: cw, height: ch
+  x: 0, y: 0
+tiles.append('text')
+  .text (d,i)-> "#{1+i}"
+  .attr
+    x: (d,i) -> if i+1 > 9 then 7 else 12
+    y: 20
+
+
+reset = (tiles, d)->
+  tiles.transition()
+    .delay d
+    .duration(ms).attrTween 'transform', (d,i,a)->
+      d3.interpolate a, "translate(#{ tx + cw * i}, #{ty})"
+
+reset tiles, 0
+tiles.transition()
+  .duration(ms)
+  .delay (d,i)->  ms * (i + delay)
+  .attrTween 'transform', (d,i,a)->
+    x = sx + i - Math.floor i/n
+    y = sy - i - Math.floor i/n
+    x = gx + cw * (x % n)
+    y = gy + ch * ((n*n+n+y) % n) # dumb trick to make -x % y be a positive number
+    d3.interpolate a, "translate(#{x},#{y})"
+
+reset tiles, ms * (n*n + 2*delay)
+
+
+
+  </script>
+
+<!-- Title: magic square animation --><!-- Author: no author --><!-- Description:  --><!-- Framework: D3 --><!-- Version: 6 --><!-- Latest_version: 6 --><!-- Url: //jsfiddle.net/8htttcy1/ --><!-- Created date: 2017-06-28 18:06:32 --></head>
+<body>
+    <svg>
+  <g class="grid"/>
+  <g class="tile"/>
+</svg>
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "8htttcy1"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

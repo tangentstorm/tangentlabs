@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>JSFiddle Echo API Demo</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+
+
+angular.module 'app', []
+
+.factory 'echo', ($http)->
+  (msg)->
+  	$http
+      method: 'POST'
+      url: '/echo/json/'
+      headers:
+        'Content-Type':
+        	'application/x-www-form-urlencoded'
+      data: 
+      	$.param
+        	json: JSON.stringify msg
+
+.controller 'MainCtrl', (echo)->
+	main =
+  	headline: "JSFiddle Echo API Demo"
+  	data:
+  		echo {msg: 'my data'}
+  		.then (result)-> main.data = result
+
+angular.bootstrap document, ['app']
+
+
+
+  </script>
+
+<!-- Title: JSFiddle Echo API Demo --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: jQuery --><!-- Version: 2 --><!-- Latest_version: 2 --><!-- Url: //jsfiddle.net/tangentstorm/ey0guqyr/ --><!-- Created date: 2016-02-12 00:12:53 --></head>
+<body>
+    <div ng-controller="MainCtrl as main" ng-cloak>
+  <h1>{{main.headline}}</h1>
+  <div>{{main.data}}</div>
+</div>
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "ey0guqyr"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

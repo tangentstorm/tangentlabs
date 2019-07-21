@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>ring data structure</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mootools/1.4.5/mootools-core-full-nocompat.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+class Ring
+  constructor:->
+    @data = [ 0 .. 7 ]
+    @head = 8
+  hold:( value )=>
+    @data.shift()
+    @data.push @head
+    @head = value
+  drop:=>
+    @head = @data.pop()
+    @data.unshift @head
+    
+r = new Ring
+e = document.write 
+d =->
+  for i in [ 0 .. 7 ]
+    document.write r.data[ i ] + ' '
+  document.write '| ' + r.head + '<br/>'
+
+0        ; d()   # want 0 1 2 3 4 5 6 7 | 8
+r.hold 9 ; d()   # want 1 2 3 4 5 6 7 8 | 9
+r.drop() ; d()   # want 8 1 2 3 4 5 6 7 | 8
+
+
+
+
+
+  </script>
+
+<!-- Title: ring data structure --><!-- Author: tangentstorm --><!-- Description: Simple demo of a "ring", like the stacks used in some forth machines. (Although this version appears to be less efficient, since it uses an array that shrinks and grows, rather than a fixed-size one.) --><!-- Framework: Mootools --><!-- Version: 6 --><!-- Latest_version: 6 --><!-- Url: //jsfiddle.net/tangentstorm/B4z8h/ --><!-- Created date: 2019-07-21 22:10:18 --></head>
+<body>
+    
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "B4z8h"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

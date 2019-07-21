@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>d3 juggling tutor</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+console.clear();
+const hx=20, hw=50, hh=20, hsep = 150,  // hand width,height,separation
+      tossDur=600, tossHeight=50;
+
+var hands = [{x:hx, y:100, a:15},
+             {x:hx+hsep, y:100, a:-15}],
+    balls = [{x:hx+15, y:95, c:'red'},
+             {x:hx+hsep+25, y:95, c:'gold'},
+             {x:hx+hsep+35, y:95, c:'lime'}],
+    leftHand = ['red'],
+    rightHand = ['gold','lime'],
+    tossDispatch = d3.dispatch('topLeft', 'topRight');
+
+d3.select('svg').selectAll('circle').data(balls).enter().append('circle')
+  .attrs({cx:d=>d.x, cy:d=>d.y, r:10, fill:d=>d.c, stroke:'black'})
+
+d3.select('svg').selectAll('rect').data(hands).enter().append('rect')
+  .attrs({x:d=>d.x, y:d=>d.y, width:hw, height:hh, stroke:'black', fill:'#33ccff',
+          transform:function(d){
+            let cx = d.x+(hw/2), cy = d.y+(hh/2);  // amount to translate to center rect at origin
+            return 'rotate(' + [d.a, cx, cy].join(',') + ')';
+          }
+        });
+
+function toss(ball, dx, tossEvent){
+  // https://bl.ocks.org/mbostock/5348789  Concurrent Transitions"
+  // "D3 transitions are exclusive and per-element".. these dummy 'lock' selections let us work around it.
+  let xLock = {}, yLock = {},
+      xStart = parseFloat(ball.attr('cx')),
+      yStart = parseFloat(ball.attr('cy'));
+  d3.select(xLock).transition().duration(tossDur).tween('attr:cx', function(){
+      var i = d3.interpolate(xStart, xStart + dx);
+      return function(t) { ball.attr('cx', i(t))}
+    });
+  d3.select(yLock)
+    .transition().duration(tossDur/2).ease(d3.easeQuad).tween('attr:cy', function(){
+      var i = d3.interpolate(yStart, yStart-tossHeight);
+      return function(t) { ball.attr('cy', i(t))}
+    })
+    .transition().on('end', function(){ tossDispatch.call(tossEvent)})
+    .transition().duration(tossDur/2).ease(d3.easeQuad).tween('attr:cy', function(){
+      var i = d3.interpolate(yStart-tossHeight, yStart);
+      return function(t) { ball.attr('cy', i(t))}
+    });   
+}
+
+function tossRight(){
+  let color = leftHand.pop(); if(!color) return;
+  d3.select('circle[fill="'+color+'"]').call(toss, hsep, 'topRight')
+    .transition().duration(tossDur).on('end', function(){ rightHand.unshift(color)});
+}
+
+function tossLeft(){
+  let color = rightHand.pop(); if(!color) return;
+  d3.select('circle[fill="'+color+'"]').call(toss, -hsep, 'topLeft')
+    .transition().duration(tossDur).on('end', function(){ leftHand.unshift(color)});
+}
+
+function cross(e){
+  let crossLock = {}; // another dummy lock object.
+  tossLeft();
+  d3.select(crossLock).transition(tossDur/2).on('end', tossRight);
+}
+
+function juggle(){
+  tossDispatch.on('topRight', tossRight).on('topLeft', tossLeft);
+  cross();
+}
+
+d3.select('#buttons').selectAll('button').data([tossRight, tossLeft, cross, juggle]).enter()
+  .append('button').text(d=>d.name).each(function(d){
+    d3.select(this).on('click', function(e){
+      if(e){ tossDispatch.on('topLeft',null).on('topRight', null); } // on button click, clear juggle() callbacks
+      d(e); // call the actual function
+    })
+  });
+
+
+    }
+
+  //]]></script>
+
+<!-- Title: d3 juggling tutor --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: No-Library --><!-- Version: 2 --><!-- Latest_version: 2 --><!-- Url: //jsfiddle.net/tangentstorm/h27b68kb/ --><!-- Created date: 2017-10-24 00:12:10 --></head>
+<body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+
+<div id="buttons"></div>
+<svg viewbox="0 0 500 300"/>
+
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "h27b68kb"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

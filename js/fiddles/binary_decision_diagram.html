@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>binary decision diagram</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://ialab.it.monash.edu/webcola/cola.v3.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+      html, body, svg { margin: 0; padding: 0; width:100%; height:100%;
+  overflow: hidden; background: #369; }
+svg { stroke-width: 1.25px; stroke: black; }
+.node { r:12; } .bit.f { fill:#666; } .bit.t { fill:#f0f0f0; }
+.link { stroke-width:1.5px; } .link.lo { stroke-dasharray: 2, 3; }
+
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+###
+
+  BDD visualizer
+
+    | copyright 2015 michal.j.wallace - http://tangentstorm.com
+    | available for use under the MIT license.
+
+  This program will draw a BDD (binary decision diagram) for
+  a given function with four input bits and one output bit.
+
+  The top diagram is a fully expanded BDD, with clickable
+  inputs at the bottom to toggle the individual bits of the
+  function's truth table.
+
+  Toggling one of the bits will refresh the bottom diagram,
+  which is the reduced BDD that uniquely identifies the
+  function for the given order of input bits.
+
+###
+
+# --- data ----------------------------------------------
+bits = (0 for _ in [0..15]); ok = ()-> ok
+DEPTH = 4 # 2^4 = 16 bits in the table
+
+# manually build and layout a tree for the fullly expanded
+# binary tree with clickable square inputs.
+nodes = []; links = []; groups = []; next=0
+build = (parent, depth, xpos, kind)->
+   shift = 264/Math.pow(2,depth) * (if kind=='lo' then -1 else 1)
+   nodes.push node =
+     index: idx = nodes.length, depth:depth, parent:parent
+     x: xpos + shift,  y: 32 + depth * 16
+   # link to parent, create children:
+   if parent is null then ok
+   else links.push { source: parent, target: idx, kind:kind }
+   if depth < DEPTH
+      node.lo = build(idx, depth+1, node.x, 'lo')
+      node.hi = build(idx, depth+1, node.x, 'hi')
+   else
+      node.bitnum = next; next += 1
+   return idx
+build null, 0, 20, 'root'
+
+# --- views ----------------------------------------------
+svg = d3.select 'svg'
+tbl = svg.select '#tbl'
+bdd = svg.select '#bdd'
+colors = d3.scale.category10()
+
+nodecolor = (d)->
+   #d3.rgb(0x4c*(3-d.depth),
+   #       0x40*(4-d.depth),
+   #       0x40*(3-d.depth))
+   colors d.depth
+
+nodepoint =
+   cx: ((d)-> d.x), cy: (d)-> d.y
+edgeline =
+   x1: (d)-> d.source.x
+   x2: (d)-> d.target.x
+   y1: (d)-> d.source.y
+   y2: (d)-> d.target.y
+
+
+# -- truth table / binary tree --
+
+# draw the edges first, so they're behind the nodes
+tbl.selectAll('.link').data(links)
+  .enter().append('line').attr
+    class: (d)-> 'link ' + d.kind
+    x1: ((d)-> nodes[d.source].x),  x2: (d)-> nodes[d.target].x
+    y1: ((d)-> nodes[d.source].y),  y2: (d)-> nodes[d.target].y
+
+# draw the internal nodes (hiding the leaf nodes):
+tbl.selectAll('.node').data(nodes)
+  .enter().append('circle')
+  .filter((d)-> d.depth < DEPTH)
+  .attr(nodepoint).attr
+    class: 'node'
+    fill: nodecolor
+
+# draw the leaf nodes (clickable input bits)
+bitattr = (el, i, ofs)-> el.attr
+   x: 24 + 33 * i-ofs,  width:  24 + 2*ofs
+   y: 97-ofs,           height: 24 + 2*ofs
+   class: 'bit ' + 'ft'[bits[i]]
+
+shrink = (d, i)-> d3.select(@).call(bitattr, i, 0)
+expand = (d, i)-> d3.select(@).call(bitattr, i, 2)
+
+bitv = tbl.selectAll('.bit').data(bits)
+   .enter().append('rect').each(shrink)
+   .on('mouseenter', expand)
+   .on('mouseleave', shrink)
+   .on 'mousedown', (d, i)->
+      bits[i] = 1-bits[i]
+      expand.call @, d, i
+      rebuild_bdd nodes, bits
+
+# -- bdd graph layout -----------------------------------
+
+rebuild_bdd = (nodes, bits)->
+   ns = reduce_bdd nodes, bits
+   es = build_edges(ns)
+   render_bdd ns, es
+
+reduce_bdd = (nodes, bits)->
+   bot = { index: 0, tag:0, label: "\u22a5", depth:DEPTH }
+   top = { index: 1, tag:1, label: "\u22a4", depth:DEPTH }
+   result = []
+   if 0 in bits then result.push(bot)
+   if 1 in bits then result.push(top)
+   # if only one result, we only need the one node:
+   if result.length == 1 then return result
+   # else do breadth-first, bottom-up walk to build the bdd
+   cache = {}; result = [ bot, top ]
+   newid = {}; nextid = 2
+   for depth in [DEPTH-1..0]
+      queue = (n for n in nodes when n.depth is depth)
+      while queue.length > 0
+         node = queue.pop(0)
+         if depth is DEPTH-1
+            lo = bits[nodes[node.lo].bitnum]
+            hi = bits[nodes[node.hi].bitnum]
+         else
+            lo = newid[node.lo]
+            hi = newid[node.hi]
+         if lo == hi then nid = lo
+         else
+            key = "#{node.depth} #{lo} #{hi}"
+            if cache[key]
+               target = cache[key]
+               nid = target.index
+            else
+               nid = result.length
+               target = cache[key] =
+                  index: nid,   depth:depth
+                  lo:lo,   hi:hi,   x:node.x,   y:node.y
+                  label: "#{node.depth}"
+            result.push target
+         newid[node.index] = nid
+   return result
+
+
+build_edges = (nodes)->
+   result = []
+   if nodes.length > 1 then for i in [2..nodes.length-1]
+      result.push source:i, target:nodes[i].lo, kind:'lo'
+      result.push source:i, target:nodes[i].hi, kind:'hi'
+    return result
+
+render_bdd = (nodes, links)->
+   k = 16
+   layout = cola.d3adaptor().size([640, 520])
+      .nodes(nodes).links(links)
+      .linkDistance(k)
+      .flowLayout('y', k)
+      .symmetricDiffLinkLengths(k)
+      #.avoidOverlaps(true)
+      .on 'tick', (e)->
+         nodev.attr
+           fill: (d,i)->
+             switch d.tag
+               when 0 then d3.rgb 0x66,0x66,0x66
+               when 1 then d3.rgb 0xf0,0xf0,0xf0
+               else nodecolor d
+         nodev.attr(nodepoint)
+         linkv.attr(edgeline)
+      .start()
+   layout.drag()
+
+   linkv = bdd.select('#links').selectAll('.link').data(links)
+   linkv.enter().append('line').attr
+        class: (d)-> 'link ' + d.kind
+   linkv.exit().remove()
+   
+   nodev = bdd.select('#nodes').selectAll('.node').data(nodes)
+   nodev.enter().append('circle').attr(nodepoint)
+      .attr
+         class: 'node'
+      .call layout.drag
+   nodev.exit().remove()
+
+rebuild_bdd nodes, bits
+
+
+
+  </script>
+
+<!-- Title: binary decision diagram --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: D3 --><!-- Version: 26 --><!-- Latest_version: 26 --><!-- Url: //jsfiddle.net/tangentstorm/bLbayo6c/ --><!-- Created date: 2019-07-21 22:10:50 --></head>
+<body>
+    <svg id="diagram" width="640" height="480">
+  <g id="tbl" transform="translate( 32  56)"/>
+  <g id="bdd" transform="translate(  0  72)">
+    <g id="links"/>
+    <g id="nodes"/>
+  </g>
+</svg>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "bLbayo6c"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

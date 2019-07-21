@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>sequent calculus</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+Var = (sym) -> {tag:0, sym:sym}
+And = (p,q) -> {tag:1, children:[p,q]}
+Vel = (p,q) -> {tag:2, children:[p,q]}
+
+expr = And((Var 'p'), (Var 'q'))
+
+tree = d3.layout.tree().size([100,25])
+nodes = tree.nodes expr
+edges = tree.links nodes
+nview = d3.select('#canvas').selectAll('.node').data(nodes).enter()
+nview.append('rect').attr
+      transform: (d)-> "translate(#{d.x}, #{d.y})"
+      fill: 'white'
+      stroke:'black'
+      width:20
+      height:20
+nview.append('text')
+  .text (d)->
+    switch d.tag
+      when 0 then d.sym
+      when 1 then '\u2227'
+      when 2 then '\u2228'
+      else '?'
+  .attr
+    x : (d)->d.x + 5
+    y : (d)->d.y + 14
+    fill: 'black'
+
+console.log nodes
+
+
+
+  </script>
+
+<!-- Title: sequent calculus --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: D3 --><!-- Version: 3 --><!-- Latest_version: 3 --><!-- Url: //jsfiddle.net/tangentstorm/u2vqypmm/ --><!-- Created date: 2014-11-18 14:02:12 --></head>
+<body>
+    <svg id="canvas" width="480" height="320" style="background:#6633ff"/>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "u2vqypmm"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

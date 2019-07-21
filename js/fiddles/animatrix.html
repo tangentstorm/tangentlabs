@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>animatrix</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      #body { margin:0; padding:0;}
+#rhs {
+
+    margin:0;
+    width:100%; height:100%;
+    font-family: arial, verdana, sans;
+    position:relative;
+    background:#ccc;
+}
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+#
+# grid demo for d3/coffeescript
+#
+# Arranges the numbers 0..99 in a table,
+# then animates them moving around.
+#
+
+if window.job isnt undefined
+  clearInterval window.job
+
+# https://github.com/jashkenas/coffee-script/issues/1191
+xys = []
+for y in [0..9]
+  for x in [0..9]
+    xys.push [ [x, y, y * 10 + x ] ]
+
+iden = (d) -> d
+
+rhs = d3.select("#rhs")
+rhs.selectAll("*").remove()
+rhs.append("section")
+
+xfm = d3.select("#rhs section")
+xfm.style("margin", "100px")
+  .style("position", "relative")
+  .style("background", "#999")
+  .style("width", "250px")
+  .style("height", "250px")
+
+rand_time = ( d ) -> Math.random() * 500 + 500
+rand_spot = ( d ) -> Math.random() * 300 - 25 + "px"
+goal_y = ( d ) -> d[1] * 25 + 7 + "px"
+goal_x = ( d ) -> d[0] * 25 + 7 + "px"
+
+cells = xfm.selectAll("div").data( xys )
+  .enter().append("div")
+    .selectAll("p").data( iden )
+    .enter().append("p").style( "position", "absolute" ).style("font-weight", "bold")
+      .style('color', (d) ->
+        if d[2] in [11, 18, 81, 88] then 'red'
+        else if d[2] in [33, 36, 63, 66] then 'blue'
+        else 'black' )
+      .style('left', goal_x )
+      .style('top', goal_y )
+      .text( (d) -> d[2] )
+
+disperse =  (->
+  if Math.random() < 0.75
+    cells.transition().duration( rand_time )
+    .style("left", rand_spot ).style("top", rand_spot )
+  else
+    cells.transition().duration( rand_time )
+    .style("left", goal_x ).style("top", goal_y ))
+
+window.job = setInterval disperse, 1750
+
+
+
+  </script>
+
+<!-- Title: animatrix --><!-- Author: tangentstorm --><!-- Description: simple d3 animation demo --><!-- Framework: D3 --><!-- Version: 1 --><!-- Latest_version: 1 --><!-- Url: //jsfiddle.net/tangentstorm/Zfjg4/ --><!-- Created date: 2019-07-21 22:10:26 --></head>
+<body>
+    <div id="rhs"></div>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "Zfjg4"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>vuejs test</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      #log .method { color: green; }
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+/* entry format:
+  {id:, method:, tag:, widget:, 
+   req:, 
+   res:{rc: msg:, bd:}}
+*/
+let log = new Vue({
+  el: "#log",
+  data: {
+    entries:[]
+  }
+});
+
+log.entries.push({
+   method:'interact', id:1232, widget:'hmnonce123',
+   expanded: 0,
+   req:[],
+   res:[]
+})
+
+    }
+
+  //]]></script>
+
+<!-- Title: vuejs test --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: No-Library --><!-- Version: 0 --><!-- Latest_version: 0 --><!-- Url: //jsfiddle.net/tangentstorm/r026vss2/ --><!-- Created date: 2017-10-06 16:04:26 --></head>
+<body>
+    <script src="https://unpkg.com/vue"></script>
+
+<div id="log">
+  <div v-for="e in entries">
+    <header>
+      <span v-if=" e.expanded">-</span>
+      <span v-if="!e.expanded">+</span>
+      #{{e.id}} 
+      <span class="method">{{e.method}}</span>
+      <span v-if="e.widget">{{e.widget}}</span>
+      <span class="status">{{e.complete ? &quot;&#x2026;&quot; : &quot;&#x2713;&quot;}}</span>
+      <span v-if="e.widget">{{e.widget}}</span>
+    </header>
+    <div v-if="e.expanded">
+      <section class="req">{{e.req}}</section>
+      <section class="res">{{e.res}}</section>
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "r026vss2"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

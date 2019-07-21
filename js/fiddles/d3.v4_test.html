@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>d3.v4 test</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+var count = 100, data = [];
+
+function addone(){
+  console.log('click');
+  data.push(count++); if (data.length>3) data.shift();
+  var log = d3.select("#log").selectAll('h1').data(data).text(d => d);
+  log.enter().append('h1').text(d => d);
+  log.exit().remove();
+}
+
+d3.select('#addone').on('click', addone);
+
+    }
+
+  //]]></script>
+
+<!-- Title: d3.v4 test --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: No-Library --><!-- Version: 0 --><!-- Latest_version: 0 --><!-- Url: //jsfiddle.net/tangentstorm/b1Lze3ho/ --><!-- Created date: 2017-08-17 22:10:16 --></head>
+<body>
+    <button id="addone">add</button>
+<div id="log"></div>
+<hr>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "b1Lze3ho"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

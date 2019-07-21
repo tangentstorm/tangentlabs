@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>keyboard event logger</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jwerty/0.3.2/jwerty.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+      #main { background:white; width:100%; min-height:100%; }
+#console { background: black; color:white; 
+  width:25%;
+  white-space: pre; font-family:"consolas"; }
+.up { color: green; }
+.dn { color: red; }
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+class Term
+  constructor: (@sel, @height)->
+    @lines = ("" for i in [1..@height])
+    @draw()
+  draw: ()=>
+  	$(@sel).html @lines.join("\n")
+  emit: (line)=>
+    @lines.push line
+    @lines.shift() while @lines.length > @height-1
+    @draw()
+    
+term = new Term('#console', 20)
+
+span = (cls, txt)-> "<span class='#{cls}'>#{txt}</span>"
+
+document.onkeydown = (e)=>term.emit(span "up", "+"+e.key)
+document.onkeyup = (e)=>term.emit(span "dn", "-"+e.key)
+
+
+
+  </script>
+
+<!-- Title: keyboard event logger --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: jQuery --><!-- Version: 2 --><!-- Latest_version: 2 --><!-- Url: //jsfiddle.net/tangentstorm/s5onp5ec/ --><!-- Created date: 2019-07-21 22:10:50 --></head>
+<body>
+    <div id="main">Type in the box below.</div>
+<div id="console">
+
+
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "s5onp5ec"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</div></body>
+</html>

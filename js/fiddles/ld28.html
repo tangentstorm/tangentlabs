@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>ld28</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      /* simulation always runs. use colors @ top to draw a level.
+   no saves yet. :(  from left to right: empty gray hero monster gold door */
+body { background:#444; font-family:verdana,arial,helvetica,sans-serif; }
+rect { stroke: #333; width:25px; height:25px; } #tbar rect:hover { cursor:pointer }
+#lev { border:0; display:inline; width:3em; padding:5px; }
+button, nav a { display:inline; border:0; padding:5px; background:#999; margin:2px;  position:relative; left:0; top:0; font-size: 10pt; height:2em; vertical-align:baseline; } button { top:-1px} input { margin-right:5px }
+nav, form{ margin:0; padding: 0; border:0;  }
+button:hover, nav a:hover{ background:#ccc; cursor:pointer }
+form, nav { display:inline-block; background:#666; padding: 5px; margin:0}
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+[mn,mx]=[Math.min,Math.max];win=window;con=console;doc=document
+next=requestAnimationFrame; defer=(f)->setTimeout(f,50)
+[js,sj,id]=[JSON.stringify,JSON.parse,(s)->doc.getElementById(s)]
+
+# cell/grid width/height/spacing
+ch=cw=25; cs=1; gh=16; gw=24; [n,s,e,w]=[-gw,gw,1,-1] 
+[tox,toy]=[((i)->i%gw),((i)->Math.floor(i/gw))]
+names = 'empty wall door hero baddie gold'.split ' '
+[empty,wall,door,hero,baddie,gold]=[0..5]
+room = ()->[0 for [0..gw*gh-1]][0]
+win.cur={t:1, go:0, tool:(()->), at:0, lv:-1, rm:room()}
+move = (i)-> cur.rm[cur.at]=0; cur.at = i; cur.rm[cur.at]=hero
+into = (i)-> if cur.rm[i]==1 then 0 else 1
+nudge= (d)-> j = cur.at+d; if into(j) then move(j) 
+step = ( )-> if toy(cur.at)+1<gh then nudge(s)
+
+pal='#666 #999 #6c9 #9cf #e24 #fc4'.split ' '
+brush=(c)->(i)->cur.rm[i]=c
+win.tools=(brush(c) for c in [0..pal.length-1])
+usetool=(i)->cur.t=i;cur.tool=tools[i];tb.attr(hl)
+tools[hero]=(i)->move(i)
+layout=
+  width : cw, height: ch,
+  x : (i)-> (cw + cs) * tox(i)
+  y : (i)-> (ch + cs) * toy(i)
+hl=({'stroke-width':(i)->if cur.t==i then 5 else 1})
+tb=d3.select("#tbar").selectAll("rect")
+  .data(d3.range(pal.length))
+  .enter().append('rect').attr(layout)
+  .attr('fill', (i)->pal[i]).attr(hl)
+  .on('click', usetool)
+gm = d3.select("#game").selectAll("rect").data(d3.range(gh*gw))
+gm.enter().append('rect').attr(layout).attr
+  'stroke-width': 0
+gm.on
+   mousedown: (i)-> cur.tool(i); cur.go=1
+   mouseover: (i)-> if cur.go then cur.tool(i)
+   mouseup:   (i)-> cur.go = 0
+draw = ()-> gm.attr {fill: (i)-> pal[cur.rm[i]]}
+frame = ()-> step(); draw(); defer(()->next frame)
+usetool(1); frame()
+
+lbar = ->
+  d3.select('nav').selectAll('a').data(sj ls['levs'])
+    .enter().append('a').text((d)->d).on(click:(d)->ld(d))
+ls = localStorage; ls['levs']||='[]'; b='button'; lbar()
+ld = (i)-> cur.rm=(sj ls['lv:'+i])||room(); lvtxt(i)
+sv = (i)-> ls['lv:'+lvtxt()]=js cur.rm
+nu = -> cur.rm = room(); lvnew(); lbar()
+lvtxt = (_)-> el=id('lev'); if _? then el.value=_ else el.value 
+lvnew = ()->
+  levs = sj ls['levs']; i=0; i++ while i in levs; levs.push(i) 
+  ls['levs'] = js levs.sort(); ls['lv:'+i]=js room(); lvtxt(i)    
+lbl='load save new'.split ' '; acts=[ld,sv,nu]
+d3.select('form').selectAll(b).data(acts)
+  .enter().append(b).attr('type',b).text((d,i)->lbl[i]).on
+    click : (d)-> d lvtxt()
+
+
+
+  </script>
+
+<!-- Title: ld28 --><!-- Author: tangentstorm --><!-- Description: coffeescript + d3 --><!-- Framework: D3 --><!-- Version: 18 --><!-- Latest_version: 18 --><!-- Url: //jsfiddle.net/tangentstorm/3tDTY/ --><!-- Created date: 2014-10-19 02:02:08 --></head>
+<body>
+    <!-- a little game by tangentstorm for ludum dare 28 -->
+<svg id="tbar" width="650" height="25"/>
+<svg id="game" width="650" height="420"/>
+<nav><form><input type="text" id="lev" value></form></nav>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "3tDTY"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>AngularJS - Communication Between Controllers</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="http://code.angularjs.org/angular-1.0.0rc9.js"></script>
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  
+<!-- Title: AngularJS - Communication Between Controllers --><!-- Author: tangentstorm --><!-- Description: This is an example of how to use a custom service to facilitate communicate between multiple controllers using $rootscope as an event bus. --><!-- Framework: No-Library --><!-- Version: 0 --><!-- Latest_version: 0 --><!-- Url: //jsfiddle.net/tangentstorm/m0yxk57b/ --><!-- Created date: 2015-12-10 03:03:31 --></head>
+<body ng-app="myModule">
+    <div ng-controller="ControllerZero">
+    <input ng-model="message">
+    <button ng-click="handleClick(message);">LOG</button>
+</div>
+
+<div ng-controller="ControllerOne">
+    <input ng-model="message">
+</div>
+
+<div ng-controller="ControllerTwo">
+    <input ng-model="message">
+</div>
+
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    
+var myModule = angular.module('myModule', []);
+myModule.factory('sharedService', function($rootScope) {
+    return {
+        message: '',
+        prepForBroadcast: function(msg) {
+        	this.message = msg;
+        	this.broadcastItem();
+    		},
+        broadcastItem = function() {
+        	$rootScope.$broadcast('handleBroadcast');
+    		}
+    };
+});
+
+function ControllerZero($scope, sharedService) {
+    $scope.handleClick = function(msg) {
+        sharedService.prepForBroadcast(msg);
+    };
+        
+    $scope.$on('handleBroadcast', function() {
+        $scope.message = sharedService.message;
+    });        
+}
+
+function ControllerOne($scope, sharedService) {
+    $scope.$on('handleBroadcast', function() {
+        $scope.message = 'ONE: ' + sharedService.message;
+    });        
+}
+
+function ControllerTwo($scope, sharedService) {
+    $scope.$on('handleBroadcast', function() {
+        $scope.message = 'TWO: ' + sharedService.message;
+    });
+}
+
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "m0yxk57b"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

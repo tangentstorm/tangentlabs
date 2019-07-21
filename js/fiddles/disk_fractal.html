@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>disk fractal</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      body{background:#eee;} svg{background:white;}
+circle { fill: black }
+.c0, .c4, .c8,  .c12, .c16, .c20 { fill : #999 }
+.c1, .c5, .c9,  .c13, .c17, .c21 { fill : #99c }
+.c2, .c6, .c10, .c14, .c18, .c22 { fill : #9c9 }
+.c3, .c7, .c11, .c15, .c19, .c23 { fill : #c9c }
+
+
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+# a proof that for any e<0, finitely many disjoint disks
+# can be drawn within the unit square, such that the total
+# area of the disks exceeds 1-e
+#
+# this script shows that i can put one big disk inside a square,
+# and then fill in the corners with smaller squares.
+#
+# (the image is showing only one quadrant of the unit square)
+#
+# for each of those squares, place a disk in the square and then
+# apply the algorithm recursively.
+#
+# it's easy to see that the disks are always going to be disjoint,
+# because they only touch the sides of the squares at the midpoints,
+# and the midpoints of the squares don't line up.
+#
+###################################################################
+
+# d will contain our disks, as [depth,cx,cy,r] tuples.
+d = []
+
+# level 0 is just a circle with radius 0.5
+d.push [0,0,0,0.5]
+
+scale = 1000
+disks = d3.select('svg').selectAll('circle')
+  .data(d).enter().append('circle').attr
+    cx : (d)->d[1]*scale
+    cy : (d)->d[2]*scale
+    r  : (d)->d[3]*scale
+
+
+# now we will fill in the space around the circle with squares.
+# given a corner, we will find the square whose diagonal spans 
+# from the corner to the edge of the circle. This will leave two
+# unfilled regions, which we will then fill with squares 
+# recursively using this same logic.
+# we will assume that the circle is centered at the origin.
+radius  = 0.5 ; maxdepth = 10
+squares = (x,y,depth)->
+  res = [] # result
+  # diagonal of the square is distance to origin - radius of circle
+  diag = Math.sqrt(x*x + y*y) - radius
+  # size^2 * 2 = diag^2
+  size = Math.sqrt((diag*diag)/2)
+  #console.log(['depth:', depth, 'diag:',diag, 'size:',size])
+  res.push [size, x-size, y-size, depth]
+  if depth < maxdepth
+    res.push sq for sq in squares(x, y-size, depth+1)
+    res.push sq for sq in squares(x-size, y, depth+1)
+  return res
+ 
+ sq = squares(0.5,0.5,0)
+ #console.log(JSON.stringify(sq))
+ squares = d3.select('#squares').selectAll('rect')
+  .data(sq).enter().append('rect').attr
+    width  : (d)->d[0]*scale
+    height : (d)->d[0]*scale
+    x      : (d)->d[1]*scale
+    y      : (d)->d[2]*scale
+    class  : (d)->"c"+d[3]
+
+
+
+  </script>
+
+<!-- Title: disk fractal --><!-- Author: tangentstorm --><!-- Description: a fractal to fill the unit square with disks. --><!-- Framework: D3 --><!-- Version: 6 --><!-- Latest_version: 6 --><!-- Url: //jsfiddle.net/tangentstorm/NtaLd/ --><!-- Created date: 2014-02-15 06:06:54 --></head>
+<body>
+    <!--<svg width="400" height="400" viewbox="-500 -500 1000 1000">-->
+<svg width="400" height="400" viewbox="0 0 500 500">
+<rect x="-500" y="-500" width="1000" height="1000" fill="white"/>
+    <g id="squares"/>
+</svg>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "NtaLd"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

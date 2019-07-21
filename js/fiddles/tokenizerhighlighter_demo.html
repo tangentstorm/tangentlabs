@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>tokenizer/highlighter demo</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+// silly little lexer-based text highlighter
+// made with jQuery.
+
+// -- rule configuration --------------------------------------
+var rules = {
+  "red": e=>e.css({background:'red'}),
+  
+  "green|violet": (e,s)=>e.css({color:s}),
+
+  "\\br\\d+\\b": (e,s)=>{
+    let r = Number.parseInt(s.substring(1));
+    return $('<a/>').attr('href',[
+      'http://projects.corp.1010data.com/websvn/',
+      'comp.php?repname=1010data',
+      '&compare[]=/branches/test@', r-1,
+      '&compare[]=/branches/test@', r].join('')).text(s)},
+
+  // catchall... 
+  "\\b\\w+?\\b": (e,s)=>
+    e.css({display:'inline-block', border:'solid '+s+' 2px'}),
+}
+
+// -- highlighter code ----------------------------------------
+
+function walk(node) {
+  node.childNodes.forEach(n=>{
+    switch(n.nodeType){
+      case Node.ELEMENT_NODE: walk(n);   break;
+      case Node.TEXT_NODE:    highlight(n, rules); break;
+      default: }})}
+
+function highlight(textNode, rules) {
+  // break text node into smaller nodes, and decorate them.
+  // rules are a dict of regexp strings -> handlers
+  // handlers take and return a jquery object.
+  // (initially it contains a span with matched text)
+
+  let match, i=0, chunks = [], text=textNode.textContent,
+      rxh = [null].concat(Object.values(rules)),
+      rxs = Object.keys(rules).map(s=>"("+s+")").join("|"),
+      rxo = new RegExp(rxs, 'g');
+
+  function skip(start, end){
+    // generate a new text node for skipped text
+  	let s = text.substring(start, end);
+    if (s.length) chunks.push(document.createTextNode(s));
+    i = end }
+
+  function token(m){
+    // generate a new span for the matched text, and
+    // pass to the appropriate rule handler.
+    for (var j=1; j<m.length; j++) {
+      if (m[j]) {
+        let s = m[j], e = $('<span/>').text(s);
+      	chunks.push(rxh[j](e,s)[0]);
+        i += s.length;
+        return }}}
+
+  // break text content into chunks:
+  while (match=rxo.exec(text)) {
+    if (match.index > i) skip(i, match.index);
+    token(match) }
+
+  // skip everything after last match:
+  skip(i,text.length);
+
+  // replace node with the chunks.
+  let parent = textNode.parentElement;
+  chunks.forEach(n=>parent.appendChild(n));
+ 	parent.removeChild(textNode)}
+
+// -- main program ---
+jQuery("span").each((i,node)=> walk(node));
+
+
+    }
+
+  //]]></script>
+
+<!-- Title: tokenizer/highlighter demo --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: jQuery --><!-- Version: 7 --><!-- Latest_version: 7 --><!-- Url: //jsfiddle.net/tangentstorm/8Lcjy76d/ --><!-- Created date: 2018-02-09 18:06:20 --></head>
+<body>
+    <span>red orange yellow green blue indigo violet</span>
+<span>r32714</span>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "8Lcjy76d"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

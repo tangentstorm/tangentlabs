@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>d3 force layout</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/js/coffeescript/coffeescript.js"></script>
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      html, body, svg { margin: 0; padding: 0; width:100%; height:100%;
+  overflow: hidden; background: #eee; }
+text { fill:black; }
+.node { stroke:black; fill:white; r:8; }
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/coffeescript">
+
+  
+nodes = d3.range(128).map (i)->
+  index: i    
+
+reposition =
+  cx: (d)-> d.x
+  cy: (d)-> d.y 
+
+svg = d3.select 'svg'
+nodev = svg.selectAll('.node').data(nodes)
+  .enter().append('circle').attr(reposition)
+    .attr
+      class: 'node'
+    .style
+      fill: (d,i)-> d3.rgb(0x22*(1+i%3),
+                           0x77*(1+i%5),
+                           0x66*(1+i%7))
+
+d3.layout.force()
+  .nodes(nodes)
+  .size([640, 480])
+  .on 'tick', (e)->
+    nodev.attr reposition
+  .start()
+
+
+
+  </script>
+
+<!-- Title: d3 force layout --><!-- Author: tangentstorm --><!-- Description: simple example with colored circles --><!-- Framework: D3 --><!-- Version: 1 --><!-- Latest_version: 1 --><!-- Url: //jsfiddle.net/tangentstorm/nwtvhf8p/ --><!-- Created date: 2015-06-10 11:11:14 --></head>
+<body>
+    <svg id="diagram" height="640" width="480"/>
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "nwtvhf8p"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>angular hello world</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      body { font-family: verdana,sans; } h1 { font-family:georgia; }
+.hello { border: solid red 2px; width: 50%;}
+.hello h1 { background: red; color: white; margin:0; }
+.hello p { background: white; vertical-align:middle; padding: 2em; }
+
+  </style>
+
+
+  
+<!-- Title: angular hello world --><!-- Author: tangentstorm --><!-- Description:  --><!-- Framework: AngularJS --><!-- Version: 5 --><!-- Latest_version: 5 --><!-- Url: //jsfiddle.net/tangentstorm/5to1hgrr/ --><!-- Created date: 2015-03-14 06:06:43 --></head>
+<body>
+    <div class="hello" ng-app="app" ng-controller="HelloCtrl">
+  <h1>{{name}}</h1>
+  <p>hello! my name is <input type="text" ng-model="name"></p>
+</div>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    
+app = angular.module("app",[])
+app.controller("HelloCtrl", function($scope) {
+    $scope.name = "tangentstorm" })
+
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "5to1hgrr"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>
