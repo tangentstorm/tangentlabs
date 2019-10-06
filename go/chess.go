@@ -1,3 +1,7 @@
+// this was just something i was experimenting with on the subway.
+// I now have a real chess related program in go here:
+// https://github.com/tangentstorm/chesscoach
+
 package main
 
 import "fmt"
