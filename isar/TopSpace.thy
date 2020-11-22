@@ -5,6 +5,8 @@ theory TopSpace
   imports Main
 begin
 
+section \<open>axioms\<close>
+
 text \<open>A topological space (X,T) is a pair where X is a set whose elements
 are called the "points" of the topological space, and T is a fixed collection of
 subsets of X called neighborhoods, with the following properties:\<close>
@@ -15,6 +17,8 @@ locale topspace =
     assumes A1 [simp]: "x\<in>X \<equiv> \<exists>N\<in>T. x\<in>N"
     assumes A2 [simp]: "U\<in>T \<and> V\<in>T \<and> x\<in>(U\<inter>V) \<Longrightarrow> \<exists>N\<in>T. x\<in>N \<and> N\<subseteq>(U\<inter>V)"
 begin
+
+section \<open>limits, boundaries, and open and closed sets\<close>
 
   text \<open>A set N\<in>T which contains p\<in>X is called a neighborhood of p.\<close>
 
@@ -198,6 +202,42 @@ begin
     \<comment> "Once we have those two, the others two are obvious:"
     corollary closed_univ: "closed X"    using open_empty by simp
     corollary closed_empty: "closed {}"  using open_univ by simp
+
+
+section \<open>The closure of a set\<close>
+
+definition closure :: "'a set \<Rightarrow> 'a set" (* def 4.3.1 *)
+  where "closure A \<equiv> {x. limpt A x}"
+
+
+text \<open>Theorem 4.3.2: For any set \<open>A\<close> in topological space \<open>X\<close>, \<open>closure A\<close> is closed.
+Furthermore, one always has \<open>A \<subseteq> closure A\<close>\<close>
+
+theorem t432: assumes "A\<subseteq>X" shows "closed (closure A)" sorry
+
+corollary c433: assumes "A\<subseteq>X" and "closed A" shows "A = closure A" sorry
+
+corollary c434: assumes "closed B" "A\<subseteq>B" shows "(closure A) \<subseteq> B" sorry
+
+section "Topology and Set Theory"
+
+theorem t441a: assumes "open S0" "open S1" shows "open (S0 \<inter> S1)" sorry
+theorem t441b: assumes "closed S0" "closed S1" shows "closed (S0 \<union> S1)" sorry
+text \<open>theorem t441c: the union of any collection of open sets is open\<close>
+text \<open>theorem t441d: the intersection of any collection of closed sets is closed\<close>
+
+
+text \<open>theorem 442: if A and B are subsets of a topspace (X,T) then 
+  1. closure(A\<union>B) = (closure A) \<union> (closure B)
+  2. closure(A\<inter>B) = (closure A) \<inter> (closure B)\<close>
+
+text \<open>theorem 443. If \<open>A\<noteq>{}\<close> is a bounded set of real numbers in \<R>, and \<R> is given the usual
+topology, then \<open>sup A\<in> closure A\<close>. Hence, if \<open>A\<close> is closed, then \<open>sup A\<in>A\<close>\<close>
+
+section \<open>4.5 connectedness in a topological space\<close>
+
+section \<open>4.6 the general theory of connected sets\<close>
+
 
 end (* locale topspace *)
 
