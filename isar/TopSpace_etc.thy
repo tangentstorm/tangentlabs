@@ -48,4 +48,13 @@ Since then, I've re-formulated \<open>limpt\<close> using \<open>(\<forall>N\<in
 be much easier to work with. I am leaving this as a conjecture for me to work on in the future.\<close>
 
 
+\<comment> \<open>A user in a mathoverflow thread claims that open sets are usually
+   defined as being those that are in T. However, my current definitions are
+   not sufficient to enforce this.  https://math.stackexchange.com/a/157738/34877\<close>
+lemma (in topspace)
+  assumes "A\<subseteq>X" "open A" "A\<noteq>{}"
+  shows "A\<in>T"
+  try \<comment> "It tries and fails. "
+  oops
+
 end
