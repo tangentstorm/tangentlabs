@@ -1,0 +1,509 @@
+#+TITLE: Isar for the Armchair Mathematician
+
+
+
+
+
+
+* induction
+
+** you need a base case (ok: 1 simplex)
+** something has to shrink down to the base case
+in our case, we're inducting on the number of faces
+
+
+
+* tverberg's triangulation
+
+any convex polytope K can be dissected into finitely many simplices in the way described above.
+
+
+#+begin_src isabelle-----------------------------------------------------------------------------------------------------------------------------------
+lemma tv1:
+  assumes "convex-polytope K"
+      and "~ is_simplex K"
+  obtains F1 F2 V
+    where p: "V vertex_of K"
+      and f1: "F1 facet_of K" and vf1: "V ~: F1"
+      and f2: "F2 facet_of K" and vf2: "V ~: F2"
+proof -
+  fix F assume "F facet_of K"
+  then show ?thesis proof (cases "is_simplex F")
+    case False
+    then obtain "V vertex_of F"
+                "FF1 facet_of F" and  "V ~: FF1"
+                "FF2 facet_of F" and  "V ~: FF2"
+    then obtain F1 F2 by extending FF1 FF2 into faces of K where FF1 ~= F and FF2 ~=F
+    thus ?thesis .
+  next
+    case True ("is_simplex F")
+      obtain F2 where "F2 facet_of K" and "F2 adjoins F"
+      with `~ is_simplex K` have "?V:K. V~:F & V~:F2" proof (ccontr)
+        assume "!V:K. V~:F | V ~:F2"
+        thus "is_simplex K" by magic
+      qed
+    thus ?thesis .
+qed
+
+
+lemma tv2:
+  assumes "d simplex s" and "h cut s = {a,b}"
+      and "d simplex a | d simplex b"
+   obtains f where "f face_of a & f face_of b & (d-1) simplex f"
+\<^proof>
+
+theorem tverberg-dissect:
+  assumes "convex-polytope K"
+  obtains T where "T triangulates K"
+proof (induction f)  // number of facets
+  if f < 4 then K is already a simplex
+  else let D = aff-dim K
+    then show thesis by cases
+      case 1: "K has a vertex P where more than D facets meet"
+        have H separating P from other vertices of K
+        hence intersection HK of of H and K
+          and HK is a (d-1)-polytope
+          and HK is not a simplex
+          and HK has fewer facets than K
+        hence dissection of HKD HK by cuts in H (by induction hypothesis)
+        then for each d-2 hyperplane in HKD, extend to the d-1 hyperplane through P
+        then obtain a dissection of K into polytopes K0..Kn
+          for each Ki in K0..Kn:
+            Ki is a (d) polytope
+            Ki has fewer facets than K
+        hence we can break it down recursively
+    next
+      case 2: "At each vertex of K only d facets meet"
+        using tv1 obtain F1 F2 P
+        let H1 = affine hull F1
+        let H2 = affine hull F2
+        let H = hyperplane through P containing intersection of H1 H2 (possibly at infinity)
+        then obtain K1 K2 where
+           "F1 facet_of K1" and "Fi is a facet of Ki, not containing any facet of K[3-i] (i=1,2)."
+        hence "card facets K1 <= card facets K"
+          and "card facets K2 <= card facets K"
+        proof
+          let ?Ki = k1 (then k2) and Kj = the other one
+          let m = number of facets of Ki that that meet at p
+          consider (2a) m>d | (2b) m=d
+          hence Ki can be dissected as desired proof (cases)
+            case 2a then have m > d
+              (dissect as desired by case 1)
+            case 2b then have (m=d)
+              obtain vertex figure of K at P to conclude that one of the facets of K through P (say F3) becomes a facet of Kj
+              thus F1 and F3 contain no facet of Ki
+              moreover only one facet of Ki (the one in H) is not contained in some facet of K
+              hence Ki has fewer facets than K
+          qed
+       qed
+#+end_src
+
+
+* triangulation
+I have two arguments I want to make that both involve induction
+over a triangulation of a polytope:
+
+1. I'm attempting to prove the generalized Euler relation,
+   which says that for an n-dimensional polytope p:
+
+   (SUM k=0..n. (-1)^k * (count of k-dimensional faces of p)) = 0
+
+   I've shown this holds for all n-dimensional simplices,
+   and since the empty set, a point, and a line segment are all
+   simplices, I've shown that it holds for all polytopes of
+   dimension <= 1.
+
+   I want to show by induction that if the relation holds for
+   dimensions 0..n-1, then it holds for dimension n.
+
+   To do this, I plan to follow Tverberg [1] and demonstrate that
+   if a polytope is cut into two pieces by a hyperplane, and the
+   relation holds for those two pieces, then it also holds for the
+   polytope.
+
+   So finally, I want to demonstrate by induction that I can cut
+   the polytope into simplices. The final cut divides the poltope
+   into two simplices, and the relation holds for  
+   
+
+since I can cut the poylgon into simplices, then by induction,
+   the relation holds at each step along the way. 
+
+
+
+[1] Helge Tverberg, _How To Cut a Convex Polytope into Simplices_
+    https://vdocuments.site/documents/how-to-cut-a-convex-polytope-into-simplices.html
+
+
+
+
+2. 
+
+
+
+
+
+
+
+* Goal:
+Demonstrate that we can use Isabelle to understand and prove 3 introductory theorems.
+
+
+* outline of the paper
+** [0/1] definitions:
+- [ ] convex :: a set of points is convex when for any two members x and y in the set, every point anywhere between them is also in the set.
+- [ ] hull :: the p hull of set s is the intersection of all sets that both satisfy predicate p and contain s
+- [ ] polytope :: a convex hull of some finite set of vertices
+- [ ] affine :: said of vectors that occupy the same hyperplane
+- [ ] affine dependent :: said of a set where at least one point lies on the affine hull of another point.
+- [ ] bounded :: satisfying a system of linear inequalities
+- [ ] polyhedron :: the intersection of a finite set of faces F, such that each face is a hyperplane.
+
+in addition, this definition requires that there is a vector a such that for any x, the inner product of a and x is less than or equal to b...
+# which means what?!? coxeter says something similar about the faces not "penetrating the interior"
+- [ ] polytope ::  a bounded polyhedron
+- [ ] hyperlane :: separates an N-dimensional space into 2 (N-1)-dimensional regions. Eg: a line separates the plane into two half-planes, a plane separates space into two half-spaces.
+
+- [ ] inner product of a and b :: a number that means something like the angle between two vectors a and b
+- [ ] simplex :: an n-simplex is the convex hull of n+1 affine-independent vectors.
+For example, a triangle is a 2-simplex: it has 3 sides (facets),
+- [ ] regular n-polytope :: each facet is the same regular (n-1) polytope, and the same number of facets meet at each (n-2 face)
+
+* TODO [0/1] actual proofs
+
+** TODO [1/2] Platonic solids (regular 3-polytopes)
+*** DONE There can be no more than 5
+*** TODO [0/6] Construct the 5 platonic solids
+**** TODO define "regular convex polytope" in isar, so we have a definition to meet
+**** TODO tetrahedron
+**** TODO hexahedron
+**** TODO octahedron
+**** TODO dodecahedron
+**** TODO icosahedron
+
+** TODO Polyhedron Formula
+*** following Tverberg:
+*** TODO state the euler relation for a convex n-dimensional polytope.
+
+  Σ_{_i=-1..d}_ (-1)^i f_i = 0      *this is what we want to prove.*
+
+
+For a simplex:
+
+  Σ_{_i=-1..d}_ (-1)^i (d+1 C i+1) = 0
+
+***
+
+*** TODO from the definition of a simplex, show that the simplified version holds.
+*** TODO Triangulation
+**** Tverberg, "How to cut a convex polytope into simplices."
+**** TODO lemma: If convex poly K is not a simplex, then it has a vertex V and two facets neither of which contain V.
+**** TODO lemma: If you split a simplex along a hyperplane and into parts A and B, and A is a simplex, then one of the facets of S is a facet of B.
+**** TODO Theorem: Any complex polytope K can be split into finitely many simplices.
+***** Case 1:
+***** Case 2:
+
+** TODO Pick's Theorem
+
+*** TODO Triangulate the polygon on the plane.
+https://www.cut-the-knot.org/ctk/Pick_proof.shtml
+
+*** Euler -> Pick
+
+**** Proof due to W.W. Funkenbusch
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.475.919&rep=rep1&type=pdf
+
+**** 1. Edge Theorem
+#+begin_quote
+Given a simple polygon, form a complete triangularization to obtain a figure that will be a plane graph. The number of edges is given by ~E = 3 I + 2B - 3~ where ~E~ is the number of edges, ~B~ is the number of boundary vertices, and ~I~ is the number of interior vertices.
+
+proof:
+
+i. If B=3, I=0, then E=3 (a triangle with no interior vertices)
+ii. If a new interior vertex is inserted, E is increased by 3.
+iii. If a new boundary vertex is added which results in x old boundary vertices becoming interior vertices (note: x may be zero) it is obvious that E is increased by 2+x. Here we have:
+
+~E + 2 + x = 3(I + x) + 2(B + 1 - x) - 3~
+or
+
+~E = 3I + 2B - 3~
+#+end_quote
+
+
+**** Area of the triangle
+**** 2. (Euler's formula): V - E + F = 2
+**** 3. Derivation of Pick's formula:
+
+: V = I + B   (interior and exterior vertices)
+: E = 3I + 2B - 3
+
+: (F - 1)/ 2 = A  (area of polygon)
+I'm not sure how to prove this one yet.
+Presumably the (F-1) is because one of the faces in the infinite exterior face... Each vertex lies on the lattice and no face (triangle) has any interior points of its own.
+
+Anyway, then we plug those into Euler:
+
+: V - E + F = 2
+: (I + B) - E + F = 2
+: (I + B) - (3I + 2B -3) + F = 2
+: -2I -1B +3 + F = 2
+: F = 2I + B - 1
+: F-1 = 2I + B - 2)
+: (F-1)/2 = I + (B/2) -1
+: A = I + B/2 -1
+
+
+* TODO Simplical Complex == Planar Graph
+Just saw this tonight, but I don't remember where.
+Coxeter's book?
+
+
+
+
+
+
+
+* question: card (d_faces (simplex n))
+
+I'm stuck.
+
+My goal is to count the number of k-dimensional faces of an n-dimensional simplex.
+
+I've proven that:
+
+  1. an n-dimensional simplex has n+1 vertices.
+  2. a face of a simplex is a simplex
+  3. the convex hull of any subset of the vertices of simplex S is a face of S
+
+=Binomial.n_subsets= gives me the that there are therefore (n+1
+
+It should be easy enough to show that there are therefore (n+1 choose k+1)
+
+
+* question : how to prove that F corresponding-face C == C corresponding-corners F?
+
+- really: how to prove a bijection
+bijective = injective and surjective
+injective = f x = f y --> x = y
+surjective = !y. ?x. f x = y
+
+
+
+
+
+
+* problems encountered
+
+** getting arithmetic to work out for sum of n-choose k
+
+- problem is the empty set, which has d = -1, and wanting to use that in a formula that only takes nats.
+
+
+- so instead define c where c = size of the subset:
+  - n-simplex has k=n+1 vertices
+  - d-simplex -1<= d <=n has c=d+1 vertices
+
+
+now we can sum:
+
+   eulerchar s = sum(c=0..k) -1^c * (c-1 dFaceCount S)
+
+
+
+
+
+
+
+
+
+
+* acknowledgements:
+
+int-e helped me seriously shrink down the proof.
+Makarius for style notes.
+
+* notes and references
+
+euler characteristic for various dimensions
+http://applet-magic.com/eulerpoincare4.htm
+
+geoboard for playing around with pick's theorem
+https://apps.mathlearningcenter.org/geoboard/
+
+Hyperplanes <--> inner products
+https://jeremykun.com/2017/05/22/the-inner-product-as-a-decision-rule/
+
+
+polytope.thy
+
+HOL/light implementation:
+https://github.com/jrh13/hol-light/blob/master/100/polyhedron.ml
+
+NJ Wildberger's topology course.
+/Euler's Gem/
+
+Funkenbusch: /From Euler's Formula to Pick's Formula Using an Edge Theorem/
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.475.919&rep=rep1&type=pdf
+
+
+a blog entry describing euler and pick's theorem
+https://chiasme.wordpress.com/2014/02/27/euler-poincare-characteristic-i-eulers-formula-and-graph-theory/
+
+
+* HOL LIGHT timeline vs isabelle
+
+| hol/light version     | isabelle version |
+|-----------------------+------------------|
+| polyhedron.ml 986950c |                  |
+| 2012-05-26            |                  |
+|-----------------------+------------------|
+| polytope.ml           |                  |
+|                       |                  |
+
+
+
+isabelle polytope changes:
+
+#+begin_src sml
+lemma subdivide_internal
+cell_subdivision_lemma
+cell_complex_subdivision_exists
+
+2016-07 (old file)
+2016-05-10
+
+#+end_src
+
+
+
+
+hol-light stuff:
+#+begin_src sml
+
+2018-03-19 add simplex_extreme_points_nonempty
+(`!c. &(dimindex (:N)) - &1 simplex c ==> ~({v | v extreme_point_of c} = {})`,
+
+2017-08-27
+del convex/compact/closed simplex (redundant with imp versions)
+
+
+
+
+
+
+
+
+
+#+end_src
+simplex_
+
+
+jan  6 2013 needs convex -> path
+mar 24 2013
+apr 06 2013
+may 11 2013
+may 28 2013
+jul 01 2013
+jul 15 2013
+aug 26 2013
+oct 14 2013
+nov 25 2013
+
+
+
+
+
+
+
+* hol light proof of euler
+
+** hyperplane arrangements
+
+*** Interpret which "side" of a hyperplane a point is on.
+#+begin_src sml
+let hyperplane_side = new_definition
+ `hyperplane_side (a,b) (x:real^N) = real_sgn (a dot x - b)`;;
+#+end_src
+
+*** equivalence relation imposed by a hyperplane arrangement
+#+begin_src sml
+
+let hyperplane_equiv = new_definition
+ `hyperplane_equiv A x y <=>
+        !h. h IN A ==> hyperplane_side h x = hyperplane_side h y`;;
+
+let HYPERPLANE_EQUIV_REFL = prove
+ (`!A x. hyperplane_equiv A x x`,
+  REWRITE_TAC[hyperplane_equiv]);;
+
+let HYPERPLANE_EQUIV_SYM = prove
+ (`!A x y. hyperplane_equiv A x y <=> hyperplane_equiv A y x`,
+  REWRITE_TAC[hyperplane_equiv; EQ_SYM_EQ]);;
+
+let HYPERPLANE_EQUIV_TRANS = prove
+ (`!A x y z.
+        hyperplane_equiv A x y /\ hyperplane_equiv A y z
+        ==> hyperplane_equiv A x z`,
+  REWRITE_TAC[hyperplane_equiv] THEN MESON_TAC[]);;
+
+let HYPERPLANE_EQUIV_UNION = prove
+ (`!A B x y. hyperplane_equiv (A UNION B) x y <=>
+                hyperplane_equiv A x y /\ hyperplane_equiv B x y`,
+  REWRITE_TAC[hyperplane_equiv; IN_UNION] THEN MESON_TAC[]);;
+#+end_src
+
+*** cells of hyperplane arrangement
+#+begin_src sml
+
+let hyperplane_cell = new_definition
+ `hyperplane_cell A c <=> ?x. c = hyperplane_equiv A x`;;
+
+#+end_src
+
+*** A cell complex is considered to be a union of such cells.
+#+begin_src sml
+
+#+end_src
+
+** Euler characteristic.
+#+begin_src sml
+
+#+end_src
+
+
+** Show that the characteristic is invariant w.r.t. hyperplane arrangement.
+#+begin_src sml
+
+#+end_src
+
+
+** Euler-type relation for full-dimensional proper polyhedral cones.
+#+begin_src sml
+
+#+end_src
+
+
+** Euler-Poincare relation for special (n-1)-dimensional polytope.
+#+begin_src sml
+
+#+end_src
+
+** Now Euler-Poincare for a general full-dimensional polytope.
+#+begin_src sml
+let EULER_POINCARE_FULL = prove
+ (`!p:real^N->bool.
+        polytope p /\ aff_dim p = &(dimindex(:N))
+        ==> sum (0..dimindex(:N))
+                (\d. (-- &1) pow d *
+                     &(CARD {f | f face_of p /\ aff_dim f = &d })) = &1`,
+#+end_src
+
+** euler for 3d
+#+begin_src sml
+let EULER_RELATION = prove
+ (`!p:real^3->bool.
+        polytope p /\ aff_dim p = &3
+        ==> (CARD {v | v face_of p /\ aff_dim(v) = &0} +
+             CARD {f | f face_of p /\ aff_dim(f) = &2}) -
+            CARD {e | e face_of p /\ aff_dim(e) = &1} = 2`
+#+end_src
