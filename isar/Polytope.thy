@@ -6,7 +6,7 @@ theory Polytope
   imports "HOL-Analysis.Cartesian_Euclidean_Space"
 begin
 
-subsection \<open>Faces of a (usually convex) set\<close>
+subsection\<open>Faces of a (usually convex) set\<close>
 
 declare[[show_consts=true,show_brackets=true]]
 
@@ -1016,7 +1016,7 @@ lemma facet_of_halfspace_ge:
     "F facet_of {x. a \<bullet> x \<ge> b} \<longleftrightarrow> a \<noteq> 0 \<and> F = {x. a \<bullet> x = b}"
 using facet_of_halfspace_le [of F "-a" "-b"] by simp
 
-subsection \<open>Edges: faces of affine dimension 1\<close>
+subsection\<open>Edges: faces of affine dimension 1\<close>
 
 definition edge_of :: "['a::euclidean_space set, 'a set] \<Rightarrow> bool"  (infixr "(edge'_of)" 50)
   where "e edge_of S \<longleftrightarrow> e face_of S \<and> aff_dim e = 1"
@@ -2865,7 +2865,7 @@ subsection\<open>Subdividing a cell complex\<close>
 lemma subdivide_interval:
   fixes x::real
   assumes "a < \<bar>x - y\<bar>" "0 < a"
-  obtains n where "n \<in> \<int>" "x < n * a \<and> n * a < y \<or> y <  n * a \<and> n * a < x"
+  obtains n where "n \<in> \<int>" "x < n*a  \<and>  n*a < y   \<or>   y < n*a  \<and>  n*a < x"
 proof -
   consider "a + x < y" | "a + y < x"
     using assms by linarith
@@ -3198,20 +3198,26 @@ qed
 
 subsection\<open>Simplicial complexes and triangulations\<close>
 
-definition simplicial_complex where
- "simplicial_complex \<C> \<equiv>
-        finite \<C> \<and>
-        (\<forall>S \<in> \<C>. \<exists>n. n simplex S) \<and>
-        (\<forall>F S. S \<in> \<C> \<and> F face_of S \<longrightarrow> F \<in> \<C>) \<and>
-        (\<forall>S S'. S \<in> \<C> \<and> S' \<in> \<C>
-                \<longrightarrow> (S \<inter> S') face_of S \<and> (S \<inter> S') face_of S')"
-
 definition triangulation where
  "triangulation \<T> \<equiv>
         finite \<T> \<and>
         (\<forall>T \<in> \<T>. \<exists>n. n simplex T) \<and>
         (\<forall>T T'. T \<in> \<T> \<and> T' \<in> \<T>
                 \<longrightarrow> (T \<inter> T') face_of T \<and> (T \<inter> T') face_of T')"
+
+definition simplicial_complex where
+ "simplicial_complex \<C> \<equiv>
+        finite \<C> \<and>
+        (\<forall>S \<in> \<C>. \<exists>n. n simplex S) \<and>
+        (\<forall>S S'. S \<in> \<C> \<and> S' \<in> \<C>
+                \<longrightarrow> (S \<inter> S') face_of S \<and> (S \<inter> S') face_of S') \<and>
+        (\<forall>F S. S \<in> \<C> \<and> F face_of S \<longrightarrow> F \<in> \<C>)"
+
+text\<open>A simplicial complex is equivalent to a triangulation that also includes all sub-faces.\<close>
+
+lemma simplicial_complex_is_triangulation:
+  "simplicial_complex \<C> \<equiv> triangulation \<C> \<and> (\<forall>F S. S \<in> \<C> \<and> F face_of S \<longrightarrow> F \<in> \<C>)"
+  unfolding triangulation_def simplicial_complex_def by simp
 
 
 subsection\<open>Refining a cell complex to a simplicial complex\<close>
@@ -3314,7 +3320,7 @@ proof (induction n arbitrary: \<M> rule: less_induct)
       and aff\<M>:    "\<And>C. C \<in> \<M> \<Longrightarrow> aff_dim C \<le> of_nat n"
       and face\<M>:   "\<And>C F. \<lbrakk>C \<in> \<M>; F face_of C\<rbrakk> \<Longrightarrow> F \<in> \<M>"
       and intface\<M>: "\<And>C1 C2. \<lbrakk>C1 \<in> \<M>; C2 \<in> \<M>\<rbrakk> \<Longrightarrow> C1 \<inter> C2 face_of C1 \<and> C1 \<inter> C2 face_of C2"
-    by metis+
+    by simp+
   show ?case
   proof (cases "n \<le> 1")
     case True
@@ -3723,26 +3729,22 @@ proof (induction n arbitrary: \<M> rule: less_induct)
         using that
       proof
         assume "L \<in> \<U>"
-        then show ?thesis
-          using C\<U> \<S>_def "*" by fastforce
+        then show ?thesis using C\<U> \<S>_def * by fastforce
       next
         assume "L \<in> ?\<T>"
         then obtain C K where "C \<in> \<N>"
           and L: "L = convex hull insert (SOME z. z \<in> rel_interior C) K"
           and K: "K \<in> \<U>" "K \<subseteq> rel_frontier C"
           by auto
-        then have "convex hull C = C"
-          by (meson convex\<N> convex_hull_eq)
-        then have "convex C"
-          by (metis (no_types) convex_convex_hull)
+        hence "convex hull C = C" by (meson convex\<N> convex_hull_eq)
+        hence "convex C" using convex_convex_hull[of C] by simp
         have "rel_frontier C \<subseteq> C"
           by (metis DiffE closed\<N> \<open>C \<in> \<N>\<close> closure_closed rel_frontier_def subsetI)
         have "K \<subseteq> C"
           using K \<open>rel_frontier C \<subseteq> C\<close> by blast
         have "C \<in> \<M>"
           using \<N>_def \<open>C \<in> \<N>\<close> by auto
-        moreover have "L \<subseteq> C"
-          using K L \<open>C \<in> \<N>\<close>
+        moreover have "L \<subseteq> C" using K L \<open>C \<in> \<N>\<close>
           by (metis \<open>K \<subseteq> C\<close> \<open>convex hull C = C\<close> contra_subsetD hull_mono in_rel_interior insert_subset rel_interior_subset)
         ultimately show ?thesis
           using \<open>rel_frontier C \<subseteq> C\<close> \<open>L \<subseteq> C\<close> aff\<M> aff_dim_subset \<open>C \<in> \<M>\<close> dual_order.trans by blast
@@ -3752,7 +3754,7 @@ proof (induction n arbitrary: \<M> rule: less_induct)
     qed
     then show ?thesis
       apply (rule ex_forward, safe)
-        apply (meson Union_iff subsetCE, fastforce)
+      apply (meson Union_iff subsetCE, fastforce)
       by (meson infinite_super simplicial_complex_def)
   qed
 qed
