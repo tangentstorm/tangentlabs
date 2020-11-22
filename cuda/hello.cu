@@ -1,7 +1,7 @@
 // based on https://gist.github.com/dpiponi/1502434
 #include <stdio.h>
 
-#define N  0x1d710 // 65536 // 4096 //1024
+#define N  256 // 0x1d710 // 65536 // 4096 //1024
 
 #define h2d(h,d,n) cudaMemcpy(d,h,sizeof(int)*n, cudaMemcpyHostToDevice)
 #define d2h(d,h,n) cudaMemcpy(h,d,sizeof(int)*n, cudaMemcpyDeviceToHost)
@@ -34,5 +34,7 @@ int main() {
   cudaFree(db);
 
   printf("hello from CUDA!\n");
+  int dc; cudaGetDeviceCount(&dc);
+  printf("Device count: %d\n", dc);
   return 0;
 }
