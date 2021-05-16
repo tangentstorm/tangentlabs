@@ -31,6 +31,7 @@ NB. Unfortunately, while the graycoding idea got me a continuous
 NB. path that visits each vertex (a hamiltonian path), it doesn`t
 NB. include all the edges, so the result looks funny.
 
+
 NB. -------
 
 NB. wrap circle function to treat negative signs differently:
@@ -66,4 +67,34 @@ rot3d =: [: dot/ (3 1 2, 3 0 2 ,: 3 0 1) (romat"1 0) 3 {. ]
 lines =: [: ,/"2 [: -: ]
 
 NB. draw a cube:
-gdlines gddraw lines ortho2d (rot3d 30 25 50 deg) dot~  e{v 3
+gdlines gddraw lines ortho2d (rot3d 30 25 50 deg) dot~  v 3
+
+
+NB. ---- working version -------------------------------
+
+edges =: <"2@{{  NB. edges of a y-dimensional hypercube
+  o =. y#0                     NB. origin for k-dimensional space
+  b =. =i.y                    NB. basis vectors in the space
+  e =. (0,2,y)$0               NB. an (empty) list of pairs of points
+  f =. ,:o                     NB. the frontier (list of unvisited points)
+  for. i.y do.
+    nf=. ,/f +."1/ b           NB. new frontier (after exploring along all axes)
+    ne=. ((y*#f)$f),:"1 nf     NB. new edges (but we've already saturated some dimensions)
+    ke=.({~ [:I. -.@-:/"2) ne  NB. keep the edges that reached new points
+    f =. nf                    NB. update the frontier
+    e =. ~.e,ke                NB. append the new edges
+  end. }}
+
+[ pt =: edges 0
+[ ln =: edges 1
+[ sq =: edges 2
+[ cu =: edges 3
+[ ts =: edges 4
+
+np =: {{#~.,/>y}}
+np each pt;ln;sq;cu;<ts
+
+NB. this actually draws a cube!
+gdlines gddraw lines ortho2d (rot3d 30 25 50 deg) dot~ > cu
+
+NB. todo: now go back and draw the tesseract.
