@@ -1,6 +1,8 @@
 #lang jsonic
 // a line comment
 [
+  123, true, "hello",
+{ "key" : "value" },
   @$ 'null $@,
   @$ (* 6 7) $@,
   // @$ (/ 3 5) $@,
