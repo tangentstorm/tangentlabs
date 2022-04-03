@@ -1,5 +1,6 @@
 #lang basic
 30 rem print 'ignored'
+33 rem goto 234234234
 35
 50 print "never gets here"
 40 end
