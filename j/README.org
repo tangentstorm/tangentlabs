@@ -1,10 +1,1 @@
 * Misc J routines and demos.
-
-*Note*: some of these files depend on =startup.ijs=.
-
-In particular, I use the following two nonstandard words to help organize namespaces:
-
-#+begin_src J
-  module =: cocurrent
-  import =: coinsert@require
-#+end_src

@@ -2,7 +2,13 @@ NB. ==== screen i/o ===============================
 NB.
 NB. NOTE: this stuff currently only works when using
 NB. ../pascal/callj.pas as the J frontend.
-module 'cwio'
+NB.
+NB. i am keeping this around for my own personal
+NB. reference, but it is almost completely superceded by:
+NB.
+NB.   http://github.com/tangentstorm/j-kvm/
+NB.
+cocurrent 'cwio'
 
 NB. -- writing to screen -------------------------
 wr=:0$(1!:2)&2   NB. &2 selects 'screen', so callj intercepts
@@ -14,6 +20,7 @@ fg =: [: cw '|',]
 bg =: [: cw '|!',]
 reset=: [: cw '|!k|w'"_
 goxy =: cwstr@:('|@',])@:('0'"_^:(' '=])"0)@(2":])
+nval =: ".@(#~ ' _0123456789' e.~ ])
 
 NB. -- reading from keyboard ---------------------
 rl=: [: (1!:1) 1:  NB. readline
@@ -23,7 +30,7 @@ rk=: 3 : 0
 )
 
 NB. -- keyboard contants -------------------------
-cc'kbd'
+cocurrent'kbd'
 U_ARROW =:0 72{a.
 D_ARROW =:0 80{a.
 L_ARROW =:0 75{a.

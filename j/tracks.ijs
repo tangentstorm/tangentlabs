@@ -12,10 +12,8 @@ NB.
 NB. If you prefer not to mess with that, you can change this
 NB. line to one of the following alternatives:
 NB.
-NB.   corequire 'cheq' [ load 'cheq.ijs' NB. for cheq.ijs, but not import.ijs
-NB.   cheq =: verb def '(0 : 0) [ y'      NB. to not need cheq.ijs at all.
-NB.
-import 'cheq'
+NB. corequire 'cheq' [ load 'cheq.ijs' NB. for cheq.ijs
+cheq =: verb def '(0 : 0) [ y'      NB. to not need cheq.ijs at all.
 
 
 NB. The idea here is to assign each symbol a
