@@ -49,3 +49,11 @@ example : add B.I.O B.I.I = B.I.O.I := by simp
 -- ... now we can use the `+` symbol to trigger addition!
 -- tactic `simp` can no longer prove it, but `rfl` can:
 example : B.I.O + B.I.I = B.I.O.I := rfl
+
+def wellFormed : Bin → Bool
+| B => true
+| O B => false
+| O x => wellFormed x
+| I x => wellFormed x
+
+#check wellFormed (I (O B))
