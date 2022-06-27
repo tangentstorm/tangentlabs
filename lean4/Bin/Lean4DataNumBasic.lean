@@ -156,8 +156,8 @@ def cmp : PosNum → PosNum → Ordering
   | _, 1 => gt
   | 1, _ => lt
   | bit0 a, bit0 b => cmp a b
-  | bit0 a, bit1 b => Ordering.casesOn (cmp a b) lt lt gt
-  | bit1 a, bit0 b => Ordering.casesOn (cmp a b) lt gt gt
+  | bit0 a, bit1 b => Ordering.casesOn (motive := fun _ => Ordering) (cmp a b) lt lt gt
+  | bit1 a, bit0 b => Ordering.casesOn (motive := fun _ => Ordering) (cmp a b) lt gt gt
   | bit1 a, bit1 b => cmp a b
 
 instance : LT PosNum :=
