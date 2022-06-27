@@ -152,12 +152,12 @@ open Ordering
 /-- Ordering of `pos_num`s.
   -/
 def cmp : PosNum → PosNum → Ordering
-  | 1, 1 => Eq
-  | _, 1 => Gt
+  | 1, 1 => eq
+  | _, 1 => gt
   | 1, _ => lt
   | bit0 a, bit0 b => cmp a b
-  | bit0 a, bit1 b => Ordering.casesOn (cmp a b) lt lt Gt
-  | bit1 a, bit0 b => Ordering.casesOn (cmp a b) lt Gt Gt
+  | bit0 a, bit1 b => Ordering.casesOn (cmp a b) lt lt gt
+  | bit1 a, bit0 b => Ordering.casesOn (cmp a b) lt gt gt
   | bit1 a, bit1 b => cmp a b
 
 instance : LT PosNum :=
@@ -278,8 +278,8 @@ open Ordering
 /-- Ordering of `num`s.
   -/
 def cmp : Num → Num → Ordering
-  | 0, 0 => Eq
-  | _, 0 => Gt
+  | 0, 0 => eq
+  | _, 0 => gt
   | 0, _ => lt
   | pos a, pos b => PosNum.cmp a b
 
@@ -512,13 +512,13 @@ open Ordering
 /-- Ordering on `znum`s.
   -/
 def cmp : Znum → Znum → Ordering
-  | 0, 0 => Eq
+  | 0, 0 => eq
   | pos a, pos b => PosNum.cmp a b
   | neg a, neg b => PosNum.cmp b a
-  | pos _, _ => Gt
+  | pos _, _ => gt
   | neg _, _ => lt
   | _, pos _ => lt
-  | _, neg _ => Gt
+  | _, neg _ => gt
 
 instance : LT Znum :=
   ⟨fun a b => cmp a b = Ordering.lt⟩
