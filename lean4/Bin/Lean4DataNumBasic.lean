@@ -23,7 +23,7 @@ inductive PosNum : Type
   | one : PosNum
   | bit1 : PosNum → PosNum
   | bit0 : PosNum → PosNum
-  deriving has_reflect, DecidableEq
+  deriving DecidableEq
 
 instance : One PosNum :=
   ⟨PosNum.one⟩
@@ -37,7 +37,7 @@ instance : Inhabited PosNum :=
 inductive Num : Type
   | zero : Num
   | Pos : PosNum → Num
-  deriving has_reflect, DecidableEq
+  deriving DecidableEq
 
 instance : Zero Num :=
   ⟨Num.zero⟩
@@ -56,7 +56,7 @@ inductive Znum : Type
   | zero : Znum
   | Pos : PosNum → Znum
   | neg : PosNum → Znum
-  deriving has_reflect, DecidableEq
+  deriving DecidableEq
 
 instance : Zero Znum :=
   ⟨Znum.zero⟩
@@ -684,3 +684,7 @@ instance : HasRepr Znum :=
   ⟨fun n => reprₓ (n : ℤ)⟩
 
 end
+
+-- TODO: implement has_reflect for all these types.
+-- (this cannot yet be derived in lean 4)
+instance : has_reflect PosNum := sorry
