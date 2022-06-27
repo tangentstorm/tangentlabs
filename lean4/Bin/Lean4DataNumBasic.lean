@@ -548,10 +548,10 @@ def divmodAux (d : PosNum) (q r : Num) : Num × Num :=
   -/
 def divmod (d : PosNum) : PosNum → Num × Num
   | bit0 n =>
-    let (q, r₁) := divmod n
+    let (q, r₁) := divmod d n
     divmodAux d q (Num.bit0 r₁)
   | bit1 n =>
-    let (q, r₁) := divmod n
+    let (q, r₁) := divmod d n
     divmodAux d q (Num.bit1 r₁)
   | 1 => divmodAux d 0 1
 
