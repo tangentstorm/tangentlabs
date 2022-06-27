@@ -92,10 +92,10 @@ def isOne : PosNum → Bool
 protected def add : PosNum → PosNum → PosNum
   | 1, b => succ b
   | a, 1 => succ a
-  | bit0 a, bit0 b => bit0 (add a b)
-  | bit1 a, bit1 b => bit0 (succ (add a b))
-  | bit0 a, bit1 b => bit1 (add a b)
-  | bit1 a, bit0 b => bit1 (add a b)
+  | bit0 a, bit0 b => bit0 (PosNum.add a b)
+  | bit1 a, bit1 b => bit0 (succ (PosNum.add a b))
+  | bit0 a, bit1 b => bit1 (PosNum.add a b)
+  | bit1 a, bit0 b => bit1 (PosNum.add a b)
 
 instance : Add PosNum :=
   ⟨PosNum.add⟩
@@ -130,8 +130,8 @@ def natSize : PosNum → Nat
   -/
 protected def mul (a : PosNum) : PosNum → PosNum
   | 1 => a
-  | bit0 b => bit0 (mul b)
-  | bit1 b => bit0 (mul b) + a
+  | bit0 b => bit0 (PosNum.mul a b)
+  | bit1 b => bit0 (PosNum.mul a b) + a
 
 instance : Mul PosNum :=
   ⟨PosNum.mul⟩
@@ -497,8 +497,8 @@ instance : Add Znum :=
 /-- Multiplication of `znum`s.
   -/
 protected def mul : Znum → Znum → Znum
-  | 0, a => 0
-  | b, 0 => 0
+  | 0, _ => 0
+  | _, 0 => 0
   | pos a, pos b => pos (a * b)
   | pos a, neg b => neg (a * b)
   | neg a, pos b => neg (a * b)
