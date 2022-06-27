@@ -622,9 +622,9 @@ instance : Mod Num :=
 
 /-- Auxiliary definition for `num.gcd`. -/
 def gcdAux : Nat → Num → Num → Num
-  | 0, a, b => b
-  | Nat.succ n, 0, b => b
-  | Nat.succ n, a, b => gcd_aux n (b % a) a
+  | 0, _, b => b
+  | Nat.succ _, 0, b => b
+  | Nat.succ n, a, b => gcdAux n (b % a) a
 
 /-- Greatest Common Divisor (GCD) of two `num`s.
   -/
