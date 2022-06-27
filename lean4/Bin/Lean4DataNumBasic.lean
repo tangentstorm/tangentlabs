@@ -104,13 +104,13 @@ instance : Add PosNum :=
   -/
 def pred' : PosNum → Num
   | 1 => 0
-  | bit0 n => Num.pos (Num.casesOn (pred' n) 1 bit1)
+  | bit0 n => Num.pos (Num.casesOn (motive := fun _ => PosNum) (pred' n) 1 bit1)
   | bit1 n => Num.pos (bit0 n)
 
 /-- The predecessor of a `pos_num` as a `pos_num`. This means that `pred 1 = 1`.
   -/
 def pred (a : PosNum) : PosNum :=
-  Num.casesOn (pred' a) 1 id
+  Num.casesOn (motive := fun _ => PosNum) (pred' a) 1 id
 
 /-- The number of bits of a `pos_num`, as a `pos_num`.
   -/
@@ -123,8 +123,8 @@ def size : PosNum → PosNum
   -/
 def natSize : PosNum → Nat
   | 1 => 1
-  | bit0 n => Nat.succ (nat_size n)
-  | bit1 n => Nat.succ (nat_size n)
+  | bit0 n => Nat.succ (natSize n)
+  | bit1 n => Nat.succ (natSize n)
 
 /-- Multiplication of two `pos_num`s.
   -/
@@ -140,7 +140,7 @@ instance : Mul PosNum :=
   -/
 def ofNatSucc : ℕ → PosNum
   | 0 => 1
-  | Nat.succ n => succ (of_nat_succ n)
+  | Nat.succ n => succ (ofNatSucc n)
 
 /-- `of_nat n` is the `pos_num` corresponding to `n`, except for `of_nat 0 = 1`.
   -/
@@ -363,13 +363,13 @@ protected def bit0 : Znum → Znum
 protected def bit1 : Znum → Znum
   | 0 => 1
   | pos n => pos (PosNum.bit1 n)
-  | neg n => neg (Num.casesOn (pred' n) 1 PosNum.bit1)
+  | neg n => neg (Num.casesOn (motive := fun _ => PosNum) (pred' n) 1 PosNum.bit1)
 
 /-- `bitm1 x` appends a `1` to the end of `x`, mapping `x` to `2 * x - 1`.
   -/
 protected def bitm1 : Znum → Znum
   | 0 => neg 1
-  | pos n => pos (Num.casesOn (pred' n) 1 PosNum.bit1)
+  | pos n => pos (Num.casesOn (motive := fun _ => PosNum) (pred' n) 1 PosNum.bit1)
   | neg n => neg (PosNum.bit1 n)
 
 /-- Converts an `int` to a `znum`.
