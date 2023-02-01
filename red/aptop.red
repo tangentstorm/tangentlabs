@@ -1,8 +1,9 @@
 Red [ Title: "tiny language inpsired by Eric Hehner's {A Practical Theory of Programming}"]
 
 ;-- helper functions (might already exist in red?)
-map: func [f xs /local r x][r: make block! [] foreach x xs [append r (f x)]]
-nest: function [x] [b: make block! [1]  b/1: x b] ; !! is there a better way to take [x] -> [[x]] ??
+map: func [f xs /local x][collect foreach x xs [keep r (f x)]]
+; nest: function [x] [b: make block! [1]  b/1: x b] ; !! is there a better way to take [x] -> [[x]] ??
+nest: function [x] [repend/only copy [] x]
 
 rest: :next
 warn: function [msg] [print rejoin ["WARNING: " msg]]
