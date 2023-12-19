@@ -524,7 +524,7 @@ SUB PlayNibbles (NumPlayers, speed, diff$)
                    
                     playerDied = TRUE
                     sammy(a).alive = FALSE
-                    sammy(a).lives = sammy(a).lives - 1
+                    sammy(a).lives = sammy(a).lives + 1
 
                 'Otherwise, move the snake, and erase the tail
                 ELSE
