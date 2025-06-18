@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skein rootNode="node-0">
+  <generator>Windows Inform 10.1.2</generator>
+  <item nodeId="node-0">
+    <command xml:space="preserve">savleen</command>
+    <result xml:space="preserve">The Magic Kitchen&#x000A;An Interactive Fiction by Savleen and Daddy&#x000A;Release 1 / Serial number 221030 / Inform 7 v10.1.2 / D&#x000A;&#x000A;Kitchen&#x000A;The kitchen has new white marble tiles but is not yet finished.&#x000A;&#x000A;You can see some stories, a magic bottle, some blue chalk, a stool, Simi and Savleen here.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-53"/>
+      <child nodeId="node-7"/>
+      <child nodeId="node-34"/>
+      <child nodeId="node-17"/>
+      <child nodeId="node-9"/>
+      <child nodeId="node-60"/>
+      <child nodeId="node-65"/>
+      <child nodeId="node-15"/>
+      <child nodeId="node-51"/>
+      <child nodeId="node-1"/>
+      <child nodeId="node-6"/>
+      <child nodeId="node-27"/>
+      <child nodeId="node-2"/>
+    </children>
+  </item>
+  <item nodeId="node-53">
+    <command xml:space="preserve"> </command>
+    <result xml:space="preserve">Welcome&#x000A;An interactive campaign&#x000A;Release 1 / Serial number 221027 / Inform 7 v10.1.2 / D&#x000A;&#x000A;Lessons&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-54"/>
+    </children>
+  </item>
+  <item nodeId="node-54">
+    <command xml:space="preserve">ono</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-55"/>
+    </children>
+  </item>
+  <item nodeId="node-55">
+    <command xml:space="preserve">to</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-56"/>
+    </children>
+  </item>
+  <item nodeId="node-56">
+    <command xml:space="preserve">eat</command>
+    <result xml:space="preserve">(yourself)&#x000A;You're plainly inedible.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-57"/>
+    </children>
+  </item>
+  <item nodeId="node-57">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">What do you want to examine?&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-58"/>
+    </children>
+  </item>
+  <item nodeId="node-58">
+    <command xml:space="preserve">x me</command>
+    <result xml:space="preserve">As good-looking as ever.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-59"/>
+    </children>
+  </item>
+  <item nodeId="node-59">
+    <command xml:space="preserve">one two</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-7">
+    <command xml:space="preserve"> x Simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-8"/>
+    </children>
+  </item>
+  <item nodeId="node-8">
+    <command xml:space="preserve">take milky</command>
+    <result xml:space="preserve">That seems to belong to Simi.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-34">
+    <command xml:space="preserve">eat savleen</command>
+    <result xml:space="preserve">She's plainly inedible.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-35"/>
+      <child nodeId="node-49"/>
+    </children>
+  </item>
+  <item nodeId="node-35">
+    <command xml:space="preserve">eat simi</command>
+    <result xml:space="preserve">You can't eat baby Simi!!!!&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-36"/>
+    </children>
+  </item>
+  <item nodeId="node-36">
+    <command xml:space="preserve">why not?</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-49">
+    <command xml:space="preserve">take savleen</command>
+    <result xml:space="preserve">I don't suppose Savleen would care for that.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-50"/>
+    </children>
+  </item>
+  <item nodeId="node-50">
+    <command xml:space="preserve">make a cake</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-17">
+    <command xml:space="preserve">eat simi</command>
+    <result xml:space="preserve">You can't eat baby Simi!!!!&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-30"/>
+      <child nodeId="node-37"/>
+      <child nodeId="node-25"/>
+      <child nodeId="node-18"/>
+    </children>
+  </item>
+  <item nodeId="node-30">
+    <command xml:space="preserve">eat chalk</command>
+    <result xml:space="preserve">They're plainly inedible.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-31"/>
+    </children>
+  </item>
+  <item nodeId="node-31">
+    <command xml:space="preserve">eat bottlo</command>
+    <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-32"/>
+    </children>
+  </item>
+  <item nodeId="node-32">
+    <command xml:space="preserve">eat magic</command>
+    <result xml:space="preserve">That's plainly inedible.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-33"/>
+    </children>
+  </item>
+  <item nodeId="node-33">
+    <command xml:space="preserve">look at simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milkyi.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-37">
+    <command xml:space="preserve">eat savleen</command>
+    <result xml:space="preserve">She's plainly inedible.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-38"/>
+    </children>
+  </item>
+  <item nodeId="node-38">
+    <command xml:space="preserve">x chalk</command>
+    <result xml:space="preserve">If you rub it on something, the something turns light blue.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-39"/>
+    </children>
+  </item>
+  <item nodeId="node-39">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">Hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-40"/>
+    </children>
+  </item>
+  <item nodeId="node-40">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">Girl's Room&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-41"/>
+    </children>
+  </item>
+  <item nodeId="node-41">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">Hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-42"/>
+    </children>
+  </item>
+  <item nodeId="node-42">
+    <command xml:space="preserve">e</command>
+    <result xml:space="preserve">Bathroom&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-43"/>
+    </children>
+  </item>
+  <item nodeId="node-43">
+    <command xml:space="preserve">w</command>
+    <result xml:space="preserve">Hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-44"/>
+    </children>
+  </item>
+  <item nodeId="node-44">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">Kitchen&#x000A;The kitchen has new white marble tiles but is not yet finished.&#x000A;&#x000A;You can see some stories, a magic bottle, some blue chalk, a stool, Simi and Savleen here.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-45"/>
+    </children>
+  </item>
+  <item nodeId="node-45">
+    <command xml:space="preserve">go outside</command>
+    <result xml:space="preserve">Patio&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-46"/>
+    </children>
+  </item>
+  <item nodeId="node-46">
+    <command xml:space="preserve">inside</command>
+    <result xml:space="preserve">Kitchen&#x000A;The kitchen has new white marble tiles but is not yet finished.&#x000A;&#x000A;You can see some stories, a magic bottle, some blue chalk, a stool, Simi and Savleen here.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-47"/>
+    </children>
+  </item>
+  <item nodeId="node-47">
+    <command xml:space="preserve">x simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-48"/>
+    </children>
+  </item>
+  <item nodeId="node-48">
+    <command xml:space="preserve">take milky</command>
+    <result xml:space="preserve">That seems to belong to Simi.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-25">
+    <command xml:space="preserve">talk to her</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-26"/>
+    </children>
+  </item>
+  <item nodeId="node-26">
+    <command xml:space="preserve">ask her</command>
+    <result xml:space="preserve">I'm not sure what 'her' refers to.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-18">
+    <command xml:space="preserve">x simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-19"/>
+    </children>
+  </item>
+  <item nodeId="node-19">
+    <command xml:space="preserve">l simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-20"/>
+    </children>
+  </item>
+  <item nodeId="node-20">
+    <command xml:space="preserve">talk simi</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-21"/>
+    </children>
+  </item>
+  <item nodeId="node-21">
+    <command xml:space="preserve">talk to simi</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-22"/>
+    </children>
+  </item>
+  <item nodeId="node-22">
+    <command xml:space="preserve">ask simi</command>
+    <result xml:space="preserve">What do you want to ask Simi for?&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-23"/>
+    </children>
+  </item>
+  <item nodeId="node-23">
+    <command xml:space="preserve">ask simi for miltky</command>
+    <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-24"/>
+    </children>
+  </item>
+  <item nodeId="node-24">
+    <command xml:space="preserve">ask simi for milky</command>
+    <result xml:space="preserve">Simi has better things to do.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-9">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Kitchen&#x000A;It has new white marble tiles but is not yet finished.&#x000A;&#x000A;You can see some stories, a magic bottle, some blue chalk, a stool and Simi here.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-10"/>
+    </children>
+  </item>
+  <item nodeId="node-10">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">Hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-11"/>
+    </children>
+  </item>
+  <item nodeId="node-11">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Hallway&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-12"/>
+    </children>
+  </item>
+  <item nodeId="node-12">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">Kitchen&#x000A;It has new white marble tiles but is not yet finished.&#x000A;&#x000A;You can see some stories, a magic bottle, some blue chalk, a stool and Simi here.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-13"/>
+    </children>
+  </item>
+  <item nodeId="node-13">
+    <command xml:space="preserve">time</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-14"/>
+    </children>
+  </item>
+  <item nodeId="node-14">
+    <command xml:space="preserve">eat simi</command>
+    <result xml:space="preserve">He's plainly inedible.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve">He's plainly inedible.&#x000A;&#x000A;&gt;</commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-60">
+    <command xml:space="preserve">l exits</command>
+    <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-61"/>
+    </children>
+  </item>
+  <item nodeId="node-61">
+    <command xml:space="preserve">exits</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-62"/>
+    </children>
+  </item>
+  <item nodeId="node-62">
+    <command xml:space="preserve">take all</command>
+    <result xml:space="preserve">stories: Taken.&#x000A;magic bottle: Taken.&#x000A;blue chalk: Taken.&#x000A;stool: Taken.&#x000A;milky: That seems to belong to Simi.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-63"/>
+    </children>
+  </item>
+  <item nodeId="node-63">
+    <command xml:space="preserve">x simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-64"/>
+    </children>
+  </item>
+  <item nodeId="node-64">
+    <command xml:space="preserve">x milky</command>
+    <result xml:space="preserve">You see nothing special about the milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-65">
+    <command xml:space="preserve">make a cake</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-15">
+    <command xml:space="preserve">replay</command>
+    <result xml:space="preserve">That's not a verb I recognise.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-51">
+    <command xml:space="preserve">test</command>
+    <result xml:space="preserve">&gt;--&gt; The following tests are available:&#x000A;'test me'&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-52"/>
+    </children>
+  </item>
+  <item nodeId="node-52">
+    <command xml:space="preserve">test me</command>
+    <result xml:space="preserve">(Testing.)&#x000A;&#x000A;&gt;[1] z&#x000A;[Your score has just gone up by five points.]&#x000A;&#x000A;&#x000A;Tempus fugit.&gt;[2] z&#x000A;[Your score has just gone up by five points.]&#x000A;&#x000A;&gt;[3] z&#x000A;[Your score has just gone up by five points.]&#x000A;&#x000A;&gt;[4] jump&#x000A;&#x000A;&#x000A;    *** The End ***&#x000A;&#x000A;&#x000A;In that game you scored 15 out of a possible 0, in 4 turns.&#x000A;&#x000A;&#x000A;Would you like to RESTART, RESTORE a saved game, QUIT or UNDO the last command?&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-1">
+    <command xml:space="preserve">test me</command>
+    <result xml:space="preserve">&gt;--&gt; No test scripts exist for this game.&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-6">
+    <command xml:space="preserve">x Simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-27">
+    <command xml:space="preserve">x her</command>
+    <result xml:space="preserve">I'm not sure what 'her' refers to.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-28"/>
+    </children>
+  </item>
+  <item nodeId="node-28">
+    <command xml:space="preserve">l simi</command>
+    <result xml:space="preserve">Simi is a cute little baby girl. She is holding a bottle of milky.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-29"/>
+    </children>
+  </item>
+  <item nodeId="node-29">
+    <command xml:space="preserve">x her</command>
+    <result xml:space="preserve">I'm not sure what 'her' refers to.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+  <item nodeId="node-2">
+    <command xml:space="preserve">x stool</command>
+    <result xml:space="preserve">It has fallen over.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-3"/>
+    </children>
+  </item>
+  <item nodeId="node-3">
+    <command xml:space="preserve">x bottle</command>
+    <result xml:space="preserve">It is magical because of its colors.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-4"/>
+    </children>
+  </item>
+  <item nodeId="node-4">
+    <command xml:space="preserve">take bottle</command>
+    <result xml:space="preserve">Taken.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-5"/>
+    </children>
+  </item>
+  <item nodeId="node-5">
+    <command xml:space="preserve">i</command>
+    <result xml:space="preserve">You are carrying:&#x000A;  a magic bottle&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+    <children>
+      <child nodeId="node-16"/>
+    </children>
+  </item>
+  <item nodeId="node-16">
+    <command xml:space="preserve">eat simi</command>
+    <result xml:space="preserve">He's plainly inedible.&#x000A;&#x000A;&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <changed>NO</changed>
+  </item>
+</Skein>

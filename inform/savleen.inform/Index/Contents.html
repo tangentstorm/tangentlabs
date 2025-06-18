@@ -1,0 +1,1586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Contents Index</title>
+    <style type="text/css">
+        <!--
+        /* The default font (family) and size */
+
+        body, p, td {
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 0.8rem; /* 100/125 */
+        }
+
+        /* For fixed-point material within text, such as the typing on the Library Card index page */
+
+        span.typewritten {
+        	font-family: monospace;
+        	font-size: 0.867rem; /* 13/12 * 100/125 */
+        }
+
+        /* For less important material: the small print */
+
+        span.smaller {
+        	font-size: 80%;
+        }
+
+        /* The "heading panel" is the coloured box, high up on the page. The colours
+        vary depending on the page: for example, the style on a report of a translation
+        with no problems is "headingpanelsucceeded", usually green, but if there were
+        problems then "headingpanelfailed" is used, which is usually red. "headingpanel"
+        itself is a more neutral grey by default. "headingpanelDark" is an alternative
+        look to make the extensions index pages have some visual contrast with the others;
+        by default they are a darker grey. */
+
+        .headingpanel {
+        	background: #eeeeee;
+        }
+        .headingpanelsucceeded {
+        	background: #E6FFE6;
+        }
+        .headingpanelfailed {
+        	background: #f69Ca6;
+        }
+        .headingpanelalt {
+        	background: #808080;
+        }
+
+        /* Heading panels have two lines of text: an upper one in a larger size, and a
+        lower one in a smaller. Again, the alt versions are meant to contrast.
+
+        	Report on Translation: Succeeded                <-- headingpaneltext
+        	Produced by Inform 10.1.0 (build 6U97)          <-- headingpanelrubric
+
+        	Installed Extensions                            <-- headingpaneltextalt
+        	Bundles of extra rules or phrases to...         <-- headingpanelrubricalt
+
+        */
+
+        span.headingpaneltext {
+        	color: #222222;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 1.333rem; /* 20/12 * 100/125 */
+        	font-weight: bold;
+        }
+        span.headingpaneltextalt {
+        	color: #ffffff;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 1.333rem; /* 20/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        span.headingpanelrubric {
+        	color: #222222;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 0.733rem; /* 11/12 * 100/125 */
+        	font-weight: bold;
+        }
+        span.headingpanelrubricalt {
+        	color: #ffffff;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 0.733rem; /* 11/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        /* Horizontal rule styling */
+
+        div.hr {
+        	border: 0;
+        	width: 100%;
+        	color: #707070;
+        	background-color: #707070;
+        	height: 5px;
+        }
+
+        /* This styles the (usually white) text of the example numbers written inside
+        oval blobs in the extension documentation, which mimic the look of the in-app
+        documentation. */
+
+        .oval, .oval td {
+        	background-image:url('inform:/doc_images/ovoid.png');
+        	color:white;
+        }
+
+        /* Styling used in the extension documentation indexes: */
+
+        /* Used for extension names in the extensions pane of the app */
+
+        span.extensioncensusentry {
+        	color: #ffffff;
+        }
+
+        span.extensionindexentry {
+        	color: #404040;
+        }
+
+        span.extensionindexerror {
+        	color: #ff8080;
+        }
+
+        /* This is used in extension documentation, where an example is presented
+        in a slightly tinted box: */
+
+        table.extensionexample {
+        	background-color: #f0f0f0;
+        }
+
+        span.extensionexampleletter {
+        	color: #202020;
+        	font-size: 14px;
+        	font-weight: bold;
+        }
+
+        /* Seen in problem messages: */
+
+        span.problemred {
+        	color: #800000;
+        }
+
+        span.problemgreen {
+        	color: #008000;
+        }
+
+        span.phraseword {
+        	color: #808080;
+        }
+
+        span.phrasetokentext {
+        	color: #e00060;
+        }
+
+        span.phrasetokendesctext {
+        	color: #4040ff;
+        }
+
+        span.phrasetokenvaluetext {
+        	color: #ff4040;
+        }
+
+        /* Now we move on to styling used in the Index pages only: */
+
+        /* The periodic table display has "sidebars", usually grey and taller than they
+        are wide; they contain no text. */
+
+        div.periodictablesidebarcolour {
+        	background: #888;
+        }
+        div.periodictablesidebar:hover {
+        	background: #222;
+        }
+
+        /* The text of the element-abbreviation, such as "Lx" or "Ph", uses: */
+
+        span.elementtext {
+        	color: #ffffff;
+        	font-size: 1.333rem; /* 20/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        /* Similarly for the "atomic number" - a single digit - in the top left corner
+        of these boxes: */
+
+        span.elementnumbertext {
+        	color: #ffffff;
+        	font-size: 0.622rem; /* 7/12 * 96/72 * 100/125 */
+        }
+
+        /* For the text of the element title, to the right of the element box: */
+
+        span.elementtitletext {
+        	color: #ffffff;
+        	font-size: 0.6rem; /* 9/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        /* The banner at the top of each element: */
+
+        table.elementbanner {
+        	background: #eeeeee;
+        }
+
+        /* For the typewriting on the Library Card: */
+
+        span.librarycardtitle {
+        	color: #803030;
+        }
+
+        span.librarycardother {
+        	color: #303030;
+        }
+
+        /* Generically used for "more details" boxes in the index: */
+
+        table.indexmorebox {
+        	background-color: #e0e0e0;
+            border-radius: 8px;
+        }
+
+        /* But not for activity contents: */
+
+        table.indexactivitycontents {
+        	background-color: #e8e0c0;
+            border-radius: 8px;
+        }
+
+        /* For responses in index entries about rules: */
+
+        span.indexresponseletter {
+        	color: #ffffff;
+        	font-family: 'Courier New', Courier, monospace;
+        	background-color: #8080ff;
+        }
+
+        span.indexresponsetext {
+        	color: #000066;
+        }
+
+        /* Used ubiquitously throughout the index and extension documentation: */
+
+        span.indexblack {
+        	color: #000000;
+        }
+
+        span.indexgrey {
+        	color: #808080;
+        }
+
+        span.indexdarkgrey {
+            color: #505050;
+        }
+
+        span.indexdullred {
+        	color: #800000;
+        }
+
+        span.indexdullgreen {
+        	color: #008000;
+        }
+
+        span.indexdullblue {
+        	color: #000080;
+        }
+
+        /* Used for the room squares in the World map in the Index (which is currently
+        a table with one row of one column) */
+
+        table.indexmaproom {
+        	border-color: #000000;
+        }
+
+        /* Used in the numbering of levels of the World map in the Index */
+
+        span.indexmaplevelnumbers {
+        	color: #c0c0c0;
+        }
+
+        /* Used e.g. for title rows in the Chart of basic kinds in the Index */
+
+        tr.headingrow {
+        	background-color: #e0e0e0;
+        }
+
+        /* Standard rows have black text on striped background colours, these being
+        the usual ones seen in Mac OS X applications such as iTunes. */
+
+        tr.stripeone {
+        	background-color: #ffffff;
+        }
+
+        tr.stripetwo {
+        	background-color: #f3f6fa;
+        }
+
+        tr.tintedrow {
+        	background-color: #808080;
+        }
+
+        /* In the Figures index, this is the background colour used behind images
+        (though in fact it will only be visible if the image fails to load, or uses
+        transparency): */
+
+        div.figureindexbox {
+        	background-color: #6495ed;
+        }
+
+        /* To get the book-contents-page style leaders on the Contents element of
+           the index to work, these must use the background colour of the body of
+           the page, whatever that is: */
+
+        ul.leaders li.leaded span:first-child {
+        	background: white;
+        }
+        ul.leaders li.leaded span + span {
+        	background: white;
+        }
+
+        /* On Registry index pages (such as the Public Library), these are used for
+        download buttons and the like: */
+
+        span.registrybuttontext {
+        	font-size: 11px;
+        	border-color: #000000;
+        }
+
+        span.registryminibuttontext {
+        	font-size: 10px;
+        	border-color: #000000;
+        }
+
+        span.registrybuttonuninstalled {
+        	color: #000000;
+        	background: #ffffdd;
+        }
+
+        span.registrybuttoninstalled {
+        	color: #000000;
+        	background: #ffffff;
+        	pointer-events: none;
+        }
+
+        span.registrybuttonbuiltin {
+        	color: #888888;
+        	background: #ffffff;
+        	pointer-events: none;
+        }
+
+        span.registrybuttonupdate {
+        	color: #000000;
+        	background: #aaddff;
+        }
+
+        span.registrybuttonrevert {
+        	color: #000000;
+        	background: #ddaaff;
+        }
+
+        span.registrybuttonrevealer {
+        	color: #ffffff;
+        	background: #444444;
+        }
+
+        /* Registry index section headings: */
+
+        span.registrysectionname {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 16px;
+        	line-height: 18px;
+        }
+        span.registrysubsectionname {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 14px;
+        	line-height: 16px;
+        }
+
+        /* These are for the "mark" for a section, usually a section-symbol and number */
+
+        span.registrysectionmark {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 16px;
+        	line-height: 18px;
+        	color: #666;
+        }
+        span.registrysubsectionmark {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 14px;
+        	line-height: 16px;
+        	color: #666;
+        }
+
+        /* Text of an item listed in a registry: */
+
+        span.registryitemtext {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 12px;
+        	line-height: 16px;
+        }
+
+        /* And how the links in a registry index page behave: */
+
+        a.registrysilentlink {
+        	text-decoration: none;
+        	color: #000;
+        }
+        a.registrybuttonlink {
+        	text-decoration: none;
+        }
+        a.registrycontentslink:link {
+        	text-decoration: none;
+        	color: #202020;
+        }
+        a.registrycontentslink:visited {
+        	text-decoration: none;
+        	color: #202020;
+        }
+        a.registrycontentslink:hover {
+        	text-decoration: none;
+        	color: #D00000;
+        }
+        a.registrycontentslink:active {
+        	text-decoration: none;
+        	color: #D00000;
+        }
+
+        -->
+    </style>
+    <style type="text/css">
+        <!--
+        /* (1) General layout material */
+
+        *, *:before, *:after {
+        	-moz-box-sizing: border-box;
+        	-webkit-box-sizing: border-box;
+        	box-sizing: border-box;
+        }
+        .headingpanellayout {
+        	position: relative;
+        	height: 56px;
+        	padding: 0px;
+        	white-space:nowrap;
+        }
+        .headingpanellayoutdeeper {
+        	position: relative;
+        	height: 117px;
+        	padding: 0px;
+        	white-space:nowrap;
+        }
+        .headingtext {
+        	position: absolute;
+        	top: -4px;
+        	left: -1px;
+        	width: 100%;
+        	padding: 14px 10px 0px 10px;
+        }
+        .headingrubric {
+        	position: absolute;
+        	top: 36px;
+        	width: 100%;
+        	padding: 0px 10px 0px 10px;
+        }
+        h3.tighter {
+        	margin-top: 0px;
+        }
+        p.hang {
+        	padding-left: 25px;
+        	text-indent: -25px;
+        	margin-top: 0px;
+        	margin-bottom: 0px;
+        }
+        p.in1 {
+        	padding-left: 0px;
+        }
+        p.tightin1 {
+        	padding-left: 0px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin1 {
+        	padding-left: 0px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin1 {
+        	padding-left: 50px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in2 {
+        	padding-left: 25px;
+        }
+        p.tightin2 {
+        	padding-left: 25px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin2 {
+        	padding-left: 25px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin2 {
+        	padding-left: 75px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in3 {
+        	padding-left: 50px;
+        }
+        p.tightin3 {
+        	padding-left: 50px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin3 {
+        	padding-left: 50px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin3 {
+        	padding-left: 100px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in4 {
+        	padding-left: 75px;
+        }
+        p.tightin4 {
+        	padding-left: 75px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin4 {
+        	padding-left: 75px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin4 {
+        	padding-left: 125px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in5 {
+        	padding-left: 100px;
+        }
+        p.tightin5 {
+        	padding-left: 100px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin5 {
+        	padding-left: 100px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin5 {
+        	padding-left: 150px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in6 {
+        	padding-left: 125px;
+        }
+        p.tightin6 {
+        	padding-left: 125px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin6 {
+        	padding-left: 125px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin6 {
+        	padding-left: 175px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in7 {
+        	padding-left: 150px;
+        }
+        p.tightin7 {
+        	padding-left: 150px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin7 {
+        	padding-left: 150px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin7 {
+        	padding-left: 200px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in8 {
+        	padding-left: 175px;
+        }
+        p.tightin8 {
+        	padding-left: 175px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin8 {
+        	padding-left: 175px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin8 {
+        	padding-left: 225px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in9 {
+        	padding-left: 200px;
+        }
+        p.tightin9 {
+        	padding-left: 200px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin9 {
+        	padding-left: 200px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin9 {
+        	padding-left: 250px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+
+        /* (2) Index page layout material */
+
+        /* The periodic table display has "sidebars", usually grey and taller than they
+        are wide; they contain no text. */
+
+        div.periodictablesidebar {
+        	height: 56px;
+        	width: 16px;
+        }
+        .periodictablesidebar a:link { text-decoration: none; }
+        .periodictablesidebar a:visited { text-decoration: none; }
+        .periodictablesidebar a:active { text-decoration: none; }
+
+        /* The "element boxes" are the cells appearing in the periodic-table display
+        on the welcome page of the index: */
+
+        .elementbox {
+        	position: relative;
+        	height: 56px;
+        	width: 56px;
+        	padding: 0px;
+        }
+
+        .elementbox a:link { text-decoration: none; }
+        .elementbox a:visited { text-decoration: none; }
+        .elementbox a:active { text-decoration: none; }
+        .elementbox a:hover { text-decoration: none; }
+        .elementbox:hover {
+        	opacity: 0.6;
+        }
+
+        /* The "small element boxes" look like those, but are smaller, and used on
+        the headings of the content which those original boxes link to: */
+
+        .smallelementbox {
+        	position: relative;
+        	height: 40px;
+        	width: 40px;
+        	padding: 0px;
+        }
+
+        .smallelementbox a:link { text-decoration: none; }
+        .smallelementbox a:visited { text-decoration: none; }
+        .smallelementbox a:active { text-decoration: none; }
+        .smallelementbox a:hover { text-decoration: none; }
+        .smallelementbox:hover {
+        	opacity: 0.6;
+        }
+
+        /* This is a class for the links formed by the element boxes: */
+
+        a.elementlink {
+        	position: absolute;
+        	top: -4px;
+        	left: -1px;
+        	width: 100%;
+        	padding: 14px 0px 14px 1px;
+        	text-align: center;
+        }
+
+        /* Similarly for the "atomic number" - a single digit - in the top left corner
+        of these boxes: */
+
+        div.elementnumber {
+        	position: absolute;
+        	top: 1px;
+        	left: 3px;
+        	text-align: left;
+        }
+
+        /* For the text of the element title, to the right of the element box: */
+
+        div.elementtitle {
+        	position: absolute;
+        	top: 35px;
+        	width: 100%;
+        	text-align: center;
+        }
+
+        /* Used for the book-contents-page style leaders on the Contents element of
+           the index: */
+
+        ul.leaders {
+        	padding: 0;
+        	margin-top: 1px;
+        	margin-bottom: 0;
+        	overflow-x: hidden;
+        	list-style: none}
+        ul.leaders li.leaded:before {
+        	float: left;
+        	width: 0;
+        	white-space: nowrap;
+        	content:
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "}
+        ul.leaders li.leaded span:first-child {
+        	padding-right: 0.33em;
+        }
+        ul.leaders li.leaded span + span {
+        	float: right;
+        	padding-left: 0.33em;
+        }
+        li.indent1 span:first-child {
+        	padding-left: 25px;
+        }
+        li.indent2 span:first-child {
+        	padding-left: 50px;
+        }
+        li.indent3 span:first-child {
+        	padding-left: 75px;
+        }
+        li.indent4 span:first-child {
+        	padding-left: 100px;
+        }
+        li.indent5 span:first-child {
+        	padding-left: 125px;
+        }
+        li.indent6 span:first-child {
+        	padding-left: 150px;
+        }
+        li.indent7 span:first-child {
+        	padding-left: 175px;
+        }
+        li.indent8 span:first-child {
+        	padding-left: 200px;
+        }
+        li.indent9 span:first-child {
+        	padding-left: 225px;
+        }
+
+        li.unleaded:before {
+        	content: "";
+        }
+
+        /* On Registry index pages (such as the Public Library), these are used for
+        download buttons and the like: */
+
+        span.registrybuttons {
+        	height: 20px;
+        	padding: 2px 8px 2px 8px;
+        	margin: 2px;
+        	border:1px solid;
+        	border-radius: 5px;
+        }
+
+        span.registryminibuttons {
+        	height: 14px;
+        	padding: 2px 5px 2px 5px;
+        	margin: 2px;
+        	border:1px solid;
+        	border-radius: 4px;
+        }
+
+        /* Used to hide or display sections in the Registry pages: */
+
+        div.registrysectionitemsopen {
+        	display: block;
+        }
+
+        div.registrysectionitemsclosed {
+        	display: none;
+        }
+
+        /* Hanging indentation for Registry item paragraphs: */
+
+        p.registryitem {
+        	padding-left: 80px;
+        	text-indent: -40px;
+        }
+
+        p.registryaddition {
+        	padding-left: 40px;
+        	text-indent: -40px;
+        }
+
+        -->
+    </style>
+    <script type="text/javascript">
+        function project() {
+            return window.Project;
+        }
+        function showExtra(id, imid) {
+        	if (document.getElementById(id).style.display == 'block') {
+        		document.getElementById(id).style.display = 'none';
+        		document.getElementById(imid).src = 'inform:/doc_images/extra.png';
+        	} else {
+        		document.getElementById(id).style.display = 'block';
+        		document.getElementById(imid).src = 'inform:/doc_images/extraclose.png';
+        	}
+        }
+        function showBasic(id) {
+        	if (document.getElementById(id).style.display == '') {
+        		document.getElementById(id).style.display = 'none';
+        	} else {
+        		document.getElementById(id).style.display = '';
+        	}
+        }
+        function showResp(id, imid) {
+        	if (document.getElementById(id)) {
+        		if (document.getElementById(id).style.display == 'block') {
+        			document.getElementById(id).style.display = 'none';
+        			document.getElementById(imid).src = 'inform:/doc_images/responses.png';
+        		} else {
+        			document.getElementById(id).style.display = 'block';
+        			document.getElementById(imid).src = 'inform:/doc_images/responsesclose.png';
+        		}
+        	}
+        }
+        function showAllResp(tot) {
+        	for (var i=0;i<tot;i++) {
+        		showResp('extra'+(1000000+i), 'plus'+(1000000+i));
+        	}
+        }
+        function pasteCode(code) {
+        	var myProject = project();
+        	myProject.selectView('source');
+        	myProject.pasteCode(code);
+        }
+
+    </script>
+    <style type="text/css" media="screen, print">
+        #box1_1 {
+            background: #cf0a38;
+        }
+        #minibox1_1 {
+            background: #cf0a38;
+        }
+        #box1_2 {
+            background: #cf0a38;
+        }
+        #minibox1_2 {
+            background: #cf0a38;
+        }
+        #box1_3 {
+            background: #cf0a38;
+        }
+        #minibox1_3 {
+            background: #cf0a38;
+        }
+        #box1_4 {
+            background: #cf0a38;
+        }
+        #minibox1_4 {
+            background: #cf0a38;
+        }
+        #box1_5 {
+            background: #cf0a38;
+        }
+        #minibox1_5 {
+            background: #cf0a38;
+        }
+        #box2_1 {
+            background: #ea5b1f;
+        }
+        #minibox2_1 {
+            background: #ea5b1f;
+        }
+        #box2_2 {
+            background: #ea5b1f;
+        }
+        #minibox2_2 {
+            background: #ea5b1f;
+        }
+        #box2_3 {
+            background: #ea5b1f;
+        }
+        #minibox2_3 {
+            background: #ea5b1f;
+        }
+        #box2_4 {
+            background: #ea5b1f;
+        }
+        #minibox2_4 {
+            background: #ea5b1f;
+        }
+        #box2_5 {
+            background: #ea5b1f;
+        }
+        #minibox2_5 {
+            background: #ea5b1f;
+        }
+        #box3_1 {
+            background: #e9cf08;
+        }
+        #minibox3_1 {
+            background: #e9cf08;
+        }
+        #box3_2 {
+            background: #e9cf08;
+        }
+        #minibox3_2 {
+            background: #e9cf08;
+        }
+        #box3_3 {
+            background: #e9cf08;
+        }
+        #minibox3_3 {
+            background: #e9cf08;
+        }
+        #box4_1 {
+            background: #52992f;
+        }
+        #minibox4_1 {
+            background: #52992f;
+        }
+        #box4_2 {
+            background: #52992f;
+        }
+        #minibox4_2 {
+            background: #52992f;
+        }
+        #box4_3 {
+            background: #52992f;
+        }
+        #minibox4_3 {
+            background: #52992f;
+        }
+        #box4_4 {
+            background: #52992f;
+        }
+        #minibox4_4 {
+            background: #52992f;
+        }
+        #box5_1 {
+            background: #1d31b4;
+        }
+        #minibox5_1 {
+            background: #1d31b4;
+        }
+        #box5_2 {
+            background: #1d31b4;
+        }
+        #minibox5_2 {
+            background: #1d31b4;
+        }
+        #box6_1 {
+            background: #001860;
+        }
+        #minibox6_1 {
+            background: #001860;
+        }
+        #box6_2 {
+            background: #001860;
+        }
+        #minibox6_2 {
+            background: #001860;
+        }
+        #box6_3 {
+            background: #001860;
+        }
+        #minibox6_3 {
+            background: #001860;
+        }
+        #box7_1 {
+            background: #8b58bf;
+        }
+        #minibox7_1 {
+            background: #8b58bf;
+        }
+        #box7_2 {
+            background: #8b58bf;
+        }
+        #minibox7_2 {
+            background: #8b58bf;
+        }
+    </style>
+    <script type="text/javascript">
+        var qq; window.onload = function() {
+            if (location.search.length > 0) {
+                qq = location.search.substring(1, location.search.length);
+                show_only_one_element(qq);
+            }
+        }
+        function click_element_box(id) {
+            if (document.getElementById(id).style.display == 'none') {
+                show_only_one_element(id);
+            } else {
+                var x = 0;
+                if (document.getElementById('segment1').style.display == '') { x++; }
+                if (document.getElementById('segment2').style.display == '') { x++; }
+                if (document.getElementById('segment3').style.display == '') { x++; }
+                if (document.getElementById('segment4').style.display == '') { x++; }
+                if (document.getElementById('segment5').style.display == '') { x++; }
+                if (x == 1) { show_all_elements(); }
+                else { show_only_one_element(id); }
+            }
+        }
+        function click_sidebar() {
+            if (document.getElementById('surround0').style.display == 'none') {
+                enter_periodic_table();
+            } else {
+                show_all_elements();
+            }
+        }
+        function show_all_elements() {
+            show_element('segment1');
+            light_up('segment1');
+            show_element('segment2');
+            light_up('segment2');
+            show_element('segment3');
+            light_up('segment3');
+            show_element('segment4');
+            light_up('segment4');
+            show_element('segment5');
+            light_up('segment5');
+        	}
+        function show_only_one_element(id) {
+            hide_element('segment1');
+            light_down('segment1');
+            hide_element('segment2');
+            light_down('segment2');
+            hide_element('segment3');
+            light_down('segment3');
+            hide_element('segment4');
+            light_down('segment4');
+            hide_element('segment5');
+            light_down('segment5');
+            show_element(id);
+            light_up(id);
+        }
+        function enter_periodic_table() {
+            hide_element('segment1');
+            light_up('segment1');
+            hide_element('segment2');
+            light_up('segment2');
+            hide_element('segment3');
+            light_up('segment3');
+            hide_element('segment4');
+            light_up('segment4');
+            hide_element('segment5');
+            light_up('segment5');
+        }
+        function show_element(id) {
+            document.getElementById(id).style.display = '';
+        }
+        function hide_element(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        function light_up(id) {
+            var ic = 'box1_1';
+            if (id == 'segment2') { ic = 'box1_2';}
+            if (id == 'segment3') { ic = 'box1_3';}
+            if (id == 'segment4') { ic = 'box1_4';}
+            if (id == 'segment5') { ic = 'box1_5';}
+            document.getElementById(ic).style.background = '#cf0a38';
+        }
+        function light_down(id) {
+            var ic = 'box1_1';
+            if (id == 'segment2') { ic = 'box1_2';}
+            if (id == 'segment3') { ic = 'box1_3';}
+            if (id == 'segment4') { ic = 'box1_4';}
+            if (id == 'segment5') { ic = 'box1_5';}
+            document.getElementById(ic).style.background = '#cccccc';
+        }
+    </script>
+</head>
+<body>
+    <!--CONTENT BEGINS-->
+    <div id="periodictable">
+        <table cellspacing="3" border="0" width="100%">
+        </table>
+        <table cellspacing="3" border="0" width="100%">
+            <tr id="surround1">
+                <td onclick="window.location='Welcome.html'; return false;">
+                    <div class="periodictablesidebar periodictablesidebarcolour">
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment1'); return false;">
+                    <div id="box1_1" class="elementbox">
+                        <a class="elementlink" title="Contents" href="#"><span class="elementtext">C</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">1</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Contents</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment2'); return false;">
+                    <div id="box1_2" class="elementbox">
+                        <a class="elementlink" title="Card" href="#"><span class="elementtext">Cd</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">2</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Card</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment3'); return false;">
+                    <div id="box1_3" class="elementbox">
+                        <a class="elementlink" title="Tables" href="#"><span class="elementtext">Tb</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">3</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Tables</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment4'); return false;">
+                    <div id="box1_4" class="elementbox">
+                        <a class="elementlink" title="Figures" href="#"><span class="elementtext">Fi</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">4</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Figures</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment5'); return false;">
+                    <div id="box1_5" class="elementbox">
+                        <a class="elementlink" title="Innards" href="#"><span class="elementtext">In</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">5</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Innards</span></div>
+                    </div>
+
+                </td>
+                <td onclick="show_all_elements(); return false;" style="width:100%">
+
+                    <div class="headingpanellayout headingpanel">
+                        <div class="headingtext">
+                            <span class="headingpaneltext">Contents Index</span></div>
+                        <div class="headingrubric">
+                            <span class="headingpanelrubric">How the source text is organised</span></div>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="segment1">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox1_1" class="smallelementbox">
+                        <a class="elementlink" title="Contents" href="#" onclick="click_element_box('segment1'); return false;"><span class="elementtext">C</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">1
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Contents</b> &mdash; 
+                    Like the contents page of a book.<br>
+                    <i>About headings&nbsp;&nbsp;<a href=inform:/doc12.html><img border=0 src=inform:/doc_images/help.png></a>; About extensions&nbsp;&nbsp;<a href=inform:/doc426.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <p><b>The Magic Kitchen by Savleen and Daddy</b></p>
+        <p>CONTENTS</p>
+        <ul class="leaders">
+        <li class="leaded indent1"><span>Preamble</span><span>39 words</span></li></ul>
+        <ul class="leaders">
+        <li class="leaded indent1"><span>Volume 1 - Places</span><span>171 words&nbsp;<a href="source:story.ni#line3"><img border=0 src=inform:/doc_images/Reveal.png></a></span></li></ul>
+        <ul class="leaders">
+        <li class="leaded indent2"><span>Section 1 - The map</span><span><span class="indexgrey">97 words</span>&nbsp;<a href="source:story.ni#line5"><img border=0 src=inform:/doc_images/Reveal.png></a></span></li></ul>
+        <p class="hangingin3"><span class="indexgrey"><i>Kitchen, Hallway, Girl's Room, Big Room, Bathroom, Pantry, Basement, Patio, Living Room, makeup table</i></span></p>
+        <ul class="leaders">
+        <li class="leaded indent2"><span>Section 2 - The kitchen</span><span><span class="indexgrey">70 words</span>&nbsp;<a href="source:story.ni#line29"><img border=0 src=inform:/doc_images/Reveal.png></a></span></li></ul>
+        <p class="hangingin3"><span class="indexgrey"><i>stories, magic bottle, blue chalk, stool</i></span></p>
+        <ul class="leaders">
+        <li class="leaded indent1"><span>Volume 2 - Cast</span><span>89 words&nbsp;<a href="source:story.ni#line40"><img border=0 src=inform:/doc_images/Reveal.png></a></span></li></ul>
+        <ul class="leaders">
+        <li class="leaded indent2"><span>Section 1 - Little Girls</span><span><span class="indexgrey">18 words</span>&nbsp;<a href="source:story.ni#line42"><img border=0 src=inform:/doc_images/Reveal.png></a></span></li></ul>
+        <p class="hangingin3"><span class="indexgrey"><i>little girl</i></span></p>
+        <ul class="leaders">
+        <li class="leaded indent2"><span>Section 2 - Simi</span><span><span class="indexgrey">55 words</span>&nbsp;<a href="source:story.ni#line46"><img border=0 src=inform:/doc_images/Reveal.png></a></span></li></ul>
+        <p class="hangingin3"><span class="indexgrey"><i>Simi, milky</i></span></p>
+        <ul class="leaders">
+        <li class="leaded indent2"><span>Section 3 - Savleen</span><span><span class="indexgrey">12 words</span>&nbsp;<a href="source:story.ni#line54"><img border=0 src=inform:/doc_images/Reveal.png></a></span></li></ul>
+        <p class="hangingin3"><span class="indexgrey"><i>Savleen</i></span></p>
+        <p>EXTENSIONS</p>
+        <p class="hangingin2"><span class="indexgrey">Included automatically by Inform</span></p>
+        <ul class="leaders"><li class="leaded indent2"><span>Basic Inform <span class="smaller">version 1</span> </span><span>7691 words</span></li></ul>
+        <ul class="leaders"><li class="leaded indent2"><span>English Language &nbsp;<a href='inform://Extensions/Extensions/Graham%20Nelson/English%20Language.html' title="English Language by Graham Nelson" style="text-decoration: none"><img border=0 src=inform:/doc_images/Revealext.png></a>&nbsp;&nbsp;<span class="smaller">version 1</span> </span><span>2328 words</span></li></ul>
+        <ul class="leaders"><li class="leaded indent2"><span>Standard Rules <span class="smaller">version 6</span> </span><span>32164 words</span></li></ul>
+    </div>
+    <div id="segment2">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox1_2" class="smallelementbox">
+                        <a class="elementlink" title="Card" href="#" onclick="click_element_box('segment2'); return false;"><span class="elementtext">Cd</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">2
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Card</b> &mdash; 
+                    How this project might be filed in a library catalogue.<br>
+                    <i>About the Library Card&nbsp;&nbsp;<a href=inform:/doc397.html><img border=0 src=inform:/doc_images/help.png></a>; About IFIDs&nbsp;&nbsp;<a href=inform:/doc398.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <p><a name=LCARD></a><table border="0" cellspacing="3" cellpadding="3" background="inform:/bg_images/indexcard.png">
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardtitle"><span class="typewritten">Story title</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardtitle"><span class="typewritten"><b>The Magic Kitchen</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">Story author</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>Savleen and Daddy</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">Story headline</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>An Interactive Fiction</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">Story genre</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>Fiction</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">Release number</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>1</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">Story creation year</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>(This year)</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">Language of play</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>English</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">IFID number</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>8C185B5A-C228-46B7-BA49-F057E8093E28</b></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;" align="left" valign="top" height="20">
+                    <span class="librarycardother"><span class="typewritten">Story description</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <span class="librarycardother"><span class="typewritten"><b>None</b></span></span>
+                </td>
+            </tr>
+        </table>
+        </p>
+    </div>
+    <div id="segment3">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox1_3" class="smallelementbox">
+                        <a class="elementlink" title="Tables" href="#" onclick="click_element_box('segment3'); return false;"><span class="elementtext">Tb</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">3
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Tables</b> &mdash; 
+                    Tables of information in the source text.<br>
+                    <i>About tables&nbsp;&nbsp;<a href=inform:/doc244.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <p><a href="#" onclick="showExtra('extra2', 'plus2'); return false;"><img border=0 id="plus2" src=inform:/doc_images/extra.png></a>&nbsp;Show tables inside extensions (there are none in the main text)</p>
+        <div id="extra2" style="display: none;">
+            <p class="in1"><table width="100%" cellpadding="6" cellspacing="0" border="0" class="indexmorebox">
+                <tr>
+                    <td>
+                        <p><i>Standard Rules</i></p>
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="padding-top: 3px;" align="left" valign="top">
+                                    <b>Table of Final Question Options</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td style="padding-top: 3px;" align="left" valign="top">
+                                    <i><span class="smaller">5 columns x 5 rows</span></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">
+                                    &nbsp;&nbsp;col 1:&nbsp;&nbsp;final question wording&nbsp;<a href="javascript:pasteCode('final question wording entry')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td align="left" valign="top">
+                                    of texts
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">
+                                    &nbsp;&nbsp;col 2:&nbsp;&nbsp;only if victorious&nbsp;<a href="javascript:pasteCode('only if victorious entry')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td align="left" valign="top">
+                                    of truth states
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">
+                                    &nbsp;&nbsp;col 3:&nbsp;&nbsp;topic&nbsp;<a href="javascript:pasteCode('topic entry')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td align="left" valign="top">
+                                    of topics
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">
+                                    &nbsp;&nbsp;col 4:&nbsp;&nbsp;final response rule&nbsp;<a href="javascript:pasteCode('final response rule entry')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td align="left" valign="top">
+                                    of rules
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">
+                                    &nbsp;&nbsp;col 5:&nbsp;&nbsp;final response activity&nbsp;<a href="javascript:pasteCode('final response activity entry')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td align="left" valign="top">
+                                    of activities on objects
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top: 3px;" align="left" valign="top">
+                                    <b>Table of Locale Priorities</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td style="padding-top: 3px;" align="left" valign="top">
+                                    <i><span class="smaller">2 columns x 10 rows (9 blank, one for each thing)</span></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">
+                                    &nbsp;&nbsp;col 1:&nbsp;&nbsp;notable-object&nbsp;<a href="javascript:pasteCode('notable-object entry')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td align="left" valign="top">
+                                    of objects
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">
+                                    &nbsp;&nbsp;col 2:&nbsp;&nbsp;locale description priority&nbsp;<a href="javascript:pasteCode('locale description priority entry')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td align="left" valign="top">
+                                    of numbers
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+            </p>
+        </div>
+    </div>
+    <div id="segment4">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox1_4" class="smallelementbox">
+                        <a class="elementlink" title="Figures" href="#" onclick="click_element_box('segment4'); return false;"><span class="elementtext">Fi</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">4
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Figures</b> &mdash; 
+                    The figures, sound effects or external files used.<br>
+                    <i>About figures&nbsp;&nbsp;<a href=inform:/doc374.html><img border=0 src=inform:/doc_images/help.png></a>; About sounds&nbsp;&nbsp;<a href=inform:/doc377.html><img border=0 src=inform:/doc_images/help.png></a>; About files&nbsp;&nbsp;<a href=inform:/doc381.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <p>There are no figures, or illustrations, in this project.</p>
+        <p><b>List of Sounds</b></p>
+        <p>There are no sound effects in this project.</p>
+        <p>This project doesn't read or write external files.</p>
+    </div>
+    <div id="segment5">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox1_5" class="smallelementbox">
+                        <a class="elementlink" title="Innards" href="#" onclick="click_element_box('segment5'); return false;"><span class="elementtext">In</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">5
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Innards</b> &mdash; 
+                    Technicalities about the story file being produced.<br>
+                    <i>About the story file&nbsp;&nbsp;<a href=inform:/doc21.html><img border=0 src=inform:/doc_images/help.png></a>; About use options&nbsp;&nbsp;<a href=inform:/doc19.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <a name=STORYFILE></a><p>Story file format: <img border=0 src=inform:/doc_images/vm_glulx.png>&nbsp;Inform6/32d/v3.1.2</p>
+        <p>The following use options are in force:</p>
+        <p class="tightin2"><span class="indexgrey">Set from the Options.txt configuration file, or automatically&nbsp;<a href=inform:/doc20.html><img border=0 src=inform:/doc_images/help.png></a>:</span></p>
+        <p class="tightin3">Use maximum text length of at least 1024&nbsp;<a href="javascript:pasteCode('Use maximum text length of at least 2048.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;<i>Double this</i></p>
+        <p class="tightin3">Use index figure thumbnails of at least 50&nbsp;<a href="javascript:pasteCode('Use index figure thumbnails of at least 100.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;<i>Double this</i></p>
+        <p class="tightin2"><span class="indexgrey">Set from Basic Inform version 1 by Graham Nelson:</span></p>
+        <p class="tightin3">Use dynamic memory allocation of at least 8192&nbsp;<a href="javascript:pasteCode('Use dynamic memory allocation of at least 16384.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;<i>Double this</i></p>
+        <p class="tightin2"><span class="indexgrey">Set from Standard Rules version 6 by Graham Nelson:</span></p>
+        <p class="tightin3">Use maximum things understood at once of at least 100&nbsp;<a href="javascript:pasteCode('Use maximum things understood at once of at least 200.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;<i>Double this</i></p>
+        <p>Whereas these are not in force:</p>
+        <p class="tightin2"><span style="white-space:nowrap";><a href="javascript:pasteCode('Use ineffectual.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;ineffectual</span><span style="white-space:nowrap";><a href="javascript:pasteCode('Use American dialect.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;American dialect</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use serial comma.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;serial comma</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use memory economy.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;memory economy</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use engineering notation.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;engineering notation</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use unabbreviated object names.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;unabbreviated object names</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use predictable randomisation.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;predictable randomisation</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use fast route-finding.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;fast route-finding</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use slow route-finding.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;slow route-finding</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use numbered rules.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;numbered rules</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use telemetry recordings.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;telemetry recordings</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use no deprecated features.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;no deprecated features</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use gn testing version.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;gn testing version</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use command line echoing.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;command line echoing</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use full-length room descriptions.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;full-length room descriptions</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use abbreviated room descriptions.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;abbreviated room descriptions</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use scoring.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;scoring</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use no scoring.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;no scoring</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use manual pronouns.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;manual pronouns</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use undo prevention.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;undo prevention</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use VERBOSE room descriptions.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;VERBOSE room descriptions</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use BRIEF room descriptions.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;BRIEF room descriptions</span>, <span style="white-space:nowrap";><a href="javascript:pasteCode('Use SUPERBRIEF room descriptions.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;SUPERBRIEF room descriptions</span>, </p>
+        <p><a href="#" onclick="showExtra('extra3', 'plus3'); return false;"><img border=0 id="plus3" src=inform:/doc_images/extra.png></a>&nbsp;See some technicalities for Inform maintainers only</p>
+        <div id="extra3" style="display: none;">
+            <p class="in2"><table width="100%" cellpadding="6" cellspacing="0" border="0" class="indexmorebox">
+                <tr>
+                    <td>
+                        <p><a name=CONFIG></a></p>
+                        <p>Inform language definition:</p>
+                        <p>Included: core, naming, instance counting, interactive fiction, spatial model, backdrops, bibliographic data, chronology, devices, mapping, persons, player, regions, scenes, scoring, timed rules, times of day, actions, going, command, showme, multimedia, figures, sounds, glulx external files</p>
+                        <p>Debugging log:</p>
+                        <p><a href="javascript:pasteCode('Include debugging log inclusions in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include debugging log inclusions in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/tick.png><br>
+                        <a href="javascript:pasteCode('Include shell usage in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include shell usage in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include memory usage in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include memory usage in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include text files in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include text files in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include lexical output in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include lexical output in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include vocabulary in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include vocabulary in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include constructed past participles in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include constructed past participles in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include constructed plurals in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include constructed plurals in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include excerpt meanings in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include excerpt meanings in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include excerpt parsing in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include excerpt parsing in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include linguistic stock in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include linguistic stock in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include time periods in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include time periods in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include verb usages in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include verb usages in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include verb forms in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include verb forms in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include kind changes in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include kind changes in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include kind checking in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include kind checking in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include kind creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include kind creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include matching in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include matching in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include predicate calculus in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include predicate calculus in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include predicate calculus workings in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include predicate calculus workings in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include intermediate file reading in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include intermediate file reading in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inter memory usage in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inter memory usage in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inter binary in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inter binary in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inter symbols in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inter symbols in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inter connectors in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inter connectors in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include constant depth calculation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include constant depth calculation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include extensions census in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include extensions census in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include headings in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include headings in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include task queue in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include task queue in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inter in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inter in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inform inter in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inform inter in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include assemblies in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include assemblies in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include assertions in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include assertions in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include implications in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include implications in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include noun resolution in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include noun resolution in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include pronouns in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include pronouns in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include relation definitions in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include relation definitions in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include object creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include object creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include phrase usage in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include phrase usage in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include specificities in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include specificities in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include text substitutions in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include text substitutions in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include variable creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include variable creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include table construction in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include table construction in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include activity creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include activity creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inferences in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inferences in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include object compilation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include object compilation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include property creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include property creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include property provision in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include property provision in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include property translations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include property translations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include rule attachments in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include rule attachments in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include rulebook compilation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include rulebook compilation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include description compilation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include description compilation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include expressions in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include expressions in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include local variables in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include local variables in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include phrase comparisons in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include phrase comparisons in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include phrase compilation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include phrase compilation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include phrase creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include phrase creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include phrase registration in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include phrase registration in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include template reading in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include template reading in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include resolving conditional compilation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include resolving conditional compilation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include external symbol resolution in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include external symbol resolution in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include code elimination in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include code elimination in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include property allocation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include property allocation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include inter hierarchy in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include inter hierarchy in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include schema compilation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include schema compilation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include schema compilation details in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include schema compilation details in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include packaging in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include packaging in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include action creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include action creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include action pattern compilation in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include action pattern compilation in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include action pattern parsing in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include action pattern parsing in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include grammar in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include grammar in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include grammar construction in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include grammar construction in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include object tree in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include object tree in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include figure creations in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include figure creations in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include spatial map in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include spatial map in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        <a href="javascript:pasteCode('Include spatial map workings in the debugging log.')"><img border=0 src=inform:/doc_images/paste.png></a>&nbsp;Include spatial map workings in the debugging log.&nbsp;<img border=0 src=inform:/doc_images/cross.png><br>
+                        </p>
+
+                    </td>
+                </tr>
+            </table>
+            </p>
+        </div>
+    </div>
+    <hr>
+
+    <!--CONTENT ENDS-->
+</body>
+</html>

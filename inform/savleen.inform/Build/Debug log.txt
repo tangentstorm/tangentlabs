@@ -1,0 +1,272 @@
+Debugging log of inform7
+inform7 was called as: C:\Program Files\Inform\Compilers\inform7 -internal C:\Program Files\Inform\Internal -external C:\Users\tange\Documents\Inform -project D:\ver\tangentlabs\inform\savleen.inform -format=Inform6/32d
+Reading further switches from file: <no file>
+Completed expert settings file
+Using Inform kit 'BasicInformKit' (priority 0).
+Using Inform kit 'EnglishLanguageKit' (priority 1).
+Using Inform kit 'WorldModelKit' (priority 2).
+Using Inform kit 'CommandParserKit' (priority 3).
+756 Preform nonterminals read from C:\Program Files\Inform\Internal\Languages\English\Syntax.preform
+I've now read your source text, which is 267 words long.
+Included: core, naming, instance counting, interactive fiction, spatial model, backdrops, bibliographic data, chronology, devices, mapping, persons, player, regions, scenes, scoring, timed rules, times of day, actions, going, command, showme, multimedia, figures, sounds, glulx external files
+Excluded: 
+I've also read Basic Inform by Graham Nelson, which is 7691 words long.
+I've also read English Language by Graham Nelson, which is 2328 words long.
+I've also read Standard Rules by Graham Nelson, which is 32164 words long.
+
+
+-----------------------------------------------------
+Phase I ... Dividing source into compilation units
+-----------------------------------------------------
+
+
+
+-----------------------------------------------------
+Phase II ... Making built in infrastructure
+-----------------------------------------------------
+
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\BasicInformKit\kinds\Macros.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\BasicInformKit\kinds\Protocols.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\BasicInformKit\kinds\Core.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\BasicInformKit\kinds\Punctuation.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\BasicInformKit\kinds\Files.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\WorldModelKit\kinds\Actions.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\WorldModelKit\kinds\Times.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\WorldModelKit\kinds\Scenes.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\WorldModelKit\kinds\Figures.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\WorldModelKit\kinds\Sounds.neptune
+Loading kinds definitions from C:\Program Files\Inform\Internal\Inter\CommandParserKit\kinds\Parsing.neptune
+
+
+-----------------------------------------------------
+Phase III ... Pre-pass through major nodes
+-----------------------------------------------------
+
+.... MajorNodes__pre_pass() took 8cs
+
+
+-----------------------------------------------------
+Phase IV ... First pass through major nodes
+-----------------------------------------------------
+
+.... MajorNodes__pass_1() took 5cs
+
+
+-----------------------------------------------------
+Phase V ... Second pass through major nodes
+-----------------------------------------------------
+
+.... MajorNodes__pass_2() took 1cs
+
+
+-----------------------------------------------------
+Phase VI ... Making the model world
+-----------------------------------------------------
+
+
+
+-----------------------------------------------------
+Phase VII ... Completing the model world
+-----------------------------------------------------
+
+
+
+-----------------------------------------------------
+Phase VIII ... Tables and grammar
+-----------------------------------------------------
+
+
+
+-----------------------------------------------------
+Phase IX ... Augment model world
+-----------------------------------------------------
+
+
+
+-----------------------------------------------------
+Phase X ... Phrases and rules
+-----------------------------------------------------
+
+.... ImperativeDefinitions__assess_all() took 3cs
+
+
+-----------------------------------------------------
+Phase XI ... Generating inter (1)
+-----------------------------------------------------
+
+.... RTKindConstructors__compile() took 2cs
+
+
+-----------------------------------------------------
+Phase XII ... Generating inter (2)
+-----------------------------------------------------
+
+.... InferenceSubjects__emit_all() took 3cs
+
+
+==== Phase XII.1 ... Slashing command grammar ====
+
+
+
+==== Phase XII.2 ... Determining command grammar ====
+
+
+
+-----------------------------------------------------
+Phase XIII ... Generating inter (3)
+-----------------------------------------------------
+
+.... Sequence__undertake_queued_tasks() took 132cs
+.... Sequence__undertake_queued_tasks() took 1cs
+.... RTPhrasebook__compile_entries() took 3cs
+
+
+-----------------------------------------------------
+Phase XIV ... Generating inter (4)
+-----------------------------------------------------
+
+
+
+==== Phase XIV.1 ... Slashing command grammar ====
+
+
+
+==== Phase XIV.2 ... Determining command grammar ====
+
+
+
+-----------------------------------------------------
+Phase XV ... Generating inter (5)
+-----------------------------------------------------
+
+.... Sequence__undertake_queued_tasks() took 1cs
+Providing for a total heap of 8192, given requirement of 8192
+.... Sequence__lint_inter() took 2cs
+
+
+-----------------------------------------------------
+Phase XVI ... Bibliographic work
+-----------------------------------------------------
+
+
+
+-----------------------------------------------------
+Phase XVII ... Complete
+-----------------------------------------------------
+
+Compile CPU time: 173 centiseconds
+
+
+==== Phase XVII.1 ... step 1/15: read <- *memory ====
+
+
+
+==== Phase XVII.2 ... step 2/15: parse-insertions ====
+
+
+
+==== Phase XVII.3 ... step 3/15: resolve-conditional-compilation ====
+
+
+
+==== Phase XVII.4 ... step 4/15: compile-splats ====
+
+
+
+==== Phase XVII.5 ... step 5/15: load-binary-kits ====
+
+
+
+==== Phase XVII.6 ... step 6/15: make-synoptic-module ====
+
+
+
+==== Phase XVII.7 ... step 7/15: shorten-wiring ====
+
+
+
+==== Phase XVII.8 ... step 8/15: detect-indirect-calls ====
+
+
+
+==== Phase XVII.9 ... step 9/15: make-identifiers-unique ====
+
+
+
+==== Phase XVII.10 ... step 10/15: reconcile-verbs ====
+
+
+
+==== Phase XVII.11 ... step 11/15: eliminate-redundant-labels ====
+
+1740 redundant label(s) removed
+
+
+==== Phase XVII.12 ... step 12/15: eliminate-redundant-operations ====
+
+361 redundant operation(s) removed
+
+
+==== Phase XVII.13 ... step 13/15: optionally-generate text ->  ====
+
+
+
+==== Phase XVII.14 ... step 14/15: generate inform6 -> auto.inf ====
+
+
+
+==== Phase XVII.15 ... step 15/15: index ====
+
+Trying to close p at line 324 of 'services/html-module/Chapter 2/Documentation Renderer.w', but:
+Tag error: closed HTML tag which wasn't open
+HTML tag stack:
+    1. body (opened at line 370 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w')
+    2. html (opened at line 236 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w')
+
+
+Trying to close body at line 374 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w', but:
+Tag error: closed HTML tag which wasn't open
+HTML tag stack:
+    1. p (opened at line 327 of 'services/html-module/Chapter 2/Documentation Renderer.w')
+    2. html (opened at line 236 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w')
+
+
+Trying to close p at line 324 of 'services/html-module/Chapter 2/Documentation Renderer.w', but:
+Tag error: closed HTML tag which wasn't open
+HTML tag stack:
+    1. body (opened at line 370 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w')
+    2. html (opened at line 236 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w')
+
+
+Trying to close body at line 374 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w', but:
+Tag error: closed HTML tag which wasn't open
+HTML tag stack:
+    1. p (opened at line 327 of 'services/html-module/Chapter 2/Documentation Renderer.w')
+    2. html (opened at line 236 of 'D:/Programs/Adv/Inform7/Distribution/inweb/foundation-module/Chapter 5/HTML.w')
+
+
+Back end elapsed time: 116cs
+Total of 97 files written as streams.
+Vacant escapes: %: ..CDE.GH..K.M.O.QR.TU...YZab..e..h.jklm.o.qr......yz0123456789
+Vacant escapes: $: .....F...J..........UVW.....................s.u..x.........789
+
+
+That concludes the debugging log from this run.
+Its contents were as follows -
+
+Included:
+  (nothing)
+Omitted:
+  debugging-log-inclusions  shell-usage  memory-usage  text-files  lexical-output  vocabulary
+  constructed-past-participles  constructed-plurals  excerpt-meanings  excerpt-parsing  linguistic-stock  time-periods
+  verb-usages  verb-forms  kind-changes  kind-checking  kind-creations  matching
+  predicate-calculus  predicate-calculus-workings  intermediate-file-reading  inter-memory-usage  inter-binary  inter-symbols
+  inter-connectors  constant-depth-calculation  extensions-census  headings  task-queue  inter
+  inform-inter  assemblies  assertions  implications  noun-resolution  pronouns
+  relation-definitions  object-creations  phrase-usage  specificities  text-substitutions  variable-creations
+  table-construction  activity-creations  inferences  object-compilation  property-creations  property-provision
+  property-translations  rule-attachments  rulebook-compilation  description-compilation  expressions  local-variables
+  phrase-comparisons  phrase-compilation  phrase-creations  phrase-registration  template-reading  resolving-conditional-compilation
+  external-symbol-resolution  code-elimination  property-allocation  inter-hierarchy  schema-compilation  schema-compilation-details
+  packaging  action-creations  action-pattern-compilation  action-pattern-parsing  grammar  grammar-construction
+  object-tree  figure-creations  spatial-map  spatial-map-workings

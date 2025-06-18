@@ -1,0 +1,2433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Actions Index</title>
+    <style type="text/css">
+        <!--
+        /* The default font (family) and size */
+
+        body, p, td {
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 0.8rem; /* 100/125 */
+        }
+
+        /* For fixed-point material within text, such as the typing on the Library Card index page */
+
+        span.typewritten {
+        	font-family: monospace;
+        	font-size: 0.867rem; /* 13/12 * 100/125 */
+        }
+
+        /* For less important material: the small print */
+
+        span.smaller {
+        	font-size: 80%;
+        }
+
+        /* The "heading panel" is the coloured box, high up on the page. The colours
+        vary depending on the page: for example, the style on a report of a translation
+        with no problems is "headingpanelsucceeded", usually green, but if there were
+        problems then "headingpanelfailed" is used, which is usually red. "headingpanel"
+        itself is a more neutral grey by default. "headingpanelDark" is an alternative
+        look to make the extensions index pages have some visual contrast with the others;
+        by default they are a darker grey. */
+
+        .headingpanel {
+        	background: #eeeeee;
+        }
+        .headingpanelsucceeded {
+        	background: #E6FFE6;
+        }
+        .headingpanelfailed {
+        	background: #f69Ca6;
+        }
+        .headingpanelalt {
+        	background: #808080;
+        }
+
+        /* Heading panels have two lines of text: an upper one in a larger size, and a
+        lower one in a smaller. Again, the alt versions are meant to contrast.
+
+        	Report on Translation: Succeeded                <-- headingpaneltext
+        	Produced by Inform 10.1.0 (build 6U97)          <-- headingpanelrubric
+
+        	Installed Extensions                            <-- headingpaneltextalt
+        	Bundles of extra rules or phrases to...         <-- headingpanelrubricalt
+
+        */
+
+        span.headingpaneltext {
+        	color: #222222;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 1.333rem; /* 20/12 * 100/125 */
+        	font-weight: bold;
+        }
+        span.headingpaneltextalt {
+        	color: #ffffff;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 1.333rem; /* 20/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        span.headingpanelrubric {
+        	color: #222222;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 0.733rem; /* 11/12 * 100/125 */
+        	font-weight: bold;
+        }
+        span.headingpanelrubricalt {
+        	color: #ffffff;
+        	font-family: sans-serif;
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 0.733rem; /* 11/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        /* Horizontal rule styling */
+
+        div.hr {
+        	border: 0;
+        	width: 100%;
+        	color: #707070;
+        	background-color: #707070;
+        	height: 5px;
+        }
+
+        /* This styles the (usually white) text of the example numbers written inside
+        oval blobs in the extension documentation, which mimic the look of the in-app
+        documentation. */
+
+        .oval, .oval td {
+        	background-image:url('inform:/doc_images/ovoid.png');
+        	color:white;
+        }
+
+        /* Styling used in the extension documentation indexes: */
+
+        /* Used for extension names in the extensions pane of the app */
+
+        span.extensioncensusentry {
+        	color: #ffffff;
+        }
+
+        span.extensionindexentry {
+        	color: #404040;
+        }
+
+        span.extensionindexerror {
+        	color: #ff8080;
+        }
+
+        /* This is used in extension documentation, where an example is presented
+        in a slightly tinted box: */
+
+        table.extensionexample {
+        	background-color: #f0f0f0;
+        }
+
+        span.extensionexampleletter {
+        	color: #202020;
+        	font-size: 14px;
+        	font-weight: bold;
+        }
+
+        /* Seen in problem messages: */
+
+        span.problemred {
+        	color: #800000;
+        }
+
+        span.problemgreen {
+        	color: #008000;
+        }
+
+        span.phraseword {
+        	color: #808080;
+        }
+
+        span.phrasetokentext {
+        	color: #e00060;
+        }
+
+        span.phrasetokendesctext {
+        	color: #4040ff;
+        }
+
+        span.phrasetokenvaluetext {
+        	color: #ff4040;
+        }
+
+        /* Now we move on to styling used in the Index pages only: */
+
+        /* The periodic table display has "sidebars", usually grey and taller than they
+        are wide; they contain no text. */
+
+        div.periodictablesidebarcolour {
+        	background: #888;
+        }
+        div.periodictablesidebar:hover {
+        	background: #222;
+        }
+
+        /* The text of the element-abbreviation, such as "Lx" or "Ph", uses: */
+
+        span.elementtext {
+        	color: #ffffff;
+        	font-size: 1.333rem; /* 20/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        /* Similarly for the "atomic number" - a single digit - in the top left corner
+        of these boxes: */
+
+        span.elementnumbertext {
+        	color: #ffffff;
+        	font-size: 0.622rem; /* 7/12 * 96/72 * 100/125 */
+        }
+
+        /* For the text of the element title, to the right of the element box: */
+
+        span.elementtitletext {
+        	color: #ffffff;
+        	font-size: 0.6rem; /* 9/12 * 100/125 */
+        	font-weight: bold;
+        }
+
+        /* The banner at the top of each element: */
+
+        table.elementbanner {
+        	background: #eeeeee;
+        }
+
+        /* For the typewriting on the Library Card: */
+
+        span.librarycardtitle {
+        	color: #803030;
+        }
+
+        span.librarycardother {
+        	color: #303030;
+        }
+
+        /* Generically used for "more details" boxes in the index: */
+
+        table.indexmorebox {
+        	background-color: #e0e0e0;
+            border-radius: 8px;
+        }
+
+        /* But not for activity contents: */
+
+        table.indexactivitycontents {
+        	background-color: #e8e0c0;
+            border-radius: 8px;
+        }
+
+        /* For responses in index entries about rules: */
+
+        span.indexresponseletter {
+        	color: #ffffff;
+        	font-family: 'Courier New', Courier, monospace;
+        	background-color: #8080ff;
+        }
+
+        span.indexresponsetext {
+        	color: #000066;
+        }
+
+        /* Used ubiquitously throughout the index and extension documentation: */
+
+        span.indexblack {
+        	color: #000000;
+        }
+
+        span.indexgrey {
+        	color: #808080;
+        }
+
+        span.indexdarkgrey {
+            color: #505050;
+        }
+
+        span.indexdullred {
+        	color: #800000;
+        }
+
+        span.indexdullgreen {
+        	color: #008000;
+        }
+
+        span.indexdullblue {
+        	color: #000080;
+        }
+
+        /* Used for the room squares in the World map in the Index (which is currently
+        a table with one row of one column) */
+
+        table.indexmaproom {
+        	border-color: #000000;
+        }
+
+        /* Used in the numbering of levels of the World map in the Index */
+
+        span.indexmaplevelnumbers {
+        	color: #c0c0c0;
+        }
+
+        /* Used e.g. for title rows in the Chart of basic kinds in the Index */
+
+        tr.headingrow {
+        	background-color: #e0e0e0;
+        }
+
+        /* Standard rows have black text on striped background colours, these being
+        the usual ones seen in Mac OS X applications such as iTunes. */
+
+        tr.stripeone {
+        	background-color: #ffffff;
+        }
+
+        tr.stripetwo {
+        	background-color: #f3f6fa;
+        }
+
+        tr.tintedrow {
+        	background-color: #808080;
+        }
+
+        /* In the Figures index, this is the background colour used behind images
+        (though in fact it will only be visible if the image fails to load, or uses
+        transparency): */
+
+        div.figureindexbox {
+        	background-color: #6495ed;
+        }
+
+        /* To get the book-contents-page style leaders on the Contents element of
+           the index to work, these must use the background colour of the body of
+           the page, whatever that is: */
+
+        ul.leaders li.leaded span:first-child {
+        	background: white;
+        }
+        ul.leaders li.leaded span + span {
+        	background: white;
+        }
+
+        /* On Registry index pages (such as the Public Library), these are used for
+        download buttons and the like: */
+
+        span.registrybuttontext {
+        	font-size: 11px;
+        	border-color: #000000;
+        }
+
+        span.registryminibuttontext {
+        	font-size: 10px;
+        	border-color: #000000;
+        }
+
+        span.registrybuttonuninstalled {
+        	color: #000000;
+        	background: #ffffdd;
+        }
+
+        span.registrybuttoninstalled {
+        	color: #000000;
+        	background: #ffffff;
+        	pointer-events: none;
+        }
+
+        span.registrybuttonbuiltin {
+        	color: #888888;
+        	background: #ffffff;
+        	pointer-events: none;
+        }
+
+        span.registrybuttonupdate {
+        	color: #000000;
+        	background: #aaddff;
+        }
+
+        span.registrybuttonrevert {
+        	color: #000000;
+        	background: #ddaaff;
+        }
+
+        span.registrybuttonrevealer {
+        	color: #ffffff;
+        	background: #444444;
+        }
+
+        /* Registry index section headings: */
+
+        span.registrysectionname {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 16px;
+        	line-height: 18px;
+        }
+        span.registrysubsectionname {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 14px;
+        	line-height: 16px;
+        }
+
+        /* These are for the "mark" for a section, usually a section-symbol and number */
+
+        span.registrysectionmark {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 16px;
+        	line-height: 18px;
+        	color: #666;
+        }
+        span.registrysubsectionmark {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 14px;
+        	line-height: 16px;
+        	color: #666;
+        }
+
+        /* Text of an item listed in a registry: */
+
+        span.registryitemtext {
+        	-webkit-font-smoothing: antialiased;
+        	font-size: 12px;
+        	line-height: 16px;
+        }
+
+        /* And how the links in a registry index page behave: */
+
+        a.registrysilentlink {
+        	text-decoration: none;
+        	color: #000;
+        }
+        a.registrybuttonlink {
+        	text-decoration: none;
+        }
+        a.registrycontentslink:link {
+        	text-decoration: none;
+        	color: #202020;
+        }
+        a.registrycontentslink:visited {
+        	text-decoration: none;
+        	color: #202020;
+        }
+        a.registrycontentslink:hover {
+        	text-decoration: none;
+        	color: #D00000;
+        }
+        a.registrycontentslink:active {
+        	text-decoration: none;
+        	color: #D00000;
+        }
+
+        -->
+    </style>
+    <style type="text/css">
+        <!--
+        /* (1) General layout material */
+
+        *, *:before, *:after {
+        	-moz-box-sizing: border-box;
+        	-webkit-box-sizing: border-box;
+        	box-sizing: border-box;
+        }
+        .headingpanellayout {
+        	position: relative;
+        	height: 56px;
+        	padding: 0px;
+        	white-space:nowrap;
+        }
+        .headingpanellayoutdeeper {
+        	position: relative;
+        	height: 117px;
+        	padding: 0px;
+        	white-space:nowrap;
+        }
+        .headingtext {
+        	position: absolute;
+        	top: -4px;
+        	left: -1px;
+        	width: 100%;
+        	padding: 14px 10px 0px 10px;
+        }
+        .headingrubric {
+        	position: absolute;
+        	top: 36px;
+        	width: 100%;
+        	padding: 0px 10px 0px 10px;
+        }
+        h3.tighter {
+        	margin-top: 0px;
+        }
+        p.hang {
+        	padding-left: 25px;
+        	text-indent: -25px;
+        	margin-top: 0px;
+        	margin-bottom: 0px;
+        }
+        p.in1 {
+        	padding-left: 0px;
+        }
+        p.tightin1 {
+        	padding-left: 0px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin1 {
+        	padding-left: 0px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin1 {
+        	padding-left: 50px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in2 {
+        	padding-left: 25px;
+        }
+        p.tightin2 {
+        	padding-left: 25px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin2 {
+        	padding-left: 25px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin2 {
+        	padding-left: 75px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in3 {
+        	padding-left: 50px;
+        }
+        p.tightin3 {
+        	padding-left: 50px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin3 {
+        	padding-left: 50px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin3 {
+        	padding-left: 100px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in4 {
+        	padding-left: 75px;
+        }
+        p.tightin4 {
+        	padding-left: 75px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin4 {
+        	padding-left: 75px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin4 {
+        	padding-left: 125px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in5 {
+        	padding-left: 100px;
+        }
+        p.tightin5 {
+        	padding-left: 100px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin5 {
+        	padding-left: 100px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin5 {
+        	padding-left: 150px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in6 {
+        	padding-left: 125px;
+        }
+        p.tightin6 {
+        	padding-left: 125px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin6 {
+        	padding-left: 125px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin6 {
+        	padding-left: 175px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in7 {
+        	padding-left: 150px;
+        }
+        p.tightin7 {
+        	padding-left: 150px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin7 {
+        	padding-left: 150px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin7 {
+        	padding-left: 200px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in8 {
+        	padding-left: 175px;
+        }
+        p.tightin8 {
+        	padding-left: 175px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin8 {
+        	padding-left: 175px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin8 {
+        	padding-left: 225px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+        p.in9 {
+        	padding-left: 200px;
+        }
+        p.tightin9 {
+        	padding-left: 200px;
+        	margin-top: 2px;
+        	margin-bottom: 2px;
+        }
+        p.halftightin9 {
+        	padding-left: 200px;
+        	margin-bottom: 2px;
+        }
+        p.hangingin9 {
+        	padding-left: 250px;
+        	text-indent: -50px;
+        	margin-top: 0px;
+        	margin-bottom: 1px;
+        }
+
+        /* (2) Index page layout material */
+
+        /* The periodic table display has "sidebars", usually grey and taller than they
+        are wide; they contain no text. */
+
+        div.periodictablesidebar {
+        	height: 56px;
+        	width: 16px;
+        }
+        .periodictablesidebar a:link { text-decoration: none; }
+        .periodictablesidebar a:visited { text-decoration: none; }
+        .periodictablesidebar a:active { text-decoration: none; }
+
+        /* The "element boxes" are the cells appearing in the periodic-table display
+        on the welcome page of the index: */
+
+        .elementbox {
+        	position: relative;
+        	height: 56px;
+        	width: 56px;
+        	padding: 0px;
+        }
+
+        .elementbox a:link { text-decoration: none; }
+        .elementbox a:visited { text-decoration: none; }
+        .elementbox a:active { text-decoration: none; }
+        .elementbox a:hover { text-decoration: none; }
+        .elementbox:hover {
+        	opacity: 0.6;
+        }
+
+        /* The "small element boxes" look like those, but are smaller, and used on
+        the headings of the content which those original boxes link to: */
+
+        .smallelementbox {
+        	position: relative;
+        	height: 40px;
+        	width: 40px;
+        	padding: 0px;
+        }
+
+        .smallelementbox a:link { text-decoration: none; }
+        .smallelementbox a:visited { text-decoration: none; }
+        .smallelementbox a:active { text-decoration: none; }
+        .smallelementbox a:hover { text-decoration: none; }
+        .smallelementbox:hover {
+        	opacity: 0.6;
+        }
+
+        /* This is a class for the links formed by the element boxes: */
+
+        a.elementlink {
+        	position: absolute;
+        	top: -4px;
+        	left: -1px;
+        	width: 100%;
+        	padding: 14px 0px 14px 1px;
+        	text-align: center;
+        }
+
+        /* Similarly for the "atomic number" - a single digit - in the top left corner
+        of these boxes: */
+
+        div.elementnumber {
+        	position: absolute;
+        	top: 1px;
+        	left: 3px;
+        	text-align: left;
+        }
+
+        /* For the text of the element title, to the right of the element box: */
+
+        div.elementtitle {
+        	position: absolute;
+        	top: 35px;
+        	width: 100%;
+        	text-align: center;
+        }
+
+        /* Used for the book-contents-page style leaders on the Contents element of
+           the index: */
+
+        ul.leaders {
+        	padding: 0;
+        	margin-top: 1px;
+        	margin-bottom: 0;
+        	overflow-x: hidden;
+        	list-style: none}
+        ul.leaders li.leaded:before {
+        	float: left;
+        	width: 0;
+        	white-space: nowrap;
+        	content:
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "
+        	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  "}
+        ul.leaders li.leaded span:first-child {
+        	padding-right: 0.33em;
+        }
+        ul.leaders li.leaded span + span {
+        	float: right;
+        	padding-left: 0.33em;
+        }
+        li.indent1 span:first-child {
+        	padding-left: 25px;
+        }
+        li.indent2 span:first-child {
+        	padding-left: 50px;
+        }
+        li.indent3 span:first-child {
+        	padding-left: 75px;
+        }
+        li.indent4 span:first-child {
+        	padding-left: 100px;
+        }
+        li.indent5 span:first-child {
+        	padding-left: 125px;
+        }
+        li.indent6 span:first-child {
+        	padding-left: 150px;
+        }
+        li.indent7 span:first-child {
+        	padding-left: 175px;
+        }
+        li.indent8 span:first-child {
+        	padding-left: 200px;
+        }
+        li.indent9 span:first-child {
+        	padding-left: 225px;
+        }
+
+        li.unleaded:before {
+        	content: "";
+        }
+
+        /* On Registry index pages (such as the Public Library), these are used for
+        download buttons and the like: */
+
+        span.registrybuttons {
+        	height: 20px;
+        	padding: 2px 8px 2px 8px;
+        	margin: 2px;
+        	border:1px solid;
+        	border-radius: 5px;
+        }
+
+        span.registryminibuttons {
+        	height: 14px;
+        	padding: 2px 5px 2px 5px;
+        	margin: 2px;
+        	border:1px solid;
+        	border-radius: 4px;
+        }
+
+        /* Used to hide or display sections in the Registry pages: */
+
+        div.registrysectionitemsopen {
+        	display: block;
+        }
+
+        div.registrysectionitemsclosed {
+        	display: none;
+        }
+
+        /* Hanging indentation for Registry item paragraphs: */
+
+        p.registryitem {
+        	padding-left: 80px;
+        	text-indent: -40px;
+        }
+
+        p.registryaddition {
+        	padding-left: 40px;
+        	text-indent: -40px;
+        }
+
+        -->
+    </style>
+    <script type="text/javascript">
+        function project() {
+            return window.Project;
+        }
+        function showExtra(id, imid) {
+        	if (document.getElementById(id).style.display == 'block') {
+        		document.getElementById(id).style.display = 'none';
+        		document.getElementById(imid).src = 'inform:/doc_images/extra.png';
+        	} else {
+        		document.getElementById(id).style.display = 'block';
+        		document.getElementById(imid).src = 'inform:/doc_images/extraclose.png';
+        	}
+        }
+        function showBasic(id) {
+        	if (document.getElementById(id).style.display == '') {
+        		document.getElementById(id).style.display = 'none';
+        	} else {
+        		document.getElementById(id).style.display = '';
+        	}
+        }
+        function showResp(id, imid) {
+        	if (document.getElementById(id)) {
+        		if (document.getElementById(id).style.display == 'block') {
+        			document.getElementById(id).style.display = 'none';
+        			document.getElementById(imid).src = 'inform:/doc_images/responses.png';
+        		} else {
+        			document.getElementById(id).style.display = 'block';
+        			document.getElementById(imid).src = 'inform:/doc_images/responsesclose.png';
+        		}
+        	}
+        }
+        function showAllResp(tot) {
+        	for (var i=0;i<tot;i++) {
+        		showResp('extra'+(1000000+i), 'plus'+(1000000+i));
+        	}
+        }
+        function pasteCode(code) {
+        	var myProject = project();
+        	myProject.selectView('source');
+        	myProject.pasteCode(code);
+        }
+
+    </script>
+    <style type="text/css" media="screen, print">
+        #box1_1 {
+            background: #cf0a38;
+        }
+        #minibox1_1 {
+            background: #cf0a38;
+        }
+        #box1_2 {
+            background: #cf0a38;
+        }
+        #minibox1_2 {
+            background: #cf0a38;
+        }
+        #box1_3 {
+            background: #cf0a38;
+        }
+        #minibox1_3 {
+            background: #cf0a38;
+        }
+        #box1_4 {
+            background: #cf0a38;
+        }
+        #minibox1_4 {
+            background: #cf0a38;
+        }
+        #box1_5 {
+            background: #cf0a38;
+        }
+        #minibox1_5 {
+            background: #cf0a38;
+        }
+        #box2_1 {
+            background: #ea5b1f;
+        }
+        #minibox2_1 {
+            background: #ea5b1f;
+        }
+        #box2_2 {
+            background: #ea5b1f;
+        }
+        #minibox2_2 {
+            background: #ea5b1f;
+        }
+        #box2_3 {
+            background: #ea5b1f;
+        }
+        #minibox2_3 {
+            background: #ea5b1f;
+        }
+        #box2_4 {
+            background: #ea5b1f;
+        }
+        #minibox2_4 {
+            background: #ea5b1f;
+        }
+        #box2_5 {
+            background: #ea5b1f;
+        }
+        #minibox2_5 {
+            background: #ea5b1f;
+        }
+        #box3_1 {
+            background: #e9cf08;
+        }
+        #minibox3_1 {
+            background: #e9cf08;
+        }
+        #box3_2 {
+            background: #e9cf08;
+        }
+        #minibox3_2 {
+            background: #e9cf08;
+        }
+        #box3_3 {
+            background: #e9cf08;
+        }
+        #minibox3_3 {
+            background: #e9cf08;
+        }
+        #box4_1 {
+            background: #52992f;
+        }
+        #minibox4_1 {
+            background: #52992f;
+        }
+        #box4_2 {
+            background: #52992f;
+        }
+        #minibox4_2 {
+            background: #52992f;
+        }
+        #box4_3 {
+            background: #52992f;
+        }
+        #minibox4_3 {
+            background: #52992f;
+        }
+        #box4_4 {
+            background: #52992f;
+        }
+        #minibox4_4 {
+            background: #52992f;
+        }
+        #box5_1 {
+            background: #1d31b4;
+        }
+        #minibox5_1 {
+            background: #1d31b4;
+        }
+        #box5_2 {
+            background: #1d31b4;
+        }
+        #minibox5_2 {
+            background: #1d31b4;
+        }
+        #box6_1 {
+            background: #001860;
+        }
+        #minibox6_1 {
+            background: #001860;
+        }
+        #box6_2 {
+            background: #001860;
+        }
+        #minibox6_2 {
+            background: #001860;
+        }
+        #box6_3 {
+            background: #001860;
+        }
+        #minibox6_3 {
+            background: #001860;
+        }
+        #box7_1 {
+            background: #8b58bf;
+        }
+        #minibox7_1 {
+            background: #8b58bf;
+        }
+        #box7_2 {
+            background: #8b58bf;
+        }
+        #minibox7_2 {
+            background: #8b58bf;
+        }
+    </style>
+    <script type="text/javascript">
+        var qq; window.onload = function() {
+            if (location.search.length > 0) {
+                qq = location.search.substring(1, location.search.length);
+                show_only_one_element(qq);
+            }
+        }
+        function click_element_box(id) {
+            if (document.getElementById(id).style.display == 'none') {
+                show_only_one_element(id);
+            } else {
+                var x = 0;
+                if (document.getElementById('segment1').style.display == '') { x++; }
+                if (document.getElementById('segment2').style.display == '') { x++; }
+                if (document.getElementById('segment3').style.display == '') { x++; }
+                if (document.getElementById('segment4').style.display == '') { x++; }
+                if (document.getElementById('segment5').style.display == '') { x++; }
+                if (x == 1) { show_all_elements(); }
+                else { show_only_one_element(id); }
+            }
+        }
+        function click_sidebar() {
+            if (document.getElementById('surround0').style.display == 'none') {
+                enter_periodic_table();
+            } else {
+                show_all_elements();
+            }
+        }
+        function show_all_elements() {
+            show_element('segment1');
+            light_up('segment1');
+            show_element('segment2');
+            light_up('segment2');
+            show_element('segment3');
+            light_up('segment3');
+            show_element('segment4');
+            light_up('segment4');
+            show_element('segment5');
+            light_up('segment5');
+        	}
+        function show_only_one_element(id) {
+            hide_element('segment1');
+            light_down('segment1');
+            hide_element('segment2');
+            light_down('segment2');
+            hide_element('segment3');
+            light_down('segment3');
+            hide_element('segment4');
+            light_down('segment4');
+            hide_element('segment5');
+            light_down('segment5');
+            show_element(id);
+            light_up(id);
+        }
+        function enter_periodic_table() {
+            hide_element('segment1');
+            light_up('segment1');
+            hide_element('segment2');
+            light_up('segment2');
+            hide_element('segment3');
+            light_up('segment3');
+            hide_element('segment4');
+            light_up('segment4');
+            hide_element('segment5');
+            light_up('segment5');
+        }
+        function show_element(id) {
+            document.getElementById(id).style.display = '';
+        }
+        function hide_element(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        function light_up(id) {
+            var ic = 'box2_1';
+            if (id == 'segment2') { ic = 'box2_2';}
+            if (id == 'segment3') { ic = 'box2_3';}
+            if (id == 'segment4') { ic = 'box2_4';}
+            if (id == 'segment5') { ic = 'box2_5';}
+            document.getElementById(ic).style.background = '#ea5b1f';
+        }
+        function light_down(id) {
+            var ic = 'box2_1';
+            if (id == 'segment2') { ic = 'box2_2';}
+            if (id == 'segment3') { ic = 'box2_3';}
+            if (id == 'segment4') { ic = 'box2_4';}
+            if (id == 'segment5') { ic = 'box2_5';}
+            document.getElementById(ic).style.background = '#cccccc';
+        }
+    </script>
+</head>
+<body>
+    <!--CONTENT BEGINS-->
+    <div id="periodictable">
+        <table cellspacing="3" border="0" width="100%">
+        </table>
+        <table cellspacing="3" border="0" width="100%">
+            <tr id="surround2">
+                <td onclick="window.location='Welcome.html'; return false;">
+                    <div class="periodictablesidebar periodictablesidebarcolour">
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment1'); return false;">
+                    <div id="box2_1" class="elementbox">
+                        <a class="elementlink" title="Grouped" href="#"><span class="elementtext">A1</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">1</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Grouped</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment2'); return false;">
+                    <div id="box2_2" class="elementbox">
+                        <a class="elementlink" title="Alphabetic" href="#"><span class="elementtext">A2</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">2</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Alphabetic</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment3'); return false;">
+                    <div id="box2_3" class="elementbox">
+                        <a class="elementlink" title="Behaviour" href="#"><span class="elementtext">Bh</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">3</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Behaviour</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment4'); return false;">
+                    <div id="box2_4" class="elementbox">
+                        <a class="elementlink" title="Commands" href="#"><span class="elementtext">Cm</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">4</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Commands</span></div>
+                    </div>
+
+                </td>
+                <td onclick="click_element_box('segment5'); return false;">
+                    <div id="box2_5" class="elementbox">
+                        <a class="elementlink" title="Tokens" href="#"><span class="elementtext">To</span></a>
+                        <div class="elementnumber">
+                            <span class="elementnumbertext">5</span></div>
+                        <div class="elementtitle">
+                            <span class="elementtitletext">Tokens</span></div>
+                    </div>
+
+                </td>
+                <td onclick="show_all_elements(); return false;" style="width:100%">
+
+                    <div class="headingpanellayout headingpanel">
+                        <div class="headingtext">
+                            <span class="headingpaneltext">Actions Index</span></div>
+                        <div class="headingrubric">
+                            <span class="headingpanelrubric">Things that people can try to do</span></div>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="segment1">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox2_1" class="smallelementbox">
+                        <a class="elementlink" title="Grouped" href="#" onclick="click_element_box('segment1'); return false;"><span class="elementtext">A1</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">1
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Grouped</b> &mdash; 
+                    With similar actions grouped together<br>
+                    <i>About actions&nbsp;&nbsp;<a href=inform:/doc96.html><img border=0 src=inform:/doc_images/help.png></a>; New actions&nbsp;&nbsp;<a href=inform:/doc181.html><img border=0 src=inform:/doc_images/help.png></a>; Out of world actions (in red)&nbsp;&nbsp;<a href=inform:/doc189.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <p><b>From the extension Standard Rules</b></p>
+        <p><b>Standard actions concerning the actor's possessions</b><br>taking inventory&nbsp;<a href=Details/0_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, taking&nbsp;<a href=Details/1_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, removing it from&nbsp;<a href=Details/2_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, dropping&nbsp;<a href=Details/3_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, putting it on&nbsp;<a href=Details/4_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, inserting it into&nbsp;<a href=Details/5_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, eating&nbsp;<a href=Details/6_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+        <p><b>Standard actions which move the actor</b><br>going&nbsp;<a href=Details/7_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, entering&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, exiting&nbsp;<a href=Details/9_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, getting off&nbsp;<a href=Details/10_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+        <p><b>Standard actions concerning the actor's vision</b><br>looking&nbsp;<a href=Details/11_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, examining&nbsp;<a href=Details/12_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, looking under&nbsp;<a href=Details/13_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, searching&nbsp;<a href=Details/14_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, consulting it about&nbsp;<a href=Details/15_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+        <p><b>Standard actions which change the state of things</b><br>locking it with&nbsp;<a href=Details/16_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, unlocking it with&nbsp;<a href=Details/17_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, switching on&nbsp;<a href=Details/18_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, switching off&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, opening&nbsp;<a href=Details/20_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, closing&nbsp;<a href=Details/21_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, wearing&nbsp;<a href=Details/22_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, taking off&nbsp;<a href=Details/23_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+        <p><b>Standard actions concerning other people</b><br>giving it to&nbsp;<a href=Details/24_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, showing it to&nbsp;<a href=Details/25_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, waking&nbsp;<a href=Details/26_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, throwing it at&nbsp;<a href=Details/27_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, attacking&nbsp;<a href=Details/28_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, kissing&nbsp;<a href=Details/29_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, answering it that&nbsp;<a href=Details/30_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, telling it about&nbsp;<a href=Details/31_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, asking it about&nbsp;<a href=Details/32_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, asking it for&nbsp;<a href=Details/33_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+        <p><b>Standard actions which are checked but then do nothing unless rules intervene</b><br>waiting&nbsp;<a href=Details/34_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, touching&nbsp;<a href=Details/35_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, waving&nbsp;<a href=Details/36_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, pulling&nbsp;<a href=Details/37_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, pushing&nbsp;<a href=Details/38_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, turning&nbsp;<a href=Details/39_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, pushing it to&nbsp;<a href=Details/40_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, squeezing&nbsp;<a href=Details/41_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+        <p><b>Standard actions which always do nothing unless rules intervene</b><br>saying yes&nbsp;<a href=Details/42_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, saying no&nbsp;<a href=Details/43_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, burning&nbsp;<a href=Details/44_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, waking up&nbsp;<a href=Details/45_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, thinking&nbsp;<a href=Details/46_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, smelling&nbsp;<a href=Details/47_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, listening to&nbsp;<a href=Details/48_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, tasting&nbsp;<a href=Details/49_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, cutting&nbsp;<a href=Details/50_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, jumping&nbsp;<a href=Details/51_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, tying it to&nbsp;<a href=Details/52_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, drinking&nbsp;<a href=Details/53_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, saying sorry&nbsp;<a href=Details/54_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, swinging&nbsp;<a href=Details/55_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, rubbing&nbsp;<a href=Details/56_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, setting it to&nbsp;<a href=Details/57_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, waving hands&nbsp;<a href=Details/58_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, buying&nbsp;<a href=Details/59_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, climbing&nbsp;<a href=Details/60_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, sleeping&nbsp;<a href=Details/61_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+        <p><b>Standard actions which happen out of world</b><br><span class="indexdullred">quitting the game</span>&nbsp;<a href=Details/62_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">saving the game</span>&nbsp;<a href=Details/63_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">restoring the game</span>&nbsp;<a href=Details/64_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">restarting the game</span>&nbsp;<a href=Details/65_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">verifying the story file</span>&nbsp;<a href=Details/66_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">switching the story transcript on</span>&nbsp;<a href=Details/67_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">switching the story transcript off</span>&nbsp;<a href=Details/68_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">requesting the story file version</span>&nbsp;<a href=Details/69_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">requesting the score</span>&nbsp;<a href=Details/70_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">preferring abbreviated room descriptions</span>&nbsp;<a href=Details/71_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">preferring unabbreviated room descriptions</span>&nbsp;<a href=Details/72_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">preferring sometimes abbreviated room descriptions</span>&nbsp;<a href=Details/73_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">switching score notification on</span>&nbsp;<a href=Details/74_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">switching score notification off</span>&nbsp;<a href=Details/75_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>, <span class="indexdullred">requesting the pronoun meanings</span>&nbsp;<a href=Details/76_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></p>
+    </div>
+    <div id="segment2">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox2_2" class="smallelementbox">
+                        <a class="elementlink" title="Alphabetic" href="#" onclick="click_element_box('segment2'); return false;"><span class="elementtext">A2</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">2
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Alphabetic</b> &mdash; 
+                    Listed in alphabetical order<br>
+                    <i>About actions&nbsp;&nbsp;<a href=inform:/doc96.html><img border=0 src=inform:/doc_images/help.png></a>; New actions&nbsp;&nbsp;<a href=inform:/doc181.html><img border=0 src=inform:/doc_images/help.png></a>; Out of world actions (in red)&nbsp;&nbsp;<a href=inform:/doc189.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td align="left" valign="top">
+                    <b>action</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>noun</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>second noun</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    answering it that&nbsp;<a href=Details/30_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>topic</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    asking it about&nbsp;<a href=Details/32_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>topic</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    asking it for&nbsp;<a href=Details/33_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    attacking&nbsp;<a href=Details/28_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    burning&nbsp;<a href=Details/44_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    buying&nbsp;<a href=Details/59_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    climbing&nbsp;<a href=Details/60_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    closing&nbsp;<a href=Details/21_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    consulting it about&nbsp;<a href=Details/15_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>topic</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    cutting&nbsp;<a href=Details/50_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    drinking&nbsp;<a href=Details/53_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    dropping&nbsp;<a href=Details/3_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    eating&nbsp;<a href=Details/6_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    entering&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    examining&nbsp;<a href=Details/12_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>requires light</i> &nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    exiting&nbsp;<a href=Details/9_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    getting off&nbsp;<a href=Details/10_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    giving it to&nbsp;<a href=Details/24_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>carried</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    going&nbsp;<a href=Details/7_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    inserting it into&nbsp;<a href=Details/5_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    jumping&nbsp;<a href=Details/51_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    kissing&nbsp;<a href=Details/29_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    listening to&nbsp;<a href=Details/48_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    locking it with&nbsp;<a href=Details/16_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>carried</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    looking&nbsp;<a href=Details/11_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    looking under&nbsp;<a href=Details/13_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>requires light</i> &nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    opening&nbsp;<a href=Details/20_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">preferring abbreviated room descriptions</span>&nbsp;<a href=Details/71_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">preferring sometimes abbreviated room descriptions</span>&nbsp;<a href=Details/73_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">preferring unabbreviated room descriptions</span>&nbsp;<a href=Details/72_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    pulling&nbsp;<a href=Details/37_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    pushing&nbsp;<a href=Details/38_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    pushing it to&nbsp;<a href=Details/40_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    putting it on&nbsp;<a href=Details/4_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">quitting the game</span>&nbsp;<a href=Details/62_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    removing it from&nbsp;<a href=Details/2_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">requesting the pronoun meanings</span>&nbsp;<a href=Details/76_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">requesting the score</span>&nbsp;<a href=Details/70_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">requesting the story file version</span>&nbsp;<a href=Details/69_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">restarting the game</span>&nbsp;<a href=Details/65_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">restoring the game</span>&nbsp;<a href=Details/64_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    rubbing&nbsp;<a href=Details/56_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">saving the game</span>&nbsp;<a href=Details/63_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    saying no&nbsp;<a href=Details/43_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    saying sorry&nbsp;<a href=Details/54_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    saying yes&nbsp;<a href=Details/42_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    searching&nbsp;<a href=Details/14_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>requires light</i> &nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    setting it to&nbsp;<a href=Details/57_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>topic</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    showing it to&nbsp;<a href=Details/25_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>carried</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    sleeping&nbsp;<a href=Details/61_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    smelling&nbsp;<a href=Details/47_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    squeezing&nbsp;<a href=Details/41_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    swinging&nbsp;<a href=Details/55_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    switching off&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    switching on&nbsp;<a href=Details/18_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">switching score notification off</span>&nbsp;<a href=Details/75_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">switching score notification on</span>&nbsp;<a href=Details/74_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">switching the story transcript off</span>&nbsp;<a href=Details/68_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">switching the story transcript on</span>&nbsp;<a href=Details/67_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    taking&nbsp;<a href=Details/1_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    taking inventory&nbsp;<a href=Details/0_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    taking off&nbsp;<a href=Details/23_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    tasting&nbsp;<a href=Details/49_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    telling it about&nbsp;<a href=Details/31_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>topic</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    thinking&nbsp;<a href=Details/46_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    throwing it at&nbsp;<a href=Details/27_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>carried</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    touching&nbsp;<a href=Details/35_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    turning&nbsp;<a href=Details/39_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    tying it to&nbsp;<a href=Details/52_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    unlocking it with&nbsp;<a href=Details/17_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>carried</i> <b>object</b>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <span class="indexdullred">verifying the story file</span>&nbsp;<a href=Details/66_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    waiting&nbsp;<a href=Details/34_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    waking&nbsp;<a href=Details/26_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    waking up&nbsp;<a href=Details/45_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    waving&nbsp;<a href=Details/36_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>touchable</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    waving hands&nbsp;<a href=Details/58_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    wearing&nbsp;<a href=Details/22_A.html><img border=0 src=inform:/doc_images/Beneath.png></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    <i>carried</i> <b>object</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td align="left" valign="top">
+                    &mdash;
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="segment3">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox2_3" class="smallelementbox">
+                        <a class="elementlink" title="Behaviour" href="#" onclick="click_element_box('segment3'); return false;"><span class="elementtext">Bh</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">3
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Behaviour</b> &mdash; 
+                    Kinds of action, grouped under common names<br>
+                    <i>About kinds of action&nbsp;&nbsp;<a href=inform:/doc110.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <p>No names for kinds of action have yet been defined.</p>
+    </div>
+    <div id="segment4">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox2_4" class="smallelementbox">
+                        <a class="elementlink" title="Commands" href="#" onclick="click_element_box('segment4'); return false;"><span class="elementtext">Cm</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">4
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Commands</b> &mdash; 
+                    Commands which the player can type<br>
+                    <i>About commands&nbsp;&nbsp;<a href=inform:/doc263.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        &quot;[direction]&quot; - <i>going</i><br>
+        <br>
+        &quot;adjust&quot;, <i>same as</i> &quot;set&quot;<br>
+        <a name=answer></a>&quot;answer [text] to [someone]&quot; - <i>answering it that</i>&nbsp;<a href=Details/30_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>reversed</i><br>
+        <a name=ask></a>&quot;ask [someone] for [something]&quot; - <i>asking it for</i>&nbsp;<a href=Details/33_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=ask></a>&quot;ask [someone] about [text]&quot; - <i>asking it about</i>&nbsp;<a href=Details/32_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;attach&quot;, <i>same as</i> &quot;tie&quot;<br>
+        <a name=attack></a>&quot;attack [something]&quot; - <i>attacking</i>&nbsp;<a href=Details/28_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;awake&quot;, <i>same as</i> &quot;wake&quot;<br>
+        &quot;awaken&quot;, <i>same as</i> &quot;wake&quot;<br>
+        <br>
+        &quot;break&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <a name=brief></a><span class="indexdullred">&quot;brief&quot; - <i>preferring sometimes abbreviated room descriptions</i>&nbsp;<a href=Details/73_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=burn></a>&quot;burn [something]&quot; - <i>burning</i>&nbsp;<a href=Details/44_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=buy></a>&quot;buy [something]&quot; - <i>buying</i>&nbsp;<a href=Details/59_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        &quot;carry&quot;, <i>same as</i> &quot;take&quot;<br>
+        &quot;check&quot;, <i>same as</i> &quot;examine&quot;<br>
+        &quot;chop&quot;, <i>same as</i> &quot;cut&quot;<br>
+        &quot;clean&quot;, <i>same as</i> &quot;rub&quot;<br>
+        &quot;clear&quot;, <i>same as</i> &quot;push&quot;<br>
+        <a name=climb></a>&quot;climb [something]&quot; - <i>climbing</i>&nbsp;<a href=Details/60_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=climb></a>&quot;climb up/over [something]&quot; - <i>climbing</i>&nbsp;<a href=Details/60_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=close></a>&quot;close [something]&quot; - <i>closing</i>&nbsp;<a href=Details/21_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=close></a>&quot;close up [something]&quot; - <i>closing</i>&nbsp;<a href=Details/21_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=close></a>&quot;close off [something]&quot; - <i>switching off</i>&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=consult></a>&quot;consult [something] on/about [text]&quot; - <i>consulting it about</i>&nbsp;<a href=Details/15_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;cover&quot;, <i>same as</i> &quot;close&quot;<br>
+        &quot;crack&quot;, <i>same as</i> &quot;attack&quot;<br>
+        &quot;cross&quot;, <i>same as</i> &quot;enter&quot;<br>
+        <a name=cut></a>&quot;cut [something]&quot; - <i>cutting</i>&nbsp;<a href=Details/50_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        &quot;describe&quot;, <i>same as</i> &quot;examine&quot;<br>
+        &quot;destroy&quot;, <i>same as</i> &quot;attack&quot;<br>
+        &quot;discard&quot;, <i>same as</i> &quot;drop&quot;<br>
+        &quot;display&quot;, <i>same as</i> &quot;show&quot;<br>
+        &quot;disrobe&quot;, <i>same as</i> &quot;shed&quot;<br>
+        &quot;doff&quot;, <i>same as</i> &quot;shed&quot;<br>
+        &quot;don&quot;, <i>same as</i> &quot;wear&quot;<br>
+        &quot;drag&quot;, <i>same as</i> &quot;pull&quot;<br>
+        <a name=drink></a>&quot;drink [something]&quot; - <i>drinking</i>&nbsp;<a href=Details/53_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=drop></a>&quot;drop [things preferably held]&quot; - <i>dropping</i>&nbsp;<a href=Details/3_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=drop></a>&quot;drop [something preferably held] at/against [something]&quot; - <i>throwing it at</i>&nbsp;<a href=Details/27_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=drop></a>&quot;drop [other things] in/into/down [something]&quot; - <i>inserting it into</i>&nbsp;<a href=Details/5_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=drop></a>&quot;drop [other things] on/onto [something]&quot; - <i>putting it on</i>&nbsp;<a href=Details/4_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;dust&quot;, <i>same as</i> &quot;rub&quot;<br>
+        <br>
+        <a name=eat></a>&quot;eat [something preferably held]&quot; - <i>eating</i>&nbsp;<a href=Details/6_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;embrace&quot;, <i>same as</i> &quot;kiss&quot;<br>
+        <a name=enter></a>&quot;enter&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=enter></a>&quot;enter [something]&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=examine></a>&quot;examine [something]&quot; - <i>examining</i>&nbsp;<a href=Details/12_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=exit></a>&quot;exit&quot; - <i>exiting</i>&nbsp;<a href=Details/9_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        &quot;fasten&quot;, <i>same as</i> &quot;tie&quot;<br>
+        &quot;feed&quot;, <i>same as</i> &quot;give&quot;<br>
+        &quot;feel&quot;, <i>same as</i> &quot;touch&quot;<br>
+        &quot;fight&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <br>
+        <a name=get></a>&quot;get out/off/down/up&quot; - <i>exiting</i>&nbsp;<a href=Details/9_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=get></a>&quot;get in/on&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=get></a>&quot;get [things]&quot; - <i>taking</i>&nbsp;<a href=Details/1_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=get></a>&quot;get in/into/on/onto [something]&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=get></a>&quot;get off/down [something]&quot; - <i>getting off</i>&nbsp;<a href=Details/10_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=get></a>&quot;get [things inside] from [something]&quot; - <i>removing it from</i>&nbsp;<a href=Details/2_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=give></a>&quot;give [someone] [something preferably held]&quot; - <i>giving it to</i>&nbsp;<a href=Details/24_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>reversed</i><br>
+        <a name=give></a>&quot;give [something preferably held] to [someone]&quot; - <i>giving it to</i>&nbsp;<a href=Details/24_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=go></a>&quot;go&quot; - <i>going</i>&nbsp;<a href=Details/7_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=go></a>&quot;go [direction]&quot; - <i>going</i>&nbsp;<a href=Details/7_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=go></a>&quot;go [something]&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=go></a>&quot;go into/in/inside/through [something]&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        <a name=hear></a>&quot;hear [something]&quot; - <i>listening to</i>&nbsp;<a href=Details/48_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;hit&quot;, <i>same as</i> &quot;attack&quot;<br>
+        &quot;hold&quot;, <i>same as</i> &quot;take&quot;<br>
+        &quot;hop&quot;, <i>same as</i> &quot;jump&quot;<br>
+        &quot;hug&quot;, <i>same as</i> &quot;kiss&quot;<br>
+        <br>
+        &quot;i&quot;, <i>same as</i> &quot;inventory&quot;<br>
+        <a name=insert></a>&quot;insert [other things] in/into [something]&quot; - <i>inserting it into</i>&nbsp;<a href=Details/5_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;inv&quot;, <i>same as</i> &quot;inventory&quot;<br>
+        <a name=inventory></a>&quot;inventory&quot; - <i>taking inventory</i>&nbsp;<a href=Details/0_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        <a name=jump></a>&quot;jump&quot; - <i>jumping</i>&nbsp;<a href=Details/51_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        &quot;kill&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <a name=kiss></a>&quot;kiss [someone]&quot; - <i>kissing</i>&nbsp;<a href=Details/29_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        &quot;l&quot;, <i>same as</i> &quot;look&quot;<br>
+        &quot;leave&quot;, <i>same as</i> &quot;exit&quot;<br>
+        &quot;light&quot;, <i>same as</i> &quot;burn&quot;<br>
+        <a name=listen></a>&quot;listen&quot; - <i>listening to</i>&nbsp;<a href=Details/48_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=listen></a>&quot;listen to [something]&quot; - <i>listening to</i>&nbsp;<a href=Details/48_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=lock></a>&quot;lock [something] with [something preferably held]&quot; - <i>locking it with</i>&nbsp;<a href=Details/16_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=long></a><span class="indexdullred">&quot;long&quot; - <i>preferring unabbreviated room descriptions</i>&nbsp;<a href=Details/72_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=look></a>&quot;look&quot; - <i>looking</i>&nbsp;<a href=Details/11_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=look></a>&quot;look [something]&quot; - <i>examining</i>&nbsp;<a href=Details/12_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=look></a>&quot;look at [something]&quot; - <i>examining</i>&nbsp;<a href=Details/12_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=look></a>&quot;look inside/in/into/through [something]&quot; - <i>searching</i>&nbsp;<a href=Details/14_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=look></a>&quot;look under [something]&quot; - <i>looking under</i>&nbsp;<a href=Details/13_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=look></a>&quot;look up [text] in [something]&quot; - <i>consulting it about</i>&nbsp;<a href=Details/15_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>reversed</i><br>
+        <br>
+        &quot;move&quot;, <i>same as</i> &quot;push&quot;<br>
+        &quot;murder&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <br>
+        &quot;nap&quot;, <i>same as</i> &quot;sleep&quot;<br>
+        <a name=no></a>&quot;no&quot; - <i>saying no</i>&nbsp;<a href=Details/43_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=normal></a><span class="indexdullred">&quot;normal&quot; - <i>preferring sometimes abbreviated room descriptions</i>&nbsp;<a href=Details/73_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=notify></a><span class="indexdullred">&quot;notify&quot; - <i>switching score notification on</i>&nbsp;<a href=Details/74_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=notify></a><span class="indexdullred">&quot;notify on&quot; - <i>switching score notification on</i>&nbsp;<a href=Details/74_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=notify></a><span class="indexdullred">&quot;notify off&quot; - <i>switching score notification off</i>&nbsp;<a href=Details/75_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=nouns></a><span class="indexdullred">&quot;nouns&quot; - <i>requesting the pronoun meanings</i>&nbsp;<a href=Details/76_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <br>
+        &quot;offer&quot;, <i>same as</i> &quot;give&quot;<br>
+        <a name=open></a>&quot;open [something]&quot; - <i>opening</i>&nbsp;<a href=Details/20_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=open></a>&quot;open [something] with [something preferably held]&quot; - <i>unlocking it with</i>&nbsp;<a href=Details/17_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;out&quot;, <i>same as</i> &quot;exit&quot;<br>
+        <br>
+        &quot;pay&quot;, <i>same as</i> &quot;give&quot;<br>
+        <a name=pick></a>&quot;pick up [things]&quot; - <i>taking</i>&nbsp;<a href=Details/1_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=pick></a>&quot;pick [things] up&quot; - <i>taking</i>&nbsp;<a href=Details/1_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;polish&quot;, <i>same as</i> &quot;rub&quot;<br>
+        &quot;present&quot;, <i>same as</i> &quot;show&quot;<br>
+        &quot;press&quot;, <i>same as</i> &quot;push&quot;<br>
+        <a name=pronouns></a><span class="indexdullred">&quot;pronouns&quot; - <i>requesting the pronoun meanings</i>&nbsp;<a href=Details/76_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        &quot;prune&quot;, <i>same as</i> &quot;cut&quot;<br>
+        <a name=pull></a>&quot;pull [something]&quot; - <i>pulling</i>&nbsp;<a href=Details/37_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;punch&quot;, <i>same as</i> &quot;attack&quot;<br>
+        &quot;purchase&quot;, <i>same as</i> &quot;buy&quot;<br>
+        <a name=push></a>&quot;push [something]&quot; - <i>pushing</i>&nbsp;<a href=Details/38_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=push></a>&quot;push [something] [direction]&quot; - <i>pushing it to</i>&nbsp;<a href=Details/40_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=push></a>&quot;push [something] to [direction]&quot; - <i>pushing it to</i>&nbsp;<a href=Details/40_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=put></a>&quot;put on [something preferably held]&quot; - <i>wearing</i>&nbsp;<a href=Details/22_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=put></a>&quot;put [something preferably held] on&quot; - <i>wearing</i>&nbsp;<a href=Details/22_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=put></a>&quot;put down [things preferably held]&quot; - <i>dropping</i>&nbsp;<a href=Details/3_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=put></a>&quot;put [things preferably held] down&quot; - <i>dropping</i>&nbsp;<a href=Details/3_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=put></a>&quot;put [other things] in/inside/into [something]&quot; - <i>inserting it into</i>&nbsp;<a href=Details/5_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=put></a>&quot;put [other things] on/onto [something]&quot; - <i>putting it on</i>&nbsp;<a href=Details/4_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        <a name=q></a><span class="indexdullred">&quot;q&quot; - <i>quitting the game</i>&nbsp;<a href=Details/62_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=quit></a><span class="indexdullred">&quot;quit&quot; - <i>quitting the game</i>&nbsp;<a href=Details/62_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <br>
+        <a name=read></a>&quot;read [something]&quot; - <i>examining</i>&nbsp;<a href=Details/12_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=read></a>&quot;read about [text] in [something]&quot; - <i>consulting it about</i>&nbsp;<a href=Details/15_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>reversed</i><br>
+        <a name=read></a>&quot;read [text] in [something]&quot; - <i>consulting it about</i>&nbsp;<a href=Details/15_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>reversed</i><br>
+        <a name=remove></a>&quot;remove [something preferably held]&quot; - <i>taking off</i>&nbsp;<a href=Details/23_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=remove></a>&quot;remove [things inside] from [something]&quot; - <i>removing it from</i>&nbsp;<a href=Details/2_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=restart></a><span class="indexdullred">&quot;restart&quot; - <i>restarting the game</i>&nbsp;<a href=Details/65_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=restore></a><span class="indexdullred">&quot;restore&quot; - <i>restoring the game</i>&nbsp;<a href=Details/64_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        &quot;rotate&quot;, <i>same as</i> &quot;turn&quot;<br>
+        <a name=rub></a>&quot;rub [something]&quot; - <i>rubbing</i>&nbsp;<a href=Details/56_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;run&quot;, <i>same as</i> &quot;go&quot;<br>
+        <br>
+        <a name=save></a><span class="indexdullred">&quot;save&quot; - <i>saving the game</i>&nbsp;<a href=Details/63_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        &quot;say&quot;, <i>same as</i> &quot;answer&quot;<br>
+        &quot;scale&quot;, <i>same as</i> &quot;climb&quot;<br>
+        <a name=score></a><span class="indexdullred">&quot;score&quot; - <i>requesting the score</i>&nbsp;<a href=Details/70_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        &quot;screw&quot;, <i>same as</i> &quot;turn&quot;<br>
+        <a name=script></a><span class="indexdullred">&quot;script&quot; - <i>switching the story transcript on</i>&nbsp;<a href=Details/67_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=script></a><span class="indexdullred">&quot;script on&quot; - <i>switching the story transcript on</i>&nbsp;<a href=Details/67_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=script></a><span class="indexdullred">&quot;script off&quot; - <i>switching the story transcript off</i>&nbsp;<a href=Details/68_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        &quot;scrub&quot;, <i>same as</i> &quot;rub&quot;<br>
+        <a name=search></a>&quot;search [something]&quot; - <i>searching</i>&nbsp;<a href=Details/14_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=set></a>&quot;set [something] to [text]&quot; - <i>setting it to</i>&nbsp;<a href=Details/57_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=shed></a>&quot;shed [something preferably held]&quot; - <i>taking off</i>&nbsp;<a href=Details/23_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;shift&quot;, <i>same as</i> &quot;push&quot;<br>
+        &quot;shine&quot;, <i>same as</i> &quot;rub&quot;<br>
+        <a name=short></a><span class="indexdullred">&quot;short&quot; - <i>preferring abbreviated room descriptions</i>&nbsp;<a href=Details/71_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        &quot;shout&quot;, <i>same as</i> &quot;answer&quot;<br>
+        <a name=show></a>&quot;show [someone] [something preferably held]&quot; - <i>showing it to</i>&nbsp;<a href=Details/25_A.html><img border=0 src=inform:/doc_images/Beneath.png></a> <i>reversed</i><br>
+        <a name=show></a>&quot;show [something preferably held] to [someone]&quot; - <i>showing it to</i>&nbsp;<a href=Details/25_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;shut&quot;, <i>same as</i> &quot;close&quot;<br>
+        &quot;sip&quot;, <i>same as</i> &quot;drink&quot;<br>
+        <a name=sit></a>&quot;sit on/in/inside [something]&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=sit></a>&quot;sit on top of [something]&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;skip&quot;, <i>same as</i> &quot;jump&quot;<br>
+        <a name=sleep></a>&quot;sleep&quot; - <i>sleeping</i>&nbsp;<a href=Details/61_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;slice&quot;, <i>same as</i> &quot;cut&quot;<br>
+        &quot;smash&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <a name=smell></a>&quot;smell&quot; - <i>smelling</i>&nbsp;<a href=Details/47_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=smell></a>&quot;smell [something]&quot; - <i>smelling</i>&nbsp;<a href=Details/47_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;sniff&quot;, <i>same as</i> &quot;smell&quot;<br>
+        <a name=sorry></a>&quot;sorry&quot; - <i>saying sorry</i>&nbsp;<a href=Details/54_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;speak&quot;, <i>same as</i> &quot;answer&quot;<br>
+        &quot;squash&quot;, <i>same as</i> &quot;squeeze&quot;<br>
+        <a name=squeeze></a>&quot;squeeze [something]&quot; - <i>squeezing</i>&nbsp;<a href=Details/41_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=stand></a>&quot;stand&quot; - <i>exiting</i>&nbsp;<a href=Details/9_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=stand></a>&quot;stand up&quot; - <i>exiting</i>&nbsp;<a href=Details/9_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=stand></a>&quot;stand on [something]&quot; - <i>entering</i>&nbsp;<a href=Details/8_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=superbrief></a><span class="indexdullred">&quot;superbrief&quot; - <i>preferring abbreviated room descriptions</i>&nbsp;<a href=Details/71_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        &quot;swallow&quot;, <i>same as</i> &quot;drink&quot;<br>
+        &quot;sweep&quot;, <i>same as</i> &quot;rub&quot;<br>
+        <a name=swing></a>&quot;swing [something]&quot; - <i>swinging</i>&nbsp;<a href=Details/55_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=swing></a>&quot;swing on [something]&quot; - <i>swinging</i>&nbsp;<a href=Details/55_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=switch></a>&quot;switch [something switched on]&quot; - <i>switching off</i>&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=switch></a>&quot;switch [something]&quot; - <i>switching on</i>&nbsp;<a href=Details/18_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=switch></a>&quot;switch on [something]&quot; - <i>switching on</i>&nbsp;<a href=Details/18_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=switch></a>&quot;switch [something] on&quot; - <i>switching on</i>&nbsp;<a href=Details/18_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=switch></a>&quot;switch [something] off&quot; - <i>switching off</i>&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=switch></a>&quot;switch off [something]&quot; - <i>switching off</i>&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        <a name=take></a>&quot;take inventory&quot; - <i>taking inventory</i>&nbsp;<a href=Details/0_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=take></a>&quot;take [things]&quot; - <i>taking</i>&nbsp;<a href=Details/1_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=take></a>&quot;take off [something]&quot; - <i>taking off</i>&nbsp;<a href=Details/23_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=take></a>&quot;take [something] off&quot; - <i>taking off</i>&nbsp;<a href=Details/23_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=take></a>&quot;take [things inside] from [something]&quot; - <i>removing it from</i>&nbsp;<a href=Details/2_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=take></a>&quot;take [things inside] off [something]&quot; - <i>removing it from</i>&nbsp;<a href=Details/2_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=taste></a>&quot;taste [something]&quot; - <i>tasting</i>&nbsp;<a href=Details/49_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=tell></a>&quot;tell [someone] about [text]&quot; - <i>telling it about</i>&nbsp;<a href=Details/31_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=think></a>&quot;think&quot; - <i>thinking</i>&nbsp;<a href=Details/46_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;throw&quot;, <i>same as</i> &quot;drop&quot;<br>
+        &quot;thump&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <a name=tie></a>&quot;tie [something] to [something]&quot; - <i>tying it to</i>&nbsp;<a href=Details/52_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;torture&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <a name=touch></a>&quot;touch [something]&quot; - <i>touching</i>&nbsp;<a href=Details/35_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=transcript></a><span class="indexdullred">&quot;transcript&quot; - <i>switching the story transcript on</i>&nbsp;<a href=Details/67_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=transcript></a><span class="indexdullred">&quot;transcript on&quot; - <i>switching the story transcript on</i>&nbsp;<a href=Details/67_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=transcript></a><span class="indexdullred">&quot;transcript off&quot; - <i>switching the story transcript off</i>&nbsp;<a href=Details/68_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=turn></a>&quot;turn [something]&quot; - <i>turning</i>&nbsp;<a href=Details/39_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=turn></a>&quot;turn [something] on&quot; - <i>switching on</i>&nbsp;<a href=Details/18_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=turn></a>&quot;turn on [something]&quot; - <i>switching on</i>&nbsp;<a href=Details/18_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=turn></a>&quot;turn [something] off&quot; - <i>switching off</i>&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=turn></a>&quot;turn off [something]&quot; - <i>switching off</i>&nbsp;<a href=Details/19_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;twist&quot;, <i>same as</i> &quot;turn&quot;<br>
+        <br>
+        &quot;uncover&quot;, <i>same as</i> &quot;open&quot;<br>
+        <a name=unlock></a>&quot;unlock [something] with [something preferably held]&quot; - <i>unlocking it with</i>&nbsp;<a href=Details/17_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;unscrew&quot;, <i>same as</i> &quot;turn&quot;<br>
+        &quot;unwrap&quot;, <i>same as</i> &quot;open&quot;<br>
+        <br>
+        <a name=verbose></a><span class="indexdullred">&quot;verbose&quot; - <i>preferring unabbreviated room descriptions</i>&nbsp;<a href=Details/72_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=verify></a><span class="indexdullred">&quot;verify&quot; - <i>verifying the story file</i>&nbsp;<a href=Details/66_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <a name=version></a><span class="indexdullred">&quot;version&quot; - <i>requesting the story file version</i>&nbsp;<a href=Details/69_A.html><img border=0 src=inform:/doc_images/Beneath.png></a></span><br>
+        <br>
+        <a name=wait></a>&quot;wait&quot; - <i>waiting</i>&nbsp;<a href=Details/34_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=wake></a>&quot;wake&quot; - <i>waking up</i>&nbsp;<a href=Details/45_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=wake></a>&quot;wake up&quot; - <i>waking up</i>&nbsp;<a href=Details/45_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=wake></a>&quot;wake [someone]&quot; - <i>waking</i>&nbsp;<a href=Details/26_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=wake></a>&quot;wake [someone] up&quot; - <i>waking</i>&nbsp;<a href=Details/26_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=wake></a>&quot;wake up [someone]&quot; - <i>waking</i>&nbsp;<a href=Details/26_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;walk&quot;, <i>same as</i> &quot;go&quot;<br>
+        &quot;watch&quot;, <i>same as</i> &quot;examine&quot;<br>
+        <a name=wave></a>&quot;wave&quot; - <i>waving hands</i>&nbsp;<a href=Details/58_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=wave></a>&quot;wave [something]&quot; - <i>waving</i>&nbsp;<a href=Details/36_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <a name=wear></a>&quot;wear [something preferably held]&quot; - <i>wearing</i>&nbsp;<a href=Details/22_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        &quot;wipe&quot;, <i>same as</i> &quot;rub&quot;<br>
+        &quot;wreck&quot;, <i>same as</i> &quot;attack&quot;<br>
+        <br>
+        &quot;x&quot;, <i>same as</i> &quot;examine&quot;<br>
+        <br>
+        &quot;y&quot;, <i>same as</i> &quot;yes&quot;<br>
+        <a name=yes></a>&quot;yes&quot; - <i>saying yes</i>&nbsp;<a href=Details/42_A.html><img border=0 src=inform:/doc_images/Beneath.png></a><br>
+        <br>
+        &quot;z&quot;, <i>same as</i> &quot;wait&quot;<br>
+    </div>
+    <div id="segment5">
+        <hr>
+        <table cellspacing="3" border="0" class="elementbanner">
+            <tr>
+                <td valign="top" align="left">
+                    <div id="minibox2_5" class="smallelementbox">
+                        <a class="elementlink" title="Tokens" href="#" onclick="click_element_box('segment5'); return false;"><span class="elementtext">To</span></a><div class="elementnumber">
+                            <span class="elementnumbertext">5
+                            </span></div>
+                    </div>
+
+                </td>
+                <td style="width:100%;" align="left" valign="top">
+                    <p style="margin-top:0px;padding-top:0px;margin-bottom:0px;padding-bottom:0px;line-height:150%;"><b>Tokens</b> &mdash; 
+                    Those square-bracketed pieces inside Understand grammar<br>
+                    <i>About tokens&nbsp;&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a>; New tokens&nbsp;&nbsp;<a href=inform:/doc275.html><img border=0 src=inform:/doc_images/help.png></a></i></p>
+
+                </td>
+            </tr>
+        </table>
+
+        <p>In addition to the tokens listed below, any description of an object
+        	or value can be used: for example, "[number]" matches text like 127 or
+        	SIX, and "[open door]" matches the name of any nearby door which is
+        	currently open.</p>
+        <p>Names of objects are normally understood only when they are within sight,
+        	but writing "any" lifts this restriction. So "[any person]" allows
+        	every name of a person, wherever they happen to be.</p>
+        <p class="tightin1">"[anybody]"&nbsp;<a href=inform:/doc263.html><img border=0 src=inform:/doc_images/help.png></a> - same as "[someone]"</p>
+        <p class="tightin1">"[anyone]"&nbsp;<a href=inform:/doc263.html><img border=0 src=inform:/doc_images/help.png></a> - same as "[someone]"</p>
+        <p class="tightin1">"[anything]"&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a> - same as "[thing]"</p>
+        <p class="tightin1">"[other things]"&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a></p>
+        <p class="tightin1">"[somebody]"&nbsp;<a href=inform:/doc263.html><img border=0 src=inform:/doc_images/help.png></a> - same as "[someone]"</p>
+        <p class="tightin1">"[someone]"&nbsp;<a href=inform:/doc263.html><img border=0 src=inform:/doc_images/help.png></a></p>
+        <p class="tightin1">"[something]"&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a> - same as "[thing]"</p>
+        <p class="tightin1">"[something preferably held]"&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a></p>
+        <p class="tightin1">"[text]"&nbsp;<a href=inform:/doc267.html><img border=0 src=inform:/doc_images/help.png></a></p>
+        <p class="tightin1">"[things]"&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a></p>
+        <p class="tightin1">"[things inside]"&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a></p>
+        <p class="tightin1">"[things preferably held]"&nbsp;<a href=inform:/doc266.html><img border=0 src=inform:/doc_images/help.png></a></p>
+    </div>
+    <hr>
+
+    <!--CONTENT ENDS-->
+</body>
+</html>

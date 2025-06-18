@@ -1,0 +1,1298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+    <key>Application Version</key><string>Inform 10.1.2 (build )</string>
+    <key>0</key><dict>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>--</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>1</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>--</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>2</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>3</integer>
+        <key>Title</key><string>Volume 1 - Places</string>
+        <key>Level</key><integer>1</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>3</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>5</integer>
+        <key>Title</key><string>Section 1 - The map</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>4</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>29</integer>
+        <key>Title</key><string>Section 2 - The kitchen</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>5</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>40</integer>
+        <key>Title</key><string>Volume 2 - Cast</string>
+        <key>Level</key><integer>1</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>6</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>42</integer>
+        <key>Title</key><string>Section 1 - Little Girls</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>7</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>46</integer>
+        <key>Title</key><string>Section 2 - Simi</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>8</key><dict>
+        <key>Filename</key><string>D:\ver\tangentlabs\inform\savleen.inform\Source\story.ni</string>
+        <key>Line</key><integer>54</integer>
+        <key>Title</key><string>Section 3 - Savleen</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>9</key><dict>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>--</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>10</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>--</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>11</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>6</integer>
+        <key>Title</key><string>Part One - Preamble</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>12</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>107</integer>
+        <key>Title</key><string>Part Two - Miscellaneous Definitions</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>13</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>154</integer>
+        <key>Title</key><string>Part Three - Phrasebook</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>14</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>156</integer>
+        <key>Title</key><string>Chapter 1 - Saying</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>15</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>158</integer>
+        <key>Title</key><string>Section 1 - Saying Values</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>16</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>174</integer>
+        <key>Title</key><string>Section 2 - Saying Names</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>17</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>195</integer>
+        <key>Title</key><string>Section 3 - Saying Special Characters</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>18</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>210</integer>
+        <key>Title</key><string>Section 4 - Saying Line and Paragraph Breaks</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>19</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>231</integer>
+        <key>Title</key><string>Section 5 - Saying If and Otherwise</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>20</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>266</integer>
+        <key>Title</key><string>Section 6 - Saying one of</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>21</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>307</integer>
+        <key>Title</key><string>Section 7 - Saying Fonts and Visual Effects</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>22</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>325</integer>
+        <key>Title</key><string>Section 8 - Saying Lists of Values</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>23</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>337</integer>
+        <key>Title</key><string>Chapter 2 - Conditions and Variables</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>24</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>339</integer>
+        <key>Title</key><string>Section 1 - Conditions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>25</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>348</integer>
+        <key>Title</key><string>Section 2 - Assigning Temporary Variables</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>26</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>386</integer>
+        <key>Title</key><string>Section 3 - Increase and Decrease</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>27</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>407</integer>
+        <key>Title</key><string>Chapter 2 - Arithmetic</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>28</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>409</integer>
+        <key>Title</key><string>Section 1 - Arithmetic Operations</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>29</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>470</integer>
+        <key>Title</key><string>Section 2 - Saying Real Numbers</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>30</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>488</integer>
+        <key>Title</key><string>Section 3 - Real Arithmetic</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>31</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>519</integer>
+        <key>Title</key><string>Section 4 - Exponential Functions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>32</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>536</integer>
+        <key>Title</key><string>Section 5 - Trigonometric Functions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>33</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>567</integer>
+        <key>Title</key><string>Section 6 - Trigonometric Functions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>34</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>597</integer>
+        <key>Title</key><string>Chapter 3 - Control</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>35</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>599</integer>
+        <key>Title</key><string>Section 1 - Deciding Outcomes</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>36</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>615</integer>
+        <key>Title</key><string>Section 2 - If and Unless</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>37</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>630</integer>
+        <key>Title</key><string>Section 3 - While and Repeat</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>38</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>692</integer>
+        <key>Title</key><string>Section 4 - Loop Flow</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>39</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>701</integer>
+        <key>Title</key><string>Chapter 4 - Values</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>40</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>703</integer>
+        <key>Title</key><string>Section 1 - Enumerations</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>41</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>721</integer>
+        <key>Title</key><string>Section 2 - Randomness</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>42</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>745</integer>
+        <key>Title</key><string>Section 3 - Default Values</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>43</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>751</integer>
+        <key>Title</key><string>Chapter 5 - Text</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>44</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>753</integer>
+        <key>Title</key><string>Section 1 - Breaking down text</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>45</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>797</integer>
+        <key>Title</key><string>Section 2 - Matching and Replacing</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>46</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>849</integer>
+        <key>Title</key><string>Section 3 - Regular Expressions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>47</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>875</integer>
+        <key>Title</key><string>Section 4 - Casing of Text</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>48</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>896</integer>
+        <key>Title</key><string>Section 5 - Adaptive Text</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>49</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>935</integer>
+        <key>Title</key><string>Chapter 6 - Data Structures</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>50</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>937</integer>
+        <key>Title</key><string>Section 1 - Tables</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>51</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>993</integer>
+        <key>Title</key><string>Section 2 - Sorting Tables</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>52</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1005</integer>
+        <key>Title</key><string>Section 3 - Lists</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>53</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1051</integer>
+        <key>Title</key><string>Section 4 - Length of lists</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>54</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1072</integer>
+        <key>Title</key><string>Section 5 - List operations</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>55</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1099</integer>
+        <key>Title</key><string>Section 6 - Relations</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>56</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1169</integer>
+        <key>Title</key><string>Chapter 7 - Functional Programming</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>57</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1171</integer>
+        <key>Title</key><string>Section 1 - Applying Functions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>58</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1215</integer>
+        <key>Title</key><string>Section 2 - Working with Lists</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>59</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1244</integer>
+        <key>Title</key><string>Chapter 8 - Rulebooks and Activities</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>60</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1246</integer>
+        <key>Title</key><string>Section 1 - Carrying out Activities</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>61</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1258</integer>
+        <key>Title</key><string>Section 2 - Advanced Activities</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>62</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1285</integer>
+        <key>Title</key><string>Section 3 - Following Rules</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>63</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1316</integer>
+        <key>Title</key><string>Section 4 - Success and Failure</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>64</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1339</integer>
+        <key>Title</key><string>Chapter 9 - External Files</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>65</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1341</integer>
+        <key>Title</key><string>Section 1 - Files of Text</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>66</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1353</integer>
+        <key>Title</key><string>Section 2 - Files of Data</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>67</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1362</integer>
+        <key>Title</key><string>Section 3 - File Handling</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>68</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1377</integer>
+        <key>Title</key><string>Part Four - Adjectival Definitions</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>69</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1379</integer>
+        <key>Title</key><string>Section 1 - Miscellaneous Useful Adjectives</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>70</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1417</integer>
+        <key>Title</key><string>Section 2 - Adjectives for Relations</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>71</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Basic Inform.i7x</string>
+        <key>Line</key><integer>1449</integer>
+        <key>Title</key><string>Section 3 - Adjectives for Real Numbers</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>72</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\English Language.i7x</string>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>--</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>73</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\English Language.i7x</string>
+        <key>Line</key><integer>7</integer>
+        <key>Title</key><string>Section 1 - Modal verbs and contractions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>74</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\English Language.i7x</string>
+        <key>Line</key><integer>31</integer>
+        <key>Title</key><string>Section 2 - Fallback definitions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>75</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\English Language.i7x</string>
+        <key>Line</key><integer>35</integer>
+        <key>Title</key><string>Section 1 - Grammatical definitions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>76</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\English Language.i7x</string>
+        <key>Line</key><integer>80</integer>
+        <key>Title</key><string>Section 2 - Saying pronouns</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>77</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\English Language.i7x</string>
+        <key>Line</key><integer>262</integer>
+        <key>Title</key><string>Section 3 - Further pronouns</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>78</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>--</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>79</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>6</integer>
+        <key>Title</key><string>Part One - Preamble</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>80</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>31</integer>
+        <key>Title</key><string>Part Two - The Physical World Model</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>81</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>33</integer>
+        <key>Title</key><string>Chapter 1 - Verbs and Relations</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>82</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>82</integer>
+        <key>Title</key><string>Chapter 2 - Kinds for the Physical World</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>83</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>84</integer>
+        <key>Title</key><string>Section 1 - Kind Definitions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>84</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>97</integer>
+        <key>Title</key><string>Section 2 - Rooms</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>85</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>127</integer>
+        <key>Title</key><string>Section 3 - Things</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>86</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>154</integer>
+        <key>Title</key><string>Section 4 - Directions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>87</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>202</integer>
+        <key>Title</key><string>Section 5 - Doors</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>88</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>219</integer>
+        <key>Title</key><string>Section 6 - Containers</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>89</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>231</integer>
+        <key>Title</key><string>Section 7 - Supporters</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>90</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>243</integer>
+        <key>Title</key><string>Section 8 - Openability</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>91</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>251</integer>
+        <key>Title</key><string>Section 9 - Lockability</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>92</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>270</integer>
+        <key>Title</key><string>Section 10 - Backdrops</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>93</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>280</integer>
+        <key>Title</key><string>Section 11 - People</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>94</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>304</integer>
+        <key>Title</key><string>Section 12 - Animals, men and women</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>95</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>322</integer>
+        <key>Title</key><string>Section 13 - Devices</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>96</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>331</integer>
+        <key>Title</key><string>Section 14 - Vehicles</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>97</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>344</integer>
+        <key>Title</key><string>Section 15 - Player's holdall</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>98</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>355</integer>
+        <key>Title</key><string>Section 16 - Inter identifier equivalents</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>99</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>388</integer>
+        <key>Title</key><string>Part Three - Variables and Rulebooks</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>100</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>390</integer>
+        <key>Title</key><string>Chapter 1 - Variables</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>101</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>392</integer>
+        <key>Title</key><string>Section 1 - Situation</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>102</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>412</integer>
+        <key>Title</key><string>Section 2 - Current action</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>103</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>427</integer>
+        <key>Title</key><string>Section 3 - Used when ruling on accessibility</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>104</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>439</integer>
+        <key>Title</key><string>Section 4 - Used when understanding typed commands</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>105</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>452</integer>
+        <key>Title</key><string>Section 5 - Presentation on screen</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>106</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>466</integer>
+        <key>Title</key><string>Section 6 - Language generation</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>107</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>472</integer>
+        <key>Title</key><string>Section 7 - Unindexed Standard Rules variables -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>108</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>484</integer>
+        <key>Title</key><string>Section SR2/6b - Unindexed Standard Rules variables -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>109</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>488</integer>
+        <key>Title</key><string>Section 8 - Unindexed Standard Rules variables -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>110</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>505</integer>
+        <key>Title</key><string>Chapter 2 - Rulebooks</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>111</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>507</integer>
+        <key>Title</key><string>Section 1 - The Standard Rulebooks</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>112</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>556</integer>
+        <key>Title</key><string>Section 2 - The Standard Rules</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>113</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>640</integer>
+        <key>Title</key><string>Section 3 - The Entire Game scene</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>114</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>646</integer>
+        <key>Title</key><string>Section 4 - Action processing</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>115</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>735</integer>
+        <key>Title</key><string>Section 5 - Accessibility</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>116</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>768</integer>
+        <key>Title</key><string>Section 6 - Adjectival definitions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>117</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>773</integer>
+        <key>Title</key><string>Section 7 - Scene descriptions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>118</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>780</integer>
+        <key>Title</key><string>Section 8 - Command parser errors</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>119</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>812</integer>
+        <key>Title</key><string>Section 9 - Responses for internal rules</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>120</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>930</integer>
+        <key>Title</key><string>Part Four - Activities</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>121</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>932</integer>
+        <key>Title</key><string>Section 1 - Responses</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>122</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>943</integer>
+        <key>Title</key><string>Section 2 - Naming and Listing</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>123</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>986</integer>
+        <key>Title</key><string>Section 3 - Command parsing</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>124</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1032</integer>
+        <key>Title</key><string>Section 4 - Posthumous activities</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>125</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1070</integer>
+        <key>Title</key><string>Section 5 - The Final Question</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>126</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1107</integer>
+        <key>Title</key><string>Section 6 - Final question options</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>127</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1117</integer>
+        <key>Title</key><string>Section 7 - Locale descriptions -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>128</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1325</integer>
+        <key>Title</key><string>Part Five - Actions</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>129</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1327</integer>
+        <key>Title</key><string>Section 1 - Verbs needed for adaptive text</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>130</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1343</integer>
+        <key>Title</key><string>Section 2 - Standard actions concerning the actor's possessions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>131</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>1788</integer>
+        <key>Title</key><string>Section 3 - Standard actions which move the actor</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>132</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>2189</integer>
+        <key>Title</key><string>Section 4 - Standard actions concerning the actor's vision</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>133</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>2486</integer>
+        <key>Title</key><string>Section 5 - Standard actions which change the state of things</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>134</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>2884</integer>
+        <key>Title</key><string>Section 6 - Standard actions concerning other people</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>135</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>3201</integer>
+        <key>Title</key><string>Section 7 - Standard actions which are checked but then do nothing unless rules intervene</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>136</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>3481</integer>
+        <key>Title</key><string>Section 8 - Standard actions which always do nothing unless rules intervene</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>137</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>3802</integer>
+        <key>Title</key><string>Section 9 - Standard actions which happen out of world</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>138</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>3964</integer>
+        <key>Title</key><string>Part Six - Grammar</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>139</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4189</integer>
+        <key>Title</key><string>Part Seven - Phrasebook</string>
+        <key>Level</key><integer>3</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>140</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4191</integer>
+        <key>Title</key><string>Chapter 1 - Saying</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>141</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4193</integer>
+        <key>Title</key><string>Section 1 - Time Values</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>142</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4205</integer>
+        <key>Title</key><string>Section 2 - Boxed quotations</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>143</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4211</integer>
+        <key>Title</key><string>Section 3 - Some built-in texts</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>144</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4232</integer>
+        <key>Title</key><string>Section 4 - Responses</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>145</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4238</integer>
+        <key>Title</key><string>Section 5 - Saying lists of things</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>146</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4345</integer>
+        <key>Title</key><string>Section 6 - Group in and omit from lists</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>147</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4372</integer>
+        <key>Title</key><string>Section 7 - Filtering contents of lists -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>148</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4379</integer>
+        <key>Title</key><string>Chapter 2 - Multimedia</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>149</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4381</integer>
+        <key>Title</key><string>Section 1 - Figures</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>150</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4390</integer>
+        <key>Title</key><string>Section 2 - Sound effects</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>151</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4399</integer>
+        <key>Title</key><string>Chapter 3 - Actions, activities and rules</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>152</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4401</integer>
+        <key>Title</key><string>Section 1 - Trying actions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>153</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4415</integer>
+        <key>Title</key><string>Section 2 - Action requirements</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>154</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4455</integer>
+        <key>Title</key><string>Section 3 - Stop or continue</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>155</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4464</integer>
+        <key>Title</key><string>Section 4 - Actions as values</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>156</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4488</integer>
+        <key>Title</key><string>Chapter 4 - The Model World</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>157</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4490</integer>
+        <key>Title</key><string>Section 1 - Ending the story</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>158</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4520</integer>
+        <key>Title</key><string>Section 2 - Times of day</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>159</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4542</integer>
+        <key>Title</key><string>Section 3 - Durations</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>160</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4551</integer>
+        <key>Title</key><string>Section 4 - Timed events</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>161</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4563</integer>
+        <key>Title</key><string>Section 5 - Scenes</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>162</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4578</integer>
+        <key>Title</key><string>Section 6 - Timing of scenes</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>163</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4593</integer>
+        <key>Title</key><string>Section 7 - Player's identity and location</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>164</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4599</integer>
+        <key>Title</key><string>Section 8 - Moving and removing things</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>165</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4617</integer>
+        <key>Title</key><string>Section 9 - The map</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>166</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4653</integer>
+        <key>Title</key><string>Section 10 - Route-finding</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>167</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4674</integer>
+        <key>Title</key><string>Section 11 - The object tree</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>168</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4686</integer>
+        <key>Title</key><string>Chapter 5 - Understanding</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>169</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4688</integer>
+        <key>Title</key><string>Section 1 - Asking yes/no questions</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>170</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4694</integer>
+        <key>Title</key><string>Section 2 - The player's command</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>171</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4709</integer>
+        <key>Title</key><string>Section 3 - Changing the player's command</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>172</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4724</integer>
+        <key>Title</key><string>Section 4 - Scope and pronouns</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>173</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4736</integer>
+        <key>Title</key><string>Section 5 - The multiple object list</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>174</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4745</integer>
+        <key>Title</key><string>Section SR5/8/1 - Message support - Issuance -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>175</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4762</integer>
+        <key>Title</key><string>Chapter 6 - Deprecated or private phrases -</string>
+        <key>Level</key><integer>4</integer>
+        <key>Indentation</key><integer>2</integer>
+    </dict>
+    <key>176</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4764</integer>
+        <key>Title</key><string>Section 1 - Spatial modelling -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>177</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4785</integer>
+        <key>Title</key><string>Section 2 - Room descriptions -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>178</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4800</integer>
+        <key>Title</key><string>Section 3 - Action conversion -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>179</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4810</integer>
+        <key>Title</key><string>Section 4 - Surreptitious violation of invariants -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>180</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4819</integer>
+        <key>Title</key><string>Section 5 - Capitalised list-writing -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>181</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4828</integer>
+        <key>Title</key><string>Section 6 - Printing names -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>182</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4833</integer>
+        <key>Title</key><string>Section 7 - Command parsing -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>183</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4838</integer>
+        <key>Title</key><string>Section 8 - Deprecated Inform -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+    <key>184</key><dict>
+        <key>Filename</key><string>C:\Program Files\Inform\Internal\Extensions\Graham Nelson\Standard Rules.i7x</string>
+        <key>Line</key><integer>4847</integer>
+        <key>Title</key><string>Section 9 - Debugging Inform -</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>3</integer>
+    </dict>
+</dict></plist>

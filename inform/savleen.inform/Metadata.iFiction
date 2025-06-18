@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ifindex version="1.0" xmlns="http://babel.ifarchive.org/protocol/iFiction/">
+    <story>
+        <identification>
+            <ifid>8C185B5A-C228-46B7-BA49-F057E8093E28</ifid>
+            <format>glulx</format>
+        </identification>
+        <bibliographic>
+            <title>The Magic Kitchen</title>
+            <author>Savleen and Daddy</author>
+            <headline>An Interactive Fiction</headline>
+            <genre>Fiction</genre>
+            <firstpublished>2022</firstpublished>
+            <language>en</language>
+            <group>Inform</group>
+        </bibliographic>
+        <releases>
+            <attached>
+                <release>
+                    <releasedate>2022-10-30</releasedate>
+                    <version>1</version>
+                    <compiler>Inform 7</compiler>
+                    <compilerversion>Inform 10.1.2 (build )</compilerversion>
+                </release>
+            </attached>
+        </releases>
+        <colophon>
+            <generator>Inform 7</generator>
+            <generatorversion>Inform 10.1.2 (build )</generatorversion>
+            <originated>2022-10-30</originated>
+        </colophon>
+        <glulx>
+            <serial>221030</serial>
+            <release>1</release>
+            <compiler>Inform Inform 10.1.2 (build )</compiler>
+        </glulx>
+    </story>
+</ifindex>
