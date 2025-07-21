@@ -1,0 +1,21 @@
+# in theory, 'qrencode' can turn data into a qr code you can display
+# on the terminal. however, my plain console doesn't display utf-8
+# and is too small to render the ascii qr code.
+#
+# so: generate the ascii qr code anyway, but then convert it to
+# an image in decker.
+#
+# qrencode -t ascii < data > qr.txt
+
+lines: "\n" split read["qr.txt"]
+
+h: count lines
+w: count first lines
+
+img: image[w,h]
+img.pixels: "#"=(on f x do "" split x end) @ lines
+img.scale[1,2]
+
+d: newdeck[]
+d.cards.home.image.paste[img 50,50]
+write["qr.deck" d]
