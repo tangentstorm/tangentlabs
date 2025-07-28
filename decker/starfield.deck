@@ -1,0 +1,91 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+name:"starfield.deck"
+
+{card:home}
+script:"home.0"
+{widgets}
+c:{"type":"canvas","size":[512,342],"pos":[0,0],"locked":1,"animated":1,"border":0,"image":"%%IMG2AgABVgH/Af8B/wH/Af8B/wH/Af8BgCcBAf8B/wH/Af8B/wH/Af8BhyUBAY0hAQH/AXElAwH1LgEB/wEJJQEB9S4DAf8B/y4BAf8BESEBAf8B/wH/Af8B2SgBAUwnAQH/Af8nAwH/Af8nAQH/Af8B/wGaIgEB/wH/Af8B/wH/Af8B/wH/Af8BWCIBAQshAQH/AfMiAwEJIQMB/wHzIgEBCyEBAaMiAQF3LAEB/wH/Af8BBC4BARosAQH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8BXCIBAQ8tAQH/Ae8iAwEjLQEB/wHbIgEB/wH/Af8B/wHBIwEB/wH/IwMB/wH/IwEB/wH/Af8B/wH/Af8B/wGIJwEB/wGDJQEB/wH/JQMB/wH/JQEB/wH/Af8B/wH/Af8B/wH/Af8B/wH/AW8mAQH/Af8mAwH/Af8mAQH/Af8B/wH/Af8B/wH/Af8B/wH/AQ8kAQH/Af8BdSQBAf8B/yQDAf8B/yQBAf8B/wH/AZErAQH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wFYLgEBCyoBAQsiAQH/AecuAwEJKgMBCSIDAf8B5y4BAQsqAQELIgEB/wH/Af8B/wH/Af8B/wH/AUcjAQH/Af8jAwH/Af8jAQH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/AewoAQH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wGiIQEB/wHZJQEBJSEDAf8B/yEBAf8B/wH/Af8BDCIBAf8B/yIDAUIoAQHrKQEBzyIBAf8BLykDAf8B/ykBAf8B/wH/ATgiAQH/Af8iAwH/Af8iAQH/Af8BhycBAf8B/wHBJgEB/wG4IwEBRiYDAf8B/yYBAf8B/wH/Af8B/wH/Af8BMCMBAf8BLysBAc8jAwGuKwEB/wFQIwEBrisDAcYgAQH/ATgrAQHGIAMB/wH/IAEB/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8BSycBAaIpASABAf8B/yADAf8B/yABAf8B/wH/Af8B/wH/Af8B/wH/Af8B/wGGKgEB/wH/KgMB/wH/KgEBkSMBAf8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wEiIQEBiyoBAf8BcyEDAYkqAwH/AXMhAQGLKgEB/wHrIwEB/wH/Af8BkSEBAf8B/wH/Af8BeSoBAf8BoCoBAf8B/yoDAf8B/yoBAf8B/wEFKQEB/wEwLAEBzikDAf8B/ykBAf8B/wH/Af8B/wH/Af8B6yEBAf8B/yEDAf8B/yEBAf8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8Bjy8BAf8B/wH/Af8B/wH/Af8B/wH/AZkkAQH/Af8B/wH/Af8BpiABAf8B/yADAf8B/yABAf8BsCcBAf8B/ycDAf8B/ycBAf8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8BtCgBAf8BYy4BAYQoAQEPKwEBBigDAf8BqyQBAVMoAQH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wEnJgEBQygBASciAQGvJwEB4iYDASAsAQEXJQEBCCgDAf8BuyYBAUMoAQH/Af8B/wH/Af8B/wH/Af8B/wEkKwEB/wHuLwEB/wH/LwMB/wH/LwEB/wHZKgEB/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8BuyoBAf8B/yoDAf8B/yoBAf8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/AYQvAQH/Af8vAwEbKgEB/wHjLwEB/wGdJQEB/wH/JQMB/wH/JQEBNSIBAf8B9yMBAUsgAQGXJAEB/wEbIwMBSSADAZUkAwH/ARsjAQFLIAEBlyQBAf8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/AWkpAQH/Af8B/wH/Af8Bri4BAf8B/wH/Af8B/wH/Af8B/wH/Af8BwC0BAQMjAQH/Af8jAwH/Af8jAQH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8BDigBAf8B/wH/Af8B/wH/Af8B/wH/ARIpAQH/Af8pAwH/AZ0jAQFhKQEB/wGdIwMB/wH/IwEB/wH/Af8B/wH/Af8BNSEBAf8BDikBAfAhAwH/AQwpAwHwIQEB/wEOKQEB/wH/Af8B/wH/ASAnAQH/Af8nAwFnJQEB/wGXJwEB/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wH/Af8B/wEpJAEB/wH/Af8B/wH/Af8B/wE1KwEB/wH/Af8B/wH/Af8B/wH/ASchAQH/Af8hAwH/Af8hAQH/Af8B/wGhIAEB/wH/IAMB/wH/IAEB/wH/Af8B/wH/ASE=","brush":1,"pattern":32,"scale":1}
+grid1:{"type":"grid","size":[174,143],"pos":[335,159],"script":"home.1","value":{"x":[483,209,440,487,185,292,188,450,395,292,136,285,404,120,501,453,306,1,508,413,420,24,418,308,104,372,338,195,132,272,476,280,81,16,503,128,100,280,304,399,204,308,286,31,156,300,212,36,48,215,327,176,340,76,402,102,68,222,120,312,24,208,227,363,468,12,444,352,85,505,44,54,282,120,230,87,420,40,164,188,82,304,130,32,148,324,87,302,159,12,450,6,386,240,126,180,54,135,152,504],"y":[282,133,125,283,41,329,25,65,212,15,221,183,172,4,325,70,123,12,119,192,166,81,133,25,177,155,45,114,305,118,297,239,27,213,146,204,87,166,261,168,118,174,170,258,114,277,50,81,128,14,315,220,146,261,228,221,221,315,4,177,24,201,338,230,213,81,59,220,259,8,107,27,136,128,303,52,226,213,40,18,135,261,255,213,41,334,52,197,255,24,310,157,274,10,221,310,68,8,261,147],"v":[3,1,4,2,5,2,4,3,5,1,4,1,4,4,1,3,3,1,4,1,3,2,2,2,1,4,2,5,2,4,1,4,3,2,1,4,4,2,4,3,3,4,2,1,4,5,2,3,2,5,3,2,2,1,1,3,2,1,4,3,4,1,1,3,4,1,2,4,5,2,4,2,2,5,5,3,5,5,2,2,2,4,5,4,4,4,3,1,3,2,5,2,2,5,2,2,3,3,2,4],"b":[0,0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,1,1,1,0,0,1,1,1,1,0,0,1,0,0,0,1,1,1,0,0,1,1,0,1,0,0,0,1,0,0,0,0,0,1,1,0,1,1,0,1,1,1,1,0,0,1,1,0,0,1,0,0,1,1,1,0,0,1,0,0,1,1,1,0,1,1,1,0,0,1,1,0,0,1,0,1,1,0,1,1],"p":[45,43,39,35,45,43,34,36,46,39,40,33,42,41,36,43,34,33,41,47,42,42,35,44,44,42,35,33,35,40,40,42,44,40,41,39,35,33,36,35,34,42,33,37,37,46,39,34,35,40,37,34,39,35,47,44,38,39,39,41,33,32,32,42,36,46,38,39,34,37,40,46,32,38,41,34,43,40,45,34,43,36,47,43,34,33,37,36,42,34,41,35,41,46,37,33,36,33,32,32]},"row":6}
+button1:{"type":"button","size":[60,20],"pos":[335,308],"script":"home.2","show":"invert","text":"rebuild"}
+field1:{"type":"field","size":[133,151],"pos":[199,159],"locked":1,"show":"invert","border":0,"scrollbar":0,"value":{"text":["","Decker Starfield Demo","\n\nUses a grid widget to track the position, velocity, brush, and pattern for each star.\n\nThis same technique can be used to make any other particle effect.\n\nPress ^E to see the code and make it your own!"],"font":["","menu",""],"arg":["","",""]}}
+
+{script:home.0}
+# decker starfield demo by tangentstorm
+# (with help from internet janitor!)
+
+# c is a canvas widget that covers the whole card.
+# ns is "number of stars"
+c.scale:1 w:c.size[0] h:c.size[1] ns:100
+
+# grid1 contains the data for each star.
+# clicking the button triggers this rebuild of the table.
+# 
+# x,y : position
+# v   : velocity
+# b   : brush number used to draw the star
+# p   : pattern (color) used to draw the star
+on rebuild do
+  grid1.value: table each in range ns
+    s: nil # create an empty structure (not strictly necessary)
+    s.x: random[w]
+    s.y: random[h]
+    s.v: 1+random[5]
+    s.b: random[2]
+    s.p: 32+random[16]
+  end
+  # a more compact way to write the same thing:
+  # grid1.value: table ("x","y","v","b","p") dict flip each in range ns
+  #   random[w],random[h],(1+random[5]),random[2],32+random[16]
+  # end
+end
+
+# widget c is marked as "animated" so decker issues
+# a "view" event 60 times a second.
+on view do
+  # -- "physics" ----------------------------
+  # store table in local variable so it's easier to work with:
+  stars:grid1.value
+
+  # move each star according to its velocity.
+  # tables let us do this with a single "+" operation.
+  # If you prefer, you could break "v" into separate "dx" and "dy"
+  # columns, and then update x and y independently.
+  stars.x: stars.x + stars.v
+  
+  # if a star moves off the canvas, wrap it back around 
+  # to the left. the "update ... where ... from ..."
+  # pattern makes it easy to modify only the stars we care about.
+  stars:update x:0 y:random[c.size[1]] where x>c.size[0] from stars
+  
+  # save the data back to the grid widget so we can find it next frame:
+  grid1.value:stars
+
+  # -- drawing -----------------------------
+  # fill canvas with pattern 1 (solid black)
+  c.pattern:1 c.rect[0,0 c.size] c.pattern:0
+
+  each s in rows stars
+    c.pattern: s.p
+    c.brush: s.b
+    c.line[s.x,s.y] # line[] with no w/h draws a single dot
+  end
+end
+{end}
+
+{script:home.1}
+on click row do
+ # nothing. just stop canvas click from rebuilding stars
+end
+{end}
+
+{script:home.2}
+on click do
+ rebuild[]
+end
+{end}
+
+{card:card1}
+
