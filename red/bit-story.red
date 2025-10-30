@@ -51,3 +51,11 @@ make-vars: function[n][
   do collect [repeat i n [
     keep compose [
       (to-set-word rejoin ["x" i - 1]) var (i - 1)]]]]
+
+
+;-- draw a 32-bit truth table:
+view/no-wait/tight compose [bit-view: base 425x20 #336699 ]
+bit-view/draw: collect [ keep [translate 5x5]
+  repeat i 32 [ keep compose [
+    fill-pen (either 0 = bits/(i) [hex-to-rgb #383838] [white] )
+    box (as-pair (i - 1)* 13 0)  (as-pair (13 * i - 3) 10) ]]]
