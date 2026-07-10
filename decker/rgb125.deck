@@ -1,0 +1,77 @@
+{deck}
+version:1
+card:1
+size:[512,342]
+name:"rgb125.deck"
+patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+EZlTIzIVmCJSJQMwI9M9AGQKwIQAdAvChQCGOWOKJAAQE"
+
+{card:home}
+
+{card:cube}
+image:"%%IMG3AgABVgbAkHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"cube.0"
+{widgets}
+field1:{"type":"field","size":[473,108],"pos":[21,215],"style":"code","value":"each i in range 5\n px[(2+i),8 i,i,i]\nend"}
+red:{"type":"slider","size":[86,25],"pos":[217,57],"interval":[0,4],"value":4,"style":"compact"}
+grn:{"type":"slider","size":[86,25],"pos":[218,92],"interval":[0,4],"value":4,"style":"compact"}
+blu:{"type":"slider","size":[86,25],"pos":[218,130],"interval":[0,4],"value":4,"style":"compact"}
+c:{"type":"canvas","size":[89,50],"pos":[20,27],"border":0,"image":"%%IMG3AFkAMgbAl1B4EqKEKaHqNRKOiqPjKDlakoSkIulISpKWJWGpWDqWkqWlSWgqmo6mpEnlmtfp9vzwVXwdX0kvS01MUFJUVlhaXF5gYmRmaGpsbnByaniZd3dDfX+BS0NPTIdMg4ovW6mNqY8vZa+Sr5Qvb7WXtZp5mitCvSe9KL0pvSorTcfAUcfEVStXz8Bbz8RfK2HXwGXXxGkra9/Ab9/Eu5vmay+/wcPFx+pPx8JTx8bQWc/CXc/G2GPXws5cMwauzTdhcb4R1MVQHR92gNz5ireMnjNk+Kbtswbt3zaB3rAZHJdwjsJzDF2wELLyxEoUK1OsVMGiSU2XUWrKrMLiSk+XW3rK/MIiTFGXZYrKTMNiTVOXb5rKRJcyXcuXMWfWfHGzJswpNWn6zNITZpeeNI2OKQrzTFGaTts0hRmnKdyqmbjywQpIK8snXnWG3fqzrFC0PbmuTeqWqVG5UevOsYuycgshl09cRnE5xWUVLZqE1hwltOcqLa6k1rwltecvLcLE1lwmtuc0Ldbk1vwmt2eqldNl3tz5c+gXo0NznhIatOosqTl3SQ1a9pjYnM/EBq27TW7OcXJzx8tpuJ/igi4jf6LcdPPjq6O7pp4a+fXa2nHL9t47/BzxwWnighADnjAgCgOmMCAdTbjwhIMITuEgHVe4kIWFCHZhIR1huDCGhwie4SEeL9Rh4Bt1KAgcOgTycWCCCzpY4oNROKhgFRaWeOEWFir4hYclfliGhwqmUUeJbdSBYBwBBliii37AKMiAMxpYo4Q4Nrhjhj5SGKSBQ4poZIdJosjkiik1iaaa5K3pZptVvcnmnHLWCSdKd9pJZ558zrnnn3oG2mceggI66KF7IlrooooKyKihkD5KaKORUsqopZhWCqmmkmZaZ6ecegqnqKGWuqappIKKjqqpttoqqrDaEeurqrI666y05qrprbbWqmuvjf4q7J+8DhsosMWGauyyTSaL7KLPMvumtNRu4my1K0Z7raHYVruttp92+20m4oLraLnGmjsum0EA","scale":1}
+button1:{"type":"button","size":[60,20],"pos":[220,178],"script":"cube.1","text":"cube"}
+p:{"type":"canvas","size":[30,30],"pos":[320,57],"image":"%%IMG3AAMAAwZAl0k1dKmEQQ==","scale":10}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"pattern":42,"style":"plain","value":"rgb125: \"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\"\n# extractor:   \" \" fuse each i in 32 + range 16 \"%06h\" format patterns[i] end\neach rgb i in extract \"%H\" parse value from \" \" split pal: rgb125\n  patterns[32+i]: rgb\nend"}
+
+{script:cube.0}
+on run text do eval[text 0 1] end
+
+# old way
+on old_px xy rgb do
+ each v i in rgb
+  c.pattern: if v v+34+4*i else 1 end
+  c.rect[(xy*3)+(i,0) 1,3]
+ end
+ nil
+end
+
+# new way
+im:image[3,3]
+pixels: "%j" parse "[[2,0,1],[0,1,2],[1,2,0]]"
+#pixels: "%j" parse "[[0,1,2],[0,1,2],[0,1,2]]"
+
+on px xy rgb do
+ im.pixels: pixels
+ #im.transform[random["horiz","vert","flip"]]#,"left","right","turn"]]
+ #im.translate[random @ 3,3 1]
+ p:im.map[(0,1,2) dict each v i in rgb if v v+34+4*i else 47 end end]
+ c.paste[p (xy*3) 0]
+end
+
+on change do
+ if me.type ~ "slider"
+  c.pattern:1 c.clear[] c.fill[]
+  rgb:each w i in "red","grn","blu" card.widgets[w].value end
+  each xy in 32 cross 32
+   i:image[3,3]
+   i.pixels:pixels
+   m:i.map[(0,1,2) dict each v i in rgb if v v+34+4*i else 47 end end]
+   p.paste[m 0,0 0]
+   px[xy rgb]
+  end
+ end
+end
+
+{end}
+
+{script:cube.1}
+on click do
+ each r in range 5
+  each g in range 5
+   each b in range 5
+     x: g+r*5
+     y: b
+     px[x,y r,g,b]
+   end
+  end
+ end
+end
+{end}
+
