@@ -1,0 +1,176 @@
+{deck}
+version:1
+card:1
+size:[512,342]
+name:"gridpad.deck"
+patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+EK1S4xoW9ZAiODjr8wwgA/2ADABOvQPFINE8oYco/HnCxjChZ/NMNKP+IooYKACDzz0ABAQ=="
+
+{card:home}
+{widgets}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"home.0","pattern":42,"style":"plain","value":"rgb125: \"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\"\narne: \"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\"\ntractor: \"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\" # tractor game\n# extractor:   \" \" fuse each i in 32 + range 16 \"%06h\" format patterns[i] end\neach rgb i in extract \"%H\" parse value from \" \" split pal: tractor\n  patterns[32+i]: rgb\nend"}
+result:{"type":"field","size":[100,101],"pos":[345,42],"style":"code","value":"{\"value\":[16777215,2829099,7039851,12434877,14694970,16747520,16766976,5025616,9425231,4892415,1989835,10639871,14524671,10644010,51455,0],\"vars\":{\"rgb125\":\"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\",\"arne\":\"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\",\"tractor\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\",\"pal\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\"}}"}
+
+{script:home.0}
+on run text do result.data: eval[text 0 1] end
+
+{end}
+
+{card:sprites}
+image:"%%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"
+script:"sprites.0"
+{widgets}
+gp:{"type":"contraption","size":[128,128],"pos":[192,107],"script":"sprites.1","show":"transparent","def":"gridpad","widgets":{"d":{"image":"%%IMG3ACAAIAZAwAtAIgkBSABLBHKhRCoUS9UytUSskcrkEpWEoqJomAyBWKUSi7RCrVovVQpEar5crmPxmGy55iEoVSMiJy4hKWMvIG0tSCmQKUlILCsnJicgKpcrhywvJiMpayYgAUWoJAFJKCOWU1UnLJlrTC5qLCanqap9LC1qlyYlbFsqUF0nJSe7qatIJy9mIWhqLiQiJlYrI90pLgFDIiJCzwApKlkrICMggSCJWHAuiygk2sNp2F4mYSXDJ+6JQgGixYpRJ1DoYzIMRJiDBkug+OOKisQSKkKMQGSCzYpJk0KQWAYChYoRakr8YeHwBQkWKZZlBJnkRIgSGwVVKlFyojScIHiSuEITiZQQ0lB8c+jlRQs6JUS0IGGmIJcVdwK+cQgsCgqk4w6NcNFmRCkTo2JOJXFC6osVGi99LUUVTYpoIkJodPdS4hYTcUrAdQHixV2lLViwPIGVIMYVIsS6sNI2VAoUoeaRAJVQKZcpW+GK+PqJJ9ySWcSyoDZVBbaCJ0ZcMYy2hcgQl7qJZJuChJY1EyvJikIshQkWUnKDOHFizqISN9kM4/JiteyAJxIPO9kixYjNKGxqWdetO4l0jHqmaIHijps1hdkb3pLGqcgUK4qoIRjChIr/WLgkCD3shKACZJ0ciJFLTnjXxleaoKPYelqZ8MYLTkWx2UhsubCEbVCopMxl38SWjmxqdAJXR1IFAt0KbajwAkZWbFKCH0FNNgZOI8wy1TKyoKFCQfbk1cJGIvQYhSxS/YHMaO4gYttqmGzyQmRr0XXaCool5lF/XDIWB2EEgYIUY9dAh0YIcNz4T5J6CWYLCu1Rsc5TAbWgAj39uZQOfrO8YJMLrt0RiGFXjvaSWX5ccgwJSrXDpkMK0TELCkVlqmmmQQA="},"cellW":{},"cellH":{},"gridW":{},"gridH":{"value":31},"c":{"pattern":40,"image":"%%IMG3AIAAgAZAgHBILAJeyKRy+TI6h6SodEqtWqfPJ3ObzHq/Qi4XTLyaz1TyULxVu9fs5RtNN7/j8rcbr5zX/1h7fEh6goN+gIB3g02FZIyNaomJi4eOYJCIk3SVfJeYjJqbZ514n1+ZbqN1pXGnXqmSq2itbK9ZsWSztIaet065YLukvaa/RsFfw3bFrsdFyV7LV7Viz9ChqtNV1WPXcJay24Fq0b+QIunq6+wi41Tt8ermt+jy8e9T9/H0r/b76/JJAciu36l/BN0JJJFwXrZvRxg1TLeQ4USDnxASrDhRBMZLGgFyvPjwW8h9Ixt+dHTyXsqEKwu1lPeSYEw9M/Et7Hiz25aONQH2bMYG6E6S4UxKnBh039BySxs2vff0UdSEU+VVBZVU2EKfTCCGKelVINg8EG9WPNtHrNqvRK25JasMLtSuz96ajestLV1pdq3iPaY3H9sucwdnWcu3TWJf4gw3DvvYWOR3hwlVdnZ5XOZIShU/YXwXcmjTZSWXtnyadWrMk9G25qwrMFfUYsGk2M27t+/fwIMLHy48d27iyJMrV25c7PLn0J83hxi9unXg079d3349+zXu4KF7fxa+fPLxx8yrL47+1vr3vtu7h09f/iv69e1/wg9f/37+6/l3CYABClgIgeoZeCCC5eUWwIMQRihhABVVuNCEGGao4YMWdjjOhiCC6OGIw4RoIoYkpjjKiSxCqOKLgLTYIow0oiEjizXmaMWNJ+rooxQ8mvjjj0GGOKSPRYp4ZI5Jbrgkk01m+GSNUUo5JYxVonjli1lOuCWXXUb4pYphijkmiWW6eOaIaXK4podtUvhmh3HOSWebdlpYZ54V7cmnQH7++U6ggm5DaKHLHIroLoouukqjjm4CaaSJTErpH5ZeSkemmp7BaadXfApqFaKOOkWppkaBaqqrmtrqqK+CGmuns2pa66W3UpprpHHe1FFHn/X6Vxa/ThRsm74Wm9CxaSarLEDMlunss/dEG+a01MZjbZfYZsvOtll266064FYp7rgilBvlueOq2yS73rqbJLzZylskvdTaGyS+z+rLI7/K+nsjwMUKHEAQ"},"allowDraw":{},"allowPick":{},"pen":{"value":3}}}
+gs:{"type":"contraption","size":[129,129],"pos":[28,107],"locked":1,"show":"transparent","def":"gridSelector","widgets":{"cellW":{"pos":[159,-46],"value":8},"cellH":{"pos":[159,-3],"value":8},"c":{"size":[129,129]},"gridColor":{"size":[54,26],"pos":[159,40],"value":1},"curXY":{"pos":[159,82],"value":"[3,0]"}}}
+notes:{"type":"field","size":[452,49],"pos":[24,277],"pattern":42,"style":"plain","value":"Demo of using the gridSelector and gridpad contraptions. (Probably these should be unified)\n"}
+pal:{"type":"contraption","size":[129,24],"pos":[28,62],"script":"sprites.2","def":"gridSelector","widgets":{"cellW":{"pos":[159,-46],"value":8},"cellH":{"size":[54,7],"pos":[159,-3],"value":8},"c":{"size":[129,24]},"gridColor":{"size":[54,4],"pos":[159,8],"value":1},"curXY":{"size":[61,4],"pos":[159,15],"value":"[3,0]"}}}
+
+{script:sprites.0}
+on pick xy do
+ gp.paste[card.image.copy[me.pos + (me.cwh * xy) me.cwh]]
+end
+
+
+{end}
+
+{script:sprites.1}
+on draw_cell c xy v cwh do
+ c.brush: c.pattern: v
+ c.rect[cwh*xy cwh]
+end
+
+on draw do
+ card.image:card.image.paste[gp.d.copy[0,0 gs.cwh] gs.pos + (gs.cwh * gs.xy)]
+end
+{end}
+
+{script:sprites.2}
+on draw c do
+ cwh:me.cwh i:-1
+ each xy in me.gw cross me.gh
+  c.pattern:i:i+1 c.rect[cwh*xy cwh]
+ end
+end
+
+on pick xy i do
+ gp.pen: me.cur
+end
+{end}
+
+{contraption:gridpad}
+size:[128,128]
+resizable:1
+margin:[2,2,2,2]
+script:"gridpad.0p"
+template:"on draw_cell c xy v cwh do\n c.brush: c.pattern: v\n c.rect[cwh*xy cwh]\nend\n"
+attributes:{"name":["gh","gw","ch","cw","allowPick","allowDraw","pen"],"label":["grid height","grid width","cell height","cell width","allowPick","allowDraw","pen"],"type":["number","number","number","number","bool","bool","number"]}
+{widgets}
+d:{"type":"canvas","size":[32,32],"pos":[-100,0],"locked":1,"show":"transparent","scale":1}
+cellW:{"type":"slider","size":[52,25],"pos":[181,-27],"locked":1,"interval":[0,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[51,25],"pos":[182,15],"locked":1,"interval":[0,100],"value":16,"style":"compact"}
+gridW:{"type":"slider","size":[52,25],"pos":[181,57],"locked":1,"interval":[0,100],"value":32,"style":"compact"}
+gridH:{"type":"slider","size":[54,25],"pos":[180,97],"locked":1,"interval":[0,100],"value":32,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"pattern":0,"show":"transparent","brush":40,"scale":1}
+allowDraw:{"type":"button","size":[71,20],"pos":[-89,-66],"locked":1,"font":"body","show":"transparent","text":"allowDraw","style":"check","value":1}
+allowPick:{"type":"button","size":[71,20],"pos":[-171,-66],"locked":1,"font":"body","show":"transparent","text":"allowPick","style":"check","value":0}
+pen:{"type":"slider","size":[53,25],"pos":[181,-71],"locked":1,"interval":[0,48],"style":"compact"}
+
+{script:gridpad.0p}
+# attributes
+on set_gh x do gridH.value:x rebuild[] end on get_gh do gridH.value end
+on set_gw x do gridW.value:x rebuild[] end on get_gw do gridW.value end
+on set_ch x do cellH.value:x view[] end    on get_ch do cellH.value end
+on set_cw x do cellW.value:x view[] end    on get_cw do cellW.value end
+on set_pen x do pen.value:x end on get_pen do pen.value end
+on set_allowPick x do allowPick.value: x end
+on get_allowPick   do allowPick.value end
+on set_allowDraw x do allowDraw.value: x end
+on get_allowDraw   do allowDraw.value end
+
+# get/set individual pixels
+on get xy   do d[xy]     end   on get_get do get end
+on set xy v do d[xy]:v v end   on get_set do set end
+
+# copy/paste from image d
+on get_d do d.copy[] end
+on copy p s a do  d.copy[p s a] end          on get_copy do copy end
+on paste i p t do d.paste[i p t] view[] end  on get_paste do paste end
+
+c.size: card.size
+gwh: (gw:gridW.value), gh:gridH.value
+cwh: (cw:cellW.value), ch:cellH.value
+
+on change do rebuild[] end # change handler for prototype widgets
+
+on rebuild do d.size:gwh view[] end
+on draw_cell xy v do
+  c.pattern: v c.rect[cwh*xy cwh]
+  card.event["draw_cell" c xy v cwh]
+end
+on view do
+ each xy in (range gw) cross (range gh) draw_cell[xy d[xy]] end
+ nil
+end
+
+# mouse handler
+on c2xy pos do floor pos / cwh end
+on click pos do xy: c2xy[pos]
+ if allowPick.value pen.value: get[xy] card.event["pick" pen.value] end
+ drag[pos]
+end
+on drag pos do xy:c2xy[pos]
+ if allowDraw.value draw_cell[xy set[xy pen.value]] card.event["draw"] end
+end
+
+{end}
+
+{contraption:gridSelector}
+size:[128,128]
+resizable:1
+margin:[2,1,2,2]
+script:"gridSelector.0p"
+attributes:{"name":["cw","ch","gc","border"],"label":["cell width","cell height","grid color","draw border?"],"type":["number","number","number","bool"]}
+{widgets}
+cellW:{"type":"slider","size":[54,25],"pos":[158,-46],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[54,25],"pos":[158,-3],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"locked":1,"volatile":1,"script":"gridSelector.1p","pattern":32,"show":"transparent","border":1,"scale":1}
+gridColor:{"type":"slider","size":[54,25],"pos":[158,40],"locked":1,"interval":[0,47],"value":9,"style":"compact"}
+curXY:{"type":"field","size":[61,20],"pos":[158,81],"locked":1,"style":"plain","value":"[0,0]"}
+
+{script:gridSelector.0p}
+on get_cw do cellW.value end       on set_cw x do cellW.value: x end
+on get_ch do cellH.value end       on set_ch x do cellH.value: x end
+on get_gc do gridColor.value end   on set_gc x do gridColor.value: x end
+on get_border do c.border end      on set_border x do c.border:x end
+on get_cxy do curXY.data end       on set_cxy xy do curXY.data: xy end
+
+on get_gw do c.size[0]/cellW.value end
+on get_gh do c.size[1]/cellH.value end
+on get_cwh do cellW.value,cellH.value end
+on get_cur do (get_gw[] * last curXY.data) + first curXY.data end
+
+on view do
+ c.clear[] c.brush:0
+ # give instances a chance to draw on canvas
+ card.event["draw" c]
+ if c.pattern: gridColor.value
+  each x in get_cw[] * range 1+get_gw[] c.line[x,0 x,c.size[1]] end nil
+  each y in get_ch[] * range 1+get_gh[] c.line[0,y c.size[0],y] end nil
+ end
+ xy:curXY.data  cwh:get_cwh[]
+ c.brush: c.pattern:1  c.box[xy*cwh 1+cwh]
+ c.brush: 0 c.pattern:32 c.box[xy*cwh cwh]
+end
+
+on click xy do
+ set_cxy[floor xy/get_cwh[]]
+ view[]
+ card.event["pick" get_cxy[]]
+end
+{end}
+
+{script:gridSelector.1p}
+# empty script to disable drawing
+on drag do end
+
+{end}
+
