@@ -32,3 +32,72 @@ on run text do eval[text 0 1] end
 
 {end}
 
+{contraption:bex}
+size:[240,100]
+resizable:1
+margin:[2,2,3,3]
+image:"%%IMG2APAAZCz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LP8s/yz/LB4="
+script:"bex.0p"
+{widgets}
+g:{"type":"canvas","size":[126,18],"pos":[-120,-80],"pattern":32,"show":"transparent","image":"%%IMG3AH4AEgZAgHAYKBaHyCTAeFQqmQHnkylNQqvIK1aorRZRYHDTWQSZzeMpab1OWwOreNydDZjudzoxIOr39VwBJ4ODgAFhiGJkZ4xoZGyQbWRylHNkeJh5ZH6cf2SEoIVPiaRRWY2opkSRrKpclbCuS5m0snydnbahu66HpKVEqMKqAazGxLGxRLTMxLjPxLvSxIlnicSNZdmrxpHIlXDgy3mZdppcnFDpRNOhpr5hIPHXS8PDS93HS8nhlFHm5DABNPEPGrQl0k4Icrek2jxE/+ylwscGShFI//gpG0gQD8eCuUTcWrewkEVQ/xyCkQexXqp7xSrmI5HRn5x+lj56LLcEF5+Rfv6149UQEUsURxUFkLgtZpuZNW9K9TerXEeeQEUGzYWQkMWSCos+REpv6cuJTmlC3Te17Yp/ta4K7JluK0leCd9VM0OPy1lGxGZWJOL27c1xAmsReeaTHcppRH4B8ytsGxfBkl7BUsYlLk90jNdxScgwsmRFpyo7yiLY1maqWZjNzRLaUxbSoqyclkX53pN8vNluDs5xtpXQxEkHXwJPzHLm2Z5fxCgd59vq5arnqu7ueSAjW74DegM+fBcs571QMb8+vPv38OPLn0/fSRA=","brush":32,"scale":1}
+edges:{"type":"grid","size":[100,50],"pos":[260,-10],"value":{"src":["1","2"],"dst":["3","3"]},"row":1}
+x0:{"type":"button","size":[24,20],"pos":[32,-48],"font":"mono","text":"x0","shortcut":"0"}
+n0:{"type":"canvas","size":[18,18],"pos":[8,-48],"pattern":32,"image":"%%IMG2ABIAEiD/IEU=","scale":1}
+c:{"type":"canvas","size":[240,100],"pos":[0,0],"script":"bex.1p","pattern":42,"show":"transparent","image":"%%IMG3APAAZAZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6fUAGioqClaKInqamkpq1gAaqxq660W7CysgG1u1W3uLm8waG/vrPCx0rFsconusjPRcWj08vQ1kLMzcTX1tLTqKrO3MjM2c3j0MrZ4ujH5sDtz+/G8fK/9GPfcPr1T+Dh7ML8WxXwjCgRCBGy6teEH5l3BR8mnKiQ4Z155wxS3BjRYhuM+MQE2Eiyo0c16+BJTPhtosmTBu+VW0lxJMcoDmH2WvZNGk2WImy69BcAhVGjC3VKSYnrpRahQKFWbHi0KlKlU7x9q5avJtChTIpateoUq5FyMn8G/coy7Ni3Zc0SUbetjFSSQalWBcGXrFx/91R2xQs2mVUQRxFXjfsXAEbGTwlPXSI2seXFjZ1AREmYcWWjilGEvpq5oTrIXQ66hPxZ9OWjqDPnZDPb7d7XpEtnas13NIrYuhW1fvs7OKPac4nDNi78dJLhy5k/nZZmMxJRZIGPQ541gInv35OKDBwyGvXGolaoVy9+Kfj34R+SDyf9SID1+Nn3gs9f+7CmgtXnWH4Eaucdf/0JJFNTAmJTYIHuhQffgSb41xBPW9HX4H35cYhfbBRWOOF7FlJGTF31ebjefSrq58+IEpL4CobUaJjigy2ugFqIIsYIXonJAIiidC16WGQo/fUo44zLDElkhyt2iOSIPFao4HwZCahikR/ilOSE+cwHJBbcUWIklC5OSWKCYab1UQC98dWemQTWaSCCSz7k3Edx9jmmIDlKSUWVP1Z3Hp99+qlJoGkOyuOclsCZaKJ/BpLeh5WWGamfksZZKaCHwtSpp5N+2uBFpZZ6aiSj9taqnKtC8ioIs5oa6xy1qnqrI6/2uusjs1L6K7CTejqsrMXSeiyrrUK67CKaPivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuOEEA","scale":1}
+nodes:{"type":"grid","size":[104,120],"pos":[-120,-16],"format":"iiii","value":{"i":[1,2,3,4,5,6,7,8],"t":[6,3,6,4,5,6,0,1],"x":[10,36,56,69,109,118,137,174],"y":[19,55,33,54,33,52,39,65]},"row":8}
+d:{"type":"canvas","size":[126,18],"pos":[80,-48],"image":"%%IMG3AH4AEgZAgHAYKBaHyCTAeFQqmQHnkylNQqvIK1aorRZRYHDTOeZGpUWSWl22BlZweDsbMNntc2JAxOfnzSeBgX8BYYZiZF5ka4xsZHGQcmR3lHhkfZh+ZIKcg0+HoGdEW6JcjaelS5GrqXWVla2Zsq2dtaWFoKGjW0tEp7+ib5HCkMGvx8GyysG1zcGHQ4fBbk++v43BrKxEd67d3USYUOJEzp1nuGEA6tK91dUB18CqwyvEcVHeJvr7lPnLy5Y0OxHA1hJo7AzlSwSPEZQ0a/JpuyeJnzeLS2aJ2JMpH6eHBQXlQwhmnUJ3VhLFiyiPhMRi+IYtgfXNX8aOG2cJtOXsoCGTKIAiSsVFpcOWL2PKkcmvX9N/4vpwlLpz0MOPPhMGbUcUZZYlR+UltVcP30yaT29KXUsu5MeB6KAJaVc0pV2wLR1xUcrXGE1Y4ZR1LPfWIJdcuuqSspY326ptXF6l5SJ4MJeB57IgDtNqcZbGVh4Xs3LMZpbKmrJg9mRlc9euij9fey3a3qTSryu/xgz7i0LYS1oBhxhxOMU/wWEZ72j8HHAzRngFj86rCxbrXqhU106Ku/Tv4MOLH09+fBA=","scale":1}
+id:{"type":"slider","size":[100,25],"pos":[-88,128],"interval":[0,1024],"value":8,"style":"compact"}
+clear:{"type":"button","size":[60,20],"pos":[243,-73],"script":"bex.2p"}
+dragging:{"type":"slider","size":[100,25],"pos":[-91,164],"interval":[-1,1000],"style":"compact"}
+
+{script:bex.0p}
+sz:18,18
+on next_id do id.value: 1+i:id.value end
+on add_node pos t do
+ n: "xy" dict pos
+ n.t:random[7] unless t
+ n.i:next_id[]
+ nodes.row: count nodes.value: nodes.value,table n
+ view[]
+end
+on view do sz:18,18
+ c.clear[]
+ each r in rows nodes.value
+  c.paste[g.copy[(r.t*18),0 sz] r.x,r.y 1]
+ end
+end
+
+{end}
+
+{script:bex.1p}
+on click pos do
+ hit: -1 unless first extract index
+  where value < first sz from 
+   each r in rows nodes.value
+    mag pos - r.x,r.y
+   end
+ if hit > -1 nodes.row: hit
+ else
+  add_node[pos - sz/2]
+ end
+end
+
+on drag pos do
+ nodes.value: update x:pos[0] y:pos[1] where index=nodes.row from nodes.value
+ view[]
+end
+
+on release pos do
+ 
+end
+{end}
+
+{script:bex.2p}
+on click do
+ id.value:0
+ nodes.value: select where 0 from nodes.value
+ view[]
+end
+
+{end}
+
