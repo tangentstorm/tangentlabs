@@ -1,0 +1,34 @@
+{deck}
+version:1
+card:1
+size:[512,342]
+name:"bex-graph.deck"
+patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+ESfCwgi8mzADOG4t04iEpZIiwTiIx3CPOGhuYIMMLSDhBRCIajOLMCQBcQUgMosgjCzfvDBQQ"
+
+{card:home}
+
+{card:card1}
+image:"%%IMG3AgABVgZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4HAzIC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcJiZMPGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiw4bgAECFuiShRC8ViWS5OpLgxYseKDl9BREGSJEgqJwGklAKRhEuXK6NAXEGTZkwoEE3o1HnzCUQRQIH2dALxhFGjQ0OOClCyqckqGI1ElfmyKkyoNbPahLqzK0+oQcMKhXq0LFKlqpg6dTqV6JK2Y6zKhcskgNa7dN963ZtXSQCxgPsmCWC2sGC0nNSuZStzDFW5c2XixStzr+XDRf4CDiyzsGfMiDEpJjmEMc7MbUEPCQA5Ms7JWlULCbCTdlfbJmSrDHuRd2fDZnWHljQaBYCSx5uqhsvcZ2vIyyfbje3ztlfcuX1u1ix2uecThIMPD1U8uXHTjqUeWV71YsuX0WOvmJ51+fXa17V3F8E9qPej7oV31niflIccenWtpyBR7T1HQnw10UffVkTdx1N+RAXGH2dEffYZgQU6ZZ55T7ml3olxwecghDZFSF2F92H3VYa8+dedT2UFmCOInhhIGoJvLZiZcyo+x+KE89VXXYx86WejUDd2GNx3wvHISHlCAJngkFwS6eCDkrVYX4SVWXibTJtxiGOOH1rZSXGLoaAbZnN+edVrd1GGE19N4pRmlGt+B6CbPcZZUpWCIfolonkqyZJlZ7L051gsCTogoW8aWuVsg0FlJFaNbqoSpNmh9KeoAhqGKSgjKSfqbFMlVRdr7b2qEpKyviVjrn71x5+tReVo66qLaGQRR8d6lCyvYyCbkbNYGEvstNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd+7556CHLvropJdu+umop6766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx76MCRBAA=="
+script:"card1.0"
+{widgets}
+x0:{"type":"button","size":[24,20],"pos":[24,80],"font":"mono","text":"x0","shortcut":"0"}
+g:{"type":"canvas","size":[18,18],"pos":[24,40],"pattern":32,"show":"transparent","image":"%%IMG2ABIAEiD/IEU=","draggable":1,"scale":1}
+c:{"type":"canvas","size":[126,18],"pos":[24,104],"image":"%%IMG3AH4AEgZAgHAYKBaHyCTAeFQqmQHnkylNQqvIK1aorRZRYHDTOeZGpUWSWl22BlZweDsbMNntc2JAxOfnzSeBgX8BYYZiZF5ka4xsZHGQcmR3lHhkfZh+ZIKcg0+HoGdEW6JcjaelS5GrqXWVla2Zsq2dtaWFoKGjW0tEp7+ib5HCkMGvx8GyysG1zcGHQ4fBbk++v43BrKxEd67d3USYUOJEzp1nuGEA6tK91dUB18CqwyvEcVHeJvr7lPnLy5Y0OxHA1hJo7AzlSwSPEZQ0a/JpuyeJnzeLS2aJ2JMpH6eHBQXlQwhmnUJ3VhLFiyiPhMRi+IYtgfXNX8aOG2cJtOXsoCGTKIAiSsVFpcOWL2PKkcmvX9N/4vpwlLpz0MOPPhMGbUcUZZYlR+UltVcP30yaT29KXUsu5MeB6KAJaVc0pV2wLR1xUcrXGE1Y4ZR1LPfWIJdcuuqSspY326ptXF6l5SJ4MJeB57IgDtNqcZbGVh4Xs3LMZpbKmrJg9mRlc9euij9fey3a3qTSryu/xgz7i0LYS1oBhxhxOMU/wWEZ72j8HHAzRngFj86rCxbrXqhU106Ku/Tv4MOLH09+fBA=","scale":1}
+canvas1:{"type":"canvas","size":[126,18],"pos":[24,104],"image":"%%IMG3AH4AEgZAgHAYKBaHyCTAeFQqmQHnkylNQqvIK1aorRZRYHDTOeZGpUWSWl22BlZweDsbMNntc2JAxOfnzSeBgX8BYYZiZF5ka4xsZHGQcmR3lHhkfZh+ZIKcg0+HoGdEW6JcjaelS5GrqXWVla2Zsq2dtaWFoKGjW0tEp7+ib5HCkMGvx8GyysG1zcGHQ4fBbk++v43BrKxEd67d3USYUOJEzp1nuGEA6tK91dUB18CqwyvEcVHeJvr7lPnLy5Y0OxHA1hJo7AzlSwSPEZQ0a/JpuyeJnzeLS2aJ2JMpH6eHBQXlQwhmnUJ3VhLFiyiPhMRi+IYtgfXNX8aOG2cJtOXsoCGTKIAiSsVFpcOWL2PKkcmvX9N/4vpwlLpz0MOPPhMGbUcUZZYlR+UltVcP30yaT29KXUsu5MeB6KAJaVc0pV2wLR1xUcrXGE1Y4ZR1LPfWIJdcuuqSspY326ptXF6l5SJ4MJeB57IgDtNqcZbGVh4Xs3LMZpbKmrJg9mRlc9euij9fey3a3qTSryu/xgz7i0LYS1oBhxhxOMU/wWEZ72j8HHAzRngFj86rCxbrXqhU106Ku/Tv4MOLH09+fBA=","scale":1}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"card1.1","pattern":42,"style":"plain","value":"# edit the prototype\n\narne: \"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\"\neach rgb i in extract \"%H\" parse value from \" \" split pal: arne\n  patterns[32+i]: rgb\nend"}
+
+{script:card1.0}
+HI:32 LO:44 # colors in arne palette
+on click do
+  if me.name[0]="x"
+    me.pattern: if me.pattern=HI LO else HI end
+    me.show: if me.pattern=LO "invert" else "solid" end
+  end
+end
+{end}
+
+{script:card1.1}
+on run text do eval[text 0 1] end
+
+{end}
+
