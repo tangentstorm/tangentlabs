@@ -1,0 +1,99 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+name:"typing.deck"
+
+{card:game}
+script:"game.0"
+{widgets}
+bg:{"type":"slider","size":[48,25],"pos":[8,309],"show":"none","interval":[0,100],"value":12,"style":"bar"}
+words:{"type":"field","size":[222,113],"pos":[275,218],"show":"none","scrollbar":1,"value":"the of and a to in is you that it he was for on are as with his they I at be this have from or one had by words but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been called who am its now find long down day did get come made may part end click drag view change range unless nil card pos size"}
+c:{"type":"canvas","size":[512,342],"pos":[0,0],"volatile":1,"script":"game.1","pattern":0,"border":0,"scale":8}
+pause:{"type":"button","size":[46,12],"pos":[460,46],"script":"game.2","font":"body","show":"transparent","text":"pause","style":"check","value":1}
+speed:{"type":"slider","size":[46,12],"pos":[460,25],"locked":1,"interval":[1,10],"value":9,"style":"bar"}
+inputCopy:{"type":"field","size":[116,37],"pos":[117,178],"locked":1,"volatile":1,"show":"invert"}
+input:{"type":"field","size":[176,33],"pos":[107,193],"font":"menu","pattern":38,"style":"plain"}
+w:{"type":"button","size":[60,20],"pos":[23,188],"volatile":1,"pattern":39,"text":"out"}
+
+{script:game.0}
+bgN:colors.red
+bgY:colors.green
+bgX:colors.white
+bgF:colors.black
+
+on loop do
+ inputCopy.text:"" new_word[] 0
+ setbg[bgX "type the words" 1]
+end
+
+on setbg x m p do
+ c.pattern:x
+ c.rect[0,0 c.size]
+ c.pattern:0 unless p
+ c.text[m (0,-c.scale)+c.lsize/2 "center"]
+ bg.value:20
+end
+
+on new_word do
+ w.text: random[" " split words.text]
+ w.pos: random[first card.size-w.size],0
+end
+
+on good do
+ r:random[" " split "good great correct yes awesome"]
+ "" fuse r,"!"
+end
+
+on nope do
+ random["try again", " " split "whoops nope sorry nah wrong"]
+end
+
+on run do
+ t: last extract where !value="" from " " split input.text
+ inputCopy.text:t input.text:""
+ if t=w.text
+  setbg[bgY good[]] new_word[]
+ else
+  setbg[bgN nope[]]
+ end
+end
+
+on view do
+ # bg just constantly loops
+ if !bg.value:bg.value-1 setbg[bgX] bg.value:20 end
+ if (speed.value>0) & !(10-speed.value) % bg.value
+  if (last card.size) < last w.pos: w.pos + 0,1
+   setbg[bgF random[">8(", "FAIL"]] new_word[]
+  end
+ end
+end
+
+{end}
+
+{script:game.1}
+on drag pos do
+ 
+end
+
+
+{end}
+
+{script:game.2}
+on click do
+ bg.animated: !speed.locked: me.value
+end
+{end}
+
+{card:home}
+{widgets}
+button1:{"type":"button","size":[60,20],"pos":[205,215],"script":"home.0","text":"play"}
+c:{"type":"canvas","size":[274,63],"pos":[109,49],"locked":1,"border":0,"image":"%%IMG3AEUAEAZAkHBILBqPyKRyyWw6n9CodEodlkrOa1L75FK9S3BRXA1fuWes8LxWg9MgNDbtnsPbbGs9vkfz/2N7f3KDfYJtiIRveYGIhYl2kI6OWnSRempGhI+PioeAlZmTfGSghpKeo6lroJxEm6Gop4CYcl55m691bHSSpoxlUrHCosFMmcNNyMXGZqXKwM3SUUE=","scale":4}
+field1:{"type":"field","size":[136,75],"pos":[179,121],"locked":1,"border":0,"value":"words fall from the sky\n\n          type them fast\n\nor you will die\n\n-- mavis B."}
+
+{script:home.0}
+on click do
+  go["game"]
+end
+{end}
+
