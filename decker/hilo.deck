@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:0
+card:1
 size:[512,342]
 name:"dfc2026.deck"
 
@@ -97,5 +97,47 @@ end
 on click do
  restart[]
 end
+{end}
+
+{card:card1}
+{widgets}
+secret:{"type":"slider","size":[100,25],"pos":[181,110],"interval":[0,100],"value":80,"style":"bar"}
+msg:{"type":"field","size":[100,20],"pos":[180,68],"border":0,"align":"center","value":"too high"}
+guess:{"type":"slider","size":[100,25],"pos":[181,148],"script":"card1.0","interval":[0,100],"value":83,"style":"compact"}
+
+{script:card1.0}
+on change val do
+ msg.text: if guess.value = secret.value
+  "you win!"
+ else
+  "no"
+ end
+end
+
+on change val do
+ msg.text: if guess.value = secret.value > "too high"
+ else if guess.value < secret.value "too low"
+ else "you win!" end
+ end
+end
+
+on change val do
+ msg.text: if guess.value = secret.value > "too high"
+ elseif guess.value < secret.value
+  "too low"
+ else
+  "you win!"
+ end
+end
+
+G:guess.value S:secret.value
+on change val do
+ msg.text:
+  if     G>S "too high"
+  elseif G<S "too low"
+  else       "you win!"
+ end
+end
+
 {end}
 
