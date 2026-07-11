@@ -1,0 +1,101 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+name:"dfc2026.deck"
+
+{card:hilo}
+script:"hilo.0"
+{widgets}
+btnHi:{"type":"button","size":[60,20],"pos":[316,193],"script":"hilo.1","pattern":34,"text":"too high","shortcut":"h"}
+btnLo:{"type":"button","size":[60,20],"pos":[139,193],"script":"hilo.2","pattern":39,"text":"too low","shortcut":"l"}
+btnOk:{"type":"button","size":[60,20],"pos":[227,193],"script":"hilo.3","pattern":40,"text":"correct!","shortcut":"c"}
+field1:{"type":"field","size":[93,20],"pos":[209,106],"locked":1,"border":0,"style":"code","align":"center","value":"Computer Guess"}
+c:{"type":"canvas","size":[320,32],"pos":[96,56],"locked":1,"volatile":1,"pattern":40,"border":0,"scale":1}
+field2:{"type":"field","size":[100,20],"pos":[202,34],"locked":1,"border":0,"style":"code","align":"center","value":"Possible Values"}
+minval:{"type":"slider","size":[60,25],"pos":[115,127],"interval":[0,255],"format":"%02H","style":"bar"}
+maxval:{"type":"slider","size":[60,25],"pos":[339,127],"interval":[0,255],"value":255,"format":"%02H","style":"bar"}
+guess:{"type":"slider","size":[60,25],"pos":[228,127],"interval":[0,255],"value":127,"format":"%02H","style":"bar"}
+field3:{"type":"field","size":[60,20],"pos":[115,106],"locked":1,"border":0,"style":"code","align":"center","value":"min"}
+field4:{"type":"field","size":[60,20],"pos":[339,106],"locked":1,"border":0,"style":"code","align":"center","value":"max"}
+button1:{"type":"button","size":[60,20],"pos":[228,300],"script":"hilo.4","text":"restart"}
+decimal:{"type":"field","size":[61,20],"pos":[227,155],"locked":1,"volatile":1,"border":0,"style":"plain","align":"center"}
+field5:{"type":"field","size":[92,20],"pos":[210,242],"locked":1,"border":0,"style":"plain","align":"center","value":"Turns Left"}
+turns:{"type":"slider","size":[60,25],"pos":[228,263],"locked":1,"volatile":1,"interval":[0,7],"format":"%i","style":"bar"}
+
+{script:hilo.0}
+on restart do
+ minval.value: 0
+ maxval.value: 255
+ turns.value: 7
+ change[]
+end
+
+on view do
+ c.clear[] c.pattern: 44
+ each i in (range 16),255 c.rect[(32+i*16),8 1,16] end 
+ c.text["00" 18,16] c.text["FF" (36+255),16]
+ on t x do (32+x),15 end
+ c.pattern:1 c.line[lo:t[minval.value] hi:t[maxval.value]]
+ ofs:0,8 sz:1,16
+ c.pattern:btnLo.pattern c.rect[lo-ofs sz]
+ c.pattern:btnHi.pattern c.rect[hi-ofs sz]
+ # draw guess last so it covers the other if same
+ c.pattern:btnOk.pattern c.rect[t[guess.value]-ofs sz]   
+ decimal.text: "(%i)" format guess.value
+end
+
+on turn w v do
+ tween[w v]
+ if turns.value
+   turns.value: turns.value - 1
+ else
+   alert["player wins!"]
+ end
+end
+
+on tween w v do
+ # w: widget (minval or maxval) v: new value
+ n: 10
+ step: (v - w.value)/n
+ each i in range n
+   w.value: w.value + step
+   change[] sleep[1]
+ end
+ w.value: v change[]
+end
+
+on change do
+ guess.value: floor 0.5 * minval.value + maxval.value
+ view[]
+end
+{end}
+
+{script:hilo.1}
+on click do
+ turn[maxval guess.value-1]
+end
+
+{end}
+
+{script:hilo.2}
+on click do
+ turn[minval guess.value+1]
+end
+
+
+{end}
+
+{script:hilo.3}
+on click do
+ alert["computer guessed in %i turns!" format 7-turns.value]
+ restart[]
+end
+{end}
+
+{script:hilo.4}
+on click do
+ restart[]
+end
+{end}
+
