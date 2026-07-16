@@ -1,0 +1,341 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+script:"0"
+name:"hilo-tutor.deck"
+
+{script:0}
+
+on is_special card do
+ "special" in keys card.widgets
+end
+
+
+{end}
+
+{card:welcome}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":"This deck will teach you how to make the simple guessing game you see above.\n\nIn the game, the computer will think of a secret number, and you will try to guess it. After each guess the computer will tell you if you are correct, too high, or too low.\n"},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"locked":1},"prevBtn":{"size":[60,27],"pos":[445,83],"show":"none"},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{},"prev":{"value":"-"}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+secret:{"type":"slider","size":[100,25],"pos":[11,31],"show":"none","interval":[0,100],"value":45}
+guessBtn:{"type":"button","size":[60,20],"pos":[272,104],"text":"guess"}
+guess:{"type":"contraption","size":[100,25],"pos":[158,101],"show":"transparent","def":"hybridSlider","widgets":{"compact":{},"bar":{}}}
+remaining:{"type":"slider","size":[175,25],"pos":[158,65],"locked":1,"interval":[0,7],"value":7,"format":"remaining guesses: %i","style":"bar"}
+tryAgain:{"type":"button","size":[92,26],"pos":[208,137],"script":"welcome.1","pattern":39,"show":"none","text":"try again?"}
+msg:{"type":"field","size":[511,20],"pos":[1,31],"script":"welcome.2","font":"menu","pattern":44,"show":"transparent","border":0,"style":"plain","align":"center","value":"guess the number"}
+
+{script:welcome.0}
+on view do reset_game[] end
+
+on reset_game do
+ guessBtn.locked:0
+ tryAgain.show:"none"
+ secret.value: random[100] guess.value:0
+ say["guess the number"]
+ remaining.value: 7
+end
+
+on say text do
+ msg.text: text
+end
+
+on check do
+ g: guess.value
+ s: secret.value
+ if g<s     say["too low"]
+ elseif g>s say["too high"]
+ else       say["you guessed it!"]
+ end
+end
+
+on click do
+ remaining.value: remaining.value - 1
+ if remaining.value
+  check[]
+ else
+  say[if guess.value=secret.value "you guessed it!" else "game over!" end]
+  guessBtn.locked:1
+  tryAgain.show:"solid"
+ end
+end
+
+
+{end}
+
+{script:welcome.1}
+on click do
+ reset_game[]
+end
+{end}
+
+{script:welcome.2}
+on change val do
+ 
+end
+{end}
+
+{card:running code}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":"The box to the right lets you run code in the Lil programming language.\n\nPress the \"run\" button to run the code."},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"alert[\"hello, world!\"]"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131],"show":"invert"},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:editing-code}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["On some cards, the code field will be editable.\n\nThe field background will turn white on these cards, and you can click inside it to edit.\n\nWhen editing in the code field, you can also press ","shift-enter"," to run your code."],"font":["","body",""],"arg":["","",""],"pat":[1,33,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"value":"alert[\"change me!\"]"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:pick-a-number}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["We will create a \"slider\"  widget to hold the secret number.\n\nIn Decker, all data lives inside a widget  (at least for beginners), and Sliders hold numbers.\n\n- Click ","\"Tool\""," > ","\"Widgets\"","\n- Click ","\"Widgets\""," >"," \"New Slider\"","\n- Click ","\"Tool\""," >"," \"Interact\"","\n\nRunning the code should causethe slider's value to jump around."],"font":["","","","","","","","","","","","",""],"arg":["","","","","","","","","","","","",""],"pat":[1,44,1,44,1,44,1,44,1,44,1,44,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"slider1.value: random[100]"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131],"show":"invert"},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:widget names}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["","From now on, when you visit a new card for the first time, we will copy your work over from the previous card.","\n\nWhenever we use a widget as a variable like this, we should give it a good name. Using the edit tool, double click the slider and change its name to ","secret",".\n\nThen switch back to interact and double check that running the code here changes its value."],"font":["","","","mono",""],"arg":["","","","",""],"pat":[1,40,1,33,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"secret.value: random[100]"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131],"show":"invert"},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:"if" statements}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["Add a second slider and call it ","guess",".\n\nWe can use the ","if"," statement to test whether the guess is too high, too low, or exactly the same.\n\nWe can introduce variables like ","g"," and ","s"," to avoid cluttering our code with repeated text."],"font":["","","","","","","","",""],"arg":["","","","","","","","",""],"pat":[1,33,1,33,1,33,1,33,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"g: guess.value\ns: secret.value\n\nif g<s\n alert[\"too low\"]\nelseif g>s\n alert[\"too high\"]\nelse\n alert[\"you guessed it!\"]\nend\n"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131],"show":"invert"},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:click events}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["Let's move our logic into the game itself.\n\nThe code is now wrapped with ","on click do ... end"," This is an event handler. Notice it no longer does anything when you click \"run\". \n\nAdd a button widget to the game, then copy the code to the button's script.\n\nOnce the script is in place, clicking the button will cause it to run."],"font":["","",""],"arg":["","",""],"pat":[1,33,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"value":"on click do\n g: guess.value\n s: secret.value\n \n if g<s\n  alert[\"too low\"]\n elseif g>s\n  alert[\"too high\"]\n else\n  alert[\"you guessed it!\"]\n end\nend"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:reseting the secret}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["Add this code to the card script to reset the secret value each time the card is visited.\n\nYou can edit the script by clicking ","\"Card\""," > ","\"Script\""," from the menu.\n\nThe view event triggers whenever the card is redrawn - as when you switch cards, or switch back to the Interact tool."],"font":["","","","",""],"arg":["","","","",""],"pat":[1,44,1,44,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"value":"on view do\n secret.value: random[100]\nend\n"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:hiding the secret}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["Guessing a value in plain sight isn't very challenging.\n\nHide the secret by selecting it with the widget tool and clicking ","\"Widgets\""," >"," \"Show None\"\n\n","If you want to see the value of a hidden widget, you can  inspect it in the listener, by pressing ","Ctrl-L"," on your keyboard, or clicking ","\"Decker\""," >"," \"Listener\""," from the menu.\n\nFrom there, type any Lil expression and press ","Shift-Enter"," to run, or ","Esc"," to return to the card."],"font":["","","","","","","","","","","","","","",""],"arg":["","","","","","","","","","","","","","",""],"pat":[1,44,1,44,1,44,1,44,1,44,1,44,1,44,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"value":"# run in the listener\nsecret.value\n"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:slider styles}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["You may have noticed that you can change the way a slider is drawn.\n\nThe ","horiz"," and ","vert"," styles look like scrollbars (vert will look funny if you don't resize it).\n\nThe ","bar"," style shows the value and allows quickly dragging back and forth.\n\nThe ","compact"," style also shows the value, and allows fine tuning by clicking the arrow buttons on each side."],"font":["","","","","","","","",""],"arg":["","","","","","","","",""],"pat":[1,33,1,33,1,33,1,33,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"s: random[\n \"horiz\", \"vert\",\"bar\",\"compact\"]\n\nguess.style: s\nalert[s]"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131],"show":"invert"},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:a custom slider}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["For our game input, it would be nice to combine the ","bar"," and ","compact"," styles into a single slider.\n\nDecker doesn't provide this option, but we can compensate by creating a second slider, and keeping  them in sync through their scripts.\n\nGive ","guess"," the ","compact"," style, and create a new slider named ","guess_bar"," with the ","bar"," style. Populate their scripts with the given code.\n\nYou can then resize ","guess_bar"," and place it directly on top of the ","guess"," widget."],"font":["","","","","","","","","","","","","","","","",""],"arg":["","","","","","","","","","","","","","","","",""],"pat":[1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"value":"# script for guess:\non change val do\n guess_bar.value: val\nend\n\n# script for guess_bar\non change val do\n guess.value: val\nend"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:contraptions}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"animated":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["This deck includes a contraption that provides a custom widget like the slider we just made.\n\nDelete the old ","guess"," and ","guess_bar",", and replace it with a new ","hybridSlider"," contraption called ","guess",". From the Widgets tool:\n \n- Click ","\"Widgets\""," > ","\"New Contraption...\"","\n- Select  ","\"hybridSlider\"","\n- Click ","\"Create\"\n","\nYou can explore how it works under the ","\"File\""," > ","\"Prototypes\""," menu."],"font":["","","","","","","","","","","","","","","","","","","","",""],"arg":["","","","","","","","","","","","","","","","","","","","",""],"pat":[1,33,1,33,1,33,1,33,1,44,1,44,1,44,1,44,39,44,39,44,39]}},"nextBtn":{"size":[60,26],"pos":[445,47]},"cardName":{},"code":{"size":[218,137],"value":"guess.value: random[100]"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:the end}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"welcome.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,171],"pos":[0,171],"animated":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["Now it's time to make the game your own.\n\nGiven high/low feedback after each guess, it should always be possible to guess a number between 0 and 100 in 7 guesses. Consider adding another slider widget to keep score.\n\nYou can also use a field widget instead of ","alert[]"," to display messages.\n\nYou can inspect the script of the first card in this deck for more example code."],"font":["","",""],"arg":["","",""],"pat":[1,33,1]}},"nextBtn":{"size":[60,26],"pos":[445,47],"show":"none"},"cardName":{},"code":{"size":[218,137],"value":"on view do\n # (existing code...)\n counter.value: 7\n counter.format: \"%i guesses left\"\nend\n\non click do\n counter.value: counter.value - 1\n if counter.value # ...\n else alert[\"game over\"]\n end\nend\n\n"},"prevBtn":{"size":[60,27],"pos":[445,83]},"runBtn":{"size":[60,27],"pos":[445,131]},"next":{"value":"-"},"prev":{}}}
+special:{"type":"field","size":[37,15],"pos":[466,31],"show":"none"}
+
+{card:index}
+script:"index.0"
+{widgets}
+grid1:{"type":"grid","size":[354,306],"pos":[11,30],"volatile":1,"widths":[33,184]}
+special:{"type":"field","size":[67,15],"pos":[393,32],"show":"none"}
+button1:{"type":"button","size":[60,20],"pos":[395,56],"script":"index.1","text":"go"}
+
+{script:index.0}
+# meta card
+
+on view do
+ grid1.value: select
+  index
+  name: value..name
+  scripted: !!value..script
+  special: !!value..widgets.special
+ from deck.cards
+end
+
+on cards_to_wipe do
+ extract value..name
+ where !value..widgets.special
+ from deck.cards
+end
+
+# run this manually to completely reset the tutorial
+on wipe_cards do
+ each c in deck.cards@cards_to_wipe[]
+  c.remove["tutor1" drop c.widgets]
+  c.script:""
+ end
+end
+
+{end}
+
+{script:index.1}
+on click do
+ go[grid1.rowvalue.name]
+end
+
+{end}
+
+{contraption:tutor}
+size:[512,128]
+resizable:1
+margin:[5,35,4,8]
+description:"A contraption for creating interactive decker tutorials."
+version:0.1
+image:"%%IMG2AgAAgC7/Lv8uAif/J/8nAgH/Af8B/wH/AQQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMAH/Af8B/wH/AQQn/yf/JwIl/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/JcI="
+script:"tutor.0p"
+attributes:{"name":["body","code","next","prev"],"label":["body","code","next","prev"],"type":["rich","code","string","string"]}
+{widgets}
+body:{"type":"field","size":[210,93],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"value":"..."}
+nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
+cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
+code:{"type":"field","size":[218,94],"pos":[222,32],"pattern":47,"show":"none","border":1,"style":"code"}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,62],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,98],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
+prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+
+{script:tutor.0p}
+on get_body do body.value end  on set_body x do body.value: x end
+on get_code do code.text end   on set_code x do code.text: x end
+on get_next do next.text end   on set_next x do next.text: x end
+on get_prev do prev.text end   on set_prev x do prev.text: x end
+
+on view do
+ cardName.text: deck.card.name
+ code.locked: me.locked
+ sh: if code.text
+       if me.locked "invert" else "solid" end
+     else "none" end
+ code.show: sh runBtn.show: sh
+ # "-" is placeholder awaiting this fix:
+ # https://github.com/JohnEarnest/Decker/commit/f591e823a
+ nextBtn.show: if !"-"=next.text "solid" else "none" end
+ prevBtn.show: if !"-"=prev.text "solid" else "none" end
+end
+
+on next_card_name do
+ if next.text = "Next"
+  cn:keys deck.cards
+  ci:first extract index where value=deck.card.name from cn
+  cn[ci+1]
+ else
+  next.text
+ end
+end
+
+on no_script c do
+ (c.script="on view do\n\nend") |!c.script
+end
+
+on copy_to_next do
+ card: deck.card
+ if !is_special[card]
+  nc: deck.cards[next_card_name[]]
+  if !is_special[nc]
+   tw: "tutor1"
+   if ! count tw drop nc.widgets
+    each w in tw drop card.widgets nc.add[w] end
+   end
+   if no_script[nc] nc.script: card.script end
+  end
+ end
+end
+
+on run text do
+ d:deck.card.widgets
+ d.card: deck.card
+ eval[text d 1]
+end
+
+{end}
+
+{script:tutor.1p}
+on click do
+ copy_to_next[]
+ go[next.text "SlideLeft"]
+end
+{end}
+
+{script:tutor.2p}
+on click do
+ go[prev.text "SlideRight"]
+end
+{end}
+
+{script:tutor.3p}
+on click do
+ d:deck.card.widgets
+ d.card:deck.card
+ eval[code.text d 1]
+end
+
+{end}
+
+{contraption:hybridSlider}
+size:[100,25]
+margin:[19,6,17,6]
+description:"Provides a slider with a combination of the \"bar\" and \"compact\" styles."
+script:"hybridSlider.0p"
+template:"on change val do\n \nend"
+attributes:{"name":["minv","maxv","format","value"],"label":["min value","max value","format","value"],"type":["number","number","string","number"]}
+{widgets}
+compact:{"type":"slider","size":[100,25],"pos":[0,0],"script":"hybridSlider.1p","interval":[0,100],"value":53,"style":"compact"}
+bar:{"type":"slider","size":[74,25],"pos":[13,0],"script":"hybridSlider.2p","interval":[0,100],"value":53,"style":"bar"}
+
+{script:hybridSlider.0p}
+on get_value do bar.value end       on set_value x do bar.value: x end
+on get_format do bar.format end     on set_format x do bar.format: x end
+on get_minv do bar.interval[0] end  on set_minv x do bar.interval:x,get_minv[] end
+on get_maxv do bar.interval[1] end  on set_maxv x do bar.interval:get_maxv[],x end
+
+on view do
+ compact.interval: bar.interval
+ compact.value:bar.value
+end
+
+{end}
+
+{script:hybridSlider.1p}
+on change val do
+ bar.value:val
+ card.event["change" val]
+end
+
+{end}
+
+{script:hybridSlider.2p}
+on change val do
+ compact.value:val
+ card.event["change" val]
+end
+
+{end}
+
