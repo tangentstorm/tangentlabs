@@ -1,0 +1,205 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+script:"0"
+name:"tic-tac-toe-part1.deck"
+
+{script:0}
+on navigate dir do
+ 
+end
+{end}
+
+{card:let's make tic tac toe!}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHDiHhcGDLNYgPEiwoZ+FBhVCdEhRD8SEai5W3GhHY8aJHEPG8ZiGpMiTEhemRIiy5UeVL1m6nFnG5BmbNHN2wVkTpM6fXHiSEQq0qBSiYpAaXcpEKRinTKMageqFqtSrVoP6vMo1SdYtX7sWDZuFrFidZq+kPTtzbRW3bFHCnTI3bsi6UfDaraj3Sd+9Df82EQxYIOElhwv/S+x1q+KojJFEfqxv8lTHlI1aLrI5c73OQ0B7lie6RenR70qfRt1ONWbWNF3DhP1TtkzaaF8P1Y37pG2GvXP+jhg8Nu+kx4vzTf6UufLAzqtGf254utbZ1Mld3M69O/AWAMKLBxDau/nzQ8aLL3++/fbsvtzL96k+PPv589PXv4/fPfxe/eGnn3r8BWjegOMVaGB3//GyoH9C1EeeEA+2h+B6FFZ4YIO6aLghePtl6CF3F9on4oircdgIiiRGGKJpLJIkoYIxqphLjDK+iCN9Ou54m43dDIcRkNBhd5N1RNojZJJF/nikkUwuhqQWKUZZzZJWBoRlllJC2ZOXXOazZZj8jElmZVOWleaZ6pjJ5j1uvvnZmmrRKWc5cd5Jmp1v8alnOHn+mZqfdBEqaJCG5pXoodoEyug6jj6aTqSSnkNppXgu6pemmE5zaafifAoqOKKO6k2ppnKDaqqNcjqYq6wus2qs18xK65WwIpbrrcbYyqs0vv4KTbDCOkNsscwci6wyyi6LTLPO9rprY2BGW+u0kmFrbYfaXlbttqz4eNuMJ/pY4oQwijskuImoSxyIBJa747k0ssjuIu4OSW664tIrL473KpKvv/ya62K8Bc8bMCIDH5zgvzU6jGHCAC98SMPwPkxxxBlPjLHFhGC8r8g9qguyK9CezO23YVSpcikpv3xLzDLXQnPNs9yMcyw67/xKzz63AnTQqwxNdCpGH31K0krD3C1nTzctCtNSTx21glUfQ3XWn2zNdSdef71J2GJnQnbZl5yNdiVqrz1J225HAnfcj8xN94pX/3u3g3lTvPcudv/dbt8uCz44y80hbni4hPe9OCOBPx5y44pLjkrklgeCeeZ/bM55H55/vkfooudBeul3nI766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxiMEAQ=="
+script:"let's make tic tac toe!.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":"This deck will show you how to make a simple 2-player version of tic-tac-toe.\n\nClick a square in the grid to place the current symbol, and press the clear button to start over."},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126]},"prevBtn":{"size":[60,25],"pos":[445,78],"show":"none"},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{},"prev":{"value":""}}}
+c5:{"type":"canvas","size":[40,40],"pos":[277,85],"locked":1,"show":"transparent","border":0,"scale":1}
+c7:{"type":"canvas","size":[40,40],"pos":[227,135],"locked":1,"show":"transparent","border":0,"scale":1}
+c6:{"type":"canvas","size":[40,40],"pos":[177,135],"locked":1,"show":"transparent","border":0,"scale":1}
+c2:{"type":"canvas","size":[40,40],"pos":[277,35],"locked":1,"show":"transparent","border":0,"scale":1}
+c1:{"type":"canvas","size":[40,40],"pos":[227,35],"locked":1,"show":"transparent","border":0,"scale":1}
+c0:{"type":"canvas","size":[40,40],"pos":[177,35],"locked":1,"show":"transparent","border":0,"scale":1}
+c3:{"type":"canvas","size":[40,40],"pos":[177,85],"locked":1,"show":"transparent","border":0,"scale":1}
+c4:{"type":"canvas","size":[40,40],"pos":[227,85],"locked":1,"show":"transparent","border":0,"scale":1}
+which:{"type":"field","size":[60,20],"pos":[390,60],"show":"none","value":"cx"}
+c8:{"type":"canvas","size":[40,40],"pos":[277,135],"locked":1,"show":"transparent","border":0,"scale":1}
+clearBtn:{"type":"button","size":[60,20],"pos":[390,150],"locked":1,"script":"let's make tic tac toe!.1","pattern":44,"text":"clear"}
+special:{"type":"field","size":[100,40],"pos":[10,140],"locked":1,"show":"none","style":"plain","value":"this prevents my script from clearing the page."}
+turnLbl:{"type":"field","size":[60,20],"pos":[390,30],"locked":1,"font":"menu","show":"transparent","border":0,"align":"center","value":"turn"}
+co:{"type":"canvas","size":[37,37],"pos":[400,60],"locked":1,"show":"none","border":0,"image":"%%IMG3ACUAJQZAgHBIHI6OyOSoyGwyldCkc2pMkq5YrJL6tGa/WikX4AWbr+IpEhw9so9qd7at/CKb6/C9m0fDi3J+f3GBJINCfXtjZIGKjHqLRIlLiI2UkVWQj4KYkpaMI2GdgKGClpejoHqlhqipm62fr5mmorOVq7a3p6yHr7y6s8B+t7i1nMK8va6dp7COmJOVy7/Ll87NstOai5OuhWlOZa18c+FVfbF4hbF0rMjr76Z1dr588mfm9vHsZ1vR4+pBA+huYKqCi4IA","scale":1}
+cx:{"type":"canvas","size":[37,37],"pos":[400,60],"locked":1,"show":"transparent","border":0,"image":"%%IMG3ACUAJQZAAKBEFBqPyKSSWDIyi8qo9NlknpjS7NFKPXmx2inRe32SwWGk9Vtcl5tp55gNH87fcXvpDJXv6WluaFt3g0uFfUmCiWqIdVGLj358kpCOjX94cZGTgHl6lKCen6Jvl6Sdb6GohJmujKylo7Gtq7S1ZJq3pa+VpJG2qJGnv5ecn8e8sGK9mMHMz0LJls3U0amGisS4ulnTyr7Wo99hnOSBjtvFvWPZ63hUu9JPfvL1AEE=","scale":1}
+
+{script:let's make tic tac toe!.0}
+# tic-tac-toe
+
+on turn side do
+ other: if "cx"=which.text "co" else "cx" end
+ which.text: side: other unless side
+ each w in cx,co w.show:"none" end
+ card.widgets[side].show:"transparent"
+end
+
+on click do
+ if !me.name in "cx","co"
+  t:which.text
+  w:card.widgets[t]
+  me.clear[]
+  me.paste[w.copy[]]
+  turn[]
+  clearBtn.locked:0
+ end
+end
+
+{end}
+
+{script:let's make tic tac toe!.1}
+on click do
+ each w in card.widgets
+  if (w.type="canvas") & ! w.name in "cx","co"
+    w.clear[]
+  end
+ end
+ turn["cx"]
+ me.locked: 1
+end
+
+{end}
+
+{card:draw-the-shapes}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKVAWgoMGDCBMqXMiwocOHECNKnEixosWLGDNq3MixYrqOIEOKHEmypMmTKFMW/KiypcuXMGPKnOkRHc2bOHPq3MlTIcueQIMKHUo04s+iSJMqXfryKNOnUKNKNWpzqtWrWJ86zcq1q9eZW7+KHUsWZNiyaNOqbXh2rdu3ZdvCnUv3qty6ePMmvau3r9+dfP8KHty0KuHDiGEGTsy4McbFjiNLdgh5suXLACpj3txYM+fPhD2DHt1XNOnTdE2jXr1WNevXZF3Dnt1VNu3bVm3j3q3VMO/faHUDHy5UOPHjgH0jXz7VOPPnipVDn47UOfXrJa1j325WOvfvN7WDH1/zHPnzYL2jX29SPPv3CN3Dny8/KQuR9wmz2M+f/+X69oGUn2D7MVSgZAAGuNGAfh3okIOMJaggRgzqBSFEF4amHl0VTtRhXh8+FOJfEio1YkMnwpWhRCv6VaKJFKWookYy1vUijBHV6JaODyJ2I449DsYjij5uaGGQBAp42I9LjTjkWk8SqaF5jH0YZVpXSikYk0xVmCVaXy4UplhcdmnQmGShiZCatRmZJJtiwVmQnFiV+RSdXtGJZ25u/nXfnlnpOaU5kQ0I6FWCDmbnhHMiluiWfYKo0KFSPUpipHU5eRiclEa16FApdnqnkoOW4yiG+nEkKlSfAsXjqkBmBCtTrfL05KxIjYnrUrXqdOWuoH7ZYmmYqiWskBYBy2uxYNJI4K3KKtUrTWpGG9SwB2F7KZWSdmTttU5+uyy3meK3aX/9/cfsfOxSRW678GY0bbzDzUvvb/beu1u++t7Gb7+z/QvwawIPvFrBBp+GcMKjLczwZw4/vFnEEqv7bsUDU4wxgutuvJ7GHnfWccjkgUxykRefDK/JKis6csvbsQyziy/PTJ3MNueFc8421swzczv/DFfQQrtFdNFqHY10cD4vDZzSTo8FddRfTU11mylffZ3VWtfZdNcBfw02wWKPfXDZZiuMdtoNr802xG6/PXHccltMaN3PcY33XnTvHZnefhMFeODF9U14YoMf3lPiiieXdeOwMQ45TpJPTlPllsuEeebRPc45aZt/3lLooqdEeuknDaT66qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxja68Y1wjKMc50jHOtrxjnjMox73yMc++vGPgAykIAdJyEIa8pCITKQiF8nIRjrykZCMpCQnSclKWvKSmMykJjfJyU568pOgDKUoR0nKUprylKhMpSpXycpWuvKVWAwC"
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"pattern":22,"def":"tutor","widgets":{"body":{"size":[210,125],"value":"Use the drawing tools to make your X and O shapes on the card background.\n\nTry toggling each of these settings:\n\nDecker > Toolbars\nView > Snap to Grid\nStyle > Color (with a drawing tool selected)\n\nUse a white background if you want transparency later."},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126]},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{},"prev":{}}}
+
+{card:extract canvas widgets}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKVAWgoMGDCBMqXMiwocOHECNKnEixosWLGDNq3MixYrqOIEOKHEmypMmTKFMW/KiypcuXMGPKnOkRHc2bOHPq3MlTIcueQIMKHUo04s+iSJMqXfryKNOnUKNKNWpzqtWrWJ86zcq1q9eZW7+KHUsWZNiyaNOqbXh2rdu3ZdvCnUv3qty6ePMmvau3r9+dfP8KHty0KuHDiGEGTsy4McbFjiNLdgh5suXLACpj3txYM+fPhD2DHt1XNOnTdE2jXr1WNevXZF3Dnt1VNu3bVm3j3q3VMO/faHUDHy5UOPHjgH0jXz7VOPPnipVDn47UOfXrJa1j325WOvfvN7WDH1/zHPnzYL2jX29SPPv3CN3Dny8/KQuR9wmz2M+f/+X69oGUn2D7MVSgZAAGuNGAfh3okIOMJaggRgzqBSFEF4amHl0VTtRhXh8+FOJfEio1YkMnwpWhRCv6VaKJFKWookYy1vUijBHV6JaODyJ2I449DsYjij5uaGGQBAp42I9LjTjkWk8SqaF5jH0YZVpXSikYk0xVmCVaXy4UplhcdmnQmGShiZCatRmZJJtiwVmQnFiV+RSdXtGJZ25u/nXfnlnpOaU5kQ0I6FWCDmbnhHMiluiWfYKo0KFSPUpipHU5eRiclEa16FApdnqnkoOW4yiG+nEkKlSfAsXjqkBmBCtTrfL05KxIjYnrUrXqdOWuoH7ZYmmYqiWskBYBy2uxYNJI4K3KKtUrTWpGG9SwB2F7KZWSdmTttU5+uyy3meK3aX/9/cfsfOxSRW678GY0bbzDzUvvb/beu1u++t7Gb7+z/QvwawIPvFrBBp+GcMKjLczwZw4/vFnEEqv7bsUDU4wxgutuvJ7GHnfWccjkgUxykRefDK/JKis6csvbsQyziy/PTJ3MNueFc8421swzczv/DFfQQrtFdNFqHY10cD4vDZzSTo8FddRfTU11mylffZ3VWtfZdNcBfw02wWKPfXDZZiuMdtoNr802xG6/PXHccltMaN3PcY33XnTvHZnefhMFeODF9U14YoMf3lPiiieXdeOwMQ45TpJPTlPllsuEeebRPc45aZt/3lLooqdEeuknDaT66qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxja68Y1wjKMc50jHOtrxjnjMox73yMc++vGPgAykIAdJyEIa8pCITKQiF8nIRjrykZCMpCQnSclKWvKSmMykJjfJyU568pOgDKUoR0nKUprylKhMpSpXycpWuvKVWAwC"
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":"Copy and paste the icons you drew from the last card (or run the script to copy the whole background).\n\nErase the borders, then turn each symbol into a canvas:\n\nTool > Select\nEdit > Cut (or Copy) Image\nTool > Widget\nEdit > Paste as new Canvas"},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126],"value":"# run to copy the backrgound over\n# from the previous card:\nprev: deck.cards[\"draw-the-shapes\"]\ncard.image: prev.image\n\n# or to clear the background\n# card.image: nil\n\n# Also try edit>tight selection\n# when selecting what to copy."},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{},"prev":{}}}
+
+{card:the draggable canvas approach}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHDiHhcGDLNYgPEiwoZ+FBhVCdEhRD8SEai5W3GhHY8aJHEPG8ZiGpMiTEhemRIiy5UeVL1m6nFnG5BmbNHN2wVkTpM6fXHiSEQq0qBSiYpAaXcpEKRinTKMageqFqtSrVoP6vMo1SdYtX7sWDZuFrFidZq+kPTtzbRW3bFHCnTI3bsi6UfDaraj3Sd+9Df82EQxYIOElhwv/S+x1q+KojJFEfqxv8lTHlI1aLrI5c73OQ0B7lie6RenR70qfRt1ONWbWNF3DhP1TtkzaaF8P1Y37pG2GvXP+jhg8Nu+kx4vzTf6UufLAzqtGf254utbZ1Mld3M69O/AWAMKLBxDau/nzQ8aLL3++/fbsvtzL96k+PPv589PXv4/fPfxe/eGnn3r8BWjegOMVaGB3//GyoH9C1EeeEA+2h+B6FFZ4YIO6aLghePtl6CF3F9on4oircdgIiiRGGKJpLJIkoYIxqphLjDK+iCN9Ou54m43dDIcRkNBhd5N1RNojZJJF/nikkUwuhqQWKUZZzZJWBoRlllJC2ZOXXOazZZj8jElmZVOWleaZ6pjJ5j1uvvnZmmrRKWc5cd5Jmp1v8alnOHn+mZqfdBEqaJCG5pXoodoEyug6jj6aTqSSnkNppXgu6pemmE5zaafifAoqOKKO6k2ppnKDaqqNcjqYq6wus2qs18xK65WwIpbrrcbYyqs0vv4KTbDCOkNsscwci6wyyi6LTLPO9rprY2BGW+u0kmFrbYfaXlbttqz4eNuMJ/pY4oQwijskuImoSxyIBJa747k0ssjuIu4OSW664tIrL473KpKvv/ya62K8Bc8bMCIDH5zgvzU6jGHCAC98SMPwPkxxxBlPjLHFhGC8r8g9qguyK9CezO23YVSpcikpv3xLzDLXQnPNs9yMcyw67/xKzz63AnTQqwxNdCpGH31K0krD3C1nTzctCtNSTx21glUfQ3XWn2zNdSdef71J2GJnQnbZl5yNdiVqrz1J225HAnfcj8xN94pX/3u3g3lTvPcudv/dbt8uCz44y80hbni4hPe9OCOBPx5y44pLjkrklgeCeeZ/bM55H55/vkfooudBeul3nI766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxiMEAQ=="
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":"Here's a very simple way to make the game.\n\nRun the script or use the menus to make the canvas widgets draggable.\n\nThen just make copies of the canvases using the Widget tool.\n\nSince there are 9 squares and \"X\" goes first, you may need up to 5 \"X\" and 4 \"O\" symbols. "},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126],"value":"each w in card.widgets\n if \"canvas\"=w.type\n   w.border:0\n   w.locked:1 w.draggable:1\n   w.show:\"transparent\"\n   # erase border on image itself:\n   # w.pattern:0 w.box[0,0 w.size]\n end\nend\n"},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{},"prev":{}}}
+
+{card:the clickable canvas approach}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHDiHhcGDLNYgPEiwoZ+FBhVCdEhRD8SEai5W3GhHY8aJHEPG8ZiGpMiTEhemRIiy5UeVL1m6nFnG5BmbNHN2wVkTpM6fXHiSEQq0qBSiYpAaXcpEKRinTKMageqFqtSrVoP6vMo1SdYtX7sWDZuFrFidZq+kPTtzbRW3bFHCnTI3bsi6UfDaraj3Sd+9Df82EQxYIOElhwv/S+x1q+KojJFEfqxv8lTHlI1aLrI5c73OQ0B7lie6RenR70qfRt1ONWbWNF3DhP1TtkzaaF8P1Y37pG2GvXP+jhg8Nu+kx4vzTf6UufLAzqtGf254utbZ1Mld3M69O/AWAMKLBxDau/nzQ8aLL3++/fbsvtzL96k+PPv589PXv4/fPfxe/eGnn3r8BWjegOMVaGB3//GyoH9C1EeeEA+2h+B6FFZ4YIO6aLghePtl6CF3F9on4oircdgIiiRGGKJpLJIkoYIxqphLjDK+iCN9Ou54m43dDIcRkNBhd5N1RNojZJJF/nikkUwuhqQWKUZZzZJWBoRlllJC2ZOXXOazZZj8jElmZVOWleaZ6pjJ5j1uvvnZmmrRKWc5cd5Jmp1v8alnOHn+mZqfdBEqaJCG5pXoodoEyug6jj6aTqSSnkNppXgu6pemmE5zaafifAoqOKKO6k2ppnKDaqqNcjqYq6wus2qs18xK65WwIpbrrcbYyqs0vv4KTbDCOkNsscwci6wyyi6LTLPO9rprY2BGW+u0kmFrbYfaXlbttqz4eNuMJ/pY4oQwijskuImoSxyIBJa747k0ssjuIu4OSW664tIrL473KpKvv/ya62K8Bc8bMCIDH5zgvzU6jGHCAC98SMPwPkxxxBlPjLHFhGC8r8g9qguyK9CezO23YVSpcikpv3xLzDLXQnPNs9yMcyw67/xKzz63AnTQqwxNdCpGH31K0krD3C1nTzctCtNSTx21glUfQ3XWn2zNdSdef71J2GJnQnbZl5yNdiVqrz1J225HAnfcj8xN94pX/3u3g3lTvPcudv/dbt8uCz44y80hbni4hPe9OCOBPx5y44pLjkrklgeCeeZ/bM55H55/vkfooudBeul3nI766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxiMEAQ=="
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":"Rename one \"X\" canvas to cx, and one \"O\" canvas to \"co\". Arrange the others into a 3x3 grid.\n\nThen add a field called \"which\" to hold the name of a widget to copy.\n\nAdd the given click handler to the card script. It uses the .copy[] and .paste[] methods to copy the canvas images."},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126],"value":"on click do\n if me.name in \"cx\",\"co\"\n  which.text: me.name\n else\n  t:which.text\n  w:card.widgets[t]\n  me.clear[]\n  me.paste[w.copy[]]\n end\nend"},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{},"prev":{}}}
+
+{card:challenge{c} add a "clear" button}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHDiHhcGDLNYgPEiwoZ+FBhVCdEhRD8SEai5W3GhHY8aJHEPG8ZiGpMiTEhemRIiy5UeVL1m6nFnG5BmbNHN2wVkTpM6fXHiSEQq0qBSiYpAaXcpEKRinTKMageqFqtSrVoP6vMo1SdYtX7sWDZuFrFidZq+kPTtzbRW3bFHCnTI3bsi6UfDaraj3Sd+9Df82EQxYIOElhwv/S+x1q+KojJFEfqxv8lTHlI1aLrI5c73OQ0B7lie6RenR70qfRt1ONWbWNF3DhP1TtkzaaF8P1Y37pG2GvXP+jhg8Nu+kx4vzTf6UufLAzqtGf254utbZ1Mld3M69O/AWAMKLBxDau/nzQ8aLL3++/fbsvtzL96k+PPv589PXv4/fPfxe/eGnn3r8BWjegOMVaGB3//GyoH9C1EeeEA+2h+B6FFZ4YIO6aLghePtl6CF3F9on4oircdgIiiRGGKJpLJIkoYIxqphLjDK+iCN9Ou54m43dDIcRkNBhd5N1RNojZJJF/nikkUwuhqQWKUZZzZJWBoRlllJC2ZOXXOazZZj8jElmZVOWleaZ6pjJ5j1uvvnZmmrRKWc5cd5Jmp1v8alnOHn+mZqfdBEqaJCG5pXoodoEyug6jj6aTqSSnkNppXgu6pemmE5zaafifAoqOKKO6k2ppnKDaqqNcjqYq6wus2qs18xK65WwIpbrrcbYyqs0vv4KTbDCOkNsscwci6wyyi6LTLPO9rprY2BGW+u0kmFrbYfaXlbttqz4eNuMJ/pY4oQwijskuImoSxyIBJa747k0ssjuIu4OSW664tIrL473KpKvv/ya62K8Bc8bMCIDH5zgvzU6jGHCAC98SMPwPkxxxBlPjLHFhGC8r8g9qguyK9CezO23YVSpcikpv3xLzDLXQnPNs9yMcyw67/xKzz63AnTQqwxNdCpGH31K0krD3C1nTzctCtNSTx21glUfQ3XWn2zNdSdef71J2GJnQnbZl5yNdiVqrz1J225HAnfcj8xN94pX/3u3g3lTvPcudv/dbt8uCz44y80hbni4hPe9OCOBPx5y44pLjkrklgeCeeZ/bM55H55/vkfooudBeul3nI766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxiMEAQ=="
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":"Try making a \"clear\" button to restart the game.\n\n"},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126],"value":"each w in card.widgets\n if w.type=\"canvas\"\n  w.draggable: 0\n  if w.name in \"cx\",\"co\"\n    # ...\n  else\n    # w.clear[]\n  end\n end\nend\n"},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{},"prev":{}}}
+
+{card:challenge{c} taking turns}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHDiHhcGDLNYgPEiwoZ+FBhVCdEhRD8SEai5W3GhHY8aJHEPG8ZiGpMiTEhemRIiy5UeVL1m6nFnG5BmbNHN2wVkTpM6fXHiSEQq0qBSiYpAaXcpEKRinTKMageqFqtSrVoP6vMo1SdYtX7sWDZuFrFidZq+kPTtzbRW3bFHCnTI3bsi6UfDaraj3Sd+9Df82EQxYIOElhwv/S+x1q+KojJFEfqxv8lTHlI1aLrI5c73OQ0B7lie6RenR70qfRt1ONWbWNF3DhP1TtkzaaF8P1Y37pG2GvXP+jhg8Nu+kx4vzTf6UufLAzqtGf254utbZ1Mld3M69O/AWAMKLBxDau/nzQ8aLL3++/fbsvtzL96k+PPv589PXv4/fPfxe/eGnn3r8BWjegOMVaGB3//GyoH9C1EeeEA+2h+B6FFZ4YIO6aLghePtl6CF3F9on4oircdgIiiRGGKJpLJIkoYIxqphLjDK+iCN9Ou54m43dDIcRkNBhd5N1RNojZJJF/nikkUwuhqQWKUZZzZJWBoRlllJC2ZOXXOazZZj8jElmZVOWleaZ6pjJ5j1uvvnZmmrRKWc5cd5Jmp1v8alnOHn+mZqfdBEqaJCG5pXoodoEyug6jj6aTqSSnkNppXgu6pemmE5zaafifAoqOKKO6k2ppnKDaqqNcjqYq6wus2qs18xK65WwIpbrrcbYyqs0vv4KTbDCOkNsscwci6wyyi6LTLPO9rprY2BGW+u0kmFrbYfaXlbttqz4eNuMJ/pY4oQwijskuImoSxyIBJa747k0ssjuIu4OSW664tIrL473KpKvv/ya62K8Bc8bMCIDH5zgvzU6jGHCAC98SMPwPkxxxBlPjLHFhGC8r8g9qguyK9CezO23YVSpcikpv3xLzDLXQnPNs9yMcyw67/xKzz63AnTQqwxNdCpGH31K0krD3C1nTzctCtNSTx21glUfQ3XWn2zNdSdef71J2GJnQnbZl5yNdiVqrz1J225HAnfcj8xN94pX/3u3g3lTvPcudv/dbt8uCz44y80hbni4hPe9OCOBPx5y44pLjkrklgeCeeZ/bM55H55/vkfooudBeul3nI766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxiMEAQ=="
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":"Update the click handler to take turns, rather than having to click on the \"cx\" or \"co\" widgets.\n\nWhose turn should it be when you press \"clear\"?\n"},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126],"value":"# hints (but they need fixing):\n\ntest: which.text=\"cx\"\n\nwhich.text:\n if test \"cx\" else \"co\" end\n\ncard.widgets[\"cx\"].show:\n random[\"solid\", \"invert\",\n        \"none\", \"transparent\"]"},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{},"prev":{}}}
+
+{card:stay tuned}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHDiHhcGDLNYgPEiwoZ+FBhVCdEhRD8SEai5W3GhHY8aJHEPG8ZiGpMiTEhemRIiy5UeVL1m6nFnG5BmbNHN2wVkTpM6fXHiSEQq0qBSiYpAaXcpEKRinTKMageqFqtSrVoP6vMo1SdYtX7sWDZuFrFidZq+kPTtzbRW3bFHCnTI3bsi6UfDaraj3Sd+9Df82EQxYIOElhwv/S+x1q+KojJFEfqxv8lTHlI1aLrI5c73OQ0B7lie6RenR70qfRt1ONWbWNF3DhP1TtkzaaF8P1Y37pG2GvXP+jhg8Nu+kx4vzTf6UufLAzqtGf254utbZ1Mld3M69O/AWAMKLBxDau/nzQ8aLL3++/fbsvtzL96k+PPv589PXv4/fPfxe/eGnn3r8BWjegOMVaGB3//GyoH9C1EeeEA+2h+B6FFZ4YIO6aLghePtl6CF3F9on4oircdgIiiRGGKJpLJIkoYIxqphLjDK+iCN9Ou54m43dDIcRkNBhd5N1RNojZJJF/nikkUwuhqQWKUZZzZJWBoRlllJC2ZOXXOazZZj8jElmZVOWleaZ6pjJ5j1uvvnZmmrRKWc5cd5Jmp1v8alnOHn+mZqfdBEqaJCG5pXoodoEyug6jj6aTqSSnkNppXgu6pemmE5zaafifAoqOKKO6k2ppnKDaqqNcjqYq6wus2qs18xK65WwIpbrrcbYyqs0vv4KTbDCOkNsscwci6wyyi6LTLPO9rprY2BGW+u0kmFrbYfaXlbttqz4eNuMJ/pY4oQwijskuImoSxyIBJa747k0ssjuIu4OSW664tIrL473KpKvv/ya62K8Bc8bMCIDH5zgvzU6jGHCAC98SMPwPkxxxBlPjLHFhGC8r8g9qguyK9CezO23YVSpcikpv3xLzDLXQnPNs9yMcyw67/xKzz63AnTQqwxNdCpGH31K0krD3C1nTzctCtNSTx21glUfQ3XWn2zNdSdef71J2GJnQnbZl5yNdiVqrz1J225HAnfcj8xN94pX/3u3g3lTvPcudv/dbt8uCz44y80hbni4hPe9OCOBPx5y44pLjkrklgeCeeZ/bM55H55/vkfooudBeul3nI766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxiMEAQ=="
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":{"text":["In a future lesson, we'll show how to evaluate the board and even create a computer opponent.\n\n- ","More decker lessons.","\n-"," Lesson videos."],"font":["","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw"]}},"nextBtn":{"size":[60,25],"pos":[445,44]},"cardName":{},"code":{"size":[218,126]},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{"value":""},"prev":{}}}
+
+{contraption:tutor}
+size:[512,128]
+resizable:1
+margin:[5,35,4,8]
+description:"A contraption for creating interactive decker tutorials."
+version:0.1
+image:"%%IMG2AgAAgC7/Lv8uAif/J/8nAgH/Af8B/wH/AQQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMAH/Af8B/wH/AQQn/yf/JwIl/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/JcI="
+script:"tutor.0p"
+attributes:{"name":["body","code","next","prev"],"label":["body","code","next","prev"],"type":["rich","code","string","string"]}
+{widgets}
+body:{"type":"field","size":[210,93],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"value":"..."}
+nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
+cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
+code:{"type":"field","size":[218,94],"pos":[222,32],"pattern":47,"show":"none","border":1,"style":"code"}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,62],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,98],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
+prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+
+{script:tutor.0p}
+on get_body do body.value end  on set_body x do body.value: x end
+on get_code do code.text end   on set_code x do code.text: x end
+on get_next do next.text end   on set_next x do next.text: x end
+on get_prev do prev.text end   on set_prev x do prev.text: x end
+
+on view do
+ cardName.text: deck.card.name
+ code.locked: me.locked
+ sh: if code.text
+       if me.locked "invert" else "solid" end
+     else "none" end
+ code.show: sh runBtn.show: sh
+ # "-" is placeholder awaiting this fix:
+ # https://github.com/JohnEarnest/Decker/commit/f591e823a
+ nextBtn.show: if next.text "solid" else "none" end
+ prevBtn.show: if prev.text "solid" else "none" end
+end
+
+on next_card_name do
+ if next.text = "Next"
+  cn:keys deck.cards
+  ci:first extract index where value=deck.card.name from cn
+  cn[ci+1]
+ else
+  next.text
+ end
+end
+
+on no_script c do
+ (c.script="on view do\n\nend") |!c.script
+end
+
+on is_special c do
+ "special" in keys c.widgets
+end
+
+on copy_to_next do
+ card: deck.card
+ if !is_special[card]
+  nc: deck.cards[next_card_name[]]
+  if !is_special[nc]
+   tw: "tutor1"
+   if ! count tw drop nc.widgets
+    each w in tw drop card.widgets nc.add[w] end
+   end
+   if no_script[nc] nc.script: card.script end
+  end
+ end
+end
+
+on run text do
+ d:deck.card.widgets
+ d.card: deck.card
+ eval[text d 1]
+end
+
+{end}
+
+{script:tutor.1p}
+on click do
+ copy_to_next[]
+ go[next.text "SlideLeft" 15]
+end
+{end}
+
+{script:tutor.2p}
+on click do
+ go[prev.text "SlideRight" 15]
+end
+{end}
+
+{script:tutor.3p}
+on click do
+ d:deck.card.widgets
+ d.card:deck.card
+ eval[code.text d 1]
+end
+
+{end}
+
