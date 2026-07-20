@@ -3,7 +3,7 @@ version:1
 card:0
 size:[512,342]
 script:"0"
-name:"tic-tac-toe-part1.deck"
+name:"tt1-basics.deck"
 
 {script:0}
 on navigate dir do

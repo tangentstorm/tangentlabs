@@ -3,7 +3,7 @@ version:1
 card:0
 size:[512,342]
 script:"0"
-name:"tic-tac-toe.deck"
+name:"ttt-lesson-plan.deck"
 
 {script:0}
 on l ...xs do xs end # list constructor
