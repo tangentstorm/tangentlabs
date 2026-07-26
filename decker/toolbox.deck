@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:1
+card:0
 size:[512,342]
 script:"0"
 name:"toolbox.deck"
@@ -40,7 +40,7 @@ end
 image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"tutor card.0"
 {widgets}
-tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":{"text":["toolbox\n\n- ","More decker lessons.","\n-"," Lesson videos."],"font":["","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw"]}},"nextBtn":{"size":[60,25],"pos":[445,44],"show":"none"},"cardName":{},"code":{"size":[218,126]},"prevBtn":{"size":[60,25],"pos":[445,78]},"runBtn":{"size":[60,25],"pos":[445,123]},"next":{"value":""},"prev":{}}}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":{"text":["toolbox\n\n- ","More decker lessons.","\n-"," Lesson videos."],"font":["","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw"]}},"nextBtn":{"size":[60,25],"pos":[445,44],"show":"none"},"cardName":{},"code":{"size":[218,126]},"prevBtn":{"size":[60,25],"pos":[445,73]},"runBtn":{"size":[60,26],"pos":[445,131]},"next":{"value":""},"prev":{},"button1":{"size":[60,25],"pos":[445,101]}}}
 
 {script:tutor card.0}
 on view do
@@ -157,7 +157,7 @@ end
 image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLzjAz29/j5+vv8/f7/AAPmGyKwoMGDCAvSU5awocOHAglCnEjx4cJkFTNqVChko8ePAy8eA0nyo8SSKCeKHJmypcWOLmMeXGlMpk2OLW7q9Eez2M6f+04CBdqT2NCjDIQivVl02FKiMJ8ybRpM6k6lVltSrZrVJtauJbcCAyvzK1mTYn2ddWl2rca0at2ibCuXItxedcNGzbvxLi++IOkCbuh312CPgg/PLJxL8du9jl8yvhW5YuLKACfjwqwSMufFmmt9ljyacGjRpRNeTh3y9CzWCFfDtuea1myDsmfXfn07oufeQXfHAh4wN2zhw4n/M84aOSzly39Dp+3c1fR+zFNXt349eM7urberAq8ve2nxrMi3Vn8P/Sr27aVPdz8eflL50Omnsn//O3v9qPBn3mgAniIgfsoVaMqB/qmnYCkM2vcgKRHCN+EoFf53YSgZOrghKB2S9yGIEiJI3IifhAgeip6o2B2Lnbh4HYycyDgfjZrYmB+OmeiYII+Y+HgikJcICRyRRZbYoIhIVmJkb006qaSSUUby5G1VTnKlbllaOaWFXUKy5XFhPjJmc2U6cqZ2aTay5nlt1vOlhnEq8iaBddo5p4d5InLnZ30m8idngfq5J5OFFjIoZokasmhljSp66IqRDvJoZJVaOumLmQZyqWOderrpjKH+8alipZo66o2p8nHqYa3GKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd+7556CHLvropJdu+umop6766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301FdvPS5BAA=="
 script:"help.0"
 {widgets}
-canvas:{"type":"field","size":[299,251],"pos":[2,20],"locked":1,"border":0,"value":{"text":["","canvas quick reference","\n\n","c.pattern: 0      # number or colors.red\nc.brush: 0\n\nc.clear[]\nc.fill[xy]        # paint bucket tool\nc.box[xy wh]      # outline only\nc.rect[xy wh]     # outline + fill\nc.line[...xy]\nc.text[msg pos a]\n# a is optional, and can be any of:\n#\n# \"top_left\"    \"top_center\"    \"top_right\"\n# \"center_left\" \"center\"        \"center_right\"\n# \"bottom_left\" \"bottom_center\" \"bottom_right\"\n\nc.copy[xy wh]     # gives an image\nc.paste[img xy t] # if t=1 color 0 is transparent\nc.merge[op? img]  # op can be any of: \"+-*&|<>=\"\n\nFor more, see ","#canvasinterface"," in docs"],"font":["","menu","","mono","mono","mono"],"arg":["","","","","https://beyondloom.com/decker/decker.html#canvasinterface",""]}}
+canvas:{"type":"field","size":[299,251],"pos":[2,20],"locked":1,"border":0,"value":{"text":["","canvas quick reference","\n\n","c.pattern: 0      # number or colors.red\nc.brush: 0\n\nc.clear[]\nc.fill[xy]        # paint bucket tool\nc.box[xy wh]      # outline only\nc.rect[xy wh]     # outline + fill\nc.line[..xy]\nc.text[msg pos a]\n# a is optional, and can be any of:\n#\n# \"top_left\"    \"top_center\"    \"top_right\"\n# \"center_left\" \"center\"        \"center_right\"\n# \"bottom_left\" \"bottom_center\" \"bottom_right\"\n\nc.copy[xy wh]     # gives an image\nc.paste[img xy t] # if t=1 color 0 is transparent\nc.merge[op? ..im] # op can be any of: \"+-*&|<>=\"\n\nFor more, see ","#canvasinterface"," in docs"],"font":["","menu","","mono","mono","mono"],"arg":["","","","","https://beyondloom.com/decker/decker.html#canvasinterface",""]}}
 pal:{"type":"contraption","size":[81,61],"pos":[46,275],"volatile":1,"script":"help.1","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[1,0]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
 patternLabel:{"type":"field","size":[43,20],"pos":[2,283],"locked":1,"show":"transparent","border":0,"align":"right","value":"pattern:"}
 patternSlider:{"type":"slider","size":[43,20],"pos":[2,303],"volatile":1,"script":"help.2","interval":[0,47],"style":"bar"}
@@ -171,7 +171,7 @@ c0:{"type":"canvas","size":[98,80],"pos":[313,30],"show":"transparent","image":"
 c1:{"type":"canvas","size":[97,80],"pos":[412,30],"show":"transparent","image":"%%IMG2AGEAUCX/Jf8l/yX/Jf8l/yU9JwMlEScDJUknBSUPJwUlRycHJQ0nByVGJwclDScHJUYnByUNJwglRScHJQ0nCCVFJwclDicHJUUnByUOJwclRScHJQ4nByVFJwclDycFJUcnBSURJwMlSScDJf8l/yX/Jf8l/yX/Jf8l/yX/Jf8lOCcDJV0nBSUcJwMlPCcIJRcnByU7JwslECcMJTonDyUJJw8lOycRJQQnESU8JyUlPScjJT8nISVCJxslSScUJVEnDSVXJwgl/yX/Jf8l/yX/JSA=","scale":1}
 f2:{"type":"field","size":[197,72],"pos":[312,266],"show":"invert","value":"c0.clear[] c0.brush:0\nc0.pattern:1 c0.fill[]\nc0.pattern:256 # secret \"ants\" pattern\nc0.box[5,5 c0.size-11]\nc0.pattern: patternSlider.value\nc0.brush: brushSlider.value"}
 f1:{"type":"field","size":[197,72],"pos":[312,189],"show":"invert","value":"im:c0.copy[]\ncm: (1,32)dict(39,38)\nxy: 0,0\nt: 1 # transparent?\nc1.paste[im.map[cm] xy t]\n"}
-backBtn:{"type":"button","size":[41,20],"pos":[257,22],"script":"help.5","text":"back"}
+backBtn:{"type":"button","size":[41,20],"pos":[257,22],"script":"help.5","pattern":39,"text":"back"}
 
 {script:help.0}
 on set_pattern x do
@@ -560,10 +560,11 @@ body:{"type":"field","size":[210,93],"pos":[3,33],"locked":1,"pattern":39,"show"
 nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
 cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
 code:{"type":"field","size":[218,94],"pos":[222,32],"pattern":47,"show":"none","border":1,"style":"code"}
-prevBtn:{"type":"button","size":[60,20],"pos":[445,62],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
-runBtn:{"type":"button","size":[60,20],"pos":[445,98],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,58],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,105],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
 next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
 prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+button1:{"type":"button","size":[60,20],"pos":[445,81],"script":"tutor.4p","pattern":39,"text":"help","style":"rect"}
 
 {script:tutor.0p}
 on get_body do body.value end  on set_body x do body.value: x end
@@ -644,6 +645,12 @@ on click do
  eval[code.text d 1]
 end
 
+{end}
+
+{script:tutor.4p}
+on click do
+ go["help" "SlideUp" 15]
+end
 {end}
 
 {contraption:cardName}
