@@ -1,0 +1,548 @@
+{deck}
+version:1
+card:8
+size:[512,342]
+script:"0"
+name:"objects.deck"
+patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+EK1S4xoW9ZAiODjr8wwgA/2ADABOvQPFINE8oYco/HnCxjChZ/NMNKP+IooYKACDzz0ABAQ=="
+
+{script:0}
+on run text do eval[text (list "card") dict (list card) 1] end
+{end}
+
+{card:1-bit}
+image:"%%IMG3AgABVgZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5smWnATJr3sw582VsAUaIHk26dIDP10KXXj36NOpqqlmvdv16WmzZpGnXjnYbt2jdu5/19g08eLPhuIsbX4ZctvLlyZqzfg79mPTZ1Z1dN539uG/u3Zl/zx1e/Pjf5ZVtJ58eWef3m9s3m1CEuvxj9I3Yv08sf33+zPinH4DKCPgfgcgYSMR+CPKi4IEN4gLfhABMCF+ErgRAwoYcdujhaRp6KCKHDGIYSogjighiiiOWaOInKLJIYoUyfvjiKjHWuGKNM96YSo4y7sgjCS76uAmQLArJY5FGZoJkikrq2OQpT7ZI45BETmlKlSpeOSSTWlbCpY1jdghmmJOUOaOaG56JZiRsZhmnm28+MqeXS9Z5IpZy8kmnnozceSegnlj4XoWGckbooow26uijkEYq6aSUVmrppZhmqummnHbq6aeghirqqKSWauqpqKaq6qqsturqq7DGKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTkgUB"
+script:"1-bit.0"
+{widgets}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"1-bit.1","pattern":42,"style":"plain","value":"with one bit, we can choose between 2 options"}
+b0:{"type":"button","size":[16,16],"pos":[34,139],"font":"mono","text":"0","style":"rect"}
+b1:{"type":"button","size":[16,16],"pos":[52,139],"font":"mono","show":"invert","text":"1","style":"rect"}
+
+{script:1-bit.0}
+on draw_graph wh do
+ d:4 mg:2 # d:depth wh: width/height of boxes  mg: min gap
+ box: (-wh/2) + wh * "%j" parse "[[0,0],[0,1],[1,1],[1,0],[0,0]]"
+ vg: 1.5*wh # vertical gap
+ # draw from from bottom up
+ c.clear[]
+ cxs: (wh+mg) * 1 + range 2^d
+ each j in rev range d+1
+  y: vg * j + 1
+  if j>0 next: each ab in 2 window cxs
+    cx: 0.5 * sum ab  p: cx,y-vg
+    c.pattern:19 c.line[p (first ab),y]
+    c.pattern:1  c.line[p (last ab),y]
+    cx
+  end end
+  each cx in cxs
+   c.pattern: 32+j  c.poly[box + list cx,y]
+   c.pattern: 1     c.line[box + list cx,y]
+  end
+  cxs:next
+ end
+end
+
+on click do
+ if !nil~ i:"b%H" parse me.name
+  each b k in card.widgets
+   if b.type ~ "button" b.show:"solid" end
+  end
+  me.show: "invert"
+ end
+end
+{end}
+
+{script:1-bit.1}
+on run text do
+ eval[text 0 1]
+end
+{end}
+
+{card:2-bits}
+image:"%%IMG3AgABVgZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cMsGmEu3rt25cf0FEMG3r9+/AfL22/u3cN/AgvcRNlwYceJ8ixn7dfz4XmTJfClXrncZs+bN8zpL/gw6nmjGpEu/O204tep2rBu/phcb8OzQmG3fNp178m7evTP/hlfb93B3d5PXPf5uQhPXzMs5dwI9urjpz62rw05d+znuT6p7zwYeivjx1sqHRy9Nufsp7pWzFxZghP37+POfN1I/v//7+803S3//+RcgEQQWiN+BAsKSoIL2MSjEgxBK2GArFCpoYYYFWnjhKhz+tyGE+n3YS4gGwkfigibygmKJUrzIYou6yAigiitGSGONOeoYY48jeLhjKTb6GEWRQQ6JC5Ij9iikkqIwiWOOT0IJipQ/OmllLVgeCWSVW3bSpXlfhjlgfHfBh6ZdZt4CHphFvNmmLurBKUSdc+KCpxZ75kmLehNmASgAdvqpyaBwImroLIpi0eiirwwaqBWSEgopKWuymelym9JFaKeFXtpHACSUauqpqAZGKqqsmqpqq7C+CiuroYq6x6qzniprrq4Syquuvv5aaq225oHrr7siG6ywyfJKbLF3HOvssspKm2uz10JLibWzYtsttdNyG6u2k4jbqrfjmksruNmSG4m6qbL7LbzA0turu5DYO6y86Qq7r74kPItvHACjey6/Bxc88CMKN+xvwAivu3AjDvtr8LoKT8xIxcxGHG/GGivCcbUPXxxvyCKX7HG9KoOM8iEjh9uyyi8jAqqqoH7aqc6b1uzzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd+7556CHLvropJdu+umop6766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCAJQkC"
+script:"1-bit.0"
+{widgets}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"1-bit.1","pattern":42,"style":"plain","value":"with two bits, we can choose between 4 different options.\nhere we see two copies of the lower bit, but we're only going to consider one of them at a time. the upper bit determines what the lower bit means."}
+b0:{"type":"button","size":[16,16],"pos":[34,139],"font":"mono","text":"0","style":"rect"}
+b1:{"type":"button","size":[16,16],"pos":[52,139],"font":"mono","text":"1","style":"rect"}
+b2:{"type":"button","size":[16,16],"pos":[70,139],"font":"mono","text":"2","style":"rect"}
+b3:{"type":"button","size":[16,16],"pos":[88,139],"font":"mono","show":"invert","text":"3","style":"rect"}
+
+{card:3-bit}
+image:"%%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"
+script:"1-bit.0"
+{widgets}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"1-bit.1","pattern":42,"style":"plain","value":"we can repeat the process indefinitely.\n\nbranch points here:\n- exponential growth (move on to 8x8 icon = 64 bits)\n- representing numbers with octal and hex\n- byte concept (8 bits)\n- memory\n"}
+b0:{"type":"button","size":[16,16],"pos":[34,139],"font":"mono","text":"0","style":"rect"}
+b1:{"type":"button","size":[16,16],"pos":[52,139],"font":"mono","text":"1","style":"rect"}
+b2:{"type":"button","size":[16,16],"pos":[70,139],"font":"mono","text":"2","style":"rect"}
+b3:{"type":"button","size":[16,16],"pos":[88,139],"font":"mono","text":"3","style":"rect"}
+b4:{"type":"button","size":[16,16],"pos":[106,139],"font":"mono","text":"4","style":"rect"}
+b5:{"type":"button","size":[16,16],"pos":[124,139],"font":"mono","text":"5","style":"rect"}
+b6:{"type":"button","size":[16,16],"pos":[142,139],"font":"mono","text":"6","style":"rect"}
+b7:{"type":"button","size":[16,16],"pos":[160,139],"font":"mono","show":"invert","text":"7","style":"rect"}
+
+{card:growth}
+{widgets}
+field1:{"type":"field","size":[477,228],"pos":[16,51],"value":{"text":["","exponential growth\n\n","\n2^0 x\n2^1 xx\n2^2 xxxx\n2^3 xxxxxxxx\n2^4 xxxxxxxxxxxxxxxx\n2^5 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n2^6 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"],"font":["","menu","mono"],"arg":["","",""]}}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"pattern":42,"style":"plain","value":"hello?"}
+
+{card:4-bit}
+image:"%%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17rvxW58tfvb8qJ3vtzFr3f1C977+pe9/B0vgP8LX/JWtb3MDbB6CSxfBtPXwfmF8H4l3N8BX9a+Fi5whhu84Qd3OMIfnnCIK6zhEnO4sRg2sYdVDGIWi9jFJD6xjFc84xbX+MWPTfGNY0zjHtvYxzgGMo9/TOQgF3nIRh7tgRXsXgoLGMZP3nGUhTzlI1c5yUjOcll1TOUFj/jKWvYylMUsZTJ3uclfNrOVD8vlNaN5zG8uc5zPnGAnqxnLYM7zncO82Dbjec96nrOb65xmQf/Z0HwmNJwVLefWknaqTIW0U5v6pKdK9dJKlXSlKQ0cS2ca08oMm6hHTepSm/rUqE61qlfN6la7+tWwjrWsZ03rWtv61rjOta53zete+/rXwA62sIdN7GIb+9jITrayl83sZjv72dCOtrSnTe1qW/va2M62trfN7W57+9vgDre4x03ucpv73OhOt7rXze52u/vd8I63vOdN73rb+974zre+983vfvv73wAPuMAHTvCCG/zgCE+4whfO8IY7/OEQj7jEJ07xilv84hjPuMY3zvGOe/zjIA+5yEdO8pKb/OQoT7nKV87ylrv85TCPucxnTvOa2/zmOM+5znfO8577/OdAD7rQh070ohv96EhPutKXzvSmO/3pUI+61KdO9apb/epYz7rWt871rnv962APu9jHTvaym/3saE+72tfO9ra7/e1wj7vc5073utv97njPu973zve++/3vgA+84AdP+MIb/vCIT7ziF8/4xjv+8X0IAg=="
+script:"1-bit.0"
+{widgets}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"1-bit.1","pattern":42,"style":"plain","value":"with 4 bits, we have 16 options. \n\n"}
+b0:{"type":"button","size":[16,16],"pos":[34,139],"font":"mono","text":"0","style":"rect"}
+b1:{"type":"button","size":[16,16],"pos":[52,139],"font":"mono","text":"1","style":"rect"}
+b2:{"type":"button","size":[16,16],"pos":[70,139],"font":"mono","text":"2","style":"rect"}
+b3:{"type":"button","size":[16,16],"pos":[88,139],"font":"mono","text":"3","style":"rect"}
+b4:{"type":"button","size":[16,16],"pos":[106,139],"font":"mono","text":"4","style":"rect"}
+b5:{"type":"button","size":[16,16],"pos":[124,139],"font":"mono","text":"5","style":"rect"}
+b6:{"type":"button","size":[16,16],"pos":[142,139],"font":"mono","text":"6","style":"rect"}
+b7:{"type":"button","size":[16,16],"pos":[160,139],"font":"mono","text":"7","style":"rect"}
+b8:{"type":"button","size":[16,16],"pos":[178,139],"font":"mono","text":"8","style":"rect"}
+b9:{"type":"button","size":[16,16],"pos":[196,139],"font":"mono","text":"9","style":"rect"}
+bA:{"type":"button","size":[16,16],"pos":[214,139],"font":"mono","text":"A","style":"rect"}
+bB:{"type":"button","size":[16,16],"pos":[232,139],"font":"mono","text":"B","style":"rect"}
+bC:{"type":"button","size":[16,16],"pos":[250,139],"font":"mono","text":"C","style":"rect"}
+bD:{"type":"button","size":[16,16],"pos":[268,139],"font":"mono","text":"D","style":"rect"}
+bE:{"type":"button","size":[16,16],"pos":[286,139],"font":"mono","text":"E","style":"rect"}
+bF:{"type":"button","size":[16,16],"pos":[304,139],"font":"mono","show":"invert","text":"F","style":"rect"}
+
+{card:physical}
+image:"%%IMG3AgABVgZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PVZIfj5+vv8/f7/+uwJlASQX5yC+wYqpAMwUsOFELn8KzUxokUlCW0FvHgxH7CNHOt5NDYy5Dt8zVCabBfiWcuV7FQukwlzXUliN2u6A9krp855PGdl/Bmx4iijRJM+fLQ0qdMoCIOyierzqVUyVLNqlXq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/swIIHky4sOHDhQErXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uijkEYq6aSUVmrppZhmqummnHbq6aeghirqqKSWauqpqKaq6qqsturqq7DGKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGO0oQ"
+script:"physical.0"
+{widgets}
+c:{"type":"canvas","size":[512,342],"pos":[0,0],"locked":1,"volatile":1,"script":"physical.1","pattern":45,"border":0,"scale":1}
+a:{"type":"button","size":[14,16],"pos":[62,172],"text":"a","shortcut":"a"}
+b:{"type":"button","size":[14,16],"pos":[95,172],"show":"invert","text":"b","shortcut":"b"}
+result:{"type":"field","size":[132,141],"pos":[347,34],"style":"plain","value":"{\"value\":\"solid\",\"vars\":{}}"}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"pattern":42,"style":"plain","value":"# on a computer, a bit is a physical object. specifically, a circuit\n\neach x i in \"AV=\"\n c.poly[]\nend"}
+edges:{"type":"grid","size":[100,50],"pos":[213,45],"format":"ssB","value":{"src":["a"],"dst":["b"],"val":[1]},"row":0,"col":0}
+c2:{"type":"canvas","size":[106,95],"pos":[207,112],"scale":1}
+
+{script:physical.0}
+on run text do result.data: eval[text 0 1] end
+
+on mid wid do wid.pos + wid.size / 2 end
+
+on click do
+ me.show: if me.show="solid" "invert" else "solid" end
+end
+
+on view do
+ c.pos:0,0 c.size:card.size c.locked:1 c.clear[] c.pattern: 45
+ each e in rows edges.value
+  src: card.widgets[e.src]  dst: card.widgets[e.dst]
+  c.line[mid[src] mid[dst]]
+ end
+end
+{end}
+
+{script:physical.1}
+on click pos do
+ # nothing, so we don't trigger the invert
+end
+
+on drag pos do
+
+end
+
+on release pos do
+
+end
+{end}
+
+{card:byte}
+script:"byte.0"
+{widgets}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"byte.1","pattern":42,"style":"plain","value":"8 bits make a byte. You can think of it as a number between 0..255 inclusive.\n"}
+c:{"type":"canvas","size":[170,43],"pos":[32,42],"image":"%%IMG3AKoAKwKMj6nL7Q+jnA3Yi7PePNMPhuIIduZ5kurKthUKx4BL1/Yk5+bN970O1CwuESLE+EA6lK/Z0VKEKoJUKcIZwDKw2uGhO/0mxUtyxbxFG6rU8Hr8LsfP83Tde3dn4fsEO6gH5qcWyCd4RTiYp9hH1/j1p1Mo94hXOel4aKY5x9kIFinJ6MllaEpJmoi4uHoZmjNktSTbFOW5RruVG3ubtfsq4yM8vAIcQ4ycjGOMouz8PMWcAk3tLD1dnT18zd3t/Q0eLj5OXm5+jp6uvs7e7v4OHy8/T19vf4+fr7/P3+//DzCgwIEECxo8iDChwoUMGzp8CDGixIkUK1q8iDGjxo0cO3o8WAA=","scale":1}
+slider2:{"type":"slider","size":[128,25],"pos":[343,60],"interval":[0,255],"style":"compact"}
+slider1:{"type":"slider","size":[100,25],"pos":[357,60],"interval":[0,255],"format":"%02H","style":"bar"}
+state:{"type":"field","size":[100,20],"pos":[345,112],"value":"0"}
+
+{script:byte.0}
+on run text do eval[text 0 1] end
+
+on change do
+ slider1.value: slider2.value: state.data:me.value
+ view[]
+end
+
+on view do
+ c.clear[]   z:16  v:state.data
+ each i in range 8
+   x:z*i  b:if bits.and[v 2^7-i] 1 else 0 end
+   c.pattern: 1-b  c.rect[x,0  z,z]
+   c.pattern: b  c.text[b (x,0)+6,4]
+   c.pattern:1 c.box[x,0 1+z,z]
+ end
+end
+
+{end}
+
+{script:byte.1}
+on change val do
+
+end
+{end}
+
+{card:palette}
+image:"%%IMG3AgABVgbAkHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNqxBhgo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiph1xOKLMMYo44w01mjjjTjmSJKLOvboY0U8/ijkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uijkEYq6aSUVopZEA=="
+script:"palette.0"
+{widgets}
+PaletteAdjuster1:{"type":"contraption","size":[296,204],"pos":[8,18],"def":"PaletteAdjuster","widgets":{"field1":{},"button99":{},"button0":{},"whitehex":{"value":"ffffff"},"blackhex":{"value":"000000"},"yellowhex":{"scroll":8,"value":" 666666"},"button1":{},"button2":{},"button3":{},"orangehex":{"value":"CCCCCC"},"redhex":{"value":"660000"},"magentahex":{"value":"990000"},"button4":{},"button5":{},"purplehex":{"value":"cc0000"},"bluehex":{"value":"ff0000"},"button6":{},"button7":{},"button8":{},"cyanhex":{"value":"006600"},"greenhex":{"value":"009900"},"darkgreenhex":{"value":"00CC00"},"button9":{},"button17":{},"button18":{},"brownhex":{"value":"00FF00"},"tanhex":{"value":"000066"},"lightgrayhex":{"value":"000099"},"button19":{},"button20":{},"mediumgrayhex":{"value":"0000cc"},"darkgrayhex":{"value":"0000ff"},"button21":{},"orangepreview":{},"blackpreview":{},"whitepreview":{},"yellowpreview":{},"redpreview":{},"magentapreview":{},"purplepreview":{},"bluepreview":{},"cyanpreview":{},"greenpreview":{},"darkgreenpreview":{},"brownpreview":{},"tanpreview":{},"lightgraypreview":{},"mediumgraypreview":{},"darkgray":{},"field2":{},"field3":{},"field4":{},"field5":{},"field6":{},"field7":{},"field8":{},"field9":{},"field10":{},"field11":{},"field12":{},"field13":{},"field14":{},"field15":{},"field16":{},"field17":{}}}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"palette.1","pattern":42,"style":"plain","value":"rgb125: \"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\"\narne: \"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\"\ntractor: \"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\" # tractor game\n# extractor:   \" \" fuse each i in 32 + range 16 \"%06h\" format patterns[i] end\neach rgb i in extract \"%H\" parse value from \" \" split pal: tractor\n  patterns[32+i]: rgb\nend"}
+result:{"type":"field","size":[100,101],"pos":[345,42],"style":"code","value":"{\"value\":[16777215,2829099,7039851,12434877,14694970,16747520,16766976,5025616,9425231,4892415,1989835,10639871,14524671,10644010,51455,0],\"vars\":{\"rgb125\":\"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\",\"arne\":\"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\",\"tractor\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\",\"pal\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\"}}"}
+
+{script:palette.0}
+on run text do result.data: eval[text 0 1] end
+
+{end}
+
+{script:palette.1}
+on change val do
+ 
+end
+{end}
+
+{card:tree}
+image:"%%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bYVEIi97zUtcqEUUgcsVYHOnet772quvQAWvfzsE4JoKeMDPy68C93tgBBd4pQ0e8IM/GmH/TriiFb7vhRea4YhuGKAdfuWH5xniU47YnCX25ImtmeJGrjiZLSbki3kZYz3OeJY1luONVZljNu5YlD0u448zGWQvDhmSRcbikRGZZCku2Y9NTuKT6xjlH075jVW24ZXTmOUWblmMXSbhl7cYZgyOuYplfuCZmZjmSypYggx2L4Jp9eYNxrm/czZjdUN5XTnnuUlrFmKb/xdoHQ4af4WO4aHjl2gULlp9jebgo8cX6QlOmnuVXuClq5fpAW7aeZ0+H1iAg59Sm/rUe5blaEf9H1S7+tXeOepYWf00WNv61syR9VZtgute+7o4twm2sIdN7GIb+9jITrayl83sZjv72dCOtrSnTe1qW/va2M62trfN7W57+9vgDre4x03ucpv73OhOt7rXze52u/vd8I63vOdN73rb+974zre+983vfvv73wAPuMAHTvCCG/zgCE+4whfO8IY7/OEQj7jEJ07xilv84hjPuMY3zvGOe/zjIA+5yEdO8pKb/OQoT7nKV87ylrv85TCPOTD+TPOa2/zmOM+5znfO8577/OdAD7rQh070ohv96EhPutKXzvSmO/3pUI+61KdO9apb/epYz7rWt871rnv962APu9jHTvaym/3saE+72tfO9ra7/e1wj7vc5073utv97hMLAg=="
+script:"1-bit.0"
+{widgets}
+c:{"type":"canvas","size":[452,193],"pos":[24,27],"locked":1,"script":"tree.0","pattern":0,"image":"%%IMG3AcQAwQZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLUBu7y9vru5wcKFASDGx8jJAcPMzXzFydHHy87V1nLQ0tHU193eaNnayNzf5eZe4eLG5Oft7lTp6uzv9PVK8eLz9vv8+Nr6/AK+8ycNoMCD5QhuQ8jw3IQJCpUBa0ix2cMJQiKOyzixosdZF4tonCay48eTqEIeGbkOCS+UMEOpTMIShEGON2PqbDRzya+fvZy83EmUUc83Q4sqDXSUTtKlUO00zfM0qtU1U/1UvcoVTNZBW7uKrfIVUdixaJWUbXQ27T6gcJ2sldS2JNxfbmkFCMG3r9+/Oedeqgtg79/DfXPmRWUY8WGAgjmdbezYr+LFpihX5ssucqiqmjdfxkwqdGVqnjNPNO14NGlRrBEHeCiM12bAr1/FfuxsN+7crXxb7n17OHBWwhMTL875OHLmzZslj+481fQQrmFdz15d0/blzLl3x/RdOnTs4xmfFx98fXpTENezVxUfusn3nmh/v09Lv3v++GGCEU53BZXRLQMWVqAvQ8wXoCG0YQEgKxFeMeGDjiSohYOcaJgFhxjyUSEXF5Iy4hYlhkiIh+iswmIXIKo4x4lgpNjhi+jEKKMbOIaho1Fp/LgjGjSWYWMlRZJx5JAwLmggAD2awY2TTzpFZUdRGtnglUI+GIAIYIYp5pjLJBnkMl+OqWaYXaK45ptlZiklmm+u2SZ+adYp5mx17KInmXfk+acIfFo5KJtMwnMomHd+uCihgT7aqISSJjqFoH9OamGldmCqp6ZWeFonqNWJCmeki5KqaKqoHqrqcaba2eqgr0oRq5q1RnEroJbqymmfvzoV7By77tmrr6x2Oiw2y8ZRLKLHPvEso7NmWu2n144arbTNwjEtpMomC6y42/rULVLnuvFtrlCsW24T7obraranykvru0zEO+689lrbL7b43pNuG/oKSy6xA+NbMMIHM9uwswm/yyW70nIZqMWdYhxwEnIWlkfHFEMB8sfwbqyWtHd0fKBUKLMslMlIqOyxyyXTnG/KLcNMhMwrz6hrHTzP7HO7Og8RdM9wHC100pcO/bPOSiPdRtRLT11FyEdQjXVXWsfRNdPweH31kBNfqnG7Z1d8pdlr25q2UG/DG3deAYxg9914581e3Xn3fffefgcOeOB9D0443oYfbnfiijN++NYDKY74pZL/TXnlIzhOuOaCX145536DXjismGfuueSi631646s/3vrmr3dua+mQu8P357GHnvvos2Oe+uS94x486rurDtztxA/PuvKuMw+787LrSnvxwEvvO+nXQ6+79rxbL7z3yYO/vPjNk/98bsiP3+703BtvfvTrZ//+9vN3H//3r6Vf/v3h86++tOyrn/v8tz8Ayo+A58tfABEIPwPiz4H9g+D/hLJACRaQggckjf4SaEEOYvCBH4xgCCcIrwqO8IIlzCBmNtjAE3owhSCEoQhlSMJ8mZCGKLShChfDQvox0IcdbCEOX6jDGBZxhkesoU9uSDcmLnGHSczhE404RSRWUYn3cGIWoeiWHtoviEB0oRCjSMQrSnGLVESjFdWIRbR4cYBg/KIYwzjEMZqxjGw8I020uEcupqVsbmubrubmE0Lew5A0QaRLFLkSRrrFQ22CZBckyQVKbsGSWsBkFjSJBU5250VCAuUlVzJKI4SSlJlE5SZV2UlWjkeUqTRlKUUySyKcUpaxpGUubVnLBuGnRzoC5ipdMkxXUkGYrSRmMo05BWS+kibFxOUVnGkFapIFmsuUZjWxOU1uftKb11RmN8W5TXKGk5lSsOYxwblOcxbtnfCMpzznSc962vOe+MynPvfJz376858ADahAB0rQghr0oAhNqEIXytCGOvShEI2oRCdK0Ypa9KIYzahGN8rRjnr0oyANqUhHStKSmvSkKE2pSlfK0pa69KUwjalMZ0rTmtr0pjjNqU53ytOe+vSnQA2qUIdK1KIa9ahITapSl8rUpjr1qVCNqlSnStWqWvWqWM2qVrfK1a569atgDatYx0rWspr1rGhNq1rXyta2uvWtcI0rWYMA","scale":1}
+field1:{"type":"field","size":[452,96],"pos":[24,230],"script":"1-bit.1","style":"code","value":"sz:16 g:2  draw_graph[sz]\nc.pattern:0 c.rect[10,111 (sz+g)*16,1]\neach i in range sz\n b:card.widgets[nm: \"b%H\" format i]\n if nil~b b:card.add[\"button\" nm] end\n b.text: \"%H\" format i\n b.size:sz,sz b.font:\"mono\" b.style:\"rect\" b.show:\"solid\"\n b.pos: (34+i*sz+g),139\nend"}
+b0:{"type":"button","size":[16,16],"pos":[34,139],"font":"mono","text":"0","style":"rect"}
+b1:{"type":"button","size":[16,16],"pos":[52,139],"font":"mono","show":"invert","text":"1","style":"rect"}
+b2:{"type":"button","size":[16,16],"pos":[70,139],"font":"mono","text":"2","style":"rect"}
+b3:{"type":"button","size":[16,16],"pos":[88,139],"font":"mono","text":"3","style":"rect"}
+b4:{"type":"button","size":[16,16],"pos":[106,139],"font":"mono","text":"4","style":"rect"}
+b5:{"type":"button","size":[16,16],"pos":[124,139],"font":"mono","text":"5","style":"rect"}
+b6:{"type":"button","size":[16,16],"pos":[142,139],"font":"mono","text":"6","style":"rect"}
+b7:{"type":"button","size":[16,16],"pos":[160,139],"font":"mono","text":"7","style":"rect"}
+b8:{"type":"button","size":[16,16],"pos":[178,139],"font":"mono","text":"8","style":"rect"}
+b9:{"type":"button","size":[16,16],"pos":[196,139],"font":"mono","text":"9","style":"rect"}
+bA:{"type":"button","size":[16,16],"pos":[214,139],"font":"mono","text":"A","style":"rect"}
+bB:{"type":"button","size":[16,16],"pos":[232,139],"font":"mono","text":"B","style":"rect"}
+bC:{"type":"button","size":[16,16],"pos":[250,139],"font":"mono","text":"C","style":"rect"}
+bD:{"type":"button","size":[16,16],"pos":[268,139],"font":"mono","text":"D","style":"rect"}
+bE:{"type":"button","size":[16,16],"pos":[286,139],"font":"mono","text":"E","style":"rect"}
+bF:{"type":"button","size":[16,16],"pos":[304,139],"font":"mono","text":"F","style":"rect"}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"pattern":42,"style":"plain","value":"hello?"}
+
+{script:tree.0}
+on click pos do
+
+end
+
+on drag pos do
+
+end
+
+on release pos do
+
+end
+{end}
+
+{card:meta}
+script:"meta.0"
+{widgets}
+field1:{"type":"field","size":[291,137],"pos":[31,44],"style":"code","value":"each x in deck.cards\n  if !\"notes\" in keys x.widgets\n    x.add[\"field\" \"notes\"]\n  end\n  n: x.widgets.notes\n  if !n.text n.text:\"hello?\" end\n  n.size: 452,96\n  n.pos: 24,230\n  n.pattern: 42\n  n.style: \"plain\"\nend"}
+result:{"type":"field","size":[166,135],"pos":[333,44],"locked":1,"value":"{\"value\":{\"1-bit\":\"plain\",\"2-bits\":\"plain\",\"3-bit\":\"plain\",\"growth\":\"plain\",\"4-bit\":\"plain\",\"physical\":\"plain\",\"physical bytes\":\"plain\",\"card1\":\"plain\",\"byte\":\"plain\",\"sprites\":\"plain\",\"card3\":\"plain\",\"palette\":\"plain\",\"cube\":\"plain\",\"tree\":\"plain\",\"vgafont\":\"plain\",\"guess\":\"plain\",\"meta\":\"plain\"},\"vars\":{}}"}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"pattern":42,"style":"plain","value":"This adds a little textbox to every card in the deck.\n"}
+
+{script:meta.0}
+on run text do
+  result.data: eval[text 0 1]
+end
+{end}
+
+{contraption:gridpad}
+size:[128,128]
+resizable:1
+margin:[2,2,2,2]
+script:"gridpad.0p"
+template:"on draw_cell c xy v cwh do\n c.brush: c.pattern: v\n c.rect[cwh*xy cwh]\nend\n"
+attributes:{"name":["gh","gw","ch","cw","allowPick","allowDraw","pen"],"label":["grid height","grid width","cell height","cell width","allowPick","allowDraw","pen"],"type":["number","number","number","number","bool","bool","number"]}
+{widgets}
+d:{"type":"canvas","size":[32,32],"pos":[-100,0],"locked":1,"show":"transparent","scale":1}
+cellW:{"type":"slider","size":[52,25],"pos":[181,-27],"locked":1,"interval":[0,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[51,25],"pos":[182,15],"locked":1,"interval":[0,100],"value":16,"style":"compact"}
+gridW:{"type":"slider","size":[52,25],"pos":[181,57],"locked":1,"interval":[0,100],"value":32,"style":"compact"}
+gridH:{"type":"slider","size":[54,25],"pos":[180,97],"locked":1,"interval":[0,100],"value":32,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"pattern":0,"show":"transparent","brush":40,"scale":1}
+allowDraw:{"type":"button","size":[71,20],"pos":[-89,-66],"locked":1,"font":"body","show":"transparent","text":"allowDraw","style":"check","value":1}
+allowPick:{"type":"button","size":[71,20],"pos":[-171,-66],"locked":1,"font":"body","show":"transparent","text":"allowPick","style":"check","value":0}
+pen:{"type":"slider","size":[53,25],"pos":[181,-71],"locked":1,"interval":[0,48],"style":"compact"}
+
+{script:gridpad.0p}
+# attributes
+on set_gh x do gridH.value:x rebuild[] end on get_gh do gridH.value end
+on set_gw x do gridW.value:x rebuild[] end on get_gw do gridW.value end
+on set_ch x do cellH.value:x view[] end    on get_ch do cellH.value end
+on set_cw x do cellW.value:x view[] end    on get_cw do cellW.value end
+on set_pen x do pen.value:x end on get_pen do pen.value end
+on set_allowPick x do allowPick.value: x end
+on get_allowPick   do allowPick.value end
+on set_allowDraw x do allowDraw.value: x end
+on get_allowDraw   do allowDraw.value end
+
+# get/set individual pixels
+on get xy   do d[xy]     end   on get_get do get end
+on set xy v do d[xy]:v v end   on get_set do set end
+
+# copy/paste from image d
+on get_d do d.copy[] end
+on copy p s a do  d.copy[p s a] end          on get_copy do copy end
+on paste i p t do d.paste[i p t] view[] end  on get_paste do paste end
+
+c.size: card.size
+gwh: (gw:gridW.value), gh:gridH.value
+cwh: (cw:cellW.value), ch:cellH.value
+
+on change do rebuild[] end # change handler for prototype widgets
+
+on rebuild do d.size:gwh view[] end
+on draw_cell xy v do
+  c.pattern: v c.rect[cwh*xy cwh]
+  card.event["draw_cell" c xy v cwh]
+end
+on view do
+ each xy in (range gw) cross (range gh) draw_cell[xy d[xy]] end
+ nil
+end
+
+# mouse handler
+on c2xy pos do floor pos / cwh end
+on click pos do xy: c2xy[pos]
+ if allowPick.value pen.value: get[xy] card.event["pick" pen.value] end
+ drag[pos]
+end
+on drag pos do xy:c2xy[pos]
+ if allowDraw.value draw_cell[xy set[xy pen.value]] card.event["draw"] end
+end
+
+{end}
+
+{contraption:PaletteAdjuster}
+size:[296,204]
+margin:[0,0,0,0]
+description:"Modify each color of your palette individually. Now with index numbers!"
+version:1.1
+image:"%%IMG3ASgAzAbAgHBILBqPyKRyyWw6n9CodEqtWq9VkHbL7Xq/4LB4TC6bz+hyIM1uu9/wOFcor9vv+PY6z+/733R/goOEYnuFiIl4gWBYjlaKi5GTlGyMX4eVcJmaep2foFuXXpyhZ6WmZKiprIKjXautjbJmsbS3cq9zuKq8hr7AdbqiwbPFsMfJacNatr7OuNDK0yDM1dTN2NLYx9bbtN+t4dzPtuOs56bp5ODm3Oug8Ozo7tr2onR7a4FD1/Lzdry9u0es2j5/BgsC7CSQoDJO+hIezPRvYS6KjzJq3MjxEMaD/vTlu2ax0qWOKFOqZKKQT8R+IBPK5GeN3ckAFHLq3Mmzp8+fQIMKHUq0qNGjORnVE3kqm0eSTxHGLDkHI9KrWLNq3apVqaGJ2dTAjEoSqtSKvG5yXcu2rVuiXsPsA7ntJbGIYcGiTWv1rd+/gLHGNca0rFynIz0Wprm3XdXAkCNL3jmYajK1kzNrblvZcjHMm0OLPtrZMzDQo1Or7lnaNN/Hq2PHbu36FmrZuDfTri3rdu7fkXfzpgcbuHHIwoer63u8ud/kyuMxd059LfToDKcf11J963XsJrUb594963fwk3wDJ1/+6nn0itT/Zt+eNFn4qeTnpl+/6Hv8heiHG3/9DfUfgIMIKBuBBQZ1IIJ/KBgbgw3+9CCEfUi4GoUVsnYfhppoqBqHHVL2IYiUiJgaiSUmdSKKkag4GostXghjQOKtB0KLQtl440XFNUdjiT7+uEmO8+3II1BFGumGjKIN2WGTTlqC5JLtUVklGlBi+ZuWW9ZypZfVgRmmKmOS6ZyZZ34VpJpZvtimS2nCaRybc2JSp51fypnnHV3ymRqef1b1pqBr+lkokPggWh6hi8rUDE6OlqlopIDsWalqkC4a6KaZdVrop6BKJuqfN62k6qootYQpjlWxKuusV7j6KqO3ZpgroI3tuouvuAIbkLBx1EQsl8dmmqwwy+rRq7DPvmpss2NEi+m01B6W7SnW7tqtp9/eGi6q4167LbfnepIumusu02615UYab5vYvmuYvbDMOyq+jeiLKr96AlytwPkSrK3BkiL8K8L1vuvvlg23+3CVEa87sZMVp3uxkRmfu/GPHW/78Y0hZzsyjCVTezKKKTe7MogtL/syhjEnOzOENR97M4I5E7szgD1Dq3DCQ98rcNDA/owf0r4qDR/T3g4Nda5Ooze1uFJXzXPWRS9s8NXSct11WAxrDbTYY5sdHdjmKsy2vGh3rbZyb3sad9FzD1f3vm7nDZ7fte39b99jk/014GvfLbXibjPOsONfQ04w4qYJniflnlk+J+aWaU6v5EeDDjDnVHl+JuklmR4m6hapDrHo/LK+kOsUw46v7ADRjrHt9uI+j+4c8+6w8BITb7HxGiPvsfIiM2+y8ypD77L0MlNvs/U6Y++z9kITXrjvNoHfOvdJk9+0+VF7nzb6VLOPtfpyux82/HjL33bZhRs9uviz2w83/YsDYOME+DgCRs6Ak/Of3RAYOgaOToF8w9/3IDg4Ca7PgbGj4OU0uDkOfg6Dt/Pg6US4OhK+DoS9M2HtUDg8FhbPhceDYfJkuDwaNs+Gz8Nh9HQ4PR5Wz4fX6xuthkjEIhrxiCoJAg=="
+attributes:{"name":[],"label":[],"type":[]}
+{widgets}
+field1:{"type":"field","size":[74,12],"pos":[11,5],"locked":1,"show":"transparent","border":0,"value":"1-Bit  Patterns"}
+button99:{"type":"button","size":[40,18],"pos":[79,22],"script":"PaletteAdjuster.0p","text":"Apply"}
+button0:{"type":"button","size":[40,18],"pos":[79,44],"script":"PaletteAdjuster.1p","text":"Apply"}
+whitehex:{"type":"field","size":[44,18],"pos":[31,22],"style":"code","align":"center"}
+blackhex:{"type":"field","size":[44,18],"pos":[31,44],"align":"center"}
+yellowhex:{"type":"field","size":[44,18],"pos":[31,70],"style":"code","align":"center"}
+button1:{"type":"button","size":[40,18],"pos":[79,70],"script":"PaletteAdjuster.2p","text":"Apply"}
+button2:{"type":"button","size":[40,18],"pos":[79,92],"script":"PaletteAdjuster.3p","text":"Apply"}
+button3:{"type":"button","size":[40,18],"pos":[79,114],"script":"PaletteAdjuster.4p","text":"Apply"}
+orangehex:{"type":"field","size":[44,18],"pos":[31,92],"style":"code","align":"center"}
+redhex:{"type":"field","size":[44,18],"pos":[31,114],"align":"center"}
+magentahex:{"type":"field","size":[44,18],"pos":[31,136],"style":"code","align":"center"}
+button4:{"type":"button","size":[40,18],"pos":[79,136],"script":"PaletteAdjuster.5p","text":"Apply"}
+button5:{"type":"button","size":[40,18],"pos":[79,158],"script":"PaletteAdjuster.6p","text":"Apply"}
+purplehex:{"type":"field","size":[44,18],"pos":[31,158],"align":"center"}
+bluehex:{"type":"field","size":[44,18],"pos":[31,180],"style":"code","align":"center"}
+button6:{"type":"button","size":[40,18],"pos":[79,180],"script":"PaletteAdjuster.7p","text":"Apply"}
+button7:{"type":"button","size":[40,18],"pos":[226,26],"script":"PaletteAdjuster.8p","text":"Apply"}
+button8:{"type":"button","size":[40,18],"pos":[226,48],"script":"PaletteAdjuster.9p","text":"Apply"}
+cyanhex:{"type":"field","size":[44,18],"pos":[178,26],"style":"code","align":"center"}
+greenhex:{"type":"field","size":[44,18],"pos":[178,48],"align":"center"}
+darkgreenhex:{"type":"field","size":[44,18],"pos":[178,70],"script":"byte.1","style":"code","align":"center"}
+button9:{"type":"button","size":[40,18],"pos":[226,70],"script":"PaletteAdjuster.10p","text":"Apply"}
+button17:{"type":"button","size":[40,18],"pos":[226,92],"script":"PaletteAdjuster.11p","text":"Apply"}
+button18:{"type":"button","size":[40,18],"pos":[226,114],"script":"PaletteAdjuster.12p","text":"Apply"}
+brownhex:{"type":"field","size":[44,18],"pos":[178,92],"style":"code","align":"center"}
+tanhex:{"type":"field","size":[44,18],"pos":[178,114],"align":"center"}
+lightgrayhex:{"type":"field","size":[44,18],"pos":[178,136],"script":"byte.1","style":"code","align":"center"}
+button19:{"type":"button","size":[40,18],"pos":[226,136],"script":"PaletteAdjuster.13p","text":"Apply"}
+button20:{"type":"button","size":[40,18],"pos":[226,158],"script":"PaletteAdjuster.14p","text":"Apply"}
+mediumgrayhex:{"type":"field","size":[44,18],"pos":[178,158],"align":"center"}
+darkgrayhex:{"type":"field","size":[44,18],"pos":[178,180],"style":"code","align":"center"}
+button21:{"type":"button","size":[40,18],"pos":[226,180],"script":"PaletteAdjuster.15p","text":"Apply"}
+orangepreview:{"type":"canvas","size":[20,18],"pos":[123,92],"locked":1,"image":"%%IMG2ABQAEiL/Imk=","scale":1}
+blackpreview:{"type":"canvas","size":[20,18],"pos":[123,44],"locked":1,"image":"%%IMG2ABQAEgH/AWk=","scale":1}
+whitepreview:{"type":"canvas","size":[20,18],"pos":[123,22],"locked":1,"image":"%%IMG2ABQAEiD/IGk=","scale":1}
+yellowpreview:{"type":"canvas","size":[20,18],"pos":[123,70],"locked":1,"image":"%%IMG2ABQAEiH/IWk=","scale":1}
+redpreview:{"type":"canvas","size":[20,18],"pos":[123,114],"locked":1,"image":"%%IMG2ABQAEiP/I2k=","scale":1}
+magentapreview:{"type":"canvas","size":[20,18],"pos":[123,136],"locked":1,"image":"%%IMG3ABQAEgZAknBILBIBxqQRqWySmM4kNFqcUofW61Nb5R69WLAweyVTzVG0U91kK93SIA==","scale":1}
+purplepreview:{"type":"canvas","size":[20,18],"pos":[123,158],"locked":1,"image":"%%IMG3ABQAEgbAknBILBIBxqQRqWyWmM4kNFqcUofW61Nb5R69WLAweyVTzVG0U91kK93SIA==","scale":1}
+bluepreview:{"type":"canvas","size":[20,18],"pos":[123,180],"locked":1,"image":"%%IMG2ABQAEib/Jmk=","scale":1}
+cyanpreview:{"type":"canvas","size":[20,18],"pos":[270,26],"locked":1,"image":"%%IMG2ABQAEif/J2k=","scale":1}
+greenpreview:{"type":"canvas","size":[20,18],"pos":[270,48],"locked":1,"image":"%%IMG2ABQAEij/KGk=","scale":1}
+darkgreenpreview:{"type":"canvas","size":[20,18],"pos":[270,70],"locked":1,"image":"%%IMG2ABQAEin/KWk=","scale":1}
+brownpreview:{"type":"canvas","size":[20,18],"pos":[270,92],"locked":1,"image":"%%IMG3ABQAEgZAlXBILBIBxqQRqWyqmM4kNFqcUofW61Nb5R69WLAweyVTzVG0U91kK93SIA==","scale":1}
+tanpreview:{"type":"canvas","size":[20,18],"pos":[270,114],"locked":1,"image":"%%IMG2ABQAEiv/K2k=","scale":1}
+lightgraypreview:{"type":"canvas","size":[20,18],"pos":[270,136],"locked":1,"image":"%%IMG2ABQAEiz/LGk=","scale":1}
+mediumgraypreview:{"type":"canvas","size":[20,18],"pos":[270,158],"locked":1,"image":"%%IMG2ABQAEi3/LWk=","scale":1}
+darkgray:{"type":"canvas","size":[20,18],"pos":[270,180],"locked":1,"image":"%%IMG2ABQAEi7/Lmk=","scale":1}
+field2:{"type":"field","size":[19,18],"pos":[9,22],"locked":1,"font":"menu","align":"center","value":{"text":["","i","32","i"],"font":["","","body",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field3:{"type":"field","size":[19,18],"pos":[9,44],"locked":1,"align":"center","value":{"text":["","i","47","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field4:{"type":"field","size":[19,18],"pos":[9,70],"locked":1,"align":"center","value":{"text":["","i","33","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field5:{"type":"field","size":[19,18],"pos":[9,92],"locked":1,"align":"center","value":{"text":["","i","34","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field6:{"type":"field","size":[19,18],"pos":[9,114],"locked":1,"align":"center","value":{"text":["","i","35","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field7:{"type":"field","size":[19,18],"pos":[9,136],"locked":1,"align":"center","value":{"text":["","i","36","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field8:{"type":"field","size":[19,18],"pos":[9,158],"locked":1,"align":"center","value":{"text":["","i","37","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field9:{"type":"field","size":[19,18],"pos":[9,180],"locked":1,"align":"center","value":{"text":["","i","38","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field10:{"type":"field","size":[19,18],"pos":[156,180],"locked":1,"align":"center","value":{"text":["","i","46","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field11:{"type":"field","size":[19,18],"pos":[156,26],"locked":1,"align":"center","value":{"text":["","i","39","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field12:{"type":"field","size":[19,18],"pos":[156,48],"locked":1,"align":"center","value":{"text":["","i","40","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field13:{"type":"field","size":[19,18],"pos":[156,70],"locked":1,"align":"center","value":{"text":["","i","41","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field14:{"type":"field","size":[19,18],"pos":[156,92],"locked":1,"align":"center","value":{"text":["","i","42","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field15:{"type":"field","size":[19,18],"pos":[156,114],"locked":1,"align":"center","value":{"text":["","i","43","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field16:{"type":"field","size":[19,18],"pos":[156,136],"locked":1,"align":"center","value":{"text":["","i","44","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+field17:{"type":"field","size":[19,18],"pos":[156,158],"locked":1,"align":"center","value":{"text":["","i","45","i"],"font":["","","",""],"arg":["","%%IMG2AAIAECAg","","%%IMG2AAIAEAAg"]}}
+
+{script:PaletteAdjuster.0p}
+on click do
+  patterns[colors.white]:"%h" parse whitehex.text
+end
+{end}
+
+{script:PaletteAdjuster.1p}
+on click do
+  patterns[colors.black]:"%h" parse blackhex.text
+end
+{end}
+
+{script:PaletteAdjuster.2p}
+on click do
+  patterns[colors.yellow]:"%h" parse yellowhex.text
+end
+{end}
+
+{script:PaletteAdjuster.3p}
+on click do
+  patterns[colors.orange]:"%h" parse orangehex.text
+end
+{end}
+
+{script:PaletteAdjuster.4p}
+on click do
+  patterns[colors.red]:"%h" parse redhex.text
+end
+{end}
+
+{script:PaletteAdjuster.5p}
+on click do
+  patterns[colors.magenta]:"%h" parse magentahex.text
+end
+{end}
+
+{script:PaletteAdjuster.6p}
+on click do
+  patterns[colors.purple]:"%h" parse purplehex.text
+end
+{end}
+
+{script:PaletteAdjuster.7p}
+on click do
+  patterns[colors.blue]:"%h" parse bluehex.text
+end
+{end}
+
+{script:PaletteAdjuster.8p}
+on click do
+  patterns[colors.cyan]:"%h" parse cyanhex.text
+end
+{end}
+
+{script:PaletteAdjuster.9p}
+on click do
+  patterns[colors.green]:"%h" parse greenhex.text
+end
+{end}
+
+{script:PaletteAdjuster.10p}
+on click do
+  patterns[colors.darkgreen]:"%h" parse darkgreenhex.text
+end
+{end}
+
+{script:PaletteAdjuster.11p}
+on click do
+  patterns[colors.brown]:"%h" parse brownhex.text
+end
+{end}
+
+{script:PaletteAdjuster.12p}
+on click do
+  patterns[colors.tan]:"%h" parse tanhex.text
+end
+{end}
+
+{script:PaletteAdjuster.13p}
+on click do
+  patterns[colors.lightgray]:"%h" parse lightgrayhex.text
+end
+{end}
+
+{script:PaletteAdjuster.14p}
+on click do
+  patterns[colors.mediumgray]:"%h" parse mediumgrayhex.text
+end
+{end}
+
+{script:PaletteAdjuster.15p}
+on click do
+  patterns[colors.darkgray]:"%h" parse darkgrayhex.text
+end
+{end}
+
+{contraption:gridSelector}
+size:[128,128]
+resizable:1
+margin:[2,1,2,2]
+script:"gridSelector.0p"
+attributes:{"name":["cw","ch","gc","border"],"label":["cell width","cell height","grid color","draw border?"],"type":["number","number","number","bool"]}
+{widgets}
+cellW:{"type":"slider","size":[54,25],"pos":[158,-46],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[54,25],"pos":[158,-3],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"locked":1,"volatile":1,"script":"gridSelector.1p","pattern":32,"show":"transparent","border":1,"scale":1}
+gridColor:{"type":"slider","size":[54,25],"pos":[158,40],"locked":1,"interval":[0,47],"value":9,"style":"compact"}
+curXY:{"type":"field","size":[61,20],"pos":[158,81],"locked":1,"style":"plain","value":"[0,0]"}
+
+{script:gridSelector.0p}
+on get_cw do cellW.value end       on set_cw x do cellW.value: x end
+on get_ch do cellH.value end       on set_ch x do cellH.value: x end
+on get_gc do gridColor.value end   on set_gc x do gridColor.value: x end
+on get_border do c.border end      on set_border x do c.border:x end
+on get_cxy do curXY.data end       on set_cxy xy do curXY.data: xy end
+
+on get_gw do c.size[0]/cellW.value end
+on get_gh do c.size[1]/cellH.value end
+on get_cwh do cellW.value,cellH.value end
+on get_cur do (get_gw[] * last curXY.data) + first curXY.data end
+
+on view do
+ c.clear[] c.brush:0
+ # give instances a chance to draw on canvas
+ card.event["draw" c]
+ if c.pattern: gridColor.value
+  each x in get_cw[] * range 1+get_gw[] c.line[x,0 x,c.size[1]] end nil
+  each y in get_ch[] * range 1+get_gh[] c.line[0,y c.size[0],y] end nil
+ end
+ xy:curXY.data  cwh:get_cwh[]
+ c.brush: c.pattern:1  c.box[xy*cwh 1+cwh]
+ c.brush: 0 c.pattern:32 c.box[xy*cwh cwh]
+end
+
+on click xy do
+ set_cxy[floor xy/get_cwh[]]
+ view[]
+ card.event["pick" get_cxy[]]
+end
+{end}
+
+{script:gridSelector.1p}
+# empty script to disable drawing
+on drag do end
+
+{end}
+
