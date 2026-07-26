@@ -1,0 +1,33 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+name:"engine.deck"
+
+{card:home}
+image:"%%IMG3AgABVgbAl3BILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"home.0"
+{widgets}
+field1:{"type":"field","size":[178,48],"pos":[19,42],"show":"transparent","value":{"text":["","h","e","llo",", ","world!"," ","somehow"," ","my\nd","ecker ","has ","t","o","o"," ","m","a","n","y"," ","c","o","l","o","r","s","."],"font":["","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu","menu"],"arg":["","","","","","","","","","","","","","","","","","","","","","","","","","","",""],"pat":[1,62,64,57,62,85,83,79,83,51,93,65,56,57,64,65,67,68,69,70,68,48,49,50,51,52,53,68]}}
+ship:{"type":"canvas","size":[63,55],"pos":[140,137],"animated":1,"script":"home.1","pattern":44,"show":"transparent","image":"%%IMG2AD8ANwD/AP8A/wD/AMkjAgA8IwQAOyMFADsjBQA7IwUAOyMELAMAOSMCLAUAOSwHADgsBwA4LAcAOSwFADssAwD/AP8A/wD/AP8A/wAM","brush":4,"scale":1}
+
+{script:home.0}
+on view do
+ app.cursor:"crosshair"
+end
+{end}
+
+{script:home.1}
+
+on view do
+ app.cursor: crosshair
+ me.pos: me.pos + gamepad.dir
+
+ me.pattern: colors.red o:me.size/2
+ a: heading pointer.pos - (o+me.pos)
+ me.clear[] me.brush:2 me.line[o o+10*unit a]
+ me.pattern: colors.lightgray me.brush: 4
+ me.line[o]
+end
+{end}
+
