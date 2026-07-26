@@ -1,0 +1,33 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+name:"lean-canvas.deck"
+
+{card:home}
+{widgets}
+problem:{"type":"field","size":[100,104],"pos":[2,33]}
+field1:{"type":"field","size":[100,14],"pos":[2,19],"locked":1,"show":"invert","border":0,"value":"problem"}
+field2:{"type":"field","size":[100,105],"pos":[105,32]}
+field3:{"type":"field","size":[100,14],"pos":[105,18],"locked":1,"show":"invert","border":0,"value":"solution"}
+field4:{"type":"field","size":[100,107],"pos":[411,32]}
+field5:{"type":"field","size":[100,14],"pos":[412,16],"locked":1,"show":"invert","border":0,"value":"customer segments"}
+field6:{"type":"field","size":[97,104],"pos":[312,31]}
+field7:{"type":"field","size":[100,14],"pos":[312,17],"locked":1,"show":"invert","border":0,"value":"unfair advantage"}
+field8:{"type":"field","size":[99,117],"pos":[-1,153]}
+field9:{"type":"field","size":[107,14],"pos":[0,139],"locked":1,"show":"invert","border":0,"value":"existing alternatives"}
+field10:{"type":"field","size":[104,98],"pos":[206,39]}
+field11:{"type":"field","size":[106,23],"pos":[206,16],"locked":1,"show":"invert","border":0,"value":"unique value\nproposition"}
+field12:{"type":"field","size":[107,118],"pos":[98,152]}
+field13:{"type":"field","size":[107,14],"pos":[98,139],"locked":1,"show":"invert","border":0,"value":"key metrics"}
+field14:{"type":"field","size":[254,54],"pos":[3,286]}
+field15:{"type":"field","size":[254,14],"pos":[3,272],"locked":1,"show":"invert","border":0,"value":"cost structure"}
+field16:{"type":"field","size":[100,115],"pos":[412,155]}
+field17:{"type":"field","size":[100,14],"pos":[412,141],"locked":1,"show":"invert","border":0,"value":"early adopters"}
+field18:{"type":"field","size":[100,117],"pos":[311,153]}
+field19:{"type":"field","size":[100,14],"pos":[311,137],"locked":1,"show":"invert","border":0,"value":"channels"}
+field20:{"type":"field","size":[100,118],"pos":[206,152]}
+field21:{"type":"field","size":[100,14],"pos":[208,137],"locked":1,"show":"invert","border":0,"value":"high level concept"}
+field26:{"type":"field","size":[247,54],"pos":[261,286]}
+field27:{"type":"field","size":[247,14],"pos":[261,272],"locked":1,"show":"invert","border":0,"value":"revenue streams"}
+
