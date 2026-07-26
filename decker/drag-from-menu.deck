@@ -1,0 +1,25 @@
+{deck}
+version:1
+card:0
+size:[512,342]
+name:"drag-from-menu.deck"
+
+{card:home}
+{widgets}
+field1:{"type":"field","size":[129,18],"pos":[15,22],"locked":1,"animated":1,"script":"home.0","border":0,"style":"code","value":"ad sb ml dv md ^[ ^] "}
+c:{"type":"canvas","size":[24,19],"pos":[84,22],"show":"transparent","draggable":1,"scale":1}
+
+{script:home.0}
+on pt_in_box pt xy wh do
+ prod (pt>xy-1) & (pt<xy+wh+1)
+end
+
+on mouse_over w do
+ pt_in_box[pointer.pos w.pos w.size]
+end
+
+on view do
+ if mouse_over[me] c.pos: (first pointer.pos),(last me.pos) end
+end
+{end}
+
