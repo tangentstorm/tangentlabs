@@ -1,0 +1,438 @@
+{deck}
+version:1
+card:2
+size:[512,342]
+script:"0"
+name:"grid-selector.deck"
+
+{script:0}
+on run text do
+ d:deck.card.widgets
+ d.card:deck.card
+ r:eval[deck.card.script d 1]
+ if r.error
+  alert[r.error]
+ else
+  d:r.vars
+  r:eval[text d 1]
+ end
+ if "res" in keys d
+   d.res.data: r.value unless r.error
+ end
+end
+
+{end}
+
+{card:home}
+script:"home.0"
+{widgets}
+pointer.pos:{"type":"field","size":[164,20],"pos":[317,47],"animated":1,"script":"home.1","border":0,"style":"code","value":"pointer.pos :: [208,83]"}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+
+{script:home.0}
+on view do
+ 
+end
+{end}
+
+{script:home.1}
+on view do
+ me.text: "pointer.pos :: %j" format list pointer.pos
+end
+{end}
+
+{card:card1}
+script:"home.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+pointer.pos:{"type":"field","size":[204,20],"pos":[5,22],"animated":1,"script":"card1.0","border":0,"style":"code","value":"pointer.pos: [208,83]"}
+field1:{"type":"field","size":[205,20],"pos":[5,43],"animated":1,"script":"card1.1","border":0,"style":"code","value":"pointer.pos-c.pos: [-79,30]"}
+c:{"type":"canvas","size":[100,100],"pos":[287,53],"pattern":40,"image":"%%IMG2AGQAZCj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yg3","draggable":1,"scale":1}
+
+{script:card1.0}
+on view do
+ me.text: "pointer.pos: %j" format list pointer.pos
+end
+{end}
+
+{script:card1.1}
+on view do
+ me.text: "pointer.pos-c.pos: %j" format list pointer.pos - c.pos
+end
+{end}
+
+{card:grid scale}
+script:"grid scale.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{"value":"cwh:2 take cs.value\ngw:first c.size/cwh\ngh:last c.size/cwh\nc.clear[] c.pattern:34 c.fill[]\neach xy in (gw cross gh) * cwh\n c.pattern:40 c.rect[xy cwh]\n c.pattern:1 c.box[xy cwh+1]\nend"},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+c:{"type":"canvas","size":[191,137],"pos":[293,57],"script":"grid scale.1","image":"%%IMG3AL8AiQbAgHBILBqPyKRyyWw6n9ColCmqWqsBlHbL3Wa7YNQ3zB2TteZzmrwOt8Hvbrx8ptfRd/T1OvfmxX99eHmCgISBiIeKd4UBe1aNiYySdZGLlZRqmWyBj1ibbqBwonKkdpOXmqlsniKWqLCYq6Gzo7Wlt6eVra+ysaq/nLl+w4PBtIy8psTHts24z7rAvtTTasrFhtHM1cLbxt3I4c67nr3W3uPQ6tLp6OLv5Nfmy+Dx6/ft8O78+/7yrOhlO9cP4D98BREe1GcQDrZv2thxyzcxIUOFDTFqLPNQoj2LFReGzHix5MiNJzmam8KypcuXMGPKFNKR4keRN0mm3JkTZU+TP73UBBm0aESbR4kmxblUp1FHAiESZDrVaVOfV4FmFRrV49an9b6KrYqVrMpHZnmODZsW7EC2Q6mynfu2rtROXZG2XWvX696/ca3+pXu3r168aAn7VXzYsNJGgcsyfjxZrmM3kbUOviy4cmdCmdVuLkx6MWc5od2Wbrya8umze2bKnk27tm0jqfm2trz7c2/UeV3/1uxZ8muuiY+rNj1cdHHYfJ47V66bufV5yZsvZ31deHfMwXl/9z3euHYxuUeXJ05dPfbY0rd7505/fsDs66efd2+favr41dUnnoCC/dcegPwN+JiB+yHoYHsM5iefghSSpxcvt2Wo4YYcHhEhgeZJGGB/BYZnIYkhgsjefh+iuKKICZ4IHn4q6gfjgyyamKKLNtY4oYwO6fiijyNWuKOR0EGC440HNpmMkD3y+OORQFIJHI1SFlnlkFkCBuWUXCIZpZhgIgefk0w2iOZ70a3Z5ZJEQvalllaGueWYd+qxUod89unnSy2SSaeddeJZVqB5DmoooYyKhmihZUaqqKRyYilojJBOqmmlZ6rpaZqgsqmkm5fC+SZoc2LaKKWm+pdqq4mquqijr5IaK6yZQmXprbbmimuSn/S66qa/0rqrr8LOyupAjw4r67KfiorFn9RWay0SzSpLbLLQlnOss8V2GydinYZ6arTnelvuuNxui+6M66bL7ru8Pvmtts+6a66r94or77+lotqvvvPuW6+6bdKLrMLgChxvwAzjGy56tUbsL8QwZnvxwQXHqTHBAHPcJYbXlmxynx/nq/LEnCZs8MIvN2zvwyJj3HHIV9IM88024wysKywH3W7Lo1oMcs9IBznwykMLPbPLPNcs9c736SxzzBIPnbLTWG+cM9Q+Z220yls3bXaOS3MdNdX8xnby23DbVvbYao9ccddHT+3s3HgzPTbfa18duLFWi9133W2DnTTbehsuLdBnHx75435LTjezdw/uteB2pz152JsTrnjjoZee99dFW6665mMBDvrpnCcOSdy01w5o5q9XzjrRwV7u++pVj8748LGTTrHnv+/OsuuLF0+86Kkr/3nz0PcOPPWme4n89cbrHnz0uSPePbnCO2++47kzP/70sar/fPbL44497OhfSrLt+OdPRSv89+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTBMYRAA","draggable":1,"scale":1}
+cs:{"type":"contraption","size":[100,25],"pos":[375,25],"script":"grid scale.2","def":"hybridSlider","widgets":{"compact":{"interval":[5,20],"value":14},"bar":{"interval":[5,20],"value":14}}}
+field3:{"type":"field","size":[263,53],"pos":[10,25],"animated":1,"script":"grid scale.3","border":0,"style":"code","value":"p0: pointer.pos   # [93,82] \np1: p0-c.pos      # [-200,25]\np2: p1/cs.value   # [-14.285714,1.785714]\np3: floor p2      # [-15,1]"}
+csLabel:{"type":"field","size":[72,20],"pos":[295,26],"border":0,"style":"plain","align":"right","value":"cell size (cs):"}
+h:{"type":"canvas","size":[4,4],"pos":[484,194],"script":"grid scale.4","draggable":1,"scale":1}
+
+{script:grid scale.0}
+on view do
+ redraw[]
+end
+
+on redraw do
+ c.clear[] c.pattern:colors.magenta c.fill[]
+ w: first c.size h: last c.size  s:cs.value
+ each xy in s * (w/s) cross h/s
+  c.pattern:colors.green c.rect[xy s,s]
+  c.pattern:colors.black c.box[xy s,s]
+ end
+end
+{end}
+
+{script:grid scale.1}
+
+on drag pos do
+ h.pos: me.pos + me.size
+end
+
+{end}
+
+{script:grid scale.2}
+on change val do
+ redraw[]
+end
+{end}
+
+{script:grid scale.3}
+on view do
+ d.p0: pointer.pos
+ d.p1: d.p0-c.pos
+ d.p2: d.p1/cs.value
+ d.p3: floor d.p2
+ me.text: 1 drop "
+p0: pointer.pos   # %[p0]j 
+p1: p0-c.pos      # %[p1]j
+p2: p1/cs.value   # %[p2]j
+p3: floor p2      # %[p3]j" 
+  format d
+end
+{end}
+
+{script:grid scale.4}
+# handle script
+
+on drag pos do
+ if prod c.pos < me.pos
+   c.size: me.pos - c.pos
+ else
+   me.pos: c.pos
+ end
+ redraw[]
+end
+
+{end}
+
+{card:card3}
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+c:{"type":"canvas","size":[176,152],"pos":[325,57],"script":"grid scale.1","pattern":47,"image":"%%IMG3ALAAmAbAl3BILBqPyKRyyWw6n9Co1IiqWq3Cqzarxb66XnCVCyZ3zduvGH1lh9fqcvw8T4tR7nG9vX/L73l4fXqAg4KFiHCJf4qNjI90i5GOk5B2lJeWfJKZlZ6doJuYopp+n6SnpqGqqKuEo6yxr6WzqbWuh7C3rbyyubS/tsG4gcWGxpy9u77IusPKz8zH08nS1cvY0dnNwNzC3sTUzuDQ5Nbj4t3p3+vhhVPw8fLz9PX29/j5+vv319r/5ra1KzfwnDp/AQEWFIhwocKGENFFPCixIsWL7CZmtLgRozuOHz0S1Biyo8mSKEeCVCnS4EmWL12mlAlzJsOVNHPebLkzZk+bD3H+rElUZ1CeCvkpXcq0qdOnUKPiI1l0qNGEWB1mpXpVq1euVsMe9TkW6FahZaum7Qp2rdizSOGSlWv2K1q6avGyvWs3bt+5f+u21fs2cF7De/0ORlx48WKpkCNLnky5smTHfDErzsx5s2fAmkF3Fv1Z8GjTpQ+HRk26NevXqk/HTp3Y9WzbtWHnvq27sezdwH3TFo6beF3LyJMrX84c+Wre0IO7nU6YOmPrz6VX336de3bj0cFr707+O/bf4tOfH76+ePve78PHH2/eO/r56u2z1w+4uf//AAYoYBP1lXcff/AhKJ+C9B1o4H4PusdgfhEmWOGCFzYIYYEcOtjhhh6GCOKIEmZI4YclonjcgCy26OKLUqmIoYwapiiijSRaSOOJN+rY44w/1uhjjkASKWSROCY5pJJILulkk1AeKSWPEMJo5ZVYZhnFjvh1OaGXJoLJ5ZdkhlnmmGamieaaQVLJ5JRithmnkW4+CeeZcuJJ55xv1smHloAGKqiVbO6pZ5982unnnWrm2aihjyJ6qKKJRrnopZUyWqikkVI6qaWZYvqppg4OauqpqCa3qaedgjqqqK2SCumqrsYKK62ycorrrY7uGuqvrwJrq7C+BmvssKkmq+yyTRWL7LPORtvrtLNSq6u1rEpb7bbXcpsttrVq2+2433obLrjjMavuuuxKIW655J5rbq7w1itvvPTea2++/PI6r7/4AryvwPoW3C+x6BLcVbsMN+zwse8arPDECP9bccAXD5yxxBsfDHHCHVP8scUjY1yyxidznNXD7JLg8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322FgHAQ==","draggable":1,"scale":1}
+cs:{"type":"contraption","size":[100,25],"pos":[375,25],"script":"grid scale.2","def":"hybridSlider","widgets":{"compact":{"interval":[5,20],"value":11},"bar":{"interval":[5,20],"value":11}}}
+field3:{"type":"field","size":[263,53],"pos":[10,25],"animated":1,"script":"grid scale.3","border":0,"style":"code","value":"p0: pointer.pos   # [202,32] \np1: p0-c.pos      # [-123,-25]\np2: p1/cs.value   # [-11.181818,-2.272727]\np3: floor p2      # [-12,-3]"}
+csLabel:{"type":"field","size":[72,20],"pos":[295,26],"border":0,"style":"plain","align":"right","value":"cell size (cs):"}
+h:{"type":"canvas","size":[4,4],"pos":[501,209],"script":"grid scale.4","draggable":1,"scale":1}
+
+{card:card2}
+script:"card2.0"
+{widgets}
+canvas:{"type":"field","size":[299,251],"pos":[2,20],"locked":1,"border":0,"value":{"text":["","canvas help","\n\n","c.pattern: 0      # number or colors.red\nc.brush: 0\n\nc.clear[]\nc.fill[xy]        # paint bucket tool\nc.box[xy wh]      # outline only\nc.rect[xy wh]     # outline + fill\nc.line[...xy]\nc.text[msg pos a]\n# a is optional, and can be any of:\n#\n# \"top_left\"    \"top_center\"    \"top_right\"\n# \"center_left\" \"center\"        \"center_right\"\n# \"bottom_left\" \"bottom_center\" \"bottom_right\"\n\nc.copy[xy wh]     # gives an image\nc.paste[img xy t] # if t=1 color 0 is transparent\n\n\nFor more, see ","#canvasinterface"," in docs"],"font":["","menu","","mono","mono","mono"],"arg":["","","","","https://beyondloom.com/decker/decker.html#canvasinterface",""]}}
+pal:{"type":"contraption","size":[81,61],"pos":[46,275],"volatile":1,"script":"card2.1","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[1,0]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
+patternLabel:{"type":"field","size":[43,20],"pos":[2,283],"locked":1,"border":0,"align":"right","value":"pattern:"}
+patternSlider:{"type":"slider","size":[43,20],"pos":[2,307],"volatile":1,"script":"card2.2","interval":[0,47],"style":"bar"}
+brush:{"type":"contraption","size":[129,49],"pos":[178,284],"script":"card2.3","def":"gridSelector","widgets":{"cellW":{"pos":[159,-46]},"cellH":{"size":[54,11],"pos":[159,-3]},"c":{"size":[129,49]},"gridColor":{"size":[54,10],"pos":[159,15]},"curXY":{"size":[61,8],"pos":[159,31],"value":"[1,0]"},"gridW":{"pos":[225,-46],"value":8},"gridH":{"size":[54,11],"pos":[225,-3],"value":3},"showCursor":{"size":[60,8],"pos":[226,15]}}}
+brushLabel:{"type":"field","size":[43,20],"pos":[134,283],"locked":1,"border":0,"align":"right","value":"brush:"}
+brushSlider:{"type":"slider","size":[43,20],"pos":[133,303],"volatile":1,"script":"card2.4","interval":[0,23],"style":"bar"}
+f0:{"type":"field","size":[197,72],"pos":[312,114],"value":"c0.clear[]"}
+c0Label:{"type":"field","size":[18,14],"pos":[312,18],"border":0,"style":"plain","value":"c0"}
+c1Label1:{"type":"field","size":[18,14],"pos":[413,18],"border":0,"style":"plain","value":"c1"}
+c0:{"type":"canvas","size":[98,80],"pos":[313,30],"image":"%%IMG3AGIAUAKEj6nL7Q+jnLTai7PevPsPhuJIluaJpurKtu4Lx/JM1/aN5/rO9/4PDAqHREXgiAwUOckkoLmsNJFPJzX6OC6gVGXEi91qleCGNuwgQ65oc5lxbsPfc3l9TbdXv3G9IX/ntyfRp1eYBoh2GGg45YTw6Odo5ShYNYlp+eeFWSnYl0kZibVo1MVV+pPqJpros0o4KsS2QTsLO4G7Y5uhqzPG5JtD5hpb3MNrIfx7zBfWjAeteZA8zWqdq4a99tS9ndUtPa0GKP58mbDcdir7PQb1LVYdT19vf4+fr7/P3+//DzCgwIEECxq0UAA=","brush":15,"scale":1}
+c1:{"type":"canvas","size":[97,80],"pos":[412,30],"image":"%%IMG3AGEAUAbAkHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/3ErgoMrgFiEhCGIhlGIg4qJj4xLgkeLj4VNKZNJmIpMKZucSoWZSqGio52mSaGqpKytqa9FlaCztEO2S6i5tU+uvkK7t8LDsae4tMTJxqiCqL1E0c6hhNTR1MLRjo7S1cfd0Inbs+KlmIujwZTpkcx97E+OkPB88lTqf99Xkvv4Vezt4WdFoB5XyqT42xcCoEKDBx02QuZH4kROCR9SNNZuI8dVHj9aKiXSCcmQJXV9Qply5SdLLYfVq8XSl7uFMSvRi2lEH8+fQIMKHUq0qNGjSJMqXcq0qdOnUKMOCQI=","brush":15,"scale":1}
+f2:{"type":"field","size":[197,72],"pos":[312,266],"value":"c1.merge[\"+\" c0.copy[] 0,0 1]"}
+f1:{"type":"field","size":[197,72],"pos":[312,189],"value":"im:c0.copy[]\nc1.paste[im.map[(0,1)dict(33,34)]"}
+special:{"type":"field","size":[100,20],"pos":[206,161],"show":"none"}
+
+{script:card2.0}
+on set_pattern x do
+ (pal,patternSlider)..value:x
+ (c0,c1)..pattern: x
+end
+
+on set_brush x do
+ (brush,brushSlider)..value: x
+ (c0,c1)..brush:x
+end
+{end}
+
+{script:card2.1}
+on draw c do
+ cwh:me.cwh
+ each xy i in me.gw cross me.gh
+  c.pattern:i c.rect[cwh*xy cwh]
+ end
+end
+
+on pick xy i do
+ set_pattern[i]
+end
+{end}
+
+{script:card2.2}
+on change val do
+ set_pattern[val]
+end
+{end}
+
+{script:card2.3}
+on draw c do
+ cwh:me.cwh
+ each xy i in me.gw cross me.gh
+  # .line[single_point] = draw brush
+  c.brush:i c.line[cwh*xy+.5]
+ end
+end
+
+on pick xy val do
+ brushSlider.value: val
+ c.brush: val
+end
+{end}
+
+{script:card2.4}
+on change val do
+ set_brush[val]
+end
+{end}
+
+{card:card4}
+script:"home.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+
+{card:card5}
+script:"home.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+
+{card:card6}
+script:"home.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+
+{card:card7}
+script:"home.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+
+{card:card8}
+script:"home.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+
+{card:card9}
+script:"home.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+
+{contraption:tutor}
+size:[512,128]
+resizable:1
+margin:[5,35,4,8]
+description:"A contraption for creating interactive decker tutorials."
+version:0.1
+image:"%%IMG2AgAAgC7/Lv8uAif/J/8nAgH/Af8B/wH/AQQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMAH/Af8B/wH/AQQn/yf/JwIl/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/JcI="
+script:"tutor.0p"
+attributes:{"name":["body","code","next","prev"],"label":["body","code","next","prev"],"type":["rich","code","string","string"]}
+{widgets}
+body:{"type":"field","size":[210,93],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"value":"..."}
+nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
+cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
+code:{"type":"field","size":[218,94],"pos":[222,32],"pattern":47,"show":"none","border":1,"style":"code"}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,62],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,98],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
+prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+
+{script:tutor.0p}
+on get_body do body.value end  on set_body x do body.value: x end
+on get_code do code.text end   on set_code x do code.text: x end
+on get_next do next.text end   on set_next x do next.text: x end
+on get_prev do prev.text end   on set_prev x do prev.text: x end
+
+on view do
+ cardName.text: deck.card.name
+ code.locked: me.locked
+ sh: if code.text
+       if me.locked "invert" else "solid" end
+     else "none" end
+ code.show: sh runBtn.show: sh
+ # "-" is placeholder awaiting this fix:
+ # https://github.com/JohnEarnest/Decker/commit/f591e823a
+ nextBtn.show: if next.text "solid" else "none" end
+ prevBtn.show: if prev.text "solid" else "none" end
+end
+
+on next_card_name do
+ if next.text = "Next"
+  cn:keys deck.cards
+  ci:first extract index where value=deck.card.name from cn
+  cn[ci+1]
+ else
+  next.text
+ end
+end
+
+on no_script c do
+ (c.script="on view do\n\nend") |!c.script
+end
+
+on is_special c do
+ "special" in keys c.widgets
+end
+
+on copy_to_next do
+ card: deck.card
+ if !is_special[card]
+  nc: deck.cards[next_card_name[]]
+  if !is_special[nc]
+   tw: "tutor1"
+   if ! count tw drop nc.widgets
+    each w in tw drop card.widgets nc.add[w] end
+   end
+   if no_script[nc] nc.script: card.script end
+  end
+ end
+end
+
+on run text do
+ d:deck.card.widgets
+ d.card: deck.card
+ eval[text d 1]
+end
+
+{end}
+
+{script:tutor.1p}
+on click do
+ copy_to_next[]
+ go[next.text "SlideLeft" 15]
+end
+{end}
+
+{script:tutor.2p}
+on click do
+ go[prev.text "SlideRight" 15]
+end
+{end}
+
+{script:tutor.3p}
+on click do
+ d:deck.card.widgets
+ d.card:deck.card
+ eval[code.text d 1]
+end
+
+{end}
+
+{contraption:hybridSlider}
+size:[100,25]
+margin:[19,6,17,6]
+description:"Provides a slider with a combination of the \"bar\" and \"compact\" styles."
+script:"hybridSlider.0p"
+template:"on change val do\n \nend"
+attributes:{"name":["minv","maxv","format","value"],"label":["min value","max value","format","value"],"type":["number","number","string","number"]}
+{widgets}
+compact:{"type":"slider","size":[100,25],"pos":[0,0],"script":"hybridSlider.1p","interval":[0,100],"style":"compact"}
+bar:{"type":"slider","size":[74,25],"pos":[13,0],"script":"hybridSlider.2p","interval":[0,100],"style":"bar"}
+
+{script:hybridSlider.0p}
+on get_value do bar.value end       on set_value x do bar.value: x end
+on get_format do bar.format end     on set_format x do bar.format: x end
+on get_minv do bar.interval[0] end  on set_minv x do bar.interval:x,get_minv[] end
+on get_maxv do bar.interval[1] end  on set_maxv x do bar.interval:get_maxv[],x end
+
+on view do
+ compact.interval: bar.interval
+ compact.value:bar.value
+end
+
+{end}
+
+{script:hybridSlider.1p}
+on change val do
+ bar.value:val
+ card.event["change" val]
+end
+
+{end}
+
+{script:hybridSlider.2p}
+on change val do
+ compact.value:val
+ card.event["change" val]
+end
+
+{end}
+
+{contraption:gridSelector}
+size:[128,128]
+resizable:1
+margin:[2,1,2,2]
+description:"Draws a rectangular grid with a cursor, and translates mouse events to grid coordinates."
+version:0.1
+script:"gridSelector.0p"
+attributes:{"name":["cw","ch","gc","gw","gh","cursor"],"label":["cell width","cell height","grid color","grid width","grid height","draw cursor?"],"type":["number","number","number","number","number","bool"]}
+{widgets}
+cellW:{"type":"slider","size":[54,25],"pos":[158,-46],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[54,25],"pos":[158,-3],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"locked":1,"volatile":1,"pattern":32,"show":"transparent","border":1,"scale":1}
+gridColor:{"type":"slider","size":[54,25],"pos":[158,40],"locked":1,"interval":[0,47],"value":9,"style":"compact"}
+curXY:{"type":"field","size":[61,20],"pos":[158,81],"locked":1,"style":"plain","value":"[2,1]"}
+gridW:{"type":"slider","size":[54,25],"pos":[224,-46],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+gridH:{"type":"slider","size":[54,25],"pos":[224,-3],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+showCursor:{"type":"button","size":[60,20],"pos":[225,40],"locked":1,"font":"body","text":"cursor?","style":"check","value":1}
+
+{script:gridSelector.0p}
+on get_cw do cellW.value end     on set_cw x do cellW.value: x end
+on get_ch do cellH.value end     on set_ch x do cellH.value: x end
+on get_gw do gridW.value end     on set_gw x do gridW.value: x end
+on get_gh do gridH.value end     on set_gh x do gridH.value: x end
+on get_gp do gridP.value end     on set_gp x do gridP.value: x end
+on get_showCursor   do showCursor.value   end
+on set_showCursor x do showCursor.value:x end
+
+on get_cxy do curXY.data end       on set_cxy xy do curXY.data: xy end
+on get_cwh do cellW.value,cellH.value end
+on get_value do (get_gw[] * last curXY.data) + first curXY.data end
+on set_value i do
+ gw:get_gw[] curXY.data: (gw%i),(floor i/gw)
+ view[]
+end
+  
+on view do
+ c.clear[] c.brush:0 c.pattern:1
+ # give instances a chance to draw on canvas
+ card.event["draw" c] c.brush:0 c.pattern: gridColor.value
+ if gridColor.value
+  each x in get_cw[] * range 1+get_gw[] c.line[x,0 x,c.size[1]] end nil
+  each y in get_ch[] * range 1+get_gh[] c.line[0,y c.size[0],y] end nil
+ end
+ if showCursor.value
+  xy:curXY.data  cwh:get_cwh[]
+  c.brush: c.pattern:1  c.box[xy*cwh 1+cwh]
+  c.brush: 0 c.pattern:32 c.box[xy*cwh cwh]
+ end
+end
+on drag xy do click[xy] end
+on click xy do
+ set_cxy[floor xy/get_cwh[]]
+ view[]
+ card.event["pick" get_cxy[] get_value[]]
+end
+{end}
+

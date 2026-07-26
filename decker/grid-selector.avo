@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="en">
+<head>
+  <title>gridpad</title>
+  <meta charset="utf-8"/>
+</head>
+<body>
+<ol>
+  <li id="2" class="h1" au="2">
+   intro
+    <ol>
+      <li id="16">gridSelector contraption</li>
+      <li id="17">we will show how it works</li>
+      <li id="18">see how incredibly easy it is to make a paint program</li>
+      <li id="19">hardly any code at all</li>
+    </ol>
+  </li>
+  <li id="12" class="h1">
+   drawing a grid
+    <ol>
+      <li id="51">challenge: how would you do it?</li>
+      <li id="20">we need to know how many lines to make, and how far apart to make them</li>
+      <li id="24">i tend to call this gwh for grid width and height</li>
+      <li id="22">then we can divide the canvas size by the cell size to get the number of cells in each dimension</li>
+    </ol>
+  </li>
+  <li id="67" class="h2">
+   parameters
+    <ol>
+      <li id="68">gwh</li>
+      <li id="69">cwh</li>
+      <li id="70">you can divide the canvas size by one of these to get the other</li>
+    </ol>
+  </li>
+  <li id="29" class="h2">
+   algo 1: lines
+    <ol>
+      <li id="34">how would you do it by hand?</li>
+      <li id="32">first draw vertical lines</li>
+      <li id="33">then draw horizontal</li>
+    </ol>
+  </li>
+  <li id="30" class="h2">
+   algo 2: boxes
+    <ol>
+      <li id="31">instead of this we use cross</li>
+      <li id="25">now we can loop through the cells and draw a box for each one</li>
+      <li id="26">use sleep[5] to illustrate</li>
+    </ol>
+  </li>
+  <li id="35" class="h2">
+   why boxes?
+    <ol>
+      <li id="27">each box maps to an index</li>
+      <li id="40">can use the index to easily choose what to draw</li>
+      <li id="57">draw numbers</li>
+      <li id="36">draw colors</li>
+      <li id="37">draw brushes</li>
+    </ol>
+  </li>
+  <li id="39" class="h1">
+   mouse interaction
+    <ol>
+      <li id="59">okay so we can draw a grid, and now we want to make it interactive</li>
+      <li id="60" class="h2">p0: mouse coords</li>
+      <li id="64">scaled canvas trick</li>
+      <li id="61" class="h2">
+       p1: mouse coords to grid coords
+        <ol>
+          <li id="58">the math isn&apos;t that hard</li>
+          <li id="66">just divide by gwh</li>
+        </ol>
+      </li>
+      <li id="43" class="h2">grid coords to index</li>
+      <li id="44" class="h2">drawing the cursor</li>
+      <li id="46" class="h2">hidden fields</li>
+      <li id="53" class="h2">
+       index to grid coords
+        <ol>
+          <li id="54">(gw%i),(floor i/gw)</li>
+          <li id="55">note gw goes on left</li>
+        </ol>
+      </li>
+      <li id="47" class="h2">the draw script</li>
+      <li id="52"></li>
+    </ol>
+  </li>
+  <li id="48" class="h1">
+   the paint program
+    <ol>
+      <li id="49">canvas already does it</li>
+      <li id="50">just set the pen and brush</li>
+    </ol>
+  </li>
+</ol>
+</body>
+</html>
