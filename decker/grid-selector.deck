@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:2
+card:0
 size:[512,342]
 script:"0"
 name:"grid-selector.deck"
@@ -23,153 +23,44 @@ end
 
 {end}
 
-{card:home}
-script:"home.0"
+{card:behold the gridSelector!}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"behold the gridSelector!.0"
 {widgets}
-pointer.pos:{"type":"field","size":[164,20],"pos":[317,47],"animated":1,"script":"home.1","border":0,"style":"code","value":"pointer.pos :: [208,83]"}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+brush:{"type":"contraption","size":[65,65],"pos":[18,75],"volatile":1,"script":"behold the gridSelector!.1","def":"gridpad","widgets":{"cellW":{"pos":[95,-46]},"cellH":{"size":[54,14],"pos":[95,-3]},"c":{"size":[65,65],"border":0},"gridColor":{"size":[54,13],"pos":[95,20],"value":1},"curXY":{"size":[61,10],"pos":[95,41]},"gridW":{"pos":[161,-46],"value":4},"gridH":{"size":[54,14],"pos":[161,-3],"value":4},"cursor":{"size":[60,10],"pos":[162,20]}}}
+pal:{"type":"contraption","size":[81,61],"pos":[108,35],"volatile":1,"script":"behold the gridSelector!.2","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[0,0]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
+gridSelector1:{"type":"contraption","size":[129,49],"pos":[210,95],"script":"behold the gridSelector!.3","def":"gridSelector","widgets":{"cellW":{"pos":[159,-46]},"cellH":{"size":[54,11],"pos":[159,-3]},"c":{"size":[129,49]},"gridColor":{"size":[54,10],"pos":[159,15]},"curXY":{"size":[61,8],"pos":[159,31],"value":"[0,0]"},"gridW":{"pos":[225,-46],"value":8},"gridH":{"size":[54,11],"pos":[225,-3],"value":3},"showCursor":{"size":[60,8],"pos":[226,15]}}}
+links:{"type":"field","size":[129,54],"pos":[377,30],"value":{"text":["\n- ","More decker lessons.","\n-"," Lesson videos.","\n\n"],"font":["","","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw",""]}}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["i","  ","challenge: draw a grid\n","i","  ","drawing with lines\n","i","  ","drawing with rectangles\n","i","  ","why use cross?\n","i","  ","the scaled canvas trick\n","i","  ","pointer coordinates\n","i","  ","pointer to grid coordinates\n","i","  ","grid coordinates to index\n","i","  ","drawing the cursor\n","i","  ","bundling the contraption\n","i","  ","thank you!\n","i","  ","cleanup\n"],"font":["","","mono","","","mono","","","mono","","","mono","","","mono","","","mono","","","mono","","","mono","","","mono","","","mono","","","mono","","","mono"],"arg":["%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","challenge: draw a grid","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","drawing with lines","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","drawing with rectangles","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","why use cross?","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","the scaled canvas trick","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","pointer coordinates","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","pointer to grid coordinates","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","grid coordinates to index","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","drawing the cursor","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","bundling the contraption","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","thank you!","%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ==","","cleanup"]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137]},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
 
-{script:home.0}
+{script:behold the gridSelector!.0}
 on view do
- 
+ bullet:image["%%IMG3AAgACAZAgHBIfBlfQyPrZBS+liemM3oyIQHGatN5JHoBQQ=="]
+ card_names: extract key
+   where !value..name in ("help",deck.card.name)
+   from deck.cards
+ tutor1.body: #rtext.make["contents:\n" "menu" nil 0],
+  raze each cn in card_names
+    rtext.make["" "" bullet],
+    rtext.make["  "],
+    rtext.make[("%s\n" format cn) "mono" cn]
+  end
 end
+
 {end}
 
-{script:home.1}
-on view do
- me.text: "pointer.pos :: %j" format list pointer.pos
-end
-{end}
-
-{card:card1}
-script:"home.0"
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
-pointer.pos:{"type":"field","size":[204,20],"pos":[5,22],"animated":1,"script":"card1.0","border":0,"style":"code","value":"pointer.pos: [208,83]"}
-field1:{"type":"field","size":[205,20],"pos":[5,43],"animated":1,"script":"card1.1","border":0,"style":"code","value":"pointer.pos-c.pos: [-79,30]"}
-c:{"type":"canvas","size":[100,100],"pos":[287,53],"pattern":40,"image":"%%IMG2AGQAZCj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yj/KP8o/yg3","draggable":1,"scale":1}
-
-{script:card1.0}
-on view do
- me.text: "pointer.pos: %j" format list pointer.pos
-end
-{end}
-
-{script:card1.1}
-on view do
- me.text: "pointer.pos-c.pos: %j" format list pointer.pos - c.pos
-end
-{end}
-
-{card:grid scale}
-script:"grid scale.0"
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{"value":"cwh:2 take cs.value\ngw:first c.size/cwh\ngh:last c.size/cwh\nc.clear[] c.pattern:34 c.fill[]\neach xy in (gw cross gh) * cwh\n c.pattern:40 c.rect[xy cwh]\n c.pattern:1 c.box[xy cwh+1]\nend"},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
-c:{"type":"canvas","size":[191,137],"pos":[293,57],"script":"grid scale.1","image":"%%IMG3AL8AiQbAgHBILBqPyKRyyWw6n9ColCmqWqsBlHbL3Wa7YNQ3zB2TteZzmrwOt8Hvbrx8ptfRd/T1OvfmxX99eHmCgISBiIeKd4UBe1aNiYySdZGLlZRqmWyBj1ibbqBwonKkdpOXmqlsniKWqLCYq6Gzo7Wlt6eVra+ysaq/nLl+w4PBtIy8psTHts24z7rAvtTTasrFhtHM1cLbxt3I4c67nr3W3uPQ6tLp6OLv5Nfmy+Dx6/ft8O78+/7yrOhlO9cP4D98BREe1GcQDrZv2thxyzcxIUOFDTFqLPNQoj2LFReGzHix5MiNJzmam8KypcuXMGPKFNKR4keRN0mm3JkTZU+TP73UBBm0aESbR4kmxblUp1FHAiESZDrVaVOfV4FmFRrV49an9b6KrYqVrMpHZnmODZsW7EC2Q6mynfu2rtROXZG2XWvX696/ca3+pXu3r168aAn7VXzYsNJGgcsyfjxZrmM3kbUOviy4cmdCmdVuLkx6MWc5od2Wbrya8umze2bKnk27tm0jqfm2trz7c2/UeV3/1uxZ8muuiY+rNj1cdHHYfJ47V66bufV5yZsvZ31deHfMwXl/9z3euHYxuUeXJ05dPfbY0rd7505/fsDs66efd2+favr41dUnnoCC/dcegPwN+JiB+yHoYHsM5iefghSSpxcvt2Wo4YYcHhEhgeZJGGB/BYZnIYkhgsjefh+iuKKICZ4IHn4q6gfjgyyamKKLNtY4oYwO6fiijyNWuKOR0EGC440HNpmMkD3y+OORQFIJHI1SFlnlkFkCBuWUXCIZpZhgIgefk0w2iOZ70a3Z5ZJEQvalllaGueWYd+qxUod89unnSy2SSaeddeJZVqB5DmoooYyKhmihZUaqqKRyYilojJBOqmmlZ6rpaZqgsqmkm5fC+SZoc2LaKKWm+pdqq4mquqijr5IaK6yZQmXprbbmimuSn/S66qa/0rqrr8LOyupAjw4r67KfiorFn9RWay0SzSpLbLLQlnOss8V2GydinYZ6arTnelvuuNxui+6M66bL7ru8Pvmtts+6a66r94or77+lotqvvvPuW6+6bdKLrMLgChxvwAzjGy56tUbsL8QwZnvxwQXHqTHBAHPcJYbXlmxynx/nq/LEnCZs8MIvN2zvwyJj3HHIV9IM88024wysKywH3W7Lo1oMcs9IBznwykMLPbPLPNcs9c736SxzzBIPnbLTWG+cM9Q+Z220yls3bXaOS3MdNdX8xnby23DbVvbYao9ccddHT+3s3HgzPTbfa18duLFWi9133W2DnTTbehsuLdBnHx75435LTjezdw/uteB2pz152JsTrnjjoZee99dFW6665mMBDvrpnCcOSdy01w5o5q9XzjrRwV7u++pVj8748LGTTrHnv+/OsuuLF0+86Kkr/3nz0PcOPPWme4n89cbrHnz0uSPePbnCO2++47kzP/70sar/fPbL44497OhfSrLt+OdPRSv89+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTBMYRAA","draggable":1,"scale":1}
-cs:{"type":"contraption","size":[100,25],"pos":[375,25],"script":"grid scale.2","def":"hybridSlider","widgets":{"compact":{"interval":[5,20],"value":14},"bar":{"interval":[5,20],"value":14}}}
-field3:{"type":"field","size":[263,53],"pos":[10,25],"animated":1,"script":"grid scale.3","border":0,"style":"code","value":"p0: pointer.pos   # [93,82] \np1: p0-c.pos      # [-200,25]\np2: p1/cs.value   # [-14.285714,1.785714]\np3: floor p2      # [-15,1]"}
-csLabel:{"type":"field","size":[72,20],"pos":[295,26],"border":0,"style":"plain","align":"right","value":"cell size (cs):"}
-h:{"type":"canvas","size":[4,4],"pos":[484,194],"script":"grid scale.4","draggable":1,"scale":1}
-
-{script:grid scale.0}
-on view do
- redraw[]
-end
-
-on redraw do
- c.clear[] c.pattern:colors.magenta c.fill[]
- w: first c.size h: last c.size  s:cs.value
- each xy in s * (w/s) cross h/s
-  c.pattern:colors.green c.rect[xy s,s]
-  c.pattern:colors.black c.box[xy s,s]
+{script:behold the gridSelector!.1}
+on draw c do
+ c.pattern:1
+ each xy i in (me.gw cross me.gh) * list me.cwh
+  c.text[i xy+me.cwh/2 "center"]
  end
 end
-{end}
-
-{script:grid scale.1}
-
-on drag pos do
- h.pos: me.pos + me.size
-end
 
 {end}
 
-{script:grid scale.2}
-on change val do
- redraw[]
-end
-{end}
-
-{script:grid scale.3}
-on view do
- d.p0: pointer.pos
- d.p1: d.p0-c.pos
- d.p2: d.p1/cs.value
- d.p3: floor d.p2
- me.text: 1 drop "
-p0: pointer.pos   # %[p0]j 
-p1: p0-c.pos      # %[p1]j
-p2: p1/cs.value   # %[p2]j
-p3: floor p2      # %[p3]j" 
-  format d
-end
-{end}
-
-{script:grid scale.4}
-# handle script
-
-on drag pos do
- if prod c.pos < me.pos
-   c.size: me.pos - c.pos
- else
-   me.pos: c.pos
- end
- redraw[]
-end
-
-{end}
-
-{card:card3}
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
-c:{"type":"canvas","size":[176,152],"pos":[325,57],"script":"grid scale.1","pattern":47,"image":"%%IMG3ALAAmAbAl3BILBqPyKRyyWw6n9Co1IiqWq3Cqzarxb66XnCVCyZ3zduvGH1lh9fqcvw8T4tR7nG9vX/L73l4fXqAg4KFiHCJf4qNjI90i5GOk5B2lJeWfJKZlZ6doJuYopp+n6SnpqGqqKuEo6yxr6WzqbWuh7C3rbyyubS/tsG4gcWGxpy9u77IusPKz8zH08nS1cvY0dnNwNzC3sTUzuDQ5Nbj4t3p3+vhhVPw8fLz9PX29/j5+vv319r/5ra1KzfwnDp/AQEWFIhwocKGENFFPCixIsWL7CZmtLgRozuOHz0S1Biyo8mSKEeCVCnS4EmWL12mlAlzJsOVNHPebLkzZk+bD3H+rElUZ1CeCvkpXcq0qdOnUKPiI1l0qNGEWB1mpXpVq1euVsMe9TkW6FahZaum7Qp2rdizSOGSlWv2K1q6avGyvWs3bt+5f+u21fs2cF7De/0ORlx48WKpkCNLnky5smTHfDErzsx5s2fAmkF3Fv1Z8GjTpQ+HRk26NevXqk/HTp3Y9WzbtWHnvq27sezdwH3TFo6beF3LyJMrX84c+Wre0IO7nU6YOmPrz6VX336de3bj0cFr707+O/bf4tOfH76+ePve78PHH2/eO/r56u2z1w+4uf//AAYoYBP1lXcff/AhKJ+C9B1o4H4PusdgfhEmWOGCFzYIYYEcOtjhhh6GCOKIEmZI4YclonjcgCy26OKLUqmIoYwapiiijSRaSOOJN+rY44w/1uhjjkASKWSROCY5pJJILulkk1AeKSWPEMJo5ZVYZhnFjvh1OaGXJoLJ5ZdkhlnmmGamieaaQVLJ5JRithmnkW4+CeeZcuJJ55xv1smHloAGKqiVbO6pZ5982unnnWrm2aihjyJ6qKKJRrnopZUyWqikkVI6qaWZYvqppg4OauqpqCa3qaedgjqqqK2SCumqrsYKK62ycorrrY7uGuqvrwJrq7C+BmvssKkmq+yyTRWL7LPORtvrtLNSq6u1rEpb7bbXcpsttrVq2+2433obLrjjMavuuuxKIW655J5rbq7w1itvvPTea2++/PI6r7/4AryvwPoW3C+x6BLcVbsMN+zwse8arPDECP9bccAXD5yxxBsfDHHCHVP8scUjY1yyxidznNXD7JLg8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322FgHAQ==","draggable":1,"scale":1}
-cs:{"type":"contraption","size":[100,25],"pos":[375,25],"script":"grid scale.2","def":"hybridSlider","widgets":{"compact":{"interval":[5,20],"value":11},"bar":{"interval":[5,20],"value":11}}}
-field3:{"type":"field","size":[263,53],"pos":[10,25],"animated":1,"script":"grid scale.3","border":0,"style":"code","value":"p0: pointer.pos   # [202,32] \np1: p0-c.pos      # [-123,-25]\np2: p1/cs.value   # [-11.181818,-2.272727]\np3: floor p2      # [-12,-3]"}
-csLabel:{"type":"field","size":[72,20],"pos":[295,26],"border":0,"style":"plain","align":"right","value":"cell size (cs):"}
-h:{"type":"canvas","size":[4,4],"pos":[501,209],"script":"grid scale.4","draggable":1,"scale":1}
-
-{card:card2}
-script:"card2.0"
-{widgets}
-canvas:{"type":"field","size":[299,251],"pos":[2,20],"locked":1,"border":0,"value":{"text":["","canvas help","\n\n","c.pattern: 0      # number or colors.red\nc.brush: 0\n\nc.clear[]\nc.fill[xy]        # paint bucket tool\nc.box[xy wh]      # outline only\nc.rect[xy wh]     # outline + fill\nc.line[...xy]\nc.text[msg pos a]\n# a is optional, and can be any of:\n#\n# \"top_left\"    \"top_center\"    \"top_right\"\n# \"center_left\" \"center\"        \"center_right\"\n# \"bottom_left\" \"bottom_center\" \"bottom_right\"\n\nc.copy[xy wh]     # gives an image\nc.paste[img xy t] # if t=1 color 0 is transparent\n\n\nFor more, see ","#canvasinterface"," in docs"],"font":["","menu","","mono","mono","mono"],"arg":["","","","","https://beyondloom.com/decker/decker.html#canvasinterface",""]}}
-pal:{"type":"contraption","size":[81,61],"pos":[46,275],"volatile":1,"script":"card2.1","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[1,0]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
-patternLabel:{"type":"field","size":[43,20],"pos":[2,283],"locked":1,"border":0,"align":"right","value":"pattern:"}
-patternSlider:{"type":"slider","size":[43,20],"pos":[2,307],"volatile":1,"script":"card2.2","interval":[0,47],"style":"bar"}
-brush:{"type":"contraption","size":[129,49],"pos":[178,284],"script":"card2.3","def":"gridSelector","widgets":{"cellW":{"pos":[159,-46]},"cellH":{"size":[54,11],"pos":[159,-3]},"c":{"size":[129,49]},"gridColor":{"size":[54,10],"pos":[159,15]},"curXY":{"size":[61,8],"pos":[159,31],"value":"[1,0]"},"gridW":{"pos":[225,-46],"value":8},"gridH":{"size":[54,11],"pos":[225,-3],"value":3},"showCursor":{"size":[60,8],"pos":[226,15]}}}
-brushLabel:{"type":"field","size":[43,20],"pos":[134,283],"locked":1,"border":0,"align":"right","value":"brush:"}
-brushSlider:{"type":"slider","size":[43,20],"pos":[133,303],"volatile":1,"script":"card2.4","interval":[0,23],"style":"bar"}
-f0:{"type":"field","size":[197,72],"pos":[312,114],"value":"c0.clear[]"}
-c0Label:{"type":"field","size":[18,14],"pos":[312,18],"border":0,"style":"plain","value":"c0"}
-c1Label1:{"type":"field","size":[18,14],"pos":[413,18],"border":0,"style":"plain","value":"c1"}
-c0:{"type":"canvas","size":[98,80],"pos":[313,30],"image":"%%IMG3AGIAUAKEj6nL7Q+jnLTai7PevPsPhuJIluaJpurKtu4Lx/JM1/aN5/rO9/4PDAqHREXgiAwUOckkoLmsNJFPJzX6OC6gVGXEi91qleCGNuwgQ65oc5lxbsPfc3l9TbdXv3G9IX/ntyfRp1eYBoh2GGg45YTw6Odo5ShYNYlp+eeFWSnYl0kZibVo1MVV+pPqJpros0o4KsS2QTsLO4G7Y5uhqzPG5JtD5hpb3MNrIfx7zBfWjAeteZA8zWqdq4a99tS9ndUtPa0GKP58mbDcdir7PQb1LVYdT19vf4+fr7/P3+//DzCgwIEECxq0UAA=","brush":15,"scale":1}
-c1:{"type":"canvas","size":[97,80],"pos":[412,30],"image":"%%IMG3AGEAUAbAkHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/3ErgoMrgFiEhCGIhlGIg4qJj4xLgkeLj4VNKZNJmIpMKZucSoWZSqGio52mSaGqpKytqa9FlaCztEO2S6i5tU+uvkK7t8LDsae4tMTJxqiCqL1E0c6hhNTR1MLRjo7S1cfd0Inbs+KlmIujwZTpkcx97E+OkPB88lTqf99Xkvv4Vezt4WdFoB5XyqT42xcCoEKDBx02QuZH4kROCR9SNNZuI8dVHj9aKiXSCcmQJXV9Qply5SdLLYfVq8XSl7uFMSvRi2lEH8+fQIMKHUq0qNGjSJMqXcq0qdOnUKMOCQI=","brush":15,"scale":1}
-f2:{"type":"field","size":[197,72],"pos":[312,266],"value":"c1.merge[\"+\" c0.copy[] 0,0 1]"}
-f1:{"type":"field","size":[197,72],"pos":[312,189],"value":"im:c0.copy[]\nc1.paste[im.map[(0,1)dict(33,34)]"}
-special:{"type":"field","size":[100,20],"pos":[206,161],"show":"none"}
-
-{script:card2.0}
-on set_pattern x do
- (pal,patternSlider)..value:x
- (c0,c1)..pattern: x
-end
-
-on set_brush x do
- (brush,brushSlider)..value: x
- (c0,c1)..brush:x
-end
-{end}
-
-{script:card2.1}
+{script:behold the gridSelector!.2}
 on draw c do
  cwh:me.cwh
  each xy i in me.gw cross me.gh
@@ -182,13 +73,7 @@ on pick xy i do
 end
 {end}
 
-{script:card2.2}
-on change val do
- set_pattern[val]
-end
-{end}
-
-{script:card2.3}
+{script:behold the gridSelector!.3}
 on draw c do
  cwh:me.cwh
  each xy i in me.gw cross me.gh
@@ -203,78 +88,414 @@ on pick xy val do
 end
 {end}
 
-{script:card2.4}
+{card:challenge{c} draw a grid}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["can you use what you've learned in other lessons to draw a grid?\n\nThe ","help"," button links to a card with more example code."],"font":["","",""],"arg":["","",""],"pat":[1,33,1]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\nc.clear[] c.pattern:1\n\n# some of these lines might help:\nw:gw*cw   h:gh*ch\nc.box[90,20 cw,ch]\nc.rect[120,20 cw,ch]\neach x in cw * range 5\n  c.line[gw+x,0 c.size]\nend"},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"border":1,"scale":1}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":7,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":5,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":10,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":10,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+
+{script:challenge{c} draw a grid.0}
+on click do
+ c.clear[] c.brush:0 c.pattern:1
+end
+{end}
+
+{card:drawing with lines}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["Here's how I'd draw it by hand:\n\nFirst, draw each horizontal line.\n\nThen draw each vertical one.\n\nNote there is 1 more horizontal line than the number of rows, and 1 more vertical line than the number of columns.\n\nThe"," sleep[n]"," calls wait for n frames before continuing the loop - an easy way to make simple animations!"],"font":["","",""],"arg":["","",""],"pat":[1,33,1]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\nw:gw*cw   h:gh*ch\n\nc.clear[] c.pattern:1\neach y in ch * range 1+gh\n c.line[0,y w,y] sleep[2]\nend\n\neach x in cw * range 1+gw\n c.line[x,0 x,h] sleep[2]\nend"},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"border":1,"scale":1}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":7,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":5,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":10,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":10,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+
+{card:drawing with rectangles}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136],"value":"Another approach is to use cross to make a singe loop through each pair of grid coordinates.\n\nIf you leave the sleep[] calls in, you'll see it's quite a bit slower: gw*gh loop steps, instead of gw+gh.\n\nHowever, normally we wouldn't put sleep[] in our drawing code, and without it, it's still very fast for actual grids.\n\nThis is the approach we'll use."},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\n\neach xy in (gw cross gh) * list cs\n c.pattern:1\n c.box[xy cs+1]\n c.pattern:colors.cyan\n c.rect[2+xy cs-2] sleep[2]\nend"},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"pattern":39,"border":1,"scale":1}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":7,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":5,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":10,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":10,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+
+{card:why use cross?}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["The ","each xy i in w cross h","  pattern makes it easy to draw each cell individually.\n\nNote the ","i",". While ","xy"," contains a pair of grid coordinates at each step, ","i"," contains the loop index - a count of how many cells we've drawn.\n\nWhy multiply by ","list cs"," instead of ","cs","? Try removing it and making the cells rectangular instead of square...\n\nWe'll cover Lil's \"conforming\" rules another time. For now, just use ","list","."],"font":["","","","","","","","","","","","","","",""],"arg":["","","","","","","","","","","","","","",""],"pat":[1,33,1,33,1,33,1,33,1,33,1,33,1,33,1]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\neach xy i in\n   (gw cross gh) * list cs\n c.pattern:i c.rect[2+xy cs-2]\n c.pattern:1 c.box[xy cs+1]\n c.pattern:0 c.rect[1+xy 13,11]\n c.pattern:1\n c.text[i (8,6)+xy \"center\"]\n sleep[1]\nend"},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"border":1,"scale":1}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":8,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":6,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":20,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":22,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+
+{card:the scaled canvas trick}
+image:"%%IMG3AgABVgZAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"the scaled canvas trick.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136],"value":"Our next goal is to detect clicks on individual grid cells.\n\nA scaled canvas can do part of this out of the box. You could put a transparent one over anything to detect clicks.\n\nSince we want an all-in-one contraption, and our cells might not be square, we'll do the calculations ourselves."},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"value":"c.scale:9 c.lsize:16,16\nc.clear[] c.pattern:colors.red\n\n# draw some random pixels\n# so we can see the grid size\nbg:colors@\"lightgray\",\n  \"mediumgray\",\"darkgray\"\nim:image[c.lsize]\nim.pixels:bg@ random@ \n  (prod c.lsize) take 3\nc.paste[im]\n"},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+c:{"type":"canvas","size":[144,144],"pos":[275,20],"volatile":1,"pattern":35,"scale":9}
+field3:{"type":"field","size":[262,108],"pos":[4,59],"locked":1,"border":1,"style":"code","value":"on click pos do\n f.text:\"last click: %i,%i\" format pos\nend"}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+f:{"type":"field","size":[127,15],"pos":[124,25],"volatile":1,"show":"transparent","border":0}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"the scaled canvas trick.1","text":"clear","style":"rect"}
+interlude:{"type":"field","size":[100,20],"pos":[4,22],"locked":1,"show":"transparent","border":0,"value":{"text":["","interlude"],"font":["","menu"],"arg":["",""]}}
+
+{script:the scaled canvas trick.0}
+on click pos do
+ f.text:"last click: %i,%i" format pos
+end
+{end}
+
+{script:the scaled canvas trick.1}
+on click do
+ c.clear[] c.brush:0 c.pattern:1
+ f.text:""
+end
+{end}
+
+{card:pointer coordinates}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["The ","pointer"," interface represents  mouse or touch input. It's updated on each new frame.\n\nThe field above is flagged as animated so it gets a ","view[]"," event every frame.\n\nIn it, we subtract the canvas position from the pointer position to get an offset into the canvas."],"font":["","","","",""],"arg":["","","","",""],"pat":[1,33,1,33,1]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\n\neach gxy in (gw cross gh)\n xy: cs*gxy  c.pattern:1\n c.text[\"%i,%i\" format gxy\n        cs*gxy+0.5 \"center\"]\n c.box[xy cs+1]\nend"},"prevBtn":{},"runBtn":{"show":"invert"},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+field3:{"type":"field","size":[262,108],"pos":[4,59],"animated":1,"volatile":1,"script":"pointer coordinates.0","border":1,"style":"code"}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"border":1,"scale":1}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":6,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":7,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":25,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":20,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+
+{script:pointer coordinates.0}
+on view do
+ d.p0: pointer.pos
+ d.p1: d.p0 - c.pos
+ me.text: 1 drop "
+on view do
+ p0: pointer.pos        # %[p0]j
+ p1: p0-c.pos           # %[p1]j
+end" 
+  format d
+end
+{end}
+
+{card:pointer to grid coordinates}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136]},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\n\neach gxy in (gw cross gh)\n xy: cs*gxy  c.pattern:1\n c.text[\"%i,%i\" format gxy\n        cs*gxy+0.5 \"center\"]\n c.box[xy cs+1]\nend"},"prevBtn":{},"runBtn":{"show":"invert"},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+field3:{"type":"field","size":[262,108],"pos":[4,59],"locked":1,"animated":1,"volatile":1,"script":"pointer to grid coordinates.0","border":1,"style":"code"}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"border":1,"scale":1}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":6,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":7,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":25,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":20,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+
+{script:pointer to grid coordinates.0}
+on view do
+ d.p0: pointer.pos-c.pos
+ d.cs: (_cw,_ch)..value
+ d.p1: floor d.p0/d.cs
+ me.text: 1 drop "
+on view do
+ p0: pointer.pos-c.pos  # %[p0]j 
+ cs: (_cw,_ch)..value   # %[cs]j
+ p1: floor p0/cs        # %[p1]j
+end"
+   format d
+end
+{end}
+
+{card:grid coordinates to index}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+{widgets}
+field3:{"type":"field","size":[262,108],"pos":[4,59],"locked":1,"animated":1,"volatile":1,"script":"grid coordinates to index.0","border":1,"style":"code"}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"script":"grid coordinates to index.1","border":1,"scale":1}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":6,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":7,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":25,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":20,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136]},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\n\neach gxy in (gw cross gh)\n xy: cs*gxy  c.pattern:1\n c.text[\"%i,%i\" format gxy\n        cs*gxy+0.5 \"center\"]\n c.box[xy cs+1]\nend"},"prevBtn":{},"runBtn":{"show":"invert"},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+current:{"type":"contraption","size":[59,21],"pos":[447,61],"show":"transparent","def":"hybridSlider","widgets":{"compact":{"size":[59,21],"interval":[0,41],"value":26},"bar":{"size":[33,21],"interval":[0,41],"value":26}}}
+currentLabel:{"type":"field","size":[55,13],"pos":[449,45],"locked":1,"show":"transparent","border":0,"style":"plain","align":"center","value":"current:"}
+
+{script:grid coordinates to index.0}
+on view do
+ d.pos: pointer.pos-c.pos
+ d.cs: (_cw,_ch)..value
+ d.xy: floor d.pos/d.cs
+ d.gw: _gw.value
+ d.ix: sum d.xy * 1,d.gw
+ me.text: 1 drop "
+on click pos do         # %[pos]j
+ cs: (_cw,_ch)..value   # %[cs]j
+ xy: floor pos/cs       # %[xy]j
+ gw: _gw.value          # %[gw]j
+ ix: sum xy * 1,gw      # %[ix]j
+ current.value: ix
+end"
+   format d
+end
+
+{end}
+
+{script:grid coordinates to index.1}
+on click pos do
+ xy: floor pos/(_cw,_ch)..value
+ current.value: sum xy * 1,_gw.value
+end
+{end}
+
+{card:drawing the cursor}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"drawing the cursor.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136]},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"value":"cw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\neach xy i in\n  (gw cross gh) * list cs\n c.pattern:1 c.box[xy cs+1]\n c.pattern:\n   if i=current.value colors.blue\n   else colors.cyan end\n c.rect[2+xy cs-2]\nend"},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":33,"text":"special"}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"volatile":1,"script":"drawing the cursor.1","pattern":39,"border":1,"scale":1}
+gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
+ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
+cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
+chLabel:{"type":"field","size":[75,14],"pos":[2,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell height (ch):"}
+_gw:{"type":"slider","size":[47,14],"pos":[218,20],"interval":[5,25],"value":8,"style":"compact"}
+_gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":8,"style":"compact"}
+_cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":16,"style":"compact"}
+_ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":16,"style":"compact"}
+clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
+current:{"type":"contraption","size":[59,21],"pos":[447,61],"show":"transparent","def":"hybridSlider","widgets":{"compact":{"size":[59,21],"value":18},"bar":{"size":[33,21],"value":18}}}
+currentLabel:{"type":"field","size":[55,13],"pos":[449,45],"locked":1,"show":"transparent","border":0,"style":"plain","align":"center","value":"current:"}
+field3:{"type":"field","size":[262,108],"pos":[4,59],"locked":1,"animated":1,"volatile":1,"script":"grid coordinates to index.0","border":1,"style":"code"}
+
+{script:drawing the cursor.0}
+on view do
+ 
+end
+{end}
+
+{script:drawing the cursor.1}
+
+on click pos do
+ xy: floor pos/(_cw,_ch)..value
+ current.value: sum xy * 1,_gw.value
+end
+{end}
+
+{card:bundling the contraption}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"drawing the cursor.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136]},"nextBtn":{},"cardName":{},"code":{"size":[218,137]},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+
+{card:thank you!}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"drawing the cursor.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136]},"nextBtn":{},"cardName":{},"code":{"size":[218,137]},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+
+{card:help}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLzjAz29/j5+vv8/f7/AAPmGyKwoMGDCAvSU5awocOHAglCnEjx4cJkFTNqVChko8ePAy8eA0nyo8SSKCeKHJmypcWOLmMeXGlMpk2OLW7q9Eez2M6f+04CBdqT2NCjDIQivVl02FKiMJ8ybRpM6k6lVltSrZrVJtauJbcCAyvzK1mTYn2ddWl2rca0at2ibCuXItxedcNGzbvxLi++IOkCbuh312CPgg/PLJxL8du9jl8yvhW5YuLKACfjwqwSMufFmmt9ljyacGjRpRNeTh3y9CzWCFfDtuea1myDsmfXfn07oufeQXfHAh4wN2zhw4n/M84aOSzly39Dp+3c1fR+zFNXt349eM7urberAq8ve2nxrMi3Vn8P/Sr27aVPdz8eflL50Omnsn//O3v9qPBn3mgAniIgfsoVaMqB/qmnYCkM2vcgKRHCN+EoFf53YSgZOrghKB2S9yGIEiJI3IifhAgeip6o2B2Lnbh4HYycyDgfjZrYmB+OmeiYII+Y+HgikJcICRyRRZbYoIhIVmJkb006qaSSUUby5G1VTnKlbllaOaWFXUKy5XFhPjJmc2U6cqZ2aTay5nlt1vOlhnEq8iaBddo5p4d5InLnZ30m8idngfq5J5OFFjIoZokasmhljSp66IqRDvJoZJVaOumLmQZyqWOderrpjKH+8alipZo66o2p8nHqYa3GKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd+7556CHLvropJdu+umop6766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301FdvPS5BAA=="
+script:"help.0"
+{widgets}
+canvas:{"type":"field","size":[299,251],"pos":[2,20],"locked":1,"border":0,"value":{"text":["","canvas quick reference","\n\n","c.pattern: 0      # number or colors.red\nc.brush: 0\n\nc.clear[]\nc.fill[xy]        # paint bucket tool\nc.box[xy wh]      # outline only\nc.rect[xy wh]     # outline + fill\nc.line[..xy]\nc.text[msg pos a]\n# a is optional, and can be any of:\n#\n# \"top_left\"    \"top_center\"    \"top_right\"\n# \"center_left\" \"center\"        \"center_right\"\n# \"bottom_left\" \"bottom_center\" \"bottom_right\"\n\nc.copy[xy wh]     # gives an image\nc.paste[img xy t] # if t=1 color 0 is transparent\nc.merge[op? ..im] # op can be any of: \"+-*&|<>=\"\n\nFor more, see ","#canvasinterface"," in docs"],"font":["","menu","","mono","mono","mono"],"arg":["","","","","https://beyondloom.com/decker/decker.html#canvasinterface",""]}}
+pal:{"type":"contraption","size":[81,61],"pos":[46,275],"volatile":1,"script":"behold the gridSelector!.2","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[1,0]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
+patternLabel:{"type":"field","size":[43,20],"pos":[2,283],"locked":1,"show":"transparent","border":0,"align":"right","value":"pattern:"}
+patternSlider:{"type":"slider","size":[43,20],"pos":[2,303],"volatile":1,"script":"help.1","interval":[0,47],"style":"bar"}
+brush:{"type":"contraption","size":[129,49],"pos":[178,284],"volatile":1,"script":"help.2","def":"gridSelector","widgets":{"cellW":{"pos":[159,-46]},"cellH":{"size":[54,11],"pos":[159,-3]},"c":{"size":[129,49]},"gridColor":{"size":[54,10],"pos":[159,15]},"curXY":{"size":[61,8],"pos":[159,31],"value":"[0,0]"},"gridW":{"pos":[225,-46],"value":8},"gridH":{"size":[54,11],"pos":[225,-3],"value":3},"showCursor":{"size":[60,8],"pos":[226,15]}}}
+brushLabel:{"type":"field","size":[43,20],"pos":[134,283],"locked":1,"show":"transparent","border":0,"align":"right","value":"brush:"}
+brushSlider:{"type":"slider","size":[43,20],"pos":[134,303],"volatile":1,"script":"help.3","interval":[0,23],"style":"bar"}
+f0:{"type":"field","size":[197,72],"pos":[312,114],"show":"invert","scroll":2,"value":"# example scripts (shift+enter to run)\n(c0,c1)..clear[]\n(c0,c1)..pattern: patternSlider.value\n(c0,c1)..brush: brushSlider.value\nc1.pattern:colors.purple\nc1.fill[]\n"}
+c0Label:{"type":"field","size":[18,14],"pos":[312,18],"show":"transparent","border":0,"style":"plain","value":"c0"}
+c1Label1:{"type":"field","size":[18,14],"pos":[413,18],"show":"transparent","border":0,"style":"plain","value":"c1"}
+c0:{"type":"canvas","size":[98,80],"pos":[313,30],"show":"transparent","image":"%%IMG3AGIAUAKEj6nL7Q+jnLTai7PevPsPhuJIluaJpurKtu4Lx/JM1/aN5/rOP8Ff+QV6QeFQYjwSIUkgs7l8JiNNZZRRpWavWKh0yl1sv8Kw2Et2mhFjH3ptaLvL8AR4Qq/b1fq+/w8YKDhIWGh4iJiouMjY6PgIGSk5SVlpeYmZqdmTN3nX0ckpZzGqU2VEcYpKpPq21xq6A/s2+ylai3vKlcu7utubWwesKjhsZVgLqbvJ3Oz8DB0tPU1dbQ1XAA==","scale":1}
+c1:{"type":"canvas","size":[97,80],"pos":[412,30],"show":"transparent","image":"%%IMG2AGEAUCX/Jf8l/yX/Jf8l/yU9JwMlEScDJUknBSUPJwUlRycHJQ0nByVGJwclDScHJUYnByUNJwglRScHJQ0nCCVFJwclDicHJUUnByUOJwclRScHJQ4nByVFJwclDycFJUcnBSURJwMlSScDJf8l/yX/Jf8l/yX/Jf8l/yX/Jf8lOCcDJV0nBSUcJwMlPCcIJRcnByU7JwslECcMJTonDyUJJw8lOycRJQQnESU8JyUlPScjJT8nISVCJxslSScUJVEnDSVXJwgl/yX/Jf8l/yX/JSA=","scale":1}
+f2:{"type":"field","size":[197,72],"pos":[312,266],"show":"invert","value":"c0.clear[] c0.brush:0\nc0.pattern:1 c0.fill[]\nc0.pattern:256 # secret \"ants\" pattern\nc0.box[5,5 c0.size-11]\nc0.pattern: patternSlider.value\nc0.brush: brushSlider.value"}
+f1:{"type":"field","size":[197,72],"pos":[312,189],"show":"invert","value":"im:c0.copy[]\ncm: (1,32)dict(39,38)\nxy: 0,0\nt: 1 # transparent?\nc1.paste[im.map[cm] xy t]\n"}
+backBtn:{"type":"button","size":[41,20],"pos":[257,22],"script":"help.4","pattern":39,"text":"back","style":"rect"}
+
+{script:help.0}
+on set_pattern x do
+ (pal,patternSlider)..value:x
+ (c0,c1)..pattern: x
+end
+
+on set_brush x do
+ (brush,brushSlider)..value: x
+ (c0,c1)..brush:x
+end
+
+on view do
+ set_pattern[1]
+ set_brush[0]
+end
+{end}
+
+{script:help.1}
+on change val do
+ set_pattern[val]
+end
+{end}
+
+{script:help.2}
+on draw c do
+ cwh:me.cwh
+ each xy i in me.gw cross me.gh
+  # .line[single_point] = draw brush
+  c.brush:i c.line[cwh*xy+.5]
+ end
+end
+
+on pick xy val do
+ set_brush[val]
+end
+{end}
+
+{script:help.3}
 on change val do
  set_brush[val]
 end
 {end}
 
-{card:card4}
-script:"home.0"
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+{script:help.4}
+on click do
+ go["Back" "SlideDown" 15]
+end
+{end}
 
-{card:card5}
-script:"home.0"
+{card:cleanup}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWoeBrHbL7Xq/4LB4TC6bz+i0es1ua6/wuHxOr9vvTbd+z+/7/4CBZHiEhYaHiIlLgoyNjo+QkWKKlJWWl5hHkpucnZ6fXpmio6SlVaCoqaqrbKaur7CmrLO0tayxuLm6hba9vr+Nu8LDxFLAx8jJacXMzc5CytHS01nP1te41Nrbvdje36Lc4uOo4ObniOTq65Do7u907PLzfvD291P0+vtq+P7/SvgJHBgGoMGD0AgqVIiwob+FEAU6nAgvokV6FDOeu8hxncaP3jqKFAey5LORKKmZXFkspUtlLGPuekkTmMybsWrqtIWzp6ydQFf5HBouqFFQRJNaOsq0k9KniZpKjQS1Kq+pWBlZ3Wonq1dAXMPK+UqWj9izVsqqbYO2rbG1cNG4neskrt0ydPMGvMsXjN6/RvoK7gK4cMLBiA0XRsxYMWDGiR3rhTxY8mTKfS3nxZxZ81zOfD1/Bm1XtFvSpU2jRR1X9WrWa12fhR1bdljaam3fxk1WN1fevX1bBf5V+HDiWY1XRZ5c+VPmWJ0/hy5VulLq1a0Txd5U+3buR70PBR9efE/yRs2fRw9UPU727d3LhL9T/nz6Ne3HxJ9f/0r+NPn3H4AuCWgSgQUaCBKCKSm4IIMjOfgRhBFKmBGFIll4IYYcaUgRhx166BCIF4k4IokRmdgQiimqeBCLELn4IowMyQgQjTXa+BCOA+n4D489+ogPkBIJeQ+R/Bh5JJL6KGkPk006+Q6UGEnpDpXzWHklluxoiQ6XXXppDpgeiQkOmeqYeSaa46j5DZttuokNnCTJeQ2d3Nh5J57a6GkNn3366QygKgnaDKHTGHoootEoygyjjTpKDKQwSToMpclYeimmx2gqDKedeqoLqDaJmgupv5h6KqrdqJoTqzy5CgusscrqCq212PoKrrToeiuvt/haCrDBCjsKsUIZeyyyqSi7LLNIOZsJtOVIiwm10Vq7FLaeaHsJt916Wwm4TolLCbmcmHsuupKoqwi77bqbDrztyHsIvfXaexW+wei7L7+C+PsvwGAJjAfBWhl8B8IBK9wVwwU7HA/Ef0hcB8UVWzwHxvVoPBbHZnkcB8ghi3wFyXuYDAfKeqh8MstsuXwKzK3ITAXNNdv8Fs7L6Lwzz2f4/DPQeAkNBdFyGf0E0kErXRfTRTvNBNRRS70X1ZNYvQjWWWudBNdde60J2H6JjQTZZZsdGNqhqL0221y4/Tbcb8hNBN1x240F3nXr7QLffesNeDV+/z144YYDjvjgASx+eOGMO6445I/7HTnlk1teueCb23255plzHrrnncv9ueh8S5465quD3jrqeKseO+uzu1477HTLnjvtu9veO+5w6x4878P7XjzwbAufPPHLG9888mgrHz3z0ztfPfRkS5899dtb3z32YGsfPvfje18++FyLnz7565vfPvpYqx8/+/O7Xz/8VMufP/37298//lDTXwD5N0D/FRCATBNgAgm4QAM2EIFIU2AEGThBB1YQgkSTYAYpuEELdhCDQNNgCDk4Qg+WEIQ8E2EKSbhCE7YQhThTYQxZOEMX1hCGNJNhDmm4Qxv2EIcw02EQeThEHxYRiCwTYhKJuEQjNhGJKFNiFJk4RSdWEYokk2IWqbhFK3YRiyDTYhi5OEYvlhGMHBNjGsm4RjO2EY0YU2Mc2ThHN9YRjhSTYx7puEc79hGPENNjIPk4SD8WEpAME2QiCblIQzYSkQhTZCQZOUlHVhKSBJNkJim5SUt2EpMA02QoOTlKT5YSlPwSZSpJuUpTthKV+FJlLFk5S1fWEpb0kmUuablLW/YSl/DSZTB5OUxfFhOY7BJmMom5TGM2E5noUmY0mTlNZ1YTmuSSZjapuU1rdhOb4NJmOLk5Tm+WE5zcEie3ggA="
+script:"cleanup.0"
 {widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+field1:{"type":"field","size":[256,257],"pos":[0,35],"pattern":46,"border":0,"scrollbar":0,"style":"plain","value":"W:nil\nK: extract value\n  where !value..name in ( \"help\",\"skip\")\n  from deck.cards  \n\neach k in K\n  each w in k.widgets\n    if w.name in W\n       d:W[w.name]\n       w.pos:d.pos\n       w.size:d.size\n    else\n       d:0\n      d.pos: w.pos\n      d.size: w.size\n      W[w.name]:d\n   end\n end\nend\n"}
+res:{"type":"field","size":[256,75],"pos":[0,293],"volatile":1,"pattern":44,"show":"invert","border":0,"style":"plain"}
+cardName1:{"type":"contraption","size":[132,14],"pos":[23,19],"def":"cardName","widgets":{"cn":{"size":[132,14],"value":"cleanup"}}}
+prevBtn:{"type":"button","size":[20,15],"pos":[0,18],"script":"cleanup.1","font":"body","text":"<<"}
+nextBtn:{"type":"button","size":[20,15],"pos":[157,18],"script":"cleanup.2","font":"body","text":">>"}
+newBtn:{"type":"button","size":[20,15],"pos":[236,18],"script":"cleanup.3","font":"body","text":"+"}
+g:{"type":"grid","size":[224,80],"pos":[272,256],"show":"invert","value":{},"row":1}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"animated":1,"pattern":45,"show":"transparent","border":0,"brush":4,"scale":1}
 
-{card:card6}
-script:"home.0"
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+{script:cleanup.0}
+on view do
+ mp:pointer.pos - c.pos
+ t:g.value c.clear[] c.brush:4
+ each i in range count t
+  xy:t.x[i],t.y[i]
+  c.pattern: if 5>mag xy-mp 32 else 45 end
+  c.line[xy]
+ end
+end
+{end}
 
-{card:card7}
-script:"home.0"
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+{script:cleanup.1}
+on click do
+  go["Prev" "SlideRight" 15]
+end
+{end}
 
-{card:card8}
-script:"home.0"
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+{script:cleanup.2}
+on click do
+  go["Next" "SlideLeft" 15]
+end
+{end}
 
-{card:card9}
-script:"home.0"
-{widgets}
-tutor1:{"type":"contraption","size":[512,128],"pos":[0,214],"def":"tutor","widgets":{"body":{},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{},"runBtn":{},"next":{},"prev":{}}}
+{script:cleanup.3}
+on click do
+ go[deck.add[deck.card]]
+ res.text:"new card"
+end
+{end}
 
 {contraption:tutor}
-size:[512,128]
+size:[512,160]
 resizable:1
-margin:[5,35,4,8]
-description:"A contraption for creating interactive decker tutorials."
-version:0.1
-image:"%%IMG2AgAAgC7/Lv8uAif/J/8nAgH/Af8B/wH/AQQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMAH/Af8B/wH/AQQn/yf/JwIl/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/JcI="
+margin:[5,140,4,8]
+description:"A contraption for creating interactive decker tutorials.\n\nchangelog\n0.3: add help config, scrolling, resize and recolor\n0.2: add help button \n0.1: initial version"
+version:0.3
+image:"%%IMG2AgAAoC7/Lv8uAif/J/8nAi//L/8v/y//LwQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMC//L/8v/y//LwQu/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8uBQ=="
 script:"tutor.0p"
-attributes:{"name":["body","code","next","prev"],"label":["body","code","next","prev"],"type":["rich","code","string","string"]}
+attributes:{"name":["body","scroll_body","code","scroll_code","next","prev","help"],"label":["body","scroll body","code","scroll code","next card","prev card","help card"],"type":["rich","bool","code","bool","string","string","string"]}
 {widgets}
-body:{"type":"field","size":[210,93],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"value":"..."}
+body:{"type":"field","size":[210,124],"pos":[3,33],"locked":1,"pattern":44,"show":"transparent","border":0,"scrollbar":0,"value":"..."}
 nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
 cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
-code:{"type":"field","size":[218,94],"pos":[222,32],"pattern":47,"show":"none","border":1,"style":"code"}
-prevBtn:{"type":"button","size":[60,20],"pos":[445,62],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
-runBtn:{"type":"button","size":[60,20],"pos":[445,98],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+code:{"type":"field","size":[218,125],"pos":[222,32],"pattern":47,"show":"none","border":1,"scrollbar":0,"style":"code","scroll":1}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,58],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,105],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
 next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
 prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+helpBtn:{"type":"button","size":[60,20],"pos":[445,81],"script":"tutor.4p","pattern":39,"show":"none","text":"help","style":"rect"}
+help:{"type":"field","size":[100,20],"pos":[239,-31],"locked":1,"show":"none","style":"plain"}
+scroll_body:{"type":"button","size":[15,20],"pos":[5,175],"locked":1,"show":"none","style":"check","value":0}
+scroll_code:{"type":"button","size":[15,20],"pos":[80,175],"locked":1,"show":"none","style":"check","value":0}
 
 {script:tutor.0p}
 on get_body do body.value end  on set_body x do body.value: x end
 on get_code do code.text end   on set_code x do code.text: x end
 on get_next do next.text end   on set_next x do next.text: x end
 on get_prev do prev.text end   on set_prev x do prev.text: x end
+on get_help do help.text end   on set_help x do help.text: x end
+on get_scroll_code do scroll_code.value end
+on get_scroll_body do scroll_body.value end
+on set_scroll_code x do scroll_code.value:x end
+on set_scroll_body x do scroll_body.value:x end
 
 on view do
  cardName.text: deck.card.name
+ code.scrollbar: scroll_code.value
+ body.scrollbar: scroll_body.value
  code.locked: me.locked
  sh: if code.text
        if me.locked "invert" else "solid" end
      else "none" end
  code.show: sh runBtn.show: sh
- # "-" is placeholder awaiting this fix:
- # https://github.com/JohnEarnest/Decker/commit/f591e823a
  nextBtn.show: if next.text "solid" else "none" end
  prevBtn.show: if prev.text "solid" else "none" end
+ helpBtn.show: if help.text "solid" else "none" end
 end
 
 on next_card_name do
@@ -339,8 +560,15 @@ end
 
 {end}
 
+{script:tutor.4p}
+on click do
+ go["help" "SlideUp" 15]
+end
+{end}
+
 {contraption:hybridSlider}
 size:[100,25]
+resizable:1
 margin:[19,6,17,6]
 description:"Provides a slider with a combination of the \"bar\" and \"compact\" styles."
 script:"hybridSlider.0p"
@@ -433,6 +661,124 @@ on click xy do
  set_cxy[floor xy/get_cwh[]]
  view[]
  card.event["pick" get_cxy[] get_value[]]
+end
+{end}
+
+{contraption:gridpad}
+size:[128,128]
+resizable:1
+margin:[2,1,2,2]
+description:"Draws a rectangular grid with a cursor, and translates mouse events to grid coordinates."
+version:0.1
+script:"gridpad.0p"
+attributes:{"name":["cw","ch","gc","border","gw","gh","cursor"],"label":["cell width","cell height","grid color","draw border?","grid width","grid height","draw cursor?"],"type":["number","number","number","bool","number","number","bool"]}
+{widgets}
+cellW:{"type":"slider","size":[54,25],"pos":[158,-46],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[54,25],"pos":[158,-3],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"locked":1,"volatile":1,"pattern":32,"show":"transparent","border":1,"scale":1}
+gridColor:{"type":"slider","size":[54,25],"pos":[158,40],"locked":1,"interval":[0,47],"value":9,"style":"compact"}
+curXY:{"type":"field","size":[61,20],"pos":[158,81],"locked":1,"style":"plain","value":"[0,0]"}
+gridW:{"type":"slider","size":[54,25],"pos":[224,-46],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+gridH:{"type":"slider","size":[54,25],"pos":[224,-3],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+cursor:{"type":"button","size":[60,20],"pos":[225,40],"locked":1,"text":"cursor?","style":"check","value":1}
+
+{script:gridpad.0p}
+on get_cw do cellW.value end       on set_cw x do cellW.value: x end
+on get_ch do cellH.value end       on set_ch x do cellH.value: x end
+on get_gw do gridW.value end       on set_gw x do gridW.value: x end
+on get_gh do gridH.value end       on set_gh x do gridH.value: x end
+on get_gc do gridColor.value end   on set_gc x do gridColor.value: x end
+on get_border do c.border end      on set_border x do c.border:x end
+on get_cursor do cursor.value end  on set_cursor x do cursor.value:x end
+on get_cxy do curXY.data end       on set_cxy xy do curXY.data: xy end
+
+on get_cwh do cellW.value,cellH.value end
+on get_cur do (get_gw[] * last curXY.data) + first curXY.data end
+
+on view do
+ c.clear[] c.brush:0
+ # give instances a chance to draw on canvas
+ card.event["draw" c]
+ if c.pattern: gridColor.value
+  each x in get_cw[] * range 1+get_gw[] c.line[x,0 x,c.size[1]] end nil
+  each y in get_ch[] * range 1+get_gh[] c.line[0,y c.size[0],y] end nil
+ end
+ if cursor.value
+  xy:curXY.data  cwh:get_cwh[]
+  c.brush: c.pattern:1  c.box[xy*cwh 1+cwh]
+  c.brush: 0 c.pattern:32 c.box[xy*cwh cwh]
+ end
+end
+on drag xy do click[xy] end
+on click xy do
+ set_cxy[floor xy/get_cwh[]]
+ view[]
+ card.event["pick" get_cxy[]]
+end
+{end}
+
+{contraption:prototype1}
+size:[512,160]
+resizable:1
+margin:[5,140,4,8]
+description:"A contraption for creating interactive decker tutorials.\n\nchangelog\n0.3: add help config, scrolling, resize and recolor\n0.2: add help button \n0.1: initial version"
+version:0.3
+image:"%%IMG2AgAAoC7/Lv8uAif/J/8nAi//L/8v/y//LwQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMC//L/8v/y//LwQn/yf/JwIm/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yYD"
+script:"tutor.0p"
+attributes:{"name":["body","code","next","prev","scroll_body","scroll_code"],"label":["body","code","next","prev","scroll body","scroll code"],"type":["rich","code","string","string","bool","bool"]}
+{widgets}
+body:{"type":"field","size":[210,124],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"scrollbar":0,"value":"..."}
+nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
+cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
+code:{"type":"field","size":[218,125],"pos":[222,32],"pattern":47,"show":"none","border":1,"scrollbar":0,"style":"code","scroll":1}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,58],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,105],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
+prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+helpBtn:{"type":"button","size":[60,20],"pos":[445,81],"script":"tutor.4p","pattern":39,"show":"none","text":"help","style":"rect"}
+help:{"type":"field","size":[100,20],"pos":[239,-31],"locked":1,"show":"none","style":"plain"}
+scroll_body:{"type":"button","size":[15,20],"pos":[5,175],"locked":1,"show":"none","style":"check","value":0}
+scroll_code:{"type":"button","size":[15,20],"pos":[80,175],"locked":1,"show":"none","style":"check","value":0}
+
+{contraption:prototype2}
+size:[512,160]
+resizable:1
+margin:[5,140,4,8]
+description:"A contraption for creating interactive decker tutorials.\n\nchangelog\n0.3: add help config, scrolling, resize and recolor\n0.2: add help button \n0.1: initial version"
+version:0.3
+image:"%%IMG2AgAAoC7/Lv8uAif/J/8nAi//L/8v/y//LwQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMC//L/8v/y//LwQn/yf/JwIm/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yYD"
+script:"tutor.0p"
+attributes:{"name":["body","code","next","prev","scroll_body","scroll_code"],"label":["body","code","next","prev","scroll body","scroll code"],"type":["rich","code","string","string","bool","bool"]}
+{widgets}
+body:{"type":"field","size":[210,124],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"scrollbar":0,"value":"..."}
+nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
+cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
+code:{"type":"field","size":[218,125],"pos":[222,32],"pattern":47,"show":"none","border":1,"scrollbar":0,"style":"code","scroll":1}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,58],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,105],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
+prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+helpBtn:{"type":"button","size":[60,20],"pos":[445,81],"script":"tutor.4p","pattern":39,"show":"none","text":"help","style":"rect"}
+help:{"type":"field","size":[100,20],"pos":[239,-31],"locked":1,"show":"none","style":"plain"}
+scroll_body:{"type":"button","size":[15,20],"pos":[5,175],"locked":1,"show":"none","style":"check","value":0}
+scroll_code:{"type":"button","size":[15,20],"pos":[80,175],"locked":1,"show":"none","style":"check","value":0}
+
+{contraption:cardName}
+size:[100,20]
+resizable:1
+margin:[0,0,0,0]
+description:"show / edit the current card name"
+script:"cardName.0p"
+{widgets}
+cn:{"type":"field","size":[100,20],"pos":[0,0],"show":"transparent","border":0,"style":"plain","value":"card7"}
+
+{script:cardName.0p}
+on view do
+ cn.text: deck.card.name
+end
+
+on change val do
+ deck.card.name: cn.text
 end
 {end}
 
