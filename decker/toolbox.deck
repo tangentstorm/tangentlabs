@@ -40,12 +40,23 @@ end
 image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"tutor card.0"
 {widgets}
-tutor1:{"type":"contraption","size":[512,160],"pos":[0,190],"def":"tutor","widgets":{"body":{"size":[210,125],"value":{"text":["toolbox\n\n- ","More decker lessons.","\n-"," Lesson videos."],"font":["","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw"]}},"nextBtn":{"size":[60,25],"pos":[445,44],"show":"none"},"cardName":{},"code":{"size":[218,126]},"prevBtn":{"size":[60,25],"pos":[445,73]},"runBtn":{"size":[60,26],"pos":[445,131]},"next":{"value":""},"prev":{},"button1":{"size":[60,25],"pos":[445,101]}}}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,182],"def":"tutor","widgets":{"body":{"value":{"text":["i","  ","canvas and grid\n","i","  ","index\n"],"font":["","","mono","","","mono"],"arg":["%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","canvas and grid","%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","index"]}},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{"show":"none"},"runBtn":{},"next":{},"prev":{"value":""},"helpBtn":{},"help":{},"scroll_body":{},"scroll_code":{}}}
+special:{"type":"field","size":[129,54],"pos":[379,126],"value":{"text":["\n- ","More decker lessons.","\n-"," Lesson videos.","\n\n"],"font":["","","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw",""]}}
 
 {script:tutor card.0}
 on view do
- 
+ bullet:image["%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE"]
+ card_names: extract key
+   where !value..name in ("help",deck.card.name)
+   from deck.cards
+ tutor1.body: # rtext.make["contents:\n" "menu" nil 0],
+  raze each cn in card_names
+    rtext.make["" "" bullet],
+    rtext.make["  "],
+    rtext.make[("%s\n" format cn) "mono" cn]
+  end
 end
+
 {end}
 
 {card:canvas and grid}
@@ -171,7 +182,7 @@ c0:{"type":"canvas","size":[98,80],"pos":[313,30],"show":"transparent","image":"
 c1:{"type":"canvas","size":[97,80],"pos":[412,30],"show":"transparent","image":"%%IMG2AGEAUCX/Jf8l/yX/Jf8l/yU9JwMlEScDJUknBSUPJwUlRycHJQ0nByVGJwclDScHJUYnByUNJwglRScHJQ0nCCVFJwclDicHJUUnByUOJwclRScHJQ4nByVFJwclDycFJUcnBSURJwMlSScDJf8l/yX/Jf8l/yX/Jf8l/yX/Jf8lOCcDJV0nBSUcJwMlPCcIJRcnByU7JwslECcMJTonDyUJJw8lOycRJQQnESU8JyUlPScjJT8nISVCJxslSScUJVEnDSVXJwgl/yX/Jf8l/yX/JSA=","scale":1}
 f2:{"type":"field","size":[197,72],"pos":[312,266],"show":"invert","value":"c0.clear[] c0.brush:0\nc0.pattern:1 c0.fill[]\nc0.pattern:256 # secret \"ants\" pattern\nc0.box[5,5 c0.size-11]\nc0.pattern: patternSlider.value\nc0.brush: brushSlider.value"}
 f1:{"type":"field","size":[197,72],"pos":[312,189],"show":"invert","value":"im:c0.copy[]\ncm: (1,32)dict(39,38)\nxy: 0,0\nt: 1 # transparent?\nc1.paste[im.map[cm] xy t]\n"}
-backBtn:{"type":"button","size":[41,20],"pos":[257,22],"script":"help.5","pattern":39,"text":"back"}
+backBtn:{"type":"button","size":[41,20],"pos":[257,22],"script":"help.5","pattern":39,"text":"back","style":"rect"}
 
 {script:help.0}
 on set_pattern x do
@@ -547,42 +558,51 @@ mod.pie    :plot_pie
 {end}
 
 {contraption:tutor}
-size:[512,128]
+size:[512,160]
 resizable:1
-margin:[5,35,4,8]
-description:"A contraption for creating interactive decker tutorials.\n\nchangelog\n0.2: add help button \n0.1: initial version"
-version:0.2
-image:"%%IMG2AgAAgC7/Lv8uAif/J/8nAgH/Af8B/wH/AQQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMAH/Af8B/wH/AQQn/yf/JwIl/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/JcI="
+margin:[5,140,4,8]
+description:"A contraption for creating interactive decker tutorials.\n\nchangelog\n0.3: add help config, scrolling, resize and recolor\n0.2: add help button \n0.1: initial version"
+version:0.3
+image:"%%IMG2AgAAoC7/Lv8uAif/J/8nAi//L/8v/y//LwQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMC//L/8v/y//LwQn/yf/JwIm/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yYD"
 script:"tutor.0p"
-attributes:{"name":["body","code","next","prev"],"label":["body","code","next","prev"],"type":["rich","code","string","string"]}
+attributes:{"name":["body","scroll_body","code","scroll_code","next","prev","help"],"label":["body","scroll body","code","scroll code","next card","prev card","help card"],"type":["rich","bool","code","bool","string","string","string"]}
 {widgets}
-body:{"type":"field","size":[210,93],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"value":"..."}
+body:{"type":"field","size":[210,124],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"scrollbar":0,"value":"..."}
 nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
 cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
-code:{"type":"field","size":[218,94],"pos":[222,32],"pattern":47,"show":"none","border":1,"style":"code"}
+code:{"type":"field","size":[218,125],"pos":[222,32],"pattern":47,"show":"none","border":1,"scrollbar":0,"style":"code","scroll":1}
 prevBtn:{"type":"button","size":[60,20],"pos":[445,58],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
 runBtn:{"type":"button","size":[60,20],"pos":[445,105],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
 next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
 prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
-button1:{"type":"button","size":[60,20],"pos":[445,81],"script":"tutor.4p","pattern":39,"text":"help","style":"rect"}
+helpBtn:{"type":"button","size":[60,20],"pos":[445,81],"script":"tutor.4p","pattern":39,"show":"none","text":"help","style":"rect"}
+help:{"type":"field","size":[100,20],"pos":[239,-31],"locked":1,"show":"none","style":"plain"}
+scroll_body:{"type":"button","size":[15,20],"pos":[5,175],"locked":1,"show":"none","style":"check","value":0}
+scroll_code:{"type":"button","size":[15,20],"pos":[80,175],"locked":1,"show":"none","style":"check","value":0}
 
 {script:tutor.0p}
 on get_body do body.value end  on set_body x do body.value: x end
 on get_code do code.text end   on set_code x do code.text: x end
 on get_next do next.text end   on set_next x do next.text: x end
 on get_prev do prev.text end   on set_prev x do prev.text: x end
+on get_help do help.text end   on set_help x do help.text: x end
+on get_scroll_code do scroll_code.value end
+on get_scroll_body do scroll_body.value end
+on set_scroll_code x do scroll_code.value:x end
+on set_scroll_body x do scroll_body.value:x end
 
 on view do
  cardName.text: deck.card.name
+ code.scrollbar: scroll_code.value
+ body.scrollbar: scroll_body.value
  code.locked: me.locked
  sh: if code.text
        if me.locked "invert" else "solid" end
      else "none" end
  code.show: sh runBtn.show: sh
- # "-" is placeholder awaiting this fix:
- # https://github.com/JohnEarnest/Decker/commit/f591e823a
  nextBtn.show: if next.text "solid" else "none" end
  prevBtn.show: if prev.text "solid" else "none" end
+ helpBtn.show: if help.text "solid" else "none" end
 end
 
 on next_card_name do
