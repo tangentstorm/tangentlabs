@@ -3,27 +3,34 @@ version:1
 card:1
 size:[512,342]
 name:"gridpad.deck"
-patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+EK1S4xoW9ZAiODjr8wwgA/2ADABOvQPFINE8oYco/HnCxjChZ/NMNKP+IooYKACDzz0ABAQ=="
+patterns:"%%IMG3AAgA+AgAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+EK1S4xoW9ZAiODjr8wwgA/2ADABOvQPFINE8oYco/HnCxjChZ/NMNKP+IooYKBv1TTTX/KKLIPzvsEI4EEmyigAJaDDDAP+Yg808wgvS4AjhqAOCJEgB4wQKI+kDzjzuV/EMNANm4AoAmewDABZbW1GPNI+A8MoMwMziwiQMHpHHAADoM8Ew98PwBTjUfEEOLA5xAcsAaYgywgw3SkPPPI77844Ih/yCZjQE+bDJACFqYw6Mvj/S4wz9iSBDOEApsYsIAWugIz6Q87uAKOBIgYiQXSc4QEA=="
 
 {card:home}
+script:"home.0"
 {widgets}
-notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"home.0","pattern":42,"style":"plain","value":"rgb125: \"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\"\narne: \"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\"\ntractor: \"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\" # tractor game\n# extractor:   \" \" fuse each i in 32 + range 16 \"%06h\" format patterns[i] end\neach rgb i in extract \"%H\" parse value from \" \" split pal: tractor\n  patterns[32+i]: rgb\nend"}
-result:{"type":"field","size":[100,101],"pos":[345,42],"style":"code","value":"{\"value\":[16777215,2829099,7039851,12434877,14694970,16747520,16766976,5025616,9425231,4892415,1989835,10639871,14524671,10644010,51455,0],\"vars\":{\"rgb125\":\"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\",\"arne\":\"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\",\"tractor\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\",\"pal\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a 00c8ff 000000\"}}"}
+notes:{"type":"field","size":[452,96],"pos":[24,230],"script":"home.1","pattern":42,"style":"plain","scroll":28,"value":"rgb125: \"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\"\narne: \"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\"\ntractor: \"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a  000000\" # tractor game\ndecker: \"ffffff ffff00 ff6500 dc0000 ff0097 360097 0000ca 0097ff 00a800 006500 653600 976536 b9b9b9 868686 454545 000000\"\n# extractor:   \" \" fuse each i in 32 + range 16 \"%06h\" format patterns[i] end\neach rgb i in extract \"%H\" parse value from \" \" split pal: tractor\n  patterns[32+i]: rgb\nend"}
+result:{"type":"field","size":[100,101],"pos":[345,42],"style":"code","value":"{\"value\":[16777215,2829099,7039851,12434877,14694970,16747520,16766976,5025616,9425231,4892415,1989835,10639871,14524671,10644010,null,0],\"vars\":{\"rgb125\":\"ffffff 666666 cccccc 660000 990000 cc0000 ff0000 006600 009900 00cc00 00ff00 000066 000099 0000cc 0000ff 000000\",\"arne\":\"ffffff 493c2b be2633 e06f8b 9d9d9d a46422 eb8931 f7e26b 1b2632 2f484e 44891a a3ce27 005784 31a2f2 b2dcef 000000\",\"tractor\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a  000000\",\"decker\":\"ffffff ffff00 ff6500 dc0000 ff0097 360097 0000ca 0097ff 00a800 006500 653600 976536 b9b9b9 868686 454545 000000\",\"pal\":\"ffffff 2b2b2b 6b6b6b bdbdbd e03a3a ff8c00 ffd800 4caf50 8fd14f 4aa6ff 1e5ccb a259ff dda0ff a26a2a  000000\"}}"}
 
 {script:home.0}
+on view do
+ 
+end
+{end}
+
+{script:home.1}
 on run text do result.data: eval[text 0 1] end
 
 {end}
 
 {card:sprites}
-image:"%%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"
+image:"%%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"
 script:"sprites.0"
 {widgets}
-gs:{"type":"contraption","size":[129,129],"pos":[28,107],"locked":1,"volatile":1,"script":"sprites.1","show":"transparent","def":"gridpad","widgets":{"cellW":{"pos":[159,-46],"value":8},"cellH":{"pos":[159,-3],"value":8},"c":{"size":[129,129]},"gridColor":{"size":[54,26],"pos":[159,40],"value":1},"curXY":{"pos":[159,82]},"gridW":{"pos":[225,-46]},"gridH":{"pos":[225,-3]},"cursor":{"pos":[226,40]}}}
+gs:{"type":"contraption","size":[129,129],"pos":[28,107],"locked":1,"volatile":1,"script":"sprites.1","show":"transparent","def":"gridpad","widgets":{"cellW":{"pos":[159,-46],"value":8},"cellH":{"pos":[159,-3],"value":8},"c":{"size":[129,129]},"gridColor":{"size":[54,26],"pos":[159,40],"value":1},"curXY":{"pos":[159,82],"value":"[1,7]"},"gridW":{"pos":[225,-46]},"gridH":{"pos":[225,-3]},"cursor":{"pos":[226,40]}}}
 notes:{"type":"field","size":[452,49],"pos":[24,277],"pattern":42,"style":"plain","value":"Gridpad contraption demo. `pal` draws the palette in its \"draw\" event. Sprite data is stored directly on the card background. "}
-pal:{"type":"contraption","size":[129,24],"pos":[28,62],"volatile":1,"script":"sprites.2","def":"gridpad","widgets":{"cellW":{"pos":[159,-46],"value":8},"cellH":{"size":[54,7],"pos":[159,-3],"value":8},"c":{"size":[129,24]},"gridColor":{"size":[54,4],"pos":[159,8],"value":1},"curXY":{"size":[61,4],"pos":[159,15],"value":"[0,2]"},"gridW":{"pos":[225,-46]},"gridH":{"size":[54,7],"pos":[225,-3],"value":3},"cursor":{"size":[60,3],"pos":[226,8]}}}
+pal:{"type":"contraption","size":[129,24],"pos":[28,62],"volatile":1,"script":"sprites.2","def":"gridpad","widgets":{"cellW":{"pos":[159,-46],"value":8},"cellH":{"size":[54,7],"pos":[159,-3],"value":8},"c":{"size":[129,24]},"gridColor":{"size":[54,4],"pos":[159,8],"value":1},"curXY":{"size":[61,4],"pos":[159,15],"value":"[8,2]"},"gridW":{"pos":[225,-46]},"gridH":{"size":[54,7],"pos":[225,-3],"value":3},"cursor":{"size":[60,3],"pos":[226,8]}}}
 c:{"type":"canvas","size":[127,127],"pos":[194,108],"locked":1,"volatile":1,"script":"sprites.3","show":"transparent","border":0,"scale":16}
-gp:{"type":"contraption","size":[128,128],"pos":[193,107],"volatile":1,"script":"sprites.4","show":"transparent","def":"gridpad","widgets":{"cellW":{},"cellH":{},"c":{"pattern":9},"gridColor":{},"curXY":{"value":"[0,2]"},"gridW":{},"gridH":{},"cursor":{"value":0}}}
+gp:{"type":"contraption","size":[128,128],"pos":[193,107],"volatile":1,"script":"sprites.4","show":"transparent","def":"gridpad","widgets":{"cellW":{},"cellH":{},"c":{"pattern":9},"gridColor":{},"curXY":{},"gridW":{},"gridH":{},"cursor":{"value":0}}}
 
 {script:sprites.0}
 c.scale:gp.cwh
@@ -263,5 +270,162 @@ on click xy do
  view[]
  card.event["pick" get_cxy[]]
 end
+{end}
+
+{contraption:tutor}
+size:[512,128]
+resizable:1
+margin:[5,35,4,8]
+description:"A contraption for creating interactive decker tutorials."
+version:0.1
+image:"%%IMG2AgAAgC7/Lv8uAif/J/8nAgH/Af8B/wH/AQQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMAH/Af8B/wH/AQQn/yf/JwIl/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/Jf8l/yX/JcI="
+script:"tutor.0p"
+attributes:{"name":["body","code","next","prev"],"label":["body","code","next","prev"],"type":["rich","code","string","string"]}
+{widgets}
+body:{"type":"field","size":[210,93],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"value":"..."}
+nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
+cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
+code:{"type":"field","size":[218,94],"pos":[222,32],"pattern":47,"show":"none","border":1,"style":"code"}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,62],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,98],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
+prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+
+{script:tutor.0p}
+on get_body do body.value end  on set_body x do body.value: x end
+on get_code do code.text end   on set_code x do code.text: x end
+on get_next do next.text end   on set_next x do next.text: x end
+on get_prev do prev.text end   on set_prev x do prev.text: x end
+
+on view do
+ cardName.text: deck.card.name
+ code.locked: me.locked
+ sh: if code.text
+       if me.locked "invert" else "solid" end
+     else "none" end
+ code.show: sh runBtn.show: sh
+ # "-" is placeholder awaiting this fix:
+ # https://github.com/JohnEarnest/Decker/commit/f591e823a
+ nextBtn.show: if next.text "solid" else "none" end
+ prevBtn.show: if prev.text "solid" else "none" end
+end
+
+on next_card_name do
+ if next.text = "Next"
+  cn:keys deck.cards
+  ci:first extract index where value=deck.card.name from cn
+  cn[ci+1]
+ else
+  next.text
+ end
+end
+
+on no_script c do
+ (c.script="on view do\n\nend") |!c.script
+end
+
+on is_special c do
+ "special" in keys c.widgets
+end
+
+on copy_to_next do
+ card: deck.card
+ if !is_special[card]
+  nc: deck.cards[next_card_name[]]
+  if !is_special[nc]
+   tw: "tutor1"
+   if ! count tw drop nc.widgets
+    each w in tw drop card.widgets nc.add[w] end
+   end
+   if no_script[nc] nc.script: card.script end
+  end
+ end
+end
+
+on run text do
+ d:deck.card.widgets
+ d.card: deck.card
+ eval[text d 1]
+end
+
+{end}
+
+{script:tutor.1p}
+on click do
+ copy_to_next[]
+ go[next.text "SlideLeft" 15]
+end
+{end}
+
+{script:tutor.2p}
+on click do
+ go[prev.text "SlideRight" 15]
+end
+{end}
+
+{script:tutor.3p}
+on click do
+ d:deck.card.widgets
+ d.card:deck.card
+ eval[code.text d 1]
+end
+
+{end}
+
+{contraption:patternPicker}
+size:[100,100]
+resizable:1
+margin:[10,10,10,10]
+description:"a palette of patterns and (optionally) colors."
+script:"patternPicker.0p"
+template:"on change val do\n \nend"
+attributes:{"name":["value","color"],"label":["Value","Color"],"type":["number","bool"]}
+{widgets}
+c:{"type":"canvas","size":[100,100],"pos":[0,0],"locked":1,"border":0,"scale":1}
+v:{"type":"slider","size":[60,25],"pos":[2,-41],"locked":1,"show":"none","interval":[0,47]}
+cc:{"type":"button","size":[14,20],"pos":[73,-40],"locked":1,"show":"none","style":"check","value":1}
+
+{script:patternPicker.0p}
+on get_value do v.value end
+on set_value x do v.value:x view[] end
+on get_color do cc.value end
+on set_color x do cc.value:x view[] end
+
+b:5
+r:4+2*cc.value
+s:floor(c.size-2*b)/8,r
+
+on boxes do
+ flip b+s*flip 8 cross r
+end
+
+on view do
+ o:-50
+ c.clear[]
+ each p i in boxes[]
+  c.pattern:i
+  c.rect[p s]
+  c.pattern:1
+  c.box[p s+1]
+  if i=v.value o:p end
+ end
+ c.pattern:0
+ c.box[o-1 s+3]
+ c.pattern:1
+ c.box[o-2 s+5]
+end
+
+on inside p r do
+ min(p>r)&(r+s>p)
+end
+on click pos do
+ each p i in boxes[]
+  if inside[pos p]
+   set_value[i]
+   card.event["change" i]
+  end
+ end
+end
+
 {end}
 
