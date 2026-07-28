@@ -1,0 +1,120 @@
+{deck}
+version:1
+card:1
+size:[512,342]
+name:"buttonfall.deck"
+
+{card:home}
+script:"home.0"
+{widgets}
+bq:{"type":"button","size":[15,15],"pos":[5,240],"font":"mono","pattern":39,"text":"q","shortcut":"q"}
+bw:{"type":"button","size":[15,15],"pos":[21,240],"font":"mono","pattern":39,"text":"w","shortcut":"w"}
+letter:{"type":"field","size":[30,23],"pos":[410,32],"font":"menu","style":"code","align":"center","value":"j"}
+msg:{"type":"field","size":[64,16],"pos":[16,32],"value":"bad"}
+layout:{"type":"field","size":[59,35],"pos":[368,160],"value":"qwertyuiop\nasdfghjkl\nzxcvbnm"}
+be:{"type":"button","size":[15,15],"pos":[37,240],"font":"mono","pattern":39,"text":"e","shortcut":"e"}
+br:{"type":"button","size":[15,15],"pos":[53,240],"font":"mono","pattern":39,"text":"r","shortcut":"r"}
+bt:{"type":"button","size":[15,15],"pos":[69,240],"font":"mono","pattern":39,"text":"t","shortcut":"t"}
+by:{"type":"button","size":[15,15],"pos":[85,240],"font":"mono","pattern":39,"text":"y","shortcut":"y"}
+bu:{"type":"button","size":[15,15],"pos":[101,240],"font":"mono","pattern":39,"text":"u","shortcut":"u"}
+bi:{"type":"button","size":[15,15],"pos":[117,240],"font":"mono","pattern":39,"text":"i","shortcut":"i"}
+bo:{"type":"button","size":[15,15],"pos":[133,240],"font":"mono","pattern":39,"text":"o","shortcut":"o"}
+bp:{"type":"button","size":[15,15],"pos":[149,240],"font":"mono","pattern":39,"text":"p","shortcut":"p"}
+ba:{"type":"button","size":[15,15],"pos":[10,256],"font":"mono","pattern":39,"text":"a","shortcut":"a"}
+bs:{"type":"button","size":[15,15],"pos":[26,256],"font":"mono","pattern":39,"text":"s","shortcut":"s"}
+bd:{"type":"button","size":[15,15],"pos":[42,256],"font":"mono","pattern":39,"text":"d","shortcut":"d"}
+bf:{"type":"button","size":[15,15],"pos":[58,256],"font":"mono","pattern":39,"text":"f","shortcut":"f"}
+bg:{"type":"button","size":[15,15],"pos":[74,256],"font":"mono","pattern":39,"text":"g","shortcut":"g"}
+bh:{"type":"button","size":[15,15],"pos":[90,256],"font":"mono","pattern":39,"text":"h","shortcut":"h"}
+bj:{"type":"button","size":[15,15],"pos":[106,256],"font":"mono","pattern":39,"text":"j","shortcut":"j"}
+bk:{"type":"button","size":[15,15],"pos":[122,256],"font":"mono","pattern":39,"text":"k","shortcut":"k"}
+bl:{"type":"button","size":[15,15],"pos":[138,256],"font":"mono","pattern":39,"text":"l","shortcut":"l"}
+bz:{"type":"button","size":[15,15],"pos":[15,272],"font":"mono","pattern":39,"text":"z","shortcut":"z"}
+bx:{"type":"button","size":[15,15],"pos":[31,272],"font":"mono","pattern":39,"text":"x","shortcut":"x"}
+bc:{"type":"button","size":[15,15],"pos":[47,272],"font":"mono","pattern":39,"text":"c","shortcut":"c"}
+bv:{"type":"button","size":[15,15],"pos":[63,272],"font":"mono","pattern":39,"text":"v","shortcut":"v"}
+bb:{"type":"button","size":[15,15],"pos":[79,272],"font":"mono","pattern":39,"text":"b","shortcut":"b"}
+bn:{"type":"button","size":[15,15],"pos":[95,272],"font":"mono","pattern":39,"text":"n","shortcut":"n"}
+bm:{"type":"button","size":[15,15],"pos":[111,272],"font":"mono","pattern":39,"text":"m","shortcut":"m"}
+code:{"type":"field","size":[254,178],"pos":[96,32],"script":"home.1","font":"mono","border":1,"scrollbar":1,"style":"code","value":"buttons: extract value\n where value..type=\"button\"\n from card.widgets\n\nx:x0:5 y:240 cw:15 gy:0 \ni:0 each ch in layout.text\n b:buttons[i]\n # b.font:\"mono\" b.size:2 take cw\n if ch=\"\\n\" \n  gy:gy+1 y:y+cw+1\n  x:x0+(gy*cw/3)\n else\n  b.pos:x,y x:x+cw+1\n  b.name: \"b%s\" format ch\n  b.text:ch b.shortcut:ch\n  i:i+1\n end\nend\n"}
+result:{"type":"field","size":[122,74],"pos":[368,64],"show":"invert","style":"code","value":"12345678910101112131415161718191520212223242526"}
+c:{"type":"canvas","size":[100,100],"pos":[304,224],"animated":1,"script":"home.2","image":"%%IMG3AGQAZAZAACBALBoDwqRyyWw6n9CoNBo4Wa/YE3LK7Xq/0Gp2rAWbz+immIzdpt9w7pptdcfveOWcbs/74XNFY31/hWZriFmEhoxyV3ttjZJeiWyLk5hLgYKRmZ5qdJ2fo0KQZJekk6aiqaRHr62xsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwIbUg","scale":1}
+field1:{"type":"field","size":[100,20],"pos":[192,240],"animated":1,"script":"home.3"}
+
+{script:home.0}
+A:"%a" format list 97+range 26
+
+on click do
+ msg.text: ""
+ if !letter.value ~ me.label
+  msg.text: "bad"
+ end
+end
+
+
+on run text do
+ d:card.widgets
+ r:eval[text d 1]
+ result.value: show[r.value unless r.error]
+end
+
+{end}
+
+{script:home.1}
+on change val do
+ 
+end
+{end}
+
+{script:home.2}
+
+on view do
+ c.paste[app.render[bc]]
+end
+
+{end}
+
+{script:home.3}
+on change val do
+ 
+end
+
+on view do
+ me.text:" " fuse 
+  extract value..text
+  where each b in (app.render@value) b[2,2]=1 end
+  where value..type="button"
+  from card.widgets
+end
+{end}
+
+{card:card1}
+{widgets}
+bq:{"type":"button","size":[15,15],"pos":[144,128],"font":"mono","pattern":39,"text":"q","shortcut":"q"}
+bw:{"type":"button","size":[15,15],"pos":[160,128],"font":"mono","pattern":39,"text":"w","shortcut":"w"}
+be:{"type":"button","size":[15,15],"pos":[176,128],"font":"mono","pattern":39,"text":"e","shortcut":"e"}
+br:{"type":"button","size":[15,15],"pos":[192,128],"font":"mono","pattern":39,"text":"r","shortcut":"r"}
+bt:{"type":"button","size":[15,15],"pos":[208,128],"font":"mono","pattern":39,"text":"t","shortcut":"t"}
+by:{"type":"button","size":[15,15],"pos":[224,128],"font":"mono","pattern":39,"text":"y","shortcut":"y"}
+bu:{"type":"button","size":[15,15],"pos":[240,128],"font":"mono","pattern":39,"text":"u","shortcut":"u"}
+bi:{"type":"button","size":[15,15],"pos":[256,128],"font":"mono","pattern":39,"text":"i","shortcut":"i"}
+bo:{"type":"button","size":[15,15],"pos":[272,128],"font":"mono","pattern":39,"text":"o","shortcut":"o"}
+bp:{"type":"button","size":[15,15],"pos":[288,128],"font":"mono","pattern":39,"text":"p","shortcut":"p"}
+ba:{"type":"button","size":[15,15],"pos":[149,144],"font":"mono","pattern":39,"text":"a","shortcut":"a"}
+bs:{"type":"button","size":[15,15],"pos":[165,144],"font":"mono","pattern":39,"text":"s","shortcut":"s"}
+bd:{"type":"button","size":[15,15],"pos":[181,144],"font":"mono","pattern":39,"text":"d","shortcut":"d"}
+bf:{"type":"button","size":[15,15],"pos":[197,144],"font":"mono","pattern":39,"text":"f","shortcut":"f"}
+bg:{"type":"button","size":[15,15],"pos":[213,144],"font":"mono","pattern":39,"text":"g","shortcut":"g"}
+bh:{"type":"button","size":[15,15],"pos":[229,144],"font":"mono","pattern":39,"text":"h","shortcut":"h"}
+bj:{"type":"button","size":[15,15],"pos":[245,144],"font":"mono","pattern":39,"text":"j","shortcut":"j"}
+bk:{"type":"button","size":[15,15],"pos":[261,144],"font":"mono","pattern":39,"text":"k","shortcut":"k"}
+bl:{"type":"button","size":[15,15],"pos":[277,144],"font":"mono","pattern":39,"text":"l","shortcut":"l"}
+bz:{"type":"button","size":[15,15],"pos":[154,160],"font":"mono","pattern":39,"text":"z","shortcut":"z"}
+bx:{"type":"button","size":[15,15],"pos":[170,160],"font":"mono","pattern":39,"text":"x","shortcut":"x"}
+bc:{"type":"button","size":[15,15],"pos":[186,160],"font":"mono","pattern":39,"text":"c","shortcut":"c"}
+bv:{"type":"button","size":[15,15],"pos":[202,160],"font":"mono","pattern":39,"text":"v","shortcut":"v"}
+bb:{"type":"button","size":[15,15],"pos":[218,160],"font":"mono","pattern":39,"text":"b","shortcut":"b"}
+bn:{"type":"button","size":[15,15],"pos":[234,160],"font":"mono","pattern":39,"text":"n","shortcut":"n"}
+bm:{"type":"button","size":[15,15],"pos":[250,160],"font":"mono","pattern":39,"text":"m","shortcut":"m"}
+pressed:{"type":"field","size":[160,32],"pos":[144,80],"animated":1,"script":"home.3","font":"menu"}
+
