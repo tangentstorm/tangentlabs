@@ -1,0 +1,9 @@
+files: " " split "hilo-tutor ttt-1-basics grid-selector toolbox"
+
+each f in files
+ d:read["%s.deck" format f]
+ o:"c:/ver/tangentstorm.github.io/decks/%s.html" format f
+ p:"c:/Program\\ Files/Git/usr/bin"
+ if r:write[o d] shell["%s/dos2unix.exe %s" format p,o] end
+ print["%i %s" format r, d.name]
+end
