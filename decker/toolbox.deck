@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:2
+card:0
 size:[512,342]
 script:"0"
 name:"toolbox.deck"
@@ -42,6 +42,7 @@ script:"tutor card.0"
 {widgets}
 tutor1:{"type":"contraption","size":[512,160],"pos":[0,182],"def":"tutor","widgets":{"body":{"value":{"text":["i","  ","canvas and grid\n","i","  ","cleanup\n"],"font":["","","mono","","","mono"],"arg":["%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","canvas and grid","%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","cleanup"]}},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{"show":"none"},"runBtn":{},"next":{},"prev":{"value":""},"helpBtn":{},"help":{},"scroll_body":{},"scroll_code":{}}}
 special:{"type":"field","size":[129,54],"pos":[379,126],"value":{"text":["\n- ","More decker lessons.","\n-"," Lesson videos.","\n\n"],"font":["","","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw",""]}}
+youtubeLink:{"type":"canvas","size":[74,28],"pos":[430,290],"locked":1,"script":"tutor card.1","border":1,"image":"%%IMG3AEoAHAZAgHBILBqPyKRyyWw6n9CodEqtWq9XkHbL7Xq/4LA4rBybz2h0Oc1up9delnzOAtXdeHKSSxr5/4CBd3JaLC1ihi2Gd4Uuh2NwIoGTk1ovAXUvL2IuAZ4Bj4UvLmaRlKd+dSyYIAGkYYaujKKvYnCUfaiqL4qsjqqKII+gwnUtiqPHdy0us7eTdbnQWi6azS7YmKtyoKu9zaMsmtYg1ZeMz4JbkurC1b3w294sjiCj9uD54ofEWumAjKT9GaRCWzde2+zFuxeOob56/vZooaRlxSlG1YQRQ8iKIzJSDUGCGxfq3x8SFi9uybhPoTeFrQ45FCeyRThCEZFsQaVr5Sab/HplWihzpL0XLZttgZOSZyAunSyNYhWA5CqQ1ppVvYT1UkmJWtg5TcXlWCFmj9AGM4vWUDFldtBygVOIxQq7LETk3Yszj9+cR/4KxkN3sGFIYA8rBoOlsePHkCNLnky5spQg","scale":1}
 
 {script:tutor card.0}
 on view do
@@ -55,6 +56,13 @@ on view do
     rtext.make["  "],
     rtext.make[("%s\n" format cn) "mono" cn]
   end
+end
+
+{end}
+
+{script:tutor card.1}
+on click pos do
+ go["https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw"] 
 end
 
 {end}
@@ -570,11 +578,11 @@ resizable:1
 margin:[5,140,4,8]
 description:"A contraption for creating interactive decker tutorials.\n\nchangelog\n0.3: add help config, scrolling, resize and recolor\n0.2: add help button \n0.1: initial version"
 version:0.3
-image:"%%IMG2AgAAoC7/Lv8uAif/J/8nAi//L/8v/y//LwQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMC//L/8v/y//LwQn/yf/JwIm/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yb/Jv8m/yYD"
+image:"%%IMG2AgAAoC7/Lv8uAif/J/8nAi//L/8v/y//LwQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMC//L/8v/y//LwQn/yf/JwIu/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y4D"
 script:"tutor.0p"
 attributes:{"name":["body","scroll_body","code","scroll_code","next","prev","help"],"label":["body","scroll body","code","scroll code","next card","prev card","help card"],"type":["rich","bool","code","bool","string","string","string"]}
 {widgets}
-body:{"type":"field","size":[210,124],"pos":[3,33],"locked":1,"pattern":39,"show":"transparent","border":0,"scrollbar":0,"value":"..."}
+body:{"type":"field","size":[210,124],"pos":[3,33],"locked":1,"pattern":44,"show":"transparent","border":0,"scrollbar":0,"value":"..."}
 nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
 cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
 code:{"type":"field","size":[218,125],"pos":[222,32],"pattern":47,"show":"none","border":1,"scrollbar":0,"style":"code","scroll":1}
