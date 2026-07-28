@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:0
+card:2
 size:[512,342]
 script:"0"
 name:"toolbox.deck"
@@ -40,7 +40,7 @@ end
 image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"tutor card.0"
 {widgets}
-tutor1:{"type":"contraption","size":[512,160],"pos":[0,182],"def":"tutor","widgets":{"body":{"value":{"text":["i","  ","canvas and grid\n","i","  ","index\n"],"font":["","","mono","","","mono"],"arg":["%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","canvas and grid","%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","index"]}},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{"show":"none"},"runBtn":{},"next":{},"prev":{"value":""},"helpBtn":{},"help":{},"scroll_body":{},"scroll_code":{}}}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,182],"def":"tutor","widgets":{"body":{"value":{"text":["i","  ","canvas and grid\n","i","  ","cleanup\n"],"font":["","","mono","","","mono"],"arg":["%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","canvas and grid","%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","cleanup"]}},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{"show":"none"},"runBtn":{},"next":{},"prev":{"value":""},"helpBtn":{},"help":{},"scroll_body":{},"scroll_code":{}}}
 special:{"type":"field","size":[129,54],"pos":[379,126],"value":{"text":["\n- ","More decker lessons.","\n-"," Lesson videos.","\n\n"],"font":["","","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw",""]}}
 
 {script:tutor card.0}
@@ -103,23 +103,30 @@ on click do
 end
 {end}
 
-{card:index}
-script:"index.0"
+{card:cleanup}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWoeBrHbL7Xq/4LB4TC6bz+i0es1ua6/wuHxOr9vvTbd+z+/7/4CBZHiEhYaHiIlLgoyNjo+QkWKKlJWWl5hHkpucnZ6fXpmio6SlVaCoqaqrbKaur7CmrLO0tayxuLm6hba9vr+Nu8LDxFLAx8jJacXMzc5CytHS01nP1te41Nrbvdje36Lc4uOo4ObniOTq65Do7u907PLzfvD291P0+vtq+P7/SvgJHBgGoMGD0AgqVIiwob+FEAU6nAgvokV6FDOeu8hxncaP3jqKFAey5LORKKmZXFkspUtlLGPuekkTmMybsWrqtIWzp6ydQFf5HBouqFFQRJNaOsq0k9KniZpKjQS1Kq+pWBlZ3Wonq1dAXMPK+UqWj9izVsqqbYO2rbG1cNG4neskrt0ydPMGvMsXjN6/RvoK7gK4cMLBiA0XRsxYMWDGiR3rhTxY8mTKfS3nxZxZ81zOfD1/Bm1XtFvSpU2jRR1X9WrWa12fhR1bdljaam3fxk1WN1fevX1bBf5V+HDiWY1XRZ5c+VPmWJ0/hy5VulLq1a0Txd5U+3buR70PBR9efE/yRs2fRw9UPU727d3LhL9T/nz6Ne3HxJ9f/0r+NPn3H4AuCWgSgQUaCBKCKSm4IIMjOfgRhBFKmBGFIll4IYYcaUgRhx166BCIF4k4IokRmdgQiimqeBCLELn4IowMyQgQjTXa+BCOA+n4D489+ogPkBIJeQ+R/Bh5JJL6KGkPk006+Q6UGEnpDpXzWHklluxoiQ6XXXppDpgeiQkOmeqYeSaa46j5DZttuokNnCTJeQ2d3Nh5J57a6GkNn3366QygKgnaDKHTGHoootEoygyjjTpKDKQwSToMpclYeimmx2gqDKedeqoLqDaJmgupv5h6KqrdqJoTqzy5CgusscrqCq212PoKrrToeiuvt/haCrDBCjsKsUIZeyyyqSi7LLNIOZsJtOVIiwm10Vq7FLaeaHsJt916Wwm4TolLCbmcmHsuupKoqwi77bqbDrztyHsIvfXaexW+wei7L7+C+PsvwGAJjAfBWhl8B8IBK9wVwwU7HA/Ef0hcB8UVWzwHxvVoPBbHZnkcB8ghi3wFyXuYDAfKeqh8MstsuXwKzK3ITAXNNdv8Fs7L6Lwzz2f4/DPQeAkNBdFyGf0E0kErXRfTRTvNBNRRS70X1ZNYvQjWWWudBNdde60J2H6JjQTZZZsdGNqhqL0221y4/Tbcb8hNBN1x240F3nXr7QLffesNeDV+/z144YYDjvjgASx+eOGMO6445I/7HTnlk1teueCb23255plzHrrnncv9ueh8S5465quD3jrqeKseO+uzu1477HTLnjvtu9veO+5w6x4878P7XjzwbAufPPHLG9888mgrHz3z0ztfPfRkS5899dtb3z32YGsfPvfje18++FyLnz7565vfPvpYqx8/+/O7Xz/8VMufP/37298//lDTXwD5N0D/FRCATBNgAgm4QAM2EIFIU2AEGThBB1YQgkSTYAYpuEELdhCDQNNgCDk4Qg+WEIQ8E2EKSbhCE7YQhThTYQxZOEMX1hCGNJNhDmm4Qxv2EIcw02EQeThEHxYRiCwTYhKJuEQjNhGJKFNiFJk4RSdWEYokk2IWqbhFK3YRiyDTYhi5OEYvlhGMHBNjGsm4RjO2EY0YU2Mc2ThHN9YRjhSTYx7puEc79hGPENNjIPk4SD8WEpAME2QiCblIQzYSkQhTZCQZOUlHVhKSBJNkJim5SUt2EpMA02QoOTlKT5YSlPwSZSpJuUpTthKV+FJlLFk5S1fWEpb0kmUuablLW/YSl/DSZTB5OUxfFhOY7BJmMom5TGM2E5noUmY0mTlNZ1YTmuSSZjapuU1rdhOb4NJmOLk5Tm+WE5zcEie3ggA="
+script:"cleanup.0"
 {widgets}
-grid1:{"type":"grid","size":[354,181],"pos":[11,30],"volatile":1,"widths":[33,184]}
-special:{"type":"field","size":[67,15],"pos":[393,32],"show":"none"}
-button1:{"type":"button","size":[60,20],"pos":[395,56],"script":"index.1","text":"go"}
-script:{"type":"field","size":[356,112],"pos":[9,224],"locked":1,"volatile":1,"style":"code"}
-clearBtn:{"type":"button","size":[60,20],"pos":[386,224],"script":"index.2","text":"clear"}
+field1:{"type":"field","size":[255,252],"pos":[0,36],"pattern":46,"border":0,"scrollbar":0,"style":"plain","value":"# clean up positions of widgets on tutorial decks\nW:nil\nK: extract value\n  where !value..name in ( \"help\",\"skip\",\"cleanup\")\n  from deck.cards  \n\neach k in K\n  each w in k.widgets\n   if w.name=\"special\" w.show:\"none\" end\n    if w.name in W\n       d:W[w.name]\n       w.pos:d.pos\n       w.size:d.size\n    else\n       d:0\n      d.pos: w.pos\n      d.size: w.size\n      W[w.name]:d\n   end\n end\nend\n"}
+res:{"type":"field","size":[256,75],"pos":[0,293],"volatile":1,"pattern":44,"show":"invert","border":0,"style":"plain"}
+cardName1:{"type":"contraption","size":[132,14],"pos":[23,19],"def":"cardName","widgets":{"cn":{"size":[132,14],"value":"cleanup"}}}
+prevBtn:{"type":"button","size":[20,15],"pos":[0,18],"script":"canvas and grid.1","font":"body","text":"<<"}
+nextBtn:{"type":"button","size":[20,15],"pos":[157,18],"script":"canvas and grid.2","font":"body","text":">>"}
+newBtn:{"type":"button","size":[20,15],"pos":[236,18],"script":"canvas and grid.3","font":"body","text":"+"}
+g:{"type":"grid","size":[246,210],"pos":[263,20],"volatile":1,"show":"invert","widths":[20,140]}
+script:{"type":"field","size":[207,103],"pos":[261,235],"locked":1,"volatile":1,"show":"invert","style":"code"}
+button1:{"type":"button","size":[37,20],"pos":[472,236],"script":"cleanup.1","text":"go"}
+clearBtn:{"type":"button","size":[38,20],"pos":[471,264],"script":"cleanup.2","text":"clear"}
+special:{"type":"button","size":[40,17],"pos":[471,319],"font":"body","pattern":40,"text":"special"}
 
-{script:index.0}
+{script:cleanup.0}
 on click do
- c:deck.cards[grid1.rowvalue.name]
+ c:deck.cards[g.rowvalue.name]
  script.text:c.script
 end
 
 on view do
- grid1.value: select
+ g.value: select
   index
   name: value..name
   scripted: !!value..script
@@ -144,19 +151,19 @@ end
 
 {end}
 
-{script:index.1}
+{script:cleanup.1}
 on click do
- go[grid1.rowvalue.name]
+ go[g.rowvalue.name]
 end
 
 {end}
 
-{script:index.2}
+{script:cleanup.2}
 on click do
- if grid1.rowvalue.special
+ if g.rowvalue.special
    alert["refusing to clear scripts on special cards"]
  else
-   c:deck.cards[grid1.rowvalue.name]
+   c:deck.cards[g.rowvalue.name]
    c.script:""
    view[]
  end
