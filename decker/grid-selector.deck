@@ -315,7 +315,7 @@ _gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":7,"
 _cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":25,"style":"compact"}
 _ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":20,"style":"compact"}
 clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
-tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["In a  ","click"," event the offset into the canvas is calculated for us.\n\nWe still have to divide to get grid coordinates.\n\nThe ","y"," value tells us how many rows are above us, and ","x"," says how many are to the left. We need ","x +  y * gw"," to get the total count of cells \"before\" the clicked one.\n\nBut notice: all along, we're able to keep ","x"," and ","y"," together in the list ","xy",". That's the array programming style!"],"font":["","","","","","","","","","","","","","",""],"arg":["","","","","","","","","","","","","","",""],"pat":[1,33,1,33,1,33,1,33,1,33,1,33,1,33,1]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"# run this to draw a grid\ncw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\n\neach gxy in (gw cross gh)\n xy: cs*gxy  c.pattern:1\n c.text[\"%i,%i\" format gxy\n        cs*gxy+0.5 \"center\"]\n c.box[xy cs+1]\nend"},"prevBtn":{},"runBtn":{"show":"invert"},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
+tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"locked":1,"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["In a  ","click"," event the offset into the canvas is calculated for us.\n\nWe still have to divide to get grid coordinates.\n\nThe ","y"," value tells us how many rows are above us, and ","x"," says how many are to the left. We need ","x +  y * gw"," to get the total count of cells \"before\" the clicked one.\n\nBut notice: all along, we're able to keep ","x"," and ","y"," together in the list ","xy",". That's the array programming style!"],"font":["","","","","","","","","","","","","","",""],"arg":["","","","","","","","","","","","","","",""],"pat":[1,33,1,33,1,33,1,33,1,33,1,33,1,33,1]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"locked":1,"show":"invert","value":"# run this to draw a grid\ncw:_cw.value ch:_ch.value\ngw:_gw.value gh:_gh.value\ncs: cw,ch c.clear[]\n\neach gxy i in (gw cross gh)\n xy: cs*gxy  c.pattern:1\n c.text[i\n        cs*gxy+0.5 \"center\"]\n c.box[xy cs+1]\nend"},"prevBtn":{},"runBtn":{"show":"invert"},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
 special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":40,"show":"none","text":"special"}
 current:{"type":"contraption","size":[59,21],"pos":[447,61],"volatile":1,"show":"transparent","def":"hybridSlider","widgets":{"compact":{"size":[59,21],"interval":[0,41],"value":21},"bar":{"size":[33,21],"interval":[0,41],"value":21}}}
 currentLabel:{"type":"field","size":[55,13],"pos":[449,45],"locked":1,"show":"transparent","border":0,"style":"plain","align":"center","value":"current:"}
@@ -353,7 +353,7 @@ script:"drawing the cursor.0"
 {widgets}
 tutor1:{"type":"contraption","size":[512,172],"pos":[0,170],"def":"tutor","widgets":{"body":{"size":[210,136],"value":{"text":["Above: to draw a cursor, we can just compare the loop index to the current value, and do something special when we draw that cell.\n\nRight: we can also go back later and calculate the cell's position from the current index.\n\nNote that \"n modulo k\" is  ","k % n"," in lil - backwards from many other languages.\n\nDrawing the cursor as nested black and white boxes helps it stay visible no matter how the grid contents look."],"font":["","",""],"arg":["","",""],"pat":[1,33,1]}},"nextBtn":{},"cardName":{},"code":{"size":[218,137],"value":"ix: current.value\ngw: _gw.value\nxy: (gw%ix), floor ix/gw\ncs: (_cw,_ch)..value\n\nc.pattern:1 c.box[1+xy*cs cs-1]\nc.pattern:0 c.box[2+xy*cs cs-2]"},"prevBtn":{},"runBtn":{},"next":{},"prev":{},"helpBtn":{},"help":{"value":"help"},"scroll_body":{"pos":[5,187]},"scroll_code":{"pos":[80,187]}}}
 special:{"type":"button","size":[48,17],"pos":[449,176],"font":"body","pattern":40,"show":"none","text":"special"}
-c:{"type":"canvas","size":[167,147],"pos":[275,20],"locked":1,"volatile":1,"script":"drawing the cursor.1","pattern":39,"border":1,"scale":1}
+c:{"type":"canvas","size":[167,147],"pos":[275,20],"locked":1,"volatile":1,"pattern":39,"border":1,"scale":1}
 gwLabel:{"type":"field","size":[77,14],"pos":[138,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid width (gw):"}
 ghLabel:{"type":"field","size":[77,14],"pos":[138,38],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"grid height (gh):"}
 cwLabel:{"type":"field","size":[75,14],"pos":[2,20],"locked":1,"show":"transparent","border":0,"style":"plain","align":"right","value":"cell width (cw):"}
@@ -363,9 +363,9 @@ _gh:{"type":"slider","size":[47,14],"pos":[218,38],"interval":[5,25],"value":8,"
 _cw:{"type":"slider","size":[47,14],"pos":[80,20],"interval":[5,25],"value":16,"style":"compact"}
 _ch:{"type":"slider","size":[47,14],"pos":[80,38],"interval":[5,25],"value":16,"style":"compact"}
 clearBtn:{"type":"button","size":[60,20],"pos":[446,20],"script":"challenge: draw a grid.0","text":"clear","style":"rect"}
-current:{"type":"contraption","size":[59,21],"pos":[447,61],"volatile":1,"script":"drawing the cursor.2","show":"transparent","def":"hybridSlider","widgets":{"compact":{"size":[59,21],"value":35},"bar":{"size":[33,21],"value":35}}}
+current:{"type":"contraption","size":[59,21],"pos":[447,61],"volatile":1,"script":"drawing the cursor.1","show":"transparent","def":"hybridSlider","widgets":{"compact":{"size":[59,21],"value":35},"bar":{"size":[33,21],"value":35}}}
 currentLabel:{"type":"field","size":[55,13],"pos":[449,45],"locked":1,"show":"transparent","border":0,"style":"plain","align":"center","value":"current:"}
-field3:{"type":"field","size":[262,108],"pos":[4,59],"locked":1,"volatile":1,"border":1,"style":"code"}
+field3:{"type":"field","size":[262,108],"pos":[4,59],"locked":1,"script":"drawing the cursor.2","border":1,"style":"code","value":"on view do\n #...\n each xy i in #...\n  c.pattern:\n    if i=current.value colors.blue\n    else colors.cyan end\n  c.rect[2+xy cs-2]\n end\nend"}
 
 {script:drawing the cursor.0}
 on view do
@@ -384,17 +384,14 @@ end
 {end}
 
 {script:drawing the cursor.1}
-
-on click pos do
- xy: floor pos/(_cw,_ch)..value
- current.value: sum xy * 1,_gw.value
- view[]
+on change val do
+ view[] 
 end
 {end}
 
 {script:drawing the cursor.2}
 on change val do
- view[] 
+ 
 end
 {end}
 
