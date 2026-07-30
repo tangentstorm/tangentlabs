@@ -3,18 +3,19 @@ version:1
 card:1
 size:[512,342]
 name:"typing.deck"
+patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+ESfCwgi8mzADOG4t04iEpZIiwTiIx3CPOGhuYIMMLSDhBRCIajOLMCQBcQUgMosgjCzfvDBQQ"
 
 {card:game}
 script:"game.0"
 {widgets}
-bg:{"type":"slider","size":[48,25],"pos":[8,309],"show":"none","interval":[0,100],"value":5,"style":"bar"}
+bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":15,"style":"bar"}
 words:{"type":"field","size":[222,113],"pos":[275,218],"show":"none","scrollbar":1,"value":"the of and a to in is you that it he was for on are as with his they I at be this have from or one had by words but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been called who am its now find long down day did get come made may part end click drag view change range unless nil card pos size"}
-c:{"type":"canvas","size":[512,342],"pos":[0,0],"volatile":1,"script":"game.1","pattern":0,"border":0,"scale":8}
-pause:{"type":"button","size":[46,12],"pos":[460,46],"script":"game.2","font":"body","show":"transparent","text":"pause","style":"check","value":1}
+c:{"type":"canvas","size":[512,342],"pos":[0,0],"volatile":1,"script":"game.1","border":0,"scale":8}
+pause:{"type":"button","size":[46,12],"pos":[460,46],"script":"game.2","font":"body","show":"transparent","text":"pause","style":"check","value":0}
 speed:{"type":"slider","size":[46,12],"pos":[460,25],"locked":1,"interval":[1,10],"value":10,"style":"bar"}
 inputCopy:{"type":"field","size":[116,37],"pos":[117,178],"locked":1,"volatile":1,"show":"invert"}
 input:{"type":"field","size":[176,33],"pos":[107,193],"font":"menu","pattern":38,"style":"plain"}
-w:{"type":"button","size":[60,20],"pos":[52,175],"volatile":1,"script":"game.3","pattern":39,"text":"to"}
+w:{"type":"button","size":[60,20],"pos":[417,5],"volatile":1,"script":"game.3","pattern":39,"text":"by"}
 
 {script:game.0}
 bgN:colors.red
@@ -22,10 +23,12 @@ bgY:colors.green
 bgX:colors.white
 bgF:colors.black
 
+# this fires at start of page
 on loop do
+ bg.animated:0
+ setbg[bgX "go" 1]
  bg.animated: 1 pause.value: 0
  inputCopy.text:"" new_word[] 0
- setbg[bgX "type the words" 1]
 end
 
 on setbg x m p do
@@ -92,16 +95,378 @@ on click do
 end
 {end}
 
-{card:home}
+{card:card3}
+image:"%%IMG3AgABVgZAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"card3.0"
 {widgets}
-button1:{"type":"button","size":[60,20],"pos":[215,214],"script":"home.0","pattern":0,"show":"invert","text":"play"}
-c:{"type":"canvas","size":[274,63],"pos":[109,49],"locked":1,"border":0,"image":"%%IMG3AEUAEAZAkHBILBqPyKRyyWw6n9CodEodlkrOa1L75FK9S3BRXA1fuWes8LxWg9MgNDbtnsPbbGs9vkfz/2N7f3KDfYJtiIRveYGIhYl2kI6OWnSRempGhI+PioeAlZmTfGSghpKeo6lroJxEm6Gop4CYcl55m691bHSSpoxlUrHCosFMmcNNyMXGZqXKwM3SUUE=","scale":4}
-field1:{"type":"field","size":[136,75],"pos":[179,121],"locked":1,"border":0,"value":"words fall from the sky\n\n          type them fast\n\nor you will die\n\n-- mavis B."}
-field2:{"type":"field","size":[234,20],"pos":[20,314],"locked":1,"pattern":37,"border":0,"style":"plain","value":"Note: press shift-enter to submit the words!"}
+c:{"type":"canvas","size":[132,60],"pos":[27,39],"locked":1,"script":"card3.1","font":"menu","pattern":45,"show":"transparent","border":0,"image":"%%IMG3AIQAPAZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bka20On1uu4nrdeBNN8fV87o+fE/n94BdAYOEg4GHiImKi4yNW32QLUyRlJJHlXFofXCYm1OdeEugd3+coKVDkH+jcahOrK5FrHKXo7GqqbN+n7aiui23vUa4Qr/AT2sAhcuDkKatzAHEAMnRhc65pNnQzNhKtN99q+K12sWh4ebU5Ofqz+BJ8Jrq0+/o67vprdvw9fz3847p68dOVkF55fa1U4iPob18SggZG+fuH0RlzX5RZOhvIcKBwhp+FAnQYqeNBCt6LAnylMlgKkm6XAmxo0yBTSa+TDhSJ02cNm0+BBZtWtCD4ooipVdwaCynPO8dZRrT6FKHO1vihPoTJsemWW+iZCnWV9WrPdGStUoVa1ezbsu+Hab2Yli2cYWG5SrXYNu0f6WCnRtvcN+pX88GrmlYL2G+iFPmrQu0sWG+kC0v3nqXsteRmDsrTjx581i7j6OiPqyZNGDXgkeD3iu6NOzVeCW/nj1EokYivnWVCj7rdGXZZAPCUn2SOSbj0Jk/dV7pc8ihz2vvTk6dkvWZfotrX3sZibXzhMyjF4oePfBo75mpl8/IsaP79u83yq+/TDK4vPVnB3epCfhGgPwZyAeBfSlIB3HPFeJgIMtNiEiFFlJ4XYZ7tLcMhyCGKOKIJJZo4okopqhiEA==","scale":1}
+pal:{"type":"contraption","size":[81,61],"pos":[63,259],"volatile":1,"script":"card3.2","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[2,4]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
+patternSlider:{"type":"slider","size":[43,20],"pos":[19,287],"volatile":1,"script":"card3.3","interval":[0,47],"style":"bar"}
+_wd:{"type":"field","size":[58,20],"pos":[281,40],"script":"card3.4","border":1,"style":"code","value":"again"}
+_t:{"type":"grid","size":[91,206],"pos":[419,114],"value":{"ch":["a","g","a","i","n"],"st":[1,1,1,1,1],"fc":[0,0,0,0,0]},"row":5}
+_key:{"type":"field","size":[43,20],"pos":[346,39]}
+field1:{"type":"field","size":[108,64],"pos":[27,142],"pattern":39,"show":"invert","border":0,"value":{"text":["","card for testing the per-character state (stored in"," ","_t",") and the drawing logic."],"font":["","","","",""],"arg":["","","","",""],"pat":[1,40,1,42,40]}}
+
+{script:card3.0}
+on set_word w do 
+ _wd.text:s:trim w
+ _t.value: select ch:value st:0 fc:0 from s
+ _t.row: 0
+ c.font: "menu" c.clear[]
+ view[]
+end
+
+on set_pattern x do
+ (pal,patternSlider)..value:x
+end
+
+on view do
+ OK:4,3,2,1 BAD:-3,-2,-1 FC:8
+ ix:_t.row T:_t.value
+ 
+ # keypress handler
+ if key:_key.text
+  _key.text:""
+  T.fc[ix]:FC # start an animation
+  T.st[ix]:
+   if key=T.ch[ix]
+     _t.row:ix+1 OK[0]
+   else BAD[0] end
+ end
+ 
+ # frame counters:
+ T:update fc:FC st:st-1 where (st>1) & !fc from
+   update fc:FC st:st+1 where (st<0) & !fc from
+   update fc:fc-1 where fc from T
+  
+ x:1 p:(0,OK,BAD) dict (44,39,32,46,45,35,34,37)
+
+ c.clear[] # draw letters:
+ c.scale:1 c.size: c.textsize["" fuse T.ch]+2
+ each row in rows T
+  c.pattern:p[row.st]
+  c.text[row.ch x,0 "top_left"]
+  x:x+first c.textsize[row.ch]
+ end
+ 
+ a:c.copy[].scale[4]
+ c.size: c.lsize*4
+ b:a.copy[].map[0 dict 0 1]
+ each xy in 3 cross 3 c.paste[b xy] end
+ c.paste[a 1,1 1]
+  
+ _t.value:T
+end
+{end}
+
+{script:card3.1}
+on click pos do
+ 
+end
+
+on drag pos do
+ 
+end
+
+on release pos do
+ 
+end
+{end}
+
+{script:card3.2}
+on draw c do
+ cwh:me.cwh
+ each xy i in me.gw cross me.gh
+  c.pattern:i c.rect[cwh*xy cwh]
+ end
+end
+
+on pick xy i do
+ set_pattern[i]
+end
+{end}
+
+{script:card3.3}
+on change val do
+ set_pattern[val]
+end
+{end}
+
+{script:card3.4}
+on change val do
+ set_word[val] 
+end
+{end}
+
+{card:card4}
+script:"card4.0"
+{widgets}
+bp:{"type":"button","size":[15,15],"pos":[53,240],"font":"mono","pattern":39,"text":"p","shortcut":"p"}
+by:{"type":"button","size":[15,15],"pos":[69,240],"font":"mono","pattern":39,"text":"y","shortcut":"y"}
+letter:{"type":"field","size":[30,23],"pos":[410,32],"font":"menu","style":"code","align":"center","value":"j"}
+msg:{"type":"field","size":[64,16],"pos":[16,32],"value":"bad"}
+bf:{"type":"button","size":[15,15],"pos":[85,240],"font":"mono","pattern":39,"text":"f","shortcut":"f"}
+bg:{"type":"button","size":[15,15],"pos":[101,240],"font":"mono","pattern":39,"text":"g","shortcut":"g"}
+bc:{"type":"button","size":[15,15],"pos":[117,240],"font":"mono","pattern":39,"text":"c","shortcut":"c"}
+br:{"type":"button","size":[15,15],"pos":[133,240],"font":"mono","pattern":39,"text":"r","shortcut":"r"}
+bl:{"type":"button","size":[15,15],"pos":[149,240],"font":"mono","pattern":39,"text":"l","shortcut":"l"}
+ba:{"type":"button","size":[15,15],"pos":[10,256],"font":"mono","pattern":39,"text":"a","shortcut":"a"}
+bo:{"type":"button","size":[15,15],"pos":[26,256],"font":"mono","pattern":39,"text":"o","shortcut":"o"}
+be:{"type":"button","size":[15,15],"pos":[42,256],"font":"mono","pattern":39,"text":"e","shortcut":"e"}
+bu:{"type":"button","size":[15,15],"pos":[58,256],"font":"mono","pattern":39,"text":"u","shortcut":"u"}
+bi:{"type":"button","size":[15,15],"pos":[74,256],"font":"mono","pattern":39,"text":"i","shortcut":"i"}
+bd:{"type":"button","size":[15,15],"pos":[90,256],"font":"mono","pattern":39,"text":"d","shortcut":"d"}
+bh:{"type":"button","size":[15,15],"pos":[106,256],"font":"mono","pattern":39,"text":"h","shortcut":"h"}
+bt:{"type":"button","size":[15,15],"pos":[122,256],"font":"mono","pattern":39,"text":"t","shortcut":"t"}
+bn:{"type":"button","size":[15,15],"pos":[138,256],"font":"mono","pattern":39,"text":"n","shortcut":"n"}
+bs:{"type":"button","size":[15,15],"pos":[154,256],"font":"mono","pattern":39,"text":"s","shortcut":"s"}
+bq:{"type":"button","size":[15,15],"pos":[31,272],"font":"mono","pattern":39,"text":"q","shortcut":"q"}
+bj:{"type":"button","size":[15,15],"pos":[47,272],"font":"mono","pattern":39,"text":"j","shortcut":"j"}
+bk:{"type":"button","size":[15,15],"pos":[63,272],"font":"mono","pattern":39,"text":"k","shortcut":"k"}
+bx:{"type":"button","size":[15,15],"pos":[79,272],"font":"mono","pattern":39,"text":"x","shortcut":"x"}
+bb:{"type":"button","size":[15,15],"pos":[95,272],"font":"mono","pattern":39,"text":"b","shortcut":"b"}
+bm:{"type":"button","size":[15,15],"pos":[111,272],"font":"mono","pattern":39,"text":"m","shortcut":"m"}
+bw:{"type":"button","size":[15,15],"pos":[127,272],"font":"mono","pattern":39,"text":"w","shortcut":"w"}
+bv:{"type":"button","size":[15,15],"pos":[143,272],"font":"mono","pattern":39,"text":"v","shortcut":"v"}
+bz:{"type":"button","size":[15,15],"pos":[159,272],"font":"mono","pattern":39,"text":"z","shortcut":"z"}
+code:{"type":"field","size":[254,178],"pos":[86,38],"script":"card4.1","font":"mono","border":1,"scrollbar":1,"style":"code","value":"buttons: extract value\n where value..type=\"button\"\n from card.widgets\n\n# arrange buttons according to layout\nlayout: random[qwerty, dvorak]\nx:x0:5 y:240 cw:15 gy:0 \ni:0 each ch in layout.text\n b:buttons[i]\n # b.font:\"mono\" b.size:2 take cw\n if ch=\"\\n\" \n  gy:gy+1 y:y+cw+1\n  x:x0+(gy*cw/3)\n elseif ch=\".\"\n  x:x+cw+1\n else\n  b.pos:x,y x:x+cw+1\n  b.name: \"b%s\" format ch\n  b.text:ch b.shortcut:ch\n  i:i+1\n end\nend\n"}
+result:{"type":"field","size":[122,74],"pos":[369,64],"show":"invert","style":"code","value":"21375312345671089101112131415161715311819202122232425262025"}
+held:{"type":"field","size":[79,20],"pos":[377,224],"animated":1,"script":"card4.2"}
+qwerty:{"type":"field","size":[56,34],"pos":[210,238],"value":"qwertyuiop\nasdfghjkl\nzxcvbnm"}
+dvorak:{"type":"field","size":[59,35],"pos":[275,238],"value":"...pyfgcrl\naoeuidhtns\n.qjkxbmwvz"}
+space:{"type":"button","size":[79,15],"pos":[47,288],"pattern":39}
+down:{"type":"field","size":[79,20],"pos":[376,255],"style":"plain"}
+
+{script:card4.0}
+A:"%a" format list 97+range 26
+
+on click do
+ msg.text: ""
+ if !letter.value ~ me.label
+  msg.text: "bad"
+ end
+end
+
+{end}
+
+{script:card4.1}
+
+on run text do
+ d:card.widgets
+ r:eval[text d 1]
+ result.value: show[r.value unless r.error]
+end
+
+{end}
+
+{script:card4.2}
+
+on view do
+ prev:me.text
+ me.text:"" fuse 
+  extract value..text
+  where each b in (app.render@value) b[2,2]=1 end
+  where value..type="button"
+  from card.widgets
+  prev:"ab" text:"bc"
+  dn:extract where !("" split text) in prev from text 
+  up:extract where !("" split prev) in text from prev
+end
+
+{end}
+
+{card:card1}
+image:"%%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"
+script:"card1.0"
+{widgets}
+k:{"type":"contraption","size":[175,68],"pos":[172,135],"show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
+
+{script:card1.0}
+on view do
+ 
+end
+{end}
+
+{card:home}
+image:"%%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"
+script:"home.0"
+{widgets}
+qwerty:{"type":"button","size":[60,20],"pos":[163,272],"pattern":38,"text":"qwerty"}
+field1:{"type":"field","size":[94,97],"pos":[219,148],"locked":1,"pattern":36,"show":"transparent","border":0,"value":"words fall \n\n  from the sky\n\n          type them fast\n\nor you will die\n\n-- Mavis B"}
+button2:{"type":"button","size":[60,20],"pos":[292,272],"script":"home.1","pattern":45,"text":"dvorak"}
 
 {script:home.0}
 on click do
+ card.prototypes.keyboard.layout: me.text
+ go["game"]
+end
+
+{end}
+
+{script:home.1}
+on click do
   go["game"]
+end
+{end}
+
+{contraption:keyboard}
+size:[175,68]
+margin:[0,0,0,0]
+script:"keyboard.0p"
+attributes:{"name":["_layout","layout"],"label":["layout: \"qwerty\" or \"dvorak\"",""],"type":["note","string"]}
+{widgets}
+bp:{"type":"button","size":[15,15],"pos":[50,2],"font":"mono","pattern":39,"text":"p","shortcut":"p"}
+by:{"type":"button","size":[15,15],"pos":[66,2],"font":"mono","pattern":39,"text":"y","shortcut":"y"}
+bf:{"type":"button","size":[15,15],"pos":[82,2],"font":"mono","pattern":39,"text":"f","shortcut":"f"}
+bg:{"type":"button","size":[15,15],"pos":[98,2],"font":"mono","pattern":39,"text":"g","shortcut":"g"}
+bc:{"type":"button","size":[15,15],"pos":[114,2],"font":"mono","pattern":39,"text":"c","shortcut":"c"}
+br:{"type":"button","size":[15,15],"pos":[130,2],"font":"mono","pattern":39,"text":"r","shortcut":"r"}
+bl:{"type":"button","size":[15,15],"pos":[146,2],"font":"mono","pattern":39,"text":"l","shortcut":"l"}
+ba:{"type":"button","size":[15,15],"pos":[7,18],"font":"mono","pattern":39,"text":"a","shortcut":"a"}
+bo:{"type":"button","size":[15,15],"pos":[23,18],"font":"mono","pattern":39,"text":"o","shortcut":"o"}
+be:{"type":"button","size":[15,15],"pos":[39,18],"font":"mono","pattern":39,"text":"e","shortcut":"e"}
+bu:{"type":"button","size":[15,15],"pos":[55,18],"font":"mono","pattern":39,"text":"u","shortcut":"u"}
+bi:{"type":"button","size":[15,15],"pos":[71,18],"font":"mono","pattern":39,"text":"i","shortcut":"i"}
+bd:{"type":"button","size":[15,15],"pos":[87,18],"font":"mono","pattern":39,"text":"d","shortcut":"d"}
+bh:{"type":"button","size":[15,15],"pos":[103,18],"font":"mono","pattern":39,"text":"h","shortcut":"h"}
+bt:{"type":"button","size":[15,15],"pos":[119,18],"font":"mono","pattern":39,"text":"t","shortcut":"t"}
+bn:{"type":"button","size":[15,15],"pos":[135,18],"font":"mono","pattern":39,"text":"n","shortcut":"n"}
+bs:{"type":"button","size":[15,15],"pos":[151,18],"font":"mono","pattern":39,"text":"s","shortcut":"s"}
+bq:{"type":"button","size":[15,15],"pos":[28,34],"font":"mono","pattern":39,"text":"q","shortcut":"q"}
+bj:{"type":"button","size":[15,15],"pos":[44,34],"font":"mono","pattern":39,"text":"j","shortcut":"j"}
+bk:{"type":"button","size":[15,15],"pos":[60,34],"font":"mono","pattern":39,"text":"k","shortcut":"k"}
+bx:{"type":"button","size":[15,15],"pos":[76,34],"font":"mono","pattern":39,"text":"x","shortcut":"x"}
+bb:{"type":"button","size":[15,15],"pos":[92,34],"font":"mono","pattern":39,"text":"b","shortcut":"b"}
+bm:{"type":"button","size":[15,15],"pos":[108,34],"script":"keyboard.1p","font":"mono","pattern":39,"text":"m","shortcut":"m"}
+bw:{"type":"button","size":[15,15],"pos":[124,34],"font":"mono","pattern":39,"text":"w","shortcut":"w"}
+bv:{"type":"button","size":[15,15],"pos":[140,34],"font":"mono","pattern":39,"text":"v","shortcut":"v"}
+bz:{"type":"button","size":[15,15],"pos":[156,34],"font":"mono","pattern":39,"text":"z","shortcut":"z"}
+spacebar:{"type":"button","size":[79,15],"pos":[47,51],"pattern":39}
+qwerty:{"type":"field","size":[56,34],"pos":[244,10],"locked":1,"value":"qwertyuiop\nasdfghjkl\nzxcvbnm"}
+dvorak:{"type":"field","size":[59,35],"pos":[244,-36],"locked":1,"value":"...pyfgcrl\naoeuidhtns\n.qjkxbmwvz"}
+_k:{"type":"field","size":[45,20],"pos":[244,60],"animated":1,"volatile":1}
+which:{"type":"field","size":[57,16],"pos":[244,-75],"locked":1,"script":"keyboard.2p","style":"plain","value":"dvorak"}
+
+{script:keyboard.0p}
+# note: you can't rearrange the widgets in an individual
+# contraption, so you have to rearrange the prototype.
+# therefore, the keyboard configuration is global
+on ME do deck.contraptions.keyboard end
+on MW do ME[].widgets end
+
+layouts: qwerty, dvorak
+
+on get_layout do MW[].which.text end
+on set_layout x do
+ if x in names:layouts..name MW[].which.text:x layout[]
+ else alert["layout must be in: {l}%s{r}" format ", " fuse names] end
+end
+
+on layout do
+ buttons: extract value
+  where value..type="button"
+  from MW[]
+  show[buttons]
+
+ # arrange buttons according to layout
+ x:x0:y:2 cw:15 gy:0 
+ i:0 each ch in MW[][get_layout[]].text
+  b:buttons[i]
+  # b.font:"mono" b.size:2 take cw
+  if ch="\n" 
+   gy:gy+1 y:y+cw+1
+   x:x0+(gy*cw/3)
+  elseif ch="."
+   x:x+cw+1
+  else
+   b.pos:x,y x:x+cw+1
+   b.name: "b%s" format ch
+   b.text:ch b.shortcut:ch
+   i:i+1
+  end
+ end
+ ME[].update[]
+end
+
+on view do
+ _k.text: "" fuse
+  extract value..text
+  where each b in (app.render@value) b[2,2]=1 end
+  where value..type="button"
+  from MW[]
+ spacebar.show:
+  if gamepad.held.action > "n" in _k.text
+    "invert" else "solid"
+  end
+end
+{end}
+
+{script:keyboard.1p}
+on click do
+ 
+end
+{end}
+
+{script:keyboard.2p}
+on change val do
+ layout[]
+end
+{end}
+
+{contraption:gridSelector}
+size:[128,128]
+resizable:1
+margin:[2,1,2,2]
+description:"Draws a rectangular grid with a cursor, and translates mouse events to grid coordinates."
+version:0.1
+script:"gridSelector.0p"
+attributes:{"name":["cw","ch","gc","gw","gh","cursor"],"label":["cell width","cell height","grid color","grid width","grid height","draw cursor?"],"type":["number","number","number","number","number","bool"]}
+{widgets}
+cellW:{"type":"slider","size":[54,25],"pos":[158,-46],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[54,25],"pos":[158,-3],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"locked":1,"volatile":1,"pattern":32,"show":"transparent","border":1,"scale":1}
+gridColor:{"type":"slider","size":[54,25],"pos":[158,40],"locked":1,"interval":[0,47],"value":9,"style":"compact"}
+curXY:{"type":"field","size":[61,20],"pos":[158,81],"locked":1,"style":"plain","value":"[2,1]"}
+gridW:{"type":"slider","size":[54,25],"pos":[224,-46],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+gridH:{"type":"slider","size":[54,25],"pos":[224,-3],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+showCursor:{"type":"button","size":[60,20],"pos":[225,40],"locked":1,"font":"body","text":"cursor?","style":"check","value":1}
+
+{script:gridSelector.0p}
+on get_cw do cellW.value end     on set_cw x do cellW.value: x end
+on get_ch do cellH.value end     on set_ch x do cellH.value: x end
+on get_gw do gridW.value end     on set_gw x do gridW.value: x end
+on get_gh do gridH.value end     on set_gh x do gridH.value: x end
+on get_gp do gridP.value end     on set_gp x do gridP.value: x end
+on get_showCursor   do showCursor.value   end
+on set_showCursor x do showCursor.value:x end
+
+on get_cxy do curXY.data end       on set_cxy xy do curXY.data: xy end
+on get_cwh do cellW.value,cellH.value end
+on get_value do (get_gw[] * last curXY.data) + first curXY.data end
+on set_value i do
+ gw:get_gw[] curXY.data: (gw%i),(floor i/gw)
+ view[]
+end
+  
+on view do
+ c.clear[] c.brush:0 c.pattern:1
+ # give instances a chance to draw on canvas
+ card.event["draw" c] c.brush:0 c.pattern: gridColor.value
+ if gridColor.value
+  each x in get_cw[] * range 1+get_gw[] c.line[x,0 x,c.size[1]] end nil
+  each y in get_ch[] * range 1+get_gh[] c.line[0,y c.size[0],y] end nil
+ end
+ if showCursor.value
+  xy:curXY.data  cwh:get_cwh[]
+  c.brush: c.pattern:1  c.box[xy*cwh 1+cwh]
+  c.brush: 0 c.pattern:32 c.box[xy*cwh cwh]
+ end
+end
+on drag xy do click[xy] end
+on click xy do
+ set_cxy[floor xy/get_cwh[]]
+ view[]
+ card.event["pick" get_cxy[] get_value[]]
 end
 {end}
 
