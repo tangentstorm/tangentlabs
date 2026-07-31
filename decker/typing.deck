@@ -1,26 +1,28 @@
 {deck}
 version:1
-card:1
+card:0
 size:[512,342]
 name:"typing.deck"
 patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJgSZIbQ6JcSbLhx5cmFyI8CVOmSoUjHQKw6FInxZ09eQLNSNTlSpEdh4r0adIo0qE7W+pkWZJozZkvjUalGpMrS5xdNX5lGHZjUZ89oUJUq/YhW7Rwo9KkaZPu1qtiweKFGtbjSa0h7Vodi/Rp37t/YxrmanVwY6Bytz5O6zgyZcmW7SYdexPrXc9fAX/02xSyVr+aIbdUqtryZ5WPscbWOHt0RNc/J+fMzFE3R7NrgbsVPjUr7uOTkStPnhyx182Yj3Zd7LXwWdNB27pF27Y73Livw4Muy3ku3rPfL95ev5b99uGcYUeWmdq5XqVLg6JfLfU0fO1PXaYZdfNVFxh5WVXVmlwK3kabe+8R9M+ESfCwgi8mzADOG4t04iEpZIiwTiIx3CPOGhuYIMMLSDhBRCIajOLMCQBcQUgMosgjCzfvDBQQ"
 
 {card:game}
+image:"%%IMG3AgABVgZAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"game.0"
 {widgets}
-bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":15,"style":"bar"}
+bg:{"type":"slider","size":[48,25],"pos":[8,309],"show":"none","interval":[0,100],"value":9,"style":"bar"}
 words:{"type":"field","size":[222,113],"pos":[275,218],"show":"none","scrollbar":1,"value":"the of and a to in is you that it he was for on are as with his they I at be this have from or one had by words but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been called who am its now find long down day did get come made may part end click drag view change range unless nil card pos size"}
-c:{"type":"canvas","size":[512,342],"pos":[0,0],"volatile":1,"script":"game.1","border":0,"scale":8}
-pause:{"type":"button","size":[46,12],"pos":[460,46],"script":"game.2","font":"body","show":"transparent","text":"pause","style":"check","value":0}
+c:{"type":"canvas","size":[512,344],"pos":[0,16],"volatile":1,"pattern":0,"show":"transparent","border":0,"scale":8}
+pause:{"type":"button","size":[46,12],"pos":[460,46],"script":"game.1","font":"body","show":"transparent","text":"pause","style":"check","value":1}
 speed:{"type":"slider","size":[46,12],"pos":[460,25],"locked":1,"interval":[1,10],"value":10,"style":"bar"}
 inputCopy:{"type":"field","size":[116,37],"pos":[117,178],"locked":1,"volatile":1,"show":"invert"}
 input:{"type":"field","size":[176,33],"pos":[107,193],"font":"menu","pattern":38,"style":"plain"}
-w:{"type":"button","size":[60,20],"pos":[417,5],"volatile":1,"script":"game.3","pattern":39,"text":"by"}
+k:{"type":"contraption","size":[175,68],"pos":[81,231],"script":"game.2","show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
+wd:{"type":"contraption","size":[339,64],"pos":[460,291],"volatile":1,"font":"menu","show":"transparent","def":"progressWord","widgets":{"c":{"size":[140,75],"font":"menu","pattern":44},"_wd":{"value":"they"},"_t":{"value":{"ch":["t","h","e","y"],"st":[0,0,0,0],"fc":[0,0,0,0]},"row":0},"_key":{},"_scale":{"value":5}}}
 
 {script:game.0}
 bgN:colors.red
 bgY:colors.green
-bgX:colors.white
+bgX:0
 bgF:colors.black
 
 # this fires at start of page
@@ -40,8 +42,8 @@ on setbg x m p do
 end
 
 on new_word do
- w.text: random[" " split words.text]
- w.pos: random[first card.size-w.size],0
+ wd.text: random[" " split words.text]
+ wd.pos: random[first card.size-w.size],0
 end
 
 on good do
@@ -67,7 +69,7 @@ on view do
  # bg just constantly loops
  if !bg.value:bg.value-1 setbg[bgX] bg.value:20 end
  if (speed.value>0) & !(10-speed.value) % bg.value
-  if (last card.size) < last w.pos: w.pos + 0,1
+  if (last card.size) < last wd.pos: wd.pos + 0,1
    setbg[bgF random[">8(", "FAIL"]] new_word[]
   end
  end
@@ -76,35 +78,31 @@ end
 {end}
 
 {script:game.1}
-on drag pos do
- 
-end
-
-
-{end}
-
-{script:game.2}
 on click do
  bg.animated: !speed.locked: me.value
 end
 {end}
 
-{script:game.3}
-on click do
- alert["that's not part of the game!"]
+{script:game.2}
+on key_dn k do
+ wd.key: k
 end
+
+on key_up k do
+end
+
 {end}
 
 {card:card3}
 image:"%%IMG3AgABVgZAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"card3.0"
 {widgets}
-c:{"type":"canvas","size":[132,60],"pos":[27,39],"locked":1,"script":"card3.1","font":"menu","pattern":45,"show":"transparent","border":0,"image":"%%IMG3AIQAPAZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bka20On1uu4nrdeBNN8fV87o+fE/n94BdAYOEg4GHiImKi4yNW32QLUyRlJJHlXFofXCYm1OdeEugd3+coKVDkH+jcahOrK5FrHKXo7GqqbN+n7aiui23vUa4Qr/AT2sAhcuDkKatzAHEAMnRhc65pNnQzNhKtN99q+K12sWh4ebU5Ofqz+BJ8Jrq0+/o67vprdvw9fz3847p68dOVkF55fa1U4iPob18SggZG+fuH0RlzX5RZOhvIcKBwhp+FAnQYqeNBCt6LAnylMlgKkm6XAmxo0yBTSa+TDhSJ02cNm0+BBZtWtCD4ooipVdwaCynPO8dZRrT6FKHO1vihPoTJsemWW+iZCnWV9WrPdGStUoVa1ezbsu+Hab2Yli2cYWG5SrXYNu0f6WCnRtvcN+pX88GrmlYL2G+iFPmrQu0sWG+kC0v3nqXsteRmDsrTjx581i7j6OiPqyZNGDXgkeD3iu6NOzVeCW/nj1EokYivnWVCj7rdGXZZAPCUn2SOSbj0Jk/dV7pc8ihz2vvTk6dkvWZfotrX3sZibXzhMyjF4oePfBo75mpl8/IsaP79u83yq+/TDK4vPVnB3epCfhGgPwZyAeBfSlIB3HPFeJgIMtNiEiFFlJ4XYZ7tLcMhyCGKOKIJJZo4okopqhiEA==","scale":1}
+c:{"type":"canvas","size":[168,60],"pos":[27,39],"locked":1,"volatile":1,"script":"card3.1","font":"menu","pattern":44,"show":"transparent","border":0,"scale":1}
 pal:{"type":"contraption","size":[81,61],"pos":[63,259],"volatile":1,"script":"card3.2","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[2,4]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
 patternSlider:{"type":"slider","size":[43,20],"pos":[19,287],"volatile":1,"script":"card3.3","interval":[0,47],"style":"bar"}
-_wd:{"type":"field","size":[58,20],"pos":[281,40],"script":"card3.4","border":1,"style":"code","value":"again"}
-_t:{"type":"grid","size":[91,206],"pos":[419,114],"value":{"ch":["a","g","a","i","n"],"st":[1,1,1,1,1],"fc":[0,0,0,0,0]},"row":5}
-_key:{"type":"field","size":[43,20],"pos":[346,39]}
+_wd:{"type":"field","size":[58,20],"pos":[281,40],"volatile":1,"script":"card3.4","border":1,"style":"code"}
+_t:{"type":"grid","size":[91,206],"pos":[419,114],"volatile":1}
+_key:{"type":"field","size":[43,20],"pos":[346,39],"animated":1,"volatile":1}
 field1:{"type":"field","size":[108,64],"pos":[27,142],"pattern":39,"show":"invert","border":0,"value":{"text":["","card for testing the per-character state (stored in"," ","_t",") and the drawing logic."],"font":["","","","",""],"arg":["","","","",""],"pat":[1,40,1,42,40]}}
 
 {script:card3.0}
@@ -198,46 +196,44 @@ on change val do
 end
 {end}
 
-{card:card4}
-script:"card4.0"
+{card:initial keyboard version}
+script:"initial keyboard version.0"
 {widgets}
-bp:{"type":"button","size":[15,15],"pos":[53,240],"font":"mono","pattern":39,"text":"p","shortcut":"p"}
-by:{"type":"button","size":[15,15],"pos":[69,240],"font":"mono","pattern":39,"text":"y","shortcut":"y"}
-letter:{"type":"field","size":[30,23],"pos":[410,32],"font":"menu","style":"code","align":"center","value":"j"}
-msg:{"type":"field","size":[64,16],"pos":[16,32],"value":"bad"}
-bf:{"type":"button","size":[15,15],"pos":[85,240],"font":"mono","pattern":39,"text":"f","shortcut":"f"}
-bg:{"type":"button","size":[15,15],"pos":[101,240],"font":"mono","pattern":39,"text":"g","shortcut":"g"}
-bc:{"type":"button","size":[15,15],"pos":[117,240],"font":"mono","pattern":39,"text":"c","shortcut":"c"}
-br:{"type":"button","size":[15,15],"pos":[133,240],"font":"mono","pattern":39,"text":"r","shortcut":"r"}
-bl:{"type":"button","size":[15,15],"pos":[149,240],"font":"mono","pattern":39,"text":"l","shortcut":"l"}
-ba:{"type":"button","size":[15,15],"pos":[10,256],"font":"mono","pattern":39,"text":"a","shortcut":"a"}
-bo:{"type":"button","size":[15,15],"pos":[26,256],"font":"mono","pattern":39,"text":"o","shortcut":"o"}
-be:{"type":"button","size":[15,15],"pos":[42,256],"font":"mono","pattern":39,"text":"e","shortcut":"e"}
-bu:{"type":"button","size":[15,15],"pos":[58,256],"font":"mono","pattern":39,"text":"u","shortcut":"u"}
-bi:{"type":"button","size":[15,15],"pos":[74,256],"font":"mono","pattern":39,"text":"i","shortcut":"i"}
-bd:{"type":"button","size":[15,15],"pos":[90,256],"font":"mono","pattern":39,"text":"d","shortcut":"d"}
-bh:{"type":"button","size":[15,15],"pos":[106,256],"font":"mono","pattern":39,"text":"h","shortcut":"h"}
-bt:{"type":"button","size":[15,15],"pos":[122,256],"font":"mono","pattern":39,"text":"t","shortcut":"t"}
-bn:{"type":"button","size":[15,15],"pos":[138,256],"font":"mono","pattern":39,"text":"n","shortcut":"n"}
-bs:{"type":"button","size":[15,15],"pos":[154,256],"font":"mono","pattern":39,"text":"s","shortcut":"s"}
-bq:{"type":"button","size":[15,15],"pos":[31,272],"font":"mono","pattern":39,"text":"q","shortcut":"q"}
-bj:{"type":"button","size":[15,15],"pos":[47,272],"font":"mono","pattern":39,"text":"j","shortcut":"j"}
-bk:{"type":"button","size":[15,15],"pos":[63,272],"font":"mono","pattern":39,"text":"k","shortcut":"k"}
-bx:{"type":"button","size":[15,15],"pos":[79,272],"font":"mono","pattern":39,"text":"x","shortcut":"x"}
-bb:{"type":"button","size":[15,15],"pos":[95,272],"font":"mono","pattern":39,"text":"b","shortcut":"b"}
-bm:{"type":"button","size":[15,15],"pos":[111,272],"font":"mono","pattern":39,"text":"m","shortcut":"m"}
-bw:{"type":"button","size":[15,15],"pos":[127,272],"font":"mono","pattern":39,"text":"w","shortcut":"w"}
-bv:{"type":"button","size":[15,15],"pos":[143,272],"font":"mono","pattern":39,"text":"v","shortcut":"v"}
-bz:{"type":"button","size":[15,15],"pos":[159,272],"font":"mono","pattern":39,"text":"z","shortcut":"z"}
-code:{"type":"field","size":[254,178],"pos":[86,38],"script":"card4.1","font":"mono","border":1,"scrollbar":1,"style":"code","value":"buttons: extract value\n where value..type=\"button\"\n from card.widgets\n\n# arrange buttons according to layout\nlayout: random[qwerty, dvorak]\nx:x0:5 y:240 cw:15 gy:0 \ni:0 each ch in layout.text\n b:buttons[i]\n # b.font:\"mono\" b.size:2 take cw\n if ch=\"\\n\" \n  gy:gy+1 y:y+cw+1\n  x:x0+(gy*cw/3)\n elseif ch=\".\"\n  x:x+cw+1\n else\n  b.pos:x,y x:x+cw+1\n  b.name: \"b%s\" format ch\n  b.text:ch b.shortcut:ch\n  i:i+1\n end\nend\n"}
+bp:{"type":"button","size":[15,15],"pos":[53,240],"font":"mono","pattern":43,"text":"p","shortcut":"p"}
+by:{"type":"button","size":[15,15],"pos":[69,240],"font":"mono","pattern":43,"text":"y","shortcut":"y"}
+bf:{"type":"button","size":[15,15],"pos":[85,240],"font":"mono","pattern":43,"text":"f","shortcut":"f"}
+bg:{"type":"button","size":[15,15],"pos":[101,240],"font":"mono","pattern":43,"text":"g","shortcut":"g"}
+bc:{"type":"button","size":[15,15],"pos":[117,240],"font":"mono","pattern":43,"text":"c","shortcut":"c"}
+br:{"type":"button","size":[15,15],"pos":[133,240],"font":"mono","pattern":43,"text":"r","shortcut":"r"}
+bl:{"type":"button","size":[15,15],"pos":[149,240],"font":"mono","pattern":43,"text":"l","shortcut":"l"}
+ba:{"type":"button","size":[15,15],"pos":[10,256],"font":"mono","pattern":43,"text":"a","shortcut":"a"}
+bo:{"type":"button","size":[15,15],"pos":[26,256],"font":"mono","pattern":43,"text":"o","shortcut":"o"}
+be:{"type":"button","size":[15,15],"pos":[42,256],"font":"mono","pattern":43,"text":"e","shortcut":"e"}
+bu:{"type":"button","size":[15,15],"pos":[58,256],"font":"mono","pattern":43,"text":"u","shortcut":"u"}
+bi:{"type":"button","size":[15,15],"pos":[74,256],"font":"mono","pattern":43,"text":"i","shortcut":"i"}
+bd:{"type":"button","size":[15,15],"pos":[90,256],"font":"mono","pattern":43,"text":"d","shortcut":"d"}
+bh:{"type":"button","size":[15,15],"pos":[106,256],"font":"mono","pattern":43,"text":"h","shortcut":"h"}
+bt:{"type":"button","size":[15,15],"pos":[122,256],"font":"mono","pattern":43,"text":"t","shortcut":"t"}
+bn:{"type":"button","size":[15,15],"pos":[138,256],"font":"mono","pattern":43,"text":"n","shortcut":"n"}
+bs:{"type":"button","size":[15,15],"pos":[154,256],"font":"mono","pattern":43,"text":"s","shortcut":"s"}
+bq:{"type":"button","size":[15,15],"pos":[31,272],"font":"mono","pattern":43,"text":"q","shortcut":"q"}
+bj:{"type":"button","size":[15,15],"pos":[47,272],"font":"mono","pattern":43,"text":"j","shortcut":"j"}
+bk:{"type":"button","size":[15,15],"pos":[63,272],"font":"mono","pattern":43,"text":"k","shortcut":"k"}
+bx:{"type":"button","size":[15,15],"pos":[79,272],"font":"mono","pattern":43,"text":"x","shortcut":"x"}
+bb:{"type":"button","size":[15,15],"pos":[95,272],"font":"mono","pattern":43,"text":"b","shortcut":"b"}
+bm:{"type":"button","size":[15,15],"pos":[111,272],"font":"mono","pattern":43,"text":"m","shortcut":"m"}
+bw:{"type":"button","size":[15,15],"pos":[127,272],"font":"mono","pattern":43,"text":"w","shortcut":"w"}
+bv:{"type":"button","size":[15,15],"pos":[143,272],"font":"mono","pattern":43,"text":"v","shortcut":"v"}
+bz:{"type":"button","size":[15,15],"pos":[159,272],"font":"mono","pattern":43,"text":"z","shortcut":"z"}
+code:{"type":"field","size":[254,178],"pos":[86,38],"script":"initial keyboard version.1","font":"mono","border":1,"scrollbar":1,"style":"code","value":"buttons: extract value\n where value..type=\"button\"\n from card.widgets\n\n# arrange buttons according to layout\nlayout: random[qwerty, dvorak]\nx:x0:5 y:240 cw:15 gy:0 \ni:0 each ch in layout.text\n b:buttons[i]\n # b.font:\"mono\" b.size:2 take cw\n if ch=\"\\n\" \n  gy:gy+1 y:y+cw+1\n  x:x0+(gy*cw/3)\n elseif ch=\".\"\n  x:x+cw+1\n else\n  b.pos:x,y x:x+cw+1\n  b.name: \"b%s\" format ch\n  b.text:ch b.shortcut:ch\n  i:i+1\n end\nend\n"}
 result:{"type":"field","size":[122,74],"pos":[369,64],"show":"invert","style":"code","value":"21375312345671089101112131415161715311819202122232425262025"}
-held:{"type":"field","size":[79,20],"pos":[377,224],"animated":1,"script":"card4.2"}
+held:{"type":"field","size":[79,20],"pos":[377,224],"animated":1,"script":"initial keyboard version.2"}
 qwerty:{"type":"field","size":[56,34],"pos":[210,238],"value":"qwertyuiop\nasdfghjkl\nzxcvbnm"}
 dvorak:{"type":"field","size":[59,35],"pos":[275,238],"value":"...pyfgcrl\naoeuidhtns\n.qjkxbmwvz"}
-space:{"type":"button","size":[79,15],"pos":[47,288],"pattern":39}
+space:{"type":"button","size":[79,15],"pos":[47,288],"pattern":43}
 down:{"type":"field","size":[79,20],"pos":[376,255],"style":"plain"}
 
-{script:card4.0}
+{script:initial keyboard version.0}
 A:"%a" format list 97+range 26
 
 on click do
@@ -249,7 +245,7 @@ end
 
 {end}
 
-{script:card4.1}
+{script:initial keyboard version.1}
 
 on run text do
  d:card.widgets
@@ -259,7 +255,7 @@ end
 
 {end}
 
-{script:card4.2}
+{script:initial keyboard version.2}
 
 on view do
  prev:me.text
@@ -276,15 +272,17 @@ end
 {end}
 
 {card:card1}
-image:"%%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"
+image:"%%IMG3AgABVgbAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"card1.0"
 {widgets}
-k:{"type":"contraption","size":[175,68],"pos":[172,135],"show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
+k:{"type":"contraption","size":[175,68],"pos":[33,135],"show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
+f:{"type":"field","size":[174,92],"pos":[33,34],"locked":1,"volatile":1}
 
 {script:card1.0}
-on view do
- 
+on key_dn k do
+ f.text: if k=" " "" else " "fuse f.text,k end
 end
+
 {end}
 
 {card:home}
@@ -312,8 +310,10 @@ end
 {contraption:keyboard}
 size:[175,68]
 margin:[0,0,0,0]
+description:"Realtime keyboard control (letters and spaces only)."
 script:"keyboard.0p"
-attributes:{"name":["_layout","layout"],"label":["layout: \"qwerty\" or \"dvorak\"",""],"type":["note","string"]}
+template:"on key_dn k do\nend\n\non key_up k do\nend\n"
+attributes:{"name":["_layout","layout"],"label":["layout: \"qwerty\" or \"dvorak\" (shared by all instances)",""],"type":["note","string"]}
 {widgets}
 bp:{"type":"button","size":[15,15],"pos":[50,2],"font":"mono","pattern":39,"text":"p","shortcut":"p"}
 by:{"type":"button","size":[15,15],"pos":[66,2],"font":"mono","pattern":39,"text":"y","shortcut":"y"}
@@ -337,15 +337,15 @@ bj:{"type":"button","size":[15,15],"pos":[44,34],"font":"mono","pattern":39,"tex
 bk:{"type":"button","size":[15,15],"pos":[60,34],"font":"mono","pattern":39,"text":"k","shortcut":"k"}
 bx:{"type":"button","size":[15,15],"pos":[76,34],"font":"mono","pattern":39,"text":"x","shortcut":"x"}
 bb:{"type":"button","size":[15,15],"pos":[92,34],"font":"mono","pattern":39,"text":"b","shortcut":"b"}
-bm:{"type":"button","size":[15,15],"pos":[108,34],"script":"keyboard.1p","font":"mono","pattern":39,"text":"m","shortcut":"m"}
+bm:{"type":"button","size":[15,15],"pos":[108,34],"font":"mono","pattern":39,"text":"m","shortcut":"m"}
 bw:{"type":"button","size":[15,15],"pos":[124,34],"font":"mono","pattern":39,"text":"w","shortcut":"w"}
 bv:{"type":"button","size":[15,15],"pos":[140,34],"font":"mono","pattern":39,"text":"v","shortcut":"v"}
 bz:{"type":"button","size":[15,15],"pos":[156,34],"font":"mono","pattern":39,"text":"z","shortcut":"z"}
 spacebar:{"type":"button","size":[79,15],"pos":[47,51],"pattern":39}
 qwerty:{"type":"field","size":[56,34],"pos":[244,10],"locked":1,"value":"qwertyuiop\nasdfghjkl\nzxcvbnm"}
 dvorak:{"type":"field","size":[59,35],"pos":[244,-36],"locked":1,"value":"...pyfgcrl\naoeuidhtns\n.qjkxbmwvz"}
-_k:{"type":"field","size":[45,20],"pos":[244,60],"animated":1,"volatile":1}
-which:{"type":"field","size":[57,16],"pos":[244,-75],"locked":1,"script":"keyboard.2p","style":"plain","value":"dvorak"}
+_k:{"type":"field","size":[171,20],"pos":[1,-54],"locked":1,"animated":1,"volatile":1,"font":"menu"}
+which:{"type":"field","size":[57,16],"pos":[244,-75],"locked":1,"script":"keyboard.1p","style":"plain","value":"dvorak"}
 
 {script:keyboard.0p}
 # note: you can't rearrange the widgets in an individual
@@ -389,25 +389,29 @@ on layout do
 end
 
 on view do
- _k.text: "" fuse
+ text: "" fuse
   extract value..text
   where each b in (app.render@value) b[2,2]=1 end
   where value..type="button"
   from MW[]
  spacebar.show:
-  if gamepad.held.action > "n" in _k.text
+  if sp: gamepad.held.action > "n" in text
+    text: "" fuse " ",text
     "invert" else "solid"
   end
+ # now: which are new?
+ prev:_k.text
+ each up in extract where !("" split prev) in text from prev
+  card.event["key_up" up]
+ end
+ each dn in extract where !("" split text) in prev from text
+  card.event["key_dn" dn]
+ end
+ _k.text: text
 end
 {end}
 
 {script:keyboard.1p}
-on click do
- 
-end
-{end}
-
-{script:keyboard.2p}
 on change val do
  layout[]
 end
@@ -467,6 +471,86 @@ on click xy do
  set_cxy[floor xy/get_cwh[]]
  view[]
  card.event["pick" get_cxy[] get_value[]]
+end
+{end}
+
+{contraption:progressWord}
+size:[339,64]
+margin:[0,0,0,0]
+description:"The word or text you're supposed to type in the game. Fills up like a progressbar as you set the .key attribute."
+script:"progressWord.0p"
+attributes:{"name":["text","scale"],"label":["text","scale"],"type":["string","number"]}
+{widgets}
+c:{"type":"canvas","size":[104,52],"pos":[0,0],"locked":1,"volatile":1,"font":"mono","pattern":45,"show":"transparent","border":0,"scale":1}
+_wd:{"type":"field","size":[58,20],"pos":[5,-36],"locked":1,"script":"progressWord.1p","border":1,"style":"code","value":"word"}
+_t:{"type":"grid","size":[91,206],"pos":[344,-68],"locked":1,"value":{"ch":["w","o","r","d"],"st":[1,1,1,1],"fc":[0,0,0,0]},"row":4}
+_key:{"type":"field","size":[43,20],"pos":[70,-37],"animated":1}
+_scale:{"type":"slider","size":[49,17],"pos":[8,-66],"locked":1,"script":"progressWord.2p","interval":[1,16],"value":4,"style":"bar"}
+
+{script:progressWord.0p}
+on get_text do _wd.text end
+on set_text w do 
+ _wd.text:s:trim w
+ _t.value: select ch:value st:0 fc:0 from s
+ _t.row: 0
+ c.font: me.font c.clear[]
+ view[]
+end
+
+on set_scale x do _scale.value: x end
+on get_scale x do _scale.value end
+
+on set_key k do _key.text:k view[] end
+on get_key do _k.ytext end
+
+on view do
+ OK:4,3,2,1 BAD:-3,-2,-1 FC:8
+ ix:_t.row T:_t.value
+ 
+ # keypress handler
+ if key:_key.text
+  _key.text:""
+  T.fc[ix]:FC # start an animation
+  T.st[ix]:
+   if key=T.ch[ix]
+     _t.row:ix+1 OK[0]
+   else BAD[0] end
+ end
+ 
+ # frame counters:
+ T:update fc:FC st:st-1 where (st>1) & !fc from
+   update fc:FC st:st+1 where (st<0) & !fc from
+   update fc:fc-1 where fc from T
+  
+ x:1 p:(0,OK,BAD) dict (44,39,32,46,45,35,34,37)
+
+ c.clear[] # draw letters:
+ c.scale:1 c.size: c.textsize["" fuse T.ch]+2 
+ each row in rows T
+  c.pattern:p[row.st]
+  c.text[row.ch x,0 "top_left"]
+  x:x+first c.textsize[row.ch]
+ end
+ 
+ a:c.copy[].scale[_scale.value]
+ c.size: c.lsize*_scale.value
+ b:a.copy[].map[0 dict 0 1]
+ each xy in 3 cross 3 c.paste[b xy] end
+ c.paste[a 1,1 1]
+  
+ _t.value:T
+end
+{end}
+
+{script:progressWord.1p}
+on change val do
+ set_text[val] 
+end
+{end}
+
+{script:progressWord.2p}
+on change val do
+ view[]
 end
 {end}
 
