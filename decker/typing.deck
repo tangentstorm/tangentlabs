@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:1
+card:0
 size:[512,342]
 name:"typing.deck"
 author:"tangentstorm"
@@ -10,26 +10,39 @@ patterns:"%%IMG3AAgA5ggAAQgcSLCgwYMIEypMGKChw4cQI0qcSLFixYMBMGKUSDCjQY8FQU4UCHJg
 image:"%%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"
 script:"home.0"
 {widgets}
-playBtn:{"type":"button","size":[60,20],"pos":[366,144],"pattern":43,"text":"play","shortcut":" "}
+playBtn:{"type":"button","size":[60,20],"pos":[366,144],"script":"home.1","pattern":43,"text":"play","shortcut":" "}
 field1:{"type":"field","size":[88,76],"pos":[68,144],"locked":1,"pattern":36,"show":"transparent","border":0,"value":"words fall\n    from the sky\n\n         type them fast\n or you will die\n\n- mavis  b"}
-configBtn:{"type":"button","size":[60,20],"pos":[366,190],"script":"home.1","pattern":41,"text":"edit","shortcut":"0"}
+configBtn:{"type":"button","size":[60,20],"pos":[366,190],"script":"home.2","pattern":41,"text":"edit","shortcut":"0"}
 videoComingSoon:{"type":"field","size":[67,33],"pos":[68,242],"locked":1,"pattern":36,"border":0,"value":{"text":[""," how it works\n","i"],"font":["","",""],"arg":["","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw","%%IMG3AD8AEwZAkHBILBqPyKRyyWw6n9CodFocjUTYrFY0onqN16042wUBzui0eo0WAlIpZ3hMFwYCANA9CUChAn8kRAABcU10iFwgJHh6hkgAjChng4VOY3N1fSSMcXB5kWckeYBshWxpQ2NnmVt2d3iAf2cBo7WEk6coKYSwnruNRKtDJmNCJH62oyjKhMu5vLuEKS6lu3qCwmJ5Qq1Ybne0y7y60dB95HHl6EXD3lngAWa39M2l65a6stmqYiMlieLNGzcNhDQ/09AVXEdJWyJ/Q/Y4m1iLka1z0gpVi+aJ25B3ASPi6YMiBLNedy6STJHR1xtg/Ig91FJGSIpRZ+DgjHQzJ86bO2/y8snriJWjSJN+meJxqdOnUKMGAQ=="]}}
 nameLabel:{"type":"field","size":[71,20],"pos":[176,144],"font":"menu","pattern":43,"show":"transparent","border":0,"style":"plain","align":"right","value":"your name:"}
-playerName:{"type":"field","size":[98,17],"pos":[255,146],"font":"menu","pattern":42,"show":"invert","border":0,"style":"plain","value":"decker"}
-g:{"type":"grid","size":[100,56],"pos":[254,190],"locked":1,"pattern":42,"show":"transparent","scrollbar":1,"headers":0,"lines":0,"value":{"word list":["letters","decker","sight words","english top 100"]},"row":0}
+playerName:{"type":"field","size":[98,17],"pos":[255,146],"font":"menu","pattern":42,"show":"invert","border":0,"style":"plain","value":"savleen"}
+wl:{"type":"grid","size":[100,56],"pos":[254,190],"locked":1,"volatile":1,"pattern":42,"show":"transparent","scrollbar":1,"headers":0,"lines":0}
 field2:{"type":"field","size":[71,20],"pos":[176,190],"font":"menu","pattern":41,"show":"transparent","border":0,"style":"plain","align":"right","value":"word list:"}
-grid1:{"type":"grid","size":[100,44],"pos":[254,253],"locked":1,"pattern":42,"show":"transparent","scrollbar":1,"headers":0,"lines":0,"value":{"layout":["qwerty","dvorak","colemak"]},"row":0}
+kb:{"type":"grid","size":[100,44],"pos":[254,253],"locked":1,"volatile":1,"pattern":42,"show":"transparent","scrollbar":1,"headers":0,"lines":0}
 field3:{"type":"field","size":[71,20],"pos":[176,253],"font":"menu","pattern":41,"show":"transparent","border":0,"style":"plain","align":"right","value":"keyboard:"}
 
 {script:home.0}
-on click do
- deck.cards.game.widgets.k.layout:me.text
- go["game"]
+on view do
+ cfg: deck.cards.config.widgets
+ wl.value: select from cfg.wl.keys
+ kb.value: select from cfg.kb.keys
 end
+
 
 {end}
 
 {script:home.1}
+on click do
+ gw:deck.cards.game.widgets
+ gw.k.layout: kb.rowvalue.value
+ gw.words.text:
+   deck.cards.config.widgets.wl.get[wl.rowvalue.value]
+ go["game" "BoxOut"]
+end
+
+{end}
+
+{script:home.2}
 on click do
   go["configure" "BoxIn"]
 end
@@ -39,16 +52,16 @@ end
 image:"%%IMG3AgABVgZAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"game.0"
 {widgets}
-bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":3,"style":"bar"}
+bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":20,"style":"bar"}
 c:{"type":"canvas","size":[512,344],"pos":[0,16],"volatile":1,"pattern":0,"show":"transparent","border":0,"scale":8}
 pause:{"type":"button","size":[58,12],"pos":[448,67],"script":"game.1","font":"body","pattern":41,"show":"invert","text":"pause","style":"check","value":0,"shortcut":"0"}
 speed:{"type":"slider","size":[58,15],"pos":[448,25],"interval":[0,10],"format":"speed: %i","style":"bar"}
-k:{"type":"contraption","size":[175,68],"pos":[169,253],"script":"game.2","show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
+k:{"type":"contraption","size":[175,68],"pos":[169,253],"script":"game.2","show":"transparent","def":"keyboard","widgets":{"bp1":{},"by1":{},"bf1":{},"bg1":{},"bc1":{},"br":{},"bl1":{},"ba1":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh1":{},"bt":{},"bn1":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb1":{},"bm1":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
 wd:{"type":"contraption","size":[268,68],"pos":[220,130],"volatile":1,"font":"menu","show":"transparent","def":"progressWord","widgets":{"c":{"size":[76,60],"font":"menu","pattern":44},"_wd":{"value":"go "},"_t":{"value":{"ch":["g","o"," "],"st":[0,0,0],"fc":[0,0,0]},"row":0},"_key":{},"_scale":{}}}
-words:{"type":"field","size":[89,152],"pos":[405,173],"show":"none","scrollbar":1,"value":"the of and a to in is you that it he was for on are as with his they at be this have from or one had by words but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been called who am its now find long down day did get come made may part end"}
+words:{"type":"field","size":[89,152],"pos":[405,173],"volatile":1,"show":"none","scrollbar":1}
 welcome:{"type":"field","size":[175,100],"pos":[169,25],"pattern":46,"show":"transparent","border":0,"align":"center","value":{"text":["type 100 falling words\nbefore they reach the bottom\n\nspeed increases every 10 words\n\n","type \"go\" to start.","\npress space after each word"],"font":["","menu","menu"],"arg":["","",""],"pat":[1,36,39]}}
 score:{"type":"slider","size":[58,15],"pos":[448,46],"pattern":42,"interval":[-1,100],"value":-1,"format":"score: %i","style":"bar"}
-prototype11:{"type":"contraption","size":[114,94],"pos":[33,133],"def":"timer","widgets":{"g":{}}}
+timer:{"type":"contraption","size":[114,94],"pos":[33,133],"volatile":1,"def":"timer","widgets":{"g":{}}}
 
 {script:game.0}
 bgN:34 # arne red
@@ -77,10 +90,6 @@ on new_word do
  wd.pos: (24,24) | random[first card.size-wd.size],0
 end
 
-on good_msg do
- r:random[" " split "good great correct yes awesome"]
- "" fuse r,"!"
-end
 
 on nope_msg do
  random["try again", " " split "whoops nope sorry nah wrong"]
@@ -90,7 +99,7 @@ on good k do
  welcome.show:"none"
  new_word[]
  if 10=score.value: score.value+1
-   setbg[bgY "you won!" 500 "scores"]
+   setbg[bgY "you won!"]
  elseif !10 % score.value
    setbg[bgY "level  %i" format speed.value:speed.value+1]
  end
@@ -195,16 +204,16 @@ end
 
 {end}
 
-{card:configure}
+{card:config}
 image:"%%IMG3AgABVgZAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
 script:"scores.0"
 {widgets}
-il:{"type":"contraption","size":[368,165],"pos":[14,41],"script":"configure.0","def":"itemlist","widgets":{"label":{"size":[228,20],"value":"word lists (level editor)"},"item_text":{"size":[268,144],"pos":[100,20],"value":"a about after all also an and any as at back be because but by can come could day do even first for from get give go good have he her him his how i if in into it its just know like look make me most my new no not now of on one only or other our out over people say see she so some take than that the their them then there these they think this time to two up us use want way we well what when which who will with work would year you your"},"items":{"size":[100,144],"widths":[80,0],"value":{"value":["letters","sight words","decker","english top 100"],"text":["a b c d e f g h i j k l m n o p q r s t u v w x y z","a about all am an and are as at be been but by called can come could day did do down each end find first for from get go had has have he her him his how if in into is it its like long look made make many may more my no not now number of on one or other out part people said see she so some than that the their them then there these they this time to two up use was water way we were what when which who will with words would write you your","add alert and app array asc author bits brush by card cards cat clear colors cols column contraptions copy corners count cursor deck desc dict dir distinct do down drop e each else elseif encoded end end eval event exit extract fill find first flip font fonts format frame from fullscreen gamepad get gindex go gridlines gridsize group headers held here if image in index index insert into keys keystore kiosk last len like line list local locked make max merge min min modules ms name newdeck nil now on ops or orderby outline panic parse paste patterns pi platform play playing pointer poly pos prev print prod purge random range raze read readcsv readxml remove render replace rev rtext save script scrollbar seed select shortcut show size sleep slice sound sounds span split start step string struct style sum sys table take text textsize transition trim typeof unless up update value version where while window with workspace write writecsv writexml xor z","a about after all also an and any as at back be because but by can come could day do even first for from get give go good have he her him his how i if in into it its just know like look make me most my new no not now of on one only or other our out over people say see she so some take than that the their them then there these they think this time to two up us use want way we well what when which who will with work would year you your"]},"row":3,"col":0},"bnw":{"pos":[348,0]},"bgo":{"pos":[228,0]},"run_event":{"size":[92,20]},"slider1":{"size":[92,20],"pos":[110,-40],"interval":[0,368],"value":100},"bpr":{"pos":[288,0]},"bnx":{"pos":[308,0]},"brm":{"pos":[328,0]},"bup":{"pos":[248,0]},"dn":{"pos":[268,0]}}}
-keyboards:{"type":"contraption","size":[368,95],"pos":[14,226],"def":"itemlist","widgets":{"label":{"size":[228,20],"value":"keyboard layouts"},"item_text":{"size":[268,74],"pos":[100,20],"value":"qwfpgjluy\narstdhneio\nzxcvbkm"},"items":{"size":[100,74],"widths":[80,0],"value":{"value":["qwerty","dvorak","colemak"],"text":["qwertyuiop\nasdfghjkl\nzxcvbnm","...pyfgcrl\naoeuidhtns\n.qjkxbmwvz","qwfpgjluy\narstdhneio\nzxcvbkm"]},"row":2,"col":0},"bnw":{"pos":[348,0]},"bgo":{"pos":[228,0]},"run_event":{"size":[92,20]},"slider1":{"size":[92,20],"pos":[110,-40],"interval":[0,368],"value":100},"bpr":{"pos":[288,0]},"bnx":{"pos":[308,0]},"brm":{"pos":[328,0]},"bup":{"pos":[248,0]},"dn":{"pos":[268,0]}}}
+wl:{"type":"contraption","size":[368,165],"pos":[14,41],"script":"config.0","def":"itemlist","widgets":{"label":{"size":[228,20],"value":"word lists (level editor)"},"item_text":{"size":[288,144],"value":"a b c d e f g h i j k l m n o p q r s t u v w x y z"},"items":{"size":[80,144],"value":{"k":["letters","sight words","decker","english top 100"],"v":["a b c d e f g h i j k l m n o p q r s t u v w x y z","a about all am an and are as at be been but by called can come could day did do down each end find first for from get go had has have he her him his how if in into is it its like long look made make many may more my no not now number of on one or other out part people said see she so some than that the their them then there these they this time to two up use was water way we were what when which who will with words would write you your","add alert and app array asc author bits brush by card cards cat clear colors cols column contraptions copy corners count cursor deck desc dict dir distinct do down drop e each else elseif encoded end end eval event exit extract fill find first flip font fonts format frame from fullscreen gamepad get gindex go gridlines gridsize group headers held here if image in index index insert into keys keystore kiosk last len like line list local locked make max merge min min modules ms name newdeck nil now on ops or orderby outline panic parse paste patterns pi platform play playing pointer poly pos prev print prod purge random range raze read readcsv readxml remove render replace rev rtext save script scrollbar seed select shortcut show size sleep slice sound sounds span split start step string struct style sum sys table take text textsize transition trim typeof unless up update value version where while window with workspace write writecsv writexml xor z","a about after all also an and any as at back be because but by can come could day do even first for from get give go good have he her him his how i if in into it its just know like look make me most my new no not now of on one only or other our out over people say see she so some take than that the their them then there these they think this time to two up us use want way we well what when which who will with work would year you your"]},"row":0,"col":0},"bnw":{"pos":[348,0]},"bgo":{"pos":[228,0]},"list_width":{"size":[92,20],"pos":[110,-40]},"bpr":{"pos":[288,0]},"bnx":{"pos":[308,0]},"brm":{"pos":[328,0]},"bup":{"pos":[248,0]},"dn":{"pos":[268,0]}}}
+kb:{"type":"contraption","size":[368,95],"pos":[14,226],"def":"itemlist","widgets":{"label":{"size":[228,20],"value":"keyboard layouts"},"item_text":{"size":[288,74],"value":"qwertyuiop\nasdfghjkl\nzxcvbnm"},"items":{"size":[80,74],"value":{"k":["qwerty","dvorak","colemak"],"v":["qwertyuiop\nasdfghjkl\nzxcvbnm","...pyfgcrl\naoeuidhtns\n.qjkxbmwvz","qwfpgjluy\narstdhneio\nzxcvbkm"]},"row":0,"col":0},"bnw":{"pos":[348,0]},"bgo":{"pos":[228,0]},"list_width":{"size":[92,20],"pos":[110,-40]},"bpr":{"pos":[288,0]},"bnx":{"pos":[308,0]},"brm":{"pos":[328,0]},"bup":{"pos":[248,0]},"dn":{"pos":[268,0]}}}
 field1:{"type":"field","size":[115,247],"pos":[394,41],"pattern":36,"show":"transparent","border":0,"value":{"text":["","configuration","\n\nword lists are just space-separated lowercase words.\n\nkeyboard layouts have one row of letters per line. you can leave space for punctuation keys by adding a period.\n\n\nnote: if you are viewing this online, you can ","save this deck to your own computer"," as an .html  file from the file menu!"],"font":["","menu","","",""],"arg":["","","","",""],"pat":[1,43,1,43,1]}}
-backBtn:{"type":"button","size":[73,20],"pos":[394,300],"script":"configure.1","pattern":43,"text":"go back","shortcut":"0"}
+backBtn:{"type":"button","size":[73,20],"pos":[394,300],"script":"config.1","pattern":43,"text":"go back","shortcut":"0"}
 
-{script:configure.0}
+{script:config.0}
 on run do
  wds: " " split il.current[].text
  res: " " fuse extract orderby value asc from wds
@@ -214,7 +223,7 @@ on run do
 end
 {end}
 
-{script:configure.1}
+{script:config.1}
 on click do
   go["First" "BoxOut"]
 end
@@ -237,14 +246,14 @@ end
 {card:v0.game}
 script:"v0.game.0"
 {widgets}
-bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":1,"style":"bar"}
+bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":6,"style":"bar"}
 words:{"type":"field","size":[222,113],"pos":[275,218],"show":"none","scrollbar":1,"value":"the of and a to in is you that it he was for on are as with his they I at be this have from or one had by words but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been called who am its now find long down day did get come made may part end click drag view change range unless nil card pos size"}
 c:{"type":"canvas","size":[512,342],"pos":[0,0],"volatile":1,"script":"v0.game.1","pattern":0,"border":0,"scale":8}
 pause:{"type":"button","size":[46,12],"pos":[460,46],"script":"game.1","font":"body","show":"transparent","text":"pause","style":"check","value":0}
 speed:{"type":"slider","size":[46,12],"pos":[460,25],"locked":1,"interval":[1,10],"value":10,"style":"bar"}
 inputCopy:{"type":"field","size":[116,37],"pos":[117,178],"locked":1,"volatile":1,"show":"invert"}
 input:{"type":"field","size":[176,33],"pos":[107,193],"font":"menu","pattern":38,"style":"plain"}
-w:{"type":"button","size":[60,20],"pos":[405,79],"volatile":1,"script":"v0.game.2","pattern":39,"text":"than"}
+w:{"type":"button","size":[60,20],"pos":[12,34],"volatile":1,"script":"v0.game.2","pattern":39,"text":"like"}
 
 {script:v0.game.0}
 bgN:colors.red
@@ -500,7 +509,7 @@ end
 image:"%%IMG3AgABVgZAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evQwOIHSI2AFiLAUaMEGE27VqzZyWmFUGX7dq6cOM6nFu3b9+8ehcG8EuYLuDACQcX9nsY8UHFi/E6Zgh5cePJjyNfxpyZ8GbOnSWDfgj582iEg02fRr26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uijkEYq6aSUVmrppZhmqummnHbq6aeghirqqKSWauqpqKaq6qqsturqq7DGKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgm+0QQ"
 script:"input from contraption.0"
 {widgets}
-k:{"type":"contraption","size":[175,68],"pos":[33,135],"show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
+k:{"type":"contraption","size":[175,68],"pos":[33,135],"show":"transparent","def":"keyboard","widgets":{"bp1":{},"by1":{},"bf1":{},"bg1":{},"bc1":{},"br":{},"bl1":{},"ba1":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh1":{},"bt":{},"bn1":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb1":{},"bm1":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{"value":"qwerty"}}}
 f:{"type":"field","size":[174,92],"pos":[33,34],"locked":1,"volatile":1}
 
 {script:input from contraption.0}
@@ -524,29 +533,29 @@ script:"keyboard.0p"
 template:"on key_dn k do\nend\n\non key_up k do\nend\n"
 attributes:{"name":["_layout","layout"],"label":["layout: \"qwerty\" or \"dvorak\" (shared by all instances)",""],"type":["note","string"]}
 {widgets}
-bp:{"type":"button","size":[15,15],"pos":[50,2],"font":"mono","pattern":0,"text":"p","shortcut":"p"}
-by:{"type":"button","size":[15,15],"pos":[66,2],"font":"mono","pattern":0,"text":"y","shortcut":"y"}
-bf:{"type":"button","size":[15,15],"pos":[82,2],"font":"mono","pattern":0,"text":"f","shortcut":"f"}
-bg:{"type":"button","size":[15,15],"pos":[98,2],"font":"mono","pattern":0,"text":"g","shortcut":"g"}
-bc:{"type":"button","size":[15,15],"pos":[114,2],"font":"mono","pattern":0,"text":"c","shortcut":"c"}
+bp1:{"type":"button","size":[15,15],"pos":[50,2],"font":"mono","pattern":0,"text":"p","shortcut":"p"}
+by1:{"type":"button","size":[15,15],"pos":[66,2],"font":"mono","pattern":0,"text":"y","shortcut":"y"}
+bf1:{"type":"button","size":[15,15],"pos":[82,2],"font":"mono","pattern":0,"text":"f","shortcut":"f"}
+bg1:{"type":"button","size":[15,15],"pos":[98,2],"font":"mono","pattern":0,"text":"g","shortcut":"g"}
+bc1:{"type":"button","size":[15,15],"pos":[114,2],"font":"mono","pattern":0,"text":"c","shortcut":"c"}
 br:{"type":"button","size":[15,15],"pos":[130,2],"font":"mono","pattern":0,"text":"r","shortcut":"r"}
-bl:{"type":"button","size":[15,15],"pos":[146,2],"font":"mono","pattern":0,"text":"l","shortcut":"l"}
-ba:{"type":"button","size":[15,15],"pos":[7,18],"font":"mono","pattern":0,"text":"a","shortcut":"a"}
+bl1:{"type":"button","size":[15,15],"pos":[146,2],"font":"mono","pattern":0,"text":"l","shortcut":"l"}
+ba1:{"type":"button","size":[15,15],"pos":[7,18],"font":"mono","pattern":0,"text":"a","shortcut":"a"}
 bo:{"type":"button","size":[15,15],"pos":[23,18],"font":"mono","pattern":0,"text":"o","shortcut":"o"}
 be:{"type":"button","size":[15,15],"pos":[39,18],"font":"mono","pattern":0,"text":"e","shortcut":"e"}
 bu:{"type":"button","size":[15,15],"pos":[55,18],"font":"mono","pattern":0,"text":"u","shortcut":"u"}
 bi:{"type":"button","size":[15,15],"pos":[71,18],"font":"mono","pattern":0,"text":"i","shortcut":"i"}
 bd:{"type":"button","size":[15,15],"pos":[87,18],"font":"mono","pattern":0,"text":"d","shortcut":"d"}
-bh:{"type":"button","size":[15,15],"pos":[103,18],"font":"mono","pattern":0,"text":"h","shortcut":"h"}
+bh1:{"type":"button","size":[15,15],"pos":[103,18],"font":"mono","pattern":0,"text":"h","shortcut":"h"}
 bt:{"type":"button","size":[15,15],"pos":[119,18],"font":"mono","pattern":0,"text":"t","shortcut":"t"}
-bn:{"type":"button","size":[15,15],"pos":[135,18],"font":"mono","pattern":0,"text":"n","shortcut":"n"}
+bn1:{"type":"button","size":[15,15],"pos":[135,18],"font":"mono","pattern":0,"text":"n","shortcut":"n"}
 bs:{"type":"button","size":[15,15],"pos":[151,18],"font":"mono","pattern":0,"text":"s","shortcut":"s"}
 bq:{"type":"button","size":[15,15],"pos":[28,34],"font":"mono","pattern":0,"text":"q","shortcut":"q"}
 bj:{"type":"button","size":[15,15],"pos":[44,34],"font":"mono","pattern":0,"text":"j","shortcut":"j"}
 bk:{"type":"button","size":[15,15],"pos":[60,34],"font":"mono","pattern":0,"text":"k","shortcut":"k"}
 bx:{"type":"button","size":[15,15],"pos":[76,34],"font":"mono","pattern":0,"text":"x","shortcut":"x"}
-bb:{"type":"button","size":[15,15],"pos":[92,34],"font":"mono","pattern":0,"text":"b","shortcut":"b"}
-bm:{"type":"button","size":[15,15],"pos":[108,34],"font":"mono","pattern":0,"text":"m","shortcut":"m"}
+bb1:{"type":"button","size":[15,15],"pos":[92,34],"font":"mono","pattern":0,"text":"b","shortcut":"b"}
+bm1:{"type":"button","size":[15,15],"pos":[108,34],"font":"mono","pattern":0,"text":"m","shortcut":"m"}
 bw:{"type":"button","size":[15,15],"pos":[124,34],"font":"mono","pattern":0,"text":"w","shortcut":"w"}
 bv:{"type":"button","size":[15,15],"pos":[140,34],"font":"mono","pattern":0,"text":"v","shortcut":"v"}
 bz:{"type":"button","size":[15,15],"pos":[156,34],"font":"mono","pattern":0,"text":"z","shortcut":"z"}
@@ -783,15 +792,14 @@ description:"a list of items"
 version:0.1
 image:"%%IMG3AZAAoQKMj6nL7Q+jnLTai7PevPsPhuJIluaJpurKtu4Lx/JM1/aN5/rO9/4PDAqHxKLxiEwql8ym8wmNSqfUqvWKzWq33K73Cw6Lx+Sy+YxOq9fstvsNj8vn9Lr9js/r9/y+/w8YKDhIWGh4iJiouMjY6PgIGSk5SVlpeYmZqbnJ2en5CRoqOkpaanqKmqq6ytrq+gobKztLW2t7i5uru8vb6/sLHCw8TFxsfIycrLzM3Oz8DB0tPU1dbX2Nna29zd3t/Q0eLj5OXm5+jp6uvs7e7v4OHy8/T19vf4+fr7/P3+//DzCgwIEECxo8iDChwoUMGzp8CDGixIkUK1q8iDGjxo0cO3r8CDKkyJEkS5o8iTKlypUsW7p8CTOmzJk0a9q8iTOnzp08e/r8CTSo0KFEixo9ijSp0qVMmzp9CjWq1KlUq1q9ijWr1q1cu3r9Cjas2LFky5o9izat2kcFAA=="
 script:"itemlist.0p"
-attributes:{"name":["label","run_event","list_width"],"label":["label","run event (on \"!\")","list width"],"type":["string","string","number"]}
+attributes:{"name":["label","list_width"],"label":["label","list width"],"type":["string","number"]}
 {widgets}
 label:{"type":"field","size":[260,20],"pos":[0,0],"locked":1,"script":"itemlist.1p","font":"menu","show":"invert","border":0,"style":"plain","value":" label"}
-item_text:{"type":"field","size":[320,140],"pos":[80,20],"script":"itemlist.2p","border":1,"scrollbar":1,"style":"code","value":"this is item 0"}
-items:{"type":"grid","size":[80,140],"pos":[0,20],"script":"itemlist.3p","headers":0,"lines":0,"widths":[60,0],"format":"ss","value":{"value":["item 0","item 1","item 2"],"text":["this is item 0","this is item 1","this is item 2"]},"row":0}
+item_text:{"type":"field","size":[320,140],"pos":[80,20],"script":"itemlist.2p","border":1,"scrollbar":1,"style":"code"}
+items:{"type":"grid","size":[80,140],"pos":[0,20],"script":"itemlist.3p","headers":0,"lines":0,"widths":[60,0],"format":"ss","value":{"k":["item 0","item 1","item 2"],"v":["this is item 0","this is item 1","this is item 2"]},"row":2}
 bnw:{"type":"button","size":[20,20],"pos":[380,0],"script":"itemlist.4p","text":"+"}
 bgo:{"type":"button","size":[20,20],"pos":[260,0],"script":"itemlist.5p","font":"body","text":"!"}
-run_event:{"type":"field","size":[100,20],"pos":[0,-40],"show":"none","value":"run"}
-slider1:{"type":"slider","size":[100,20],"pos":[120,-40],"script":"itemlist.6p","show":"none","interval":[0,400],"value":80,"step":20,"style":"compact"}
+list_width:{"type":"slider","size":[100,20],"pos":[120,-40],"script":"itemlist.6p","show":"none","interval":[0,400],"value":80,"step":20,"style":"compact"}
 bpr:{"type":"button","size":[20,20],"pos":[320,0],"script":"itemlist.7p","font":"body","text":"<"}
 bnx:{"type":"button","size":[20,20],"pos":[340,0],"script":"itemlist.8p","font":"body","text":">"}
 brm:{"type":"button","size":[20,20],"pos":[360,0],"script":"itemlist.9p","text":"-"}
@@ -799,25 +807,22 @@ bup:{"type":"button","size":[20,20],"pos":[280,0],"script":"itemlist.10p","font"
 dn:{"type":"button","size":[20,20],"pos":[300,0],"script":"itemlist.11p","font":"body","text":"dn"}
 
 {script:itemlist.0p}
- on get_label do label.text end
+on get_label do label.text end
 on set_label x do label.text: x end
 
-on get_run_event do run_event.text end
-on set_run_event x do run_event.text: x end
-on run x do card.event[get_run_event[] x] end
+on run x do card.event["run" x] end
 
 on goto_row x do
  items.row: max 0,min x,count items.value
- item_text.value: items.value[items.row].text
+ item_text.value: items.rowvalue.v
 end
 
 on view do
- slider1.interval: 0,card.size[0]
- set_list_width[slider1.value]
+ set_list_width[list_width.value]
 end
-on get_list_width do slider1.value end
+on get_list_width do list_width.value end
 on set_list_width x do
- cw:card.size[0] lw: slider1.value: floor x 
+ cw:card.size[0] lw: list_width.value: floor x 
  items.size: lw, items.size[1]
  items.widths: (max 20,lw-20),0
  item_text.pos: lw,item_text.pos[1]
@@ -845,9 +850,26 @@ on mv_dn do
 end
 
 # so you can query the items:
-on get_ls do on ls do items.value end end
-# or the current row:
-on get_current do on current do items.value[items.row] end end
+on set_table t do items.value: t end
+on get_table do items.value end
+on get_rowvalue do items.rowvalue end
+
+# dictionary interface:
+
+on has key do key in items.value.k end
+on get key do first extract v where k=key from items.value end
+on put key val do
+ items.value: if has[key]
+  update v:val where k=key from items.value
+ else
+  items.value, insert k v with key val end
+ end
+end
+
+on get_keys do items.value.k end
+on get_has do has end
+on get_get do get end
+on get_put do put end
 
 {end}
 
