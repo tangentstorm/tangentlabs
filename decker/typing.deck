@@ -65,16 +65,24 @@ script:"game.0"
 c:{"type":"canvas","size":[512,344],"pos":[0,16],"volatile":1,"pattern":0,"show":"transparent","border":0,"scale":8}
 pause:{"type":"button","size":[58,12],"pos":[448,67],"script":"game.1","font":"body","pattern":41,"show":"invert","text":"pause","style":"check","value":0,"shortcut":"0"}
 speed:{"type":"slider","size":[58,15],"pos":[448,25],"interval":[0,10],"format":"speed: %i","style":"bar"}
-k:{"type":"contraption","size":[175,68],"pos":[169,253],"script":"game.2","show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
+k:{"type":"contraption","size":[175,68],"pos":[169,253],"script":"game.2","show":"transparent","def":"keyboard","widgets":{"bq":{},"bw":{},"be":{},"br":{},"bt":{},"by":{},"bu":{},"bi":{},"bo":{},"bp":{},"ba":{},"bs":{},"bd":{},"bf":{},"bg":{},"bh":{},"bj":{},"bk":{},"bl":{},"bz":{},"bx":{},"bc":{},"bv":{},"bb":{},"bn":{},"bm":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
 wd:{"type":"contraption","size":[268,68],"pos":[220,130],"volatile":1,"font":"menu","show":"transparent","def":"progressWord","widgets":{"c":{"size":[64,60],"font":"menu","pattern":44},"_wd":{"value":"go"},"_t":{"value":{"ch":["g","o"],"st":[0,0],"fc":[0,0]},"row":0},"_key":{},"_scale":{}}}
 words:{"type":"field","size":[89,152],"pos":[405,173],"volatile":1,"show":"none","scrollbar":1}
-welcome:{"type":"field","size":[175,85],"pos":[169,25],"pattern":46,"show":"transparent","border":0,"align":"center","value":{"text":["type 100 falling words\nbefore they reach the bottom\n\nspeed increases every 10 words\n\n","type \"","go","\" to begin"],"font":["","menu","menu","menu"],"arg":["","","",""],"pat":[1,36,39,36]}}
-score:{"type":"slider","size":[58,15],"pos":[448,46],"pattern":42,"interval":[-1,100],"value":-1,"format":"score: %i","style":"bar"}
+welcome:{"type":"field","size":[175,85],"pos":[169,25],"pattern":46,"show":"transparent","border":0,"align":"center","value":{"text":["type ","50"," falling words\nbefore they reach the bottom\n\nspeed increases every ","5"," words\n\n","type \"","go","\" to begin"],"font":["","","","","","menu","menu","menu"],"arg":["","","","","","","",""],"pat":[1,39,1,39,1,36,39,36]}}
+score:{"type":"slider","size":[58,15],"pos":[448,46],"pattern":42,"interval":[-1,15],"value":-1,"format":"score: %i","style":"bar"}
 timer:{"type":"contraption","size":[154,89],"pos":[8,237],"volatile":1,"show":"none","def":"timer","widgets":{"g":{},"button1":{}}}
 
 {script:game.0}
 # arne theme colors:
 WHT:32 BLK:47 RED:34 GRN:42
+
+# how many words to win or per level
+# !! duplicated in "welcome" field
+WIN_WORDS:15 LVL_WORDS:5
+
+on view do
+ score.interval: -1,WIN_WORDS
+end
 
 # screen msg themes:
 NOPE:BLK,RED
@@ -86,7 +94,7 @@ CLEAR:0,0
 on setbg thm msg do
  c.pattern:thm[1] c.rect[0,0 c.size]
  c.pattern:thm[0] c.text[msg (0,-c.scale)+c.lsize/2 "center"]
- if !thm~CLEAR
+ if !(thm~CLEAR)|(thm~DONE)
   timer.set[600 "clear_bg"]
  end
 end
@@ -115,14 +123,14 @@ end
 
 on good k do
  timer.set[200 "new_word"] # give it time to animate last letter
- if 100=score.value: score.value+1
+ oldspeed:speed.value
+ if WIN_WORDS=score.value: score.value+1
    setbg[DONE "you won!"]
- elseif !10 % score.value
+ elseif !LVL_WORDS % score.value
    setbg[LEVEL "level  %i" format speed.value:speed.value+1]
-   # special logic for first word:
-   if 1=speed.value schedule_step[] end
  end
- welcome.show:"none"
+  # special logic for first word:
+ if 0=oldspeed welcome.show:"none" schedule_step[] end
 end
 
 on scores do
@@ -138,9 +146,11 @@ on fail do # fired when a word reaches the bottom
  new_word[]
 end
 
+# steps don't start until you pause/unpause or
+# complete the first word
 on schedule_step do
  if (speed.value>0) & !pause.value
-   timer.set[200/speed.value "step"]
+   timer.set[100/speed.value "step"]
  end
 end
 
@@ -170,10 +180,10 @@ end
 {end}
 
 {card:scores}
-image:"%%IMG3AgABVgZAlHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+image:"%%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15wbXehmPwpY8PY2q8/SJHLPq96w4re90jGuTseqxdceKUAFrh0caTuxOCr4wDBasFLMKGEV6LDCVDEwhI2CYcxqOIuXQBNhN1xZJn0YjrJz8PJMHOEKX9jFFO7whB9MYi/IeCovXjBaXJuXHmcWvj4O8h8gK+Qi64HIRk5yHZCs5CZfIb08drKUuQBluk75yqOE6XuLi+UuM07A//WymLXbw7yO+cwkrHJ30YxmooC5zGyOM2PXiR8Py/nO1BntZG2L5z6bF4p+DjRLiyjoQt+X0IZOdF7XrOg2i5fLjcbzje0caUVPms+VzrSmN83pTnv606AOtahHTepSm/rUqE61qlfN6la7+tWwjrWsZ03rWtv61rjOta53zete+/rXwA62sIdN7GIb+9jITrayl83sZjv72dCOtrSnTe1qW/va2M62trfN7W57+9vgDre4x03ucpv73OhOt7rXze52u/vd8I63vOdN73rb+974zre+983vfvv73wAPuMAHTvCCG/zgCE+4whfO8IY7/OEQj7jEJ07xilv84hjPuMY3zvGOe/zjIA+5yEdO8pKb/OQoT7nKV87ylrv85TCPucxnTvOa2/zmOM+5znfO8577/OdAD7rQh070ohv96EhPutKXzvSmO/3pUI+61KdO9apb/epYz7rWt871rnv962APu9jHTvaym/3saE+72tfO9ra7/e1wj7vc5073utv97njPu973zve++/3vgA+84AdP+MIb/vCIT7ziF8/4xjv+8ZCPvOQnT/nKW/7ymM+85jfP+c57/vOgD73oR0/60pv+9KhPvepXz/rWu/71sI+97GdP+9rb/va4z73ud8/73vv+9wcPAg=="
 script:"scores.0"
 {widgets}
-title:{"type":"field","size":[101,20],"pos":[186,43],"font":"menu","pattern":43,"show":"transparent","border":0,"style":"plain","align":"right","value":"scores"}
+grid1:{"type":"grid","size":[448,176],"pos":[32,144],"font":"menu","pattern":39,"show":"invert","scrollbar":0,"headers":1,"lines":0,"format":"ssiii","value":{"date":["9/9","xyz","abc"],"name":["savleen","michal","simran"],"score":["23","53","50000"],"time":["5","5","5"],"errors":["2","943","0"]},"row":2}
 
 {script:scores.0}
 bgN:34 # arne red
@@ -257,6 +267,25 @@ on click do
 end
 {end}
 
+{card:big text}
+image:"%%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"
+script:"big text.0"
+{widgets}
+f:{"type":"field","size":[100,20],"pos":[144,176],"font":"menu","pattern":43,"show":"transparent","border":0,"style":"plain","value":"high scores"}
+c:{"type":"canvas","size":[480,112],"pos":[16,32],"font":"menu","pattern":34,"show":"transparent","border":0,"image":"%%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","scale":1}
+scale:{"type":"slider","size":[80,16],"pos":[272,176],"interval":[1,10],"value":6.75,"step":0.25,"format":"scale: %f","style":"bar"}
+
+{script:big text.0}
+
+
+on change do
+ c.clear[]
+ c.paste[app.render[f].scale[scale.value] 0,0 1]
+end
+
+on view do change[] end
+{end}
+
 {card:v0.home}
 {widgets}
 button1:{"type":"button","size":[60,20],"pos":[215,214],"script":"v0.home.0","pattern":0,"show":"invert","text":"play"}
@@ -274,14 +303,14 @@ end
 {card:v0.game}
 script:"v0.game.0"
 {widgets}
-bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":16,"style":"bar"}
+bg:{"type":"slider","size":[48,25],"pos":[8,309],"animated":1,"show":"none","interval":[0,100],"value":9,"style":"bar"}
 words:{"type":"field","size":[222,113],"pos":[275,218],"show":"none","scrollbar":1,"value":"the of and a to in is you that it he was for on are as with his they I at be this have from or one had by words but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been called who am its now find long down day did get come made may part end click drag view change range unless nil card pos size"}
-c:{"type":"canvas","size":[512,342],"pos":[0,0],"volatile":1,"script":"v0.game.1","pattern":0,"border":0,"scale":8}
+c:{"type":"canvas","size":[512,342],"pos":[0,0],"volatile":1,"script":"v0.game.1","border":0,"scale":8}
 pause:{"type":"button","size":[46,12],"pos":[460,46],"script":"v0.game.2","font":"body","show":"transparent","text":"pause","style":"check","value":0}
 speed:{"type":"slider","size":[46,12],"pos":[460,25],"locked":1,"interval":[1,10],"value":10,"style":"bar"}
 inputCopy:{"type":"field","size":[116,37],"pos":[117,178],"locked":1,"volatile":1,"show":"invert"}
 input:{"type":"field","size":[176,33],"pos":[107,193],"font":"menu","pattern":38,"style":"plain"}
-w:{"type":"button","size":[60,20],"pos":[165,24],"volatile":1,"script":"v0.game.3","pattern":39,"text":"if"}
+w:{"type":"button","size":[60,20],"pos":[8,11],"volatile":1,"script":"v0.game.3","pattern":39,"text":"so"}
 
 {script:v0.game.0}
 bgN:colors.red
@@ -543,7 +572,7 @@ end
 image:"%%IMG3AgABVgZAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evQwOIHSI2AFiLAUaMEGE27VqzZyWmFUGX7dq6cOM6nFu3b9+8ehcG8EuYLuDACQcX9nsY8UHFi/E6Zgh5cePJjyNfxpyZ8GbOnSWDfgj582iEg02fRr26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uijkEYq6aSUVmrppZhmqummnHbq6aeghirqqKSWauqpqKaq6qqsturqq7DGKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgm+0QQ"
 script:"input from contraption.0"
 {widgets}
-k:{"type":"contraption","size":[175,68],"pos":[33,135],"show":"transparent","def":"keyboard","widgets":{"bp":{},"by":{},"bf":{},"bg":{},"bc":{},"br":{},"bl":{},"ba":{},"bo":{},"be":{},"bu":{},"bi":{},"bd":{},"bh":{},"bt":{},"bn":{},"bs":{},"bq":{},"bj":{},"bk":{},"bx":{},"bb":{},"bm":{},"bw":{},"bv":{},"bz":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{"value":"qwerty"}}}
+k:{"type":"contraption","size":[175,68],"pos":[33,135],"show":"transparent","def":"keyboard","widgets":{"bq":{},"bw":{},"be":{},"br":{},"bt":{},"by":{},"bu":{},"bi":{},"bo":{},"bp":{},"ba":{},"bs":{},"bd":{},"bf":{},"bg":{},"bh":{},"bj":{},"bk":{},"bl":{},"bz":{},"bx":{},"bc":{},"bv":{},"bb":{},"bn":{},"bm":{},"spacebar":{},"qwerty":{},"dvorak":{},"_k":{},"which":{}}}
 f:{"type":"field","size":[174,92],"pos":[33,34],"locked":1,"volatile":1}
 
 {script:input from contraption.0}
@@ -589,37 +618,37 @@ script:"keyboard.0p"
 template:"on key_dn k do\nend\n\non key_up k do\nend\n"
 attributes:{"name":["_layout","layout"],"label":["layout: \"qwerty\" or \"dvorak\" (shared by all instances)",""],"type":["note","string"]}
 {widgets}
-bp:{"type":"button","size":[15,15],"pos":[50,2],"font":"mono","pattern":0,"text":"p","shortcut":"p"}
-by:{"type":"button","size":[15,15],"pos":[66,2],"font":"mono","pattern":0,"text":"y","shortcut":"y"}
-bf:{"type":"button","size":[15,15],"pos":[82,2],"font":"mono","pattern":0,"text":"f","shortcut":"f"}
-bg:{"type":"button","size":[15,15],"pos":[98,2],"font":"mono","pattern":0,"text":"g","shortcut":"g"}
-bc:{"type":"button","size":[15,15],"pos":[114,2],"font":"mono","pattern":0,"text":"c","shortcut":"c"}
-br:{"type":"button","size":[15,15],"pos":[130,2],"font":"mono","pattern":0,"text":"r","shortcut":"r"}
-bl:{"type":"button","size":[15,15],"pos":[146,2],"font":"mono","pattern":0,"text":"l","shortcut":"l"}
+bq:{"type":"button","size":[15,15],"pos":[2,2],"font":"mono","pattern":0,"text":"q","shortcut":"q"}
+bw:{"type":"button","size":[15,15],"pos":[18,2],"font":"mono","pattern":0,"text":"w","shortcut":"w"}
+be:{"type":"button","size":[15,15],"pos":[34,2],"font":"mono","pattern":0,"text":"e","shortcut":"e"}
+br:{"type":"button","size":[15,15],"pos":[50,2],"font":"mono","pattern":0,"text":"r","shortcut":"r"}
+bt:{"type":"button","size":[15,15],"pos":[66,2],"font":"mono","pattern":0,"text":"t","shortcut":"t"}
+by:{"type":"button","size":[15,15],"pos":[82,2],"font":"mono","pattern":0,"text":"y","shortcut":"y"}
+bu:{"type":"button","size":[15,15],"pos":[98,2],"font":"mono","pattern":0,"text":"u","shortcut":"u"}
+bi:{"type":"button","size":[15,15],"pos":[114,2],"font":"mono","pattern":0,"text":"i","shortcut":"i"}
+bo:{"type":"button","size":[15,15],"pos":[130,2],"font":"mono","pattern":0,"text":"o","shortcut":"o"}
+bp:{"type":"button","size":[15,15],"pos":[146,2],"font":"mono","pattern":0,"text":"p","shortcut":"p"}
 ba:{"type":"button","size":[15,15],"pos":[7,18],"font":"mono","pattern":0,"text":"a","shortcut":"a"}
-bo:{"type":"button","size":[15,15],"pos":[23,18],"font":"mono","pattern":0,"text":"o","shortcut":"o"}
-be:{"type":"button","size":[15,15],"pos":[39,18],"font":"mono","pattern":0,"text":"e","shortcut":"e"}
-bu:{"type":"button","size":[15,15],"pos":[55,18],"font":"mono","pattern":0,"text":"u","shortcut":"u"}
-bi:{"type":"button","size":[15,15],"pos":[71,18],"font":"mono","pattern":0,"text":"i","shortcut":"i"}
-bd:{"type":"button","size":[15,15],"pos":[87,18],"font":"mono","pattern":0,"text":"d","shortcut":"d"}
-bh:{"type":"button","size":[15,15],"pos":[103,18],"font":"mono","pattern":0,"text":"h","shortcut":"h"}
-bt:{"type":"button","size":[15,15],"pos":[119,18],"font":"mono","pattern":0,"text":"t","shortcut":"t"}
-bn:{"type":"button","size":[15,15],"pos":[135,18],"font":"mono","pattern":0,"text":"n","shortcut":"n"}
-bs:{"type":"button","size":[15,15],"pos":[151,18],"font":"mono","pattern":0,"text":"s","shortcut":"s"}
-bq:{"type":"button","size":[15,15],"pos":[28,34],"font":"mono","pattern":0,"text":"q","shortcut":"q"}
-bj:{"type":"button","size":[15,15],"pos":[44,34],"font":"mono","pattern":0,"text":"j","shortcut":"j"}
-bk:{"type":"button","size":[15,15],"pos":[60,34],"font":"mono","pattern":0,"text":"k","shortcut":"k"}
-bx:{"type":"button","size":[15,15],"pos":[76,34],"font":"mono","pattern":0,"text":"x","shortcut":"x"}
-bb:{"type":"button","size":[15,15],"pos":[92,34],"font":"mono","pattern":0,"text":"b","shortcut":"b"}
+bs:{"type":"button","size":[15,15],"pos":[23,18],"font":"mono","pattern":0,"text":"s","shortcut":"s"}
+bd:{"type":"button","size":[15,15],"pos":[39,18],"font":"mono","pattern":0,"text":"d","shortcut":"d"}
+bf:{"type":"button","size":[15,15],"pos":[55,18],"font":"mono","pattern":0,"text":"f","shortcut":"f"}
+bg:{"type":"button","size":[15,15],"pos":[71,18],"font":"mono","pattern":0,"text":"g","shortcut":"g"}
+bh:{"type":"button","size":[15,15],"pos":[87,18],"font":"mono","pattern":0,"text":"h","shortcut":"h"}
+bj:{"type":"button","size":[15,15],"pos":[103,18],"font":"mono","pattern":0,"text":"j","shortcut":"j"}
+bk:{"type":"button","size":[15,15],"pos":[119,18],"font":"mono","pattern":0,"text":"k","shortcut":"k"}
+bl:{"type":"button","size":[15,15],"pos":[135,18],"font":"mono","pattern":0,"text":"l","shortcut":"l"}
+bz:{"type":"button","size":[15,15],"pos":[12,34],"font":"mono","pattern":0,"text":"z","shortcut":"z"}
+bx:{"type":"button","size":[15,15],"pos":[28,34],"font":"mono","pattern":0,"text":"x","shortcut":"x"}
+bc:{"type":"button","size":[15,15],"pos":[44,34],"font":"mono","pattern":0,"text":"c","shortcut":"c"}
+bv:{"type":"button","size":[15,15],"pos":[60,34],"font":"mono","pattern":0,"text":"v","shortcut":"v"}
+bb:{"type":"button","size":[15,15],"pos":[76,34],"font":"mono","pattern":0,"text":"b","shortcut":"b"}
+bn:{"type":"button","size":[15,15],"pos":[92,34],"font":"mono","pattern":0,"text":"n","shortcut":"n"}
 bm:{"type":"button","size":[15,15],"pos":[108,34],"font":"mono","pattern":0,"text":"m","shortcut":"m"}
-bw:{"type":"button","size":[15,15],"pos":[124,34],"font":"mono","pattern":0,"text":"w","shortcut":"w"}
-bv:{"type":"button","size":[15,15],"pos":[140,34],"font":"mono","pattern":0,"text":"v","shortcut":"v"}
-bz:{"type":"button","size":[15,15],"pos":[156,34],"font":"mono","pattern":0,"text":"z","shortcut":"z"}
 spacebar:{"type":"button","size":[79,15],"pos":[47,51],"pattern":0}
 qwerty:{"type":"field","size":[56,34],"pos":[244,10],"locked":1,"value":"qwertyuiop\nasdfghjkl\nzxcvbnm"}
 dvorak:{"type":"field","size":[59,35],"pos":[244,-36],"locked":1,"value":"...pyfgcrl\naoeuidhtns\n.qjkxbmwvz"}
 _k:{"type":"field","size":[171,20],"pos":[1,-54],"locked":1,"animated":1,"volatile":1,"font":"menu"}
-which:{"type":"field","size":[57,16],"pos":[244,-75],"locked":1,"script":"keyboard.1p","style":"plain","value":"dvorak"}
+which:{"type":"field","size":[57,16],"pos":[244,-75],"locked":1,"script":"keyboard.1p","style":"plain","value":"qwerty"}
 
 {script:keyboard.0p}
 # note: you can't rearrange the widgets in an individual
