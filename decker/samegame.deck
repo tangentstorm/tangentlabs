@@ -71,14 +71,15 @@ end
 image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWoeBrHbL7Xq/4LB4TC6bz+i0es1ua6/wuHxOr9vvTbd+z+/7/4CBZHiEhYaHiIlLgoyNjo+QkWKKlJWWl5hHkpucnZ6fXpmio6SlVaCoqaqrbKaur7CmrLO0tayxuLm6hba9vr+Nu8LDxFLAx8jJacXMzc5CytHS01nP1te41Nrbvdje36Lc4uOo4ObniOTq65Do7u907PLzfvD291P0+vtq+P7/SvgJHBgGoMGD0AgqVIiwob+FEAU6nAgvokV6FDOeu8hxncaP3jqKFAey5LORKKmZXFkspUtlLGPuekkTmMybsWrqtIWzp6ydQFf5HBouqFFQRJNaOsq0k9KniZpKjQS1Kq+pWBlZ3Wonq1dAXMPK+UqWj9izVsqqbYO2rbG1cNG4neskrt0ydPMGvMsXjN6/RvoK7gK4cMLBiA0XRsxYMWDGiR3rhTxY8mTKfS3nxZxZ81zOfD1/Bm1XtFvSpU2jRR1X9WrWa12fhR1bdljaam3fxk1WN1fevX1bBf5V+HDiWY1XRZ5c+VPmWJ0/hy5VulLq1a0Txd5U+3buR70PBR9efE/yRs2fRw9UPU727d3LhL9T/nz6Ne3HxJ9f/0r+NPn3H4AuCWgSgQUaCBKCKSm4IIMjOfgRhBFKmBGFIll4IYYcaUgRhx166BCIF4k4IokRmdgQiimqeBCLELn4IowMyQgQjTXa+BCOA+n4D489+ogPkBIJeQ+R/Bh5JJL6KGkPk006+Q6UGEnpDpXzWHklluxoiQ6XXXppDpgeiQkOmeqYeSaa46j5DZttuokNnCTJeQ2d3Nh5J57a6GkNn3366QygKgnaDKHTGHoootEoygyjjTpKDKQwSToMpclYeimmx2gqDKedeqoLqDaJmgupv5h6KqrdqJoTqzy5CgusscrqCq212PoKrrToeiuvt/haCrDBCjsKsUIZeyyyqSi7LLNIOZsJtOVIiwm10Vq7FLaeaHsJt916Wwm4TolLCbmcmHsuupKoqwi77bqbDrztyHsIvfXaexW+wei7L7+C+PsvwGAJjAfBWhl8B8IBK9wVwwU7HA/Ef0hcB8UVWzwHxvVoPBbHZnkcB8ghi3wFyXuYDAfKeqh8MstsuXwKzK3ITAXNNdv8Fs7L6Lwzz2f4/DPQeAkNBdFyGf0E0kErXRfTRTvNBNRRS70X1ZNYvQjWWWudBNdde60J2H6JjQTZZZsdGNqhqL0221y4/Tbcb8hNBN1x240F3nXr7QLffesNeDV+/z144YYDjvjgASx+eOGMO6445I/7HTnlk1teueCb23255plzHrrnncv9ueh8S5465quD3jrqeKseO+uzu1477HTLnjvtu9veO+5w6x4878P7XjzwbAufPPHLG9888mgrHz3z0ztfPfRkS5899dtb3z32YGsfPvfje18++FyLnz7565vfPvpYqx8/+/O7Xz/8VMufP/37298//lDTXwD5N0D/FRCATBNgAgm4QAM2EIFIU2AEGThBB1YQgkSTYAYpuEELdhCDQNNgCDk4Qg+WEIQ8E2EKSbhCE7YQhThTYQxZOEMX1hCGNJNhDmm4Qxv2EIcw02EQeThEHxYRiCwTYhKJuEQjNhGJKFNiFJk4RSdWEYokk2IWqbhFK3YRiyDTYhi5OEYvlhGMHBNjGsm4RjO2EY0YU2Mc2ThHN9YRjhSTYx7puEc79hGPENNjIPk4SD8WEpAME2QiCblIQzYSkQhTZCQZOUlHVhKSBJNkJim5SUt2EpMA02QoOTlKT5YSlPwSZSpJuUpTthKV+FJlLFk5S1fWEpb0kmUuablLW/YSl/DSZTB5OUxfFhOY7BJmMom5TGM2E5noUmY0mTlNZ1YTmuSSZjapuU1rdhOb4NJmOLk5Tm+WE5zcEie3ggA="
 script:"same game.0"
 {widgets}
-field1:{"type":"field","size":[256,257],"pos":[0,35],"pattern":46,"border":0,"scrollbar":0,"style":"plain","value":"\nsame game!\n"}
+field1:{"type":"field","size":[256,257],"pos":[0,35],"pattern":46,"border":0,"scrollbar":0,"style":"plain","value":"\n# same game!\n"}
 res:{"type":"field","size":[256,75],"pos":[0,293],"volatile":1,"pattern":44,"show":"invert","border":0,"style":"plain"}
 cardName1:{"type":"contraption","size":[132,14],"pos":[23,19],"def":"cardName","widgets":{"cn":{"size":[132,14],"value":"same game"}}}
 prevBtn:{"type":"button","size":[20,15],"pos":[0,18],"script":"same game.1","font":"body","text":"<<"}
 nextBtn:{"type":"button","size":[20,15],"pos":[157,18],"script":"same game.2","font":"body","text":">>"}
 newBtn:{"type":"button","size":[20,15],"pos":[236,18],"script":"same game.3","font":"body","text":"+"}
-c:{"type":"canvas","size":[160,160],"pos":[272,32],"animated":1,"pattern":0,"show":"transparent","border":0,"image":"%%IMG3AAoACgbAkpBkGglNxJFxKTSaiqUR8mkaEkukbLZaXSq3V2W19IySjNljs/sln93StBFrCgI=","brush":4,"scale":16}
+c:{"type":"canvas","size":[160,160],"pos":[272,32],"locked":1,"pattern":0,"show":"transparent","border":0,"image":"%%IMG3AAoACgbAkWlIIgGOgFGJJCyZkMvisoQ0KU3MkTE5FJJMVKIQywQwp1ort8QmObtfIvjr/F5LSlIQ","brush":4,"scale":16}
 button1:{"type":"button","size":[60,20],"pos":[442,32],"script":"same game.4","text":"reset"}
+score:{"type":"slider","size":[60,25],"pos":[442,62],"locked":1,"interval":[0,9801],"value":10,"format":"score: %i","style":"bar"}
 
 {script:same game.0}
 SLEEP:2
@@ -86,6 +87,7 @@ W:c.lsize[0]
 H:c.lsize[1]
 
 on reset do
+ score.value:0
  c.scale:16 c.lsize:10,10
  b:image[c.lsize]
  b.pixels: 35+random@(prod c.lsize) take 4
@@ -134,20 +136,24 @@ on shrink do
    xy:(x+1),0 wh:(W-x),H
    b: c.copy[xy wh]
    c.paste[b x,0]
-   done: 0=sum raze c.pixels
+   done: 0=sum raze b.pixels
    sleep[SLEEP]
   end
  end 
 end
 
+# make sure the grid is locked or you'll draw on it
+# and mess up the data!
 on click xy do
- old:c[xy]
- n:flood[c xy 32]
- if n=1 sleep[SLEEP] c[xy]:old # revert
- else
-  flood[c xy 0]
-  fall[]
-  shrink[]
+ if old:c[xy]
+  n:flood[c xy 32 old]
+  if n=1 sleep[SLEEP] c[xy]:old # revert
+  else
+   score.value:score.value + (n-1)^2
+   flood[c xy 0]
+   fall[]
+   shrink[]
+  end
  end
 end
 {end}
