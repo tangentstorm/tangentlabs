@@ -77,9 +77,9 @@ cardName1:{"type":"contraption","size":[132,14],"pos":[23,19],"def":"cardName","
 prevBtn:{"type":"button","size":[20,15],"pos":[0,18],"script":"same game.1","font":"body","text":"<<"}
 nextBtn:{"type":"button","size":[20,15],"pos":[157,18],"script":"same game.2","font":"body","text":">>"}
 newBtn:{"type":"button","size":[20,15],"pos":[236,18],"script":"same game.3","font":"body","text":"+"}
-c:{"type":"canvas","size":[160,160],"pos":[272,32],"locked":1,"pattern":0,"show":"transparent","border":0,"image":"%%IMG3AAoACgbAkWlIIgGOgFGJJCyZkMvisoQ0KU3MkTE5FJJMVKIQywQwp1ort8QmObtfIvjr/F5LSlIQ","brush":4,"scale":16}
+c:{"type":"canvas","size":[160,160],"pos":[272,32],"locked":1,"volatile":1,"pattern":0,"show":"transparent","border":0,"brush":4,"scale":16}
 button1:{"type":"button","size":[60,20],"pos":[442,32],"script":"same game.4","text":"reset"}
-score:{"type":"slider","size":[60,25],"pos":[442,62],"locked":1,"interval":[0,9801],"value":10,"format":"score: %i","style":"bar"}
+score:{"type":"slider","size":[60,25],"pos":[442,62],"locked":1,"interval":[0,9801],"format":"score: %i","style":"bar"}
 
 {script:same game.0}
 SLEEP:2
