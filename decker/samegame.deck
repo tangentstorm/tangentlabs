@@ -1,0 +1,898 @@
+{deck}
+version:1
+card:1
+size:[512,342]
+script:"0"
+name:"toolbox.deck"
+
+{script:0}
+# toolbox
+
+on l ...xs do xs end # list constructor
+on fac n do prod n-range n end # factorial
+on nck n k do (prod n-range k) / fac[k] end # n choose k
+
+on navigate dir do  help:"help" fc:15 # frame count
+ if   (dir="down") &! deck.card.name=help go[help "SlideUp" fc]
+ elseif (dir="up") & deck.card.name=help go["Back" "SlideDown" fc]
+ elseif dir="left" go["Prev" "SlideRight" fc]
+ elseif dir="right" go["Next" "SlideLeft" fc] end
+end
+
+on run text do
+ d:deck.card.widgets
+ d.card:deck.card
+ r:eval[deck.card.script d 1]
+ if r.error
+  alert[r.error]
+ else
+  d:r.vars
+  r:eval[text d 1]
+ end
+ if "res" in keys d
+   d.res.data: r.value unless r.error
+ end
+end
+
+{end}
+
+{card:tutor card}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///AAYo4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWaOGFGGao4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkEQWaeSRSCap5JJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTWaeedeOap55589unnn4AGKuighBZq6KGIJqrooow26uij6AQB"
+script:"tutor card.0"
+{widgets}
+tutor1:{"type":"contraption","size":[512,160],"pos":[0,182],"def":"tutor","widgets":{"body":{"value":{"text":["i","  ","canvas and grid\n","i","  ","cleanup\n"],"font":["","","mono","","","mono"],"arg":["%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","canvas and grid","%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE","","cleanup"]}},"nextBtn":{},"cardName":{},"code":{},"prevBtn":{"show":"none"},"runBtn":{},"next":{},"prev":{"value":""},"helpBtn":{},"help":{},"scroll_body":{},"scroll_code":{}}}
+special:{"type":"field","size":[129,54],"pos":[379,126],"value":{"text":["\n- ","More decker lessons.","\n-"," Lesson videos.","\n\n"],"font":["","","","",""],"arg":["","https://tangentstorm.github.io/decks/","","https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw",""]}}
+youtubeLink:{"type":"canvas","size":[74,28],"pos":[430,290],"locked":1,"script":"tutor card.1","border":1,"image":"%%IMG3AEoAHAZAgHBILBqPyKRyyWw6n9CodEqtWq9XkHbL7Xq/4LA4rBybz2h0Oc1up9delnzOAtXdeHKSSxr5/4CBd3JaLC1ihi2Gd4Uuh2NwIoGTk1ovAXUvL2IuAZ4Bj4UvLmaRlKd+dSyYIAGkYYaujKKvYnCUfaiqL4qsjqqKII+gwnUtiqPHdy0us7eTdbnQWi6azS7YmKtyoKu9zaMsmtYg1ZeMz4JbkurC1b3w294sjiCj9uD54ofEWumAjKT9GaRCWzde2+zFuxeOob56/vZooaRlxSlG1YQRQ8iKIzJSDUGCGxfq3x8SFi9uybhPoTeFrQ45FCeyRThCEZFsQaVr5Sab/HplWihzpL0XLZttgZOSZyAunSyNYhWA5CqQ1ppVvYT1UkmJWtg5TcXlWCFmj9AGM4vWUDFldtBygVOIxQq7LETk3Yszj9+cR/4KxkN3sGFIYA8rBoOlsePHkCNLnky5spQg","scale":1}
+
+{script:tutor card.0}
+on view do
+ bullet:image["%%IMG3AAYABgZAwGv4Er5OJyISOVwmm0/jEBAE"]
+ card_names: extract key
+   where !value..name in ("help",deck.card.name)
+   from deck.cards
+ tutor1.body: # rtext.make["contents:\n" "menu" nil 0],
+  raze each cn in card_names
+    rtext.make["" "" bullet],
+    rtext.make["  "],
+    rtext.make[("%s\n" format cn) "mono" cn]
+  end
+end
+
+{end}
+
+{script:tutor card.1}
+on click pos do
+ go["https://www.youtube.com/playlist?list=PLQ_SPWX2XIsw"] 
+end
+
+{end}
+
+{card:same game}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWoeBrHbL7Xq/4LB4TC6bz+i0es1ua6/wuHxOr9vvTbd+z+/7/4CBZHiEhYaHiIlLgoyNjo+QkWKKlJWWl5hHkpucnZ6fXpmio6SlVaCoqaqrbKaur7CmrLO0tayxuLm6hba9vr+Nu8LDxFLAx8jJacXMzc5CytHS01nP1te41Nrbvdje36Lc4uOo4ObniOTq65Do7u907PLzfvD291P0+vtq+P7/SvgJHBgGoMGD0AgqVIiwob+FEAU6nAgvokV6FDOeu8hxncaP3jqKFAey5LORKKmZXFkspUtlLGPuekkTmMybsWrqtIWzp6ydQFf5HBouqFFQRJNaOsq0k9KniZpKjQS1Kq+pWBlZ3Wonq1dAXMPK+UqWj9izVsqqbYO2rbG1cNG4neskrt0ydPMGvMsXjN6/RvoK7gK4cMLBiA0XRsxYMWDGiR3rhTxY8mTKfS3nxZxZ81zOfD1/Bm1XtFvSpU2jRR1X9WrWa12fhR1bdljaam3fxk1WN1fevX1bBf5V+HDiWY1XRZ5c+VPmWJ0/hy5VulLq1a0Txd5U+3buR70PBR9efE/yRs2fRw9UPU727d3LhL9T/nz6Ne3HxJ9f/0r+NPn3H4AuCWgSgQUaCBKCKSm4IIMjOfgRhBFKmBGFIll4IYYcaUgRhx166BCIF4k4IokRmdgQiimqeBCLELn4IowMyQgQjTXa+BCOA+n4D489+ogPkBIJeQ+R/Bh5JJL6KGkPk006+Q6UGEnpDpXzWHklluxoiQ6XXXppDpgeiQkOmeqYeSaa46j5DZttuokNnCTJeQ2d3Nh5J57a6GkNn3366QygKgnaDKHTGHoootEoygyjjTpKDKQwSToMpclYeimmx2gqDKedeqoLqDaJmgupv5h6KqrdqJoTqzy5CgusscrqCq212PoKrrToeiuvt/haCrDBCjsKsUIZeyyyqSi7LLNIOZsJtOVIiwm10Vq7FLaeaHsJt916Wwm4TolLCbmcmHsuupKoqwi77bqbDrztyHsIvfXaexW+wei7L7+C+PsvwGAJjAfBWhl8B8IBK9wVwwU7HA/Ef0hcB8UVWzwHxvVoPBbHZnkcB8ghi3wFyXuYDAfKeqh8MstsuXwKzK3ITAXNNdv8Fs7L6Lwzz2f4/DPQeAkNBdFyGf0E0kErXRfTRTvNBNRRS70X1ZNYvQjWWWudBNdde60J2H6JjQTZZZsdGNqhqL0221y4/Tbcb8hNBN1x240F3nXr7QLffesNeDV+/z144YYDjvjgASx+eOGMO6445I/7HTnlk1teueCb23255plzHrrnncv9ueh8S5465quD3jrqeKseO+uzu1477HTLnjvtu9veO+5w6x4878P7XjzwbAufPPHLG9888mgrHz3z0ztfPfRkS5899dtb3z32YGsfPvfje18++FyLnz7565vfPvpYqx8/+/O7Xz/8VMufP/37298//lDTXwD5N0D/FRCATBNgAgm4QAM2EIFIU2AEGThBB1YQgkSTYAYpuEELdhCDQNNgCDk4Qg+WEIQ8E2EKSbhCE7YQhThTYQxZOEMX1hCGNJNhDmm4Qxv2EIcw02EQeThEHxYRiCwTYhKJuEQjNhGJKFNiFJk4RSdWEYokk2IWqbhFK3YRiyDTYhi5OEYvlhGMHBNjGsm4RjO2EY0YU2Mc2ThHN9YRjhSTYx7puEc79hGPENNjIPk4SD8WEpAME2QiCblIQzYSkQhTZCQZOUlHVhKSBJNkJim5SUt2EpMA02QoOTlKT5YSlPwSZSpJuUpTthKV+FJlLFk5S1fWEpb0kmUuablLW/YSl/DSZTB5OUxfFhOY7BJmMom5TGM2E5noUmY0mTlNZ1YTmuSSZjapuU1rdhOb4NJmOLk5Tm+WE5zcEie3ggA="
+script:"same game.0"
+{widgets}
+field1:{"type":"field","size":[256,257],"pos":[0,35],"pattern":46,"border":0,"scrollbar":0,"style":"plain","value":"\nsame game!\n"}
+res:{"type":"field","size":[256,75],"pos":[0,293],"volatile":1,"pattern":44,"show":"invert","border":0,"style":"plain"}
+cardName1:{"type":"contraption","size":[132,14],"pos":[23,19],"def":"cardName","widgets":{"cn":{"size":[132,14],"value":"same game"}}}
+prevBtn:{"type":"button","size":[20,15],"pos":[0,18],"script":"same game.1","font":"body","text":"<<"}
+nextBtn:{"type":"button","size":[20,15],"pos":[157,18],"script":"same game.2","font":"body","text":">>"}
+newBtn:{"type":"button","size":[20,15],"pos":[236,18],"script":"same game.3","font":"body","text":"+"}
+c:{"type":"canvas","size":[160,160],"pos":[272,32],"animated":1,"pattern":0,"show":"transparent","border":0,"image":"%%IMG3AAoACgbAkpBkGglNxJFxKTSaiqUR8mkaEkukbLZaXSq3V2W19IySjNljs/sln93StBFrCgI=","brush":4,"scale":16}
+button1:{"type":"button","size":[60,20],"pos":[442,32],"script":"same game.4","text":"reset"}
+
+{script:same game.0}
+SLEEP:2
+W:c.lsize[0]
+H:c.lsize[1]
+
+on reset do
+ c.scale:16 c.lsize:10,10
+ b:image[c.lsize]
+ b.pixels: 35+random@(prod c.lsize) take 4
+ c.paste[b]
+end
+
+on flood c xy new old do
+ old: c[xy] unless old     sleep[SLEEP]
+ if !old=new
+  c[xy]:new n:1 # n=number of pixels changed
+  neighbors: "%j" parse "[[0 1][1 0][0 -1][-1 0]]"
+  each pt in neighbors + list xy
+   # list xy == very important!!
+   if prod (-1<pt) & pt<c.lsize
+    if c[pt]=old n:n+flood[c pt new old] end
+   end
+  end
+  n
+ end
+end
+
+on column x do
+ raze c.copy[x,0 1,H].pixels
+end
+
+on fall do
+ # move unsupported blocks down by a single pixel
+ f:1 # falling?
+ while f  f:0
+  sleep[SLEEP]
+  each x in range W
+   packed:1 # assume the best 
+   each v i in col: rev column[x]
+    if packed & v=0 packed:0 end
+    if (!packed) f:f|o:col[i+1]  c[x,H-i+1]:o end
+   end
+  end
+ end
+end
+
+on shrink do
+ # move empty columns to the left
+ done:0
+ each x in range W
+  while (0=sum column[x]) & !done
+   xy:(x+1),0 wh:(W-x),H
+   b: c.copy[xy wh]
+   c.paste[b x,0]
+   done: 0=sum raze c.pixels
+   sleep[SLEEP]
+  end
+ end 
+end
+
+on click xy do
+ old:c[xy]
+ n:flood[c xy 32]
+ if n=1 sleep[SLEEP] c[xy]:old # revert
+ else
+  flood[c xy 0]
+  fall[]
+  shrink[]
+ end
+end
+{end}
+
+{script:same game.1}
+on click do
+  go["Prev" "SlideRight" 15]
+end
+{end}
+
+{script:same game.2}
+on click do
+  go["Next" "SlideLeft" 15]
+end
+{end}
+
+{script:same game.3}
+on click do
+ go[deck.add[deck.card]]
+ res.text:"new card"
+end
+{end}
+
+{script:same game.4}
+on click do
+ reset[]
+end
+{end}
+
+{card:cwrite}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWoeBrHbL7Xq/4LB4TC6bz+i0es1ua6/wuHxOr9vvTbd+z+/7/4CBZHiEhYaHiIlLgoyNjo+QkWKKlJWWl5hHkpucnZ6fXpmio6SlVaCoqaqrbKaur7CmrLO0tayxuLm6hba9vr+Nu8LDxFLAx8jJacXMzc5CytHS01nP1te41Nrbvdje36Lc4uOo4ObniOTq65Do7u907PLzfvD291P0+vtq+P7/SvgJHBgGoMGD0AgqVIiwob+FEAU6nAgvokV6FDOeu8hxncaP3jqKFAey5LORKKmZXFkspUtlLGPuekkTmMybsWrqtIWzp6ydQFf5HBouqFFQRJNaOsq0k9KniZpKjQS1Kq+pWBlZ3Wonq1dAXMPK+UqWj9izVsqqbYO2rbG1cNG4neskrt0ydPMGvMsXjN6/RvoK7gK4cMLBiA0XRsxYMWDGiR3rhTxY8mTKfS3nxZxZ81zOfD1/Bm1XtFvSpU2jRR1X9WrWa12fhR1bdljaam3fxk1WN1fevX1bBf5V+HDiWY1XRZ5c+VPmWJ0/hy5VulLq1a0Txd5U+3buR70PBR9efE/yRs2fRw9UPU727d3LhL9T/nz6Ne3HxJ9f/0r+NPn3H4AuCWgSgQUaCBKCKSm4IIMjOfgRhBFKmBGFIll4IYYcaUgRhx166BCIF4k4IokRmdgQiimqeBCLELn4IowMyQgQjTXa+BCOA+n4D489+ogPkBIJeQ+R/Bh5JJL6KGkPk006+Q6UGEnpDpXzWHklluxoiQ6XXXppDpgeiQkOmeqYeSaa46j5DZttuokNnCTJeQ2d3Nh5J57a6GkNn3366QygKgnaDKHTGHoootEoygyjjTpKDKQwSToMpclYeimmx2gqDKedeqoLqDaJmgupv5h6KqrdqJoTqzy5CgusscrqCq212PoKrrToeiuvt/haCrDBCjsKsUIZeyyyqSi7LLNIOZsJtOVIiwm10Vq7FLaeaHsJt916Wwm4TolLCbmcmHsuupKoqwi77bqbDrztyHsIvfXaexW+wei7L7+C+PsvwGAJjAfBWhl8B8IBK9wVwwU7HA/Ef0hcB8UVWzwHxvVoPBbHZnkcB8ghi3wFyXuYDAfKeqh8MstsuXwKzK3ITAXNNdv8Fs7L6Lwzz2f4/DPQeAkNBdFyGf0E0kErXRfTRTvNBNRRS70X1ZNYvQjWWWudBNdde60J2H6JjQTZZZsdGNqhqL0221y4/Tbcb8hNBN1x240F3nXr7QLffesNeDV+/z144YYDjvjgASx+eOGMO6445I/7HTnlk1teueCb23255plzHrrnncv9ueh8S5465quD3jrqeKseO+uzu1477HTLnjvtu9veO+5w6x4878P7XjzwbAufPPHLG9888mgrHz3z0ztfPfRkS5899dtb3z32YGsfPvfje18++FyLnz7565vfPvpYqx8/+/O7Xz/8VMufP/37298//lDTXwD5N0D/FRCATBNgAgm4QAM2EIFIU2AEGThBB1YQgkSTYAYpuEELdhCDQNNgCDk4Qg+WEIQ8E2EKSbhCE7YQhThTYQxZOEMX1hCGNJNhDmm4Qxv2EIcw02EQeThEHxYRiCwTYhKJuEQjNhGJKFNiFJk4RSdWEYokk2IWqbhFK3YRiyDTYhi5OEYvlhGMHBNjGsm4RjO2EY0YU2Mc2ThHN9YRjhSTYx7puEc79hGPENNjIPk4SD8WEpAME2QiCblIQzYSkQhTZCQZOUlHVhKSBJNkJim5SUt2EpMA02QoOTlKT5YSlPwSZSpJuUpTthKV+FJlLFk5S1fWEpb0kmUuablLW/YSl/DSZTB5OUxfFhOY7BJmMom5TGM2E5noUmY0mTlNZ1YTmuSSZjapuU1rdhOb4NJmOLk5Tm+WE5zcEie3ggA="
+script:"cwrite.0"
+{widgets}
+field1:{"type":"field","size":[256,257],"pos":[0,35],"pattern":46,"border":0,"scrollbar":0,"style":"plain","value":"on decker_pal do\n p:0 p._:1\n p.r:colors.red\n p.c:colors.cyan\n p.y:colors.yellow\n p.w:colors.lightgray\n p.W:colors.white\n p.g:colors.green\nend\np:decker_pal[]\n\ns:\"hello |gworld. |rhow |yare |cyou?\"\n\non cwrite s do\n if !s[0]=\"|\" s:\"|_\",s\n  rt.value:raze each w in \"|\" split s\n   rtext.make[1 drop w \"\" \"\" p[w[0]]]\n  end\n end\nend\n"}
+res:{"type":"field","size":[256,75],"pos":[0,293],"volatile":1,"pattern":44,"show":"invert","border":0,"style":"plain"}
+cardName1:{"type":"contraption","size":[132,14],"pos":[23,19],"def":"cardName","widgets":{"cn":{"size":[132,14],"value":"cwrite"}}}
+prevBtn:{"type":"button","size":[20,15],"pos":[0,18],"script":"same game.1","font":"body","text":"<<"}
+nextBtn:{"type":"button","size":[20,15],"pos":[157,18],"script":"same game.2","font":"body","text":">>"}
+newBtn:{"type":"button","size":[20,15],"pos":[236,18],"script":"same game.3","font":"body","text":"+"}
+g:{"type":"grid","size":[224,80],"pos":[272,256],"show":"invert","value":{},"row":1}
+c:{"type":"canvas","size":[224,224],"pos":[272,32],"animated":1,"pattern":45,"show":"transparent","border":0,"brush":4,"scale":1}
+rt:{"type":"field","size":[100,69],"pos":[307,93],"value":{"text":["","hello ","world. ","how ","are ","you?"],"font":["","","","","",""],"arg":["","","","","",""],"pat":[0,1,40,35,33,39]}}
+
+{script:cwrite.0}
+on view do
+ mp:pointer.pos - c.pos
+ t:g.value c.clear[] c.brush:4
+ each i in range count t
+  xy:t.x[i],t.y[i]
+  c.pattern: if 5>mag xy-mp 32 else 45 end
+  c.line[xy]
+ end
+end
+{end}
+
+{card:cleanup}
+image:"%%IMG3AgABVgZAl3BILBqPyKRyyWw6n9CodEqtWoeBrHbL7Xq/4LB4TC6bz+i0es1ua6/wuHxOr9vvTbd+z+/7/4CBZHiEhYaHiIlLgoyNjo+QkWKKlJWWl5hHkpucnZ6fXpmio6SlVaCoqaqrbKaur7CmrLO0tayxuLm6hba9vr+Nu8LDxFLAx8jJacXMzc5CytHS01nP1te41Nrbvdje36Lc4uOo4ObniOTq65Do7u907PLzfvD291P0+vtq+P7/SvgJHBgGoMGD0AgqVIiwob+FEAU6nAgvokV6FDOeu8hxncaP3jqKFAey5LORKKmZXFkspUtlLGPuekkTmMybsWrqtIWzp6ydQFf5HBouqFFQRJNaOsq0k9KniZpKjQS1Kq+pWBlZ3Wonq1dAXMPK+UqWj9izVsqqbYO2rbG1cNG4neskrt0ydPMGvMsXjN6/RvoK7gK4cMLBiA0XRsxYMWDGiR3rhTxY8mTKfS3nxZxZ81zOfD1/Bm1XtFvSpU2jRR1X9WrWa12fhR1bdljaam3fxk1WN1fevX1bBf5V+HDiWY1XRZ5c+VPmWJ0/hy5VulLq1a0Txd5U+3buR70PBR9efE/yRs2fRw9UPU727d3LhL9T/nz6Ne3HxJ9f/0r+NPn3H4AuCWgSgQUaCBKCKSm4IIMjOfgRhBFKmBGFIll4IYYcaUgRhx166BCIF4k4IokRmdgQiimqeBCLELn4IowMyQgQjTXa+BCOA+n4D489+ogPkBIJeQ+R/Bh5JJL6KGkPk006+Q6UGEnpDpXzWHklluxoiQ6XXXppDpgeiQkOmeqYeSaa46j5DZttuokNnCTJeQ2d3Nh5J57a6GkNn3366QygKgnaDKHTGHoootEoygyjjTpKDKQwSToMpclYeimmx2gqDKedeqoLqDaJmgupv5h6KqrdqJoTqzy5CgusscrqCq212PoKrrToeiuvt/haCrDBCjsKsUIZeyyyqSi7LLNIOZsJtOVIiwm10Vq7FLaeaHsJt916Wwm4TolLCbmcmHsuupKoqwi77bqbDrztyHsIvfXaexW+wei7L7+C+PsvwGAJjAfBWhl8B8IBK9wVwwU7HA/Ef0hcB8UVWzwHxvVoPBbHZnkcB8ghi3wFyXuYDAfKeqh8MstsuXwKzK3ITAXNNdv8Fs7L6Lwzz2f4/DPQeAkNBdFyGf0E0kErXRfTRTvNBNRRS70X1ZNYvQjWWWudBNdde60J2H6JjQTZZZsdGNqhqL0221y4/Tbcb8hNBN1x240F3nXr7QLffesNeDV+/z144YYDjvjgASx+eOGMO6445I/7HTnlk1teueCb23255plzHrrnncv9ueh8S5465quD3jrqeKseO+uzu1477HTLnjvtu9veO+5w6x4878P7XjzwbAufPPHLG9888mgrHz3z0ztfPfRkS5899dtb3z32YGsfPvfje18++FyLnz7565vfPvpYqx8/+/O7Xz/8VMufP/37298//lDTXwD5N0D/FRCATBNgAgm4QAM2EIFIU2AEGThBB1YQgkSTYAYpuEELdhCDQNNgCDk4Qg+WEIQ8E2EKSbhCE7YQhThTYQxZOEMX1hCGNJNhDmm4Qxv2EIcw02EQeThEHxYRiCwTYhKJuEQjNhGJKFNiFJk4RSdWEYokk2IWqbhFK3YRiyDTYhi5OEYvlhGMHBNjGsm4RjO2EY0YU2Mc2ThHN9YRjhSTYx7puEc79hGPENNjIPk4SD8WEpAME2QiCblIQzYSkQhTZCQZOUlHVhKSBJNkJim5SUt2EpMA02QoOTlKT5YSlPwSZSpJuUpTthKV+FJlLFk5S1fWEpb0kmUuablLW/YSl/DSZTB5OUxfFhOY7BJmMom5TGM2E5noUmY0mTlNZ1YTmuSSZjapuU1rdhOb4NJmOLk5Tm+WE5zcEie3ggA="
+script:"cleanup.0"
+{widgets}
+field1:{"type":"field","size":[255,252],"pos":[0,36],"pattern":46,"border":0,"scrollbar":0,"style":"plain","value":"# clean up positions of widgets on tutorial decks\nW:nil\nK: extract value\n  where !value..name in ( \"help\",\"skip\",\"cleanup\")\n  from deck.cards  \n\neach k in K\n  each w in k.widgets\n   if w.name=\"special\" w.show:\"none\" end\n    if w.name in W\n       d:W[w.name]\n       w.pos:d.pos\n       w.size:d.size\n    else\n       d:0\n      d.pos: w.pos\n      d.size: w.size\n      W[w.name]:d\n   end\n end\nend\n"}
+res:{"type":"field","size":[256,75],"pos":[0,293],"volatile":1,"pattern":44,"show":"invert","border":0,"style":"plain"}
+cardName1:{"type":"contraption","size":[132,14],"pos":[23,19],"def":"cardName","widgets":{"cn":{"size":[132,14],"value":"cleanup"}}}
+prevBtn:{"type":"button","size":[20,15],"pos":[0,18],"script":"same game.1","font":"body","text":"<<"}
+nextBtn:{"type":"button","size":[20,15],"pos":[157,18],"script":"same game.2","font":"body","text":">>"}
+newBtn:{"type":"button","size":[20,15],"pos":[236,18],"script":"same game.3","font":"body","text":"+"}
+g:{"type":"grid","size":[246,210],"pos":[263,20],"volatile":1,"show":"invert","widths":[20,140]}
+script:{"type":"field","size":[207,103],"pos":[261,235],"locked":1,"volatile":1,"show":"invert","style":"code"}
+button1:{"type":"button","size":[37,20],"pos":[472,236],"script":"cleanup.1","text":"go"}
+clearBtn:{"type":"button","size":[38,20],"pos":[471,264],"script":"cleanup.2","text":"clear"}
+special:{"type":"button","size":[40,17],"pos":[471,319],"font":"body","pattern":40,"text":"special"}
+
+{script:cleanup.0}
+on click do
+ c:deck.cards[g.rowvalue.name]
+ script.text:c.script
+end
+
+on view do
+ g.value: select
+  index
+  name: value..name
+  scripted: !!value..script
+  special: !!value..widgets.special
+ from deck.cards
+ click[]
+end
+
+on cards_to_wipe do
+ extract value..name
+ where !value..widgets.special
+ from deck.cards
+end
+
+# run this manually to completely reset the tutorial
+on wipe_cards do
+ each c in deck.cards@cards_to_wipe[]
+  c.remove["tutor1" drop c.widgets]
+  c.script:""
+ end
+end
+
+{end}
+
+{script:cleanup.1}
+on click do
+ go[g.rowvalue.name]
+end
+
+{end}
+
+{script:cleanup.2}
+on click do
+ if g.rowvalue.special
+   alert["refusing to clear scripts on special cards"]
+ else
+   c:deck.cards[g.rowvalue.name]
+   c.script:""
+   view[]
+ end
+end
+
+{end}
+
+{card:help}
+image:"%%IMG3AgABVgbAlnBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLzjAz29/j5+vv8/f7/AAPmGyKwoMGDCAvSU5awocOHAglCnEjx4cJkFTNqVChko8ePAy8eA0nyo8SSKCeKHJmypcWOLmMeXGlMpk2OLW7q9Eez2M6f+04CBdqT2NCjDIQivVl02FKiMJ8ybRpM6k6lVltSrZrVJtauJbcCAyvzK1mTYn2ddWl2rca0at2ibCuXItxedcNGzbvxLi++IOkCbuh312CPgg/PLJxL8du9jl8yvhW5YuLKACfjwqwSMufFmmt9ljyacGjRpRNeTh3y9CzWCFfDtuea1myDsmfXfn07oufeQXfHAh4wN2zhw4n/M84aOSzly39Dp+3c1fR+zFNXt349eM7urberAq8ve2nxrMi3Vn8P/Sr27aVPdz8eflL50Omnsn//O3v9qPBn3mgAniIgfsoVaMqB/qmnYCkM2vcgKRHCN+EoFf53YSgZOrghKB2S9yGIEiJI3IifhAgeip6o2B2Lnbh4HYycyDgfjZrYmB+OmeiYII+Y+HgikJcICRyRRZbYoIhIVmJkb006qaSSUUby5G1VTnKlbllaOaWFXUKy5XFhPjJmc2U6cqZ2aTay5nlt1vOlhnEq8iaBddo5p4d5InLnZ30m8idngfq5J5OFFjIoZokasmhljSp66IqRDvJoZJVaOumLmQZyqWOderrpjKH+8alipZo66o2p8nHqYa3GKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd+7556CHLvropJdu+umop6766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301FdvPS5BAA=="
+script:"help.0"
+{widgets}
+canvas:{"type":"field","size":[299,251],"pos":[2,20],"locked":1,"border":0,"value":{"text":["","canvas quick reference","\n\n","c.pattern: 0      # number or colors.red\nc.brush: 0\n\nc.clear[]\nc.fill[xy]        # paint bucket tool\nc.box[xy wh]      # outline only\nc.rect[xy wh]     # outline + fill\nc.line[..xy]\nc.text[msg pos a]\n# a is optional, and can be any of:\n#\n# \"top_left\"    \"top_center\"    \"top_right\"\n# \"center_left\" \"center\"        \"center_right\"\n# \"bottom_left\" \"bottom_center\" \"bottom_right\"\n\nc.copy[xy wh]     # gives an image\nc.paste[img xy t] # if t=1 color 0 is transparent\nc.merge[op? ..im] # op can be any of: \"+-*&|<>=\"\n\nFor more, see ","#canvasinterface"," in docs"],"font":["","menu","","mono","mono","mono"],"arg":["","","","","https://beyondloom.com/decker/decker.html#canvasinterface",""]}}
+pal:{"type":"contraption","size":[81,61],"pos":[46,275],"volatile":1,"script":"help.1","def":"gridSelector","widgets":{"cellW":{"pos":[111,-46],"value":10},"cellH":{"size":[54,13],"pos":[111,-3],"value":10},"c":{"size":[81,61]},"gridColor":{"size":[54,12],"pos":[111,19],"value":1},"curXY":{"size":[61,9],"pos":[111,39],"value":"[1,0]"},"gridW":{"pos":[177,-46],"value":8},"gridH":{"size":[54,13],"pos":[177,-3],"value":6},"showCursor":{"size":[60,10],"pos":[178,19]}}}
+patternLabel:{"type":"field","size":[43,20],"pos":[2,283],"locked":1,"show":"transparent","border":0,"align":"right","value":"pattern:"}
+patternSlider:{"type":"slider","size":[43,20],"pos":[2,303],"volatile":1,"script":"help.2","interval":[0,47],"style":"bar"}
+brush:{"type":"contraption","size":[129,49],"pos":[178,284],"volatile":1,"script":"help.3","def":"gridSelector","widgets":{"cellW":{"pos":[159,-46]},"cellH":{"size":[54,11],"pos":[159,-3]},"c":{"size":[129,49]},"gridColor":{"size":[54,10],"pos":[159,15]},"curXY":{"size":[61,8],"pos":[159,31],"value":"[0,0]"},"gridW":{"pos":[225,-46],"value":8},"gridH":{"size":[54,11],"pos":[225,-3],"value":3},"showCursor":{"size":[60,8],"pos":[226,15]}}}
+brushLabel:{"type":"field","size":[43,20],"pos":[134,283],"locked":1,"show":"transparent","border":0,"align":"right","value":"brush:"}
+brushSlider:{"type":"slider","size":[43,20],"pos":[134,303],"volatile":1,"script":"help.4","interval":[0,23],"style":"bar"}
+f0:{"type":"field","size":[197,72],"pos":[312,114],"show":"invert","scroll":2,"value":"# example scripts (shift+enter to run)\n(c0,c1)..clear[]\n(c0,c1)..pattern: patternSlider.value\n(c0,c1)..brush: brushSlider.value\nc1.pattern:colors.purple\nc1.fill[]\n"}
+c0Label:{"type":"field","size":[18,14],"pos":[312,18],"show":"transparent","border":0,"style":"plain","value":"c0"}
+c1Label1:{"type":"field","size":[18,14],"pos":[413,18],"show":"transparent","border":0,"style":"plain","value":"c1"}
+c0:{"type":"canvas","size":[98,80],"pos":[313,30],"show":"transparent","image":"%%IMG3AGIAUAKEj6nL7Q+jnLTai7PevPsPhuJIluaJpurKtu4Lx/JM1/aN5/rOP8Ff+QV6QeFQYjwSIUkgs7l8JiNNZZRRpWavWKh0yl1sv8Kw2Et2mhFjH3ptaLvL8AR4Qq/b1fq+/w8YKDhIWGh4iJiouMjY6PgIGSk5SVlpeYmZqdmTN3nX0ckpZzGqU2VEcYpKpPq21xq6A/s2+ylai3vKlcu7utubWwesKjhsZVgLqbvJ3Oz8DB0tPU1dbQ1XAA==","scale":1}
+c1:{"type":"canvas","size":[97,80],"pos":[412,30],"show":"transparent","image":"%%IMG2AGEAUCX/Jf8l/yX/Jf8l/yU9JwMlEScDJUknBSUPJwUlRycHJQ0nByVGJwclDScHJUYnByUNJwglRScHJQ0nCCVFJwclDicHJUUnByUOJwclRScHJQ4nByVFJwclDycFJUcnBSURJwMlSScDJf8l/yX/Jf8l/yX/Jf8l/yX/Jf8lOCcDJV0nBSUcJwMlPCcIJRcnByU7JwslECcMJTonDyUJJw8lOycRJQQnESU8JyUlPScjJT8nISVCJxslSScUJVEnDSVXJwgl/yX/Jf8l/yX/JSA=","scale":1}
+f2:{"type":"field","size":[197,72],"pos":[312,266],"show":"invert","value":"c0.clear[] c0.brush:0\nc0.pattern:1 c0.fill[]\nc0.pattern:256 # secret \"ants\" pattern\nc0.box[5,5 c0.size-11]\nc0.pattern: patternSlider.value\nc0.brush: brushSlider.value"}
+f1:{"type":"field","size":[197,72],"pos":[312,189],"show":"invert","value":"im:c0.copy[]\ncm: (1,32)dict(39,38)\nxy: 0,0\nt: 1 # transparent?\nc1.paste[im.map[cm] xy t]\n"}
+backBtn:{"type":"button","size":[41,20],"pos":[257,22],"script":"help.5","pattern":39,"text":"back","style":"rect"}
+
+{script:help.0}
+on set_pattern x do
+ (pal,patternSlider)..value:x
+ (c0,c1)..pattern: x
+end
+
+on set_brush x do
+ (brush,brushSlider)..value: x
+ (c0,c1)..brush:x
+end
+
+on view do
+ set_pattern[1]
+ set_brush[0]
+end
+{end}
+
+{script:help.1}
+on draw c do
+ cwh:me.cwh
+ each xy i in me.gw cross me.gh
+  c.pattern:i c.rect[cwh*xy cwh]
+ end
+end
+
+on pick xy i do
+ set_pattern[i]
+end
+{end}
+
+{script:help.2}
+on change val do
+ set_pattern[val]
+end
+{end}
+
+{script:help.3}
+on draw c do
+ cwh:me.cwh
+ each xy i in me.gw cross me.gh
+  # .line[single_point] = draw brush
+  c.brush:i c.line[cwh*xy+.5]
+ end
+end
+
+on pick xy val do
+ set_brush[val]
+end
+{end}
+
+{script:help.4}
+on change val do
+ set_brush[val]
+end
+{end}
+
+{script:help.5}
+on click do
+ go["Back" "SlideDown" 15]
+end
+{end}
+
+{module:plot}
+description:"draw graphs and plots to canvases"
+version:2.2
+{script}
+local grays:(1,13,12,9,8,5)
+
+on label x y do
+ # Paul Heckbert's "loose labels" method
+ # for generating axis labels and ranges:
+ on nice x round do
+  f:x/10^e:floor(ln x)/(ln n:10)
+  if round
+   if f<7   n:5 end
+   if f<3   n:2 end
+   if f<1.5 n:1 end
+  else
+   if !f>5  n:5 end
+   if !f>2  n:2 end
+   if !f>1  n:1 end
+  end
+  n*10^e
+ end
+ d:nice[nice[y-x 0]/5 1]
+ a:d*floor x/d
+ b:d*ceil  y/d
+ v:() while a<b+.5*d  v:v,a  a:a+d end v
+end
+
+on plot_series c data draw etc do
+ c.font:      if "font"   in etc etc.font   else "body" end
+ local margin:if "margin" in etc etc.margin else     10 end
+ local bg    :if "bg"     in etc etc.bg     else      0 end
+ local bgdata:if "bgdata" in etc etc.bgdata else      0 end
+ local stroke:if "stroke" in etc etc.stroke else      1 end
+ local fillp :if "fill"   in etc etc.fill   else  grays end
+ if "number"~typeof fillp fillp:list fillp end
+
+ if !"table"~typeof data
+  data:select x:keys data y:value from data
+ end
+ nd.x:if "x" in data data.x else (update x:gindex by g from data).x end
+ nd.y:if "y" in data data.y else data end
+ nd.g:if "g" in data data.g else 0*nd.x end
+ data:update g:group by g from table nd
+
+ xaxis:label[
+  if "xmin" in etc etc.xmin else min data.x end
+  if "xmax" in etc etc.xmax else max data.x end
+ ]
+ yaxis:label[
+  if "ymin" in etc etc.ymin else min data.y end
+  if "ymax" in etc etc.ymax else max data.y end
+ ]
+ gmin:(first xaxis),first yaxis
+ gmax:(last  xaxis),last  yaxis
+ axes:(max each x in yaxis c.font.textsize[x][0] end),12
+ psize:c.lsize-axes+2*margin
+ ppos:margin+axes*1,0
+
+ c.pattern:bg
+ c.rect[0,0 c.size]
+ c.pattern:bgdata
+ c.rect[ppos psize]
+
+ c.pattern:stroke
+ c.brush:0
+ c.rect[ppos+psize*0,1  psize[0],1]
+ c.rect[ppos+psize*0,1  1,-psize[1]]
+ on map pos do
+  r:(pos-gmin)/gmax-gmin
+  ppos+psize*r[0],1-r[1]
+ end
+ each v in xaxis
+  p:map[v,first yaxis]
+  c.rect[p 1,3]
+  c.text[v p+0,5 "top_center"]
+ end
+ each v in yaxis
+  p:map[(first xaxis),v]
+  c.rect[p -3,1]
+  c.text[v p-5,0 "center_right"]
+ end
+ c.clip[ppos-0,1 psize+1]
+ extract
+  (c.pattern:fillp[(count fillp)%first g]),
+  draw[each v i in x map[v,y[i]] end]
+ by g from data
+ c.clip[]
+end
+
+on plot_category c data line draw etc do
+ c.font:      if "font"   in etc etc.font   else  "body" end
+ local margin:if "margin" in etc etc.margin else      10 end
+ local bg    :if "bg"     in etc etc.bg     else       0 end
+ local bgdata:if "bgdata" in etc etc.bgdata else       0 end
+ local stroke:if "stroke" in etc etc.stroke else       1 end
+ local fillp :if "fill"   in etc etc.fill   else list 13 end
+ if "number"~typeof fillp fillp:list fillp end
+
+ xaxis:label[
+  if "xmin" in etc etc.xmin else min 0,min data end
+  if "xmax" in etc etc.xmax else max 0,max data end
+ ]
+ gmin:first xaxis
+ gmax:last  xaxis
+ axes:(max each v k in data c.font.textsize[k][0] end),12
+ psize:c.lsize-axes+2*margin
+ ppos:margin+axes*1,0
+
+ c.pattern:bg
+ c.rect[0,0 c.size]
+ c.pattern:bgdata
+ c.rect[ppos psize]
+
+ c.pattern:stroke
+ c.brush:0
+ c.rect[ppos+psize*0,1 psize[0],1]
+ on mapx x do ppos[0]+psize[0]*(x-gmin)/gmax-gmin end
+ each v in xaxis
+  p:mapx[v],(ppos+psize)[1]
+  c.rect[p 1,3]
+  c.text[v p+0,5 "top_center"]
+ end
+ origin:mapx[0]
+ yaxis:origin,ppos[1]
+ c.pattern:line
+ c.rect[yaxis 1,psize[1]]
+
+ bh:psize[1]/count data
+ each v k i in data
+  p:ppos+(0,1)*(bh*i)+bh/2
+  c.pattern:stroke
+  c.text[k p-5,0 "center_right"]
+  c.pattern:fillp[(count fillp)%i]
+  c.clip[ppos-0,1 psize+1]
+  draw[origin,p[1] each x in (),v mapx[x] end bh]
+  c.clip[]
+ end
+end
+
+on plot_scatter c data etc do
+ local data_brush:if "brush" in etc etc.brush else 3 end
+ on draw d do
+  c.brush:data_brush
+  each v in d c.line[v] end
+ end
+ plot_series[c data draw etc]
+end
+
+on plot_line c data etc do
+ local data_brush:if "brush" in etc etc.brush else 1 end
+ on draw d do
+  c.brush:data_brush
+  c.line[d]
+ end
+ plot_series[c data draw etc]
+end
+
+on plot_hist c data etc do
+ c.font:      if "font"   in etc etc.font   else  "body" end
+ local margin:if "margin" in etc etc.margin else      10 end
+ local bg    :if "bg"     in etc etc.bg     else       0 end
+ local bgdata:if "bgdata" in etc etc.bgdata else       0 end
+ local stroke:if "stroke" in etc etc.stroke else       1 end
+ local fillp :if "fill"   in etc etc.fill   else list 13 end
+ if "number"~typeof fillp fillp:list fillp end
+
+ xdata:range count data
+ xaxis:label[min xdata max xdata]
+ yaxis:label[
+  if "ymin" in etc etc.ymin else min data end
+  if "ymax" in etc etc.ymax else max data end
+ ]
+ if 5>count data xaxis:xdata end
+ gmin:(  first xaxis),first yaxis
+ gmax:(1+last  xaxis),last  yaxis
+ axes:(max each x in yaxis c.font.textsize[x][0] end),12
+ psize:c.lsize-axes+2*margin
+ ppos:margin+axes*1,0
+ bwid:psize[0]/count data
+
+ c.pattern:bg
+ c.rect[0,0 c.size]
+ c.pattern:bgdata
+ c.rect[ppos psize]
+
+ c.brush:0
+ c.clip[ppos-0,1 psize+1]
+ on map pos xoff do
+  r:(pos-gmin)/gmax-gmin
+  (xoff,0)+ppos+psize*r[0],1-r[1]
+ end
+ each v i in data
+  v:map[i,v bwid/2]
+  s:1+psize[1]-v[1]-ppos[1]
+  c.pattern:fillp[(count fillp)%i]
+  c.rect[v 1+bwid,s "top_center"]
+ end
+ c.clip[]
+ c.pattern:stroke
+ c.rect[ppos+psize*0,1  psize[0],1]
+ c.rect[ppos+psize*0,1  1,-psize[1]]
+ each v in xaxis
+  p:map[v,first yaxis bwid/2]
+  c.rect[p 1,3]
+  c.text[v p+0,5 "top_center"]
+ end
+ each v in yaxis
+  p:map[(first xaxis),v]
+  c.rect[p -3,1]
+  c.text[v p-5,0 "center_right"]
+ end
+end
+
+on plot_bar c data etc do
+ local stroke:if "stroke" in etc etc.stroke else 1 end
+ local axes:  if "axes"   in etc etc.axes   else 1 end
+ on draw start stops height do
+  a:start-height*0,.4
+  b:((first stops)-start[0]),.8*height
+  c.rect[a b]
+  c.pattern:stroke
+  c.box[a b]
+ end
+ plot_category[c data axes draw etc]
+end
+
+on plot_box c data etc do
+ local stroke:if "stroke" in etc etc.stroke else 1 end
+ on draw start stops height do
+  on stop x do floor stops[x],start[1] end
+  on woff x do (1+x),height*.5         end
+  a:stop[0]
+  b:stop[-1+count stops]
+  local col:c.pattern
+  c.pattern:stroke
+  c.line[a b]
+  c.rect[a woff[] "center_left"]
+  c.rect[b woff[] "center_left"]
+  c.pattern:col
+  if 2<count stops
+   m:0.5*count stops
+   q1:stop[m-1] q2:stop[m] q3:stop[m+1]
+   c.rect [q1 woff[q3[0]-q1[0]] "center_left"]
+   c.pattern:stroke
+   c.box  [q1 woff[q3[0]-q1[0]] "center_left"]
+   c.rect [q2 woff[           ] "center_left"]
+  end
+ end
+ if !"fill" in etc etc.fill:32 end
+ plot_category[c data 18 draw etc]
+end
+
+on plot_pie c data etc do
+ local margin    :if "margin" in etc etc.margin else    10 end
+ local bg        :if "bg"     in etc etc.bg     else     0 end
+ local data_brush:if "brush"  in etc etc.brush  else     1 end
+ local stroke    :if "stroke" in etc etc.stroke else     1 end
+ local fillp     :if "fill"   in etc etc.fill   else grays end
+ if "number"~typeof fillp fillp:list fillp end
+ 
+ local vals:(range data)/sum range data
+ local psize:c.lsize-2*margin
+ local radius:.5*min psize
+ local center:margin+psize/2
+ 
+ c.pattern:bg
+ c.rect[0,0 c.size]
+ c.brush:data_brush
+ local start:0
+ on wedge v do
+  r:radius*unit -2*pi*start+v*(range 21)/20
+  start:start+v
+  (list center),(flip center+flip r),(list center)
+ end
+ each v i in vals
+  local w:wedge[v]
+  c.pattern:fillp[(count fillp)%i]
+  c.poly[w]
+  c.pattern:stroke
+  c.line[w]
+ end
+end
+
+on unpivot key value src tab do
+ eval["select
+  %s
+  %v:src
+  %v:raze column@src
+ by index from tab" format (" " fuse src drop keys tab),key,value () 1].value
+end
+on pivot key value tab do
+ keep:(key,value) drop keys tab
+ dkey:keys tab[key] dict ()
+ head:(" ","%q:first %v") format keep join keep
+ data:(" ","%q:%s[%i]"  ) format dkey join ((count dkey) take list value) join (keys dkey)
+ ident:" join " fuse keep
+ eval["select %s %s by %s from tab" format head,data,ident () 1].value
+end
+
+mod.label  :label
+mod.unpivot:unpivot
+mod.pivot  :pivot
+mod.scatter:plot_scatter
+mod.line   :plot_line
+mod.hist   :plot_hist
+mod.bar    :plot_bar
+mod.box    :plot_box
+mod.pie    :plot_pie
+{end}
+
+{contraption:tutor}
+size:[512,160]
+resizable:1
+margin:[5,140,4,8]
+description:"A contraption for creating interactive decker tutorials.\n\nchangelog\n0.3: add help config, scrolling, resize and recolor\n0.2: add help button \n0.1: initial version"
+version:0.3
+image:"%%IMG2AgAAoC7/Lv8uAif/J/8nAi//L/8v/y//LwQn/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8n/yf/J/8nMC//L/8v/y//LwQn/yf/JwIu/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y7/Lv8u/y4D"
+script:"tutor.0p"
+attributes:{"name":["body","scroll_body","code","scroll_code","next","prev","help"],"label":["body","scroll body","code","scroll code","next card","prev card","help card"],"type":["rich","bool","code","bool","string","string","string"]}
+{widgets}
+body:{"type":"field","size":[210,124],"pos":[3,33],"locked":1,"pattern":44,"show":"transparent","border":0,"scrollbar":0,"value":"..."}
+nextBtn:{"type":"button","size":[60,20],"pos":[445,35],"script":"tutor.1p","pattern":39,"text":"next>","style":"rect"}
+cardName:{"type":"field","size":[504,20],"pos":[3,7],"locked":1,"volatile":1,"font":"menu","show":"transparent","border":0,"style":"plain"}
+code:{"type":"field","size":[218,125],"pos":[222,32],"pattern":47,"show":"none","border":1,"scrollbar":0,"style":"code","scroll":1}
+prevBtn:{"type":"button","size":[60,20],"pos":[445,58],"script":"tutor.2p","pattern":39,"text":"<prev","style":"rect"}
+runBtn:{"type":"button","size":[60,20],"pos":[445,105],"script":"tutor.3p","pattern":0,"show":"none","text":"run","style":"rect"}
+next:{"type":"field","size":[100,20],"pos":[4,-31],"locked":1,"show":"none","style":"plain","value":"Next"}
+prev:{"type":"field","size":[100,20],"pos":[121,-31],"locked":1,"show":"none","style":"plain","value":"Prev"}
+helpBtn:{"type":"button","size":[60,20],"pos":[445,81],"script":"tutor.4p","pattern":39,"show":"none","text":"help","style":"rect"}
+help:{"type":"field","size":[100,20],"pos":[239,-31],"locked":1,"show":"none","style":"plain"}
+scroll_body:{"type":"button","size":[15,20],"pos":[5,175],"locked":1,"show":"none","style":"check","value":0}
+scroll_code:{"type":"button","size":[15,20],"pos":[80,175],"locked":1,"show":"none","style":"check","value":0}
+
+{script:tutor.0p}
+on get_body do body.value end  on set_body x do body.value: x end
+on get_code do code.text end   on set_code x do code.text: x end
+on get_next do next.text end   on set_next x do next.text: x end
+on get_prev do prev.text end   on set_prev x do prev.text: x end
+on get_help do help.text end   on set_help x do help.text: x end
+on get_scroll_code do scroll_code.value end
+on get_scroll_body do scroll_body.value end
+on set_scroll_code x do scroll_code.value:x end
+on set_scroll_body x do scroll_body.value:x end
+
+on view do
+ cardName.text: deck.card.name
+ code.scrollbar: scroll_code.value
+ body.scrollbar: scroll_body.value
+ code.locked: me.locked
+ sh: if code.text
+       if me.locked "invert" else "solid" end
+     else "none" end
+ code.show: sh runBtn.show: sh
+ nextBtn.show: if next.text "solid" else "none" end
+ prevBtn.show: if prev.text "solid" else "none" end
+ helpBtn.show: if help.text "solid" else "none" end
+end
+
+on next_card_name do
+ if next.text = "Next"
+  cn:keys deck.cards
+  ci:first extract index where value=deck.card.name from cn
+  cn[ci+1]
+ else
+  next.text
+ end
+end
+
+on no_script c do
+ (c.script="on view do\n\nend") |!c.script
+end
+
+on is_special c do
+ "special" in keys c.widgets
+end
+
+on copy_to_next do
+ card: deck.card
+ if !is_special[card]
+  nc: deck.cards[next_card_name[]]
+  if !is_special[nc]
+   tw: "tutor1"
+   if ! count tw drop nc.widgets
+    each w in tw drop card.widgets nc.add[w] end
+   end
+   if no_script[nc] nc.script: card.script end
+  end
+ end
+end
+
+on run text do
+ d:deck.card.widgets
+ d.card: deck.card
+ eval[text d 1]
+end
+
+{end}
+
+{script:tutor.1p}
+on click do
+ copy_to_next[]
+ go[next.text "SlideLeft" 15]
+end
+{end}
+
+{script:tutor.2p}
+on click do
+ go[prev.text "SlideRight" 15]
+end
+{end}
+
+{script:tutor.3p}
+on click do
+ d:deck.card.widgets
+ d.card:deck.card
+ eval[code.text d 1]
+end
+
+{end}
+
+{script:tutor.4p}
+on click do
+ go["help" "SlideUp" 15]
+end
+{end}
+
+{contraption:cardName}
+size:[100,20]
+resizable:1
+margin:[0,0,0,0]
+description:"show / edit the current card name"
+script:"cardName.0p"
+{widgets}
+cn:{"type":"field","size":[100,20],"pos":[0,0],"show":"transparent","border":0,"style":"plain","value":"card7"}
+
+{script:cardName.0p}
+on view do
+ cn.text: deck.card.name
+end
+
+on change val do
+ deck.card.name: cn.text
+end
+{end}
+
+{contraption:hybridSlider}
+size:[100,25]
+margin:[19,6,17,6]
+description:"Provides a slider with a combination of the \"bar\" and \"compact\" styles."
+script:"hybridSlider.0p"
+template:"on change val do\n \nend"
+attributes:{"name":["minv","maxv","format","value"],"label":["min value","max value","format","value"],"type":["number","number","string","number"]}
+{widgets}
+compact:{"type":"slider","size":[100,25],"pos":[0,0],"script":"hybridSlider.1p","interval":[0,100],"style":"compact"}
+bar:{"type":"slider","size":[74,25],"pos":[13,0],"script":"hybridSlider.2p","interval":[0,100],"style":"bar"}
+
+{script:hybridSlider.0p}
+on get_value do bar.value end       on set_value x do bar.value: x end
+on get_format do bar.format end     on set_format x do bar.format: x end
+on get_minv do bar.interval[0] end  on set_minv x do bar.interval:x,get_minv[] end
+on get_maxv do bar.interval[1] end  on set_maxv x do bar.interval:get_maxv[],x end
+
+on view do
+ compact.interval: bar.interval
+ compact.value:bar.value
+end
+
+{end}
+
+{script:hybridSlider.1p}
+on change val do
+ bar.value:val
+ card.event["change" val]
+end
+
+{end}
+
+{script:hybridSlider.2p}
+on change val do
+ compact.value:val
+ card.event["change" val]
+end
+
+{end}
+
+{contraption:gridSelector}
+size:[128,128]
+resizable:1
+margin:[2,1,2,2]
+description:"Draws a rectangular grid with a cursor, and translates mouse events to grid coordinates."
+version:0.1
+script:"gridSelector.0p"
+attributes:{"name":["cw","ch","gc","gw","gh","cursor"],"label":["cell width","cell height","grid color","grid width","grid height","draw cursor?"],"type":["number","number","number","number","number","bool"]}
+{widgets}
+cellW:{"type":"slider","size":[54,25],"pos":[158,-46],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+cellH:{"type":"slider","size":[54,25],"pos":[158,-3],"locked":1,"interval":[4,100],"value":16,"style":"compact"}
+c:{"type":"canvas","size":[128,128],"pos":[0,0],"locked":1,"volatile":1,"pattern":32,"show":"transparent","border":1,"scale":1}
+gridColor:{"type":"slider","size":[54,25],"pos":[158,40],"locked":1,"interval":[0,47],"value":9,"style":"compact"}
+curXY:{"type":"field","size":[61,20],"pos":[158,81],"locked":1,"style":"plain","value":"[2,1]"}
+gridW:{"type":"slider","size":[54,25],"pos":[224,-46],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+gridH:{"type":"slider","size":[54,25],"pos":[224,-3],"locked":1,"interval":[1,1024],"value":16,"style":"compact"}
+showCursor:{"type":"button","size":[60,20],"pos":[225,40],"locked":1,"font":"body","text":"cursor?","style":"check","value":1}
+
+{script:gridSelector.0p}
+on get_cw do cellW.value end     on set_cw x do cellW.value: x end
+on get_ch do cellH.value end     on set_ch x do cellH.value: x end
+on get_gw do gridW.value end     on set_gw x do gridW.value: x end
+on get_gh do gridH.value end     on set_gh x do gridH.value: x end
+on get_gp do gridP.value end     on set_gp x do gridP.value: x end
+on get_showCursor   do showCursor.value   end
+on set_showCursor x do showCursor.value:x end
+
+on get_cxy do curXY.data end       on set_cxy xy do curXY.data: xy end
+on get_cwh do cellW.value,cellH.value end
+on get_value do (get_gw[] * last curXY.data) + first curXY.data end
+on set_value i do
+ gw:get_gw[] curXY.data: (gw%i),(floor i/gw)
+ view[]
+end
+  
+on view do
+ c.clear[] c.brush:0 c.pattern:1
+ # give instances a chance to draw on canvas
+ card.event["draw" c] c.brush:0 c.pattern: gridColor.value
+ if gridColor.value
+  each x in get_cw[] * range 1+get_gw[] c.line[x,0 x,c.size[1]] end nil
+  each y in get_ch[] * range 1+get_gh[] c.line[0,y c.size[0],y] end nil
+ end
+ if showCursor.value
+  xy:curXY.data  cwh:get_cwh[]
+  c.brush: c.pattern:1  c.box[xy*cwh 1+cwh]
+  c.brush: 0 c.pattern:32 c.box[xy*cwh cwh]
+ end
+end
+on drag xy do click[xy] end
+on click xy do
+ set_cxy[floor xy/get_cwh[]]
+ view[]
+ card.event["pick" get_cxy[] get_value[]]
+end
+{end}
+
