@@ -1,0 +1,63 @@
+{deck}
+version:1
+card:1
+size:[256,200]
+name:"timer.deck"
+locked:1
+
+{card:home}
+
+{card:canvas and grid}
+image:"%%IMG3AQAAyAbAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6ffS6io6SlpqeoqaqrrK2ur7CxsrO0s1u1uLm6u7y9vr+kt8DDxMXGx8XCyMvMzc7Lys/S09TVq9HW2drbx9jc3+Dhst7i5ebnLuSioOxSqerpLPLz9PX29/j5+vv8/f7/AAMKHDgwwDst7wgqXMiwocOHEBUaRAUvQMSLGDNq3Phw4qmKHEOKHEnyokdTIEuqXMmy5byTpVK6nEmzpkOYwRBStMmzp899OEfJ/Em0aM2g63R+NMq06Uqk6ZSidEq1qkaoQ61q3VrwYJaEXMOK7YdVasyxaNPWK/t1p9q3Y9liAQu3rla5V+ja3dsUrxW9fAP/9FsFsODDR73OdYu4MU3CVAw7nkwS8hTJlDNvtOyOsebPmxXn9Qy6dETOUTCbXk0QNRTVrGP/c/0Etuzb+mg7sY2791rRf0n7Hn5PdxPexHsbZ4I8+e3lS5o7jw1difTpq6snuY69tHYk3Lt//n4kvPjM5I2YPz85fZH17Bu7JwI//uH5Q+rbD4xfiP79e/WHFYDKAVeYcASaJuB/Cb61IIINjmdgZBBGiN6El1VoYXsYdrbUhgp2mJqGICL24IclSkiRWcGkCNqJU7moGYxnyXjhim2haKNjNLa4I4c4Lqbjj/eJ+BqJRDpoZG1IJplWj0I5aeKSuzUppVhQrnOlYFnGsyVfXVr0ZYBUHmflmFaFiaZdaq4JV5tuqgVnnGjNSSeWZTJ35p1F2cnnVn7+mWae0e0paE+BHupUoooyxWijfRJqnaGQzvRopT5diilPmm6aWJCjDekpUZ2O6lKpprKEaqoqrcpqZZJuR+mrIblKa62xgjfrrVflWt6uvGJka7AZDUusSb6qB+yxHSX73rLMNmRstDc5Sx+01EpkbX7YZtsVqMGJ6q1I047b2rb+dWvubOgOuC6s4B4o7rvFtssgvfyUi68/+u6br73q+otPvwLnQ3DBxQE8L8IMHcwwPQ4/LE/EElP8sMUMY4ywxgVzLLDH/oK8r8j4kkyvye+ivK7K5rI8rsvewpytzNTSHK3NzOJ8rM7E8hysz7wCfavQtBL9qtGsIp2q0qYyParTnkK9qdSYUl2p1ZBi3ajWinJ9qNeCgv2n2HySfWeY7aRt5kcsouP229bAA/fcdBsjd914563L3Xr37bcrfP8t+OA55Uj44YgXLmTijBMeeOOQu/145JSLM3nlmG+j9uacd+7556CHLvropJdu+umop6766qy37vrrsMcuuxdBAA=="
+script:"canvas and grid.0"
+{widgets}
+c:{"type":"canvas","size":[200,120],"pos":[27,30],"animated":1,"font":"mono","pattern":38,"border":1,"image":"%%IMG3ADIAHgZAgHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LD4aCoPy6Yk+mxGroVv+BmQlsPrdbreTsfP84B3e219dmZ4gH6FiH96aY9kjpJ5RJCWe4WOikVtj5uVfp1zcoGCmJB8oqSjd4mUhHFxmX2uY7a3uLm6u7y9vr/AwVRB","brush":4,"scale":4}
+f:{"type":"field","size":[153,19],"pos":[26,180],"font":"menu","show":"none","value":"13430540930560.892578"}
+startBtn:{"type":"button","size":[44,21],"pos":[127,154],"font":"body","text":"start","style":"rect"}
+stopBtn:{"type":"button","size":[48,20],"pos":[179,154],"script":"canvas and grid.1","font":"body","text":"stop","style":"rect"}
+minutes:{"type":"slider","size":[89,20],"pos":[27,154],"interval":[1,60],"value":1,"format":"minutes: %i","style":"bar"}
+
+{script:canvas and grid.0}
+MINUTE: 60*1000
+
+on click do
+ f.data: sys.ms + MINUTE*minutes.value
+end
+
+on view do
+ t: (f.data - sys.ms) | 0
+ m: floor t / MINUTE
+ s: (MINUTE % t)/1000
+ ms: (1000 % t)/10
+ c.clear[] c.pattern:colors.blue
+ c.text["%02i:%02i:%02i" format m,s,ms
+   c.lsize/2 "center"] 
+end
+
+{end}
+
+{script:canvas and grid.1}
+on click do
+ f.data: sys.ms
+end
+{end}
+
+{contraption:cardName}
+size:[100,20]
+resizable:1
+margin:[0,0,0,0]
+description:"show / edit the current card name"
+script:"cardName.0p"
+{widgets}
+cn:{"type":"field","size":[100,20],"pos":[0,0],"show":"transparent","border":0,"style":"plain","value":"card7"}
+
+{script:cardName.0p}
+on view do
+ cn.text: deck.card.name
+end
+
+on change val do
+ deck.card.name: cn.text
+end
+{end}
+
